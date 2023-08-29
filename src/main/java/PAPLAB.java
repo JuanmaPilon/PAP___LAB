@@ -43,16 +43,14 @@ public class PAPLAB extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
         jMenu1.add(jMenuItem2);
 
-<<<<<<< HEAD
+
         jMenuItem3.setText("Alta Actividad Turistica");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-=======
-        jMenuItem3.setText("jMenuItem3");
->>>>>>> 6bd02544ad1cc320325e35869f8cc803a97384a0
+
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Consulta Actividad Turistica");
@@ -85,7 +83,7 @@ public class PAPLAB extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-<<<<<<< HEAD
+
     ConsultaActividadTuristica consultaActividadTuristica = new ConsultaActividadTuristica();
     consultaActividadTuristica.setVisible(true); 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -95,12 +93,6 @@ public class PAPLAB extends javax.swing.JFrame {
         altaActividadTuristica.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-=======
-    ConsultaActividadTuristica consultaActividadTuristica = new     ConsultaActividadTuristica();
-    consultaActividadTuristica.setVisible(true); 
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
->>>>>>> 6bd02544ad1cc320325e35869f8cc803a97384a0
     /**
      * @param args the command line arguments
      */
