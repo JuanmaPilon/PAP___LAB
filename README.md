@@ -1,5 +1,7 @@
 # Laboratorio Programacion de Aplicaciones - UTEC
 
+<img align="right" width="300" src="https://media.giphy.com/media/Dh5q0sShxgp13DwrvG/giphy.gif">
+
 ## Autores:
 
 * **[Juan Martin Pilon](https://github.com/JuanmaPilon)**
@@ -14,7 +16,6 @@
 - Maven
 - Swing
 - JPA
-- Git / GitHub
 - Docker?
 
 ### Fechas limites:
