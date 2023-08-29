@@ -21,11 +21,16 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
+<<<<<<< HEAD
                 <Property name="text" type="java.lang.String" value="Alta Actividad Turistica"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
               </Events>
+=======
+                <Property name="text" type="java.lang.String" value="jMenuItem3"/>
+              </Properties>
+>>>>>>> 6bd02544ad1cc320325e35869f8cc803a97384a0
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
