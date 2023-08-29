@@ -14,6 +14,7 @@
 - Maven
 - Swing
 - JPA
+- Git / GitHub
 - Docker?
 
 ### Fechas limites:
