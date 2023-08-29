@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Turista extends Usuario {
     private int nacionalidad;
-    private List <Compra> compras = new ArrayList<>();
+    private List<Compra> compras = new ArrayList<>();
 
     public Turista (String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
         super(nickname, nombre, apellido, correo, fNacimiento);
