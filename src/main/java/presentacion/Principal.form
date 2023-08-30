@@ -44,11 +44,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salida Turistica"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="altaSalidaTuristicaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="altaInscripcionSalidaTuristica">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Inscripcion Salida Turistica"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="altaInscripcionSalidaTuristicaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="altaCrearPaquete">
               <Properties>
@@ -116,6 +122,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salida Tursitica"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consSalidaTuristicaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="consPaquete">
               <Properties>

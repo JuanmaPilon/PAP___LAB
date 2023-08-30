@@ -98,9 +98,19 @@ public class Principal extends javax.swing.JFrame {
         menuAltas.add(altaActividadTuristica);
 
         altaSalidaTuristica.setText("Salida Turistica");
+        altaSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaSalidaTuristicaActionPerformed(evt);
+            }
+        });
         menuAltas.add(altaSalidaTuristica);
 
         altaInscripcionSalidaTuristica.setText("Inscripcion Salida Turistica");
+        altaInscripcionSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaInscripcionSalidaTuristicaActionPerformed(evt);
+            }
+        });
         menuAltas.add(altaInscripcionSalidaTuristica);
 
         altaCrearPaquete.setText("Crear Paquete");
@@ -160,6 +170,11 @@ public class Principal extends javax.swing.JFrame {
         menuConsultas.add(consActividadTuristica);
 
         consSalidaTuristica.setText("Salida Tursitica");
+        consSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consSalidaTuristicaActionPerformed(evt);
+            }
+        });
         menuConsultas.add(consSalidaTuristica);
 
         consPaquete.setText("Paquete");
@@ -283,6 +298,24 @@ public class Principal extends javax.swing.JFrame {
         contenedorPrincipal.add(verConsultarUsuarioProveedor);
         verConsultarUsuarioProveedor.show();
     }//GEN-LAST:event_consProveedorActionPerformed
+
+    private void altaInscripcionSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaInscripcionSalidaTuristicaActionPerformed
+        InscripciónASalidaTurística verInscripcionSalidaTuristica = new InscripciónASalidaTurística();
+        contenedorPrincipal.add(verInscripcionSalidaTuristica);
+        verInscripcionSalidaTuristica.show();        
+    }//GEN-LAST:event_altaInscripcionSalidaTuristicaActionPerformed
+
+    private void altaSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaSalidaTuristicaActionPerformed
+        AltaSalidaTuristica verAltaSalidaTuristica = new AltaSalidaTuristica();
+        contenedorPrincipal.add(verAltaSalidaTuristica);
+        verAltaSalidaTuristica.show();
+    }//GEN-LAST:event_altaSalidaTuristicaActionPerformed
+
+    private void consSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consSalidaTuristicaActionPerformed
+        ConsultaDeSalidaTurística verConsultaDeSalidaTurística = new ConsultaDeSalidaTurística();
+        contenedorPrincipal.add(verConsultaDeSalidaTurística);
+        verConsultaDeSalidaTurística.show();
+    }//GEN-LAST:event_consSalidaTuristicaActionPerformed
 
     /**
      * @param args the command line arguments
