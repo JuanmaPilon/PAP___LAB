@@ -40,12 +40,16 @@ public class Principal extends javax.swing.JFrame {
         altaAgregarActividadPaquete = new javax.swing.JMenuItem();
         altaDepartamento = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
-        consUsuario = new javax.swing.JMenuItem();
+        consUsuario = new javax.swing.JMenu();
+        consTurista = new javax.swing.JMenuItem();
+        consProveedor = new javax.swing.JMenuItem();
         consActividadTuristica = new javax.swing.JMenuItem();
         consSalidaTuristica = new javax.swing.JMenuItem();
         consPaquete = new javax.swing.JMenuItem();
         menuModificar = new javax.swing.JMenu();
-        modiUsuario = new javax.swing.JMenuItem();
+        ModificarUsuario = new javax.swing.JMenu();
+        modTurista = new javax.swing.JMenuItem();
+        modProveedor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" turismo.uy Grupo 4");
@@ -60,7 +64,7 @@ public class Principal extends javax.swing.JFrame {
         );
         contenedorPrincipalLayout.setVerticalGroup(
             contenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 607, Short.MAX_VALUE)
         );
 
         menuAltas.setText("Altas");
@@ -108,6 +112,11 @@ public class Principal extends javax.swing.JFrame {
         menuAltas.add(altaCrearPaquete);
 
         altaAgregarActividadPaquete.setText("Agregar Actividad Paquete");
+        altaAgregarActividadPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaAgregarActividadPaqueteActionPerformed(evt);
+            }
+        });
         menuAltas.add(altaAgregarActividadPaquete);
 
         altaDepartamento.setText("Departamento");
@@ -123,9 +132,31 @@ public class Principal extends javax.swing.JFrame {
         menuConsultas.setText("Consultas");
 
         consUsuario.setText("Usuario");
+
+        consTurista.setText("Turista");
+        consTurista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consTuristaActionPerformed(evt);
+            }
+        });
+        consUsuario.add(consTurista);
+
+        consProveedor.setText("Proveedor");
+        consProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consProveedorActionPerformed(evt);
+            }
+        });
+        consUsuario.add(consProveedor);
+
         menuConsultas.add(consUsuario);
 
         consActividadTuristica.setText("Actividad Turistica");
+        consActividadTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consActividadTuristicaActionPerformed(evt);
+            }
+        });
         menuConsultas.add(consActividadTuristica);
 
         consSalidaTuristica.setText("Salida Tursitica");
@@ -143,8 +174,25 @@ public class Principal extends javax.swing.JFrame {
 
         menuModificar.setText("Modificar");
 
-        modiUsuario.setText("Usuario");
-        menuModificar.add(modiUsuario);
+        ModificarUsuario.setText("Usuario");
+
+        modTurista.setText("Turista");
+        modTurista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modTuristaActionPerformed(evt);
+            }
+        });
+        ModificarUsuario.add(modTurista);
+
+        modProveedor.setText("Proveedor");
+        modProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modProveedorActionPerformed(evt);
+            }
+        });
+        ModificarUsuario.add(modProveedor);
+
+        menuModificar.add(ModificarUsuario);
 
         barraMenuPrincipal.add(menuModificar);
 
@@ -200,6 +248,42 @@ public class Principal extends javax.swing.JFrame {
         verAltaDepartamento.show();
     }//GEN-LAST:event_altaDepartamentoActionPerformed
 
+    private void modTuristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modTuristaActionPerformed
+        ModificarDatosTurista verModificarTurista = new ModificarDatosTurista();
+        contenedorPrincipal.add(verModificarTurista);
+        verModificarTurista.show();
+    }//GEN-LAST:event_modTuristaActionPerformed
+
+    private void modProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modProveedorActionPerformed
+        ModificarDatosProveedor verModificarProveedor = new ModificarDatosProveedor();
+        contenedorPrincipal.add(verModificarProveedor);
+        verModificarProveedor.show();
+    }//GEN-LAST:event_modProveedorActionPerformed
+
+    private void consActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consActividadTuristicaActionPerformed
+        ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica();
+        contenedorPrincipal.add(verConsultaActividadTuristica);
+        verConsultaActividadTuristica.show();
+    }//GEN-LAST:event_consActividadTuristicaActionPerformed
+
+    private void altaAgregarActividadPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaAgregarActividadPaqueteActionPerformed
+        AgregarActividadTuristicaPaquete verAgregarActividadPaquete = new AgregarActividadTuristicaPaquete();
+        contenedorPrincipal.add(verAgregarActividadPaquete);
+        verAgregarActividadPaquete.show();
+    }//GEN-LAST:event_altaAgregarActividadPaqueteActionPerformed
+
+    private void consTuristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consTuristaActionPerformed
+        ConsultaUsuarioTurista verConsultarUsuarioTurista = new ConsultaUsuarioTurista();
+        contenedorPrincipal.add(verConsultarUsuarioTurista);
+        verConsultarUsuarioTurista.show();
+    }//GEN-LAST:event_consTuristaActionPerformed
+
+    private void consProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consProveedorActionPerformed
+        ConsultaUsuarioProveedor verConsultarUsuarioProveedor = new ConsultaUsuarioProveedor();
+        contenedorPrincipal.add(verConsultarUsuarioProveedor);
+        verConsultarUsuarioProveedor.show();
+    }//GEN-LAST:event_consProveedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,6 +320,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu ModificarUsuario;
     private javax.swing.JMenu Usuario;
     private javax.swing.JMenuItem altaActividadTuristica;
     private javax.swing.JMenuItem altaAgregarActividadPaquete;
@@ -248,12 +333,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraMenuPrincipal;
     private javax.swing.JMenuItem consActividadTuristica;
     private javax.swing.JMenuItem consPaquete;
+    private javax.swing.JMenuItem consProveedor;
     private javax.swing.JMenuItem consSalidaTuristica;
-    private javax.swing.JMenuItem consUsuario;
+    private javax.swing.JMenuItem consTurista;
+    private javax.swing.JMenu consUsuario;
     private javax.swing.JDesktopPane contenedorPrincipal;
     private javax.swing.JMenu menuAltas;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuModificar;
-    private javax.swing.JMenuItem modiUsuario;
+    private javax.swing.JMenuItem modProveedor;
+    private javax.swing.JMenuItem modTurista;
     // End of variables declaration//GEN-END:variables
 }
