@@ -1,5 +1,8 @@
-import java.util.Date;
+package logica;
 
+
+import presentacion.DActividad;
+import java.util.Date;
 public class Actividad {
     private String nombre;
     private String desc;
@@ -63,6 +66,9 @@ public String getCiudad() {
 
 public Date getfAlta() {
     return fAlta;
+}
+public DActividad parse(){
+    return new DActividad(getNombre(),getDesc(),getDuracion(),getCosto(),getCiudad(),getfAlta());
 }
 
 }

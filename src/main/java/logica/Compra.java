@@ -1,3 +1,6 @@
+package logica;
+
+import presentacion.DCompra;
 import java.util.Date;
 
 public class Compra {
@@ -42,5 +45,8 @@ public class Compra {
     }
     public void setVencimiento(Date vencimiento) {
         this.vencimiento = vencimiento;
+    }
+    public DCompra parse(){
+        return new DCompra(getfCompra(),getfContTurista(),getfCostoTotal(),getVencimiento());
     }
 }

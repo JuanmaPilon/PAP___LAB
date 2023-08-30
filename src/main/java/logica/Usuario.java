@@ -1,3 +1,6 @@
+package logica;
+
+import presentacion.DUsuario;
 import java.util.Date;
 
     public class Usuario {
@@ -53,5 +56,9 @@ import java.util.Date;
 
     public Date getfNacimiento() {
         return fNacimiento;
+    }
+    
+    public DUsuario parse(){
+        return null;
     }
 }

@@ -1,14 +1,17 @@
+package presentacion;
+
+import logica.Paquete;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Paquete {
+public class DPaquete {
     
     private String nombre;
     private String desc;
     private int validez;
     private int descuento;
 
- public Paquete(String nombre, String desc, int validez, int descuento) {
+ public DPaquete(String nombre, String desc, int validez, int descuento) {
     this.nombre = nombre;
     this.desc = desc;
     this.validez = validez;
@@ -47,6 +50,8 @@ public int getDescuento() {
     return descuento;
 }
 
-
+public Paquete parse(){
+    return new Paquete(getNombre(),getDesc(),getValidez(),getDescuento());
+}
 
 }

@@ -1,10 +1,13 @@
+package presentacion;
+
+import logica.Proveedor;
 import java.util.Date;
 
-public class Proveedor extends Usuario {
+public class DProveedor extends DUsuario {
     private String descripcion;
     private String link;
 
-    public Proveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
+    public DProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
         super(nickname, nombre, apellido, correo, fNacimiento);
         this.descripcion = descripcion;
         this.link = link;
@@ -24,5 +27,10 @@ public class Proveedor extends Usuario {
 
     public void setLink(String link) {
         this.link = link;
+    }
+    
+    @Override
+    public Proveedor parse(){
+        return new Proveedor(getNickname(), getNombre(),getApellido(),getCorreo(),getfNacimiento());
     }
 }

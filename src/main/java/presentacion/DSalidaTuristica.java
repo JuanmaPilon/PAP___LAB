@@ -1,8 +1,11 @@
+package presentacion;
+
+import logica.SalidaTuristica;
 import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Date;
-public class SalidaTuristica {
+public class DSalidaTuristica {
     private String nombre;
     private int cantMax;
     private Date fAlta;
@@ -10,7 +13,7 @@ public class SalidaTuristica {
     private String lugar;
 
     
-    public SalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) {
+    public DSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) {
         this.nombre = nombre;
         this.cantMax = cantMax;
         this.fAlta = fAlta;
@@ -48,5 +51,7 @@ public class SalidaTuristica {
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
-
+    public SalidaTuristica parse(){
+        return new SalidaTuristica(getNombre(),getCantMax(),getfAlta(),getfSalida(),getLugar());
+    }
 }
