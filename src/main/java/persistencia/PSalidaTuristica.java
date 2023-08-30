@@ -1,12 +1,11 @@
-package logica;
+package persistencia;
 
-import persistencia.PSalidaTuristica;
-import presentacion.DSalidaTuristica;
+import logica.SalidaTuristica;
 import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Date;
-public class SalidaTuristica {
+public class PSalidaTuristica {
     private String nombre;
     private int cantMax;
     private Date fAlta;
@@ -14,7 +13,7 @@ public class SalidaTuristica {
     private String lugar;
 
     
-    public SalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) {
+    public PSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) {
         this.nombre = nombre;
         this.cantMax = cantMax;
         this.fAlta = fAlta;
@@ -52,11 +51,7 @@ public class SalidaTuristica {
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
-    public DSalidaTuristica parse(){
-        return new DSalidaTuristica(getNombre(),getCantMax(),getfAlta(),getfSalida(),getLugar());
+    public SalidaTuristica parse(){
+        return new SalidaTuristica(getNombre(),getCantMax(),getfAlta(),getfSalida(),getLugar());
     }
-    public PSalidaTuristica parsePersist(){
-        return new PSalidaTuristica(getNombre(),getCantMax(),getfAlta(),getfSalida(),getLugar());
-    }
-    
 }

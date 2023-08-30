@@ -1,5 +1,6 @@
 package logica;
 
+import persistencia.PTurista;
 import presentacion.DTurista;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,8 @@ public class Turista extends Usuario {
     public DTurista parse(){
         return new DTurista(getNickname(), getNombre(), getApellido(), getCorreo(), getfNacimiento());
     }
-
-
+    public PTurista parsePersist(){
+        return new PTurista(getNickname(), getNombre(), getApellido(), getCorreo(), getfNacimiento());
+    }
 }
 

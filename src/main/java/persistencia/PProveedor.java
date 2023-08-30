@@ -1,14 +1,13 @@
-package logica;
+package persistencia;
 
-import persistencia.PProveedor;
-import presentacion.DProveedor;
+import logica.Proveedor;
 import java.util.Date;
 
-public class Proveedor extends Usuario {
+public class PProveedor extends PUsuario {
     private String descripcion;
     private String link;
 
-    public Proveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
+    public PProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
         super(nickname, nombre, apellido, correo, fNacimiento);
         this.descripcion = descripcion;
         this.link = link;
@@ -31,10 +30,7 @@ public class Proveedor extends Usuario {
     }
     
     @Override
-    public DProveedor parse(){
-        return new DProveedor(getNickname(), getNombre(),getApellido(),getCorreo(),getfNacimiento());
-    }
-    public PProveedor parsePersist(){
-        return new PProveedor(getNickname(), getNombre(),getApellido(),getCorreo(),getfNacimiento());
+    public Proveedor parse(){
+        return new Proveedor(getNickname(), getNombre(),getApellido(),getCorreo(),getfNacimiento());
     }
 }

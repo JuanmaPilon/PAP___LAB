@@ -1,17 +1,16 @@
-package logica;
+package persistencia;
 
-import persistencia.PUsuario;
-import presentacion.DUsuario;
+import logica.Usuario;
 import java.util.Date;
 
-    public class Usuario {
+    public class PUsuario {
         private String nickname;
         private String nombre;
         private String apellido;
         private String correo;
         private Date fNacimiento;
 
-    public Usuario(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
+    public PUsuario(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -59,10 +58,7 @@ import java.util.Date;
         return fNacimiento;
     }
     
-    public DUsuario parse(){
-        return null;
-    }
-    public PUsuario parsePersist(){
+    public Usuario parse(){
         return null;
     }
 }

@@ -1,26 +1,25 @@
-package logica;
+package persistencia;
 
-import persistencia.PCompra;
-import presentacion.DCompra;
+import logica.Compra;
 import java.util.Date;
 
-public class Compra {
+public class PCompra {
     private Date fCompra;
     private int fContTurista;
     private float fCostoTotal;
     private Date vencimiento;
-    private Paquete paquete;
-    public Compra(Date fCompra, int fContTurista, float fCostoTotal, Date vencimiento) {
+    private PPaquete paquete;
+    public PCompra(Date fCompra, int fContTurista, float fCostoTotal, Date vencimiento) {
         this.fCompra = fCompra;
         this.fContTurista = fContTurista;
         this.fCostoTotal = fCostoTotal;
         this.vencimiento = vencimiento;
         this.paquete = paquete;
     }
-    public void setPaquete(Paquete paquete) {
+    public void setPaquete(PPaquete paquete) {
         this.paquete = paquete;
     }
-    public Paquete getPaquete() {
+    public PPaquete getPaquete() {
         return paquete;
     }
     public Date getfCompra() {
@@ -47,10 +46,7 @@ public class Compra {
     public void setVencimiento(Date vencimiento) {
         this.vencimiento = vencimiento;
     }
-    public DCompra parse(){
-        return new DCompra(getfCompra(),getfContTurista(),getfCostoTotal(),getVencimiento());
-    }
-    public PCompra parsePersist(){
-        return new PCompra(getfCompra(),getfContTurista(),getfCostoTotal(),getVencimiento());
+    public Compra parse(){
+        return new Compra(getfCompra(),getfContTurista(),getfCostoTotal(),getVencimiento());
     }
 }

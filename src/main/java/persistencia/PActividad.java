@@ -1,9 +1,8 @@
-package logica;
+package persistencia;
 
-import persistencia.PActividad;
-import presentacion.DActividad;
+import logica.Actividad;
 import java.util.Date;
-public class Actividad {
+public class PActividad {
     private String nombre;
     private String desc;
     private int duracion;
@@ -11,7 +10,7 @@ public class Actividad {
     private String ciudad;
     private Date fAlta;
 //////
-public Actividad(String nombre,String desc, int duracion, float costo, String ciudad, Date fAlta) {
+public PActividad(String nombre,String desc, int duracion, float costo, String ciudad, Date fAlta) {
     this.nombre = nombre;
     this.desc = desc;
     this.duracion = duracion;
@@ -67,10 +66,9 @@ public String getCiudad() {
 public Date getfAlta() {
     return fAlta;
 }
-public DActividad parse(){
-    return new DActividad(getNombre(),getDesc(),getDuracion(),getCosto(),getCiudad(),getfAlta());
+
+public Actividad parse(){
+    return new Actividad(getNombre(),getDesc(),getDuracion(),getCosto(),getCiudad(),getfAlta());
 }
-public PActividad parsePersist(){
-    return new PActividad(getNombre(),getDesc(),getDuracion(),getCosto(),getCiudad(),getfAlta());
-}
+
 }

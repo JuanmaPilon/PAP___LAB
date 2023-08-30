@@ -1,18 +1,17 @@
-package logica;
+package persistencia;
 
-import persistencia.PPaquete;
-import presentacion.DPaquete;
+import logica.Paquete;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Paquete {
+public class PPaquete {
     
     private String nombre;
     private String desc;
     private int validez;
     private int descuento;
 
- public Paquete(String nombre, String desc, int validez, int descuento) {
+ public PPaquete(String nombre, String desc, int validez, int descuento) {
     this.nombre = nombre;
     this.desc = desc;
     this.validez = validez;
@@ -51,11 +50,8 @@ public int getDescuento() {
     return descuento;
 }
 
-public DPaquete parse(){
-    return new DPaquete(getNombre(),getDesc(),getValidez(),getDescuento());
-}
-public PPaquete parsePersist(){
-    return new PPaquete(getNombre(),getDesc(),getValidez(),getDescuento());
+public Paquete parse(){
+    return new Paquete(getNombre(),getDesc(),getValidez(),getDescuento());
 }
 
 }
