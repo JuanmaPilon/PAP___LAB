@@ -1,14 +1,14 @@
 # Laboratorio Programacion de Aplicaciones - UTEC
 
-<img align="right" width="300" src="https://media.giphy.com/media/Dh5q0sShxgp13DwrvG/giphy.gif">
+<img align="right" width="350" src="https://media.giphy.com/media/Dh5q0sShxgp13DwrvG/giphy.gif">
 
 ## Autores:
 
 * **[Juan Martin Pilon](https://github.com/JuanmaPilon)**
 * **[Carlos Santana](https://github.com/Carlangassss)**
-* **Natalia Lopez**
-* **Santiago Badiola**
-* **Mauricio ?**
+* **[Natalia Lopez](https://github.com/Natalialopezutec)**
+* **[Santiago Badiola](https://github.com/SantiagoBadiola2002)**
+* **[Mauricio Batista](https://github.com/rkko)**
 
 ### Para el Proyecto usaremos:
 
