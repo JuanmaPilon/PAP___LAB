@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class DTurista extends DUsuario {
-    private String nacionalidad;
+    private int nacionalidad;
     private List<DCompra> compras = new ArrayList<>();
 
     public DTurista (String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
@@ -14,11 +14,11 @@ public class DTurista extends DUsuario {
        this.nacionalidad = nacionalidad;
     }
 
-    public void setNacionalidad(String nacionalidad) {
+    public void setNacionalidad(int nacionalidad) {
         this.nacionalidad = nacionalidad;
     }
 
-    public String getNacionalidad() {
+    public int getNacionalidad() {
         return nacionalidad;
     }
 
