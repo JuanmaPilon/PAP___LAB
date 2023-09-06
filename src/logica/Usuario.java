@@ -67,7 +67,7 @@ import javax.persistence.TemporalType;
 
     public Date getfNacimiento() {
         return fNacimiento;
-    }
+    } 
     
 
 }

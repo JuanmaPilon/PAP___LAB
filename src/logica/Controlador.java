@@ -28,8 +28,16 @@ public class Controlador implements IControlador{
    @Override
    public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String descripcion, String link, Departamento depto){
    };
-
-//    public void ConsultaDeUsuario();//Mauri
+   
+   @Override
+   public ArrayList<String> listaUsuarios(){
+     return controlPersis.listaUsuarios();
+   };
+   
+   @Override
+   public Usuario ConsultaDeUsuario(String nickname){
+       return controlPersis.consultaUsuario(nickname);
+   };
 //    public void ModificarDatosDeUsuario();//Nati
    @Override
    public void AltaDeActividadTuristica(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete){

@@ -3,18 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package presentacion;
-
+import logica.Turista;
 /**
  *
  * @author natil
  */
 public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
-
+    
+    private Turista turista;
     /**
      * Creates new form ConsultaActividadTuristica
      */
-    public ConsultaUsuarioTurista() {
+    public ConsultaUsuarioTurista(Turista t) {
         initComponents();
+        this.turista = t;
     }
 
     /**
@@ -29,7 +31,7 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         departamentoConsultaActividadTuristica = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        fechaAltaConsultaActividadTuristica = new javax.swing.JTextField();
+        fechaNacimientoTurista = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         salidasTuristicasConsultaActividadTuristica = new javax.swing.JComboBox<>();
         verActividadTuristica = new javax.swing.JButton();
@@ -50,7 +52,12 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
 
         setClosable(true);
-        setTitle("Consulta de Actividad Turistica");
+        setTitle("Informacion del usuario");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLabel1.setText("Seleccionar turista:");
 
@@ -58,7 +65,7 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Datos turistica:");
 
-        fechaAltaConsultaActividadTuristica.setEditable(false);
+        fechaNacimientoTurista.setEditable(false);
 
         jLabel11.setText("Actividad Turistica");
 
@@ -119,7 +126,7 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel17)
                                     .addGap(18, 18, 18)
-                                    .addComponent(fechaAltaConsultaActividadTuristica, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)))
+                                    .addComponent(fechaNacimientoTurista, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)))
                             .addComponent(jLabel18))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -191,19 +198,29 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
                             .addComponent(jLabel12)
                             .addComponent(paqutesActividadConsultaActividadTuristica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(verSalidaTuristica)))
-                    .addComponent(fechaAltaConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaNacimientoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        apellidoTurista.setText(turista.getApellido());
+        correoTurista.setText(turista.getCorreo());
+        nacionalidadTurista.setText(turista.getNacionalidad());
+        nicknameTurista.setText(turista.getNickname());
+        nombreTurista.setText(turista.getNombre());
+        fechaNacimientoTurista.setText(turista.getfNacimiento().toString());
+    }//GEN-LAST:event_formComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTurista;
     private javax.swing.JTextField correoTurista;
     private javax.swing.JComboBox<String> departamentoConsultaActividadTuristica;
-    private javax.swing.JTextField fechaAltaConsultaActividadTuristica;
+    private javax.swing.JTextField fechaNacimientoTurista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

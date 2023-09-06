@@ -1,12 +1,16 @@
 
 package persistencia;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.Actividad;
 import logica.Departamento;
 import logica.Turista;
+import logica.Proveedor;
+import logica.Usuario;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 
 public class ControladoraPersistencia {
@@ -19,6 +23,48 @@ public class ControladoraPersistencia {
     ProveedorJpaController proveedorJpa = new ProveedorJpaController();
     
     
+    //Consultas
+    public Usuario consultaUsuario(String nickname){
+        Usuario usuario=null;
+        boolean esProveedor=true;
+        try {
+            usuario = turistaJpa.findTurista(nickname);
+            if (usuario != null){
+                esProveedor = !esProveedor;
+            }
+        }catch(Exception ex){
+                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (esProveedor){
+            try {
+            usuario = proveedorJpa.findProveedor(nickname);
+            }catch(Exception ex){
+                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return usuario; 
+    }
+    
+    public ArrayList<String> listaUsuarios(){
+    ArrayList<String> nicknames = new ArrayList<String>();
+    try {
+        List<Turista> turistas = turistaJpa.findTuristaEntities();
+        for (int i = 0; i < turistas.size(); i++) {
+            nicknames.add(turistas.get(i).getNickname());
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    try {
+        List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+        for (int i = 0; i < proveedores.size(); i++) {
+            nicknames.add(proveedores.get(i).getNickname());
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return nicknames;
+    }
     
     //Guardar Departamento
     public void guardarDepartamento(Departamento depto) {

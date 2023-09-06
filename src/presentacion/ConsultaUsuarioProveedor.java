@@ -3,18 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package presentacion;
-
+import logica.Proveedor;
 /**
  *
  * @author natil
  */
 public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
-
+    private Proveedor proveedor;
     /**
      * Creates new form ConsultaActividadTuristica
      */
-    public ConsultaUsuarioProveedor() {
+    public ConsultaUsuarioProveedor(Proveedor p) {
         initComponents();
+        this.proveedor = p;
     }
 
     /**
@@ -29,7 +30,7 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         departamentoConsultaActividadTuristica = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        fechaAltaConsultaActividadTuristica = new javax.swing.JTextField();
+        fechaNacimientoProveedor = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         salidasTuristicasConsultaActividadTuristica = new javax.swing.JComboBox<>();
         verActividadTuristica = new javax.swing.JButton();
@@ -37,22 +38,27 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         paqutesActividadConsultaActividadTuristica1 = new javax.swing.JComboBox<>();
         verSalidaTuristica = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        nicknameTurista = new javax.swing.JTextField();
+        nicknameProveedor = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        nacionalidadTurista = new javax.swing.JTextField();
+        descripcionProveedor = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        nombreTurista = new javax.swing.JTextField();
-        apellidoTurista = new javax.swing.JTextField();
-        correoTurista = new javax.swing.JTextField();
+        nombreProveedor = new javax.swing.JTextField();
+        apellidoProveedor = new javax.swing.JTextField();
+        correoProveedor = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        nacionalidadTurista1 = new javax.swing.JTextField();
+        urlProveedor = new javax.swing.JTextField();
 
         setClosable(true);
-        setTitle("Consulta de Actividad Turistica");
+        setTitle("Informacion del usuario");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLabel1.setText("Seleccionar proveedor:");
 
@@ -60,7 +66,7 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Datos proveedor:");
 
-        fechaAltaConsultaActividadTuristica.setEditable(false);
+        fechaNacimientoProveedor.setEditable(false);
 
         jLabel11.setText("Actividad Turistica:");
 
@@ -124,32 +130,32 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addGap(18, 18, 18)
-                                .addComponent(correoTurista))
+                                .addComponent(correoProveedor))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addGap(18, 18, 18)
-                                .addComponent(nacionalidadTurista))
+                                .addComponent(descripcionProveedor))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(nicknameTurista))
+                                .addComponent(nicknameProveedor))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(18, 18, 18)
-                                .addComponent(nombreTurista))
+                                .addComponent(nombreProveedor))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(apellidoTurista))
+                                .addComponent(apellidoProveedor))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addGap(18, 18, 18)
-                                .addComponent(fechaAltaConsultaActividadTuristica, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
+                                .addComponent(fechaNacimientoProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
                             .addComponent(jLabel18)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel19)
                                 .addGap(18, 18, 18)
-                                .addComponent(nacionalidadTurista1)))
+                                .addComponent(urlProveedor)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -166,18 +172,18 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(nicknameTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nicknameProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(nombreTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(apellidoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(apellidoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel16))
-                    .addComponent(correoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(correoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -185,12 +191,12 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13)
-                            .addComponent(nacionalidadTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(fechaAltaConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(descripcionProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(fechaNacimientoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel19)
-                    .addComponent(nacionalidadTurista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(urlProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel18)
                 .addGap(20, 20, 20)
@@ -209,12 +215,24 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        apellidoProveedor.setText(proveedor.getApellido());
+        correoProveedor.setText(proveedor.getCorreo());
+        descripcionProveedor.setText(proveedor.getDescripcion());
+        fechaNacimientoProveedor.setText(proveedor.getfNacimiento().toString());
+        nicknameProveedor.setText(proveedor.getNickname());
+        nombreProveedor.setText(proveedor.getNombre());
+        urlProveedor.setText(proveedor.getLink());
+    }//GEN-LAST:event_formComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField apellidoTurista;
-    private javax.swing.JTextField correoTurista;
+    private javax.swing.JTextField apellidoProveedor;
+    private javax.swing.JTextField correoProveedor;
     private javax.swing.JComboBox<String> departamentoConsultaActividadTuristica;
-    private javax.swing.JTextField fechaAltaConsultaActividadTuristica;
+    private javax.swing.JTextField descripcionProveedor;
+    private javax.swing.JTextField fechaNacimientoProveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -227,12 +245,11 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField nacionalidadTurista;
-    private javax.swing.JTextField nacionalidadTurista1;
-    private javax.swing.JTextField nicknameTurista;
-    private javax.swing.JTextField nombreTurista;
+    private javax.swing.JTextField nicknameProveedor;
+    private javax.swing.JTextField nombreProveedor;
     private javax.swing.JComboBox<String> paqutesActividadConsultaActividadTuristica1;
     private javax.swing.JComboBox<String> salidasTuristicasConsultaActividadTuristica;
+    private javax.swing.JTextField urlProveedor;
     private javax.swing.JButton verActividadTuristica;
     private javax.swing.JButton verSalidaTuristica;
     // End of variables declaration//GEN-END:variables
