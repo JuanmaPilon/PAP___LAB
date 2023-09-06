@@ -12,10 +12,10 @@
 
 ### Para el Proyecto usaremos:
 
-- JAVA 8
+- JAVA 8 (JDK 8)
 - Ant
 - Swing
-- JPA
+- JPA (MySQL Connector 8.0.30)
 - Docker
 
 ### Fechas limites:
