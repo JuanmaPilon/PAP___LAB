@@ -13,10 +13,10 @@
 ### Para el Proyecto usaremos:
 
 - JAVA 8
-- Maven
+- Ant
 - Swing
 - JPA
-- Docker?
+- Docker
 
 ### Fechas limites:
 
