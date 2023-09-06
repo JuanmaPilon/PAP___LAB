@@ -30,6 +30,16 @@ public class Controlador implements IControlador{
    };
    
    @Override
+   public ArrayList<String> listaDepartamentos(){
+       return controlPersis.listaDepartamentos();
+   };
+   
+   @Override
+   public ArrayList<String> listaActividadesTuristicas(String departamento){
+       return controlPersis.listaActividadesTuristicas(departamento);
+   };
+   
+   @Override
    public ArrayList<String> listaUsuarios(){
      return controlPersis.listaUsuarios();
    };
@@ -37,6 +47,11 @@ public class Controlador implements IControlador{
    @Override
    public Usuario ConsultaDeUsuario(String nickname){
        return controlPersis.consultaUsuario(nickname);
+   };
+   
+   @Override
+   public Actividad ConsultaActividadTuristica(String nombreActividad){
+       return controlPersis.consultaActividad(nombreActividad);
    };
 //    public void ModificarDatosDeUsuario();//Nati
    @Override
@@ -59,7 +74,6 @@ public class Controlador implements IControlador{
 
 
 };//Juanma
-//    public void ConsultaActividadTuristica();//Carlos
 //    public void AltaDeSalidaTuristica();
 //    public void ConsultaDeSalidaTuristica();
 //    public void InscripcionDeSalidaTuristica();

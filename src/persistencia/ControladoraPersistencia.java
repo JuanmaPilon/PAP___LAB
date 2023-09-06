@@ -24,6 +24,29 @@ public class ControladoraPersistencia {
     
     
     //Consultas
+    public Actividad consultaActividad(String nombreActividad){
+      return   actividadJpa.findActividad(nombreActividad);
+    };
+    public ArrayList<String> listaDepartamentos(){
+        ArrayList<String> departamentos = new ArrayList<String>();
+        try {
+            List<Departamento> departamento = departamentoJpa.findDepartamentoEntities();
+            for (int i = 0; i < departamento.size(); i++) {
+                departamentos.add(departamento.get(i).getNombre());
+            }
+        }catch(Exception ex){
+                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return departamentos;
+    }
+    public ArrayList<String> listaActividadesTuristicas(String departamento){
+       ArrayList<String> actividades = new ArrayList<String>();
+        List<String> actividad = actividadJpa.findByDepartamento(departamento);
+        for(int i = 0; i < actividad.size();i++){
+            actividades.add(actividad.get(i));
+        };
+        return actividades;
+    }
     public Usuario consultaUsuario(String nickname){
         Usuario usuario=null;
         boolean esProveedor=true;

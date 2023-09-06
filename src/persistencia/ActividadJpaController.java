@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 import logica.Paquete;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -186,4 +187,37 @@ public class ActividadJpaController implements Serializable {
         }
     }
     
+    public List<String> findByDepartamento(String departamento) { 
+        EntityManager em = getEntityManager();
+        String query = "SELECT listaActTur_NOMBRE FROM departamento_actividad WHERE Departamento_NOMBRE LIKE '%"+departamento+"%'";
+	@SuppressWarnings("unchecked")
+	List<String> r = (List<String>) em.createNativeQuery(query).getResultList();
+        return r;
+    }
+    /*
+    public Map<String, Set<String>> obtenerActividadxClasesSocio(String nombreSocio) {
+	EntityManager em = emFabrica.createEntityManager();
+	Map<String, Set<String>> res = new HashMap<>();
+	try {
+		em.getTransaction().begin();
+		TypedQuery<Registros> select = em.createQuery("SELECT reg FROM Registros reg WHERE reg.tipoEstado=:tipoEstado", Registros.class);
+		select.setParameter("tipoEstado", tipoEstado.finalizada.toString());
+		Map<String,String> clasexact = new HashMap<>();
+		for(Registros x: select.getResultList()) {
+			if (x.getSocio().equals(nombreSocio))
+				clasexact.put(x.getClase(), x.getAct());
+		}
+		for(Entry<String, String> x: clasexact.entrySet()) {
+			if(!res.containsKey(x.getValue()))
+				res.put(x.getValue(), new HashSet<String>());
+			res.get(x.getValue()).add(x.getKey());
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+		em.getTransaction().rollback();
+	} finally {
+		em.close();
+	}
+	return res;
+}*/
 }
