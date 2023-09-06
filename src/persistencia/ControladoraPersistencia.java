@@ -3,9 +3,11 @@ package persistencia;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import logica.Actividad;
 import logica.Departamento;
 import logica.Turista;
+import persistencia.exceptions.CorreoElectronicoExistenteException;
 
 public class ControladoraPersistencia {
     //creo las controladoras de persistencia de cada clase
@@ -37,11 +39,14 @@ public class ControladoraPersistencia {
     }
 
     public void guardarTurista(Turista turista) {
-        try {
-            turistaJpa.create(turista);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    try {
+        turistaJpa.create(turista);
+         JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    } catch (CorreoElectronicoExistenteException e) {
+       JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception ex) {
+       JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }
     
 }

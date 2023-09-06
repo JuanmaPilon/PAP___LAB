@@ -9,7 +9,11 @@ import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
-
+import persistencia.exceptions.CorreoElectronicoExistenteException;
+import  persistencia.exceptions.PreexistingEntityException;
+import logica.Turista;
+import logica.Controlador;
+import java.text.ParseException;
 /**
  *
  * @author natil
@@ -166,29 +170,26 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        String nickname = txtnickname.getText();
-        String nombre = txtnombre.getText();
-        String apellido = txtapellido.getText();
-        String correo = txtcorreo.getText();
-        String nacionalidad = txtnacionalidad.getText();
-        int dia = (int) cmbdia.getValue();
-        int mes = (int) cmbmes.getValue();
-        int anio = (int)cmbanio.getValue();
-        
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
+     String nickname = txtnickname.getText();
+    String nombre = txtnombre.getText();
+    String apellido = txtapellido.getText();
+    String correo = txtcorreo.getText();
+    String nacionalidad = txtnacionalidad.getText();
+    int dia = (int) cmbdia.getValue();
+    int mes = (int) cmbmes.getValue();
+    int anio = (int) cmbanio.getValue();
 
-        // Obtiene un objeto Date a partir del objeto Calendar
-        Date fecha = calendar.getTime();
-        
-        //NO paso OBJETOS!
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
+
+    Date fecha = calendar.getTime();
+
+    try {
         control.AltaDeUsuarioTurista(nickname, nombre, apellido, correo, fecha, nacionalidad);
-        
-        JOptionPane optionPane = new JOptionPane("se guardó correctamente");
-        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Guardado exitoso");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
     }//GEN-LAST:event_btnguardarActionPerformed
 
 

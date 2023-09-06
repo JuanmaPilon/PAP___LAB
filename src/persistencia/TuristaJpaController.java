@@ -10,12 +10,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import logica.Turista;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
+import persistencia.exceptions.CorreoElectronicoExistenteException;
 
 /**
  *
@@ -36,24 +39,46 @@ public class TuristaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Turista turista) throws PreexistingEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.persist(turista);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findTurista(turista.getNickname()) != null) {
-                throw new PreexistingEntityException("Turista " + turista + " already exists.", ex);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+     public void create(Turista turista) throws CorreoElectronicoExistenteException, PreexistingEntityException, Exception {
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
+
+        // Verificar si el correo electrónico ya existe en la base de datos
+        if (existeCorreoElectronico(turista.getCorreo())) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso: " + turista.getCorreo());
+        }
+
+        em.persist(turista);
+        em.getTransaction().commit();
+    } catch (Exception ex) {
+        if (findTurista(turista.getNickname()) != null) {
+            throw new PreexistingEntityException("Turista " + turista.getNickname() + " already exists.", ex);
+        }
+        throw ex;
+    } finally {
+        if (em != null) {
+            em.close();
         }
     }
+}
+
+public boolean existeCorreoElectronico(String correo) {
+    EntityManager em = getEntityManager(); // Inicializa el EntityManager aquí
+    try {
+        TypedQuery<Turista> query = em.createQuery("SELECT t FROM Turista t WHERE t.correo = :correo", Turista.class);
+        query.setParameter("correo", correo);
+        Turista turista = query.getSingleResult();
+        return turista != null;
+    } catch (NoResultException e) {
+        return false; // No se encontró ningún turista con ese correo electrónico.
+    } finally {
+        if (em != null && em.isOpen()) {
+            em.close();
+        }
+    }
+}
 
     public void edit(Turista turista) throws NonexistentEntityException, Exception {
         EntityManager em = null;
