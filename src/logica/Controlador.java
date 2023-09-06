@@ -21,12 +21,16 @@ public class Controlador implements IControlador{
     turista.setCorreo(correo);
     turista.setfNacimiento(fNacimiento);
     turista.setNacionalidad(nacionalidad);
-    
     controlPersis.guardarTurista(turista);
    };
    
    @Override
    public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String descripcion, String link, Departamento depto){
+   };
+   
+   @Override 
+   public ArrayList<String> listaSalActividadTuristica(String actividad){
+       return controlPersis.listaSalActividadTuristica(actividad);
    };
    
    @Override
@@ -75,7 +79,10 @@ public class Controlador implements IControlador{
 
 };//Juanma
 //    public void AltaDeSalidaTuristica();
-//    public void ConsultaDeSalidaTuristica();
+   @Override
+    public SalidaTuristica ConsultaSalidaTuristica(String nombreSalida){
+        return controlPersis.consultaSalida(nombreSalida);
+    };
 //    public void InscripcionDeSalidaTuristica();
 //    public void CrearPaqueteDeActividadesTuristicas();
 //    public void AgregarActividadTuristicaAPaquete();

@@ -4,12 +4,16 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
+import logica.Controlador;
+import logica.SalidaTuristica;
+
 /**
  *
  * @author Pc
  */
 public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
-
+    Controlador control = new Controlador();
     /**
      * Creates new form ConsultaDeSalidaTurística
      */
@@ -26,38 +30,58 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbActividades = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbDepartamentos = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbSalidas = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        diaProveedor = new javax.swing.JSpinner();
+        sprFecha = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        cmbBoxMaxCantTuristas = new javax.swing.JTextField();
+        txtMaxTur = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        lugarSalidaTuristica1 = new javax.swing.JTextField();
+        txtLugar = new javax.swing.JTextField();
 
         setTitle("Consulta de Salida Turística");
         setPreferredSize(new java.awt.Dimension(765, 600));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbActividades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbActividades.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbActividadesItemStateChanged(evt);
+            }
+        });
 
         jLabel8.setText("Actividades Turisticas");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDepartamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDepartamentos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbDepartamentosItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setText("Departamento");
 
         jLabel4.setText("Nombre Salida");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbSalidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbSalidas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbSalidasItemStateChanged(evt);
+            }
+        });
 
         jLabel7.setText("Lugar");
 
-        diaProveedor.setModel(new javax.swing.SpinnerDateModel());
-        diaProveedor.setEnabled(false);
+        sprFecha.setModel(new javax.swing.SpinnerDateModel());
+        sprFecha.setEnabled(false);
 
         jLabel5.setText("Max. Cant. de Turistas");
 
@@ -73,27 +97,27 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(diaProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lugarSalidaTuristica1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(cmbBoxMaxCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMaxTur, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(24, 24, 24)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(26, 26, 26)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(37, 37, 37)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,42 +126,83 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbActividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(diaProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(cmbBoxMaxCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaxTur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(lugarSalidaTuristica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(311, Short.MAX_VALUE))
+                    .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+         cmbDepartamentos.removeAllItems();
+        ArrayList<String> departamentos = control.listaDepartamentos();
+        for (int i = 0; i < departamentos.size();i++){
+            cmbDepartamentos.addItem(departamentos.get(i));
+        } 
+    }//GEN-LAST:event_formComponentShown
+
+    private void cmbDepartamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentosItemStateChanged
+        // TODO add your handling code here:
+        if (cmbDepartamentos.getItemCount()>0){
+            cmbActividades.removeAllItems();
+            ArrayList<String> actividades = control.listaActividadesTuristicas(cmbDepartamentos.getSelectedItem().toString());
+            for (int i = 0; i < actividades.size();i++){
+                cmbActividades.addItem(actividades.get(i));
+            }
+        }
+    }//GEN-LAST:event_cmbDepartamentosItemStateChanged
+
+    private void cmbActividadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbActividadesItemStateChanged
+        // TODO add your handling code here:
+        if (cmbActividades.getItemCount()>0){
+            cmbSalidas.removeAllItems();
+            ArrayList<String> actividades = control.listaSalActividadTuristica(cmbActividades.getSelectedItem().toString());
+            for (int i = 0; i < actividades.size();i++){
+                cmbSalidas.addItem(actividades.get(i));
+            }
+        }
+    }//GEN-LAST:event_cmbActividadesItemStateChanged
+
+    private void cmbSalidasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSalidasItemStateChanged
+        // TODO add your handling code here:
+        if (cmbSalidas.getItemCount()>0){
+            SalidaTuristica salida = control.ConsultaSalidaTuristica(cmbSalidas.getSelectedItem().toString());
+            txtLugar.setText(salida.getLugar());
+            txtMaxTur.setText(String.valueOf(salida.getCantMax()));
+            sprFecha.setValue(salida.getfSalida());
+        }
+    }//GEN-LAST:event_cmbSalidasItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cmbBoxMaxCantTuristas;
-    private javax.swing.JSpinner diaProveedor;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> cmbActividades;
+    private javax.swing.JComboBox<String> cmbDepartamentos;
+    private javax.swing.JComboBox<String> cmbSalidas;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField lugarSalidaTuristica1;
+    private javax.swing.JSpinner sprFecha;
+    private javax.swing.JTextField txtLugar;
+    private javax.swing.JTextField txtMaxTur;
     // End of variables declaration//GEN-END:variables
 }

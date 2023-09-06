@@ -11,6 +11,7 @@ import logica.Departamento;
 import logica.Turista;
 import logica.Proveedor;
 import logica.Usuario;
+import logica.SalidaTuristica;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 
 public class ControladoraPersistencia {
@@ -24,11 +25,22 @@ public class ControladoraPersistencia {
     
     
     //Consultas
+    public SalidaTuristica consultaSalida(String nombreSalida){
+        return salidaTuristicaJpa.findSalidaTuristica(nombreSalida);
+    }
     public Actividad consultaActividad(String nombreActividad){
       return   actividadJpa.findActividad(nombreActividad);
     };
+    public ArrayList<String> listaSalActividadTuristica(String actividad){
+       ArrayList<String> salidas = new ArrayList();
+       List<String> salida = salidaTuristicaJpa.findByActividad(actividad);
+       for(int i = 0; i < salida.size();i++){
+           salidas.add(salida.get(i));
+       }
+       return salidas; 
+    };
     public ArrayList<String> listaDepartamentos(){
-        ArrayList<String> departamentos = new ArrayList<String>();
+        ArrayList<String> departamentos = new ArrayList();
         try {
             List<Departamento> departamento = departamentoJpa.findDepartamentoEntities();
             for (int i = 0; i < departamento.size(); i++) {
@@ -40,12 +52,12 @@ public class ControladoraPersistencia {
         return departamentos;
     }
     public ArrayList<String> listaActividadesTuristicas(String departamento){
-       ArrayList<String> actividades = new ArrayList<String>();
-        List<String> actividad = actividadJpa.findByDepartamento(departamento);
-        for(int i = 0; i < actividad.size();i++){
-            actividades.add(actividad.get(i));
-        };
-        return actividades;
+       ArrayList<String> actividades = new ArrayList();
+       List<String> actividad = actividadJpa.findByDepartamento(departamento);
+       for(int i = 0; i < actividad.size();i++){
+           actividades.add(actividad.get(i));
+       }
+       return actividades;
     }
     public Usuario consultaUsuario(String nickname){
         Usuario usuario=null;

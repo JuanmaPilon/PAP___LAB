@@ -14,8 +14,9 @@ public abstract void AltaDeActividadTuristica(String nombre, String descripcion,
 public abstract Actividad ConsultaActividadTuristica(String nombreActividad);
 public abstract ArrayList listaDepartamentos();
 public abstract ArrayList listaActividadesTuristicas(String departamento);
+public abstract ArrayList listaSalActividadTuristica(String actividad);
 //    public abstract void AltaDeSalidaTuristica();
-//    public abstract void ConsultaDeSalidaTuristica();
+ public abstract SalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
 //    public abstract void InscripcionDeSalidaTuristica();
 //    public abstract void CrearPaqueteDeActividadesTuristicas();
 //    public abstract void AgregarActividadTuristicaAPaquete();

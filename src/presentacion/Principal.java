@@ -169,6 +169,11 @@ public class Principal extends javax.swing.JFrame {
         menuConsultas.add(consActividadTuristica);
 
         consSalidaTuristica.setText("Salida Tursitica");
+        consSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consSalidaTuristicaActionPerformed(evt);
+            }
+        });
         menuConsultas.add(consSalidaTuristica);
 
         consPaquete.setText("Paquete");
@@ -287,6 +292,13 @@ public class Principal extends javax.swing.JFrame {
         contenedorPrincipal.add(verConsultaUsuarios);
         verConsultaUsuarios.show();
     }//GEN-LAST:event_consUsuarioActionPerformed
+
+    private void consSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consSalidaTuristicaActionPerformed
+        // TODO add your handling code here:
+        ConsultaDeSalidaTuristica verSalidaConsTuristica = new ConsultaDeSalidaTuristica();
+        contenedorPrincipal.add(verSalidaConsTuristica);
+        verSalidaConsTuristica.show();
+    }//GEN-LAST:event_consSalidaTuristicaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -144,4 +144,12 @@ public class SalidaTuristicaJpaController implements Serializable {
         }
     }
     
+    public List<String> findByActividad(String actividad) { 
+        EntityManager em = getEntityManager();
+        String query = "SELECT listaSalidaTuristica_NOMBRE FROM actividad_salidaturistica WHERE Actividad_NOMBRE LIKE '%"+actividad+"%'";
+	@SuppressWarnings("unchecked")
+	List<String> r = (List<String>) em.createNativeQuery(query).getResultList();
+        return r;
+    }
+    
 }
