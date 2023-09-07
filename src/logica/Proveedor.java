@@ -3,8 +3,10 @@ package logica;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
@@ -12,20 +14,18 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Proveedor extends Usuario implements Serializable {
     private String descripcion;
     private String link;
-    private Departamento departamento;
-    
-    public Proveedor(){
-    super();
+    @OneToMany
+    private ArrayList<Actividad> listaActividades;  
+
+    public Proveedor() {
+        super();
     }
 
-    public Proveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
-        super(nickname, nombre, apellido, correo, fNacimiento);
-    }
-
-    public Proveedor(String descripcion, String link, String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
+    public Proveedor(String descripcion, String link, ArrayList<Actividad> listaActividades, String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
         super(nickname, nombre, apellido, correo, fNacimiento);
         this.descripcion = descripcion;
         this.link = link;
+        this.listaActividades = listaActividades;
     }
 
     public String getDescripcion() {
@@ -44,13 +44,15 @@ public class Proveedor extends Usuario implements Serializable {
         this.link = link;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public ArrayList<Actividad> getListaActividades() {
+        return listaActividades;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setListaActividades(ArrayList<Actividad> listaActividades) {
+        this.listaActividades = listaActividades;
     }
 
+    
+    
     
 }
