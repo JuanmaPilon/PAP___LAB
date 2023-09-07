@@ -6,7 +6,7 @@ import java.util.Date;
 public interface IControlador {
     
 public abstract void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String nacionalidad);
-public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String descripcion, String link, Departamento depto);//throws UsuarioRepetidoException;// es una prueba
+public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String descripcion, String link);//throws UsuarioRepetidoException;// es una prueba
 public abstract Usuario ConsultaDeUsuario(String nickname); //Devuelve el usuario 
 public abstract ArrayList listaUsuarios();  //devuelve una lista de todos los usuarios sin discriminar su tipo
 //    public abstract void ModificarDatosDeUsuario();//Nati

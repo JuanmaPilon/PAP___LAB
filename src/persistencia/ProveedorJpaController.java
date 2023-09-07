@@ -10,10 +10,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import logica.Proveedor;
+import logica.Turista;
+import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
@@ -36,24 +40,46 @@ public class ProveedorJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Proveedor proveedor) throws PreexistingEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.persist(proveedor);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findProveedor(proveedor.getNickname()) != null) {
-                throw new PreexistingEntityException("Proveedor " + proveedor + " already exists.", ex);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+    public void create(Proveedor proveedor) throws CorreoElectronicoExistenteException, PreexistingEntityException, Exception {
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
+
+        // Verificar si el correo electrónico ya existe en la base de datos
+        if (existeCorreoElectronico(proveedor.getCorreo())) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso: " + proveedor.getCorreo());
+        }
+
+        em.persist(proveedor);
+        em.getTransaction().commit();
+    } catch (Exception ex) {
+        if (findProveedor(proveedor.getNickname()) != null) {
+            throw new PreexistingEntityException("Proveedor " + proveedor.getNickname() + " already exists.", ex);
+        }
+        throw ex;
+    } finally {
+        if (em != null) {
+            em.close();
         }
     }
+}
+
+public boolean existeCorreoElectronico(String correo) {
+    EntityManager em = getEntityManager(); // Inicializa el EntityManager aquí
+    try {
+        TypedQuery<Proveedor> query = em.createQuery("SELECT p FROM Proveedor p WHERE p.correo = :correo", Proveedor.class);
+        query.setParameter("correo", correo);
+        Proveedor proveedor = query.getSingleResult();
+        return proveedor != null;
+    } catch (NoResultException e) {
+        return false; // No se encontró ningún turista con ese correo electrónico.
+    } finally {
+        if (em != null && em.isOpen()) {
+            em.close();
+        }
+    }
+}
 
     public void edit(Proveedor proveedor) throws NonexistentEntityException, Exception {
         EntityManager em = null;

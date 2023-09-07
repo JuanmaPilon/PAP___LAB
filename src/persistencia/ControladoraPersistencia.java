@@ -130,4 +130,15 @@ public class ControladoraPersistencia {
     }
     }
     
+    public void guardarProveedor(Proveedor proveedor){
+        try{
+        proveedorJpa.create(proveedor);
+         JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+       } catch (CorreoElectronicoExistenteException e) {
+       JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception ex) {
+       JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }
+    
 }

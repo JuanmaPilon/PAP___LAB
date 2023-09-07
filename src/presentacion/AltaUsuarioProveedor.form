@@ -38,43 +38,43 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="linkProveedor" max="32767" attributes="0"/>
+                              <Component id="txtlink" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="descripcionProveedor" max="32767" attributes="0"/>
+                              <Component id="txtdescripcion" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="nicknameProveedor" min="-2" pref="260" max="-2" attributes="0"/>
+                              <Component id="txtnickname" min="-2" pref="260" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="nombreProveedor" max="32767" attributes="0"/>
+                              <Component id="txtnombre" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="apellidoProveedor" max="32767" attributes="0"/>
+                              <Component id="txtapellido" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="correoProveedor" max="32767" attributes="0"/>
+                              <Component id="txtcorreo" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="diaProveedor" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbdia" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="mesProveedor" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbmes" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="anioProveedor" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbanio" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
@@ -95,39 +95,39 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="nicknameProveedor" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtnickname" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nombreProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtnombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="apellidoProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtapellido" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="correoProveedor" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtcorreo" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="diaProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="mesProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="anioProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbdia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbmes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbanio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="descripcionProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtdescripcion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                  <Component id="linkProveedor" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtlink" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="41" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -145,7 +145,7 @@
         <Property name="text" type="java.lang.String" value="nickname:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nicknameProveedor">
+    <Component class="javax.swing.JTextField" name="txtnickname">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -167,27 +167,27 @@
         <Property name="text" type="java.lang.String" value="Fecha de nacimiento:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nombreProveedor">
+    <Component class="javax.swing.JTextField" name="txtnombre">
     </Component>
-    <Component class="javax.swing.JTextField" name="apellidoProveedor">
+    <Component class="javax.swing.JTextField" name="txtapellido">
     </Component>
-    <Component class="javax.swing.JTextField" name="correoProveedor">
+    <Component class="javax.swing.JTextField" name="txtcorreo">
     </Component>
-    <Component class="javax.swing.JSpinner" name="diaProveedor">
+    <Component class="javax.swing.JSpinner" name="cmbdia">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="0" maximum="31" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="mesProveedor">
+    <Component class="javax.swing.JSpinner" name="cmbmes">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="1" maximum="12" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="anioProveedor">
+    <Component class="javax.swing.JSpinner" name="cmbanio">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="1900" maximum="2023" minimum="1900" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -199,19 +199,22 @@
         <Property name="text" type="java.lang.String" value="Descripcion:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="descripcionProveedor">
+    <Component class="javax.swing.JTextField" name="txtdescripcion">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
         <Property name="text" type="java.lang.String" value="Link:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="linkProveedor">
+    <Component class="javax.swing.JTextField" name="txtlink">
     </Component>
     <Component class="javax.swing.JButton" name="aceptarAltaProveedor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aceptarAltaProveedorActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cancelarAltaProveedor">
       <Properties>

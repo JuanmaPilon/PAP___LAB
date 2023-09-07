@@ -25,7 +25,17 @@ public class Controlador implements IControlador{
    };
    
    @Override
-   public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String descripcion, String link, Departamento depto){
+   public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, 
+           Date fNacimiento, String descripcion, String link){
+   Proveedor proveedor = new Proveedor();
+   proveedor.setNickname(nickname);
+   proveedor.setNombre(nombre);
+   proveedor.setApellido(apellido);
+   proveedor.setCorreo(correo);
+   proveedor.setfNacimiento(fNacimiento);
+   proveedor.setDescripcion(descripcion);
+   proveedor.setLink(link);
+   controlPersis.guardarProveedor(proveedor);
    };
    
    @Override 

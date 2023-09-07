@@ -22,11 +22,10 @@ public class Proveedor extends Usuario implements Serializable {
         super(nickname, nombre, apellido, correo, fNacimiento);
     }
 
-    public Proveedor(String descripcion, String link, Departamento departamento, String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
+    public Proveedor(String descripcion, String link, String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
         super(nickname, nombre, apellido, correo, fNacimiento);
         this.descripcion = descripcion;
         this.link = link;
-        this.departamento = departamento;
     }
 
     public String getDescripcion() {
