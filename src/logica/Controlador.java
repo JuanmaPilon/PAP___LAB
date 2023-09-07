@@ -2,6 +2,7 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import persistencia.ControladoraPersistencia;
 
 public class Controlador implements IControlador{
@@ -22,6 +23,10 @@ public class Controlador implements IControlador{
     turista.setfNacimiento(fNacimiento);
     turista.setNacionalidad(nacionalidad);
     controlPersis.guardarTurista(turista);
+   };
+   @Override
+   public List<Paquete> consultaPaquetes(){
+       return controlPersis.consultaPaquete();
    };
    
    @Override

@@ -2,7 +2,7 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 public interface IControlador {
     
 public abstract void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String nacionalidad);
@@ -15,6 +15,7 @@ public abstract Actividad ConsultaActividadTuristica(String nombreActividad);
 public abstract ArrayList listaDepartamentos();
 public abstract ArrayList listaActividadesTuristicas(String departamento);
 public abstract ArrayList listaSalActividadTuristica(String actividad);
+public abstract List consultaPaquetes();
 //    public abstract void AltaDeSalidaTuristica();
  public abstract SalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
 //    public abstract void InscripcionDeSalidaTuristica();

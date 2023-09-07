@@ -12,6 +12,7 @@ import logica.Turista;
 import logica.Proveedor;
 import logica.Usuario;
 import logica.SalidaTuristica;
+import logica.Paquete;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 
 public class ControladoraPersistencia {
@@ -79,7 +80,9 @@ public class ControladoraPersistencia {
         }
         return usuario; 
     }
-    
+    public List<Paquete> consultaPaquete(){
+        return paqueteJpa.findPaqueteEntities();
+    };
     public ArrayList<String> listaUsuarios(){
     ArrayList<String> nicknames = new ArrayList<String>();
     try {
