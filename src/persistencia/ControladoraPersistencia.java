@@ -158,5 +158,11 @@ public class ControladoraPersistencia {
            JOptionPane.showMessageDialog(null, "El nombre ya esta ocupado por otra salida turistica", "Error", JOptionPane.ERROR_MESSAGE);
        }
     }
-    
+    public void guardarPaqueteActividadTuristica(Paquete paquete) {
+        try {
+            paqueteJpa.create(paquete);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

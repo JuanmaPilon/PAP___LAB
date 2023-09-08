@@ -147,5 +147,14 @@ public class Controlador implements IControlador{
        return controlPersis.llenarCmboBoxDepPersis();
    }
     
+   public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, int altaDePaquete){
+      Paquete paquete = new Paquete();
+      paquete.setNombre(nombreDePaquete);
+      paquete.setDescripcion(nombreDePaquete);
+      paquete.setValidez(validezDePaquete);
+      
+      controlPersis.guardarPaqueteActividadTuristica(paquete);
+   }
+    
 }
 
