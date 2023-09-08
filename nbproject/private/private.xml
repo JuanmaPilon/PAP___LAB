@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/persistencia/ActividadJpaController.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/AltaActividadTuristica.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/turismo/TurismoUy.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/AltaDepartamento.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/Principal.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/logica/Inscripcion.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/logica/Controlador.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/persistencia/ProveedorJpaController.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/logica/Proveedor.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/CrearPaqueteActividadTuristica.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/logica/SalidaTuristica.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/ModificarDatosProveedor.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/AltaUsuarioProveedor.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/ConsultaDeUsuarios.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/logica/Compra.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/META-INF/persistence.xml</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/ConsultaUsuarioTurista.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/persistencia/SalidaTuristicaJpaController.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/mano.png</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/persistencia/ControladoraPersistencia.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/AltaUsuarioTurista.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/InscripcionASalidaTuristica.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/logica/Usuario.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/AltaDeSalidaTuristica.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/ModificarDatosTurista.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/ConsultaActividadTuristica.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/logica/Actividad.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/persistencia/TuristaJpaController.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/persistencia/exceptions/IllegalOrphanException.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/AgregarActividadTuristicaPaquete.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/ConsultaDeSalidaTuristica.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/presentacion/ConsultaPaqueteActividadesTuristicas.java</file>
+            <file>file:/C:/Programming/Java/PAP___LAB/src/persistencia/PaqueteJpaController.java</file>
+        </group>
+    </open-files>
 </project-private>
