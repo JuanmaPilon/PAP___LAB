@@ -76,6 +76,12 @@ Controlador control = new Controlador();
 
         jLabel2.setText("nickname:");
 
+        txtnickname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnicknameActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Nombre:");
 
         jLabel4.setText("Apellido:");
@@ -216,6 +222,10 @@ Controlador control = new Controlador();
         JOptionPane.showMessageDialog(null, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     } 
     }//GEN-LAST:event_aceptarAltaProveedorActionPerformed
+
+    private void txtnicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnicknameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnicknameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -60,6 +60,12 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
         jLabel2.setText("nickname:");
 
+        txtnickname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnicknameActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Nombre:");
 
         jLabel4.setText("Apellido:");
@@ -191,6 +197,10 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
     }
     
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void txtnicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnicknameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnicknameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

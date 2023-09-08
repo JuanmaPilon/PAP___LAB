@@ -3,6 +3,7 @@ package logica;
 import java.util.ArrayList;
 import java.util.Date;
 import persistencia.ControladoraPersistencia;
+import java.util.Calendar;
 
 public class Controlador implements IControlador{
    public Controlador() {}
@@ -37,6 +38,20 @@ public class Controlador implements IControlador{
    proveedor.setLink(link);
    controlPersis.guardarProveedor(proveedor);
    };
+   
+   
+   //String nombreProveedor, String nombreDep,
+   
+   public void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha){
+   Actividad actividad = new Actividad();
+   actividad.setCiudad(nombreCuidad);
+   actividad.setNombre(nombreActividad);
+   actividad.setDescripcion(descripcionActividad);
+   actividad.setDuracion(duracionActividad);
+   actividad.setCosto(costoActividad);
+   actividad.setfAlta(fecha);
+   controlPersis.guardarActividad(actividad);
+   }
    
    @Override 
    public ArrayList<String> listaSalActividadTuristica(String actividad){
