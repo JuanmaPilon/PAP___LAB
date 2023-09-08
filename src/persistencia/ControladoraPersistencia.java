@@ -12,6 +12,7 @@ import logica.Turista;
 import logica.Proveedor;
 import logica.Usuario;
 import logica.SalidaTuristica;
+import logica.Paquete;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 
 public class ControladoraPersistencia {
@@ -79,7 +80,9 @@ public class ControladoraPersistencia {
         }
         return usuario; 
     }
-    
+    public List<Paquete> consultaPaquete(){
+        return paqueteJpa.findPaqueteEntities();
+    };
     public ArrayList<String> listaUsuarios(){
     ArrayList<String> nicknames = new ArrayList<String>();
     try {
@@ -141,6 +144,19 @@ public class ControladoraPersistencia {
     } catch (Exception ex) {
        JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
     }
+    }
+    
+    public List<String> llenarCmboBoxDepPersis(){
+        return departamentoJpa.obtenerNombresDepartamentos();
+    }
+    
+     public void guardarSalidaTuristica(SalidaTuristica salidaTuristica){
+       try{
+        salidaTuristicaJpa.create(salidaTuristica);
+        JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+       }catch (Exception ex){
+           JOptionPane.showMessageDialog(null, "El nombre ya esta ocupado por otra salida turistica", "Error", JOptionPane.ERROR_MESSAGE);
+       }
     }
     
 }

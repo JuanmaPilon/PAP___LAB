@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,10 +26,13 @@ public class Actividad implements Serializable {
     private ArrayList<SalidaTuristica> listaSalidaTuristica;
     @ManyToMany
     private ArrayList<Paquete> listaPaquete;
+    @ManyToOne
+    private Departamento departamento;
 
-//////
+    public Actividad() {
+    }
 
-    public Actividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete) {
+    public Actividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, Departamento departamento) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -37,17 +41,55 @@ public class Actividad implements Serializable {
         this.fAlta = fAlta;
         this.listaSalidaTuristica = listaSalidaTuristica;
         this.listaPaquete = listaPaquete;
+        this.departamento = departamento;
     }
 
-    public ArrayList<Paquete> getListaPaquete() {
-        return listaPaquete;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setListaPaquete(ArrayList<Paquete> listaPaquete) {
-        this.listaPaquete = listaPaquete;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Actividad() {
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public float getCosto() {
+        return costo;
+    }
+
+    public void setCosto(float costo) {
+        this.costo = costo;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public Date getfAlta() {
+        return fAlta;
+    }
+
+    public void setfAlta(Date fAlta) {
+        this.fAlta = fAlta;
     }
 
     public ArrayList<SalidaTuristica> getListaSalidaTuristica() {
@@ -58,53 +100,24 @@ public class Actividad implements Serializable {
         this.listaSalidaTuristica = listaSalidaTuristica;
     }
 
-///////////
-public void setNombre(String nombre) {
-    this.nombre = nombre;
-}
+    public ArrayList<Paquete> getListaPaquete() {
+        return listaPaquete;
+    }
 
-public void setDescripcion(String descripcion) {
-    this.descripcion = descripcion;
-}
+    public void setListaPaquete(ArrayList<Paquete> listaPaquete) {
+        this.listaPaquete = listaPaquete;
+    }
 
-public void setDuracion(int duracion) {
-    this.duracion = duracion;
-}
+    public Departamento getDepartamento() {
+        return departamento;
+    }
 
-public void setCosto(float costo) {
-    this.costo = costo;
-}
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
 
-public void setCiudad(String ciudad) {
-    this.ciudad = ciudad;
-}
 
-public void setfAlta(Date fAlta) {
-    this.fAlta = fAlta;
-}
-////////////////
-public String getNombre() {
-    return nombre;
-}
 
-public String getDescripcion() {
-    return descripcion;
-}
-
-public int getDuracion() {
-    return duracion;
-}
-
-public float getCosto() {
-    return costo;
-}
-
-public String getCiudad() {
-    return ciudad;
-}
-
-public Date getfAlta() {
-    return fAlta;
-}
+    
 
 }
