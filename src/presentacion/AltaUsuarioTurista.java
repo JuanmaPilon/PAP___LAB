@@ -77,6 +77,11 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
         jLabel1.setText("Nacionalidad:");
 
         btnlimpiar.setText("Limpiar");
+        btnlimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlimpiarActionPerformed(evt);
+            }
+        });
 
         btnguardar.setText("Guardar");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +196,14 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
     }
     
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
+    txtnickname.setText("");
+    txtnombre.setText("");
+    txtapellido.setText("");
+    txtcorreo.setText("");
+    txtnacionalidad.setText("");
+    }//GEN-LAST:event_btnlimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

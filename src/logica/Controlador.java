@@ -43,6 +43,16 @@ public class Controlador implements IControlador{
    controlPersis.guardarProveedor(proveedor);
    };
    
+   public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) {
+       SalidaTuristica salidaTuristica = new SalidaTuristica();
+        salidaTuristica.setNombre(nombre);
+        salidaTuristica.setCantMax(cantMax);
+        salidaTuristica.setfAlta(fAlta);
+        salidaTuristica.setfSalida(fSalida);
+        salidaTuristica.setLugar(lugar);
+        controlPersis.guardarSalidaTuristica(salidaTuristica);
+    }
+   
    @Override 
    public ArrayList<String> listaSalActividadTuristica(String actividad){
        return controlPersis.listaSalActividadTuristica(actividad);
@@ -115,6 +125,10 @@ public class Controlador implements IControlador{
        
        controlPersis.guardarDepartamento(depto);
    };
+   
+    public List<String> llenarCmboBoxDep(){
+       return controlPersis.llenarCmboBoxDepPersis();
+   }
     
 }
 

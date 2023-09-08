@@ -144,4 +144,17 @@ public class ControladoraPersistencia {
     }
     }
     
+    public List<String> llenarCmboBoxDepPersis(){
+        return departamentoJpa.obtenerNombresDepartamentos();
+    }
+    
+     public void guardarSalidaTuristica(SalidaTuristica salidaTuristica){
+       try{
+        salidaTuristicaJpa.create(salidaTuristica);
+        JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+       }catch (Exception ex){
+           JOptionPane.showMessageDialog(null, "El nombre ya esta ocupado por otra salida turistica", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+    }
+    
 }
