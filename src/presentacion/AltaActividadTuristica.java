@@ -198,8 +198,8 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarAltaActividadTuristicaActionPerformed
-        //String nombreProveedor = (String) proveedorActividadTuristica.getSelectedItem();  nombreProveedor,
-        //String nombreDep = (String) departamentoActividadTuristica.getSelectedItem();  nombreDep,
+        //String nombreProveedor = (String) proveedorActividadTuristica.getSelectedItem();  
+        //String nombreDep = (String) departamentoActividadTuristica.getSelectedItem();  
         String nombreActividad = nombreActividadTuristica.getText();
         String descripcionActividad = descripcionActividadTuristica.getText();
         String nombreCuidad = (String) ciudadActividadTuristica.getSelectedItem(); 

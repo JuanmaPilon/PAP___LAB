@@ -29,6 +29,6 @@ public abstract List consultaPaquetes();
    public abstract List<String> llenarCmboBoxDep();
    public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar);
    public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha);
-   
+    public ArrayList<DTUsuario> traerUsuarioMod();
 
 }

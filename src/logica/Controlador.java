@@ -55,7 +55,7 @@ public class Controlador implements IControlador{
    
    //String nombreProveedor, String nombreDep,
    @Override
-   public void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha){
+   public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha){
    Actividad actividad = new Actividad();
    actividad.setCiudad(nombreCuidad);
    actividad.setNombre(nombreActividad);
@@ -63,6 +63,8 @@ public class Controlador implements IControlador{
    actividad.setDuracion(duracionActividad);
    actividad.setCosto(costoActividad);
    actividad.setfAlta(fecha);
+   actividad.setProveedor(null);
+   actividad.setDepartamento(null);
    controlPersis.guardarActividad(actividad);
    }
    
@@ -165,6 +167,14 @@ public class Controlador implements IControlador{
       
       controlPersis.guardarPaqueteActividadTuristica(paquete);
    }
-    
+   
+   @Override
+   public ArrayList<DTUsuario> traerUsuarioMod(){
+       return controlPersis.traerUsuarios();
+   }
+
+
+   
+   
 }
 

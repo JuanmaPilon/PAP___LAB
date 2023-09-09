@@ -1,12 +1,14 @@
 
 package persistencia;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.Actividad;
+import logica.DTUsuario;
 import logica.Departamento;
 import logica.Turista;
 import logica.Proveedor;
@@ -104,7 +106,41 @@ public class ControladoraPersistencia {
     return nicknames;
     }
     
-    //Guardar Departamento
+   
+public ArrayList<DTUsuario> traerUsuarios(){
+        
+    ArrayList<DTUsuario> listaDTUsuario = new ArrayList<DTUsuario>();
+    
+    try {
+        List<Turista> turistas = turistaJpa.findTuristaEntities();
+        for (Turista t : turistas) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String fnac = sdf.format(t.getfNacimiento());
+            DTUsuario dtusuario = new DTUsuario(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(), fnac );
+            listaDTUsuario.add(dtusuario);
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    try {
+        List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+        for (Proveedor p : proveedores) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String fnac = sdf.format(p.getfNacimiento());
+            DTUsuario dtusuario = new DTUsuario(p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fnac );
+            listaDTUsuario.add(dtusuario);
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        return listaDTUsuario;
+        
+        
+    }
+    
+ 
+//Guardar Departamento
     public void guardarDepartamento(Departamento depto) {
         try {
             //crear Departamento en BD

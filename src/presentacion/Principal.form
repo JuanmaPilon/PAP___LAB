@@ -123,29 +123,14 @@
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="ModificarUsuario">
+            <MenuItem class="javax.swing.JMenuItem" name="modUsuario">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Usuario"/>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="modTurista">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Turista"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modTuristaActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="modProveedor">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Proveedor"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modProveedorActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modUsuarioActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>

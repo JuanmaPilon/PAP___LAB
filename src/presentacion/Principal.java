@@ -51,9 +51,7 @@ public class Principal extends javax.swing.JFrame {
         consSalidaTuristica = new javax.swing.JMenuItem();
         consPaquete = new javax.swing.JMenuItem();
         menuModificar = new javax.swing.JMenu();
-        ModificarUsuario = new javax.swing.JMenu();
-        modTurista = new javax.swing.JMenuItem();
-        modProveedor = new javax.swing.JMenuItem();
+        modUsuario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" turismo.uy Grupo 4");
@@ -193,25 +191,13 @@ public class Principal extends javax.swing.JFrame {
 
         menuModificar.setText("Modificar");
 
-        ModificarUsuario.setText("Usuario");
-
-        modTurista.setText("Turista");
-        modTurista.addActionListener(new java.awt.event.ActionListener() {
+        modUsuario.setText("Usuario");
+        modUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modTuristaActionPerformed(evt);
+                modUsuarioActionPerformed(evt);
             }
         });
-        ModificarUsuario.add(modTurista);
-
-        modProveedor.setText("Proveedor");
-        modProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modProveedorActionPerformed(evt);
-            }
-        });
-        ModificarUsuario.add(modProveedor);
-
-        menuModificar.add(ModificarUsuario);
+        menuModificar.add(modUsuario);
 
         barraMenuPrincipal.add(menuModificar);
 
@@ -230,18 +216,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void modProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modProveedorActionPerformed
-        ModificarDatosProveedor verModificarProveedor = new ModificarDatosProveedor();
-        contenedorPrincipal.add(verModificarProveedor);
-        verModificarProveedor.show();
-    }//GEN-LAST:event_modProveedorActionPerformed
-
-    private void modTuristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modTuristaActionPerformed
-        ModificarDatosTurista verModificarTurista = new ModificarDatosTurista();
-        contenedorPrincipal.add(verModificarTurista);
-        verModificarTurista.show();
-    }//GEN-LAST:event_modTuristaActionPerformed
 
     private void altaDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaDepartamentoActionPerformed
         AltaDepartamento verAltaDepartamento = new AltaDepartamento();
@@ -311,13 +285,18 @@ public class Principal extends javax.swing.JFrame {
         verAltaSalidaTuristica.show();
     }//GEN-LAST:event_altaSalidaTuristicaActionPerformed
 
+    private void modUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modUsuarioActionPerformed
+        ListaUsuarios verListaUsuarios = new ListaUsuarios();
+        contenedorPrincipal.add(verListaUsuarios);
+        verListaUsuarios.show();
+    }//GEN-LAST:event_modUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu ModificarUsuario;
     private javax.swing.JMenu Usuario;
     private javax.swing.JMenuItem altaActividadTuristica;
     private javax.swing.JMenuItem altaAgregarActividadPaquete;
@@ -338,7 +317,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menuAltas;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuModificar;
-    private javax.swing.JMenuItem modProveedor;
-    private javax.swing.JMenuItem modTurista;
+    private javax.swing.JMenuItem modUsuario;
     // End of variables declaration//GEN-END:variables
 }
