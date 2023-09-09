@@ -1,5 +1,6 @@
 package logica;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -173,7 +174,31 @@ public class Controlador implements IControlador{
        return controlPersis.traerUsuarios();
    }
 
-
+   @Override
+   public DTTurista traerDTTurista(String nickname){
+   
+       Turista t = controlPersis.traerTurista(nickname);
+       //conversion date a String
+       SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+       String fnac = sdf.format(t.getfNacimiento());
+       
+       
+       return new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
+               fnac, t.getNacionalidad());
+   }
+   
+      @Override
+   public DTProveedor traerDTProveedor(String nickname){
+   
+       Proveedor t = controlPersis.traerProveedor(nickname);
+       //conversion date a String
+       SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+       String fnac = sdf.format(t.getfNacimiento());
+       
+       
+       return new DTProveedor(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
+               fnac, t.getDescripcion(), t.getLink());
+   }
    
    
 }

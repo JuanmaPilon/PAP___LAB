@@ -201,4 +201,14 @@ public ArrayList<DTUsuario> traerUsuarios(){
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Turista traerTurista(String nickname) {
+        return turistaJpa.findTurista(nickname);
+    }
+
+    public Proveedor traerProveedor(String nickname) {
+        return proveedorJpa.findProveedor(nickname);
+    }
+    
+    
 }

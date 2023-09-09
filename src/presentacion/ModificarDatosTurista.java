@@ -4,18 +4,27 @@
  */
 package presentacion;
 
+import logica.Controlador;
+import logica.DTTurista;
+
 /**
  *
  * @author natil
  */
 public class ModificarDatosTurista extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form ModificarDatosUsuario
-     */
-    public ModificarDatosTurista() {
+    //cambiar forma de instanciar control
+    Controlador control = Controlador.getInstance();
+    //variable global
+    //String nickname;
+    //cargar ventan
+    
+    
+    public ModificarDatosTurista(String nickname) {
         initComponents();
+        cargarDatosTurista(nickname);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,8 +35,6 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        seleccionModificarTurista = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -35,23 +42,19 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        nicknameModificarTurista = new javax.swing.JTextField();
-        correoModificarTurista = new javax.swing.JTextField();
-        nombreModificarTurista = new javax.swing.JTextField();
-        apellidoModificarTurista = new javax.swing.JTextField();
-        diaModificarTurista = new javax.swing.JSpinner();
-        mesModificarTurista = new javax.swing.JSpinner();
-        anioModificarTurista = new javax.swing.JSpinner();
-        nacionalidadModificarTurista = new javax.swing.JTextField();
+        txtnickname = new javax.swing.JTextField();
+        txtcorreo = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
+        txtapellido = new javax.swing.JTextField();
+        txtnacionalidad = new javax.swing.JTextField();
         aceptarModificarTurista = new javax.swing.JButton();
         cancelarModificarTurista = new javax.swing.JButton();
+        spnmes = new javax.swing.JSpinner();
+        spnanio = new javax.swing.JSpinner();
+        spndia = new javax.swing.JSpinner();
 
         setClosable(true);
         setTitle("Modificar Datos de Turista");
-
-        jLabel1.setText("Seleccione Turista:");
-
-        seleccionModificarTurista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista turista" }));
 
         jLabel2.setText("Datos del Turista seleccionado:");
 
@@ -67,19 +70,19 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Nacionalidad:");
 
-        nicknameModificarTurista.setEditable(false);
+        txtnickname.setEditable(false);
 
-        correoModificarTurista.setEditable(false);
-
-        diaModificarTurista.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
-
-        mesModificarTurista.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
-
-        anioModificarTurista.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2023, 1));
+        txtcorreo.setEditable(false);
 
         aceptarModificarTurista.setText("Aceptar");
 
         cancelarModificarTurista.setText("Cancelar");
+
+        spnmes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        spnanio.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2023, 1));
+
+        spndia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,39 +93,35 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(seleccionModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(nicknameModificarTurista))
+                                .addComponent(txtnickname))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(correoModificarTurista))
+                                .addComponent(txtcorreo))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(nombreModificarTurista))
+                                .addComponent(txtnombre))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(apellidoModificarTurista))
+                                .addComponent(txtapellido))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(diaModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spndia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(mesModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spnmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(anioModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(spnanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
-                                .addComponent(nacionalidadModificarTurista))))
+                                .addComponent(txtnacionalidad))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(aceptarModificarTurista)
@@ -133,38 +132,35 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(seleccionModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(70, 70, 70)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(nicknameModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(correoModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(nombreModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(apellidoModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(diaModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mesModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(anioModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(spndia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spnmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spnanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(nacionalidadModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptarModificarTurista)
@@ -178,12 +174,7 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarModificarTurista;
-    private javax.swing.JSpinner anioModificarTurista;
-    private javax.swing.JTextField apellidoModificarTurista;
     private javax.swing.JButton cancelarModificarTurista;
-    private javax.swing.JTextField correoModificarTurista;
-    private javax.swing.JSpinner diaModificarTurista;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -191,10 +182,34 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JSpinner mesModificarTurista;
-    private javax.swing.JTextField nacionalidadModificarTurista;
-    private javax.swing.JTextField nicknameModificarTurista;
-    private javax.swing.JTextField nombreModificarTurista;
-    private javax.swing.JComboBox<String> seleccionModificarTurista;
+    private javax.swing.JSpinner spnanio;
+    private javax.swing.JSpinner spndia;
+    private javax.swing.JSpinner spnmes;
+    private javax.swing.JTextField txtapellido;
+    private javax.swing.JTextField txtcorreo;
+    private javax.swing.JTextField txtnacionalidad;
+    private javax.swing.JTextField txtnickname;
+    private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
+
+private void cargarDatosTurista(String nickname){
+    DTTurista t = control.traerDTTurista(nickname);
+    
+    txtnickname.setText(t.getNickname());
+    txtnombre.setText(t.getNombre());
+    txtapellido.setText(t.getApellido());
+    txtnacionalidad.setText(t.getNacionalidad());
+    
+    
+    int dia = Integer.parseInt(t.getfNacimiento().substring(1,2));
+    int mes = Integer.parseInt(t.getfNacimiento().substring(4,5));  
+    int anio = Integer.parseInt(t.getfNacimiento().substring(6,10));   
+    spndia.setValue(dia);
+    spnmes.setValue(mes);
+    spnanio.setValue(anio);
+    //System.out.println(t.getfNacimiento());
+   //System.out.println(dia +" "+mes+"  "+anio);
+};
+
+
 }

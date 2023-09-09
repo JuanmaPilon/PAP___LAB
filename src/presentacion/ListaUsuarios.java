@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import logica.DTUsuario;
 import logica.Controlador;
 import logica.Proveedor;
-import logica.Turista;
 import logica.Usuario;
 
 /**
@@ -128,11 +127,11 @@ public class ListaUsuarios extends javax.swing.JInternalFrame {
                 //veo si es proveedor o turista y muestro pantalla de modificacion correspondiente
                 Usuario consultado = control.ConsultaDeUsuario(nickname);
                 if (consultado instanceof Proveedor){
-                    ModificarDatosProveedor verModificarProveedor = new ModificarDatosProveedor();  
+                    ModificarDatosProveedor verModificarProveedor = new ModificarDatosProveedor(nickname);  
                     getParent().add(verModificarProveedor);
                     verModificarProveedor.show();
                 } else  {
-                    ModificarDatosTurista verModificarTurista = new ModificarDatosTurista();  
+                    ModificarDatosTurista verModificarTurista = new ModificarDatosTurista(nickname);  
                     getParent().add(verModificarTurista);
                     verModificarTurista.show();
                 }

@@ -4,17 +4,20 @@
  */
 package presentacion;
 
+import logica.Controlador;
+
 /**
  *
  * @author natil
  */
 public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ModificarDatosUsuario
-     */
-    public ModificarDatosProveedor() {
+    Controlador control = Controlador.getInstance();
+    String nickname;
+    
+    public ModificarDatosProveedor(String nickname) {
         initComponents();
+        this.nickname = nickname;
     }
 
     /**
