@@ -15,6 +15,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import logica.Proveedor;
 import logica.Turista;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
@@ -45,9 +46,16 @@ public class TuristaJpaController implements Serializable {
         em = getEntityManager();
         em.getTransaction().begin();
 
-        // Verificar si el correo electrónico ya existe en la base de datos
-        if (existeCorreoElectronico(turista.getCorreo())) {
-            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso: " + turista.getCorreo());
+        EmailExistenceChecker checker = new EmailExistenceChecker(em);
+
+        // Verificar si el correo electrónico ya existe en la base de datos para turistas
+        if (checker.correoElectronicoExiste(turista.getCorreo(), Turista.class)) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un turista: " + turista.getCorreo());
+        }
+
+        // Verificar si el correo electrónico ya existe en la base de datos para proveedores
+        if (checker.correoElectronicoExiste(turista.getCorreo(), Proveedor.class)) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un proveedor: " + turista.getCorreo());
         }
 
         em.persist(turista);
@@ -64,19 +72,19 @@ public class TuristaJpaController implements Serializable {
     }
 }
 
-public boolean existeCorreoElectronico(String correo) {
-    EntityManager em = getEntityManager(); // Inicializa el EntityManager aquí
-    try {
-        TypedQuery<Turista> query = em.createQuery("SELECT t FROM Turista t WHERE t.correo = :correo", Turista.class);
+public class EmailExistenceChecker {
+
+    private EntityManager em;
+
+    public EmailExistenceChecker(EntityManager em) {
+        this.em = em;
+    }
+
+    public boolean correoElectronicoExiste(String correo, Class<?> entityClass) {
+        TypedQuery<?> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.correo = :correo", entityClass);
         query.setParameter("correo", correo);
-        Turista turista = query.getSingleResult();
-        return turista != null;
-    } catch (NoResultException e) {
-        return false; // No se encontró ningún turista con ese correo electrónico.
-    } finally {
-        if (em != null && em.isOpen()) {
-            em.close();
-        }
+        List<?> resultList = query.getResultList();
+        return !resultList.isEmpty();
     }
 }
 
