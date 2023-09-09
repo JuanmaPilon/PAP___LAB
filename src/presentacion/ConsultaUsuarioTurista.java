@@ -3,13 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package presentacion;
+import java.util.ArrayList;
+import logica.Actividad;
+import logica.SalidaTuristica;
 import logica.Turista;
 /**
  *
  * @author natil
  */
 public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
-    
+    private ArrayList<Actividad> actividades;
+    private boolean loaded = false;
     private Turista turista;
     /**
      * Creates new form ConsultaActividadTuristica
@@ -31,11 +35,8 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         fechaNacimientoTurista = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        salidasTuristicasConsultaActividadTuristica = new javax.swing.JComboBox<>();
+        cmbActividad = new javax.swing.JComboBox<>();
         verActividadTuristica = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        paqutesActividadConsultaActividadTuristica1 = new javax.swing.JComboBox<>();
-        verSalidaTuristica = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         nicknameTurista = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -63,15 +64,14 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Actividad Turistica");
 
-        salidasTuristicasConsultaActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turistica" }));
+        cmbActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turistica" }));
+        cmbActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbActividadActionPerformed(evt);
+            }
+        });
 
         verActividadTuristica.setText("Ver");
-
-        jLabel12.setText("Saida Turistica:");
-
-        paqutesActividadConsultaActividadTuristica1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista salida actividad turistica" }));
-
-        verSalidaTuristica.setText("Ver");
 
         jLabel2.setText("nickname:");
 
@@ -122,20 +122,12 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(paqutesActividadConsultaActividadTuristica1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(salidasTuristicasConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(verActividadTuristica, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(verSalidaTuristica, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addContainerGap(97, Short.MAX_VALUE))))
+                                .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(verActividadTuristica)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,15 +164,10 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(salidasTuristicasConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(verActividadTuristica))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(paqutesActividadConsultaActividadTuristica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(verSalidaTuristica)))
+                            .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(verActividadTuristica)))
                     .addComponent(fechaNacimientoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -194,15 +181,35 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         nicknameTurista.setText(turista.getNickname());
         nombreTurista.setText(turista.getNombre());
         fechaNacimientoTurista.setText(turista.getfNacimiento().toString());
+        /*actividades = turista.getListaInscripcion();
+        cmbActividad.removeAllItems();
+        for (int i = 0 ; i < actividades.size() ; i++){
+            cmbActividad.addItem(actividades.get(i).getNombre());
+        }*/
+        loaded = true;
     }//GEN-LAST:event_formComponentShown
 
-
+    private void cmbActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbActividadActionPerformed
+        // TODO add your handling code here:
+       // loadSalidas();
+    }//GEN-LAST:event_cmbActividadActionPerformed
+  /*  private void loadSalidas(){
+        if (loaded){
+            Actividad actividad = actividades.get(cmbActividad.getSelectedIndex()); 
+            cmbSalida.removeAllItems();
+            ArrayList<SalidaTuristica> salidas = actividad.getListaSalidaTuristica();
+            for (int i = 0 ; i < salidas.size() ; i++){
+                cmbSalida.addItem(salidas.get(i).getNombre());
+            }
+        }
+    }
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTurista;
+    private javax.swing.JComboBox<String> cmbActividad;
     private javax.swing.JTextField correoTurista;
     private javax.swing.JTextField fechaNacimientoTurista;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -214,9 +221,6 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField nacionalidadTurista;
     private javax.swing.JTextField nicknameTurista;
     private javax.swing.JTextField nombreTurista;
-    private javax.swing.JComboBox<String> paqutesActividadConsultaActividadTuristica1;
-    private javax.swing.JComboBox<String> salidasTuristicasConsultaActividadTuristica;
     private javax.swing.JButton verActividadTuristica;
-    private javax.swing.JButton verSalidaTuristica;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,13 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package presentacion;
+import java.util.ArrayList;
+import logica.Actividad;
 import logica.Proveedor;
+import logica.SalidaTuristica;
 /**
  *
  * @author natil
  */
 public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
+    private ArrayList<Actividad> actividades;
+    private ArrayList<SalidaTuristica> salidas;
     private Proveedor proveedor;
+    private boolean loaded = false;
     /**
      * Creates new form ConsultaActividadTuristica
      */
@@ -27,15 +33,13 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        departamentoConsultaActividadTuristica = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         fechaNacimientoProveedor = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        salidasTuristicasConsultaActividadTuristica = new javax.swing.JComboBox<>();
+        cmbActividad = new javax.swing.JComboBox<>();
         verActividadTuristica = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        paqutesActividadConsultaActividadTuristica1 = new javax.swing.JComboBox<>();
+        cmbSalida = new javax.swing.JComboBox<>();
         verSalidaTuristica = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         nicknameProveedor = new javax.swing.JTextField();
@@ -60,25 +64,36 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Seleccionar proveedor:");
-
-        departamentoConsultaActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista proveedores" }));
-
         jLabel3.setText("Datos proveedor:");
 
         fechaNacimientoProveedor.setEditable(false);
 
         jLabel11.setText("Actividad Turistica:");
 
-        salidasTuristicasConsultaActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turistica" }));
+        cmbActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turistica" }));
+        cmbActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbActividadActionPerformed(evt);
+            }
+        });
 
         verActividadTuristica.setText("Ver");
+        verActividadTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verActividadTuristicaActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Saida Turistica:");
 
-        paqutesActividadConsultaActividadTuristica1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista salida actividad turistica" }));
+        cmbSalida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista salida actividad turistica" }));
 
         verSalidaTuristica.setText("Ver");
+        verSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verSalidaTuristicaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("nickname:");
 
@@ -107,109 +122,96 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(departamentoConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(18, 18, 18))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel12)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(paqutesActividadConsultaActividadTuristica1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(salidasTuristicasConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(40, 40, 40)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbSalida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbActividad, 0, 357, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(verActividadTuristica, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(verSalidaTuristica, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addContainerGap(94, Short.MAX_VALUE))
+                        .addContainerGap(9, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addGap(18, 18, 18)
-                                .addComponent(correoProveedor))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(descripcionProveedor))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(nicknameProveedor))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(nombreProveedor))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(apellidoProveedor))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addGap(18, 18, 18)
-                                .addComponent(fechaNacimientoProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel19))
                                 .addGap(18, 18, 18)
-                                .addComponent(urlProveedor)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(urlProveedor)
+                                    .addComponent(descripcionProveedor)
+                                    .addComponent(nicknameProveedor)
+                                    .addComponent(nombreProveedor)
+                                    .addComponent(apellidoProveedor)
+                                    .addComponent(correoProveedor)
+                                    .addComponent(fechaNacimientoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 137, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(departamentoConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(nicknameProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(nombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel14)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(apellidoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
+                        .addComponent(jLabel15)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel16))
-                    .addComponent(correoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel17)
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel13)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel19))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel13)
-                            .addComponent(descripcionProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(fechaNacimientoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel19)
-                    .addComponent(urlProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nicknameProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(nombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(apellidoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34))
+                            .addComponent(correoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(descripcionProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fechaNacimientoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(urlProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel18)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(salidasTuristicasConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(verActividadTuristica))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(paqutesActividadConsultaActividadTuristica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(verSalidaTuristica))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -224,16 +226,50 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         nicknameProveedor.setText(proveedor.getNickname());
         nombreProveedor.setText(proveedor.getNombre());
         urlProveedor.setText(proveedor.getLink());
+        actividades = proveedor.getListaActividades();
+        cmbActividad.removeAllItems();
+        for (int i = 0 ; i < actividades.size() ; i++){
+            cmbActividad.addItem(actividades.get(i).getNombre());
+        }
+        loaded = true;
+        loadSalidas();
     }//GEN-LAST:event_formComponentShown
+    private void loadSalidas(){
+        if (loaded){
+            Actividad actividad = actividades.get(cmbActividad.getSelectedIndex()); 
+            cmbSalida.removeAllItems();
+            salidas = actividad.getListaSalidaTuristica();
+            for (int i = 0 ; i < salidas.size() ; i++){
+                cmbSalida.addItem(salidas.get(i).getNombre());
+            }
+        }
+    }
+    private void cmbActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbActividadActionPerformed
+        loadSalidas();
+    }//GEN-LAST:event_cmbActividadActionPerformed
+
+    private void verActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActividadTuristicaActionPerformed
+        // TODO add your handling code here:
+        ConsultaActividadTuristica verConsulta = new ConsultaActividadTuristica(actividades.get(cmbActividad.getSelectedIndex()));
+        getParent().add(verConsulta);
+        verConsulta.show();
+    }//GEN-LAST:event_verActividadTuristicaActionPerformed
+
+    private void verSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSalidaTuristicaActionPerformed
+        // TODO add your handling code here:
+        ConsultaDeSalidaTuristica verSalida = new ConsultaDeSalidaTuristica(salidas.get(cmbSalida.getSelectedIndex()),actividades.get(cmbActividad.getSelectedIndex()));
+        getParent().add(verSalida);
+        verSalida.show();
+    }//GEN-LAST:event_verSalidaTuristicaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoProveedor;
+    private javax.swing.JComboBox<String> cmbActividad;
+    private javax.swing.JComboBox<String> cmbSalida;
     private javax.swing.JTextField correoProveedor;
-    private javax.swing.JComboBox<String> departamentoConsultaActividadTuristica;
     private javax.swing.JTextField descripcionProveedor;
     private javax.swing.JTextField fechaNacimientoProveedor;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -247,8 +283,6 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField nicknameProveedor;
     private javax.swing.JTextField nombreProveedor;
-    private javax.swing.JComboBox<String> paqutesActividadConsultaActividadTuristica1;
-    private javax.swing.JComboBox<String> salidasTuristicasConsultaActividadTuristica;
     private javax.swing.JTextField urlProveedor;
     private javax.swing.JButton verActividadTuristica;
     private javax.swing.JButton verSalidaTuristica;
