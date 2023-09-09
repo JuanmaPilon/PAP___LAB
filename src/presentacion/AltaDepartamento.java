@@ -14,7 +14,7 @@ import logica.Controlador;
  */
 public class AltaDepartamento extends javax.swing.JInternalFrame {
 
-    Controlador control = new Controlador();
+    Controlador control = Controlador.getInstance();
     
     public AltaDepartamento() {
         initComponents();

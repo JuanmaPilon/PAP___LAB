@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 public interface IControlador {
-    
+
 public abstract void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String nacionalidad);
 public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String descripcion, String link);//throws UsuarioRepetidoException;// es una prueba
 public abstract Usuario ConsultaDeUsuario(String nickname); //Devuelve el usuario 
@@ -24,4 +24,11 @@ public abstract List consultaPaquetes();
 //    public abstract void ConsultaDePaqueteDeActividadTuristicas();
 
    public abstract void AltaDeDepartamento(String nombre, String descripcion, String url);
+   
+   public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, int altaDePaquete);
+   public abstract List<String> llenarCmboBoxDep();
+   public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar);
+   public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha);
+   
+
 }

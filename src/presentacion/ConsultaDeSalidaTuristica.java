@@ -7,13 +7,14 @@ package presentacion;
 import java.util.ArrayList;
 import logica.Controlador;
 import logica.SalidaTuristica;
+import logica.Departamento;
 
 /**
  *
  * @author Pc
  */
 public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
-    Controlador control = new Controlador();
+    Controlador control = Controlador.getInstance();
     /**
      * Creates new form ConsultaDeSalidaTurística
      */
@@ -43,6 +44,7 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txtLugar = new javax.swing.JTextField();
 
+        setClosable(true);
         setTitle("Consulta de Salida Turística");
         setPreferredSize(new java.awt.Dimension(765, 600));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -152,9 +154,9 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
          cmbDepartamentos.removeAllItems();
-        ArrayList<String> departamentos = control.listaDepartamentos();
+        ArrayList<Departamento> departamentos = control.listaDepartamentos();
         for (int i = 0; i < departamentos.size();i++){
-            cmbDepartamentos.addItem(departamentos.get(i));
+            cmbDepartamentos.addItem(departamentos.get(i).getNombre());
         } 
     }//GEN-LAST:event_formComponentShown
 

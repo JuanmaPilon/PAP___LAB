@@ -6,6 +6,7 @@ package presentacion;
 
 import logica.Actividad;
 import logica.Controlador;
+import logica.Departamento;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,8 @@ import java.util.ArrayList;
  */
 public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
     
-        Controlador control = new Controlador();
-
+    Controlador control = Controlador.getInstance();
+        private ArrayList<Departamento> departamentos;
     /**
      * Creates new form ConsultaActividadTuristica
      */
@@ -252,10 +253,10 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
-         cmbDepartamentos.removeAllItems();
-        ArrayList<String> departamentos = control.listaDepartamentos();
+        cmbDepartamentos.removeAllItems();
+        departamentos = control.listaDepartamentos();
         for (int i = 0; i < departamentos.size();i++){
-            cmbDepartamentos.addItem(departamentos.get(i));
+            cmbDepartamentos.addItem(departamentos.get(i).getNombre());
         } 
     }//GEN-LAST:event_formComponentShown
 

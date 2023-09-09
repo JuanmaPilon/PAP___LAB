@@ -9,7 +9,7 @@ import logica.Controlador;
  * @author natil
  */
 public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
-    Controlador control = new Controlador();
+    Controlador control = Controlador.getInstance();
     /**
      * Creates new form CrearPaqueteActividadTuristica
      */

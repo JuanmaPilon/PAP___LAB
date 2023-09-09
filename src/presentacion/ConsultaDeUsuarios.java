@@ -14,7 +14,7 @@ import logica.Turista;
  */
 public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
     
-    Controlador control = new Controlador();
+    Controlador control = Controlador.getInstance();
     /**
      * Creates new form listaDeUsuarios
      */

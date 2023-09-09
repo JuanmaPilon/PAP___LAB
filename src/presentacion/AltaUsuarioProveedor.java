@@ -31,7 +31,7 @@ import java.text.ParseException;
  * @author natil
  */
 public class AltaUsuarioProveedor extends javax.swing.JInternalFrame {
-Controlador control = new Controlador();
+    Controlador control = Controlador.getInstance();
     /**
      * Creates new form AltaUsuario
      */

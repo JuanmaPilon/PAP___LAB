@@ -40,12 +40,12 @@ public class ControladoraPersistencia {
        }
        return salidas; 
     };
-    public ArrayList<String> listaDepartamentos(){
-        ArrayList<String> departamentos = new ArrayList();
+    public ArrayList<Departamento> listaDepartamentos(){
+        ArrayList<Departamento> departamentos = new ArrayList();
         try {
             List<Departamento> departamento = departamentoJpa.findDepartamentoEntities();
             for (int i = 0; i < departamento.size(); i++) {
-                departamentos.add(departamento.get(i).getNombre());
+                departamentos.add(departamento.get(i));
             }
         }catch(Exception ex){
                 Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);

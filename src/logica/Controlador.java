@@ -7,7 +7,14 @@ import persistencia.ControladoraPersistencia;
 import java.util.Calendar;
 
 public class Controlador implements IControlador{
-   public Controlador() {}
+    private Controlador() {}
+    private static Controlador control;
+    public static Controlador getInstance(){
+    if (control == null){
+        control = new Controlador();
+    }
+    return control;
+   };
    
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
@@ -47,7 +54,7 @@ public class Controlador implements IControlador{
 
    
    //String nombreProveedor, String nombreDep,
-   
+   @Override
    public void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha){
    Actividad actividad = new Actividad();
    actividad.setCiudad(nombreCuidad);
@@ -58,7 +65,8 @@ public class Controlador implements IControlador{
    actividad.setfAlta(fecha);
    controlPersis.guardarActividad(actividad);
    }
-
+   
+   @Override
    public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) {
        SalidaTuristica salidaTuristica = new SalidaTuristica();
         salidaTuristica.setNombre(nombre);
@@ -76,7 +84,7 @@ public class Controlador implements IControlador{
    };
    
    @Override
-   public ArrayList<String> listaDepartamentos(){
+   public ArrayList<Departamento> listaDepartamentos(){
        return controlPersis.listaDepartamentos();
    };
    
@@ -143,10 +151,12 @@ public class Controlador implements IControlador{
        controlPersis.guardarDepartamento(depto);
    };
    
+   @Override
     public List<String> llenarCmboBoxDep(){
        return controlPersis.llenarCmboBoxDepPersis();
    }
     
+   @Override 
    public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, int altaDePaquete){
       Paquete paquete = new Paquete();
       paquete.setNombre(nombreDePaquete);

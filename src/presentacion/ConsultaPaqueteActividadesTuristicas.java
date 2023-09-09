@@ -13,7 +13,7 @@ import java.util.List;
  * @author natil
  */
 public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalFrame {
-    Controlador control = new Controlador();
+    Controlador control = Controlador.getInstance();
     private List<Paquete> paquetes;
     private boolean fload=false;
     /**

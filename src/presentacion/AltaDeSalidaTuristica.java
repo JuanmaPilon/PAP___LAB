@@ -13,7 +13,7 @@ import logica.Controlador;
  * @author Pc
  */
 public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
-Controlador control = new Controlador();
+    Controlador control = Controlador.getInstance();
     /**
      * Creates new form AltaDeSalidaTuristica
      */

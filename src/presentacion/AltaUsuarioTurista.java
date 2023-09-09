@@ -20,7 +20,7 @@ import java.text.ParseException;
  */
 public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
-    Controlador control = new Controlador();
+    Controlador control = Controlador.getInstance();
     
     public AltaUsuarioTurista() {
         initComponents();
