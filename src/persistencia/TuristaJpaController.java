@@ -20,6 +20,7 @@ import logica.Turista;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
+import persistencia.exceptions.NicknameExistenteException;
 
 /**
  *
@@ -40,22 +41,33 @@ public class TuristaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-     public void create(Turista turista) throws CorreoElectronicoExistenteException, PreexistingEntityException, Exception {
+     public void create(Turista turista) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
     EntityManager em = null;
     try {
         em = getEntityManager();
         em.getTransaction().begin();
 
-        EmailExistenceChecker checker = new EmailExistenceChecker(em);
+        EmailExistenceChecker emailChecker = new EmailExistenceChecker(em);
+        NicknameExistenceChecker nicknameChecker = new NicknameExistenceChecker(em);
 
         // Verificar si el correo electrónico ya existe en la base de datos para turistas
-        if (checker.correoElectronicoExiste(turista.getCorreo(), Turista.class)) {
+        if (emailChecker.correoElectronicoExiste(turista.getCorreo(), Turista.class)) {
             throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un turista: " + turista.getCorreo());
         }
 
         // Verificar si el correo electrónico ya existe en la base de datos para proveedores
-        if (checker.correoElectronicoExiste(turista.getCorreo(), Proveedor.class)) {
+        if (emailChecker.correoElectronicoExiste(turista.getCorreo(), Proveedor.class)) {
             throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un proveedor: " + turista.getCorreo());
+        }
+
+        // Verificar si el nickname ya existe en la base de datos para turistas
+        if (nicknameChecker.nicknameExiste(turista.getNickname(), Turista.class)) {
+            throw new NicknameExistenteException("Nickname ya en uso por un turista: " + turista.getNickname());
+        }
+
+        // Verificar si el nickname ya existe en la base de datos para proveedores
+        if (nicknameChecker.nicknameExiste(turista.getNickname(), Proveedor.class)) {
+            throw new NicknameExistenteException("Nickname ya en uso por un proveedor: " + turista.getNickname());
         }
 
         em.persist(turista);
@@ -83,6 +95,22 @@ public class EmailExistenceChecker {
     public boolean correoElectronicoExiste(String correo, Class<?> entityClass) {
         TypedQuery<?> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.correo = :correo", entityClass);
         query.setParameter("correo", correo);
+        List<?> resultList = query.getResultList();
+        return !resultList.isEmpty();
+    }
+}
+
+public class NicknameExistenceChecker {
+
+    private EntityManager em;
+
+    public NicknameExistenceChecker(EntityManager em) {
+        this.em = em;
+    }
+
+    public boolean nicknameExiste(String nickname, Class<?> entityClass) {
+        TypedQuery<?> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.nickname = :nickname", entityClass);
+        query.setParameter("nickname", nickname);
         List<?> resultList = query.getResultList();
         return !resultList.isEmpty();
     }
