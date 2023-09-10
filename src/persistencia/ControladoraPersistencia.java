@@ -55,7 +55,7 @@ public class ControladoraPersistencia {
         }
         return departamentos;
     }
-    //////////////
+ 
      public ArrayList<String> listaDeptos(){
     ArrayList<String> nicks = new ArrayList<String>();
   
@@ -69,8 +69,35 @@ public class ControladoraPersistencia {
     }
     return nicks;
     }
-    //////////////
-     
+ //////////////////////
+         public ArrayList<String> listaActividades(){
+    ArrayList<String> nombre = new ArrayList<String>();
+  
+    try {
+        List<Actividad> actividades = actividadJpa.findActividadEntities();
+        for (int i = 0; i < actividades.size(); i++) {
+            nombre.add(actividades.get(i).getNombre());
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return nombre;
+    }
+     ////////////////////
+       public ArrayList<String> listaPaquetes(){
+    ArrayList<String> nombrep = new ArrayList<String>();
+  
+    try {
+        List<Paquete> paquetes = paqueteJpa.findPaqueteEntities();
+        for (int i = 0; i < paquetes.size(); i++) {
+            nombrep.add(paquetes.get(i).getNombre());
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return nombrep;
+    }
+     /////////////////////////
     public ArrayList<String> listaActividadesTuristicas(String departamento){
        ArrayList<String> actividades = new ArrayList();
        List<String> actividad = actividadJpa.findByDepartamento(departamento);

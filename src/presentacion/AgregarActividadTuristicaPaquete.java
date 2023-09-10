@@ -4,12 +4,14 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
+import logica.Controlador;
 /**
  *
  * @author natil
  */
 public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame {
-
+    Controlador control = Controlador.getInstance();
     /**
      * Creates new form AgregarActividadTuristicaPaquete
      */
@@ -31,12 +33,17 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
         jLabel2 = new javax.swing.JLabel();
         departamentoAgregarActividadPaquete = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        paqueteAgregarActividadTuristica = new javax.swing.JComboBox<>();
         aceptarAgregarActividadPaquete = new javax.swing.JButton();
         cancelarAgregarActividadPaquete = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Agregar Actividad Turistica a Paquete");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLabel1.setText("Seleccione paquete turistico:");
 
@@ -48,11 +55,16 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
 
         jLabel3.setText("Agregar actividad turistica:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turisticas" }));
+        paqueteAgregarActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turisticas" }));
 
         aceptarAgregarActividadPaquete.setText("Aceptar");
 
-        cancelarAgregarActividadPaquete.setText("Cancelar");
+        cancelarAgregarActividadPaquete.setText("Limpiar");
+        cancelarAgregarActividadPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarAgregarActividadPaqueteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +86,7 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(paqueteAgregarActividadTuristica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addComponent(aceptarAgregarActividadPaquete)
@@ -96,7 +108,7 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(paqueteAgregarActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptarAgregarActividadPaquete)
@@ -107,15 +119,40 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        paqueteAgregarActividadPaquete.removeAllItems();
+        ArrayList<String> nicknames = control.listaPaquetes();
+        for (int i = 0; i < nicknames.size(); i++) {
+            paqueteAgregarActividadPaquete.addItem(nicknames.get(i));
+
+        }
+        departamentoAgregarActividadPaquete.removeAllItems();
+        ArrayList<String> nicks = control.listaDeptos();
+        for (int i = 0; i < nicks.size(); i++) {
+            departamentoAgregarActividadPaquete.addItem(nicks.get(i));
+        }
+         paqueteAgregarActividadTuristica.removeAllItems();
+        ArrayList<String> nombres = control.listaActividades();
+        for (int i = 0; i < nicks.size(); i++) {
+            paqueteAgregarActividadTuristica.addItem(nombres.get(i));
+        }
+    }//GEN-LAST:event_formComponentShown
+
+    private void limpiarAgregarActividadPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarAgregarActividadPaqueteActionPerformed
+        paqueteAgregarActividadPaquete.setSelectedIndex(-1);
+        departamentoAgregarActividadPaquete.setSelectedIndex(-1);
+        paqueteAgregarActividadTuristica.setSelectedIndex(-1);
+    }//GEN-LAST:event_limpiarAgregarActividadPaqueteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarAgregarActividadPaquete;
     private javax.swing.JButton cancelarAgregarActividadPaquete;
     private javax.swing.JComboBox<String> departamentoAgregarActividadPaquete;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JComboBox<String> paqueteAgregarActividadPaquete;
+    private javax.swing.JComboBox<String> paqueteAgregarActividadTuristica;
     // End of variables declaration//GEN-END:variables
 }

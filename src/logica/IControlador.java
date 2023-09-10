@@ -12,7 +12,9 @@ public abstract Usuario ConsultaDeUsuario(String nickname); //Devuelve el usuari
 public abstract ArrayList listaUsuarios();  //devuelve una lista de todos los usuarios sin discriminar su tipo
 public abstract ArrayList listaProveedores(); //devuelve una lista de todos los proveedores
 public abstract ArrayList listaDepartamentos(); //devuelve una lista de todos los departamentos
-public abstract ArrayList listaDeptos();
+public abstract ArrayList listaDeptos();//lista que contiene solo los nombres de los departamentos
+public abstract ArrayList listaPaquetes();
+public abstract ArrayList listaActividades();
 public abstract void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url);
 public void ModificarDatosDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fecha, String nacionalidad);//Nati
 public abstract void AltaDeActividadTuristica(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete);

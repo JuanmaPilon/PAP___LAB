@@ -91,8 +91,16 @@ public class Controlador implements IControlador{
         salidaTuristica.setLugar(lugar);
         controlPersis.guardarSalidaTuristica(salidaTuristica);
     }
-
-   
+////////////
+   @Override
+   public ArrayList<String> listaActividades(){//tiene el nombre de los departamentos, no el objeto
+       return controlPersis.listaActividades();
+   };
+   @Override
+   public ArrayList<String> listaPaquetes(){//tiene el nombre de los departamentos, no el objeto
+       return controlPersis.listaPaquetes();
+   };
+   ///////
    @Override 
    public ArrayList<String> listaSalActividadTuristica(String actividad){
        return controlPersis.listaSalActividadTuristica(actividad);
