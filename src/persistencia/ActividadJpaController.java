@@ -16,7 +16,9 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import logica.Actividad;
+import logica.DTActividad;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
@@ -194,5 +196,40 @@ public class ActividadJpaController implements Serializable {
 	List<String> r = (List<String>) em.createNativeQuery(query).getResultList();
         return r;
     }
+    
+    //Sirve para crear una tabla con la info delas actividades asociadas a un departamento
+    public List<DTActividad> findActividadByDepartamento(String departamento) {
+    EntityManager em = getEntityManager();
+    
+    // Cambiamos la consulta a JPQL
+    String jpqlQuery = "SELECT a FROM Actividad a " +
+                       "JOIN a.departamento d " +
+                       "WHERE d.nombre LIKE :departamento";
+    
+    TypedQuery<Actividad> typedQuery = em.createQuery(jpqlQuery, Actividad.class);
+    typedQuery.setParameter("departamento", "%" + departamento + "%");
+
+    List<Actividad> activities = typedQuery.getResultList();
+    
+    List<DTActividad> resultList = new ArrayList<>();
+    
+    for (Actividad activity : activities) {
+        DTActividad dtActividad = new DTActividad(
+            activity.getNombre(),
+            activity.getDescripcion(),
+            activity.getDuracion(),
+            activity.getCosto(),
+            activity.getCiudad(),
+            activity.getfAlta(),
+            activity.getListaSalidaTuristica(),
+            activity.getListaPaquete(),
+            activity.getDepartamento(),
+            activity.getProveedor()
+        );
+        resultList.add(dtActividad);
+    }
+    
+    return resultList;
+}
     
 }

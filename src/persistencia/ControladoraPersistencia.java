@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.Actividad;
+import logica.DTActividad;
 import logica.DTUsuario;
 import logica.Departamento;
 import logica.Turista;
@@ -225,5 +226,10 @@ public ArrayList<DTUsuario> traerUsuarios(){
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+        
+        
+    public List<DTActividad> encontraSalidasTuristicasDepartamentoPersis(String departamentoSeleccionado){
+         return actividadJpa.findActividadByDepartamento(departamentoSeleccionado);
+     }
     
 }

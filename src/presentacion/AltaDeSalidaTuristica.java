@@ -6,8 +6,10 @@ package presentacion;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import logica.Controlador;
+import logica.DTActividad;
 /**
  *
  * @author Pc
@@ -19,13 +21,6 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
      */
     public AltaDeSalidaTuristica() {
         initComponents();
-        cmboBoxDep.removeAllItems();
-        // Llamar a obtenerNombresDepartamentos para obtener la lista de nombres de departamentos y llenar el cmboBoxDep
-    List<String> nombresDepartamentos = control.llenarCmboBoxDep();
-    // Llenar el JComboBox con los nombres de los departamentos
-    for (String nombre : nombresDepartamentos) {
-       cmboBoxDep.addItem(nombre);
-   }
     }
 
     /**
@@ -49,10 +44,28 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
         aceptarAltaProveedor = new javax.swing.JButton();
         btnlimpiar = new javax.swing.JButton();
         cantTuristas = new javax.swing.JSpinner();
+        BotonVerActividades = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Alta Salida Turistica");
         setPreferredSize(new java.awt.Dimension(600, 500));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel1.setText("Departamento:");
 
@@ -84,6 +97,13 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
 
         cantTuristas.setModel(new javax.swing.SpinnerNumberModel(0, 0, 310, 1));
 
+        BotonVerActividades.setText("Ver Actividades ");
+        BotonVerActividades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonVerActividadesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +116,9 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmboBoxDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmboBoxDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(BotonVerActividades))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,7 +140,7 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
                         .addComponent(btnlimpiar)
                         .addGap(56, 56, 56)
                         .addComponent(aceptarAltaProveedor)))
-                .addGap(25, 300, Short.MAX_VALUE))
+                .addGap(25, 243, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +148,8 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmboBoxDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmboBoxDep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonVerActividades))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,21 +170,14 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptarAltaProveedor)
                     .addComponent(btnlimpiar))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarAltaProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarAltaProveedorActionPerformed
-       /*
-        Date fechaHoraActual = new Date();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String fechaHoraFormateada = formato.format(fechaHoraActual);
-        */
-        
-       // Date fechaHoraSalida = new Date();
-        //String fechaHoraFormateada2 = formato.format(fechaHoraSalida);
+
         Date fechaAlta = new Date();
         int maxCantTuristas = (int) cantTuristas.getValue();
         Date fechaSalida = (Date) sprFecha.getValue();
@@ -182,8 +198,40 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
         sprFecha.setValue(fechaActual);
     }//GEN-LAST:event_btnlimpiarActionPerformed
 
+    private void BotonVerActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVerActividadesActionPerformed
+        String departamentoSeleccionado = (String) cmboBoxDep.getSelectedItem();
+        System.out.println(departamentoSeleccionado);
+        List<DTActividad> actividades = control.encontraSalidasTuristicasDepartamento(departamentoSeleccionado);
+
+        ListaActividades listaActividadesFrame = new ListaActividades();
+
+        listaActividadesFrame.crearListaActividades(actividades);
+
+        Principal p = new Principal();
+        // Obtén el JDesktopPane desde tu ventana principal
+        JDesktopPane desktopPane = p.obtenerJDesktopPane();
+
+        // Agrega el JInternalFrame al JDesktopPane
+        desktopPane.add(listaActividadesFrame);
+        listaActividadesFrame.toFront();
+        // Establece la visibilidad del JInternalFrame en true
+        listaActividadesFrame.setVisible(true);
+
+    }//GEN-LAST:event_BotonVerActividadesActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+         cmboBoxDep.removeAllItems();
+        // Llamar a obtenerNombresDepartamentos para obtener la lista de nombres de departamentos y llenar el cmboBoxDep
+         List<String> nombresDepartamentos = control.llenarCmboBoxDep();
+        // Llenar el JComboBox con los nombres de los departamentos
+         for (String nombre : nombresDepartamentos) {
+             cmboBoxDep.addItem(nombre);
+          }
+    }//GEN-LAST:event_formInternalFrameOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonVerActividades;
     private javax.swing.JButton aceptarAltaProveedor;
     private javax.swing.JButton btnlimpiar;
     private javax.swing.JSpinner cantTuristas;

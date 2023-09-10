@@ -1,6 +1,9 @@
 package presentacion;
 
 //import logica.Fabrica;
+
+import javax.swing.JDesktopPane;
+
 //import logica.IControlador;
 //import logica.Usuario;
 
@@ -291,6 +294,10 @@ public class Principal extends javax.swing.JFrame {
         verListaUsuarios.show();
     }//GEN-LAST:event_modUsuarioActionPerformed
 
+       public JDesktopPane obtenerJDesktopPane() {
+      //  System.out.print("funcion obtener");
+    return contenedorPrincipal;
+}
     /**
      * @param args the command line arguments
      */

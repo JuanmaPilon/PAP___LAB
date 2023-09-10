@@ -227,6 +227,9 @@ public class Controlador implements IControlador{
         controlPersis.modificarTurista(t);
     }
    
+    public List<DTActividad> encontraSalidasTuristicasDepartamento(String departamentoSeleccionado){
+        return controlPersis.encontraSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
+    }
    
 }
 
