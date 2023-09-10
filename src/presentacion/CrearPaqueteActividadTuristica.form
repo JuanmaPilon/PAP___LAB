@@ -43,7 +43,10 @@
                       <Component id="validezPaquete" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -53,6 +56,7 @@
                               <Component id="aceptarCrearPaquete" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="fechaAltaPaquete" min="-2" pref="351" max="-2" attributes="0"/>
+                          <Component id="descuentoPaquete" alignment="0" min="-2" pref="351" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -83,7 +87,12 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fechaAltaPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="descuentoPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="aceptarCrearPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelarCrearPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -147,6 +156,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarCrearPaqueteActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="descuentoPaquete">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Descuento:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

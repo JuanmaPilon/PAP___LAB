@@ -2,12 +2,12 @@
 
 package logica;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import persistencia.ControladoraPersistencia;
-import java.util.Calendar;
 
 public class Controlador implements IControlador{
     private Controlador() {}
@@ -58,7 +58,7 @@ public class Controlador implements IControlador{
    
    //String nombreProveedor, String nombreDep,
    @Override
-   public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha){
+   public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha,String nombreProveedor, String nombreDepartamento){
    Actividad actividad = new Actividad();
    actividad.setCiudad(nombreCuidad);
    actividad.setNombre(nombreActividad);
@@ -66,9 +66,19 @@ public class Controlador implements IControlador{
    actividad.setDuracion(duracionActividad);
    actividad.setCosto(costoActividad);
    actividad.setfAlta(fecha);
-   actividad.setProveedor(null);
-   actividad.setDepartamento(null);
+   
+   
+   Departamento dep = new Departamento();//creo dep auxiliar
+   dep = controlPersis.traerDepartamento(nombreDepartamento);// encuentro el departamento y lo cargo en dep
+   actividad.setDepartamento(dep);// hago que mi actividad apunte al departamento que me traje
+   //idem con proveedor
+   Proveedor pro = new Proveedor();
+   pro = controlPersis.traerProveedor(nombreProveedor);
+   actividad.setProveedor(pro);
+   
    controlPersis.guardarActividad(actividad);
+   
+   
    }
    
    @Override
@@ -92,7 +102,10 @@ public class Controlador implements IControlador{
    public ArrayList<Departamento> listaDepartamentos(){
        return controlPersis.listaDepartamentos();
    };
-   
+   @Override
+   public ArrayList<String> listaDeptos(){//tiene el nombre de los departamentos, no el objeto
+       return controlPersis.listaDeptos();
+   };
    @Override
    public ArrayList<String> listaActividadesTuristicas(String departamento){
        return controlPersis.listaActividadesTuristicas(departamento);
@@ -103,6 +116,11 @@ public class Controlador implements IControlador{
      return controlPersis.listaUsuarios();
    };
    
+    @Override
+   public ArrayList<String> listaProveedores(){
+     return controlPersis.listaProveedores();
+   };
+ 
    @Override
    public Usuario ConsultaDeUsuario(String nickname){
        return controlPersis.consultaUsuario(nickname);
@@ -161,15 +179,27 @@ public class Controlador implements IControlador{
        return controlPersis.llenarCmboBoxDepPersis();
    }
     
-   @Override 
-   public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, int altaDePaquete){
-      Paquete paquete = new Paquete();
-      paquete.setNombre(nombreDePaquete);
-      paquete.setDescripcion(nombreDePaquete);
-      paquete.setValidez(validezDePaquete);
-      
-      controlPersis.guardarPaqueteActividadTuristica(paquete);
-   }
+
+
+@Override 
+public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, String altaDePaquete, int descuentoDePaquete) {
+    Paquete paquete = new Paquete();
+    paquete.setNombre(nombreDePaquete);
+    paquete.setDescripcion(descripcionDePaquete);
+    paquete.setValidez(validezDePaquete);
+    paquete.setDescuento(descuentoDePaquete);
+
+    try {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Ajusta el formato según tus necesidades
+        Date fechaAlta = dateFormat.parse(altaDePaquete);
+        paquete.setFechaAlta(fechaAlta);//le seteo fechaAlta al paquete
+    } catch (ParseException e) { //excepción si el formato del String no es válido
+        throw new IllegalArgumentException("Ingrese la fecha en este formato dd/MM/yyyy", e);
+    }
+
+    controlPersis.guardarPaqueteActividadTuristica(paquete);
+}
+
    
    @Override
    public ArrayList<DTUsuario> traerUsuarioMod(){
@@ -188,8 +218,7 @@ public class Controlador implements IControlador{
        return new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
                fnac, t.getNacionalidad());
    }
-   
-      @Override
+   @Override
    public DTProveedor traerDTProveedor(String nickname){
    
        Proveedor t = controlPersis.traerProveedor(nickname);

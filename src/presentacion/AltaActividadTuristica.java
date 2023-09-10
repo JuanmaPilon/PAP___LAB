@@ -4,8 +4,8 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import logica.IControlador;
 import java.util.Date;
 import logica.Controlador;
 
@@ -55,6 +55,11 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Alta de Actividad Turistica");
         setToolTipText("");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLabel1.setText("Proveedor:");
 
@@ -72,12 +77,9 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Fecha de Alta:");
 
-        proveedorActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista proveedores", "1", "2", "3", "4", "5" }));
         proveedorActividadTuristica.setToolTipText("");
 
-        departamentoActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista departamentos", "1", "2", "3", "4", "5" }));
-
-        ciudadActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista ciudades1", "2", "3", "4", "5" }));
+        ciudadActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Montevideo", "Canelones", "Maldonado", "Rocha", "Colonia", "Soriano", "Rio Negro", "Paysandu", "Salto", "Artigas", "Rivera", "Tacuarembo", "Durazno", "Florida", "Lavalleja", "Treinta y Tres", "Cerro Largo" }));
 
         diaAltaActividadTuristica.setModel(new javax.swing.SpinnerNumberModel(0, 0, 310, 1));
 
@@ -197,12 +199,15 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     
     private void aceptarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarAltaActividadTuristicaActionPerformed
         //String nombreProveedor = (String) proveedorActividadTuristica.getSelectedItem();  
         //String nombreDep = (String) departamentoActividadTuristica.getSelectedItem();  
         String nombreActividad = nombreActividadTuristica.getText();
         String descripcionActividad = descripcionActividadTuristica.getText();
-        String nombreCuidad = (String) ciudadActividadTuristica.getSelectedItem(); 
+        String nombreCuidad = (String) ciudadActividadTuristica.getSelectedItem();
+        String nombreProveedor = (String) proveedorActividadTuristica.getSelectedItem();
+        String nombreDepartamento = (String) departamentoActividadTuristica.getSelectedItem();
         int duracionActividad = Integer.parseInt(duracionActividadTuristica.getText());
         float costoActividad = Float.parseFloat(costoActividadTuristica.getText());
         int diaA = (int) diaAltaActividadTuristica.getValue();
@@ -214,7 +219,7 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
         calendar.set(Calendar.DAY_OF_MONTH, diaA);
         Date fecha = calendar.getTime();
         
-        control.guardarActividad(nombreActividad,descripcionActividad,duracionActividad,costoActividad,nombreCuidad,fecha);
+        control.guardarActividad(nombreActividad,descripcionActividad,duracionActividad,costoActividad,nombreCuidad,fecha,nombreProveedor,nombreDepartamento);
     }//GEN-LAST:event_aceptarAltaActividadTuristicaActionPerformed
 
     private void cancelarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarAltaActividadTuristicaActionPerformed
@@ -230,6 +235,21 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
        ciudadActividadTuristica.setSelectedIndex(-1);
        departamentoActividadTuristica.setSelectedIndex(-1);
     }//GEN-LAST:event_cancelarAltaActividadTuristicaActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+
+        proveedorActividadTuristica.removeAllItems();
+        ArrayList<String> nicknames = control.listaProveedores();
+        for (int i = 0; i < nicknames.size(); i++) {
+            proveedorActividadTuristica.addItem(nicknames.get(i));
+
+        }
+        departamentoActividadTuristica.removeAllItems();
+        ArrayList<String> nicks = control.listaDeptos();
+        for (int i = 0; i < nicks.size(); i++) {
+            departamentoActividadTuristica.addItem(nicks.get(i));
+        }
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

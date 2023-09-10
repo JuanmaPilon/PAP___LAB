@@ -55,6 +55,22 @@ public class ControladoraPersistencia {
         }
         return departamentos;
     }
+    //////////////
+     public ArrayList<String> listaDeptos(){
+    ArrayList<String> nicks = new ArrayList<String>();
+  
+    try {
+        List<Departamento> deptos = departamentoJpa.findDepartamentoEntities();
+        for (int i = 0; i < deptos.size(); i++) {
+            nicks.add(deptos.get(i).getNombre());
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return nicks;
+    }
+    //////////////
+     
     public ArrayList<String> listaActividadesTuristicas(String departamento){
        ArrayList<String> actividades = new ArrayList();
        List<String> actividad = actividadJpa.findByDepartamento(departamento);
@@ -106,8 +122,43 @@ public class ControladoraPersistencia {
     }
     return nicknames;
     }
+
+   public ArrayList<String> listaProveedores(){
+    ArrayList<String> nicknames = new ArrayList<String>();
+  
+    try {
+        List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+        for (int i = 0; i < proveedores.size(); i++) {
+            nicknames.add(proveedores.get(i).getNickname());
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return nicknames;
+    }    
+
     
-   
+
+public ArrayList<DTUsuario> traerProveedores() {
+
+    ArrayList<DTUsuario> listaDTUsuario = new ArrayList<DTUsuario>();
+    try {
+        List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+        for (Proveedor p : proveedores) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String fnac = sdf.format(p.getfNacimiento());
+            DTUsuario dtusuario = new DTUsuario(p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fnac);
+            listaDTUsuario.add(dtusuario);
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return listaDTUsuario;
+
+}
+
+
+
 public ArrayList<DTUsuario> traerUsuarios(){
         
     ArrayList<DTUsuario> listaDTUsuario = new ArrayList<DTUsuario>();
@@ -154,6 +205,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
     public void guardarActividad(Actividad actividad) {
         try {
             actividadJpa.create(actividad);
+            JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -198,6 +250,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
     public void guardarPaqueteActividadTuristica(Paquete paquete) {
         try {
             paqueteJpa.create(paquete);
+            JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -209,6 +262,9 @@ public ArrayList<DTUsuario> traerUsuarios(){
 
     public Proveedor traerProveedor(String nickname) {
         return proveedorJpa.findProveedor(nickname);
+    }
+    public Departamento traerDepartamento(String nickname) {
+        return departamentoJpa.findDepartamento(nickname);
     }
 
     public void modificarProveedor(Proveedor p) {

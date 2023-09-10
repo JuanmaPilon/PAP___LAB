@@ -36,6 +36,8 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
         fechaAltaPaquete = new javax.swing.JTextField();
         aceptarCrearPaquete = new javax.swing.JButton();
         cancelarCrearPaquete = new javax.swing.JButton();
+        descuentoPaquete = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setClosable(true);
         setResizable(true);
@@ -67,6 +69,8 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel4.setText("Descuento:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,7 +91,9 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(validezPaquete))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -95,7 +101,8 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
                                 .addComponent(cancelarCrearPaquete)
                                 .addGap(133, 133, 133)
                                 .addComponent(aceptarCrearPaquete))
-                            .addComponent(fechaAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(fechaAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(224, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,7 +124,11 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(fechaAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(112, 112, 112)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(descuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptarCrearPaquete)
                     .addComponent(cancelarCrearPaquete))
@@ -131,16 +142,18 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
         String nombreDePaquete = nombrePaquete.getText();
         String descripcionDePaquete = descripcionPaquete.getText();
         int validezDePaquete = Integer.parseInt(validezPaquete.getText());
-        int fechaAltaDePaquete = Integer.parseInt(fechaAltaPaquete.getText());
+        String fechaAltaDePaquete = fechaAltaPaquete.getText();
+        int descuentoDePaquete = Integer.parseInt(descuentoPaquete.getText());
         
-        control.crearPaqueteActividadTuristica(nombreDePaquete,descripcionDePaquete,validezDePaquete,fechaAltaDePaquete);
+        control.crearPaqueteActividadTuristica(nombreDePaquete,descripcionDePaquete,validezDePaquete,fechaAltaDePaquete, descuentoDePaquete);
     }//GEN-LAST:event_aceptarCrearPaqueteActionPerformed
 
     private void cancelarCrearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCrearPaqueteActionPerformed
         nombrePaquete.setText("");
         descripcionPaquete.setText("");
         validezPaquete.setText("");
-        fechaAltaPaquete.setText(""); 
+        fechaAltaPaquete.setText("");
+        descuentoPaquete.setText("");
     }//GEN-LAST:event_cancelarCrearPaqueteActionPerformed
 
 
@@ -148,10 +161,12 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
     private javax.swing.JButton aceptarCrearPaquete;
     private javax.swing.JButton cancelarCrearPaquete;
     private javax.swing.JTextField descripcionPaquete;
+    private javax.swing.JTextField descuentoPaquete;
     private javax.swing.JTextField fechaAltaPaquete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JTextField nombrePaquete;
     private javax.swing.JTextField validezPaquete;

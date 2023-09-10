@@ -214,6 +214,9 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
     txtapellido.setText("");
     txtcorreo.setText("");
     txtnacionalidad.setText("");
+    cmbdia.setValue(0);
+    cmbmes.setValue(0);
+    cmbanio.setValue(1900);
     }//GEN-LAST:event_btnlimpiarActionPerformed
 
 
