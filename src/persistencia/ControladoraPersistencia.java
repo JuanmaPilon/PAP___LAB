@@ -209,6 +209,21 @@ public ArrayList<DTUsuario> traerUsuarios(){
     public Proveedor traerProveedor(String nickname) {
         return proveedorJpa.findProveedor(nickname);
     }
+
+    public void modificarProveedor(Proveedor p) {
+        try {
+            proveedorJpa.edit(p);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
+        public void modificarTurista(Turista t) {
+        try {
+            turistaJpa.edit(t);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

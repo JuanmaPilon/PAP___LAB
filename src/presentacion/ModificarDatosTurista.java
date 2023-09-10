@@ -4,6 +4,10 @@
  */
 package presentacion;
 
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import logica.Controlador;
 import logica.DTTurista;
 
@@ -75,6 +79,11 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
         txtcorreo.setEditable(false);
 
         aceptarModificarTurista.setText("Aceptar");
+        aceptarModificarTurista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarModificarTuristaActionPerformed(evt);
+            }
+        });
 
         cancelarModificarTurista.setText("Cancelar");
 
@@ -151,12 +160,12 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(spndia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(spnmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(spnanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(spnanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -170,6 +179,27 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void aceptarModificarTuristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarModificarTuristaActionPerformed
+        String nickname = txtnickname.getText();
+        String correo = txtcorreo.getText();
+        String nombre = txtnombre.getText();
+        String apellido = txtapellido.getText();
+        String nacionalidad = txtnacionalidad.getText();
+        int dia = (int) spndia.getValue();
+        int mes = (int) spnmes.getValue();
+        int anio = (int) spnanio.getValue();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
+
+        Date fecha = calendar.getTime();
+        
+        control.ModificarDatosDeUsuarioTurista(nickname, nombre, apellido, correo, fecha, nacionalidad );
+        
+        //mensaje de OK
+        mostrarMensaje("Se modifico el Turista correctamente", "Info", "Edición correcta");
+    }//GEN-LAST:event_aceptarModificarTuristaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -199,7 +229,7 @@ private void cargarDatosTurista(String nickname){
     txtnombre.setText(t.getNombre());
     txtapellido.setText(t.getApellido());
     txtnacionalidad.setText(t.getNacionalidad());
-    
+    txtcorreo.setText(t.getCorreo());
     
     int dia = Integer.parseInt(t.getfNacimiento().substring(1,2));
     int mes = Integer.parseInt(t.getfNacimiento().substring(4,5));  
@@ -211,5 +241,17 @@ private void cargarDatosTurista(String nickname){
    //System.out.println(dia +" "+mes+"  "+anio);
 };
 
+public void mostrarMensaje(String mensaje, String tipo, String titulo){
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")){
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        }else if (tipo.equals("Error")){
+            optionPane.setMessageType(JOptionPane.ERROR);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    
+    }
 
 }

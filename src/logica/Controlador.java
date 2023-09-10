@@ -1,3 +1,5 @@
+//mio
+
 package logica;
 
 import java.text.SimpleDateFormat;
@@ -199,6 +201,31 @@ public class Controlador implements IControlador{
        return new DTProveedor(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
                fnac, t.getDescripcion(), t.getLink());
    }
+   @Override
+    public void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url) {
+       
+        Proveedor p = (Proveedor) ConsultaDeUsuario(nickname);
+        
+        p.setNombre(nombre);
+        p.setApellido(apellido);
+        p.setDescripcion(descripcion);
+        p.setLink(url);
+        p.setfNacimiento(fecha);
+        
+        controlPersis.modificarProveedor(p);
+    }
+
+    @Override
+    public void ModificarDatosDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fecha, String nacionalidad) {
+        Turista t =  (Turista) ConsultaDeUsuario(nickname);
+        
+        t.setNombre(nombre);
+        t.setApellido(apellido);
+        t.setNacionalidad(nacionalidad);
+        t.setfNacimiento(fecha);
+        
+        controlPersis.modificarTurista(t);
+    }
    
    
 }

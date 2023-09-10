@@ -4,7 +4,12 @@
  */
 package presentacion;
 
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import logica.Controlador;
+import logica.DTProveedor;
 
 /**
  *
@@ -13,11 +18,11 @@ import logica.Controlador;
 public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
 
     Controlador control = Controlador.getInstance();
-    String nickname;
+    
     
     public ModificarDatosProveedor(String nickname) {
         initComponents();
-        this.nickname = nickname;
+         cargarDatosProveedor(nickname);
     }
 
     /**
@@ -29,8 +34,6 @@ public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        seleccionModificarTurista = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -38,25 +41,21 @@ public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        nicknameModificarProveedor = new javax.swing.JTextField();
-        correoModificarProveedor = new javax.swing.JTextField();
-        nombreModificarProveedor = new javax.swing.JTextField();
-        apellidoModificarProveedor = new javax.swing.JTextField();
-        diaModificarProveedor = new javax.swing.JSpinner();
-        mesModificarProveedor = new javax.swing.JSpinner();
-        anioModificarProveedor = new javax.swing.JSpinner();
-        descripcionModificarProveedor = new javax.swing.JTextField();
-        aceptarModificarTurista = new javax.swing.JButton();
+        txtnickname = new javax.swing.JTextField();
+        txtcorreo = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
+        txtapellido = new javax.swing.JTextField();
+        spndia = new javax.swing.JSpinner();
+        spnmes = new javax.swing.JSpinner();
+        spnanio = new javax.swing.JSpinner();
+        txtdescripcion = new javax.swing.JTextField();
+        btnAcepta = new javax.swing.JButton();
         cancelarModificarTurista = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        urlModificarProveedor = new javax.swing.JTextField();
+        txturl = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Modificar Datos de Proveedor");
-
-        jLabel1.setText("Seleccione Proveer:");
-
-        seleccionModificarTurista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista proveedores" }));
 
         jLabel2.setText("Datos del Proveedor seleccionado:");
 
@@ -72,17 +71,22 @@ public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Descripcion:");
 
-        nicknameModificarProveedor.setEditable(false);
+        txtnickname.setEditable(false);
 
-        correoModificarProveedor.setEditable(false);
+        txtcorreo.setEditable(false);
 
-        diaModificarProveedor.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+        spndia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
-        mesModificarProveedor.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        spnmes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
-        anioModificarProveedor.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2023, 1));
+        spnanio.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2023, 1));
 
-        aceptarModificarTurista.setText("Aceptar");
+        btnAcepta.setText("Aceptar");
+        btnAcepta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptaActionPerformed(evt);
+            }
+        });
 
         cancelarModificarTurista.setText("Cancelar");
 
@@ -94,51 +98,45 @@ public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(seleccionModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel2)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(nicknameModificarProveedor))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(correoModificarProveedor))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(nombreModificarProveedor))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(apellidoModificarProveedor))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(diaModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(mesModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(anioModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(descripcionModificarProveedor))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel9)
-                            .addGap(18, 18, 18)
-                            .addComponent(urlModificarProveedor)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtnickname))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtcorreo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtnombre))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtapellido))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(spndia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(spnmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(spnanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtdescripcion))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(txturl))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
-                        .addComponent(aceptarModificarTurista)
+                        .addComponent(btnAcepta)
                         .addGap(58, 58, 58)
                         .addComponent(cancelarModificarTurista)))
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -146,45 +144,41 @@ public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(seleccionModificarTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(70, 70, 70)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(nicknameModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(correoModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(nombreModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(apellidoModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(diaModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mesModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(anioModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spndia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(descripcionModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(urlModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txturl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aceptarModificarTurista)
+                    .addComponent(btnAcepta)
                     .addComponent(cancelarModificarTurista))
                 .addGap(20, 20, 20))
         );
@@ -192,16 +186,32 @@ public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceptaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptaActionPerformed
+        String nickname = txtnickname.getText();
+        String correo = txtcorreo.getText();
+        String nombre = txtnombre.getText();
+        String apellido = txtapellido.getText();
+        String descripcion = txtdescripcion.getText();
+        String url = txturl.getText();
+        int dia = (int) spndia.getValue();
+        int mes = (int) spnmes.getValue();
+        int anio = (int) spnanio.getValue();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
+
+        Date fecha = calendar.getTime();
+        
+        control.ModificarDatosDeUsuarioProveedor(nickname, nombre, apellido, correo, fecha, descripcion, url );
+
+        //mensaje de OK
+        mostrarMensaje("Se modifico el Proveedor correctamente", "Info", "Edición correcta");
+    }//GEN-LAST:event_btnAceptaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aceptarModificarTurista;
-    private javax.swing.JSpinner anioModificarProveedor;
-    private javax.swing.JTextField apellidoModificarProveedor;
+    private javax.swing.JButton btnAcepta;
     private javax.swing.JButton cancelarModificarTurista;
-    private javax.swing.JTextField correoModificarProveedor;
-    private javax.swing.JTextField descripcionModificarProveedor;
-    private javax.swing.JSpinner diaModificarProveedor;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -210,10 +220,49 @@ public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JSpinner mesModificarProveedor;
-    private javax.swing.JTextField nicknameModificarProveedor;
-    private javax.swing.JTextField nombreModificarProveedor;
-    private javax.swing.JComboBox<String> seleccionModificarTurista;
-    private javax.swing.JTextField urlModificarProveedor;
+    private javax.swing.JSpinner spnanio;
+    private javax.swing.JSpinner spndia;
+    private javax.swing.JSpinner spnmes;
+    private javax.swing.JTextField txtapellido;
+    private javax.swing.JTextField txtcorreo;
+    private javax.swing.JTextField txtdescripcion;
+    private javax.swing.JTextField txtnickname;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txturl;
     // End of variables declaration//GEN-END:variables
+
+private void cargarDatosProveedor(String nickname){
+    DTProveedor t = control.traerDTProveedor(nickname);
+    
+    txtnickname.setText(t.getNickname());
+    txtnombre.setText(t.getNombre());
+    txtapellido.setText(t.getApellido());
+    txtdescripcion.setText(t.getDescripcion());
+    txturl.setText(t.getLink());
+    txtcorreo.setText(t.getCorreo());
+    
+    int dia = Integer.parseInt(t.getfNacimiento().substring(1,2));
+    int mes = Integer.parseInt(t.getfNacimiento().substring(4,5));  
+    int anio = Integer.parseInt(t.getfNacimiento().substring(6,10));   
+    spndia.setValue(dia);
+    spnmes.setValue(mes);
+    spnanio.setValue(anio);
+    System.out.println(t.getfNacimiento());
+   System.out.println(dia +" "+mes+"  "+anio);
+}
+
+public void mostrarMensaje(String mensaje, String tipo, String titulo){
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")){
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        }else if (tipo.equals("Error")){
+            optionPane.setMessageType(JOptionPane.ERROR);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    
+    }
+
+
 }

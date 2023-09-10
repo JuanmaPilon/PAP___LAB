@@ -102,13 +102,13 @@
                   <Component id="txtapellido" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="spndia" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="spnmes" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="spnanio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -181,6 +181,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aceptarModificarTuristaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cancelarModificarTurista">
       <Properties>
