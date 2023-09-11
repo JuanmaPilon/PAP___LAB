@@ -200,23 +200,14 @@ public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
 
     private void BotonVerActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVerActividadesActionPerformed
         String departamentoSeleccionado = (String) cmboBoxDep.getSelectedItem();
-        System.out.println(departamentoSeleccionado);
         List<DTActividad> actividades = control.encontraSalidasTuristicasDepartamento(departamentoSeleccionado);
 
         ListaActividades listaActividadesFrame = new ListaActividades();
-
         listaActividadesFrame.crearListaActividades(actividades);
-
-        Principal p = new Principal();
-        // Obtén el JDesktopPane desde tu ventana principal
-        JDesktopPane desktopPane = p.obtenerJDesktopPane();
-
-        // Agrega el JInternalFrame al JDesktopPane
-        desktopPane.add(listaActividadesFrame);
-        listaActividadesFrame.toFront();
-        // Establece la visibilidad del JInternalFrame en true
-        listaActividadesFrame.setVisible(true);
-
+        getParent().add(listaActividadesFrame);
+        listaActividadesFrame.show();
+         
+        
     }//GEN-LAST:event_BotonVerActividadesActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
