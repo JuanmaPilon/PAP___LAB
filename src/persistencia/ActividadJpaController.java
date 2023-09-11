@@ -191,7 +191,7 @@ public class ActividadJpaController implements Serializable {
     
     public List<String> findByDepartamento(String departamento) { 
         EntityManager em = getEntityManager();
-        String query = "SELECT listaActTur_NOMBRE FROM departamento_actividad WHERE Departamento_NOMBRE LIKE '%"+departamento+"%'";
+        String query = "SELECT NOMBRE FROM actividad WHERE DEPARTAMENTO_NOMBRE LIKE '%"+departamento+"%'";
 	@SuppressWarnings("unchecked")
 	List<String> r = (List<String>) em.createNativeQuery(query).getResultList();
         return r;

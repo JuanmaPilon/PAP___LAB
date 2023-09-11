@@ -70,7 +70,8 @@ public class Controlador implements IControlador{
    
    Departamento dep = new Departamento();//creo dep auxiliar
    dep = controlPersis.traerDepartamento(nombreDepartamento);// encuentro el departamento y lo cargo en dep
-   actividad.setDepartamento(dep);// hago que mi actividad apunte al departamento que me traje
+  // dep.getListaActTur().add(actividad);
+   actividad.setDepartamento(controlPersis.traerDepartamento(nombreDepartamento));// hago que mi actividad apunte al departamento que me traje
    //idem con proveedor
    Proveedor pro = new Proveedor();
    pro = controlPersis.traerProveedor(nombreProveedor);
@@ -263,10 +264,21 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
         
         controlPersis.modificarTurista(t);
     }
-   
-    public List<DTActividad> encontraSalidasTuristicasDepartamento(String departamentoSeleccionado){
+    
+    @Override
+    public List<String> findSalidasTuristicasDepartamento(String departamentoSeleccionado) {
+        return controlPersis.findSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
+    }
+    @Override
+    public List<DTActividad> encontraSalidasTuristicasDepartamento(String departamentoSeleccionado) {
         return controlPersis.encontraSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
     }
    
+    @Override
+     public void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada){
+         controlPersis.asignarActividadPaquetePersis(paqueteSeleccionado, actividadSeleccionada);
+     }
+    
+    
 }
 

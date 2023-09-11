@@ -309,10 +309,24 @@ public ArrayList<DTUsuario> traerUsuarios(){
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
-        
+    public List<String> findSalidasTuristicasDepartamentoPersis(String departamentoSeleccionado) {
+        return actividadJpa.findByDepartamento(departamentoSeleccionado);
+    }
+   
     public List<DTActividad> encontraSalidasTuristicasDepartamentoPersis(String departamentoSeleccionado){
          return actividadJpa.findActividadByDepartamento(departamentoSeleccionado);
+     }
+    
+     public void asignarActividadPaquetePersis(String paqueteSeleccionado,String actividadSeleccionada){
+     Paquete paquete = paqueteJpa.findPaquete(paqueteSeleccionado);
+     Actividad actividad = actividadJpa.findActividad(actividadSeleccionada);
+     
+     paquete.getListaActividades().add(actividad);
+        try {
+            paqueteJpa.edit(paquete);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
      }
     
 }

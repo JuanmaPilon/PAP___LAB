@@ -38,5 +38,9 @@ public abstract List consultaPaquetes();
     public ArrayList<DTUsuario> traerUsuarioMod();
     public DTTurista traerDTTurista(String nickname);
     public DTProveedor traerDTProveedor(String nickname);
+public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada);
+public abstract List findSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae lista de strings con los nombres de las actividades asociadas a un depto att:carlangas
+
+public abstract List encontraSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
 
 }

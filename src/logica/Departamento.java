@@ -13,7 +13,7 @@ public class Departamento implements Serializable {
     private String nombre;
     private String descripcion;
     private String url;
-    @OneToMany
+    @OneToMany(mappedBy="departamento")
     private ArrayList<Actividad> listaActTur;
 
     public Departamento() {

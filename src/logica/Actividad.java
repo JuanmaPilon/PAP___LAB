@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,8 +28,10 @@ public class Actividad implements Serializable {
     @ManyToMany
     private ArrayList<Paquete> listaPaquete;
     @ManyToOne
+    @JoinColumn(name="DEPARTAMENTO_NOMBRE")
     private Departamento departamento;
     @ManyToOne
+    @JoinColumn(name="PROVEEDOR_NICKNAME")
     private Proveedor proveedor; 
 
     public Actividad() {

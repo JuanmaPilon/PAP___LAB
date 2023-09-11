@@ -4,7 +4,10 @@
  */
 package presentacion;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.List;
 import logica.Controlador;
 /**
  *
@@ -12,11 +15,13 @@ import logica.Controlador;
  */
 public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame {
     Controlador control = Controlador.getInstance();
+    
     /**
      * Creates new form AgregarActividadTuristicaPaquete
      */
     public AgregarActividadTuristicaPaquete() {
         initComponents();
+       
     }
 
     /**
@@ -52,12 +57,23 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
         jLabel2.setText("Seleccionar departamento:");
 
         departamentoAgregarActividadPaquete.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista departamentos" }));
+        departamentoAgregarActividadPaquete.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                departamentoAgregarActividadPaqueteItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setText("Agregar actividad turistica:");
 
         paqueteAgregarActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turisticas" }));
+        paqueteAgregarActividadTuristica.setSelectedIndex(-1);
 
         aceptarAgregarActividadPaquete.setText("Aceptar");
+        aceptarAgregarActividadPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarAgregarActividadPaqueteActionPerformed(evt);
+            }
+        });
 
         cancelarAgregarActividadPaquete.setText("Limpiar");
         cancelarAgregarActividadPaquete.addActionListener(new java.awt.event.ActionListener() {
@@ -131,11 +147,6 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
         for (int i = 0; i < nicks.size(); i++) {
             departamentoAgregarActividadPaquete.addItem(nicks.get(i));
         }
-         paqueteAgregarActividadTuristica.removeAllItems();
-        ArrayList<String> nombres = control.listaActividades();
-        for (int i = 0; i < nicks.size(); i++) {
-            paqueteAgregarActividadTuristica.addItem(nombres.get(i));
-        }
     }//GEN-LAST:event_formComponentShown
 
     private void limpiarAgregarActividadPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarAgregarActividadPaqueteActionPerformed
@@ -143,6 +154,30 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
         departamentoAgregarActividadPaquete.setSelectedIndex(-1);
         paqueteAgregarActividadTuristica.setSelectedIndex(-1);
     }//GEN-LAST:event_limpiarAgregarActividadPaqueteActionPerformed
+
+    private void departamentoAgregarActividadPaqueteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_departamentoAgregarActividadPaqueteItemStateChanged
+      
+    if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+        String departamentoSeleccionado = (String) departamentoAgregarActividadPaquete.getSelectedItem();
+        List<String> actividades = control.findSalidasTuristicasDepartamento(departamentoSeleccionado);
+
+           paqueteAgregarActividadTuristica.removeAllItems();
+           
+            for (String actividad : actividades) {
+                paqueteAgregarActividadTuristica.addItem(actividad);
+            }
+    
+}
+    }//GEN-LAST:event_departamentoAgregarActividadPaqueteItemStateChanged
+
+    private void aceptarAgregarActividadPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarAgregarActividadPaqueteActionPerformed
+    String paqueteSeleccionado = (String) paqueteAgregarActividadPaquete.getSelectedItem();
+    
+    String actividadSeleccionada = (String) paqueteAgregarActividadTuristica.getSelectedItem();
+    
+    control.asignarActividadPaquete(paqueteSeleccionado, actividadSeleccionada);
+    
+    }//GEN-LAST:event_aceptarAgregarActividadPaqueteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

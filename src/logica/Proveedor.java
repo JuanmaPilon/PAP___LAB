@@ -14,7 +14,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Proveedor extends Usuario implements Serializable {
     private String descripcion;
     private String link;
-    @OneToMany
+    @OneToMany(mappedBy="proveedor")
     private ArrayList<Actividad> listaActividades;  
 
     public Proveedor() {
