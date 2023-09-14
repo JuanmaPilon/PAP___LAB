@@ -4,13 +4,32 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import logica.Actividad;
+import logica.Controlador;
+import logica.Departamento;
+import logica.SalidaTuristica;
+import logica.Turista;
+
 /**
  *
  * @author Pc
  */
 public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
-
-    /**
+     Controlador control = Controlador.getInstance();
+     private ArrayList<Departamento> departamentos = null;
+     private ArrayList<Turista> turistas= null;
+     private ArrayList<SalidaTuristica> salidas;
+     private ArrayList<Actividad> actividades;
+     private DefaultTableModel tabla = new DefaultTableModel(){
+            //que filas y columnas no sean editables
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            };
+        };
+     /**
      * Creates new form InscripciónASalidaTurística
      */
     public InscripcionASalidaTuristica() {
@@ -26,173 +45,237 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbDepartamento = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbActividad = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        diaProveedor = new javax.swing.JSpinner();
-        lugarSalidaTuristica = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        scrFecha = new javax.swing.JSpinner();
+        txtCorreo = new javax.swing.JTextField();
+        cmbTurista = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        MaxCantTuristas = new javax.swing.JSpinner();
-        jLabel9 = new javax.swing.JLabel();
-        diaProveedor1 = new javax.swing.JSpinner();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        nicknameTurista3 = new javax.swing.JTextField();
+        txtNombreTurista = new javax.swing.JTextField();
         aceptarInscripcionSalida = new javax.swing.JButton();
         cancelarInscripcionSalida = new javax.swing.JButton();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaSalidas = new javax.swing.JTable();
 
+        setClosable(true);
         setTitle("Inscripción A Salida Turística");
         setPreferredSize(new java.awt.Dimension(900, 500));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDepartamento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbDepartamentoItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setText("Departamento");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbActividad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbActividadItemStateChanged(evt);
+            }
+        });
 
         jLabel8.setText("Actividades Turisticas");
 
         jLabel4.setText("Datos:");
 
-        diaProveedor.setModel(new javax.swing.SpinnerDateModel());
-        diaProveedor.setEnabled(false);
+        scrFecha.setModel(new javax.swing.SpinnerDateModel());
+        scrFecha.setEnabled(false);
 
-        lugarSalidaTuristica.setEditable(false);
+        txtCorreo.setEditable(false);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTurista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTurista.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTuristaItemStateChanged(evt);
+            }
+        });
 
-        jLabel5.setText("Turistas");
+        jLabel5.setText("Turista");
 
-        MaxCantTuristas.setModel(new javax.swing.SpinnerNumberModel(0, 0, 31, 1));
-
-        jLabel9.setText("Cant. de Turistas");
-
-        diaProveedor1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.WEEK_OF_MONTH));
-
-        jLabel10.setText("Fecha y Hora Insc.");
-
-        jLabel11.setText("Nombre Salida");
-
-        nicknameTurista3.setEditable(false);
+        txtNombreTurista.setEditable(false);
 
         aceptarInscripcionSalida.setText("Aceptar");
+        aceptarInscripcionSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarInscripcionSalidaActionPerformed(evt);
+            }
+        });
 
         cancelarInscripcionSalida.setText("Cancelar");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tablaSalidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaSalidas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(24, 24, 24)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(26, 26, 26)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(nicknameTurista3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel11)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(diaProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lugarSalidaTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(MaxCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(diaProveedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel3))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(aceptarInscripcionSalida)
-                        .addGap(81, 81, 81)
-                        .addComponent(cancelarInscripcionSalida)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(30, 30, 30)
+                                .addComponent(cmbTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addGap(26, 26, 26)
+                                .addComponent(txtNombreTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(scrFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(aceptarInscripcionSalida)
+                            .addComponent(cancelarInscripcionSalida))))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(cmbDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(nicknameTurista3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(diaProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lugarSalidaTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel9)
-                    .addComponent(MaxCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(diaProveedor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aceptarInscripcionSalida)
+                    .addComponent(cmbTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNombreTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aceptarInscripcionSalida))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelarInscripcionSalida))
-                .addContainerGap(299, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        cmbDepartamento.removeAllItems();
+        departamentos = control.listaDepartamentos();
+        for (int i = 0; i < departamentos.size();i++){
+            cmbDepartamento.addItem(departamentos.get(i).getNombre());
+        }
+        cmbTurista.removeAllItems();
+        turistas = control.listaTurista();
+        for (int i = 0; i < turistas.size();i++){
+            cmbTurista.addItem(turistas.get(i).getNickname());
+        }
+        setModeloTabla();
+    }//GEN-LAST:event_formComponentShown
+
+    private void cmbDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentoItemStateChanged
+        // TODO add your handling code here:
+        if (cmbDepartamento.getItemCount()>0){
+            cmbActividad.removeAllItems();
+            actividades = departamentos.get(cmbDepartamento.getSelectedIndex()).getListaActTur();
+            for (int i = 0; i < actividades.size();i++){
+                cmbActividad.addItem(actividades.get(i).getNombre());
+            }
+        }
+    }//GEN-LAST:event_cmbDepartamentoItemStateChanged
+    private void cargarSalidas(){
+        //carga de los datos desde la BD
+        salidas = actividades.get(cmbActividad.getSelectedIndex()).getListaSalidaTuristica();
+        tabla.setRowCount(0);
+        //recorrer la lista y mostrar cada elemento en la tabla
+        if (salidas != null){
+            for (SalidaTuristica s : salidas){
+                Object[] objeto = {s.getNombre(), s.getCantMax(), s.getfAlta(), s.getfSalida(), s.getLugar()};
+                if (objeto !=null)
+                tabla.addRow(objeto);   
+            }
+        }
+        
+    }
+    private void cmbTuristaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTuristaItemStateChanged
+        // TODO add your handling code here:
+        
+        if(cmbTurista.getItemCount()>0){
+            txtNombreTurista.setText(turistas.get(cmbTurista.getSelectedIndex()).getNombre());
+            txtCorreo.setText(turistas.get(cmbTurista.getSelectedIndex()).getCorreo());
+            scrFecha.setValue(turistas.get(cmbTurista.getSelectedIndex()).getfNacimiento());
+        }
+    }//GEN-LAST:event_cmbTuristaItemStateChanged
+
+    private void cmbActividadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbActividadItemStateChanged
+        // TODO add your handling code here:
+        if(cmbActividad.getItemCount()>0)
+            cargarSalidas();
+        
+    }//GEN-LAST:event_cmbActividadItemStateChanged
+
+    private void aceptarInscripcionSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarInscripcionSalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aceptarInscripcionSalidaActionPerformed
+    private void setModeloTabla(){   
+        //establecemos los nombres de las columnas
+        String titulos[] = {"Nombre", "Capacidad", "Fecha Alta", "Fecha Salida", "Lugar"};
+        
+        tabla.setColumnIdentifiers(titulos);
+        tablaSalidas.setModel(tabla);
+    };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSpinner MaxCantTuristas;
     private javax.swing.JButton aceptarInscripcionSalida;
     private javax.swing.JButton cancelarInscripcionSalida;
-    private javax.swing.JSpinner diaProveedor;
-    private javax.swing.JSpinner diaProveedor1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JComboBox<String> cmbActividad;
+    private javax.swing.JComboBox<String> cmbDepartamento;
+    private javax.swing.JComboBox<String> cmbTurista;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField lugarSalidaTuristica;
-    private javax.swing.JTextField nicknameTurista3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner scrFecha;
+    private javax.swing.JTable tablaSalidas;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtNombreTurista;
     // End of variables declaration//GEN-END:variables
 }

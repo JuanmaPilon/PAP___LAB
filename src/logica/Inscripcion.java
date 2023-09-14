@@ -1,9 +1,27 @@
 
 package logica;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Inscripcion {
+@Entity
+public class Inscripcion implements Serializable{ 
+    @Id @GeneratedValue
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name="TURISTA_NICKNAME")
+    private Turista turista;
+    @ManyToOne
+    @JoinColumn(name="SALIDA_NOMBRE")
+    private SalidaTuristica salida;
+    @Temporal(TemporalType.DATE)
     private Date fInscripcion;
     private int cantTurista;
     private float costo;
@@ -11,10 +29,29 @@ public class Inscripcion {
     public Inscripcion() {
     }
 
-    public Inscripcion(Date fInscripcion, int cantTurista, float costo) {
+    public Inscripcion(Long id, Turista turista, SalidaTuristica salida, Date fInscripcion, int cantTurista, float costo) {
+        this.id = id;
+        this.turista = turista;
+        this.salida = salida;
         this.fInscripcion = fInscripcion;
         this.cantTurista = cantTurista;
         this.costo = costo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Turista getTurista() {
+        return turista;
+    }
+
+    public SalidaTuristica getSalida() {
+        return salida;
+    }
+
+    public Date getfInscripcion() {
+        return fInscripcion;
     }
 
     public int getCantTurista() {
@@ -25,8 +62,20 @@ public class Inscripcion {
         return costo;
     }
 
-    public Date getfInscripcion() {
-        return fInscripcion;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTurista(Turista turista) {
+        this.turista = turista;
+    }
+
+    public void setSalida(SalidaTuristica salida) {
+        this.salida = salida;
+    }
+
+    public void setfInscripcion(Date fInscripcion) {
+        this.fInscripcion = fInscripcion;
     }
 
     public void setCantTurista(int cantTurista) {
@@ -37,9 +86,5 @@ public class Inscripcion {
         this.costo = costo;
     }
 
-    public void setfInscripcion(Date fInscripcion) {
-        this.fInscripcion = fInscripcion;
-    }
-    
     
 }

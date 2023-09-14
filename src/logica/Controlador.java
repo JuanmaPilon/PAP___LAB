@@ -284,6 +284,9 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
          controlPersis.asignarActividadPaquetePersis(paqueteSeleccionado, actividadSeleccionada);
      }
     
-    
+    @Override
+    public ArrayList<Turista> listaTurista(){
+        return controlPersis.listaTuristas();
+    }
 }
 

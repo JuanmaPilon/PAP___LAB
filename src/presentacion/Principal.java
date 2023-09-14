@@ -135,6 +135,11 @@ public class Principal extends javax.swing.JFrame {
         menuAltas.add(altaSalidaTuristica);
 
         altaInscripcionSalidaTuristica.setText("Inscripcion Salida Turistica");
+        altaInscripcionSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaInscripcionSalidaTuristicaActionPerformed(evt);
+            }
+        });
         menuAltas.add(altaInscripcionSalidaTuristica);
 
         altaCrearPaquete.setText("Crear Paquete");
@@ -300,6 +305,13 @@ public class Principal extends javax.swing.JFrame {
         contenedorPrincipal.add(verListaUsuarios);
         verListaUsuarios.show();
     }//GEN-LAST:event_modUsuarioActionPerformed
+
+    private void altaInscripcionSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaInscripcionSalidaTuristicaActionPerformed
+        // TODO add your handling code here:
+        InscripcionASalidaTuristica verIns = new InscripcionASalidaTuristica();
+        contenedorPrincipal.add(verIns);
+        verIns.show();
+    }//GEN-LAST:event_altaInscripcionSalidaTuristicaActionPerformed
 
        public JDesktopPane obtenerJDesktopPane() {
       //  System.out.print("funcion obtener");

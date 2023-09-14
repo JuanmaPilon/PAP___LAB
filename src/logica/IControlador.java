@@ -42,5 +42,5 @@ public abstract void asignarActividadPaquete(String paqueteSeleccionado,String a
 public abstract List findSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae lista de strings con los nombres de las actividades asociadas a un depto att:carlangas
 
 public abstract ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
-
+public abstract ArrayList<Turista> listaTurista();
 }

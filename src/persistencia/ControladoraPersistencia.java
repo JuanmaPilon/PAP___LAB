@@ -26,7 +26,7 @@ public class ControladoraPersistencia {
     DepartamentoJpaController departamentoJpa = new DepartamentoJpaController();
     TuristaJpaController turistaJpa = new TuristaJpaController();
     ProveedorJpaController proveedorJpa = new ProveedorJpaController();
-    
+    InscripcionJpaController inscripcionJpa = new InscripcionJpaController();
     
     //Consultas
     public SalidaTuristica consultaSalida(String nombreSalida){
@@ -349,6 +349,17 @@ public ArrayList<DTUsuario> traerUsuarios(){
         }
      }
     
-
+     public ArrayList<Turista> listaTuristas(){
+         ArrayList<Turista> turista= new ArrayList();
+        try {
+        List<Turista> turistas = turistaJpa.findTuristaEntities();
+            for (Turista t : turistas) {
+                turista.add(t);
+            }
+        }catch(Exception ex){
+                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return turista;
+     }
      
 }

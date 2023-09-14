@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
@@ -14,8 +15,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Turista extends Usuario implements Serializable {
     private String nacionalidad;
     private ArrayList<Compra> listaCompras;
+    @OneToMany(mappedBy="turista")
     private ArrayList<Inscripcion> listaInscripcion;
-
     public Turista(){
     super();
     }
