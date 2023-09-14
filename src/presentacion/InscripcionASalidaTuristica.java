@@ -84,6 +84,11 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                 cmbActividadItemStateChanged(evt);
             }
         });
+        cmbActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbActividadActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Actividades Turisticas");
 
@@ -160,10 +165,10 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(jScrollPane1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(aceptarInscripcionSalida)
-                            .addComponent(cancelarInscripcionSalida))))
-                .addContainerGap(88, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cancelarInscripcionSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(aceptarInscripcionSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,13 +188,15 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtNombreTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scrFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(aceptarInscripcionSalida))
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelarInscripcionSalida))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(aceptarInscripcionSalida)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelarInscripcionSalida)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -208,6 +215,8 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
             cmbTurista.addItem(turistas.get(i).getNickname());
         }
         setModeloTabla();
+        if(cmbActividad.getItemCount()>0)
+            cargarSalidas();
     }//GEN-LAST:event_formComponentShown
 
     private void cmbDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentoItemStateChanged
@@ -254,6 +263,10 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
     private void aceptarInscripcionSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarInscripcionSalidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aceptarInscripcionSalidaActionPerformed
+
+    private void cmbActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbActividadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbActividadActionPerformed
     private void setModeloTabla(){   
         //establecemos los nombres de las columnas
         String titulos[] = {"Nombre", "Capacidad", "Fecha Alta", "Fecha Salida", "Lugar"};
