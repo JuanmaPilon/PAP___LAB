@@ -2,6 +2,9 @@ package presentacion;
 
 //import logica.Fabrica;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 
 //import logica.IControlador;
@@ -35,8 +38,16 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         contenedorPrincipal = new javax.swing.JDesktopPane();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/presentacion/mano.png"));
+        Image image =icon.getImage();
+        jDesktopPane1 = new javax.swing.JDesktopPane(){
+
+            public void paintComponent(Graphics g){
+
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            }
+
+        };
         barraMenuPrincipal = new javax.swing.JMenuBar();
         menuAltas = new javax.swing.JMenu();
         Usuario = new javax.swing.JMenu();
@@ -61,19 +72,15 @@ public class Principal extends javax.swing.JFrame {
 
         contenedorPrincipal.setName(""); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/mano.png"))); // NOI18N
-
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 873, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
 
         contenedorPrincipal.setLayer(jDesktopPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -283,7 +290,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_consSalidaTuristicaActionPerformed
 
     private void altaSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaSalidaTuristicaActionPerformed
-        AltaDeSalidaTuristica verAltaSalidaTuristica = new AltaDeSalidaTuristica();
+        ListaActividadPorDepto verAltaSalidaTuristica = new ListaActividadPorDepto();
         contenedorPrincipal.add(verAltaSalidaTuristica);
         verAltaSalidaTuristica.show();
     }//GEN-LAST:event_altaSalidaTuristicaActionPerformed
@@ -320,7 +327,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consUsuario;
     private javax.swing.JDesktopPane contenedorPrincipal;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu menuAltas;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuModificar;

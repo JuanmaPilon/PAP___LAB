@@ -33,7 +33,7 @@ public abstract List consultaPaquetes();
    
 
    public abstract List<String> llenarCmboBoxDep();
-   public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar);
+   public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad);
    public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento);
     public ArrayList<DTUsuario> traerUsuarioMod();
     public DTTurista traerDTTurista(String nickname);
@@ -41,6 +41,6 @@ public abstract List consultaPaquetes();
 public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada);
 public abstract List findSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae lista de strings con los nombres de las actividades asociadas a un depto att:carlangas
 
-public abstract List encontraSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
+public abstract ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
 
 }

@@ -35,6 +35,7 @@ public class ControladoraPersistencia {
     public Actividad consultaActividad(String nombreActividad){
       return   actividadJpa.findActividad(nombreActividad);
     };
+    
     public ArrayList<String> listaSalActividadTuristica(String actividad){
        ArrayList<String> salidas = new ArrayList();
        List<String> salida = salidaTuristicaJpa.findByActividad(actividad);
@@ -43,6 +44,7 @@ public class ControladoraPersistencia {
        }
        return salidas; 
     };
+    
     public ArrayList<Departamento> listaDepartamentos(){
         ArrayList<Departamento> departamentos = new ArrayList();
         try {
@@ -266,9 +268,10 @@ public ArrayList<DTUsuario> traerUsuarios(){
         return departamentoJpa.obtenerNombresDepartamentos();
     }
     
-     public void guardarSalidaTuristica(SalidaTuristica salidaTuristica){
+     public void guardarSalidaTuristica(SalidaTuristica salidaTuristica, Actividad actividad){
        try{
         salidaTuristicaJpa.create(salidaTuristica);
+        actividadJpa.edit(actividad);
         JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
        }catch (Exception ex){
            JOptionPane.showMessageDialog(null, "El nombre ya esta ocupado por otra salida turistica", "Error", JOptionPane.ERROR_MESSAGE);
@@ -313,8 +316,25 @@ public ArrayList<DTUsuario> traerUsuarios(){
         return actividadJpa.findByDepartamento(departamentoSeleccionado);
     }
    
-    public List<DTActividad> encontraSalidasTuristicasDepartamentoPersis(String departamentoSeleccionado){
-         return actividadJpa.findActividadByDepartamento(departamentoSeleccionado);
+    public ArrayList<DTActividad> encontraActividadDepartamentoPersis(String departamentoSeleccionado){
+         
+         ArrayList<DTActividad> listaDTActividad = new ArrayList();
+    
+    try {
+        List<Actividad> actividades = actividadJpa.findActividadEntities();
+        for (Actividad a : actividades) {
+            if (a.getDepartamento().getNombre().equals(departamentoSeleccionado)){
+                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), 
+                    a.getCosto(), a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname() );
+                listaDTActividad.add(dtactividad);
+            }    
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        return listaDTActividad;
+      
      }
     
      public void asignarActividadPaquetePersis(String paqueteSeleccionado,String actividadSeleccionada){
@@ -329,4 +349,6 @@ public ArrayList<DTUsuario> traerUsuarios(){
         }
      }
     
+
+     
 }

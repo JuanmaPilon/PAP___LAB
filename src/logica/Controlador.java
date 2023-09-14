@@ -10,7 +10,7 @@ import java.util.List;
 import persistencia.ControladoraPersistencia;
 
 public class Controlador implements IControlador{
-    private Controlador() {}
+    public Controlador() {}
     private static Controlador control;
     public static Controlador getInstance(){
     if (control == null){
@@ -83,14 +83,18 @@ public class Controlador implements IControlador{
    }
    
    @Override
-   public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) {
+   public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) {
        SalidaTuristica salidaTuristica = new SalidaTuristica();
         salidaTuristica.setNombre(nombre);
         salidaTuristica.setCantMax(cantMax);
         salidaTuristica.setfAlta(fAlta);
         salidaTuristica.setfSalida(fSalida);
         salidaTuristica.setLugar(lugar);
-        controlPersis.guardarSalidaTuristica(salidaTuristica);
+        
+        Actividad actividad = ConsultaActividadTuristica(nombreActividad);
+        actividad.getListaSalidaTuristica().add(salidaTuristica);
+        
+        controlPersis.guardarSalidaTuristica(salidaTuristica, actividad);
     }
 ////////////
    @Override
@@ -134,6 +138,7 @@ public class Controlador implements IControlador{
    public Usuario ConsultaDeUsuario(String nickname){
        return controlPersis.consultaUsuario(nickname);
    };
+   
    
    @Override
    public Actividad ConsultaActividadTuristica(String nombreActividad){
@@ -270,8 +275,8 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
         return controlPersis.findSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
     }
     @Override
-    public List<DTActividad> encontraSalidasTuristicasDepartamento(String departamentoSeleccionado) {
-        return controlPersis.encontraSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
+    public ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado) {
+        return controlPersis.encontraActividadDepartamentoPersis(departamentoSeleccionado);
     }
    
     @Override
