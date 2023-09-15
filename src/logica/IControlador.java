@@ -25,7 +25,7 @@ public abstract List consultaPaquetes();
 //    public abstract void AltaDeSalidaTuristica();
  public abstract SalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
 //    public abstract void InscripcionDeSalidaTuristica();
- public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, String altaDePaquete, int descuentoDePaquete);
+ public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete);
 //    public abstract void AgregarActividadTuristicaAPaquete();
 //    public abstract void ConsultaDePaqueteDeActividadTuristicas();
 

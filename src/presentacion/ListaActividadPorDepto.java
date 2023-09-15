@@ -241,7 +241,7 @@ public class ListaActividadPorDepto extends javax.swing.JInternalFrame {
         ArrayList<DTActividad> listaActividad = control.encontraActividadDepartamento(nombreDepto);
         // Llenar la tabla con la lista de actividades
         for (DTActividad actividad : listaActividad) {
-            Object[] fila = {actividad.getNombre(), actividad.getCiudad(), actividad.getCosto(), actividad.getDescripcion(), actividad.getDuracion(),
+            Object[] fila = {actividad.getNombre(),actividad.getDescripcion(),actividad.getDuracion(), actividad.getCosto(),  actividad.getCiudad(),
                     actividad.getfAlta(), actividad.getNombreProveedor()}; // Ajusta esto según las propiedades de DTActividad
 
             tabla.addRow(fila);

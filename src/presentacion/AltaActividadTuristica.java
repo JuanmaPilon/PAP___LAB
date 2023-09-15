@@ -81,7 +81,7 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
 
         ciudadActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Montevideo", "Canelones", "Maldonado", "Rocha", "Colonia", "Soriano", "Rio Negro", "Paysandu", "Salto", "Artigas", "Rivera", "Tacuarembo", "Durazno", "Florida", "Lavalleja", "Treinta y Tres", "Cerro Largo" }));
 
-        diaAltaActividadTuristica.setModel(new javax.swing.SpinnerNumberModel(0, 0, 310, 1));
+        diaAltaActividadTuristica.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
         mesAltaActividadTuristica.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
@@ -225,8 +225,8 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
     private void cancelarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarAltaActividadTuristicaActionPerformed
        duracionActividadTuristica.setText("");
        descripcionActividadTuristica.setText("");
-       diaAltaActividadTuristica.setValue(0);
-       mesAltaActividadTuristica.setValue(0);
+       diaAltaActividadTuristica.setValue(1);
+       mesAltaActividadTuristica.setValue(1);
        anioAltaActividadTuristica.setValue(1900);
        nombreActividadTuristica.setText("");
        proveedorActividadTuristica.setSelectedIndex(-1);

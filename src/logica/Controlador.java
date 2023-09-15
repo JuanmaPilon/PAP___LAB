@@ -196,20 +196,13 @@ public class Controlador implements IControlador{
 
 
 @Override 
-public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, String altaDePaquete, int descuentoDePaquete) {
+public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) {
     Paquete paquete = new Paquete();
     paquete.setNombre(nombreDePaquete);
     paquete.setDescripcion(descripcionDePaquete);
     paquete.setValidez(validezDePaquete);
     paquete.setDescuento(descuentoDePaquete);
-
-    try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Ajusta el formato según tus necesidades
-        Date fechaAlta = dateFormat.parse(altaDePaquete);
-        paquete.setFechaAlta(fechaAlta);//le seteo fechaAlta al paquete
-    } catch (ParseException e) { //excepción si el formato del String no es válido
-        throw new IllegalArgumentException("Ingrese la fecha en este formato dd/MM/yyyy", e);
-    }
+    paquete.setFechaAlta(altaDePaquete);//le seteo fechaAlta al paquete
 
     controlPersis.guardarPaqueteActividadTuristica(paquete);
 }

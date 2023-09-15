@@ -122,7 +122,7 @@ public class AltaDepartamento extends javax.swing.JInternalFrame {
         //NO paso OBJETOS!
         control.AltaDeDepartamento(nombre, descripcion, url);
         
-        JOptionPane optionPane = new JOptionPane("se guardó correctamente");
+        JOptionPane optionPane = new JOptionPane("El departamento se guardo correctamente");
         optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = optionPane.createDialog("Guardado exitoso");
         dialog.setAlwaysOnTop(true);
