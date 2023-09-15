@@ -4,11 +4,16 @@
  */
 package presentacion;
 
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Actividad;
 import logica.Controlador;
 import logica.Departamento;
+import logica.Inscripcion;
 import logica.SalidaTuristica;
 import logica.Turista;
 
@@ -45,6 +50,7 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmbmes = new javax.swing.JSpinner();
         cmbDepartamento = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         cmbActividad = new javax.swing.JComboBox<>();
@@ -59,6 +65,16 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
         cancelarInscripcionSalida = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSalidas = new javax.swing.JTable();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        cmbDia = new javax.swing.JSpinner();
+        cmbMes = new javax.swing.JSpinner();
+        cmbAnio = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+
+        cmbmes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
         setClosable(true);
         setTitle("Inscripción A Salida Turística");
@@ -132,6 +148,20 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tablaSalidas);
 
+        jLabel1.setText("Cantidad");
+
+        cmbDia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+
+        cmbMes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        cmbAnio.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2023, 1));
+
+        jLabel6.setText("Año:");
+
+        jLabel7.setText("Mes:");
+
+        jLabel9.setText("Dia:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,7 +178,7 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                             .addComponent(cmbDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(30, 30, 30)
@@ -160,15 +190,22 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(scrFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane1)))
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cancelarInscripcionSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(aceptarInscripcionSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cancelarInscripcionSalida, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                .addComponent(aceptarInscripcionSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addComponent(txtCantidad)
+                                .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,20 +227,34 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                     .addComponent(scrFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(aceptarInscripcionSalida)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelarInscripcionSalida)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(cancelarInscripcionSalida))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
+    private void cargar(){
         cmbDepartamento.removeAllItems();
         departamentos = control.listaDepartamentos();
         for (int i = 0; i < departamentos.size();i++){
@@ -217,6 +268,10 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
         setModeloTabla();
         if(cmbActividad.getItemCount()>0)
             cargarSalidas();
+    };
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        cargar();
     }//GEN-LAST:event_formComponentShown
 
     private void cmbDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentoItemStateChanged
@@ -259,9 +314,52 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
             cargarSalidas();
         
     }//GEN-LAST:event_cmbActividadItemStateChanged
-
+    private int comprobarActividad(SalidaTuristica salida, Turista turista){
+        int resultado = 0;
+        int cantTotal = 0;
+        for (Inscripcion i: salida.getListaInscripciones()){
+            cantTotal=cantTotal + i.getCantTurista();
+            if((cantTotal>=salida.getCantMax())){
+                resultado = 1;
+                break;
+            } else if(((i.getTurista().getNickname().equals(turista.getNickname())) && (i.getSalida().getNombre().equals(salida.getNombre())))) {
+                resultado = 2;
+                break;
+            }
+        }        
+        return resultado;
+    }
     private void aceptarInscripcionSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarInscripcionSalidaActionPerformed
         // TODO add your handling code here:
+        SalidaTuristica salida = control.ConsultaSalidaTuristica(String.valueOf(tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(), 0)));
+        int comprobacion = comprobarActividad(salida,turistas.get(cmbTurista.getSelectedIndex()));
+         switch (comprobacion) {
+             case 0:
+                 JOptionPane.showMessageDialog(null, "Inscripcion realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                 Inscripcion insc = new Inscripcion();
+                 insc.setCantTurista(parseInt(txtCantidad.getText()));
+                 insc.setSalida(salida);
+                 insc.setTurista(turistas.get(cmbTurista.getSelectedIndex()));
+                //seteo de fecha
+                    int dia = (int) cmbDia.getValue();
+                    int mes = (int) cmbMes.getValue();
+                    int anio = (int) cmbAnio.getValue();
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
+                    Date fecha = calendar.getTime();
+                //end seteo  de fecha
+                  insc.setfInscripcion(fecha);
+                  insc.setCosto(salida.getActividad().getCosto()*insc.getCantTurista());
+                  control.AltaInscripcion(insc);
+                 break;
+             case 1:
+                 JOptionPane.showMessageDialog(null, "Error al realizar la inscripcion la cantidad supera el maximo", "Error", JOptionPane.ERROR_MESSAGE);
+                 break;
+             case 2:
+                 JOptionPane.showMessageDialog(null, "Error al realizar la inscripcion datos replicados turista/salida", "Error", JOptionPane.ERROR_MESSAGE);
+                 break;
+         }
+         cargar();
     }//GEN-LAST:event_aceptarInscripcionSalidaActionPerformed
 
     private void cmbActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbActividadActionPerformed
@@ -279,15 +377,24 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
     private javax.swing.JButton aceptarInscripcionSalida;
     private javax.swing.JButton cancelarInscripcionSalida;
     private javax.swing.JComboBox<String> cmbActividad;
+    private javax.swing.JSpinner cmbAnio;
     private javax.swing.JComboBox<String> cmbDepartamento;
+    private javax.swing.JSpinner cmbDia;
+    private javax.swing.JSpinner cmbMes;
     private javax.swing.JComboBox<String> cmbTurista;
+    private javax.swing.JSpinner cmbmes;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner scrFecha;
     private javax.swing.JTable tablaSalidas;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombreTurista;
     // End of variables declaration//GEN-END:variables

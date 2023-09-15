@@ -92,6 +92,7 @@ public class Controlador implements IControlador{
         salidaTuristica.setLugar(lugar);
         
         Actividad actividad = ConsultaActividadTuristica(nombreActividad);
+        salidaTuristica.setActividad(actividad);
         actividad.getListaSalidaTuristica().add(salidaTuristica);
         
         controlPersis.guardarSalidaTuristica(salidaTuristica, actividad);
@@ -280,6 +281,11 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
     @Override
     public ArrayList<Turista> listaTurista(){
         return controlPersis.listaTuristas();
+    }
+    
+    @Override
+    public void AltaInscripcion(Inscripcion insc){
+        controlPersis.guardarInscripcion(insc);
     }
 }
 

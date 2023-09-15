@@ -23,7 +23,7 @@ public class Actividad implements Serializable {
     private String ciudad;
     @Temporal(TemporalType.DATE)
     private Date fAlta;
-    @OneToMany
+    @OneToMany(mappedBy="actividad")
     private ArrayList<SalidaTuristica> listaSalidaTuristica;
     @ManyToMany
     private ArrayList<Paquete> listaPaquete;

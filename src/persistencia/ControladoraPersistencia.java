@@ -11,6 +11,7 @@ import logica.Actividad;
 import logica.DTActividad;
 import logica.DTUsuario;
 import logica.Departamento;
+import logica.Inscripcion;
 import logica.Turista;
 import logica.Proveedor;
 import logica.Usuario;
@@ -263,7 +264,15 @@ public ArrayList<DTUsuario> traerUsuarios(){
        JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }
-    
+    public void guardarInscripcion(Inscripcion insc){
+        try{
+            insc.setTurista(turistaJpa.findTurista(insc.getTurista().getNickname()));
+            insc.setSalida(salidaTuristicaJpa.findSalidaTuristica(insc.getSalida().getNombre()));
+            inscripcionJpa.create(insc);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Error al conectar con base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     public List<String> llenarCmboBoxDepPersis(){
         return departamentoJpa.obtenerNombresDepartamentos();
     }
