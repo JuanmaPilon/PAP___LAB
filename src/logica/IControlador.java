@@ -44,4 +44,6 @@ public abstract List findSalidasTuristicasDepartamento(String departamentoSelecc
 public abstract ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
 public abstract ArrayList<Turista> listaTurista();
 public abstract void AltaInscripcion(Inscripcion insc);
+
+public abstract void cargarDatosDePrueba();
 }

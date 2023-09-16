@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import logica.Controlador;
 
 //import logica.IControlador;
 //import logica.Usuario;
@@ -20,10 +23,8 @@ import javax.swing.JDesktopPane;
  * @author natil
  */
 public class Principal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Principal
-     */
+    Controlador control = Controlador.getInstance();
+    boolean datosyacargados =false;
     public Principal() {
         initComponents();
     }
@@ -66,6 +67,8 @@ public class Principal extends javax.swing.JFrame {
         consPaquete = new javax.swing.JMenuItem();
         menuModificar = new javax.swing.JMenu();
         modUsuario = new javax.swing.JMenuItem();
+        cargarDatos = new javax.swing.JMenu();
+        mitemDatosPrueba = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" turismo.uy Grupo 4");
@@ -216,6 +219,18 @@ public class Principal extends javax.swing.JFrame {
 
         barraMenuPrincipal.add(menuModificar);
 
+        cargarDatos.setText("Cargar Datos");
+
+        mitemDatosPrueba.setText("Datos de prueba");
+        mitemDatosPrueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemDatosPruebaActionPerformed(evt);
+            }
+        });
+        cargarDatos.add(mitemDatosPrueba);
+
+        barraMenuPrincipal.add(cargarDatos);
+
         setJMenuBar(barraMenuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -313,6 +328,18 @@ public class Principal extends javax.swing.JFrame {
         verIns.show();
     }//GEN-LAST:event_altaInscripcionSalidaTuristicaActionPerformed
 
+    private void mitemDatosPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemDatosPruebaActionPerformed
+     
+        if (!datosyacargados){
+            control.cargarDatosDePrueba();
+            datosyacargados=true;
+            mostrsarMensaje("Datos de prueba cargados correctamente", "Info", "Carga exitosa");
+        }else{
+            mostrsarMensaje("Los datos de prueba ya fueron cargados", "Error", "Datos de prueba ya cargados");
+        }
+     
+    }//GEN-LAST:event_mitemDatosPruebaActionPerformed
+
        public JDesktopPane obtenerJDesktopPane() {
       //  System.out.print("funcion obtener");
     return contenedorPrincipal;
@@ -333,6 +360,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem altaUsuarioProveedor;
     private javax.swing.JMenuItem altaUsuarioTurista;
     private javax.swing.JMenuBar barraMenuPrincipal;
+    private javax.swing.JMenu cargarDatos;
     private javax.swing.JMenuItem consActividadTuristica;
     private javax.swing.JMenuItem consPaquete;
     private javax.swing.JMenuItem consSalidaTuristica;
@@ -342,6 +370,22 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menuAltas;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuModificar;
+    private javax.swing.JMenuItem mitemDatosPrueba;
     private javax.swing.JMenuItem modUsuario;
     // End of variables declaration//GEN-END:variables
+
+public void mostrsarMensaje(String mensaje, String tipo, String titulo){
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info")){
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        }else if (tipo.equals("Error")){
+            optionPane.setMessageType(JOptionPane.ERROR);
+        }
+        JDialog dialog = optionPane.createDialog(titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    
+    }
+
+
 }
