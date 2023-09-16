@@ -97,9 +97,13 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
 
         jLabel2.setText("nickname:");
 
+        nicknameProveedor.setEditable(false);
+
         jLabel13.setText("Descripcion:");
 
         jLabel14.setText("Nombre:");
+
+        descripcionProveedor.setEditable(false);
 
         jLabel15.setText("Apellido:");
 
@@ -107,9 +111,17 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
 
         jLabel17.setText("Fecha de nacimiento:");
 
+        nombreProveedor.setEditable(false);
+
+        apellidoProveedor.setEditable(false);
+
+        correoProveedor.setEditable(false);
+
         jLabel18.setText("Ofrece:");
 
         jLabel19.setText("URL:");
+
+        urlProveedor.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

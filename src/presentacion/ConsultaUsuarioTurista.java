@@ -75,15 +75,25 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
 
         jLabel2.setText("nickname:");
 
+        nicknameTurista.setEditable(false);
+
         jLabel13.setText("Nacionalidad:");
 
         jLabel14.setText("Nombre:");
+
+        nacionalidadTurista.setEditable(false);
 
         jLabel15.setText("Apellido:");
 
         jLabel16.setText("Correo electronico:");
 
         jLabel17.setText("Fecha de nacimiento:");
+
+        nombreTurista.setEditable(false);
+
+        apellidoTurista.setEditable(false);
+
+        correoTurista.setEditable(false);
 
         jLabel18.setText("Inscripciones:");
 

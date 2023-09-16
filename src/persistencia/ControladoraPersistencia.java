@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Actividad;
 import logica.DTActividad;
@@ -227,6 +228,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
         try {
             //crear Departamento en BD
             departamentoJpa.create(depto);
+             JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -353,6 +355,8 @@ public ArrayList<DTUsuario> traerUsuarios(){
      paquete.getListaActividades().add(actividad);
         try {
             paqueteJpa.edit(paquete);
+             JOptionPane.showMessageDialog(null, "Se agrego correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+      
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -222,6 +222,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nicknameProveedor">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
@@ -234,6 +237,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="descripcionProveedor">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>
@@ -251,10 +257,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nombreProveedor">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="apellidoProveedor">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="correoProveedor">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel18">
       <Properties>
@@ -267,6 +282,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="urlProveedor">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

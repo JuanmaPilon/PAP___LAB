@@ -172,6 +172,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nicknameTurista">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
@@ -184,6 +187,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nacionalidadTurista">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>
@@ -201,10 +207,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nombreTurista">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="apellidoTurista">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="correoTurista">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel18">
       <Properties>

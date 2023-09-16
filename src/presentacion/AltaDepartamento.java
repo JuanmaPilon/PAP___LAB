@@ -119,14 +119,7 @@ public class AltaDepartamento extends javax.swing.JInternalFrame {
         String descripcion = txtdescripcion.getText();
         String url = txturl.getText();
         
-        //NO paso OBJETOS!
         control.AltaDeDepartamento(nombre, descripcion, url);
-        
-        JOptionPane optionPane = new JOptionPane("El departamento se guardo correctamente");
-        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Guardado exitoso");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
