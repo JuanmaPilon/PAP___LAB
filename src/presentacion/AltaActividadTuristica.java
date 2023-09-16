@@ -45,12 +45,12 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
         descripcionActividadTuristica = new javax.swing.JTextField();
         duracionActividadTuristica = new javax.swing.JTextField();
         costoActividadTuristica = new javax.swing.JTextField();
-        ciudadActividadTuristica = new javax.swing.JComboBox<>();
         diaAltaActividadTuristica = new javax.swing.JSpinner();
         mesAltaActividadTuristica = new javax.swing.JSpinner();
         anioAltaActividadTuristica = new javax.swing.JSpinner();
         aceptarAltaActividadTuristica = new javax.swing.JButton();
         cancelarAltaActividadTuristica = new javax.swing.JButton();
+        ciudadActividadTuristica = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Alta de Actividad Turistica");
@@ -78,8 +78,6 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
         jLabel8.setText("Fecha de Alta:");
 
         proveedorActividadTuristica.setToolTipText("");
-
-        ciudadActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Montevideo", "Canelones", "Maldonado", "Rocha", "Colonia", "Soriano", "Rio Negro", "Paysandu", "Salto", "Artigas", "Rivera", "Tacuarembo", "Durazno", "Florida", "Lavalleja", "Treinta y Tres", "Cerro Largo" }));
 
         diaAltaActividadTuristica.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
@@ -135,7 +133,7 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(ciudadActividadTuristica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(ciudadActividadTuristica))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
@@ -150,7 +148,7 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
                                 .addComponent(mesAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(anioAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,11 +199,9 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
 
      
     private void aceptarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarAltaActividadTuristicaActionPerformed
-        //String nombreProveedor = (String) proveedorActividadTuristica.getSelectedItem();  
-        //String nombreDep = (String) departamentoActividadTuristica.getSelectedItem();  
         String nombreActividad = nombreActividadTuristica.getText();
         String descripcionActividad = descripcionActividadTuristica.getText();
-        String nombreCuidad = (String) ciudadActividadTuristica.getSelectedItem();
+        String nombreCuidad = (String) ciudadActividadTuristica.getText();
         String nombreProveedor = (String) proveedorActividadTuristica.getSelectedItem();
         String nombreDepartamento = (String) departamentoActividadTuristica.getSelectedItem();
         int duracionActividad = Integer.parseInt(duracionActividadTuristica.getText());
@@ -232,7 +228,7 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
        proveedorActividadTuristica.setSelectedIndex(-1);
        departamentoActividadTuristica.setSelectedIndex(-1);
        costoActividadTuristica.setText("");
-       ciudadActividadTuristica.setSelectedIndex(-1);
+       ciudadActividadTuristica.setText("");
        departamentoActividadTuristica.setSelectedIndex(-1);
     }//GEN-LAST:event_cancelarAltaActividadTuristicaActionPerformed
 
@@ -256,7 +252,7 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
     private javax.swing.JButton aceptarAltaActividadTuristica;
     private javax.swing.JSpinner anioAltaActividadTuristica;
     private javax.swing.JButton cancelarAltaActividadTuristica;
-    private javax.swing.JComboBox<String> ciudadActividadTuristica;
+    private javax.swing.JTextField ciudadActividadTuristica;
     private javax.swing.JTextField costoActividadTuristica;
     private javax.swing.JComboBox<String> departamentoActividadTuristica;
     private javax.swing.JTextField descripcionActividadTuristica;

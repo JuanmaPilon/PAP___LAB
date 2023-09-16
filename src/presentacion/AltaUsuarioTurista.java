@@ -74,12 +74,6 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha de nacimiento:");
 
-        txtnombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombreActionPerformed(evt);
-            }
-        });
-
         cmbdia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
         cmbmes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
@@ -226,10 +220,6 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
     cmbmes.setValue(1);
     cmbanio.setValue(1900);
     }//GEN-LAST:event_btnlimpiarActionPerformed
-
-    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreActionPerformed
 
 
 

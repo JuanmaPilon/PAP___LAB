@@ -84,7 +84,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="149" max="32767" attributes="0"/>
+              <EmptySpace pref="142" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -213,34 +213,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="costoActividadTuristica">
     </Component>
-    <Component class="javax.swing.JComboBox" name="ciudadActividadTuristica">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="17">
-            <StringItem index="0" value="Montevideo"/>
-            <StringItem index="1" value="Canelones"/>
-            <StringItem index="2" value="Maldonado"/>
-            <StringItem index="3" value="Rocha"/>
-            <StringItem index="4" value="Colonia"/>
-            <StringItem index="5" value="Soriano"/>
-            <StringItem index="6" value="Rio Negro"/>
-            <StringItem index="7" value="Paysandu"/>
-            <StringItem index="8" value="Salto"/>
-            <StringItem index="9" value="Artigas"/>
-            <StringItem index="10" value="Rivera"/>
-            <StringItem index="11" value="Tacuarembo"/>
-            <StringItem index="12" value="Durazno"/>
-            <StringItem index="13" value="Florida"/>
-            <StringItem index="14" value="Lavalleja"/>
-            <StringItem index="15" value="Treinta y Tres"/>
-            <StringItem index="16" value="Cerro Largo"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JSpinner" name="diaAltaActividadTuristica">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
@@ -277,6 +249,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarAltaActividadTuristicaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ciudadActividadTuristica">
     </Component>
   </SubComponents>
 </Form>

@@ -36,13 +36,13 @@ public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
         btnConsultar = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
+        setClosable(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
             }
         });
 
-        cmbListaUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbListaUsuarios.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 cmbListaUsuariosComponentShown(evt);
@@ -126,8 +126,7 @@ public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formComponentShown
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
 
