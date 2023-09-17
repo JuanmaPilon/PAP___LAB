@@ -16,7 +16,6 @@
 - Ant
 - Swing
 - JPA (MySQL Connector 8.0.30)
-- Docker
 
 ### Fechas limites:
 
