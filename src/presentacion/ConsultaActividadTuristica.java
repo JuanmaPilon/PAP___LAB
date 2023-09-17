@@ -119,8 +119,6 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Saidas Turisticas diponibles:");
 
-        cmbSalidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista salidas para actividad turistica" }));
-
         verSalidaTuristica.setText("Ver");
         verSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,8 +127,6 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
         });
 
         jLabel12.setText("Paquetes Turisticos diponibles:");
-
-        cmbPaquetes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista paquetes para actividad turistica" }));
 
         verPaqueteTuristico.setText("Ver");
         verPaqueteTuristico.addActionListener(new java.awt.event.ActionListener() {
@@ -271,9 +267,17 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formComponentShown
 
     private void cmbDepartamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentosItemStateChanged
-        // TODO add your handling code here:
+      cmbSalidas.removeAllItems();
+       cmbPaquetes.removeAllItems();
+       txtProveedor.setText("");
+       nombreConsultaActividadTuristica.setText("");
+       descripcionConsultaActividadTuristica.setText("");
+       duracionConsultaActividadTuristica.setText("");
+       costoConsultaActividadTuristica.setText("");
+       txtCiudad.setText("");
+       fechaAltaConsultaActividadTuristica.setText("");
         if (cmbDepartamentos.getItemCount()>0){
-            cmbActividades.removeAllItems();
+              cmbActividades.removeAllItems();
             ArrayList<Actividad> actividades = departamentos.get(cmbDepartamentos.getSelectedIndex()).getListaActTur();
             for (int i = 0; i < actividades.size();i++){
                 cmbActividades.addItem(actividades.get(i).getNombre());
@@ -310,17 +314,19 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbActividadesItemStateChanged
 
     private void verSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSalidaTuristicaActionPerformed
-        // TODO add your handling code here:
+       if(cmbSalidas.getSelectedIndex() != -1){
         ConsultaDeSalidaTuristica verSalida = new ConsultaDeSalidaTuristica(actividad.getListaSalidaTuristica().get(cmbSalidas.getSelectedIndex()),actividad);
         getParent().add(verSalida);
         verSalida.show();
+       }
     }//GEN-LAST:event_verSalidaTuristicaActionPerformed
 
     private void verPaqueteTuristicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPaqueteTuristicoActionPerformed
-        // TODO add your handling code here:
+       if(cmbPaquetes.getSelectedIndex() != -1){
         ConsultaPaqueteActividadesTuristicas verPaquete = new ConsultaPaqueteActividadesTuristicas(actividad.getListaPaquete().get(cmbPaquetes.getSelectedIndex()));
         getParent().add(verPaquete);
         verPaquete.show();
+       }
     }//GEN-LAST:event_verPaqueteTuristicoActionPerformed
 
 

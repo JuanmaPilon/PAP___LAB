@@ -50,11 +50,11 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
 
         jlabel1.setText("Nombre del Paquete:");
 
-        nombrePaquete.setFont(new java.awt.Font("Segoe UI", 2, 15)); // NOI18N
+        nombrePaquete.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
 
         jLabel1.setText("Descripcion:");
 
-        descripcionPaquete.setFont(new java.awt.Font("Segoe UI", 2, 15)); // NOI18N
+        descripcionPaquete.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
 
         jLabel2.setText("Periodo de Validez (dias):");
 
@@ -90,35 +90,37 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(nombrePaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(descripcionPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(validezPaquete))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(descuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(cancelarCrearPaquete)
-                                .addGap(133, 133, 133)
-                                .addComponent(aceptarCrearPaquete))
+                                .addComponent(jlabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(nombrePaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(fechaAltaPaqueteD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(fechaAltaPaqueteM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(fechaAltaPaqueteA, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(descripcionPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(descuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(60, 60, 60)
+                                        .addComponent(cancelarCrearPaquete)
+                                        .addGap(133, 133, 133)
+                                        .addComponent(aceptarCrearPaquete))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(fechaAltaPaqueteD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(fechaAltaPaqueteM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(fechaAltaPaqueteA, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(60, 60, 60)))
                 .addContainerGap(186, Short.MAX_VALUE))
         );
@@ -158,6 +160,7 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarCrearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarCrearPaqueteActionPerformed
+        try{
         String nombreDePaquete = nombrePaquete.getText();
         String descripcionDePaquete = descripcionPaquete.getText();
         int validezDePaquete = Integer.parseInt(validezPaquete.getText());
@@ -171,9 +174,11 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
         Date fecha = calendar.getTime();
         int descuentoDePaquete = Integer.parseInt(descuentoPaquete.getText());
         
-        try{
+        
         control.crearPaqueteActividadTuristica(nombreDePaquete,descripcionDePaquete,validezDePaquete,fecha, descuentoDePaquete);
         JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch(NumberFormatException ex){
+           JOptionPane.showMessageDialog(null, "Validez y Descuento deben ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
         } catch(Exception ex){
            JOptionPane.showMessageDialog(null, "Nombre ya esta en uso por otro paquete", "Error", JOptionPane.ERROR_MESSAGE);
         }

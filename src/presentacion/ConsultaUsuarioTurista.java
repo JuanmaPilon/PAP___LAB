@@ -49,6 +49,8 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         apellidoTurista = new javax.swing.JTextField();
         correoTurista = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
+        cmbSalidas = new javax.swing.JComboBox<>();
+        verSalidasTuristicas = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Informacion del usuario");
@@ -64,7 +66,6 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Actividad Turistica");
 
-        cmbActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turistica" }));
         cmbActividad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbActividadActionPerformed(evt);
@@ -95,7 +96,20 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
 
         correoTurista.setEditable(false);
 
-        jLabel18.setText("Inscripciones:");
+        jLabel18.setText("Salidas Turisticas");
+
+        cmbSalidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSalidasActionPerformed(evt);
+            }
+        });
+
+        verSalidasTuristicas.setText("Ver");
+        verSalidasTuristicas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verSalidasTuristicasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,38 +120,43 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel17))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jLabel15)
-                                            .addComponent(jLabel16)
-                                            .addComponent(jLabel17))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(46, 46, 46)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nacionalidadTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaNacimientoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(correoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(apellidoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nombreTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nicknameTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel18))
+                                .addComponent(jLabel13)
+                                .addGap(46, 46, 46)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nacionalidadTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechaNacimientoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(correoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(apellidoTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombreTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nicknameTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel18))
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(verActividadTuristica)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(verSalidasTuristicas))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(verActividadTuristica)))))
+                        .addContainerGap(12, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,9 +188,12 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13)
                             .addComponent(nacionalidadTurista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel18)
-                        .addGap(20, 20, 20)
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(verSalidasTuristicas))
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,6 +213,7 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         nicknameTurista.setText(turista.getNickname());
         nombreTurista.setText(turista.getNombre());
         fechaNacimientoTurista.setText(turista.getfNacimiento().toString());
+        loadSalidas();
         /*actividades = turista.getListaInscripcion();
         cmbActividad.removeAllItems();
         for (int i = 0 ; i < actividades.size() ; i++){
@@ -203,20 +226,29 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
        // loadSalidas();
     }//GEN-LAST:event_cmbActividadActionPerformed
-  /*  private void loadSalidas(){
+
+    private void cmbSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSalidasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSalidasActionPerformed
+
+    private void verSalidasTuristicasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSalidasTuristicasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_verSalidasTuristicasActionPerformed
+    private void loadSalidas(){
         if (loaded){
             Actividad actividad = actividades.get(cmbActividad.getSelectedIndex()); 
-            cmbSalida.removeAllItems();
+            cmbSalidas.removeAllItems();
             ArrayList<SalidaTuristica> salidas = actividad.getListaSalidaTuristica();
             for (int i = 0 ; i < salidas.size() ; i++){
-                cmbSalida.addItem(salidas.get(i).getNombre());
+                cmbSalidas.addItem(salidas.get(i).getNombre());
             }
         }
     }
-*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoTurista;
     private javax.swing.JComboBox<String> cmbActividad;
+    private javax.swing.JComboBox<String> cmbSalidas;
     private javax.swing.JTextField correoTurista;
     private javax.swing.JTextField fechaNacimientoTurista;
     private javax.swing.JLabel jLabel11;
@@ -232,5 +264,6 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField nicknameTurista;
     private javax.swing.JTextField nombreTurista;
     private javax.swing.JButton verActividadTuristica;
+    private javax.swing.JButton verSalidasTuristicas;
     // End of variables declaration//GEN-END:variables
 }

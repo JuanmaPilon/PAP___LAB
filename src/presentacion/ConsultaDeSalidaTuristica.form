@@ -43,7 +43,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="cmbSalidas" min="-2" pref="154" max="-2" attributes="0"/>
-                              <EmptySpace pref="40" max="32767" attributes="0"/>
+                              <EmptySpace pref="192" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -66,7 +66,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtLugar" pref="135" max="32767" attributes="0"/>
+                          <Component id="txtLugar" pref="208" max="32767" attributes="0"/>
                           <Component id="txtMaxTur" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -74,7 +74,7 @@
               </Group>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
               <Component id="btnCerrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -209,6 +209,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMaxTur">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -216,6 +219,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtLugar">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCerrar">
       <Properties>

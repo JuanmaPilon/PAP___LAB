@@ -79,7 +79,12 @@ public class ListaUsuarios extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Usuarios registrados");
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Cerrar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,10 +135,13 @@ public class ListaUsuarios extends javax.swing.JInternalFrame {
                     ModificarDatosProveedor verModificarProveedor = new ModificarDatosProveedor(nickname);  
                     getParent().add(verModificarProveedor);
                     verModificarProveedor.show();
+                  
                 } else  {
+                    
                     ModificarDatosTurista verModificarTurista = new ModificarDatosTurista(nickname);  
                     getParent().add(verModificarTurista);
                     verModificarTurista.show();
+                      this.dispose();
                 }
                 
             }else {mostrsarMensaje("No seleccionó ningun usuario", "Error", "Error al modificar");}
@@ -148,6 +156,10 @@ public class ListaUsuarios extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         cargarTabla();
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -151,6 +151,11 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
         });
 
         cancelarInscripcionSalida.setText("Cancelar");
+        cancelarInscripcionSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarInscripcionSalidaActionPerformed(evt);
+            }
+        });
 
         tablaSalidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,29 +209,6 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel3))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbDepartamento, 0, 257, Short.MAX_VALUE)
-                                    .addComponent(cmbActividad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(30, 30, 30)
-                                .addComponent(cmbTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtNombreTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 39, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(spnCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -249,18 +231,35 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel6)
                                     .addGap(18, 18, 18)
                                     .addComponent(spnAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel3))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbDepartamento, 0, 257, Short.MAX_VALUE)
+                                    .addComponent(cmbActividad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(30, 30, 30)
+                                .addComponent(cmbTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)
+                                .addGap(12, 12, 12)
+                                .addComponent(txtNombreTurista, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel11))
+                        .addGap(0, 39, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,7 +336,8 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formComponentShown
 
     private void cmbDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentoItemStateChanged
-        // TODO add your handling code here:
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaSalidas.getModel();
+        modeloTabla.setRowCount(0);
         if (cmbDepartamento.getItemCount()>0){
             cmbActividad.removeAllItems();
             ArrayList<DTActividad> listaActividadesDepto = control.encontraActividadDepartamento((String)cmbDepartamento.getSelectedItem());
@@ -394,44 +394,59 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
    
     private void aceptarInscripcionSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarInscripcionSalidaActionPerformed
         //tengo turista 
-        if (cmbTurista.getSelectedIndex() != -1){
+        if (cmbTurista.getSelectedIndex() != -1) {
             //se selecciono una salida turistica
-            if (tablaSalidas.getRowCount()>0){
-                if (tablaSalidas.getSelectedRow()!=-1){ 
-                    if((Integer)spnCantidad.getValue() > 0){
+            if (tablaSalidas.getRowCount() > 0) {
+                if (tablaSalidas.getSelectedRow() != -1) {
+                    if ((Integer) spnCantidad.getValue() > 0) {
                         //controlo que cant a inscribir no supere al max cant de la salida
-                        String nombreSalidaSeleccionada = String.valueOf(tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(),0));
-                        int cantidadTurista = (Integer)spnCantidad.getValue();
-                        if(!control.salidaTuristicaLlena(nombreSalidaSeleccionada, cantidadTurista)){
+                        String nombreSalidaSeleccionada = String.valueOf(tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(), 0));
+                        int cantidadTurista = (Integer) spnCantidad.getValue();
+                        if (!control.salidaTuristicaLlena(nombreSalidaSeleccionada, cantidadTurista)) {
                             //controlo que el turista no este inscripto a la salida
                             String nicknameTurista = (String) cmbTurista.getSelectedItem();
                             //DTSalidaTuristica dtSalida = control.traerDTSalidaTuristica( nombreSalidaSeleccionada);
-                            
-                            
-                            if(!control.turistaYaInscriptoSalidaTuristica(nombreSalidaSeleccionada, nicknameTurista)){
-                                int costo = cantidadTurista * Integer.parseInt(txtCosto.getText());
-                                //System.out.println("llegue hasta aca");
-                                int dia = (int) spnDia.getValue();
-                                int mes = (int) spnMes.getValue();
-                                int anio = (int) spnAnio.getValue();
-                                Calendar calendar = Calendar.getInstance();
-                                calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
-                                Date fecha = calendar.getTime();
-                                
-                                control.InscripcionASalidaTuristica(nombreSalidaSeleccionada, nicknameTurista,cantidadTurista,costo, fecha);
-                            
-                                mostrsarMensaje("Incripcion realizada", "Info", "Inscripcion realizada con exito");
-                                
-                            }else{mostrsarMensaje("Turista ya inscripto a la salida turistica", "Error", "Error al ingresar Inscripcion");}
-                            
-                        }else{mostrsarMensaje("Cantidad de turistas supera la cantidad max de la salida", "Error", "Error al ingresar Inscripcion");}
-                    
-                    }else{mostrsarMensaje("Cantidad de inscriptos debe ser mayor a cero", "Error", "Error al ingresar Inscripcion");}
-                }else{mostrsarMensaje("No ha seleccionado ninguna salidas turisticas", "Error", "Error al ingresar Inscripcion");}
-            }else{mostrsarMensaje("No hay salidas turisticas para la actividad", "Error", "Error al ingresar Inscripcion");}    
-        }else{mostrsarMensaje("No se selecciono ningun turista", "Error", "Error al ingresar Inscripcion");}
-        
-        
+
+                            if (!control.turistaYaInscriptoSalidaTuristica(nombreSalidaSeleccionada, nicknameTurista)) {
+                                try {
+                                    int costo = cantidadTurista * Integer.parseInt(txtCosto.getText());
+                                    //System.out.println("llegue hasta aca");
+                                    int dia = (int) spnDia.getValue();
+                                    int mes = (int) spnMes.getValue();
+                                    int anio = (int) spnAnio.getValue();
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
+                                    Date fecha = calendar.getTime();
+
+                                    control.InscripcionASalidaTuristica(nombreSalidaSeleccionada, nicknameTurista, cantidadTurista, costo, fecha);
+
+                                    mostrsarMensaje("Incripcion realizada", "Info", "Inscripcion realizada con exito");
+                                } catch (NumberFormatException ex) {
+                                    JOptionPane.showMessageDialog(null, "Costo tiene que ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
+
+                                } catch (Exception ex) {
+                                    JOptionPane.showMessageDialog(null, "Error al realizar la inscripcion", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                mostrsarMensaje("Turista ya inscripto a la salida turistica", "Error", "Error al ingresar Inscripcion");
+                            }
+
+                        } else {
+                            mostrsarMensaje("Cantidad de turistas supera la cantidad max de la salida", "Error", "Error al ingresar Inscripcion");
+                        }
+
+                    } else {
+                        mostrsarMensaje("Cantidad de inscriptos debe ser mayor a cero", "Error", "Error al ingresar Inscripcion");
+                    }
+                } else {
+                    mostrsarMensaje("No ha seleccionado ninguna salidas turisticas", "Error", "Error al ingresar Inscripcion");
+                }
+            } else {
+                mostrsarMensaje("No hay salidas turisticas para la actividad", "Error", "Error al ingresar Inscripcion");
+            }
+        } else {
+            mostrsarMensaje("No se selecciono ningun turista", "Error", "Error al ingresar Inscripcion");
+        }
 
 
     }//GEN-LAST:event_aceptarInscripcionSalidaActionPerformed
@@ -471,6 +486,10 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
             cargarSalidas((String) cmbActividad.getSelectedItem());
         
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void cancelarInscripcionSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarInscripcionSalidaActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelarInscripcionSalidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

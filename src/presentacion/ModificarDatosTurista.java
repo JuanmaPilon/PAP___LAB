@@ -86,6 +86,11 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
         });
 
         cancelarModificarTurista.setText("Cancelar");
+        cancelarModificarTurista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarModificarTuristaActionPerformed(evt);
+            }
+        });
 
         spnmes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
@@ -200,6 +205,10 @@ public class ModificarDatosTurista extends javax.swing.JInternalFrame {
         //mensaje de OK
         mostrarMensaje("Se modifico el Turista correctamente", "Info", "Edición correcta");
     }//GEN-LAST:event_aceptarModificarTuristaActionPerformed
+
+    private void cancelarModificarTuristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarModificarTuristaActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_cancelarModificarTuristaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

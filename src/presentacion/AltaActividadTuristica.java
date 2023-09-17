@@ -200,27 +200,33 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
 
      
     private void aceptarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarAltaActividadTuristicaActionPerformed
-        String nombreActividad = nombreActividadTuristica.getText();
-        String descripcionActividad = descripcionActividadTuristica.getText();
-        String nombreCuidad = (String) ciudadActividadTuristica.getText();
-        String nombreProveedor = (String) proveedorActividadTuristica.getSelectedItem();
-        String nombreDepartamento = (String) departamentoActividadTuristica.getSelectedItem();
-        int duracionActividad = Integer.parseInt(duracionActividadTuristica.getText());
-        float costoActividad = Float.parseFloat(costoActividadTuristica.getText());
-        int diaA = (int) diaAltaActividadTuristica.getValue();
-        int mesA = (int) mesAltaActividadTuristica.getValue();
-        int anioA = (int) anioAltaActividadTuristica.getValue();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, anioA);
-        calendar.set(Calendar.MONTH, mesA - 1); // Los meses en Calendar se indexan desde 0 (enero) hasta 11 (diciembre) sasa
-        calendar.set(Calendar.DAY_OF_MONTH, diaA);
-        Date fecha = calendar.getTime();
-        
-        try{
-        control.guardarActividad(nombreActividad,descripcionActividad,duracionActividad,costoActividad,nombreCuidad,fecha,nombreProveedor,nombreDepartamento);
-        JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        }catch(Exception ex){
-           JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            String nombreActividad = nombreActividadTuristica.getText();
+            String descripcionActividad = descripcionActividadTuristica.getText();
+            String nombreCuidad = (String) ciudadActividadTuristica.getText();
+            String nombreProveedor = (String) proveedorActividadTuristica.getSelectedItem();
+            String nombreDepartamento = (String) departamentoActividadTuristica.getSelectedItem();
+
+            int duracionActividad = Integer.parseInt(duracionActividadTuristica.getText());
+
+            float costoActividad = Float.parseFloat(costoActividadTuristica.getText());
+
+            int diaA = (int) diaAltaActividadTuristica.getValue();
+            int mesA = (int) mesAltaActividadTuristica.getValue();
+            int anioA = (int) anioAltaActividadTuristica.getValue();
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, anioA);
+            calendar.set(Calendar.MONTH, mesA - 1); // Los meses en Calendar se indexan desde 0 (enero) hasta 11 (diciembre) sasa
+            calendar.set(Calendar.DAY_OF_MONTH, diaA);
+            Date fecha = calendar.getTime();
+
+            control.guardarActividad(nombreActividad, descripcionActividad, duracionActividad, costoActividad, nombreCuidad, fecha, nombreProveedor, nombreDepartamento);
+            JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Duracion y Costo tienen que ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_aceptarAltaActividadTuristicaActionPerformed
 

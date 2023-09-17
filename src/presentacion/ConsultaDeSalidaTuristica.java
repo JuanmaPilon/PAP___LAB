@@ -101,7 +101,11 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Max. Cant. de Turistas");
 
+        txtMaxTur.setEditable(false);
+
         jLabel6.setText("Fecha y Hora");
+
+        txtLugar.setEditable(false);
 
         btnCerrar.setText("Cerrar");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +132,7 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(40, Short.MAX_VALUE))))
+                                .addContainerGap(192, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -144,11 +148,11 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLugar, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(txtLugar, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                             .addComponent(txtMaxTur))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(195, 195, 195)
                 .addComponent(btnCerrar)
                 .addGap(0, 0, Short.MAX_VALUE))
         );

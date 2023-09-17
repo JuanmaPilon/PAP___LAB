@@ -55,6 +55,7 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
 
         setClosable(true);
         setTitle("Consulta de Paquete de Actividades Turisticas");
+        setPreferredSize(new java.awt.Dimension(800, 306));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -121,7 +122,7 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cmbActividades, 0, 312, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -131,14 +132,12 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNombre)
-                                    .addComponent(txtDescripcion)
                                     .addComponent(txtValidez)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(txtDescripcion)
+                                    .addComponent(txtDescuento))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnVer)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
