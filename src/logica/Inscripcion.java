@@ -29,8 +29,7 @@ public class Inscripcion implements Serializable{
     public Inscripcion() {
     }
 
-    public Inscripcion(Long id, Turista turista, SalidaTuristica salida, Date fInscripcion, int cantTurista, float costo) {
-        this.id = id;
+    public Inscripcion(Turista turista, SalidaTuristica salida, Date fInscripcion, int cantTurista, float costo) {
         this.turista = turista;
         this.salida = salida;
         this.fInscripcion = fInscripcion;

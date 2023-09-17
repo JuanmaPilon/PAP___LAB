@@ -213,6 +213,11 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
    public ArrayList<DTUsuario> traerUsuarioMod(){
        return controlPersis.traerUsuarios();
    }
+   
+      @Override
+   public ArrayList<DTTurista> traerUsuarioTurista(){
+       return controlPersis.traerUsuariosTurista();
+   }
 
    @Override
    public DTTurista traerDTTurista(String nickname){
@@ -238,6 +243,16 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
        return new DTProveedor(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
                fnac, t.getDescripcion(), t.getLink());
    }
+   
+    @Override
+    public  DTSalidaTuristica traerDTSalidaTuristica(String nombreSalida){
+        SalidaTuristica salida = ConsultaSalidaTuristica(nombreSalida);
+        DTSalidaTuristica dtSalida = new DTSalidaTuristica(salida.getNombre(), salida.getCantMax(),
+                                            salida.getfAlta(), salida.getfSalida(), salida.getLugar(), salida.getActividad().getNombre());
+        
+        return dtSalida;
+    }
+   
    @Override
     public void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url) {
        
@@ -272,21 +287,86 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
     public ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado) {
         return controlPersis.encontraActividadDepartamentoPersis(departamentoSeleccionado);
     }
+    
+    @Override
+    public ArrayList<DTSalidaTuristica> encontraSalidasTuristicasDeActividad(String actividadSeleccionado) {
+        return controlPersis.encontraSalidasTuristicasDeActividadPersis(actividadSeleccionado);
+    }
    
     @Override
      public void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada){
          controlPersis.asignarActividadPaquetePersis(paqueteSeleccionado, actividadSeleccionada);
      }
     
-    @Override
-    public ArrayList<Turista> listaTurista(){
-        return controlPersis.listaTuristas();
-    }
+//    @Override
+//    public ArrayList<> listaNicknameTurista(){
+//        ArrayList<Turista> listaTuristas = controlPersis.listaTuristas();
+//        
+//        ArrayList<String> listaNicknameTuristas = new ArrayList();
+//        
+//        for (Turista t : listaTuristas){
+//            listaNicknameTuristas.add(t.getNickname());
+//        }
+//        
+//        return listaNicknameTuristas;
+//    }
+//    
+
     
+    //chequea si ya no se supero el limite de inscripcion. Si es true la Salida turistica esta llena. Si es false se puede inscribir
     @Override
-    public void AltaInscripcion(Inscripcion insc){
-        controlPersis.guardarInscripcion(insc);
-    }
+     public boolean salidaTuristicaLlena(String salida, int cantAInscribir){
+        
+        boolean resultado = true;
+        int cantTotal = 0;
+        
+        //busco los obj salidaTuristica
+        SalidaTuristica salidaTuristica = ConsultaSalidaTuristica(salida);
+        //Turista turista = (Turista) ConsultaDeUsuario(turistaAlta.getNickname());
+        
+        //busco las inscripciones para ese obj salidaTuristica
+        ArrayList<Inscripcion> inscripcionesSalidaTuristica = controlPersis.listarInscripcionesDeSalidaTuristica(salida);
+     
+        //me fijo en las inscripciones la cantidad de inscriptos
+        for (Inscripcion i: inscripcionesSalidaTuristica){
+           cantTotal=cantTotal + i.getCantTurista();
+        }
+           
+        if((cantTotal+cantAInscribir)<=salidaTuristica.getCantMax()){
+            resultado = false;//no llena se puede inscribir
+        }
+        
+        
+        return resultado;
+    }    
+    
+    //chequea si el turista ya esta inscripto a la Salida Turistica. Si es true el turista esta inscripto a la salida. Si es false el turista se puede inscripto a la salida
+    @Override
+    public boolean turistaYaInscriptoSalidaTuristica(String salida, String turistaAlta){
+        
+        boolean resultado = false;
+        
+        //busco los obj de turista y salidaTuristica
+        Turista turista = (Turista) ConsultaDeUsuario(turistaAlta);
+        
+        //me fijo en la lista de inscripciones del turista por si ya esta inscripto. obs.: no controlo fechas
+        for (Inscripcion insc : turista.getListaInscripcion()){
+            
+            if(insc.getSalida().getNombre().equals(salida)){
+                return true;
+            }        
+        }
+        return resultado;
+        
+    }    
+        @Override
+    public void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, int costo, Date fecha ) {
+        SalidaTuristica salida = ConsultaSalidaTuristica(nombreSalidaSeleccionada);
+        Turista turista = (Turista) ConsultaDeUsuario(nicknameTurista);
+        Inscripcion inscripcion = new Inscripcion(turista, salida, fecha, cantTurista, costo);
+        
+        controlPersis.guardarInscripcion(inscripcion);
+    }    
 
     @Override
     public void cargarDatosDePrueba() {
@@ -382,9 +462,25 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
         asignarActividadPaquete("Un dıa en Colonia", "Tour por Colonia del Sacramento");
         asignarActividadPaquete("Un dıa en Colonia", "Almuerzo en el Real de San Carlos");
 
+        try {
+            //inscripcion
+            InscripcionASalidaTuristica("Degusta Agosto", "lachiqui", 3, 2400, fecha.parse("15/8/2022"));
+            InscripcionASalidaTuristica("Degusta Agosto", "elelvis", 5, 4000, fecha.parse("16/8/2022"));
+            InscripcionASalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui", 3, 1200, fecha.parse("18/8/2022"));
+            InscripcionASalidaTuristica("Tour Colonia del Sacramento 18-09", "isabelita", 1, 400, fecha.parse("19/8/2022"));
+            InscripcionASalidaTuristica("Almuerzo 2",  "mastropiero", 2, 1600, fecha.parse("19/8/2022"));
+            InscripcionASalidaTuristica("Teatro con Sabores 1", "chino", 1, 500, fecha.parse("19/8/2022"));
+            InscripcionASalidaTuristica("Teatro con Sabores 2", "chino", 10, 5000, fecha.parse("20/8/2022"));
+            InscripcionASalidaTuristica("Teatro con Sabores 2", "bobesponja", 2, 1000, fecha.parse("20/8/2022"));
+            InscripcionASalidaTuristica("Teatro con Sabores 2", "anibal", 1, 500, fecha.parse("21/8/2022"));
+            InscripcionASalidaTuristica("Degusta Setiembre", "tony", 11, 8800, fecha.parse("21/8/2022"));
+        } catch (ParseException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        
     }
+
+
 
 
 

@@ -78,13 +78,10 @@ public class ListaActividadPorDepto extends javax.swing.JInternalFrame {
 
         tablaActividades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tablaActividades);
@@ -185,7 +182,7 @@ public class ListaActividadPorDepto extends javax.swing.JInternalFrame {
             if (tablaActividades.getSelectedRow()!=-1){ 
                 //consigo el nombre de la Actividad seleccionado en la tabla
                 String nombreActividad = String.valueOf(tablaActividades.getValueAt(tablaActividades.getSelectedRow(),0));
-                System.out.println("llegue aca");
+                //System.out.println("llegue aca");
                 //me traigo la actividad (esta mal)
                 //Actividad consultado = control.ConsultaActividadTuristica(nombreActividad);
                 
@@ -257,7 +254,7 @@ public void mostrsarMensaje(String mensaje, String tipo, String titulo){
         if (tipo.equals("Info")){
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
         }else if (tipo.equals("Error")){
-            optionPane.setMessageType(JOptionPane.ERROR);
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
         }
         JDialog dialog = optionPane.createDialog(titulo);
         dialog.setAlwaysOnTop(true);

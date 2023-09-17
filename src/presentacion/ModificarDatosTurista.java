@@ -246,7 +246,7 @@ public void mostrarMensaje(String mensaje, String tipo, String titulo){
         if (tipo.equals("Info")){
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
         }else if (tipo.equals("Error")){
-            optionPane.setMessageType(JOptionPane.ERROR);
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
         }
         JDialog dialog = optionPane.createDialog(titulo);
         dialog.setAlwaysOnTop(true);

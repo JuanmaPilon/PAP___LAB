@@ -10,6 +10,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Actividad;
 import logica.DTActividad;
+import logica.DTSalidaTuristica;
+import logica.DTTurista;
 import logica.DTUsuario;
 import logica.Departamento;
 import logica.Inscripcion;
@@ -192,7 +194,7 @@ public ArrayList<DTUsuario> traerProveedores() {
 
 public ArrayList<DTUsuario> traerUsuarios(){
         
-    ArrayList<DTUsuario> listaDTUsuario = new ArrayList<DTUsuario>();
+    ArrayList<DTUsuario> listaDTUsuario = new ArrayList();
     
     try {
         List<Turista> turistas = turistaJpa.findTuristaEntities();
@@ -331,7 +333,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
          
          ArrayList<DTActividad> listaDTActividad = new ArrayList();
     
-    try {
+        try {
         List<Actividad> actividades = actividadJpa.findActividadEntities();
         for (Actividad a : actividades) {
             if (a.getDepartamento().getNombre().equals(departamentoSeleccionado)){
@@ -374,5 +376,58 @@ public ArrayList<DTUsuario> traerUsuarios(){
         }
         return turista;
      }
+
+    public ArrayList<DTTurista> traerUsuariosTurista() {
+      ArrayList<DTTurista> listaDTTurista= new ArrayList();
+    
+    try {
+        List<Turista> turistas = turistaJpa.findTuristaEntities();
+        for (Turista t : turistas) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String fnac = sdf.format(t.getfNacimiento());
+            DTTurista dtTurista = new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(), fnac, t.getNacionalidad() );
+            listaDTTurista.add(dtTurista);
+        }
+    }catch(Exception ex){
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        return listaDTTurista;
+    }
+
+    //Me devuelve una lista de inscripciones que tiene una Salida Turistica con nombre nombreSalidaTuristica
+    public ArrayList<Inscripcion> listarInscripcionesDeSalidaTuristica(String nombreSalidaTuristica) {
+        
+        List<Inscripcion> listaInscripciones = inscripcionJpa.findInscripcionEntities();
+        ArrayList<Inscripcion> listarInscripcionesDeSalidaTuristica = new ArrayList();
+        
+        if (listaInscripciones != null){
+            for (Inscripcion insc : listaInscripciones){
+                if (insc.getSalida().getNombre().equals(nombreSalidaTuristica)){
+                    listarInscripcionesDeSalidaTuristica.add(insc);
+                }
+            }
+        }//else {listaInscripciones = null;}    
+        
+        return listarInscripcionesDeSalidaTuristica;        
+    }
+
+    public ArrayList<DTSalidaTuristica> encontraSalidasTuristicasDeActividadPersis(String actividadSeleccionado) {
+        
+         ArrayList<DTSalidaTuristica> listaDTSalidaTuristica = new ArrayList();
+         Actividad a = actividadJpa.findActividad(actividadSeleccionado);
+    
+ 
+
+        for (SalidaTuristica sT : a.getListaSalidaTuristica()) {
+            
+                DTSalidaTuristica dtSalida = new DTSalidaTuristica (sT.getNombre(), sT.getCantMax(), sT.getfAlta(), sT.getfSalida(), sT.getLugar() );
+                listaDTSalidaTuristica.add(dtSalida);      
+                
+        }
+
+        
+        return listaDTSalidaTuristica;
+    }
      
 }
