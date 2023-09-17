@@ -1,4 +1,4 @@
-//mio
+
 package logica;
 
 import java.util.ArrayList;
@@ -23,31 +23,22 @@ public abstract ArrayList listaActividadesTuristicas(String departamento);
 public abstract ArrayList<DTSalidaTuristica> encontraSalidasTuristicasDeActividad(String actividadSeleccionado);
 public abstract ArrayList listaSalActividadTuristica(String actividad);
 public abstract List consultaPaquetes();
-//    public abstract void AltaDeSalidaTuristica();
- public abstract SalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
-//    public abstract void InscripcionDeSalidaTuristica();
- public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete);
-//    public abstract void AgregarActividadTuristicaAPaquete();
-//    public abstract void ConsultaDePaqueteDeActividadTuristicas();
-
-   public abstract void AltaDeDepartamento(String nombre, String descripcion, String url);
-   
-
-   public abstract List<String> llenarCmboBoxDep();
-   public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad);
-   public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento);
-    public ArrayList<DTUsuario> traerUsuarioMod();
-    public ArrayList<DTTurista> traerUsuarioTurista();
-    public DTTurista traerDTTurista(String nickname);
-    public DTProveedor traerDTProveedor(String nickname);
+public abstract SalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
+public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete);
+public abstract void AltaDeDepartamento(String nombre, String descripcion, String url);
+public abstract List<String> llenarCmboBoxDep();
+public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad);
+public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento);
+public ArrayList<DTUsuario> traerUsuarioMod();
+public ArrayList<DTTurista> traerUsuarioTurista();
+public DTTurista traerDTTurista(String nickname);
+public DTProveedor traerDTProveedor(String nickname);
 public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada);
 public abstract List findSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae lista de strings con los nombres de las actividades asociadas a un depto att:carlangas
-
 public abstract ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
-//public abstract ArrayList<String> listaNicknameTurista();
 public abstract void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, int costo, Date fecha );
- public abstract boolean salidaTuristicaLlena(String salida, int cantAInscribir);
- public abstract boolean turistaYaInscriptoSalidaTuristica(String salida, String turistaAlta);
- public abstract DTSalidaTuristica traerDTSalidaTuristica(String nombreSalida);
+public abstract boolean salidaTuristicaLlena(String salida, int cantAInscribir);
+public abstract boolean turistaYaInscriptoSalidaTuristica(String salida, String turistaAlta);
+public abstract DTSalidaTuristica traerDTSalidaTuristica(String nombreSalida);
 public abstract void cargarDatosDePrueba();
 }

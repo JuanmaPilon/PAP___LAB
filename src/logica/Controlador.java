@@ -10,76 +10,78 @@ import java.util.logging.Logger;
 import persistencia.ControladoraPersistencia;
 
 public class Controlador implements IControlador{
+    
     public Controlador() {}
+    
     private static Controlador control;
     public static Controlador getInstance(){
-    if (control == null){
-        control = new Controlador();
-    }
-    return control;
-   };
+        if (control == null){
+            control = new Controlador();
+        }
+            return control;
+    };
    
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
-   //descomentado por una prueba:
-   @Override
-   public void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, 
-           Date fNacimiento, String nacionalidad) {
+    //descomentado por una prueba:
+    @Override
+    public void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, 
+                                        Date fNacimiento, String nacionalidad) {
     
-    Turista turista = new Turista(); 
-    turista.setNickname(nickname);
-    turista.setNombre(nombre);
-    turista.setApellido(apellido);
-    turista.setCorreo(correo);
-    turista.setfNacimiento(fNacimiento);
-    turista.setNacionalidad(nacionalidad);
-    controlPersis.guardarTurista(turista);
-   };
-   @Override
-   public List<Paquete> consultaPaquetes(){
-       return controlPersis.consultaPaquete();
-   };
+        Turista turista = new Turista(); 
+        turista.setNickname(nickname);
+        turista.setNombre(nombre);
+        turista.setApellido(apellido);
+        turista.setCorreo(correo);
+        turista.setfNacimiento(fNacimiento);
+        turista.setNacionalidad(nacionalidad);
+        
+        controlPersis.guardarTurista(turista);
+    };
    
-   @Override
-   public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, 
-           Date fNacimiento, String descripcion, String link){
-   Proveedor proveedor = new Proveedor();
-   proveedor.setNickname(nickname);
-   proveedor.setNombre(nombre);
-   proveedor.setApellido(apellido);
-   proveedor.setCorreo(correo);
-   proveedor.setfNacimiento(fNacimiento);
-   proveedor.setDescripcion(descripcion);
-   proveedor.setLink(link);
-   controlPersis.guardarProveedor(proveedor);
+    @Override
+    public List<Paquete> consultaPaquetes(){
+        return controlPersis.consultaPaquete();
+    };
+   
+    @Override
+    public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, 
+                                            Date fNacimiento, String descripcion, String link){
+        Proveedor proveedor = new Proveedor();
+        proveedor.setNickname(nickname);
+        proveedor.setNombre(nombre);
+        proveedor.setApellido(apellido);
+        proveedor.setCorreo(correo);
+        proveedor.setfNacimiento(fNacimiento);
+        proveedor.setDescripcion(descripcion);
+        proveedor.setLink(link);
+        
+        controlPersis.guardarProveedor(proveedor);
    };
    
 
+    //String nombreProveedor, String nombreDep,
+    @Override
+    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha,String nombreProveedor, String nombreDepartamento){
+        Actividad actividad = new Actividad();
+        actividad.setCiudad(nombreCuidad);
+        actividad.setNombre(nombreActividad);
+        actividad.setDescripcion(descripcionActividad);
+        actividad.setDuracion(duracionActividad);
+        actividad.setCosto(costoActividad);
+        actividad.setfAlta(fecha);
    
-   //String nombreProveedor, String nombreDep,
-   @Override
-   public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha,String nombreProveedor, String nombreDepartamento){
-   Actividad actividad = new Actividad();
-   actividad.setCiudad(nombreCuidad);
-   actividad.setNombre(nombreActividad);
-   actividad.setDescripcion(descripcionActividad);
-   actividad.setDuracion(duracionActividad);
-   actividad.setCosto(costoActividad);
-   actividad.setfAlta(fecha);
+        Departamento dep = new Departamento();//creo dep auxiliar
+        dep = controlPersis.traerDepartamento(nombreDepartamento);// encuentro el departamento y lo cargo en dep
+        // dep.getListaActTur().add(actividad);
+        actividad.setDepartamento(controlPersis.traerDepartamento(nombreDepartamento));// hago que mi actividad apunte al departamento que me traje
+        //idem con proveedor
+        Proveedor pro = new Proveedor();
+        pro = controlPersis.traerProveedor(nombreProveedor);
+        actividad.setProveedor(pro);
    
-   
-   Departamento dep = new Departamento();//creo dep auxiliar
-   dep = controlPersis.traerDepartamento(nombreDepartamento);// encuentro el departamento y lo cargo en dep
-  // dep.getListaActTur().add(actividad);
-   actividad.setDepartamento(controlPersis.traerDepartamento(nombreDepartamento));// hago que mi actividad apunte al departamento que me traje
-   //idem con proveedor
-   Proveedor pro = new Proveedor();
-   pro = controlPersis.traerProveedor(nombreProveedor);
-   actividad.setProveedor(pro);
-   
-   controlPersis.guardarActividad(actividad);
-   
-   
+        controlPersis.guardarActividad(actividad);
+
    }
    
    @Override
@@ -140,12 +142,12 @@ public class Controlador implements IControlador{
        return controlPersis.consultaUsuario(nickname);
    };
    
-   
    @Override
    public Actividad ConsultaActividadTuristica(String nombreActividad){
        return controlPersis.consultaActividad(nombreActividad);
    };
-//    public void ModificarDatosDeUsuario();//Nati
+   
+   
    @Override
    public void AltaDeActividadTuristica(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete){
 
@@ -160,28 +162,22 @@ public class Controlador implements IControlador{
     actividad.setfAlta(fAlta);
     actividad.setListaSalidaTuristica(listaSalidaTuristica);
     actividad.setListaPaquete(listaPaquete);
-    
-       
+
     controlPersis.guardarActividad(actividad);
 
-
 };//Juanma
-//    public void AltaDeSalidaTuristica();
+   
+   //Devuelve la Salida Turistica con nombre nombreSalida
    @Override
     public SalidaTuristica ConsultaSalidaTuristica(String nombreSalida){
         return controlPersis.consultaSalida(nombreSalida);
     };
-//    public void InscripcionDeSalidaTuristica();
-//    public void CrearPaqueteDeActividadesTuristicas();
-//    public void AgregarActividadTuristicaAPaquete();
-//    public void ConsultaDePaqueteDeActividadTuristicas();
-  
-   @Override
-   public void AltaDeDepartamento(String nombre, String descripcion, String url){
+    
+    //Alta de Departamento. No requiere GUI.
+    @Override
+    public void AltaDeDepartamento(String nombre, String descripcion, String url){
        
        Departamento depto = new Departamento();
-       
-       //falta control si nombre ya existe o si es null nombre
        depto.setNombre(nombre);
        depto.setDescripcion(descripcion);
        depto.setUrl(url);
@@ -208,17 +204,19 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
     controlPersis.guardarPaqueteActividadTuristica(paquete);
 }
 
-   
+   //Lista auxiliar de DTUsuarios para mostrar los usuarios (turista y proveevor) registrados en la BD.
    @Override
    public ArrayList<DTUsuario> traerUsuarioMod(){
        return controlPersis.traerUsuarios();
    }
    
-      @Override
+   //Lista auxiliar para traer los DT de Turista registrados en la BD.
+   @Override
    public ArrayList<DTTurista> traerUsuarioTurista(){
        return controlPersis.traerUsuariosTurista();
    }
 
+   //Devuelve DTTurista del Turista a partir del nickname
    @Override
    public DTTurista traerDTTurista(String nickname){
    
@@ -227,23 +225,22 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
        String fnac = sdf.format(t.getfNacimiento());
        
-       
        return new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
                fnac, t.getNacionalidad());
    }
+   //Devuelve DTProveedor del Proveedor a partir del nickname
    @Override
    public DTProveedor traerDTProveedor(String nickname){
-   
        Proveedor t = controlPersis.traerProveedor(nickname);
        //conversion date a String
        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
        String fnac = sdf.format(t.getfNacimiento());
        
-       
        return new DTProveedor(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
                fnac, t.getDescripcion(), t.getLink());
    }
    
+    //Devuelve el DTSalidaTuristica a partir del nombre de la Salida Turistica
     @Override
     public  DTSalidaTuristica traerDTSalidaTuristica(String nombreSalida){
         SalidaTuristica salida = ConsultaSalidaTuristica(nombreSalida);
@@ -253,9 +250,9 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
         return dtSalida;
     }
    
+    //Persiste la modificacion de Usuario Proveedor. nickname y correo no se modifican. 
    @Override
     public void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url) {
-       
         Proveedor p = (Proveedor) ConsultaDeUsuario(nickname);
         
         p.setNombre(nombre);
@@ -266,7 +263,8 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
         
         controlPersis.modificarProveedor(p);
     }
-
+    
+    //Persiste la modificacion de Usuario Turista. nickname y correo no se modifican. 
     @Override
     public void ModificarDatosDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fecha, String nacionalidad) {
         Turista t =  (Turista) ConsultaDeUsuario(nickname);
@@ -279,87 +277,76 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
         controlPersis.modificarTurista(t);
     }
     
+    //
     @Override
     public List<String> findSalidasTuristicasDepartamento(String departamentoSeleccionado) {
         return controlPersis.findSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
     }
+    
+    //Devuelve lista de DT Actividad para un nombre de Departamento dado
     @Override
     public ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado) {
         return controlPersis.encontraActividadDepartamentoPersis(departamentoSeleccionado);
     }
     
+    //Devuelve lista de DT Salida Turistica para un nombre de Actividad dado
     @Override
     public ArrayList<DTSalidaTuristica> encontraSalidasTuristicasDeActividad(String actividadSeleccionado) {
         return controlPersis.encontraSalidasTuristicasDeActividadPersis(actividadSeleccionado);
     }
    
+    //
     @Override
      public void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada){
          controlPersis.asignarActividadPaquetePersis(paqueteSeleccionado, actividadSeleccionada);
      }
-    
-//    @Override
-//    public ArrayList<> listaNicknameTurista(){
-//        ArrayList<Turista> listaTuristas = controlPersis.listaTuristas();
-//        
-//        ArrayList<String> listaNicknameTuristas = new ArrayList();
-//        
-//        for (Turista t : listaTuristas){
-//            listaNicknameTuristas.add(t.getNickname());
-//        }
-//        
-//        return listaNicknameTuristas;
-//    }
-//    
+  
 
     
-    //chequea si ya no se supero el limite de inscripcion. Si es true la Salida turistica esta llena. Si es false se puede inscribir
+    //Chequea si ya no se supero el limite de Inscripcion para un nombre Salida Turistica. 
+    //Devuelve true la Salida Turistica esta llena o se supera el max de la cantidad de turista para la Salida Turistica. 
+    //Devuelve false se puede Inscribir la cantidad a Incribir a la Salida Turistica
     @Override
      public boolean salidaTuristicaLlena(String salida, int cantAInscribir){
         
         boolean resultado = true;
         int cantTotal = 0;
-        
         //busco los obj salidaTuristica
         SalidaTuristica salidaTuristica = ConsultaSalidaTuristica(salida);
-        //Turista turista = (Turista) ConsultaDeUsuario(turistaAlta.getNickname());
-        
         //busco las inscripciones para ese obj salidaTuristica
         ArrayList<Inscripcion> inscripcionesSalidaTuristica = controlPersis.listarInscripcionesDeSalidaTuristica(salida);
-     
         //me fijo en las inscripciones la cantidad de inscriptos
         for (Inscripcion i: inscripcionesSalidaTuristica){
            cantTotal=cantTotal + i.getCantTurista();
         }
-           
+        //controlo cantidad actual de inscriptos y la cantidad a inscribir no supere el max de la salida turistica
         if((cantTotal+cantAInscribir)<=salidaTuristica.getCantMax()){
             resultado = false;//no llena se puede inscribir
         }
-        
-        
+
         return resultado;
     }    
     
-    //chequea si el turista ya esta inscripto a la Salida Turistica. Si es true el turista esta inscripto a la salida. Si es false el turista se puede inscripto a la salida
-    @Override
+    //chequea si el turista ya esta inscripto a la Salida Turistica. 
+    //Devuelve true si el Turistica esta ya inscripto a la Salida Turistica. 
+    //Devuelve false si el Turistica se puede Inscribir a la Salida Turistica
+     @Override
     public boolean turistaYaInscriptoSalidaTuristica(String salida, String turistaAlta){
-        
         boolean resultado = false;
-        
         //busco los obj de turista y salidaTuristica
         Turista turista = (Turista) ConsultaDeUsuario(turistaAlta);
-        
         //me fijo en la lista de inscripciones del turista por si ya esta inscripto. obs.: no controlo fechas
         for (Inscripcion insc : turista.getListaInscripcion()){
-            
             if(insc.getSalida().getNombre().equals(salida)){
                 return true;
             }        
         }
-        return resultado;
         
+        return resultado;  
     }    
-        @Override
+        
+    //Alta de Inscripcion. Pre-condicion: exite salida turistica y turista con los respectivos nombres; los parametros vienen en el formato correcto.
+    @Override
     public void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, int costo, Date fecha ) {
         SalidaTuristica salida = ConsultaSalidaTuristica(nombreSalidaSeleccionada);
         Turista turista = (Turista) ConsultaDeUsuario(nicknameTurista);
@@ -367,7 +354,8 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
         
         controlPersis.guardarInscripcion(inscripcion);
     }    
-
+    
+    //Carga de los Datos de Prueba
     @Override
     public void cargarDatosDePrueba() {
         //Usuarios y Proveedores:
