@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
@@ -118,8 +120,12 @@ public class AltaDepartamento extends javax.swing.JInternalFrame {
         String nombre = txtnombre.getText();
         String descripcion = txtdescripcion.getText();
         String url = txturl.getText();
-        
+        try{
         control.AltaDeDepartamento(nombre, descripcion, url);
+        JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch(Exception ex){
+           JOptionPane.showMessageDialog(null, "Nombre ya esta en uso por otro departamento", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed

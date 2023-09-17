@@ -5,6 +5,7 @@
 package presentacion;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import logica.Controlador;
 /**
  *
@@ -169,7 +170,13 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
         calendar.set(Calendar.DAY_OF_MONTH, diaD);
         Date fecha = calendar.getTime();
         int descuentoDePaquete = Integer.parseInt(descuentoPaquete.getText());
+        
+        try{
         control.crearPaqueteActividadTuristica(nombreDePaquete,descripcionDePaquete,validezDePaquete,fecha, descuentoDePaquete);
+        JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch(Exception ex){
+           JOptionPane.showMessageDialog(null, "Nombre ya esta en uso por otro paquete", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_aceptarCrearPaqueteActionPerformed
 
     private void cancelarCrearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCrearPaqueteActionPerformed

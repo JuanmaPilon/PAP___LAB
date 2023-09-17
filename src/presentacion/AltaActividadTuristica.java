@@ -7,6 +7,7 @@ package presentacion;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import logica.Controlador;
 
 /**
@@ -215,7 +216,12 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
         calendar.set(Calendar.DAY_OF_MONTH, diaA);
         Date fecha = calendar.getTime();
         
+        try{
         control.guardarActividad(nombreActividad,descripcionActividad,duracionActividad,costoActividad,nombreCuidad,fecha,nombreProveedor,nombreDepartamento);
+        JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){
+           JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_aceptarAltaActividadTuristicaActionPerformed
 
     private void cancelarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarAltaActividadTuristicaActionPerformed

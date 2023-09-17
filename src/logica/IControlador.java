@@ -4,10 +4,14 @@ package logica;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import persistencia.exceptions.CorreoElectronicoExistenteException;
+import persistencia.exceptions.NicknameExistenteException;
+import persistencia.exceptions.NonexistentEntityException;
+import persistencia.exceptions.PreexistingEntityException;
 public interface IControlador {
 
-public abstract void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String nacionalidad);
-public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String descripcion, String link);//throws UsuarioRepetidoException;// es una prueba
+public abstract void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
+public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fNacimiento, String descripcion, String link) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract Usuario ConsultaDeUsuario(String nickname); //Devuelve el usuario 
 public abstract ArrayList listaUsuarios();  //devuelve una lista de todos los usuarios sin discriminar su tipo
 public abstract ArrayList listaProveedores(); //devuelve una lista de todos los proveedores
@@ -24,16 +28,16 @@ public abstract ArrayList<DTSalidaTuristica> encontraSalidasTuristicasDeActivida
 public abstract ArrayList listaSalActividadTuristica(String actividad);
 public abstract List consultaPaquetes();
 public abstract SalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
-public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete);
-public abstract void AltaDeDepartamento(String nombre, String descripcion, String url);
+public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) throws PreexistingEntityException, Exception;
+public abstract void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception;
 public abstract List<String> llenarCmboBoxDep();
-public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad);
-public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento);
+public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception;
+public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento) throws PreexistingEntityException, Exception;
 public ArrayList<DTUsuario> traerUsuarioMod();
 public ArrayList<DTTurista> traerUsuarioTurista();
 public DTTurista traerDTTurista(String nickname);
 public DTProveedor traerDTProveedor(String nickname);
-public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada);
+public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada) throws NonexistentEntityException, Exception;
 public abstract List findSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae lista de strings con los nombres de las actividades asociadas a un depto att:carlangas
 public abstract ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
 public abstract void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, int costo, Date fecha );

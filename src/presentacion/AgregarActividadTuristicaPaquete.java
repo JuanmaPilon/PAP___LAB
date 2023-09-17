@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import logica.Controlador;
 /**
  *
@@ -175,7 +176,12 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
     
     String actividadSeleccionada = (String) paqueteAgregarActividadTuristica.getSelectedItem();
     
+    try{
     control.asignarActividadPaquete(paqueteSeleccionado, actividadSeleccionada);
+    JOptionPane.showMessageDialog(null, "Se agrego correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    }catch (Exception ex){
+       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     
     }//GEN-LAST:event_aceptarAgregarActividadPaqueteActionPerformed
 

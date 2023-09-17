@@ -26,6 +26,7 @@ import  persistencia.exceptions.PreexistingEntityException;
 import logica.Turista;
 import logica.Controlador;
 import java.text.ParseException;
+import persistencia.exceptions.NicknameExistenteException;
 /**
  *
  * @author natil
@@ -207,22 +208,26 @@ public class AltaUsuarioProveedor extends javax.swing.JInternalFrame {
 
     private void aceptarAltaProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarAltaProveedorActionPerformed
     String nickname = txtnickname.getText();
-    String nombre = txtnombre.getText();
-    String apellido = txtapellido.getText();
-    String correo = txtcorreo.getText();
-    String desc = txtdescripcion.getText();
-    String link = txtlink.getText();
-   // Departamento depto = new Departamento();
-    int dia = (int) cmbdia.getValue();
-    int mes = (int) cmbmes.getValue();
-    int anio = (int) cmbanio.getValue();
+        String nombre = txtnombre.getText();
+        String apellido = txtapellido.getText();
+        String correo = txtcorreo.getText();
+        String desc = txtdescripcion.getText();
+        String link = txtlink.getText();
+        int dia = (int) cmbdia.getValue();
+        int mes = (int) cmbmes.getValue();
+        int anio = (int) cmbanio.getValue();
 
-    Calendar calendar = Calendar.getInstance();
-    calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
-    Date fecha = calendar.getTime();
-     try {
-      control.AltaDeUsuarioProveedor(nickname,  nombre,  apellido,  correo,  fecha,  desc,  link);
-   } catch (Exception e) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
+        Date fecha = calendar.getTime();
+     try {   
+        control.AltaDeUsuarioProveedor(nickname,  nombre,  apellido,  correo,  fecha,  desc,  link);
+        JOptionPane.showMessageDialog(null, "Alta realizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    } catch (CorreoElectronicoExistenteException e) {
+        JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (NicknameExistenteException e) {
+        JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     } 
     }//GEN-LAST:event_aceptarAltaProveedorActionPerformed

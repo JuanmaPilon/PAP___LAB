@@ -176,9 +176,9 @@ Controlador control = Controlador.getInstance();
         Date fechaSalida = (Date) sprFecha.getValue();
         try{
             control.AltaSalidaTuristica(txtnombreSalida.getText(), maxCantTuristas,fechaAlta, fechaSalida,txtLugar.getText(), txtActividad.getText());
-            //(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar)
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+         JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch(Exception ex){
+           JOptionPane.showMessageDialog(null, "Nombre ya esta en uso por otra salida turistica", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_aceptarAltaProveedorActionPerformed

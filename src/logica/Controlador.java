@@ -7,7 +7,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import persistencia.ControladoraPersistencia;
+import persistencia.exceptions.CorreoElectronicoExistenteException;
+import persistencia.exceptions.NicknameExistenteException;
+import persistencia.exceptions.NonexistentEntityException;
+import persistencia.exceptions.PreexistingEntityException;
 
 public class Controlador implements IControlador{
     
@@ -26,7 +31,7 @@ public class Controlador implements IControlador{
     //descomentado por una prueba:
     @Override
     public void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, 
-                                        Date fNacimiento, String nacionalidad) {
+                                        Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception{
     
         Turista turista = new Turista(); 
         turista.setNickname(nickname);
@@ -36,7 +41,13 @@ public class Controlador implements IControlador{
         turista.setfNacimiento(fNacimiento);
         turista.setNacionalidad(nacionalidad);
         
-        controlPersis.guardarTurista(turista);
+        try {
+           controlPersis.guardarTurista(turista);
+        } catch (NicknameExistenteException ex) {
+            throw new NicknameExistenteException("Nickname ya en uso por un usuario");
+        } catch (CorreoElectronicoExistenteException e) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un usuario ");
+        }
     };
    
     @Override
@@ -46,23 +57,28 @@ public class Controlador implements IControlador{
    
     @Override
     public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, 
-                                            Date fNacimiento, String descripcion, String link){
-        Proveedor proveedor = new Proveedor();
-        proveedor.setNickname(nickname);
-        proveedor.setNombre(nombre);
-        proveedor.setApellido(apellido);
-        proveedor.setCorreo(correo);
-        proveedor.setfNacimiento(fNacimiento);
-        proveedor.setDescripcion(descripcion);
-        proveedor.setLink(link);
-        
-        controlPersis.guardarProveedor(proveedor);
-   };
+   Date fNacimiento, String descripcion, String link) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
+   Proveedor proveedor = new Proveedor();
+   proveedor.setNickname(nickname);
+   proveedor.setNombre(nombre);
+   proveedor.setApellido(apellido);
+   proveedor.setCorreo(correo);
+   proveedor.setfNacimiento(fNacimiento);
+   proveedor.setDescripcion(descripcion);
+   proveedor.setLink(link);
    
+   try {
+           controlPersis.guardarProveedor(proveedor);
+        } catch (NicknameExistenteException ex) {
+            throw new NicknameExistenteException("Nickname ya en uso por un usuario");
+        } catch (CorreoElectronicoExistenteException e) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un usuario ");
+        }
+}
 
     //String nombreProveedor, String nombreDep,
     @Override
-    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha,String nombreProveedor, String nombreDepartamento){
+    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha,String nombreProveedor, String nombreDepartamento) throws PreexistingEntityException, Exception{
         Actividad actividad = new Actividad();
         actividad.setCiudad(nombreCuidad);
         actividad.setNombre(nombreActividad);
@@ -76,16 +92,21 @@ public class Controlador implements IControlador{
         // dep.getListaActTur().add(actividad);
         actividad.setDepartamento(controlPersis.traerDepartamento(nombreDepartamento));// hago que mi actividad apunte al departamento que me traje
         //idem con proveedor
+        
+        try{
         Proveedor pro = new Proveedor();
         pro = controlPersis.traerProveedor(nombreProveedor);
         actividad.setProveedor(pro);
    
         controlPersis.guardarActividad(actividad);
+        }catch (PreexistingEntityException e) {
+            throw new PreexistingEntityException("Ya existe ua actividad con ese nombre");
+        }
 
    }
    
    @Override
-   public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) {
+   public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception{
        SalidaTuristica salidaTuristica = new SalidaTuristica();
         salidaTuristica.setNombre(nombre);
         salidaTuristica.setCantMax(cantMax);
@@ -96,8 +117,11 @@ public class Controlador implements IControlador{
         Actividad actividad = ConsultaActividadTuristica(nombreActividad);
         salidaTuristica.setActividad(actividad);
         actividad.getListaSalidaTuristica().add(salidaTuristica);
-        
+        try{
         controlPersis.guardarSalidaTuristica(salidaTuristica, actividad);
+        } catch (PreexistingEntityException e) {
+            throw new PreexistingEntityException("Ya existe un departamento con ese nombre");
+        }
     }
 ////////////
    @Override
@@ -163,7 +187,7 @@ public class Controlador implements IControlador{
     actividad.setListaSalidaTuristica(listaSalidaTuristica);
     actividad.setListaPaquete(listaPaquete);
 
-    controlPersis.guardarActividad(actividad);
+    //controlPersis.guardarActividad(actividad);
 
 };//Juanma
    
@@ -175,14 +199,18 @@ public class Controlador implements IControlador{
     
     //Alta de Departamento. No requiere GUI.
     @Override
-    public void AltaDeDepartamento(String nombre, String descripcion, String url){
+    public void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception{
        
        Departamento depto = new Departamento();
        depto.setNombre(nombre);
        depto.setDescripcion(descripcion);
        depto.setUrl(url);
        
+       try{
        controlPersis.guardarDepartamento(depto);
+       }catch (PreexistingEntityException e) {
+            throw new PreexistingEntityException("Ya existe un departamento con ese nombre");
+        }
    };
    
    @Override
@@ -193,15 +221,18 @@ public class Controlador implements IControlador{
 
 
 @Override 
-public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) {
+public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) throws PreexistingEntityException, Exception {
     Paquete paquete = new Paquete();
     paquete.setNombre(nombreDePaquete);
     paquete.setDescripcion(descripcionDePaquete);
     paquete.setValidez(validezDePaquete);
     paquete.setDescuento(descuentoDePaquete);
     paquete.setFechaAlta(altaDePaquete);//le seteo fechaAlta al paquete
-
+try{
     controlPersis.guardarPaqueteActividadTuristica(paquete);
+} catch (PreexistingEntityException e) {
+            throw new PreexistingEntityException("Ya existe un paquete con ese nombre");
+        }
 }
 
    //Lista auxiliar de DTUsuarios para mostrar los usuarios (turista y proveevor) registrados en la BD.
@@ -297,8 +328,12 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
    
     //
     @Override
-     public void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada){
+     public void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada) throws NonexistentEntityException, Exception{
+         try{
          controlPersis.asignarActividadPaquetePersis(paqueteSeleccionado, actividadSeleccionada);
+         } catch (NonexistentEntityException ex) {
+            throw new NonexistentEntityException("El paquete con ese nombre no existe");
+        }
      }
   
 
@@ -376,11 +411,20 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
             AltaDeUsuarioProveedor("eldiez", "Pablo", "Bengoechea", "eldiez@socfomturriv.org.uy", fecha.parse("27/06/1965"), "Pablo es el presidente de la Sociedad de Fomento Turıstico de Rivera (conocida como Socfomturriv)", "http://wwww.socfomturriv.org.uy");
             AltaDeUsuarioProveedor("meche" ,"Mercedes", "Venn", "meche@colonia.gub.uy", fecha.parse("31/12/1990"), "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
     
-        } catch (ParseException ex) {
-            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       } catch (ParseException ex) {
+    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+} catch (CorreoElectronicoExistenteException ex) {
+    JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+} catch (NicknameExistenteException ex) {
+    JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+} catch (PreexistingEntityException ex) {
+    // Manejo de la excepción PreexistingEntityException
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+}
         
         //Departamentos
+        try{
         AltaDeDepartamento("Canelones", "Division Turismo de la Intendencia", "https://www.imcanelones.gub.uy/es");
         AltaDeDepartamento("Maldonado", "Division Turismo de la Intendencia", "https://www.maldonado.gub.uy/");
         AltaDeDepartamento("Rocha", "La Organizacion de Gestion del Destino (OGD) Rocha es un ambito de articulacion publico – privada en el sector turıstico que integran la Corporacion Rochense de Turismo y la Intendencia de Rocha a traves de su Direccion de Turismo.", "www.turismorocha.gub.uy");
@@ -400,7 +444,13 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
         AltaDeDepartamento("Durazno", "Division Turismo de la Intendencia", "https://durazno.uy");
         AltaDeDepartamento("Tacuarembo", "Division Turismo de la Intendencia", "https://tacuarembo.gub.uy");
         AltaDeDepartamento("Montevideo", "Division Turismo de la Intendencia", "https://montevideo.gub.uy/areastematicas/turismo");
-       
+        } catch (Exception ex) {
+            try {
+                throw new Exception("Ha ocurrido un error");
+            } catch (Exception ex1) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
         
  
         //Actividades Turisticas y Salidas Turisticas
@@ -411,9 +461,11 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
             guardarActividad("Almuerzo en el Real de San Carlos", "Restaurante en la renovada Plaza de Toros con menu internacional", 2, 800, "Colonia del Sacramento", fecha.parse("1/8/2022"), "meche", "Colonia");
             guardarActividad("Almuerzo en Valle del Lunarejo", "Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.", 2, 300, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera");
             guardarActividad("Cabalgata en Valle del Lunarejo", "Cabalgata por el ´area protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera"); 
-        } catch (ParseException ex) {
-            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (PreexistingEntityException ex) {
+    JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+}
         
         
         SimpleDateFormat fechahora = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -432,23 +484,36 @@ public void crearPaqueteActividadTuristica(String nombreDePaquete, String descri
             AltaSalidaTuristica("Cabalgata 1", 4, fecha.parse("15/08/2022"), fechahora.parse("10/09/2022 16:00"), "Posada del Lunarejo", "Cabalgata en Valle del Lunarejo");
             AltaSalidaTuristica("Cabalgata 2", 4, fecha.parse("15/08/2022"), fechahora.parse("11/09/2022 16:00"), "Posada del Lunarejo", "Cabalgata en Valle del Lunarejo");
         
-        } catch (ParseException ex) {
-            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         } catch (PreexistingEntityException ex) {
+    JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra salida", "Error", JOptionPane.ERROR_MESSAGE);
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+}
+        
+
 
         //crear paquetes
         try {
             crearPaqueteActividadTuristica("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomıa", 60, fecha.parse("10/08/2022"), 20);
             crearPaqueteActividadTuristica("Un dıa en Colonia", "Paseos por el casco historico y se puede terminar con Almuerzo en la Plaza de Toros", 45, fecha.parse("01/08/2022"), 15);
-        } catch (ParseException ex) {
-            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       } catch (PreexistingEntityException ex) {
+    JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+}
+
 
         //asignar Actividad turistica a paquete
+        try{
         asignarActividadPaquete("Disfrutar Rocha", "Degusta");
         asignarActividadPaquete("Disfrutar Rocha", "Teatro con Sabores");
         asignarActividadPaquete("Un dıa en Colonia", "Tour por Colonia del Sacramento");
         asignarActividadPaquete("Un dıa en Colonia", "Almuerzo en el Real de San Carlos");
+        } catch (NonexistentEntityException ex) {
+    JOptionPane.showMessageDialog(null, "El paquete con ese nombre no existe", "Error", JOptionPane.ERROR_MESSAGE);
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+}
 
         try {
             //inscripcion

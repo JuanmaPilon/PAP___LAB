@@ -14,6 +14,7 @@ import  persistencia.exceptions.PreexistingEntityException;
 import logica.Turista;
 import logica.Controlador;
 import java.text.ParseException;
+import persistencia.exceptions.NicknameExistenteException;
 /**
  *
  * @author natil
@@ -199,9 +200,14 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
     try {
         control.AltaDeUsuarioTurista(nickname, nombre, apellido, correo, fecha, nacionalidad);
+    JOptionPane.showMessageDialog(null, "Alta realizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    } catch (CorreoElectronicoExistenteException e) {
+        JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (NicknameExistenteException e) {
+        JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
+    } 
     
     }//GEN-LAST:event_btnguardarActionPerformed
 

@@ -21,6 +21,9 @@ import logica.Usuario;
 import logica.SalidaTuristica;
 import logica.Paquete;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
+import persistencia.exceptions.NicknameExistenteException;
+import persistencia.exceptions.NonexistentEntityException;
+import persistencia.exceptions.PreexistingEntityException;
 
 public class ControladoraPersistencia {
     //creo las controladoras de persistencia de cada clase
@@ -226,47 +229,46 @@ public ArrayList<DTUsuario> traerUsuarios(){
     
  
 //Guardar Departamento
-    public void guardarDepartamento(Departamento depto) {
+    public void guardarDepartamento(Departamento depto) throws PreexistingEntityException, Exception{
         try {
             //crear Departamento en BD
             departamentoJpa.create(depto);
-             JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PreexistingEntityException ex) {
+            throw new PreexistingEntityException("Nombre ya esta en uso por otro departamento");
         }
     }
 
-    public void guardarActividad(Actividad actividad) {
+    public void guardarActividad(Actividad actividad) throws PreexistingEntityException, CorreoElectronicoExistenteException, Exception{
         try {
             actividadJpa.create(actividad);
-            JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PreexistingEntityException ex) {
+            throw new PreexistingEntityException("Nickname ya en uso por un usuario");
         }
     }
     
     //public void guardarActividad(string nombreProveedor,string nombreDep,string nombreActividad,string descripcionActividad,string duracionActividad,string costoActividad,string nombreCuidad,int dia,int mes,int anio);
 
-    public void guardarTurista(Turista turista) {
+    public void guardarTurista(Turista turista) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception{
     try {
-        turistaJpa.create(turista);
-         JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-    } catch (CorreoElectronicoExistenteException e) {
-       JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception ex) {
-       JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+            turistaJpa.create(turista);
+        } catch (NicknameExistenteException ex) {
+            throw new NicknameExistenteException("Nickname ya en uso por un usuario");
+        } catch (CorreoElectronicoExistenteException e) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un usuario ");
+        }
     }
     
-    public void guardarProveedor(Proveedor proveedor){
-        try{
-        proveedorJpa.create(proveedor);
-         JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-       } catch (CorreoElectronicoExistenteException e) {
-       JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception ex) {
-       JOptionPane.showMessageDialog(null, "El nickname ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+    public void guardarProveedor(Proveedor proveedor) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception{
+        
+        try {
+            proveedorJpa.create(proveedor);
+        } catch (NicknameExistenteException ex) {
+            throw new NicknameExistenteException("Nickname ya en uso por un usuario");
+        } catch (CorreoElectronicoExistenteException e) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un usuario ");
+        }
+         
+     
     }
     public void guardarInscripcion(Inscripcion insc){
         try{
@@ -281,21 +283,20 @@ public ArrayList<DTUsuario> traerUsuarios(){
         return departamentoJpa.obtenerNombresDepartamentos();
     }
     
-     public void guardarSalidaTuristica(SalidaTuristica salidaTuristica, Actividad actividad){
+     public void guardarSalidaTuristica(SalidaTuristica salidaTuristica, Actividad actividad) throws PreexistingEntityException, Exception{
        try{
         salidaTuristicaJpa.create(salidaTuristica);
         actividadJpa.edit(actividad);
-        JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-       }catch (Exception ex){
-           JOptionPane.showMessageDialog(null, "El nombre ya esta ocupado por otra salida turistica", "Error", JOptionPane.ERROR_MESSAGE);
-       }
+       } catch (PreexistingEntityException e) {
+            throw new PreexistingEntityException("Ya existe una salida con ese nombre");
+        }
     }
-    public void guardarPaqueteActividadTuristica(Paquete paquete) {
+     
+    public void guardarPaqueteActividadTuristica(Paquete paquete) throws  PreexistingEntityException, Exception{
         try {
             paqueteJpa.create(paquete);
-            JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }  catch (PreexistingEntityException ex) {
+            throw new PreexistingEntityException("Nombre ya esta en uso por otro paquete");
         }
     }
 
@@ -350,17 +351,17 @@ public ArrayList<DTUsuario> traerUsuarios(){
       
      }
     
-     public void asignarActividadPaquetePersis(String paqueteSeleccionado,String actividadSeleccionada){
+     public void asignarActividadPaquetePersis(String paqueteSeleccionado,String actividadSeleccionada) throws NonexistentEntityException, Exception{
      Paquete paquete = paqueteJpa.findPaquete(paqueteSeleccionado);
      Actividad actividad = actividadJpa.findActividad(actividadSeleccionada);
      
      paquete.getListaActividades().add(actividad);
         try {
             paqueteJpa.edit(paquete);
-             JOptionPane.showMessageDialog(null, "Se agrego correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+             
       
-        } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NonexistentEntityException ex) {
+            throw new NonexistentEntityException("El paquete con ese nombre no existe");
         }
      }
     
