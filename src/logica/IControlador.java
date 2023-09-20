@@ -46,6 +46,7 @@ public abstract boolean turistaYaInscriptoSalidaTuristica(String salida, String 
 public abstract DTSalidaTuristica traerDTSalidaTuristica(String nombreSalida);
 public abstract ArrayList<DTSalidaTuristica> traerInscSalidasDeTurista(String nickname);
 public abstract ArrayList<DTActividad> traerInscActividadesDeTurista(String nickname);
+public abstract ArrayList<String> listaPaquetesDeActividad(String nombreActividad);
 
 public abstract void cargarDatosDePrueba();
 }

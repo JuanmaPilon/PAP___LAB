@@ -438,7 +438,98 @@ try{
         return listaInscActividadesDeTurista;
     }
     
+        public ArrayList<DTActividad> traerActividadesDelProveedor(String nickname) {
+            Proveedor p = (Proveedor) ConsultaDeUsuario(nickname);
+            
+            ArrayList<DTActividad> listaActividadesDelProveedor = new ArrayList();
+            
+            for (Actividad a : p.getListaActividades()){
+                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), 
+                                                      a.getDuracion(), 
+                                                        a.getCosto(), a.getCiudad(),
+                                                    a.getfAlta(), 
+                                            a.getProveedor().getNombre());
+                listaActividadesDelProveedor.add(dtactividad);
+            }
+            
+            return listaActividadesDelProveedor;
+        }
+        
+        public ArrayList<DTSalidaTuristica> traerSalidasDelProveedor(String nickname) {
+            Proveedor p = (Proveedor) ConsultaDeUsuario(nickname);
+            
+            ArrayList<DTSalidaTuristica> listaSalidasDelProveedor = new ArrayList();
+            //ArrayList<Actividad> listaActividadProveedor = p.getListaActividades();
+            
+            for (Actividad a : p.getListaActividades()){
+                for (SalidaTuristica s : a.getListaSalidaTuristica()){
+                    DTSalidaTuristica dtSalida = new DTSalidaTuristica(s.getNombre(), s.getCantMax(),
+                                            s.getfAlta(), s.getfSalida(), s.getLugar(), s.getActividad().getNombre());
+                    listaSalidasDelProveedor.add(dtSalida);
+                }
+            }       
+            return listaSalidasDelProveedor;
+        }
     
+    public String traerDepartamentoSalida(String nombreActividad) {
+        Actividad a = ConsultaActividadTuristica(nombreActividad);
+        return a.getDepartamento().getNombre();
+    }
+    
+    @Override
+    public ArrayList<String> listaPaquetesDeActividad(String nombreActividad) {
+        Actividad a = ConsultaActividadTuristica(nombreActividad);
+        ArrayList<String> listaPaquetesDeActividad = new ArrayList();
+        
+        for (Paquete p : a.getListaPaquete() ){
+            listaPaquetesDeActividad.add(p.getNombre());
+        }
+   
+        return listaPaquetesDeActividad;
+    }
+    
+    public DTActividad traerDTActividad(String nombreActividad){
+        Actividad a = ConsultaActividadTuristica(nombreActividad);
+        //DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, String nombreProveedor) 
+        DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(),
+                a.getCosto(), a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname());
+        
+        return dtactividad;
+    }
+    
+    
+    public ArrayList<DTPaquete> traerListaDTPaquetes(){
+        List<Paquete> listaPaquetes = consultaPaquetes();
+        
+        ArrayList<DTPaquete> listaDTPaquete = new ArrayList();
+        //DTPaquete(String nombre, String descripcion, int validez, int descuento, Date fechaAlta)
+        for(Paquete p : listaPaquetes){
+            DTPaquete dtpaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
+            listaDTPaquete.add(dtpaquete);
+        }
+        
+        return listaDTPaquete;
+    }
+    
+    public ArrayList<String> listaActividadesDelPaquete(String nombrePaquete) {
+        Paquete p = controlPersis.traerPaquete(nombrePaquete);
+        
+        ArrayList<String> listaActividadesDelPaquete = new ArrayList();
+        
+        for (Actividad a : p.getListaActividades()){
+            listaActividadesDelPaquete.add(a.getNombre());
+        }
+        
+        return listaActividadesDelPaquete;
+    }
+    
+    public DTPaquete traerDTPaquete(String nombrePaquete) {
+         Paquete p = controlPersis.traerPaquete(nombrePaquete);
+         
+         DTPaquete dtpaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
+         
+         return dtpaquete;
+    }
     
     //Carga de los Datos de Prueba
     @Override
@@ -582,6 +673,17 @@ try{
         }
 
     }
+
+
+
+
+
+ 
+
+
+
+
+
 
  
 

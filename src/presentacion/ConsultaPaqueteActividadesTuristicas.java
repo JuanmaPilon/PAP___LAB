@@ -4,17 +4,34 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
+import logica.Controlador;
+import logica.DTPaquete;
+
 /**
  *
  * @author natil
  */
 public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalFrame {
-
+     Controlador control = Controlador.getInstance();
     /**
      * Creates new form ConsultaPaqueteActividadesTuristicas2
      */
     public ConsultaPaqueteActividadesTuristicas() {
         initComponents();
+    }
+    
+    public ConsultaPaqueteActividadesTuristicas(String nombrePaquete) {
+        initComponents();
+        //aca tengo la actividad
+        
+        cmbPaquetes.removeAllItems();
+        cmbPaquetes.addItem(nombrePaquete);
+        //cmbActividades.setSelectedItem(salida.getNombreActividad());
+ 
+        
+        //para qeu no quede en loop y no se pueda modificar esta entrada
+        cmbPaquetes.setEnabled(false);
     }
 
     /**
@@ -40,6 +57,27 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
         cmbPaquetes = new javax.swing.JComboBox<>();
         cmbActividades = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
+
+        setClosable(true);
+        setTitle("Consulta Paquete de Actividad Turistica");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         btnVer.setText("Ver");
         btnVer.addActionListener(new java.awt.event.ActionListener() {
@@ -68,54 +106,58 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
 
         jLabel7.setText("Ver detalles de Actividad Turistica:");
 
-        cmbPaquetes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista de paquetes actividad turisticas" }));
-        cmbPaquetes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmbPaquetesMouseClicked(evt);
+        cmbPaquetes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbPaquetesItemStateChanged(evt);
             }
         });
-        cmbPaquetes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbPaquetesActionPerformed(evt);
-            }
-        });
-
-        cmbActividades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista de actividades turisticas" }));
 
         jLabel2.setText("Datos del paquete seleccionado:");
+
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbActividades, 0, 312, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtValidez)
-                                    .addComponent(txtDescripcion)
-                                    .addComponent(txtDescuento))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnVer)))
+                                .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cmbActividades, 0, 312, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel6))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtNombre)
+                                            .addComponent(txtValidez)
+                                            .addComponent(txtDescripcion)
+                                            .addComponent(txtDescuento))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnVer))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(309, 309, 309)
+                        .addComponent(btnCerrar)))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -148,27 +190,77 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
                     .addComponent(jLabel7)
                     .addComponent(cmbActividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVer))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(btnCerrar)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
-
+        
+         if(cmbActividades.getSelectedIndex() != -1){
+            String nombreActividad = (String) cmbActividades.getSelectedItem();
+            ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad);
+            getParent().add(verConsultaActividadTuristica);        
+            verConsultaActividadTuristica.show();
+        }
     }//GEN-LAST:event_btnVerActionPerformed
 
-    private void cmbPaquetesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbPaquetesMouseClicked
-        // TODO add your handling code here:
-        //actualizarDatosDePaquete();
-    }//GEN-LAST:event_cmbPaquetesMouseClicked
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void cmbPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPaquetesActionPerformed
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        ArrayList<DTPaquete> paquetes = control.traerListaDTPaquetes();
+        
+        for (DTPaquete dtpaquete : paquetes){
+            cmbPaquetes.addItem(dtpaquete.getNombre());
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
 
-    }//GEN-LAST:event_cmbPaquetesActionPerformed
+    private void cmbPaquetesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPaquetesItemStateChanged
+        cmbActividades.removeAllItems();
+        // Verifica si se seleccionó un departamento
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            String paqueteSeleccionado = (String) cmbPaquetes.getSelectedItem();
+        
+        
+        // Verifica si el departamento seleccionado no es nulo ni está vacío
+        if (paqueteSeleccionado != null && !paqueteSeleccionado.isEmpty()) {
+            
+            DTPaquete dtpaquete = control.traerDTPaquete(paqueteSeleccionado);
+            
+            txtNombre.setText(dtpaquete.getNombre());
+            txtDescripcion.setText(dtpaquete.getDescripcion());
+            txtValidez.setText(String.valueOf(dtpaquete.getValidez()));
+            txtDescuento.setText(String.valueOf(dtpaquete.getDescuento()));
+            
+            
+            ArrayList<String> actividades = control.listaActividadesDelPaquete(paqueteSeleccionado);
+
+            cmbActividades.removeAllItems();
+
+            // Verifica si se encontraron actividades
+            if (actividades != null && !actividades.isEmpty()) {
+                for (String actividad : actividades) {
+                    cmbActividades.addItem(actividad);
+                }
+            }
+        } else {
+            // Si no se seleccionó un departamento válido, puedes limpiar cmbActividades y cmbSalidas
+            cmbActividades.removeAllItems();
+        }
+    }
+        
+        
+        
+    }//GEN-LAST:event_cmbPaquetesItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnVer;
     private javax.swing.JComboBox<String> cmbActividades;
     private javax.swing.JComboBox<String> cmbPaquetes;

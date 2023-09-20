@@ -432,5 +432,9 @@ public ArrayList<DTUsuario> traerUsuarios(){
         
         return listaDTSalidaTuristica;
     }
+
+    public Paquete traerPaquete(String nombrePaquete) {
+        return paqueteJpa.findPaquete(nombrePaquete);
+    }
      
 }

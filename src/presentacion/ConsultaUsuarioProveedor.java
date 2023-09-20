@@ -4,10 +4,13 @@
  */
 package presentacion;
 
+import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
+import logica.DTActividad;
 import logica.DTProveedor;
+import logica.DTSalidaTuristica;
 
 /**
  *
@@ -22,6 +25,8 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
     public ConsultaUsuarioProveedor(String nickname) {
         initComponents();
         cargarDatosProveedor(nickname);
+        cargarSalidasDelProveedor(nickname);
+        cargarActividadesDelProveedor( nickname);
     }
 
     /**
@@ -35,13 +40,13 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
 
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        cmbActividad = new javax.swing.JComboBox<>();
+        cmbActividades = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         btnVerActividad = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        cmbSalida = new javax.swing.JComboBox<>();
+        cmbSalidas = new javax.swing.JComboBox<>();
         txtApellido = new javax.swing.JTextField();
         btnVerSalida = new javax.swing.JButton();
         txtCorreo = new javax.swing.JTextField();
@@ -56,20 +61,41 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         txtFNacimiento = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtADescripcion = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Consulta Datos Proveedor");
         setToolTipText("");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel11.setText("Actividad Turistica:");
 
         jLabel15.setText("Apellido:");
 
-        cmbActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividad turistica" }));
-
         jLabel16.setText("Correo electronico:");
 
         btnVerActividad.setText("Ver");
+        btnVerActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActividadActionPerformed(evt);
+            }
+        });
 
         jLabel17.setText("Fecha de nacimiento:");
 
@@ -77,11 +103,14 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
 
         txtNombre.setEditable(false);
 
-        cmbSalida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista salida actividad turistica" }));
-
         txtApellido.setEditable(false);
 
         btnVerSalida.setText("Ver");
+        btnVerSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerSalidaActionPerformed(evt);
+            }
+        });
 
         txtCorreo.setEditable(false);
 
@@ -105,9 +134,17 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
 
         txtFNacimiento.setEditable(false);
 
+        txtADescripcion.setEditable(false);
         txtADescripcion.setColumns(20);
         txtADescripcion.setRows(5);
         jScrollPane1.setViewportView(txtADescripcion);
+
+        jButton1.setText("Cerrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,8 +163,8 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel12)
                                     .addGap(44, 44, 44)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cmbActividad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cmbSalida, 0, 318, Short.MAX_VALUE))
+                                        .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cmbSalidas, 0, 318, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnVerSalida))
                                 .addGroup(layout.createSequentialGroup()
@@ -157,6 +194,10 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel3))
                         .addGap(0, 67, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,30 +232,63 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(18, 28, Short.MAX_VALUE)
                 .addComponent(jLabel18)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(cmbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbActividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerActividad))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(cmbSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerSalida))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        
+        
+        
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btnVerActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActividadActionPerformed
+        if(cmbActividades.getSelectedIndex() != -1){
+        String nombreActividad = (String) cmbActividades.getSelectedItem();
+        
+        ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad);
+        getParent().add(verConsultaActividadTuristica);        
+        verConsultaActividadTuristica.show();
+        }
+    }//GEN-LAST:event_btnVerActividadActionPerformed
+
+    private void btnVerSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSalidaActionPerformed
+         if(cmbSalidas.getSelectedIndex() != -1){
+        String nombreSalida = (String) cmbSalidas.getSelectedItem();
+        
+        ConsultaDeSalidaTuristica verConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(nombreSalida);
+        getParent().add(verConsultaDeSalidaTuristica);        
+        verConsultaDeSalidaTuristica.show();
+         }
+    }//GEN-LAST:event_btnVerSalidaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVerActividad;
     private javax.swing.JButton btnVerSalida;
-    private javax.swing.JComboBox<String> cmbActividad;
-    private javax.swing.JComboBox<String> cmbSalida;
+    private javax.swing.JComboBox<String> cmbActividades;
+    private javax.swing.JComboBox<String> cmbSalidas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -247,15 +321,31 @@ private void cargarDatosProveedor(String nickname){
     txtCorreo.setText(t.getCorreo());
     txtFNacimiento.setText(t.getfNacimiento());
     
-//    int dia = Integer.parseInt(t.getfNacimiento().substring(1,2));
-//    int mes = Integer.parseInt(t.getfNacimiento().substring(4,5));  
-//    int anio = Integer.parseInt(t.getfNacimiento().substring(6,10));   
-//    spndia.setValue(dia);
-//    spnmes.setValue(mes);
-//    spnanio.setValue(anio);
-//    System.out.println(t.getfNacimiento());
-//   System.out.println(dia +" "+mes+"  "+anio);
+
 }
+
+private void cargarSalidasDelProveedor(String nickname){
+
+    ArrayList<DTSalidaTuristica> listaSalidasDeTurista = control.traerSalidasDelProveedor(nickname);
+    
+    for (DTSalidaTuristica dt : listaSalidasDeTurista){
+        cmbSalidas.addItem(dt.getNombre());
+    }        
+}
+
+private void cargarActividadesDelProveedor(String nickname){
+    
+    ArrayList<DTActividad> listaActividadesDeProveedor = control.traerActividadesDelProveedor(nickname);
+        for (DTActividad dt : listaActividadesDeProveedor){
+        cmbActividades.addItem(dt.getNombre());
+    }  
+    
+}
+
+
+
+
+
 
 public void mostrarMensaje(String mensaje, String tipo, String titulo){
         JOptionPane optionPane = new JOptionPane(mensaje);

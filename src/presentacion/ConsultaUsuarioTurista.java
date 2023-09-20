@@ -81,6 +81,11 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         txtApellido.setEditable(false);
 
         btnVerActividad.setText("Ver");
+        btnVerActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActividadActionPerformed(evt);
+            }
+        });
 
         txtCorreo.setEditable(false);
 
@@ -180,7 +185,6 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(98, 98, 98)
@@ -210,8 +214,25 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSalidaActionPerformed
-        //cmbSalidas.getSelectedItem();
+         if(cmbSalidas.getSelectedIndex() != -1){
+        
+        String nombreSalida = (String) cmbSalidas.getSelectedItem();
+        
+        ConsultaDeSalidaTuristica verConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(nombreSalida);
+        getParent().add(verConsultaDeSalidaTuristica);        
+        verConsultaDeSalidaTuristica.show();
+         }
     }//GEN-LAST:event_btnVerSalidaActionPerformed
+
+    private void btnVerActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActividadActionPerformed
+         if(cmbActividades.getSelectedIndex() != -1){
+        String nombreActividad = (String) cmbActividades.getSelectedItem();
+        
+        ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad);
+        getParent().add(verConsultaActividadTuristica);        
+        verConsultaActividadTuristica.show();
+         }
+    }//GEN-LAST:event_btnVerActividadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

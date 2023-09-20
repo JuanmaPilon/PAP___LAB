@@ -17,6 +17,33 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+    public ConsultaDeSalidaTuristica(String nombreSalida) {
+        initComponents();
+        //aca tengo la actividad
+        DTSalidaTuristica salida = control.traerDTSalidaTuristica(nombreSalida);
+        String departamentoSalida = control.traerDepartamentoSalida(salida.getNombreActividad());
+        
+        cmbDepartamentos.removeAllItems();
+        cmbDepartamentos.addItem(departamentoSalida);
+        //cmbDepartamentos.setSelectedItem(departamentoSalida);
+        
+        cmbActividades.removeAllItems();
+        cmbActividades.addItem(salida.getNombreActividad());
+        //cmbActividades.setSelectedItem(salida.getNombreActividad());
+        
+        cmbSalidas.removeAllItems();
+        cmbSalidas.addItem(nombreSalida);
+        //cmbSalidas.setSelectedItem(nombreSalida);
+        
+        //para qeu no quede en loop y no se pueda modificar esta entrada
+        cmbSalidas.setEnabled(false);
+        cmbActividades.setEnabled(false);
+        cmbDepartamentos.setEnabled(false);
+        
+        
+    }
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
