@@ -438,36 +438,53 @@ try{
         return listaInscActividadesDeTurista;
     }
     
+    @Override
         public ArrayList<DTActividad> traerActividadesDelProveedor(String nickname) {
-            Proveedor p = (Proveedor) ConsultaDeUsuario(nickname);
-            
-            ArrayList<DTActividad> listaActividadesDelProveedor = new ArrayList();
-            
-            for (Actividad a : p.getListaActividades()){
-                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), 
+//            Proveedor p = (Proveedor) ConsultaDeUsuario(nickname);
+//            
+//            ArrayList<DTActividad> listaActividadesDelProveedor = new ArrayList();
+//            
+//            for (Actividad a : p.getListaActividades()){
+//                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), 
+//                                                      a.getDuracion(), 
+//                                                        a.getCosto(), a.getCiudad(),
+//                                                    a.getfAlta(), 
+//                                            a.getProveedor().getNombre());
+//                listaActividadesDelProveedor.add(dtactividad);
+//            }
+//            
+//            return listaActividadesDelProveedor;
+
+        List<Actividad> listaActividades = controlPersis.traerActividades();
+         ArrayList<DTActividad> listaActividadesDelProveedor = new ArrayList();
+         for (Actividad a : listaActividades){
+             if (a.getProveedor().getNickname().equals(nickname)){
+                 DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), 
                                                       a.getDuracion(), 
                                                         a.getCosto(), a.getCiudad(),
                                                     a.getfAlta(), 
                                             a.getProveedor().getNombre());
                 listaActividadesDelProveedor.add(dtactividad);
-            }
-            
-            return listaActividadesDelProveedor;
+             }
+         
+         }
+        return listaActividadesDelProveedor;
+
         }
         
+    @Override
         public ArrayList<DTSalidaTuristica> traerSalidasDelProveedor(String nickname) {
-            Proveedor p = (Proveedor) ConsultaDeUsuario(nickname);
-            
+            List<SalidaTuristica> listaSalidasTuristicas = controlPersis.traerSalidasTuristicas();
             ArrayList<DTSalidaTuristica> listaSalidasDelProveedor = new ArrayList();
-            //ArrayList<Actividad> listaActividadProveedor = p.getListaActividades();
             
-            for (Actividad a : p.getListaActividades()){
-                for (SalidaTuristica s : a.getListaSalidaTuristica()){
+            for (SalidaTuristica s: listaSalidasTuristicas){
+                if (s.getActividad().getProveedor().getNickname().equals(nickname)){
                     DTSalidaTuristica dtSalida = new DTSalidaTuristica(s.getNombre(), s.getCantMax(),
                                             s.getfAlta(), s.getfSalida(), s.getLugar(), s.getActividad().getNombre());
                     listaSalidasDelProveedor.add(dtSalida);
                 }
-            }       
+            }
+                   
             return listaSalidasDelProveedor;
         }
     

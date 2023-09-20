@@ -47,6 +47,8 @@ public abstract DTSalidaTuristica traerDTSalidaTuristica(String nombreSalida);
 public abstract ArrayList<DTSalidaTuristica> traerInscSalidasDeTurista(String nickname);
 public abstract ArrayList<DTActividad> traerInscActividadesDeTurista(String nickname);
 public abstract ArrayList<String> listaPaquetesDeActividad(String nombreActividad);
+public abstract ArrayList<DTSalidaTuristica> traerSalidasDelProveedor(String nickname);
+public abstract ArrayList<DTActividad> traerActividadesDelProveedor(String nickname);
 
 public abstract void cargarDatosDePrueba();
 }

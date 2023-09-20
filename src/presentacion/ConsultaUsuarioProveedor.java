@@ -66,23 +66,6 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Consulta Datos Proveedor");
         setToolTipText("");
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
-            }
-        });
 
         jLabel11.setText("Actividad Turistica:");
 
@@ -256,12 +239,6 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        
-        
-        
-    }//GEN-LAST:event_formInternalFrameOpened
-
     private void btnVerActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActividadActionPerformed
         if(cmbActividades.getSelectedIndex() != -1){
         String nombreActividad = (String) cmbActividades.getSelectedItem();
@@ -330,7 +307,9 @@ private void cargarSalidasDelProveedor(String nickname){
     
     for (DTSalidaTuristica dt : listaSalidasDeTurista){
         cmbSalidas.addItem(dt.getNombre());
-    }        
+    }       
+    
+    cmbSalidas.repaint();
 }
 
 private void cargarActividadesDelProveedor(String nickname){
@@ -339,6 +318,8 @@ private void cargarActividadesDelProveedor(String nickname){
         for (DTActividad dt : listaActividadesDeProveedor){
         cmbActividades.addItem(dt.getNombre());
     }  
+        
+        cmbActividades.repaint();
     
 }
 
