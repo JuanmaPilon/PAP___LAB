@@ -5,34 +5,22 @@
 package presentacion;
 
 import java.util.ArrayList;
-import logica.Actividad;
+import java.util.List;
 import logica.Controlador;
-import logica.SalidaTuristica;
-import logica.Departamento;
 
 /**
  *
- * @author Pc
+ * @author natil
  */
 public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
+
     Controlador control = Controlador.getInstance();
-    private ArrayList<Departamento> departamentos;
-    private ArrayList<Actividad> actividades;
-    private ArrayList<SalidaTuristica> salidas;
-    private SalidaTuristica salida;
-    private Actividad actividad;
-    private boolean floaded=false;
+    
     /**
-     * Creates new form ConsultaDeSalidaTurística
+     * Creates new form ConsultaDeSalidaTuristica2
      */
     public ConsultaDeSalidaTuristica() {
         initComponents();
-    }
-    public ConsultaDeSalidaTuristica(SalidaTuristica salida,Actividad actividad) {
-        initComponents();
-        this.actividad = actividad;
-        this.salida = salida;
-        floaded=true;
     }
 
     /**
@@ -59,15 +47,25 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
         btnCerrar = new javax.swing.JButton();
 
         setClosable(true);
-        setResizable(true);
-        setTitle("Consulta de Salida Turística");
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
+        setTitle("Consulta de Salida Turistica");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
             }
         });
 
-        cmbActividades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbActividades.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbActividadesItemStateChanged(evt);
@@ -76,7 +74,6 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Actividades Turisticas");
 
-        cmbDepartamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbDepartamentos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbDepartamentosItemStateChanged(evt);
@@ -87,7 +84,6 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Nombre Salida");
 
-        cmbSalidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbSalidas.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbSalidasItemStateChanged(evt);
@@ -122,44 +118,43 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(192, Short.MAX_VALUE))))
+                        .addGap(151, 151, 151)
+                        .addComponent(sprFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 151, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbDepartamentos, 0, 153, Short.MAX_VALUE)
-                            .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLugar, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                            .addComponent(txtMaxTur))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71)
+                                .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel3)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cmbSalidas, 0, 281, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(cmbDepartamentos, 0, 281, Short.MAX_VALUE)
+                                            .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtMaxTur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(66, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
+                .addGap(186, 186, 186)
                 .addComponent(btnCerrar)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cmbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,69 +178,61 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtMaxTur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
                 .addComponent(btnCerrar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
-         cmbDepartamentos.removeAllItems();
-        departamentos = control.listaDepartamentos();
-        for (int i = 0; i < departamentos.size();i++){
-            cmbDepartamentos.addItem(departamentos.get(i).getNombre());
-        }
-        if (floaded){
-            cmbDepartamentos.setSelectedItem(actividad.getDepartamento().getNombre());
-        }
-    }//GEN-LAST:event_formComponentShown
-
-    private void cmbDepartamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentosItemStateChanged
-        // TODO add your handling code here:
-        if (cmbDepartamentos.getItemCount()>0){
-            cmbActividades.removeAllItems();
-            actividades = departamentos.get(cmbDepartamentos.getSelectedIndex()).getListaActTur();
-            for (int i = 0; i < actividades.size();i++){
-                cmbActividades.addItem(actividades.get(i).getNombre());
-            }
-            if (floaded)
-                cmbActividades.setSelectedItem(actividad.getNombre());
-            
-        }
-    }//GEN-LAST:event_cmbDepartamentosItemStateChanged
-
     private void cmbActividadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbActividadesItemStateChanged
-        // TODO add your handling code here:
+        cmbSalidas.removeAllItems();
+        
+        String actividadSeleccionado = (String) cmbActividades.getSelectedItem();
+        ArrayList<String> salidas = control.listaSalActividadTuristica( actividadSeleccionado);
         if (cmbActividades.getItemCount()>0){
-            cmbSalidas.removeAllItems();
-            salidas = actividades.get(cmbActividades.getSelectedIndex()).getListaSalidaTuristica();
-            for (int i = 0; i < salidas.size();i++){
-                cmbSalidas.addItem(salidas.get(i).getNombre());
+            for (String salida : salidas) {
+                cmbSalidas.addItem(salida);
             }
-            if(floaded)
-                cmbSalidas.setSelectedItem(salida.getNombre());
         }
     }//GEN-LAST:event_cmbActividadesItemStateChanged
 
-    private void cmbSalidasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSalidasItemStateChanged
-        // TODO add your handling code here:
-        if (cmbSalidas.getItemCount()>0){
-            if(!floaded)
-                salida = salidas.get(cmbSalidas.getSelectedIndex());
-            txtLugar.setText(salida.getLugar());
-            txtMaxTur.setText(String.valueOf(salida.getCantMax()));
-            sprFecha.setValue(salida.getfSalida());
-            if(floaded && cmbSalidas.getSelectedItem().equals(salida.getNombre()))
-                floaded = !floaded;
+    private void cmbDepartamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentosItemStateChanged
+       // cmbActividades.removeAllItems();
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            String departamentoSeleccionado = (String) cmbDepartamentos.getSelectedItem();
+            List<String> actividades = control.findSalidasTuristicasDepartamento(departamentoSeleccionado);
+            
+            cmbActividades.removeAllItems();
+            
+            if (actividades !=null){
+                for (String actividad : actividades) {
+                cmbActividades.addItem(actividad);
+                }
+            }
+            
+            cmbSalidas.removeAllItems();
+        
         }
+
+     
+    }//GEN-LAST:event_cmbDepartamentosItemStateChanged
+
+    private void cmbSalidasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSalidasItemStateChanged
+
     }//GEN-LAST:event_cmbSalidasItemStateChanged
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        ArrayList<String> nicks = control.listaDeptos();
+        for (String nick : nicks) {
+            cmbDepartamentos.addItem(nick);
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

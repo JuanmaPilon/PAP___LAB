@@ -135,6 +135,8 @@ public class Controlador implements IControlador{
    ///////
    @Override 
    public ArrayList<String> listaSalActividadTuristica(String actividad){
+       
+       
        return controlPersis.listaSalActividadTuristica(actividad);
    };
    
@@ -388,7 +390,55 @@ try{
         Inscripcion inscripcion = new Inscripcion(turista, salida, fecha, cantTurista, costo);
         
         controlPersis.guardarInscripcion(inscripcion);
-    }    
+    }  
+    
+    //Devuelve una lista de salidas turisticas a la que se inscribio el turista con el nickname de entrada.
+    @Override
+    public ArrayList<DTSalidaTuristica> traerInscSalidasDeTurista(String nickname){
+        Turista t = (Turista) ConsultaDeUsuario(nickname);
+        ArrayList<DTSalidaTuristica> listaInscSalidasDeTurista = new ArrayList();
+        
+        //DTSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) 
+        
+        for (Inscripcion insc : t.getListaInscripcion()){
+            DTSalidaTuristica dtSalida = new DTSalidaTuristica(insc.getSalida().getNombre(), insc.getSalida().getCantMax(), 
+                    insc.getSalida().getfAlta(), insc.getSalida().getfSalida(), insc.getSalida().getLugar() );
+            
+            listaInscSalidasDeTurista.add(dtSalida);
+        }
+        return listaInscSalidasDeTurista;
+    }
+    
+    
+    @Override
+    public ArrayList<DTActividad> traerInscActividadesDeTurista(String nickname) {
+        Turista t = (Turista) ConsultaDeUsuario(nickname);
+        ArrayList<DTActividad> listaInscActividadesDeTurista = new ArrayList();
+        ArrayList<Actividad> actividades = new ArrayList();
+        
+        //DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, String nombreProveedor)
+        //armo una lista auxiliar con las actividades de las salidas a la que se inscribio el turista
+        for (Inscripcion insc : t.getListaInscripcion()){
+            if (!actividades.contains(insc.getSalida().getActividad())){
+            actividades.add(insc.getSalida().getActividad());
+            
+            }   
+        }
+        //paso la lista de actividades a DT (asi no se repite la actividad, si el turista esta inscpto a dos salidas de la misma actividad.
+        
+        for(Actividad a : actividades){
+                    DTActividad dtActividad = new DTActividad(a.getNombre(), a.getDescripcion(), 
+                                                      a.getDuracion(), 
+                                                        a.getCosto(), a.getCiudad(),
+                                                    a.getfAlta(), 
+                                            a.getProveedor().getNombre());
+    
+            listaInscActividadesDeTurista.add(dtActividad);
+        }
+        return listaInscActividadesDeTurista;
+    }
+    
+    
     
     //Carga de los Datos de Prueba
     @Override
@@ -532,6 +582,8 @@ try{
         }
 
     }
+
+ 
 
 
 

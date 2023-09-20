@@ -4,31 +4,19 @@
  */
 package presentacion;
 
-import logica.Controlador;
-import logica.Paquete;
-import logica.Actividad;
-import java.util.List;
 /**
  *
  * @author natil
  */
 public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalFrame {
-    Controlador control = Controlador.getInstance();
-    private List<Paquete> paquetes;
-    private Paquete paquete;
-    private boolean fload=false;
-    private boolean floaded=false;
+
     /**
-     * Creates new form ConsultaPaqueteActividadesTuristicas
+     * Creates new form ConsultaPaqueteActividadesTuristicas2
      */
     public ConsultaPaqueteActividadesTuristicas() {
         initComponents();
     }
-    public ConsultaPaqueteActividadesTuristicas(Paquete paquete) {
-        initComponents();
-        this.paquete = paquete;
-        floaded = !floaded;
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,9 +26,7 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        cmbPaquetes = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        btnVer = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -49,34 +35,18 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
         txtDescripcion = new javax.swing.JTextField();
         txtValidez = new javax.swing.JTextField();
         txtDescuento = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        cmbPaquetes = new javax.swing.JComboBox<>();
         cmbActividades = new javax.swing.JComboBox<>();
-        btnVer = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        setClosable(true);
-        setTitle("Consulta de Paquete de Actividades Turisticas");
-        setPreferredSize(new java.awt.Dimension(800, 306));
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
-
-        jLabel1.setText("Seleccione un paquete:");
-
-        cmbPaquetes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista de paquetes actividad turisticas" }));
-        cmbPaquetes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmbPaquetesMouseClicked(evt);
-            }
-        });
-        cmbPaquetes.addActionListener(new java.awt.event.ActionListener() {
+        btnVer.setText("Ver");
+        btnVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbPaquetesActionPerformed(evt);
+                btnVerActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Datos del paquete seleccionado:");
 
         jLabel3.setText("Nombre:");
 
@@ -94,16 +64,25 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
 
         txtDescuento.setEditable(false);
 
+        jLabel1.setText("Seleccione un paquete:");
+
         jLabel7.setText("Ver detalles de Actividad Turistica:");
+
+        cmbPaquetes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista de paquetes actividad turisticas" }));
+        cmbPaquetes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmbPaquetesMouseClicked(evt);
+            }
+        });
+        cmbPaquetes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPaquetesActionPerformed(evt);
+            }
+        });
 
         cmbActividades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista de actividades turisticas" }));
 
-        btnVer.setText("Ver");
-        btnVer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Datos del paquete seleccionado:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,12 +116,12 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
                                     .addComponent(txtDescuento))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnVer)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,61 +148,24 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
                     .addComponent(jLabel7)
                     .addComponent(cmbActividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVer))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void actualizarDatosDePaquete(boolean flag){
-        if(flag){
-            if(!floaded)
-                paquete = paquetes.get(cmbPaquetes.getSelectedIndex());
-            txtNombre.setText(paquete.getNombre());
-            txtDescripcion.setText(paquete.getDescripcion());
-            txtDescuento.setText(String.valueOf(paquete.getDescuento()));
-            txtValidez.setText(String.valueOf(paquete.getValidez()));
-            cmbActividades.removeAllItems();
-            if(!paquete.getListaActividades().isEmpty()){
-                List<Actividad> actividades = paquete.getListaActividades();
-                for(int i = 0; i < actividades.size() ;i++){
-                    cmbActividades.addItem(actividades.get(i).getNombre());
-                }
-            }
-            fload = true;
-            if(floaded)
-                floaded = !floaded;
-        }
-    }
-    private void cmbPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPaquetesActionPerformed
-        // TODO add your handling code here:
-        actualizarDatosDePaquete(fload);
-    }//GEN-LAST:event_cmbPaquetesActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
-        paquetes = control.consultaPaquetes();
-        cmbPaquetes.removeAllItems();
-        for(int i = 0; i < paquetes.size();i++){
-            cmbPaquetes.addItem(paquetes.get(i).getNombre());
-        }
-        if(floaded)
-            cmbPaquetes.setSelectedItem(paquete.getNombre());
-        actualizarDatosDePaquete(true);
-    }//GEN-LAST:event_formComponentShown
+    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
+
+    }//GEN-LAST:event_btnVerActionPerformed
 
     private void cmbPaquetesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbPaquetesMouseClicked
         // TODO add your handling code here:
         //actualizarDatosDePaquete();
     }//GEN-LAST:event_cmbPaquetesMouseClicked
 
-    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
-        // TODO add your handling code here:
-        Paquete paquete = paquetes.get(cmbPaquetes.getSelectedIndex());
-        Actividad actividad = paquete.getListaActividades().get(cmbActividades.getSelectedIndex());
-        ConsultaActividadTuristica verConsulta = new ConsultaActividadTuristica(actividad);
-        getParent().add(verConsulta);
-        verConsulta.show();
-    }//GEN-LAST:event_btnVerActionPerformed
+    private void cmbPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPaquetesActionPerformed
+
+    }//GEN-LAST:event_cmbPaquetesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

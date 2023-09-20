@@ -44,12 +44,14 @@ public class ControladoraPersistencia {
     };
     
     public ArrayList<String> listaSalActividadTuristica(String actividad){
-       ArrayList<String> salidas = new ArrayList();
-       List<String> salida = salidaTuristicaJpa.findByActividad(actividad);
-       for(int i = 0; i < salida.size();i++){
-           salidas.add(salida.get(i));
+       ArrayList<String> salidasDeActividad = new ArrayList();
+       Actividad a = actividadJpa.findActividad(actividad);
+      
+       
+       for(SalidaTuristica st : a.getListaSalidaTuristica()){
+          salidasDeActividad.add(st.getNombre()); 
        }
-       return salidas; 
+       return salidasDeActividad; 
     };
     
     public ArrayList<Departamento> listaDepartamentos(){

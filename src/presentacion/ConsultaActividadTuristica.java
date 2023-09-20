@@ -4,32 +4,19 @@
  */
 package presentacion;
 
-import logica.Actividad;
-import logica.Controlador;
-import logica.Departamento;
-import java.util.ArrayList;
-
 /**
  *
  * @author natil
  */
 public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
-    
-    Controlador control = Controlador.getInstance();
-    private ArrayList<Departamento> departamentos;
-    private boolean floaded=false;
-    private Actividad actividad;
+
     /**
-     * Creates new form ConsultaActividadTuristica
+     * Creates new form ConsultaActividadTuristica2
      */
     public ConsultaActividadTuristica() {
         initComponents();
     }
-    public ConsultaActividadTuristica(Actividad actividad) {
-        initComponents();
-        floaded=!floaded;
-        this.actividad = actividad;
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,105 +26,64 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        nombreActividadTuristica = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        descripcionActividadTuristica = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        cmbDepartamentos = new javax.swing.JComboBox<>();
-        cmbActividades = new javax.swing.JComboBox<>();
+        duracionActividadTuristica = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        duracionConsultaActividadTuristica = new javax.swing.JTextField();
+        costoActividadTuristica = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        costoConsultaActividadTuristica = new javax.swing.JTextField();
+        diaAltaActividadTuristica = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
+        mesAltaActividadTuristica = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
+        anioAltaActividadTuristica = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
+        aceptarAltaActividadTuristica = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        nombreConsultaActividadTuristica = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        descripcionConsultaActividadTuristica = new javax.swing.JTextField();
-        fechaAltaConsultaActividadTuristica = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        cmbSalidas = new javax.swing.JComboBox<>();
-        verSalidaTuristica = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        cmbPaquetes = new javax.swing.JComboBox<>();
-        verPaqueteTuristico = new javax.swing.JButton();
-        txtCiudad = new javax.swing.JTextField();
-        txtProveedor = new javax.swing.JTextField();
+        cancelarAltaActividadTuristica = new javax.swing.JButton();
+        proveedorActividadTuristica = new javax.swing.JComboBox<>();
+        ciudadActividadTuristica = new javax.swing.JTextField();
+        departamentoActividadTuristica = new javax.swing.JComboBox<>();
 
-        setClosable(true);
-        setTitle("Consulta de Actividad Turistica");
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
+        jLabel1.setText("Proveedor:");
 
-        jLabel1.setText("Seleccionar departamento:");
+        jLabel2.setText("Departamento:");
 
-        jLabel2.setText("Seleccionar actividad turistica:");
+        jLabel3.setText("Nombre:");
 
-        cmbDepartamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista departamentos" }));
-        cmbDepartamentos.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbDepartamentosItemStateChanged(evt);
-            }
-        });
+        jLabel4.setText("Descripcion:");
 
-        cmbActividades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lista actividades turisticas" }));
-        cmbActividades.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbActividadesItemStateChanged(evt);
-            }
-        });
+        diaAltaActividadTuristica.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
-        jLabel3.setText("Datos de actividad turistica:");
+        jLabel5.setText("Duracion:");
 
-        duracionConsultaActividadTuristica.setEditable(false);
+        mesAltaActividadTuristica.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
-        jLabel4.setText("Nombre:");
+        jLabel6.setText("Costo:");
 
-        costoConsultaActividadTuristica.setEditable(false);
+        anioAltaActividadTuristica.setModel(new javax.swing.SpinnerNumberModel(1900, 1900, 2023, 1));
 
-        jLabel5.setText("Descripcion:");
+        jLabel7.setText("Ciudad:");
 
-        jLabel6.setText("Duracion:");
-
-        jLabel7.setText("Costo:");
-
-        jLabel8.setText("Ciudad:");
-
-        jLabel9.setText("Fecha de Alta:");
-
-        nombreConsultaActividadTuristica.setEditable(false);
-
-        jLabel10.setText("Proveedor:");
-
-        descripcionConsultaActividadTuristica.setEditable(false);
-
-        fechaAltaConsultaActividadTuristica.setEditable(false);
-
-        jLabel11.setText("Saidas Turisticas diponibles:");
-
-        verSalidaTuristica.setText("Ver");
-        verSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
+        aceptarAltaActividadTuristica.setText("Aceptar");
+        aceptarAltaActividadTuristica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verSalidaTuristicaActionPerformed(evt);
+                aceptarAltaActividadTuristicaActionPerformed(evt);
             }
         });
 
-        jLabel12.setText("Paquetes Turisticos diponibles:");
+        jLabel8.setText("Fecha de Alta:");
 
-        verPaqueteTuristico.setText("Ver");
-        verPaqueteTuristico.addActionListener(new java.awt.event.ActionListener() {
+        cancelarAltaActividadTuristica.setText("Limpiar");
+        cancelarAltaActividadTuristica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verPaqueteTuristicoActionPerformed(evt);
+                cancelarAltaActividadTuristicaActionPerformed(evt);
             }
         });
 
-        txtCiudad.setEditable(false);
-
-        txtProveedor.setEditable(false);
+        proveedorActividadTuristica.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,204 +91,118 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(proveedorActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(departamentoActividadTuristica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(nombreActividadTuristica))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(descripcionActividadTuristica))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(duracionActividadTuristica))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(costoActividadTuristica))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(ciudadActividadTuristica))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(cmbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(costoConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(duracionConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nombreConsultaActividadTuristica)
-                                    .addComponent(descripcionConsultaActividadTuristica)
-                                    .addComponent(txtCiudad)
-                                    .addComponent(txtProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cancelarAltaActividadTuristica)
+                                .addGap(131, 131, 131)
+                                .addComponent(aceptarAltaActividadTuristica))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
+                                .addComponent(diaAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbPaquetes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mesAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(verPaqueteTuristico))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(cmbSalidas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(fechaAltaConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(verSalidaTuristica)))
-                        .addGap(75, 75, 75))))
+                                .addComponent(anioAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cmbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(proveedorActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cmbActividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(jLabel3)
+                    .addComponent(departamentoActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(nombreActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(nombreConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(descripcionActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(descripcionConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(duracionActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(duracionConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(costoActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(costoConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ciudadActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(diaAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anioAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(fechaAltaConsultaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(verSalidaTuristica))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(verPaqueteTuristico))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelarAltaActividadTuristica)
+                    .addComponent(aceptarAltaActividadTuristica))
+                .addGap(61, 61, 61))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
-        cmbDepartamentos.removeAllItems();
-        departamentos = control.listaDepartamentos();
-        for (int i = 0; i < departamentos.size();i++){
-            cmbDepartamentos.addItem(departamentos.get(i).getNombre());
-        }
-        if (floaded){
-            cmbDepartamentos.setSelectedItem(actividad.getDepartamento().getNombre());
-        }
-    }//GEN-LAST:event_formComponentShown
+    private void aceptarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarAltaActividadTuristicaActionPerformed
 
-    private void cmbDepartamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentosItemStateChanged
-      cmbSalidas.removeAllItems();
-       cmbPaquetes.removeAllItems();
-       txtProveedor.setText("");
-       nombreConsultaActividadTuristica.setText("");
-       descripcionConsultaActividadTuristica.setText("");
-       duracionConsultaActividadTuristica.setText("");
-       costoConsultaActividadTuristica.setText("");
-       txtCiudad.setText("");
-       fechaAltaConsultaActividadTuristica.setText("");
-        if (cmbDepartamentos.getItemCount()>0){
-              cmbActividades.removeAllItems();
-            ArrayList<Actividad> actividades = departamentos.get(cmbDepartamentos.getSelectedIndex()).getListaActTur();
-            for (int i = 0; i < actividades.size();i++){
-                cmbActividades.addItem(actividades.get(i).getNombre());
-            }
-            if (floaded){
-                cmbActividades.setSelectedItem(actividad.getNombre());
-            }
-        }
-    }//GEN-LAST:event_cmbDepartamentosItemStateChanged
+    }//GEN-LAST:event_aceptarAltaActividadTuristicaActionPerformed
 
-    private void cmbActividadesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbActividadesItemStateChanged
-        // TODO add your handling code here:
-        if (cmbDepartamentos.getItemCount()>0 && cmbActividades.getItemCount()>0){
-            if(!floaded)
-                actividad = departamentos.get(cmbDepartamentos.getSelectedIndex()).getListaActTur().get(cmbActividades.getSelectedIndex());
-            nombreConsultaActividadTuristica.setText(actividad.getNombre());
-            costoConsultaActividadTuristica.setText(String.valueOf(actividad.getCosto()));
-            descripcionConsultaActividadTuristica.setText(actividad.getDescripcion());
-            duracionConsultaActividadTuristica.setText(String.valueOf(actividad.getDuracion()));
-            fechaAltaConsultaActividadTuristica.setText(actividad.getfAlta().toString());
-            txtCiudad.setText(actividad.getCiudad());
-            txtProveedor.setText(actividad.getProveedor().getNickname());
-            cmbSalidas.removeAllItems();
-            for(int i = 0 ; i < actividad.getListaSalidaTuristica().size() ; i++){
-                cmbSalidas.addItem(actividad.getListaSalidaTuristica().get(i).getNombre());
-            }
-            cmbPaquetes.removeAllItems();
-            for(int i = 0 ; i < actividad.getListaPaquete().size();i++){
-                cmbPaquetes.addItem(actividad.getListaPaquete().get(i).getNombre());
-            }
-            if(floaded && nombreConsultaActividadTuristica.getText().equals(departamentos.get(cmbDepartamentos.getSelectedIndex()).getListaActTur().get(cmbActividades.getSelectedIndex()).getNombre()))
-                floaded=!floaded;
-        }
-    }//GEN-LAST:event_cmbActividadesItemStateChanged
+    private void cancelarAltaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarAltaActividadTuristicaActionPerformed
 
-    private void verSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSalidaTuristicaActionPerformed
-       if(cmbSalidas.getSelectedIndex() != -1){
-        ConsultaDeSalidaTuristica verSalida = new ConsultaDeSalidaTuristica(actividad.getListaSalidaTuristica().get(cmbSalidas.getSelectedIndex()),actividad);
-        getParent().add(verSalida);
-        verSalida.show();
-       }
-    }//GEN-LAST:event_verSalidaTuristicaActionPerformed
-
-    private void verPaqueteTuristicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPaqueteTuristicoActionPerformed
-       if(cmbPaquetes.getSelectedIndex() != -1){
-        ConsultaPaqueteActividadesTuristicas verPaquete = new ConsultaPaqueteActividadesTuristicas(actividad.getListaPaquete().get(cmbPaquetes.getSelectedIndex()));
-        getParent().add(verPaquete);
-        verPaquete.show();
-       }
-    }//GEN-LAST:event_verPaqueteTuristicoActionPerformed
+    }//GEN-LAST:event_cancelarAltaActividadTuristicaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbActividades;
-    private javax.swing.JComboBox<String> cmbDepartamentos;
-    private javax.swing.JComboBox<String> cmbPaquetes;
-    private javax.swing.JComboBox<String> cmbSalidas;
-    private javax.swing.JTextField costoConsultaActividadTuristica;
-    private javax.swing.JTextField descripcionConsultaActividadTuristica;
-    private javax.swing.JTextField duracionConsultaActividadTuristica;
-    private javax.swing.JTextField fechaAltaConsultaActividadTuristica;
+    private javax.swing.JButton aceptarAltaActividadTuristica;
+    private javax.swing.JSpinner anioAltaActividadTuristica;
+    private javax.swing.JButton cancelarAltaActividadTuristica;
+    private javax.swing.JTextField ciudadActividadTuristica;
+    private javax.swing.JTextField costoActividadTuristica;
+    private javax.swing.JComboBox<String> departamentoActividadTuristica;
+    private javax.swing.JTextField descripcionActividadTuristica;
+    private javax.swing.JSpinner diaAltaActividadTuristica;
+    private javax.swing.JTextField duracionActividadTuristica;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -350,11 +210,8 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField nombreConsultaActividadTuristica;
-    private javax.swing.JTextField txtCiudad;
-    private javax.swing.JTextField txtProveedor;
-    private javax.swing.JButton verPaqueteTuristico;
-    private javax.swing.JButton verSalidaTuristica;
+    private javax.swing.JSpinner mesAltaActividadTuristica;
+    private javax.swing.JTextField nombreActividadTuristica;
+    private javax.swing.JComboBox<String> proveedorActividadTuristica;
     // End of variables declaration//GEN-END:variables
 }

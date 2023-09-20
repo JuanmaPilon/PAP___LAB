@@ -256,8 +256,8 @@ private void cargarDatosProveedor(String nickname){
     spndia.setValue(dia);
     spnmes.setValue(mes);
     spnanio.setValue(anio);
-    System.out.println(t.getfNacimiento());
-   System.out.println(dia +" "+mes+"  "+anio);
+//    System.out.println(t.getfNacimiento());
+//   System.out.println(dia +" "+mes+"  "+anio);
 }
 
 public void mostrarMensaje(String mensaje, String tipo, String titulo){

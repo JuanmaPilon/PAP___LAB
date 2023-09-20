@@ -37,6 +37,8 @@ public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
         btnCancel = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("Seleccion de Usuario a consultar");
+        setToolTipText("");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -49,7 +51,7 @@ public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        lblNickname.setText("Nickname de usuario");
+        lblNickname.setText("Elija nickname:");
 
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,30 +72,31 @@ public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNickname)
-                .addGap(18, 18, 18)
-                .addComponent(cmbListaUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancel)
-                .addGap(18, 18, 18)
-                .addComponent(btnConsultar)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(btnCancel)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnConsultar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblNickname)
+                        .addGap(26, 26, 26)
+                        .addComponent(cmbListaUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbListaUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNickname))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                    .addComponent(lblNickname)
+                    .addComponent(cmbListaUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConsultar)
-                    .addComponent(btnCancel))
-                .addContainerGap())
+                    .addComponent(btnCancel)
+                    .addComponent(btnConsultar))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -103,11 +106,11 @@ public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
         String nickname = cmbListaUsuarios.getSelectedItem().toString();
         Usuario consultado = control.ConsultaDeUsuario(nickname);
         if (consultado instanceof Proveedor){
-            ConsultaUsuarioProveedor verConsultaUsuarioProveedor = new ConsultaUsuarioProveedor((Proveedor)consultado);
+            ConsultaUsuarioProveedor verConsultaUsuarioProveedor = new ConsultaUsuarioProveedor(nickname);
             getParent().add(verConsultaUsuarioProveedor);        
             verConsultaUsuarioProveedor.show();
         } else  {
-            ConsultaUsuarioTurista verConsultaUsuarioTurista = new ConsultaUsuarioTurista((Turista)consultado);
+            ConsultaUsuarioTurista verConsultaUsuarioTurista = new ConsultaUsuarioTurista(nickname);
             getParent().add(verConsultaUsuarioTurista);
             verConsultaUsuarioTurista.show();
         }
