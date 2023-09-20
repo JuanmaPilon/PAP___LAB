@@ -80,6 +80,7 @@
                           <Component id="txtcorreo" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="botonImagenPerfil" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="53" max="32767" attributes="0"/>
           </Group>
@@ -127,7 +128,9 @@
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <Component id="txtlink" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <Component id="botonImagenPerfil" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="aceptarAltaProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -223,6 +226,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonImagenPerfil">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ASIGNAR IMAGEN PERFIL"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonImagenPerfilActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JDialog;
@@ -14,6 +15,8 @@ import  persistencia.exceptions.PreexistingEntityException;
 import logica.Turista;
 import logica.Controlador;
 import java.text.ParseException;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import persistencia.exceptions.NicknameExistenteException;
 /**
  *
@@ -22,6 +25,9 @@ import persistencia.exceptions.NicknameExistenteException;
 public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
     Controlador control = Controlador.getInstance();
+    String imagenNombre;
+    String imagenRuta;
+    String nombreUsuario;
     
     public AltaUsuarioTurista() {
         initComponents();
@@ -53,6 +59,7 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
         txtnacionalidad = new javax.swing.JTextField();
         btnlimpiar = new javax.swing.JButton();
         btnguardar = new javax.swing.JButton();
+        botonImagenPerfil = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -97,6 +104,13 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
             }
         });
 
+        botonImagenPerfil.setText("ASIGNAR IMAGEN PERFIL");
+        botonImagenPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonImagenPerfilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,7 +152,10 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
                         .addGap(69, 69, 69)
                         .addComponent(btnlimpiar)
                         .addGap(132, 132, 132)
-                        .addComponent(btnguardar)))
+                        .addComponent(btnguardar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(botonImagenPerfil)))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -173,7 +190,9 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(txtnacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(18, 18, 18)
+                .addComponent(botonImagenPerfil)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnlimpiar)
                     .addComponent(btnguardar))
@@ -200,6 +219,7 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
     try {
         control.AltaDeUsuarioTurista(nickname, nombre, apellido, correo, fecha, nacionalidad);
+        control.AltaDeImagenPerfil(imagenNombre,imagenRuta, nombreUsuario);
     JOptionPane.showMessageDialog(null, "Alta realizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     } catch (CorreoElectronicoExistenteException e) {
         JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);
@@ -227,9 +247,35 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
     cmbanio.setValue(1900);
     }//GEN-LAST:event_btnlimpiarActionPerformed
 
+    private void botonImagenPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImagenPerfilActionPerformed
+
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG & PNG", "jpg", "png");
+        fileChooser.setFileFilter(filtro);
+
+        int seleccion = fileChooser.showOpenDialog(null);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                String fileName = selectedFile.getName(); // Obtener el nombre del archivo
+                String filePath = selectedFile.getAbsolutePath(); // Obtener la ruta del archivo
+
+                imagenNombre = fileName;
+                imagenRuta = filePath;
+                nombreUsuario = txtnickname.getText();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error al seleccionar la imagen", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_botonImagenPerfilActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonImagenPerfil;
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnlimpiar;
     private javax.swing.JSpinner cmbanio;

@@ -29,6 +29,19 @@ public class Controlador implements IControlador{
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
     //descomentado por una prueba:
+    
+    public ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception{
+        
+           return  controlPersis.buscarImagen(nickname);
+    }
+    
+    public  void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
+        
+        ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
+        controlPersis.guardarImagenPerfil(imagenPerfil);
+        
+    }
+    
     @Override
     public void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, 
                                         Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception{

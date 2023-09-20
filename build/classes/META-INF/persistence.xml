@@ -9,6 +9,7 @@
     <class>logica.Proveedor</class>
     <class>logica.Turista</class>
     <class>logica.Inscripcion</class>
+    <class>logica.ImagenPerfil</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/lab?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

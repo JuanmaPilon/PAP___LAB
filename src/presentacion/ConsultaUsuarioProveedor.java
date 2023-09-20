@@ -4,13 +4,20 @@
  */
 package presentacion;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
 import logica.DTActividad;
 import logica.DTProveedor;
 import logica.DTSalidaTuristica;
+import logica.ImagenPerfil;
 
 /**
  *
@@ -27,6 +34,7 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         cargarDatosProveedor(nickname);
         cargarSalidasDelProveedor(nickname);
         cargarActividadesDelProveedor( nickname);
+        mostrarImagenPerfil(nickname);
     }
 
     /**
@@ -62,16 +70,28 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtADescripcion = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        labelImagen = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Consulta Datos Proveedor");
         setToolTipText("");
+        setPreferredSize(new java.awt.Dimension(900, 800));
+        getContentPane().setLayout(null);
 
         jLabel11.setText("Actividad Turistica:");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(6, 459, 100, 16);
 
         jLabel15.setText("Apellido:");
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(6, 136, 47, 16);
+
+        getContentPane().add(cmbActividades);
+        cmbActividades.setBounds(128, 456, 318, 22);
 
         jLabel16.setText("Correo electronico:");
+        getContentPane().add(jLabel16);
+        jLabel16.setBounds(6, 170, 101, 16);
 
         btnVerActividad.setText("Ver");
         btnVerActividad.addActionListener(new java.awt.event.ActionListener() {
@@ -79,14 +99,27 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                 btnVerActividadActionPerformed(evt);
             }
         });
+        getContentPane().add(btnVerActividad);
+        btnVerActividad.setBounds(496, 456, 72, 23);
 
         jLabel17.setText("Fecha de nacimiento:");
+        getContentPane().add(jLabel17);
+        jLabel17.setBounds(6, 200, 113, 16);
 
         jLabel12.setText("Saida Turistica:");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(6, 500, 78, 16);
 
         txtNombre.setEditable(false);
+        getContentPane().add(txtNombre);
+        txtNombre.setBounds(137, 93, 306, 22);
+
+        getContentPane().add(cmbSalidas);
+        cmbSalidas.setBounds(128, 497, 318, 22);
 
         txtApellido.setEditable(false);
+        getContentPane().add(txtApellido);
+        txtApellido.setBounds(137, 133, 306, 22);
 
         btnVerSalida.setText("Ver");
         btnVerSalida.addActionListener(new java.awt.event.ActionListener() {
@@ -94,33 +127,58 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                 btnVerSalidaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnVerSalida);
+        btnVerSalida.setBounds(496, 497, 72, 23);
 
         txtCorreo.setEditable(false);
+        getContentPane().add(txtCorreo);
+        txtCorreo.setBounds(137, 167, 306, 22);
 
         jLabel2.setText("nickname:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(6, 56, 55, 16);
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel18.setText("Ofrece:");
+        getContentPane().add(jLabel18);
+        jLabel18.setBounds(6, 417, 50, 21);
 
         txtNickname.setEditable(false);
+        getContentPane().add(txtNickname);
+        txtNickname.setBounds(137, 53, 306, 22);
 
         jLabel19.setText("URL:");
+        getContentPane().add(jLabel19);
+        jLabel19.setBounds(6, 234, 24, 16);
 
         jLabel13.setText("Descripcion:");
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(6, 271, 65, 16);
 
         txtUrl.setEditable(false);
+        getContentPane().add(txtUrl);
+        txtUrl.setBounds(137, 231, 306, 22);
 
         jLabel14.setText("Nombre:");
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(6, 96, 47, 16);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel3.setText("Datos proveedor:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(6, 14, 121, 21);
 
         txtFNacimiento.setEditable(false);
+        getContentPane().add(txtFNacimiento);
+        txtFNacimiento.setBounds(137, 197, 306, 22);
 
         txtADescripcion.setEditable(false);
         txtADescripcion.setColumns(20);
         txtADescripcion.setRows(5);
         jScrollPane1.setViewportView(txtADescripcion);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(83, 271, 485, 61);
 
         jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -128,109 +186,12 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(247, 538, 72, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel12)
-                                    .addGap(44, 44, 44)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cmbSalidas, 0, 318, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnVerSalida))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnVerActividad))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jLabel15)
-                                            .addComponent(jLabel16)
-                                            .addComponent(jLabel17)
-                                            .addComponent(jLabel19))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtUrl)
-                                            .addComponent(txtNickname)
-                                            .addComponent(txtNombre)
-                                            .addComponent(txtApellido)
-                                            .addComponent(txtCorreo)
-                                            .addComponent(txtFNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel3))
-                        .addGap(0, 67, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(247, 247, 247)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(txtUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 28, Short.MAX_VALUE)
-                .addComponent(jLabel18)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(cmbActividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerActividad))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerSalida))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+        labelImagen.setBackground(new java.awt.Color(51, 51, 51));
+        getContentPane().add(labelImagen);
+        labelImagen.setBounds(500, 60, 300, 190);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -278,6 +239,7 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelImagen;
     private javax.swing.JTextArea txtADescripcion;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
@@ -340,6 +302,41 @@ public void mostrarMensaje(String mensaje, String tipo, String titulo){
         dialog.setVisible(true);
     
     }
+
+
+public void mostrarImagenPerfil(String nickname){
+    try {
+        ImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
+
+        if (imagen != null) {
+            String rutaImagen = imagen.getRuta();
+            BufferedImage imagenCargada = ImageIO.read(new File(rutaImagen));
+            
+            // Escalar la imagen al tamaño de la etiqueta (labelImagen)
+            int anchoEtiqueta = labelImagen.getWidth();
+            int altoEtiqueta = labelImagen.getHeight();
+            Image imagenEscalada = imagenCargada.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_SMOOTH);
+            
+            ImageIcon imagenPerfil = new ImageIcon(imagenEscalada);
+
+            // Supongamos que 'labelImagen' es el JLabel en el que quieres mostrar la imagen
+            labelImagen.setIcon(imagenPerfil);
+            labelImagen.setVisible(true);
+        } else {
+            // Manejar el caso en el que no se encuentra la imagen
+            labelImagen.setVisible(false); // Oculta el JLabel si no hay imagen
+            JOptionPane.showMessageDialog(null, "No se encontró la imagen de perfil.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+        // Manejar errores al cargar la imagen desde el archivo
+        JOptionPane.showMessageDialog(null, "Error al cargar la imagen.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        e.printStackTrace();
+        // Manejar otras excepciones generales
+        JOptionPane.showMessageDialog(null, "Ha ocurrido un error.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
 
 }

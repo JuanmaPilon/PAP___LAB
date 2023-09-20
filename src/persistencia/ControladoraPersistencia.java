@@ -18,6 +18,7 @@ import logica.Inscripcion;
 import logica.Turista;
 import logica.Proveedor;
 import logica.Usuario;
+import logica.ImagenPerfil;
 import logica.SalidaTuristica;
 import logica.Paquete;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
@@ -34,6 +35,7 @@ public class ControladoraPersistencia {
     TuristaJpaController turistaJpa = new TuristaJpaController();
     ProveedorJpaController proveedorJpa = new ProveedorJpaController();
     InscripcionJpaController inscripcionJpa = new InscripcionJpaController();
+    ImagenPerfilJpaController imagenPerfilJpa = new ImagenPerfilJpaController();
     
     //Consultas
     public SalidaTuristica consultaSalida(String nombreSalida){
@@ -443,6 +445,20 @@ public ArrayList<DTUsuario> traerUsuarios(){
 
     public List<Actividad> traerActividades() {
         return actividadJpa.findActividadEntities();
+    }
+    
+     public void guardarImagenPerfil(ImagenPerfil imagenPerfil) throws PreexistingEntityException, Exception{
+           try{
+                imagenPerfilJpa.create(imagenPerfil);
+           } catch (PreexistingEntityException e){
+               throw new PreexistingEntityException("Nombre de la imagen ya en uso por otro usuario");
+           }
+                
+             
+        }
+     
+     public ImagenPerfil buscarImagen(String nickname){
+             return  imagenPerfilJpa.findImagenPerfilByNickname(nickname);
     }
      
 }
