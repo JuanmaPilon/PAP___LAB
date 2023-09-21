@@ -324,10 +324,10 @@ try{
     }
     
     //
-    @Override
-    public List<String> findSalidasTuristicasDepartamento(String departamentoSeleccionado) {
-        return controlPersis.findSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
-    }
+//    @Override
+//    public List<String> findSalidasTuristicasDepartamento(String departamentoSeleccionado) {
+//        return controlPersis.findSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
+//    }
     
     //Devuelve lista de DT Actividad para un nombre de Departamento dado
     @Override

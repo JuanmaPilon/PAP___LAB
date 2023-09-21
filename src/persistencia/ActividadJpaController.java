@@ -189,13 +189,13 @@ public class ActividadJpaController implements Serializable {
         }
     }
     
-    public List<String> findByDepartamento(String departamento) { 
-        EntityManager em = getEntityManager();
-        String query = "SELECT NOMBRE FROM actividad WHERE DEPARTAMENTO_NOMBRE LIKE '%"+departamento+"%'";
-	@SuppressWarnings("unchecked")
-	List<String> r = (List<String>) em.createNativeQuery(query).getResultList();
-        return r;
-    }
+//    public List<String> findByDepartamento(String departamento) { 
+//        EntityManager em = getEntityManager();
+//        String query = "SELECT NOMBRE FROM actividad WHERE DEPARTAMENTO_NOMBRE LIKE '%"+departamento+"%'";
+//	@SuppressWarnings("unchecked")
+//	List<String> r = (List<String>) em.createNativeQuery(query).getResultList();
+//        return r;
+//    }
     
 //    //Sirve para crear una tabla con la info delas actividades asociadas a un departamento
 //    public ArrayList<DTActividad> findActividadByDepartamento(String departamento) {

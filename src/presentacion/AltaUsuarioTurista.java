@@ -25,7 +25,7 @@ import persistencia.exceptions.NicknameExistenteException;
 public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
     Controlador control = Controlador.getInstance();
-    String imagenNombre;
+    String imagenNombre="";
     String imagenRuta;
     String nombreUsuario;
     
@@ -219,7 +219,10 @@ public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
     try {
         control.AltaDeUsuarioTurista(nickname, nombre, apellido, correo, fecha, nacionalidad);
-        control.AltaDeImagenPerfil(imagenNombre,imagenRuta, nombreUsuario);
+        
+        if (!(imagenNombre.equals(""))){
+            control.AltaDeImagenPerfil(imagenNombre,imagenRuta, nombreUsuario);
+        }
     JOptionPane.showMessageDialog(null, "Alta realizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     } catch (CorreoElectronicoExistenteException e) {
         JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);

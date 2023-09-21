@@ -36,7 +36,7 @@ import persistencia.exceptions.NicknameExistenteException;
  */
 public class AltaUsuarioProveedor extends javax.swing.JInternalFrame {
     Controlador control = Controlador.getInstance();
-    String imagenNombre;
+    String imagenNombre="";
     String imagenRuta;
     String nombreUsuario;
     /**
@@ -239,7 +239,10 @@ public class AltaUsuarioProveedor extends javax.swing.JInternalFrame {
         Date fecha = calendar.getTime();
      try {   
         control.AltaDeUsuarioProveedor(nickname,  nombre,  apellido,  correo,  fecha,  desc,  link);
-        control.AltaDeImagenPerfil(imagenNombre,imagenRuta, nombreUsuario);
+        
+        if (!(imagenNombre.equals(""))){
+            control.AltaDeImagenPerfil(imagenNombre,imagenRuta, nombreUsuario);
+        }
         JOptionPane.showMessageDialog(null, "Alta realizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     } catch (CorreoElectronicoExistenteException e) {
         JOptionPane.showMessageDialog(null, "El correo ya está en uso por otro usuario", "Error", JOptionPane.ERROR_MESSAGE);

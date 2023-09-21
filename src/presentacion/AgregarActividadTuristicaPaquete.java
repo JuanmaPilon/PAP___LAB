@@ -160,7 +160,7 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
       
     if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
         String departamentoSeleccionado = (String) departamentoAgregarActividadPaquete.getSelectedItem();
-        List<String> actividades = control.findSalidasTuristicasDepartamento(departamentoSeleccionado);
+        List<String> actividades = control.listaActividadesTuristicas(departamentoSeleccionado);
 
            paqueteAgregarActividadTuristica.removeAllItems();
            

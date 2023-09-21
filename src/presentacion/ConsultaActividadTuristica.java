@@ -316,7 +316,7 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
         
         // Verifica si el departamento seleccionado no es nulo ni está vacío
         if (departamentoSeleccionado != null && !departamentoSeleccionado.isEmpty()) {
-            List<String> actividades = control.findSalidasTuristicasDepartamento(departamentoSeleccionado);
+            List<String> actividades = control.listaActividadesTuristicas(departamentoSeleccionado);
 
             cmbActividades.removeAllItems();
             cmbSalidas.removeAllItems();

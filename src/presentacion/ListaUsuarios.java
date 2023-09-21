@@ -135,6 +135,7 @@ public class ListaUsuarios extends javax.swing.JInternalFrame {
                     ModificarDatosProveedor verModificarProveedor = new ModificarDatosProveedor(nickname);  
                     getParent().add(verModificarProveedor);
                     verModificarProveedor.show();
+                     this.dispose();
                   
                 } else  {
                     
