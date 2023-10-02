@@ -1,0 +1,187 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(./images/Thehandofpuntadeleste.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header {
+    background-color: #3e9cff7a;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+#search form {
+    display: flex;
+    align-items: center;
+}
+
+#search input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-right:5px;
+}
+
+#search button {
+    background-color: #fff;
+    color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#login a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+aside {
+    background-color: #f4f4f4;
+    padding: 10px;
+    width: 200px;
+}
+
+aside h2 {
+    font-size: 16px;
+    margin-top: 0;
+}
+
+aside ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+aside ul li {
+    margin: 5px 0;
+}
+
+aside ul li a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+aside ul li:hover {
+    background-color: #c7dcff;
+   }
+   
+
+
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.actividad {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    flex-basis: calc(33.33%);
+}
+
+.actividad img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.actividad h3 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.actividad p {
+    font-size: 14px;
+}
+
+.actividad a {
+    display: block;
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.actividad a:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: #92c7ff;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    clear: both;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+    width: 60%;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+textarea,
+select {
+    width:95%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+input[type="text"]:not(.no-estilo) {
+ 
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+}

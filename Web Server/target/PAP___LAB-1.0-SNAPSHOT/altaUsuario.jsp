@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
             </form>
         </div>
         <div id="login">
-        <a href="index.html" src="index.html">Cancelar Alta</a>
+        <a href="index.jsp" src="index.jsp">Cancelar Alta</a>
         </div>
     </header>
     

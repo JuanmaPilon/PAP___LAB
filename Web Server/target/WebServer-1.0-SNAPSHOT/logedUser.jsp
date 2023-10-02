@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,24 +15,30 @@
         </div>
         <div id="search">
             <form action="buscar.jsp" method="get">
-                <input type="text" calss="no-buscar" name="query" placeholder="Buscar turistas o paquetes">
+                <input type="text" name="query" placeholder="Buscar turistas o paquetes">
                 <button type="submit">Buscar</button>
             </form>
         </div>
         <div id="login">
-            <a href="logedUser.html" src="logedUser.html">Iniciar Sesión</a> | <a href="altaUsuario.html" src="altaUsuario.html">Alta Usuario</a>
+            <a href="">Usuario X</a> | <a href="index.jsp" src="index.jsp">Cerrar Sesion</a> | <a href="altaUsuario.jsp" src="altaUsuario.jsp">Alta Usuario</a>
         </div>
     </header>
     
  
     <aside>
+        <h2>Mi perfil</h2>
+        <ul>
+            <li><a href="#">Inscripcion a Salida</a></li>
+            <li><a href="#">Otro caso de uso</a></li>
+            <li><a href="#">Otros...</a></li>
+        </ul>
         <h2>Departamentos</h2>
         <ul>
-            <li><a class="departamento" href="#">Montevideo</a></li>
-            <li><a class="departamento" href="#">Canelones</a></li>
-            <li><a class="departamento" href="#">Maldonado</a></li>
-            <li><a class="departamento" href="#">Colonia</a></li>
-            <li><a class="departamento" href="#">Rocha</a></li>
+            <li><a href="#">Montevideo</a></li>
+            <li><a href="#">Canelones</a></li>
+            <li><a href="#">Maldonado</a></li>
+            <li><a href="#">Colonia</a></li>
+            <li><a href="#">Rocha</a></li>
        
         </ul>
         
@@ -43,9 +50,6 @@
             <li><a href="#">Gastronomia</a></li>
             <li><a href="#" target="_blank">Turismo Playas</a></li>
             
-
-
-        
         </ul>
     </aside>
     
@@ -68,10 +72,11 @@
         <section class="actividad">
             <img src="./images/playaFoto.jpg" alt="VisitaPlaya">
             <h3>Visita las Playas</h3>
-            <p>Disfruta de nuestras playas en Maldonado.</p>
+            <p>Disfruta de nuestras playas en Maldonado</p>
             <a href="paquete.jsp?id=3">Ver paquetes</a>
         </section>
         
+      
     </main>
     
   

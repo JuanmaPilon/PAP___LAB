@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
             </form>
         </div>
         <div id="login">
-            <a href="">Usuario X</a> | <a href="index.html" src="index.html">Cerrar Sesion</a> | <a href="altaUsuario.html" src="altaUsuario.html">Alta Usuario</a>
+            <a href="">Usuario X</a> | <a href="index.jsp" src="index.jsp">Cerrar Sesion</a> | <a href="altaUsuario.jsp" src="altaUsuario.jsp">Alta Usuario</a>
         </div>
     </header>
     
