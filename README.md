@@ -8,7 +8,7 @@
 * **[Carlos Santana](https://github.com/Carlangassss)**
 * **[Natalia Lopez](https://github.com/Natalialopezutec)**
 * **[Santiago Badiola](https://github.com/SantiagoBadiola2002)**
-* **[Mauricio Batista](https://github.com/rkko)** || Solo primera Iteracion.
+* **[Mauricio Batista](https://github.com/rkko)** || Solo primera Iteracion
 
 ### Para el Proyecto usaremos:
 
