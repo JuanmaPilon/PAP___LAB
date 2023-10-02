@@ -13,7 +13,7 @@
             <h1>Turismo.uy</h1>
         </div>
         <div id="search">
-            <form action="buscar.jsp" method="get">
+            <form action="buscar.jsp" method="post">
                 <input type="text" name="query" placeholder="Buscar turistas o paquetes">
                 <button type="submit">Buscar</button>
             </form>
@@ -51,21 +51,55 @@
     
 
     <main>
-        <section class="actividad">
-            <img src="playa.jpg" alt="Playa">
-            <h3>Paseo por Colonia</h3>
-            <p>Disfruta de nuestros paquetes en Colonia.</p>
-            <a href="paquete.jsp?id=1">Ver paquetes</a>
-        </section>
-        
-        <section class="actividad">
-            <img src="aventura.jpg" alt="Aventura">
-            <h3>Excursiones de Aventura</h3>
-            <p>Vive emocionantes aventuras en la naturaleza de Uruguay.</p>
-            <a href="paquete.jsp?id=2">Ver paquetes</a>
-        </section>
-        
-      
+        <h2>Alta de Usuario</h2>
+        <form action="procesar_registro.jsp" method="post" enctype="multipart/form-data">
+            <label for="nickname">Nickname único:</label>
+            <input placeholder="JuanitoKpo777" type="text" id="nickname" name="nickname" required>
+            
+            <label for="nombre">Nombre:</label>
+            <input placeholder="Juan" type="text" id="nombre" name="nombre" required>
+            
+            <label for="apellido">Apellido:</label>
+            <input placeholder="Sito" type="text" id="apellido" name="apellido" required>
+            
+            <label for="contrasenia">Contraseña:</label>
+            <input type="password" id="contrasenia" name="contrasenia" required>
+            
+            <label for="confirmacion">Confirmar Contraseña:</label>
+            <input type="password" id="confirmacion" name="confirmacion" required>
+            
+            <label for="correo">Correo Electrónico único:</label>
+            <input placeholder= "juanitopotter777@hotmail.com" type="email" id="correo" name="correo" required>
+            
+            <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+            
+            <label for="imagen">Imagen (opcional):</label>
+            <input type="file" id="imagen" name="imagen">
+            
+            <label for="tipoUsuario">Tipo de Usuario:</label>
+            <select id="tipoUsuario" name="tipoUsuario" required>
+                <option value="turista">Turista</option>
+                <option value="proveedor">Proveedor</option>
+            </select>
+            
+       <!-- Turista -->
+            <div id="camposTurista">
+                <label  for="nacionalidad">Nacionalidad:</label>
+                <input placeholder="Chile" type="text" id="nacionalidad" name="nacionalidad">
+            </div>
+            
+      <!--Proveedor-->
+            <div id="camposProveedor">
+                <label for="descripcion">Descripción general:</label>
+                <textarea placeholder="Escribe aqui tu descripcion..." id="descripcion" name="descripcion" rows="4"></textarea>
+                
+                <label for="sitioWeb">Link a Sitio Web:</label>
+                <input type="url" id="sitioWeb" name="sitioWeb">
+            </div>
+            
+            <button type="submit">Registrar</button>
+        </form>
     </main>
     
   
