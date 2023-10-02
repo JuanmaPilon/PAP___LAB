@@ -8,7 +8,7 @@
 * **[Carlos Santana](https://github.com/Carlangassss)**
 * **[Natalia Lopez](https://github.com/Natalialopezutec)**
 * **[Santiago Badiola](https://github.com/SantiagoBadiola2002)**
-* **[Mauricio Batista](https://github.com/rkko)**
+* **[Mauricio Batista](https://github.com/rkko)** || Solo primera Iteracion.
 
 ### Para el Proyecto usaremos:
 
@@ -16,7 +16,13 @@
 - Ant
 - Swing
 - JPA (MySQL Connector 8.0.30)
+- HTML
+- CSS
+- Boostrap
+- Javascript
+- JSP
 
 ### Fechas limites:
 
-- Primera entrega **17 de Setiembre a las 23:00hs**
+- Primera entrega **17 de Setiembre a las 23:59hs**
+- Segunda entrega **22 de Octubre a las 23:59hs**
