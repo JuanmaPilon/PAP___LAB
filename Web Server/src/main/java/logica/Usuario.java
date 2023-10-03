@@ -14,19 +14,29 @@ import javax.persistence.TemporalType;
         private String nickname;
         private String nombre;
         private String apellido;
+        private String contrasenia;
         private String correo;
         @Temporal(TemporalType.DATE)
         private Date fNacimiento;
 
     public Usuario() {
     }
-    
-    public Usuario(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
+
+    public Usuario(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.contrasenia = contrasenia;
         this.correo = correo;
         this.fNacimiento = fNacimiento;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public void setNickname(String nickname) {

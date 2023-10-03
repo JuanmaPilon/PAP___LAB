@@ -21,8 +21,8 @@ public class Proveedor extends Usuario implements Serializable {
         super();
     }
 
-    public Proveedor(String descripcion, String link, ArrayList<Actividad> listaActividades, String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
-        super(nickname, nombre, apellido, correo, fNacimiento);
+    public Proveedor(String descripcion, String link, ArrayList<Actividad> listaActividades, String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento) {
+        super(nickname, nombre, apellido, contrasenia, correo, fNacimiento);
         this.descripcion = descripcion;
         this.link = link;
         this.listaActividades = listaActividades;
