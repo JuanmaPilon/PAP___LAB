@@ -31,6 +31,7 @@
             <li><a href="#">Inscripcion a Salida</a></li>
             <li><a href="#">Otro caso de uso</a></li>
             <li><a href="#">Otros...</a></li>
+            <li><a href="consultaUsuario.jsp">Consulta Usuario</a></li>
         </ul>
         <h2>Departamentos</h2>
         <ul>
