@@ -43,9 +43,6 @@
             <li><a href="#">Cultura y Patrimonio</a></li>
             <li><a href="#">Gastronomia</a></li>
             <li><a href="#" target="_blank">Turismo Playas</a></li>
-            
-
-
         
         </ul>
     </aside>

@@ -32,6 +32,8 @@
             <li><a href="#">Otro caso de uso</a></li>
             <li><a href="#">Otros...</a></li>
             <li><a href="consultaUsuario.jsp">Consulta Usuario</a></li>
+            <li><a href="altaActividadTuristica.jsp">Alta Actividad</a></li>
+            
         </ul>
         <h2>Departamentos</h2>
         <ul>

@@ -20,7 +20,7 @@
             </form>
         </div>
         <div id="login">
-        <a href="index.jsp" src="index.jsp">Cancelar Alta</a>
+        <a href="index.jsp" src="index.jsp">Cancelar Alta Usuario</a>
         </div>
     </header>
     

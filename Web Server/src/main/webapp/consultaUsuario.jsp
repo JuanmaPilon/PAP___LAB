@@ -20,7 +20,7 @@
             </form>
         </div>
         <div id="login">
-        <a href="index.jsp" src="index.jsp">Cancelar Consulta</a>
+        <a href="logedUser.jsp" src="logedUser.jsp">Cancelar Consulta Usuario</a>
         </div>
     </header>
     
