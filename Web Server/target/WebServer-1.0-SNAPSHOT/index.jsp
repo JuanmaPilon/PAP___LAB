@@ -20,7 +20,7 @@
             </form>
         </div>
         <div id="login">
-            <a href="logedUser.jsp" src="logedUser.jsp">Iniciar Sesión</a> | <a href="altaUsuario.jsp" src="altaUsuario.jsp">Alta Usuario</a>
+            <a href="login.jsp">Iniciar Sesión</a> | <a href="altaUsuario.jsp">Alta Usuario</a>
         </div>
     </header>
     
