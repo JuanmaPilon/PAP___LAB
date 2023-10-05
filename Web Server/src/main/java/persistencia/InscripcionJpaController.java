@@ -15,19 +15,20 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import logica.Inscripcion;
 import logica.Turista;
+import logica.SalidaTuristica;
 import persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author kouta
+ * @author carlo
  */
 public class InscripcionJpaController implements Serializable {
 
     public InscripcionJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    public InscripcionJpaController(){
-        emf = Persistence.createEntityManagerFactory("Lab1PU");
+    public InscripcionJpaController() {
+       emf = Persistence.createEntityManagerFactory("Lab01PU");
     }
     private EntityManagerFactory emf = null;
 
@@ -45,10 +46,19 @@ public class InscripcionJpaController implements Serializable {
                 turista = em.getReference(turista.getClass(), turista.getNickname());
                 inscripcion.setTurista(turista);
             }
+            SalidaTuristica salida = inscripcion.getSalida();
+            if (salida != null) {
+                salida = em.getReference(salida.getClass(), salida.getNombre());
+                inscripcion.setSalida(salida);
+            }
             em.persist(inscripcion);
             if (turista != null) {
                 turista.getListaInscripcion().add(inscripcion);
                 turista = em.merge(turista);
+            }
+            if (salida != null) {
+                salida.getListaInscripciones().add(inscripcion);
+                salida = em.merge(salida);
             }
             em.getTransaction().commit();
         } finally {
@@ -66,9 +76,15 @@ public class InscripcionJpaController implements Serializable {
             Inscripcion persistentInscripcion = em.find(Inscripcion.class, inscripcion.getId());
             Turista turistaOld = persistentInscripcion.getTurista();
             Turista turistaNew = inscripcion.getTurista();
+            SalidaTuristica salidaOld = persistentInscripcion.getSalida();
+            SalidaTuristica salidaNew = inscripcion.getSalida();
             if (turistaNew != null) {
                 turistaNew = em.getReference(turistaNew.getClass(), turistaNew.getNickname());
                 inscripcion.setTurista(turistaNew);
+            }
+            if (salidaNew != null) {
+                salidaNew = em.getReference(salidaNew.getClass(), salidaNew.getNombre());
+                inscripcion.setSalida(salidaNew);
             }
             inscripcion = em.merge(inscripcion);
             if (turistaOld != null && !turistaOld.equals(turistaNew)) {
@@ -78,6 +94,14 @@ public class InscripcionJpaController implements Serializable {
             if (turistaNew != null && !turistaNew.equals(turistaOld)) {
                 turistaNew.getListaInscripcion().add(inscripcion);
                 turistaNew = em.merge(turistaNew);
+            }
+            if (salidaOld != null && !salidaOld.equals(salidaNew)) {
+                salidaOld.getListaInscripciones().remove(inscripcion);
+                salidaOld = em.merge(salidaOld);
+            }
+            if (salidaNew != null && !salidaNew.equals(salidaOld)) {
+                salidaNew.getListaInscripciones().add(inscripcion);
+                salidaNew = em.merge(salidaNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -112,6 +136,11 @@ public class InscripcionJpaController implements Serializable {
             if (turista != null) {
                 turista.getListaInscripcion().remove(inscripcion);
                 turista = em.merge(turista);
+            }
+            SalidaTuristica salida = inscripcion.getSalida();
+            if (salida != null) {
+                salida.getListaInscripciones().remove(inscripcion);
+                salida = em.merge(salida);
             }
             em.remove(inscripcion);
             em.getTransaction().commit();

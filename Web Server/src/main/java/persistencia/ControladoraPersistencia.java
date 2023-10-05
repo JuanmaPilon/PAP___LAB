@@ -257,7 +257,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
     //public void guardarActividad(string nombreProveedor,string nombreDep,string nombreActividad,string descripcionActividad,string duracionActividad,string costoActividad,string nombreCuidad,int dia,int mes,int anio);
 
     public void guardarTurista(Turista turista) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception{
-    try {
+        try {
             turistaJpa.create(turista);
         } catch (NicknameExistenteException ex) {
             throw new NicknameExistenteException("Nickname ya en uso por un usuario");

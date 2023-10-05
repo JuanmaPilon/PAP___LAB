@@ -13,9 +13,14 @@ import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.NicknameExistenteException;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
+import javax.persistence.EntityNotFoundException;
+
 
 public class Controlador implements IControlador{
     
+    /**
+     *
+     */
     public Controlador() {}
     
     private static Controlador control;
@@ -29,12 +34,20 @@ public class Controlador implements IControlador{
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
     //descomentado por una prueba:
+
+    /**
+     *
+     * @param nickname
+     * @return
+     * @throws Exception
+     */
     
+    @Override
     public ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception{
         
            return  controlPersis.buscarImagen(nickname);
     }
-    
+    @Override
     public  void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
         
         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
@@ -54,7 +67,6 @@ public class Controlador implements IControlador{
         turista.setCorreo(correo);
         turista.setfNacimiento(fNacimiento);
         turista.setNacionalidad(nacionalidad);
-        
         try {
            controlPersis.guardarTurista(turista);
         } catch (NicknameExistenteException ex) {

@@ -5,35 +5,31 @@
 package persistencia;
 
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import logica.Inscripcion;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import logica.Proveedor;
 import logica.Turista;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
-import persistencia.exceptions.CorreoElectronicoExistenteException;
-import persistencia.exceptions.NicknameExistenteException;
 
 /**
  *
- * @author natil
+ * @author carlo
  */
 public class TuristaJpaController implements Serializable {
 
     public TuristaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    //la vacia
-    public TuristaJpaController() {
-        emf = Persistence.createEntityManagerFactory("Lab1PU");
+     public TuristaJpaController() {
+       emf = Persistence.createEntityManagerFactory("Lab01PU");
     }
     private EntityManagerFactory emf = null;
 
@@ -41,87 +37,76 @@ public class TuristaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-     public void create(Turista turista) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
-    EntityManager em = null;
-    try {
-        em = getEntityManager();
-        em.getTransaction().begin();
-
-        EmailExistenceChecker emailChecker = new EmailExistenceChecker(em);
-        NicknameExistenceChecker nicknameChecker = new NicknameExistenceChecker(em);
-
-        // Verificar si el correo electrónico ya existe en la base de datos para turistas
-        if (emailChecker.correoElectronicoExiste(turista.getCorreo(), Turista.class)) {
-            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un turista: " + turista.getCorreo());
+    public void create(Turista turista) throws PreexistingEntityException, Exception {
+        if (turista.getListaInscripcion() == null) {
+            turista.setListaInscripcion(new ArrayList<Inscripcion>());
         }
-
-        // Verificar si el correo electrónico ya existe en la base de datos para proveedores
-        if (emailChecker.correoElectronicoExiste(turista.getCorreo(), Proveedor.class)) {
-            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un proveedor: " + turista.getCorreo());
-        }
-
-        // Verificar si el nickname ya existe en la base de datos para turistas
-        if (nicknameChecker.nicknameExiste(turista.getNickname(), Turista.class)) {
-            throw new NicknameExistenteException("Nickname ya en uso por un turista: " + turista.getNickname());
-        }
-
-        // Verificar si el nickname ya existe en la base de datos para proveedores
-        if (nicknameChecker.nicknameExiste(turista.getNickname(), Proveedor.class)) {
-            throw new NicknameExistenteException("Nickname ya en uso por un proveedor: " + turista.getNickname());
-        }
-
-        em.persist(turista);
-        em.getTransaction().commit();
-    } catch (Exception ex) {
-        if (findTurista(turista.getNickname()) != null) {
-            throw new PreexistingEntityException("Turista " + turista.getNickname() + " already exists.", ex);
-        }
-        throw ex;
-    } finally {
-        if (em != null) {
-            em.close();
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            ArrayList<Inscripcion> attachedListaInscripcion = new ArrayList<Inscripcion>();
+            for (Inscripcion listaInscripcionInscripcionToAttach : turista.getListaInscripcion()) {
+                listaInscripcionInscripcionToAttach = em.getReference(listaInscripcionInscripcionToAttach.getClass(), listaInscripcionInscripcionToAttach.getId());
+                attachedListaInscripcion.add(listaInscripcionInscripcionToAttach);
+            }
+            turista.setListaInscripcion(attachedListaInscripcion);
+            em.persist(turista);
+            for (Inscripcion listaInscripcionInscripcion : turista.getListaInscripcion()) {
+                Turista oldTuristaOfListaInscripcionInscripcion = listaInscripcionInscripcion.getTurista();
+                listaInscripcionInscripcion.setTurista(turista);
+                listaInscripcionInscripcion = em.merge(listaInscripcionInscripcion);
+                if (oldTuristaOfListaInscripcionInscripcion != null) {
+                    oldTuristaOfListaInscripcionInscripcion.getListaInscripcion().remove(listaInscripcionInscripcion);
+                    oldTuristaOfListaInscripcionInscripcion = em.merge(oldTuristaOfListaInscripcionInscripcion);
+                }
+            }
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findTurista(turista.getNickname()) != null) {
+                throw new PreexistingEntityException("Turista " + turista + " already exists.", ex);
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
-}
-
-public class EmailExistenceChecker {
-
-    private EntityManager em;
-
-    public EmailExistenceChecker(EntityManager em) {
-        this.em = em;
-    }
-
-    public boolean correoElectronicoExiste(String correo, Class<?> entityClass) {
-        TypedQuery<?> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.correo = :correo", entityClass);
-        query.setParameter("correo", correo);
-        List<?> resultList = query.getResultList();
-        return !resultList.isEmpty();
-    }
-}
-
-public class NicknameExistenceChecker {
-
-    private EntityManager em;
-
-    public NicknameExistenceChecker(EntityManager em) {
-        this.em = em;
-    }
-
-    public boolean nicknameExiste(String nickname, Class<?> entityClass) {
-        TypedQuery<?> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.nickname = :nickname", entityClass);
-        query.setParameter("nickname", nickname);
-        List<?> resultList = query.getResultList();
-        return !resultList.isEmpty();
-    }
-}
 
     public void edit(Turista turista) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Turista persistentTurista = em.find(Turista.class, turista.getNickname());
+            ArrayList<Inscripcion> listaInscripcionOld = persistentTurista.getListaInscripcion();
+            ArrayList<Inscripcion> listaInscripcionNew = turista.getListaInscripcion();
+            ArrayList<Inscripcion> attachedListaInscripcionNew = new ArrayList<Inscripcion>();
+            for (Inscripcion listaInscripcionNewInscripcionToAttach : listaInscripcionNew) {
+                listaInscripcionNewInscripcionToAttach = em.getReference(listaInscripcionNewInscripcionToAttach.getClass(), listaInscripcionNewInscripcionToAttach.getId());
+                attachedListaInscripcionNew.add(listaInscripcionNewInscripcionToAttach);
+            }
+            listaInscripcionNew = attachedListaInscripcionNew;
+            turista.setListaInscripcion(listaInscripcionNew);
             turista = em.merge(turista);
+            for (Inscripcion listaInscripcionOldInscripcion : listaInscripcionOld) {
+                if (!listaInscripcionNew.contains(listaInscripcionOldInscripcion)) {
+                    listaInscripcionOldInscripcion.setTurista(null);
+                    listaInscripcionOldInscripcion = em.merge(listaInscripcionOldInscripcion);
+                }
+            }
+            for (Inscripcion listaInscripcionNewInscripcion : listaInscripcionNew) {
+                if (!listaInscripcionOld.contains(listaInscripcionNewInscripcion)) {
+                    Turista oldTuristaOfListaInscripcionNewInscripcion = listaInscripcionNewInscripcion.getTurista();
+                    listaInscripcionNewInscripcion.setTurista(turista);
+                    listaInscripcionNewInscripcion = em.merge(listaInscripcionNewInscripcion);
+                    if (oldTuristaOfListaInscripcionNewInscripcion != null && !oldTuristaOfListaInscripcionNewInscripcion.equals(turista)) {
+                        oldTuristaOfListaInscripcionNewInscripcion.getListaInscripcion().remove(listaInscripcionNewInscripcion);
+                        oldTuristaOfListaInscripcionNewInscripcion = em.merge(oldTuristaOfListaInscripcionNewInscripcion);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -150,6 +135,11 @@ public class NicknameExistenceChecker {
                 turista.getNickname();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The turista with id " + id + " no longer exists.", enfe);
+            }
+            ArrayList<Inscripcion> listaInscripcion = turista.getListaInscripcion();
+            for (Inscripcion listaInscripcionInscripcion : listaInscripcion) {
+                listaInscripcionInscripcion.setTurista(null);
+                listaInscripcionInscripcion = em.merge(listaInscripcionInscripcion);
             }
             em.remove(turista);
             em.getTransaction().commit();

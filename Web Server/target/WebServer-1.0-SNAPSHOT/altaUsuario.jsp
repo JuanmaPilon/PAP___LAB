@@ -25,7 +25,7 @@
     
     <main>
         <h2>Alta de Usuario</h2>
-        <form action="SvTurista" method="POST" enctype="multipart/form-data">
+        <form action="SvTurista" method="post" accept-charset="UTF-8">
             <label for="nickname">Nickname único:</label>
             <input placeholder="JuanitoKpo777" type="text" id="nickname" name="nickname" required>
             

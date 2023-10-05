@@ -21,15 +21,15 @@ import persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author natil
+ * @author carlo
  */
 public class PaqueteJpaController implements Serializable {
 
     public PaqueteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    public PaqueteJpaController() {
-        emf = Persistence.createEntityManagerFactory("Lab1PU");
+     public PaqueteJpaController() {
+       emf = Persistence.createEntityManagerFactory("Lab01PU");
     }
     private EntityManagerFactory emf = null;
 

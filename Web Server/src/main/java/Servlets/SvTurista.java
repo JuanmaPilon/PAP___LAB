@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Controlador;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
-import persistencia.exceptions.NicknameExistenteException;
 import persistencia.exceptions.PreexistingEntityException;
 
 @WebServlet(name = "SvTurista", urlPatterns = {"/SvTurista"})
@@ -35,6 +34,7 @@ Controlador control = Controlador.getInstance();
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Date fNacimiento = null;
+        
         String nickname = request.getParameter("nickname");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
@@ -43,28 +43,30 @@ Controlador control = Controlador.getInstance();
         String fechaNacimientoString = request.getParameter("fechaNacimiento");
         String imagen = request.getParameter("");
         String nacionalidad = request.getParameter("nacionalidad");
+       
+        try {
+        SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaNacimientoDate = formatoEntrada.parse(fechaNacimientoString);
+        String fechaFormateada = formatoSalida.format(fechaNacimientoDate);
+        fNacimiento = formatoSalida.parse(fechaFormateada);
+        
+    } catch (ParseException e) {
+        e.printStackTrace(); // Maneja la excepción si la cadena no se puede convertir a Date
+    }
 
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy"); // Define el formato de la fecha
-            fNacimiento = sdf.parse(fechaNacimientoString); // Convierte la cadena a Date
-        } catch (ParseException e) {
-            // Maneja la excepción si la cadena no se puede convertir a Date
-            e.printStackTrace(); // O usa un logger para registrar el error
+            control.AltaDeUsuarioTurista(nickname, nombre, apellido, contrasenia, correo, fNacimiento, nacionalidad);
+        } catch (PreexistingEntityException ex) {
+            Logger.getLogger(SvTurista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CorreoElectronicoExistenteException ex) {
+            Logger.getLogger(SvTurista.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(SvTurista.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-      
-    try { 
-        control.AltaDeUsuarioTurista(nickname, nombre, apellido,contrasenia, correo, fNacimiento, nacionalidad);
-    } catch (PreexistingEntityException ex) {
-        Logger.getLogger(SvTurista.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (CorreoElectronicoExistenteException ex) {
-        Logger.getLogger(SvTurista.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (Exception ex) {
-        Logger.getLogger(SvTurista.class.getName()).log(Level.SEVERE, null, ex);
+        response.sendRedirect("login.jsp");
     }
-      
-    }
-
+        
     @Override
     public String getServletInfo() {
         return "Short description";
