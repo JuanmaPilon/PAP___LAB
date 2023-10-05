@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="styles.css" src="styles.css"">
-    <title>Turismo.uy - Reserva de Paquetes Turísticos</title>
+    <title>Turismo.uy - Reserva de Paquetes Turï¿½sticos</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -26,7 +26,7 @@
     <main>
         <h2>Alta de Usuario</h2>
         <form action="SvTurista" method="post" accept-charset="UTF-8">
-            <label for="nickname">Nickname único:</label>
+            <label for="nickname">Nickname:</label>
             <input placeholder="JuanitoKpo777" type="text" id="nickname" name="nickname" required>
             
             <label for="nombre">Nombre:</label>
@@ -35,13 +35,13 @@
             <label for="apellido">Apellido:</label>
             <input placeholder="Sito" type="text" id="apellido" name="apellido" required>
             
-            <label for="contrasenia">Contraseña:</label>
+            <label for="contrasenia">ContraseÃ±a:</label>
             <input type="password" id="contrasenia" name="contrasenia" required>
             
-            <label for="confirmacion">Confirmar Contraseña:</label>
+            <label for="confirmacion">Confirmar ContraseÃ±a:</label>
             <input type="password" id="confirmacion" name="confirmacion" required>
             
-            <label for="correo">Correo Electrónico único:</label>
+            <label for="correo">Correo Electronico:</label>
             <input placeholder= "juanitopotter777@sucio.com" type="email" id="correo" name="correo" required>
             
             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
@@ -51,6 +51,28 @@
             <input type="file" id="imagen" name="imagen">
             
             <label for="tipoUsuario">Tipo de Usuario:</label>
+            <script>
+                function mostrarCampos() {
+                    var tipoUsuario = document.getElementById("tipoUsuario").value;
+                    var camposTurista = document.getElementById("camposTurista");
+                    var camposProveedor = document.getElementById("camposProveedor");
+        
+                    if (tipoUsuario === "turista") {
+                        camposTurista.style.display = "block";
+                        camposProveedor.style.display = "none";
+                    } else if (tipoUsuario === "proveedor") {
+                        camposTurista.style.display = "none";
+                        camposProveedor.style.display = "block";
+                    } 
+                };
+
+                    window.onload = function defaultChoice () {
+                        let tipoUsuarioSeleccion = document.getElementById("tipoUsuario");
+                        tipoUsuarioSeleccion.value = "turista";
+                        mostrarCampos();
+                    };
+                
+            </script>
             <select id="tipoUsuario" name="tipoUsuario" required onchange="mostrarCampos()">
                 <option value="turista">Turista</option>
                 <option value="proveedor">Proveedor</option>
@@ -64,8 +86,8 @@
             
             <!-- Proveedor -->
             <div id="camposProveedor" style="display:none;">
-                <label for="descripcion">Descripción general:</label>
-                <textarea placeholder="Escribe aquí tu descripción..." id="descripcion" name="descripcion" rows="4"></textarea>
+                <label for="descripcion">Descripcion general:</label>
+                <textarea placeholder="Escribe aquï¿½ tu descripciï¿½n..." id="descripcion" name="descripcion" rows="4"></textarea>
                 
                 <label for="sitioWeb">Link a Sitio Web:</label>
                 <input type="url" id="sitioWeb" name="sitioWeb">
@@ -80,20 +102,6 @@
         <p>&copy; 2023 Turismo.uy</p>
     </footer>
 
-    <script>
-        function mostrarCampos() {
-            var tipoUsuario = document.getElementById("tipoUsuario").value;
-            var camposTurista = document.getElementById("camposTurista");
-            var camposProveedor = document.getElementById("camposProveedor");
 
-            if (tipoUsuario === "turista") {
-                camposTurista.style.display = "block";
-                camposProveedor.style.display = "none";
-            } else if (tipoUsuario === "proveedor") {
-                camposTurista.style.display = "none";
-                camposProveedor.style.display = "block";
-            }
-        }
-    </script>
 </body>
 </html>
