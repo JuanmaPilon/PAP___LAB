@@ -29,6 +29,7 @@ persistencia\InscripcionJpaController.class
 persistencia\TuristaJpaController.class
 logica\Proveedor_.class
 logica\SalidaTuristica_.class
+Servlets\SvUsuario.class
 persistencia\PaqueteJpaController.class
 logica\DTProveedor.class
 logica\DTActividad.class

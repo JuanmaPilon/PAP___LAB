@@ -146,40 +146,44 @@ public class ControladoraPersistencia {
     public List<Paquete> consultaPaquete(){
         return paqueteJpa.findPaqueteEntities();
     };
-    public ArrayList<String> listaUsuarios(){
-    ArrayList<String> nicknames = new ArrayList<String>();
-    try {
-        List<Turista> turistas = turistaJpa.findTuristaEntities();
-        for (int i = 0; i < turistas.size(); i++) {
-            nicknames.add(turistas.get(i).getNickname());
-        }
-    }catch(Exception ex){
+    
+    
+    
+    
+   public ArrayList<String> listaUsuarios() {
+        ArrayList<String> nicknames = new ArrayList<String>();
+        try {
+            List<Turista> turistas = turistaJpa.findTuristaEntities();
+            for (int i = 0; i < turistas.size(); i++) {
+                nicknames.add(turistas.get(i).getNickname());
+            }
+        } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    try {
-        List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
-        for (int i = 0; i < proveedores.size(); i++) {
-            nicknames.add(proveedores.get(i).getNickname());
         }
-    }catch(Exception ex){
+        try {
+            List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+            for (int i = 0; i < proveedores.size(); i++) {
+                nicknames.add(proveedores.get(i).getNickname());
+            }
+        } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return nicknames;
+        }
+        return nicknames;
     }
 
-   public ArrayList<String> listaProveedores(){
-    ArrayList<String> nicknames = new ArrayList<String>();
-  
-    try {
-        List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
-        for (int i = 0; i < proveedores.size(); i++) {
-            nicknames.add(proveedores.get(i).getNickname());
-        }
-    }catch(Exception ex){
+    public ArrayList<String> listaProveedores() {
+        ArrayList<String> nicknames = new ArrayList<String>();
+
+        try {
+            List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+            for (int i = 0; i < proveedores.size(); i++) {
+                nicknames.add(proveedores.get(i).getNickname());
+            }
+        } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return nicknames;
-    }    
+        }
+        return nicknames;
+    }  
 
     
 

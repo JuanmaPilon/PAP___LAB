@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,19 +52,26 @@
     </aside>
     
        <main>
-        <h2>Consulta de Usuario</h2>
-        <form action="procesar_consulta_usuario.jsp" method="post">
-            <label for="usuario">Selecciona un usuario:</label>
-            <select id="usuario" name="usuario">
-                <!-- ES UN PLACEHOLDER -->
-                <option value="usuario1">Nombre de Usuario 1</option>
-                <option value="usuario2">Nombre de Usuario 2</option>
-                <option value="usuario3">Nombre de Usuario 3</option>
-                <option value="usuario4">Ya entendiste wn como es</option>
-            </select>
-            <button type="submit">Consultar</button>
-        </form>
-        
+           <h2>Consulta de Usuario</h2>
+           <form action="SvUsuario" method="get" name="cmbUsuarios">
+               <label for="usuario">Selecciona un usuario:</label>
+               <select id="usuario" name="usuario">
+                   <% List<String> listaUsuarios = (List<String>) request.getAttribute("listaUsuarios");
+                       if (listaUsuarios != null) {
+                           for (String usuario : listaUsuarios) {%>
+                   <option value="<%= usuario%>"><%= usuario%></option>
+                   <% }
+    }%>
+
+               </select>
+               <button type="submit">Consultar</button>
+           </form>
+<script>
+window.onload= function cargaDatos(){
+    let cargarDatos =
+}
+</script>
+
     </main>
     
   
