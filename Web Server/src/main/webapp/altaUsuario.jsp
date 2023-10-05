@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="styles.css" src="styles.css"">
-    <title>Turismo.uy - Reserva de Paquetes Tur�sticos</title>
+    <title>Turismo.uy - Reserva de Paquetes Turisticos</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -35,10 +35,10 @@
             <label for="apellido">Apellido:</label>
             <input placeholder="Sito" type="text" id="apellido" name="apellido" required>
             
-            <label for="contrasenia">Contraseña:</label>
+            <label for="contrasenia">Contrase�a:</label>
             <input type="password" id="contrasenia" name="contrasenia" required>
             
-            <label for="confirmacion">Confirmar Contraseña:</label>
+            <label for="confirmacion">Confirmar Contrasenia:</label>
             <input type="password" id="confirmacion" name="confirmacion" required>
             
             <label for="correo">Correo Electronico:</label>

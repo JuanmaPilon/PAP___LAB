@@ -81,13 +81,29 @@ public class Controlador implements IControlador{
         return controlPersis.consultaPaquete();
     };
    
+    /**
+     *
+     * @param nickname
+     * @param nombre
+     * @param apellido
+     * @param Contrasenia
+     * @param correo
+     * @param fNacimiento
+     * @param descripcion
+     * @param link
+     * @throws CorreoElectronicoExistenteException
+     * @throws NicknameExistenteException
+     * @throws PreexistingEntityException
+     * @throws Exception
+     */
     @Override
-    public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, 
+    public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido,String contrasenia, String correo, 
    Date fNacimiento, String descripcion, String link) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
    Proveedor proveedor = new Proveedor();
    proveedor.setNickname(nickname);
    proveedor.setNombre(nombre);
    proveedor.setApellido(apellido);
+   proveedor.setContrasenia(contrasenia);
    proveedor.setCorreo(correo);
    proveedor.setfNacimiento(fNacimiento);
    proveedor.setDescripcion(descripcion);
@@ -591,9 +607,9 @@ try{
             AltaDeUsuarioTurista("tony", "Antonio", "Pacheco","123", "eltony@manya.org.uy", fecha.parse("11/04/1976"), "uruguaya");
             AltaDeUsuarioTurista("chino", "Alvaro", "Recoba","123", "chino@trico.org.uy", fecha.parse("17/03/1976"), "uruguaya");
             AltaDeUsuarioTurista("mastropiero", "Johann Sebastian", "Mastropiero","123", "johann.sebastian@gmail.com", fecha.parse("07/02/1922"), "austrıaca");
-            AltaDeUsuarioProveedor("washington", "Washington", "Rocha", "washington@turismorocha.gub.uy", fecha.parse("14/09/1970"), "Hola! me llamo Washington y soy el encargado del portal de turismo del departamento de Rocha - Uruguay", "http://turismorocha.gub.uy/");
-            AltaDeUsuarioProveedor("eldiez", "Pablo", "Bengoechea", "eldiez@socfomturriv.org.uy", fecha.parse("27/06/1965"), "Pablo es el presidente de la Sociedad de Fomento Turıstico de Rivera (conocida como Socfomturriv)", "http://wwww.socfomturriv.org.uy");
-            AltaDeUsuarioProveedor("meche" ,"Mercedes", "Venn", "meche@colonia.gub.uy", fecha.parse("31/12/1990"), "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
+            AltaDeUsuarioProveedor("washington", "Washington", "Rocha","123", "washington@turismorocha.gub.uy", fecha.parse("14/09/1970"), "Hola! me llamo Washington y soy el encargado del portal de turismo del departamento de Rocha - Uruguay", "http://turismorocha.gub.uy/");
+            AltaDeUsuarioProveedor("eldiez", "Pablo", "Bengoechea","123", "eldiez@socfomturriv.org.uy", fecha.parse("27/06/1965"), "Pablo es el presidente de la Sociedad de Fomento Turıstico de Rivera (conocida como Socfomturriv)", "http://wwww.socfomturriv.org.uy");
+            AltaDeUsuarioProveedor("meche" ,"Mercedes", "Venn","123", "meche@colonia.gub.uy", fecha.parse("31/12/1990"), "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
     
        } catch (ParseException ex) {
     Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
