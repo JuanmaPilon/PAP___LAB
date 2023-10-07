@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import logica.Controlador;
+import com.google.gson.Gson;
 
 @WebServlet(name = "SvUsuario", urlPatterns = {"/SvUsuario"})
 public class SvUsuario extends HttpServlet {
@@ -17,19 +17,18 @@ public class SvUsuario extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+        // Puedes manejar solicitudes adicionales aquí si es necesario
     }
-   @Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-List<String> listaUsuarios = control.listaUsuarios(); // Obtén la lista de usuarios de alguna manera
-request.setAttribute("listaUsuarios", listaUsuarios);
-RequestDispatcher dispatcher = request.getRequestDispatcher("consultaUsuario.jsp");
-dispatcher.forward(request, response);
 
-    
-}
-
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<String> listaUsuarios = control.listaUsuarios();
+        // Convierte la lista de usuarios a JSON
+        String jsonUsuarios = new Gson().toJson(listaUsuarios);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(jsonUsuarios);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -40,6 +39,5 @@ dispatcher.forward(request, response);
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

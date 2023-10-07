@@ -22,62 +22,71 @@
         <a href="index.jsp" src="index.jsp">Cancelar Alta Usuario</a>
         </div>
     </header>
-    
+
     <main>
         <h2>Alta de Usuario</h2>
-        <form action="SvTurista" method="post" accept-charset="UTF-8">
+        <script>
+function mostrarCampos() {
+    var tipoUsuario = document.getElementById("tipoUsuario").value;
+    var camposTurista = document.getElementById("camposTurista");
+    var camposProveedor = document.getElementById("camposProveedor");
+
+    if (tipoUsuario === "turista") {
+        camposTurista.style.display = "block";
+        camposProveedor.style.display = "none";
+    } else if (tipoUsuario === "proveedor") {
+        camposTurista.style.display = "none";
+        camposProveedor.style.display = "block";
+    }
+
+    // Cambiar el valor del atributo action del formulario
+    var formulario = document.getElementById("formularioRegistro");
+    if (tipoUsuario === "turista") {
+        formulario.action = "SvTurista";
+                } else if (tipoUsuario === "proveedor") {
+                    formulario.action = "SvProveedor"; // Cambia "SvProveedor" al servlet correspondiente para proveedores
+                }
+            }
+
+// Esta función se ejecutará cuando se cargue la página
+            window.onload = function () {
+                // Llamamos a mostrarCampos() para asegurarnos de que el formulario tenga la acción correcta al cargar la página
+                mostrarCampos();
+            };
+        </script>
+
+        <form id="formularioRegistro" action=SvTurista method="post" accept-charset="UTF-8">
             <label for="nickname">Nickname:</label>
             <input placeholder="JuanitoKpo777" type="text" id="nickname" name="nickname" required>
-            
+
             <label for="nombre">Nombre:</label>
             <input placeholder="Juan" type="text" id="nombre" name="nombre" required>
-            
+
             <label for="apellido">Apellido:</label>
             <input placeholder="Sito" type="text" id="apellido" name="apellido" required>
-            
+
             <label for="contrasenia">Contraseña:</label>
             <input type="password" id="contrasenia" name="contrasenia" required>
-            
+
             <label for="confirmacion">Confirmar Contrasenia:</label>
             <input type="password" id="confirmacion" name="confirmacion" required>
-            
+
             <label for="correo">Correo Electronico:</label>
             <input placeholder= "juanitopotter777@sucio.com" type="email" id="correo" name="correo" required>
-            
+
             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
             <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
-            
+
             <label for="imagen">Imagen (opcional):</label>
             <input type="file" id="imagen" name="imagen">
-            
-            <label for="tipoUsuario">Tipo de Usuario:</label>
-            <script>
-                function mostrarCampos() {
-                    var tipoUsuario = document.getElementById("tipoUsuario").value;
-                    var camposTurista = document.getElementById("camposTurista");
-                    var camposProveedor = document.getElementById("camposProveedor");
-        
-                    if (tipoUsuario === "turista") {
-                        camposTurista.style.display = "block";
-                        camposProveedor.style.display = "none";
-                    } else if (tipoUsuario === "proveedor") {
-                        camposTurista.style.display = "none";
-                        camposProveedor.style.display = "block";
-                    } 
-                };
 
-                    window.onload = function defaultChoice () {
-                        let tipoUsuarioSeleccion = document.getElementById("tipoUsuario");
-                        tipoUsuarioSeleccion.value = "turista";
-                        mostrarCampos();
-                    };
-                
-            </script>
+            <label for="tipoUsuario">Tipo de Usuario:</label>
+            
             <select id="tipoUsuario" name="tipoUsuario" required onchange="mostrarCampos()">
                 <option value="turista">Turista</option>
                 <option value="proveedor">Proveedor</option>
             </select>
-            
+
             <!-- Turista -->
             <div id="camposTurista" style="display:none;">
                 <label for="nacionalidad">Nacionalidad:</label>
