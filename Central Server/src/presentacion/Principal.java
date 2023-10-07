@@ -60,6 +60,7 @@ public class Principal extends javax.swing.JFrame {
         altaCrearPaquete = new javax.swing.JMenuItem();
         altaAgregarActividadPaquete = new javax.swing.JMenuItem();
         altaDepartamento = new javax.swing.JMenuItem();
+        altaCategoria = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         consUsuario = new javax.swing.JMenuItem();
         consActividadTuristica = new javax.swing.JMenuItem();
@@ -67,6 +68,7 @@ public class Principal extends javax.swing.JFrame {
         consPaquete = new javax.swing.JMenuItem();
         menuModificar = new javax.swing.JMenu();
         modUsuario = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         cargarDatos = new javax.swing.JMenu();
         mitemDatosPrueba = new javax.swing.JMenuItem();
 
@@ -169,6 +171,14 @@ public class Principal extends javax.swing.JFrame {
         });
         menuAltas.add(altaDepartamento);
 
+        altaCategoria.setText("Categoria");
+        altaCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaCategoriaActionPerformed(evt);
+            }
+        });
+        menuAltas.add(altaCategoria);
+
         barraMenuPrincipal.add(menuAltas);
 
         menuConsultas.setText("Consultas");
@@ -216,6 +226,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menuModificar.add(modUsuario);
+
+        jMenuItem1.setText("Aceptar/Rechazar Actividad Turistica");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuModificar.add(jMenuItem1);
 
         barraMenuPrincipal.add(menuModificar);
 
@@ -340,6 +358,19 @@ public class Principal extends javax.swing.JFrame {
      
     }//GEN-LAST:event_mitemDatosPruebaActionPerformed
 
+    private void altaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaCategoriaActionPerformed
+           
+        AltaCategoria verAltaCategoria = new AltaCategoria();
+        contenedorPrincipal.add(verAltaCategoria);
+        verAltaCategoria.show();
+    }//GEN-LAST:event_altaCategoriaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        AceptarRechazarActividadTuristica verAceptarRechazarActividadTuristica = new AceptarRechazarActividadTuristica();
+        contenedorPrincipal.add(verAceptarRechazarActividadTuristica);
+        verAceptarRechazarActividadTuristica.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
        public JDesktopPane obtenerJDesktopPane() {
       //  System.out.print("funcion obtener");
     return contenedorPrincipal;
@@ -353,6 +384,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu Usuario;
     private javax.swing.JMenuItem altaActividadTuristica;
     private javax.swing.JMenuItem altaAgregarActividadPaquete;
+    private javax.swing.JMenuItem altaCategoria;
     private javax.swing.JMenuItem altaCrearPaquete;
     private javax.swing.JMenuItem altaDepartamento;
     private javax.swing.JMenuItem altaInscripcionSalidaTuristica;
@@ -367,6 +399,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consUsuario;
     private javax.swing.JDesktopPane contenedorPrincipal;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAltas;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuModificar;

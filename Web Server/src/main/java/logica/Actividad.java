@@ -21,6 +21,7 @@ public class Actividad implements Serializable {
     private int duracion;
     private float costo;
     private String ciudad;
+    private TipoEstado estado;
     @Temporal(TemporalType.DATE)
     private Date fAlta;
     @OneToMany(mappedBy="actividad")
@@ -33,10 +34,12 @@ public class Actividad implements Serializable {
     @ManyToOne
     @JoinColumn(name="PROVEEDOR_NICKNAME")
     private Proveedor proveedor; 
+    @ManyToMany
+    private ArrayList<Categoria> listaCategoria;
 
     public Actividad() {
     }
-
+//borrar luego de agregar estado
     public Actividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, Departamento departamento, Proveedor proveedor) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -49,6 +52,38 @@ public class Actividad implements Serializable {
         this.departamento = departamento;
         this.proveedor = proveedor;
     }
+
+    public Actividad(String nombre, String descripcion, int duracion, float costo, String ciudad, TipoEstado estado, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, Departamento departamento, Proveedor proveedor, ArrayList<Categoria> listaCategoria) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.ciudad = ciudad;
+        this.estado = estado;
+        this.fAlta = fAlta;
+        this.listaSalidaTuristica = listaSalidaTuristica;
+        this.listaPaquete = listaPaquete;
+        this.departamento = departamento;
+        this.proveedor = proveedor;
+        this.listaCategoria = listaCategoria;
+    }
+
+    public TipoEstado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(TipoEstado estado) {
+        this.estado = estado;
+    }
+
+    public ArrayList<Categoria> getListaCategoria() {
+        return listaCategoria;
+    }
+
+    public void setListaCategoria(ArrayList<Categoria> listaCategoria) {
+        this.listaCategoria = listaCategoria;
+    }
+   
 
     public String getNombre() {
         return nombre;

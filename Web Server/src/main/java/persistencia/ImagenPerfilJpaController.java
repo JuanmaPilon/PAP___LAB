@@ -20,20 +20,21 @@ import persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author carlo
+ * @author Pc
  */
 public class ImagenPerfilJpaController implements Serializable {
 
     public ImagenPerfilJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-     public ImagenPerfilJpaController() {
-       emf = Persistence.createEntityManagerFactory("Lab01PU");
-    }
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
+    }
+    
+    public ImagenPerfilJpaController() {
+        emf = Persistence.createEntityManagerFactory("Lab1PU");
     }
 
     public void create(ImagenPerfil imagenPerfil) throws PreexistingEntityException, Exception {
@@ -144,7 +145,7 @@ public class ImagenPerfilJpaController implements Serializable {
             em.close();
         }
     }
-     
+    
     public ImagenPerfil findImagenPerfilByNickname(String nicknameUsuario) {
     EntityManager em = getEntityManager();
     try {

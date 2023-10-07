@@ -1,7 +1,5 @@
 package logica;
 
-
-
 import java.util.Date;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -12,6 +10,7 @@ import javax.persistence.TemporalType;
     public class Usuario {
         @Id
         private String nickname;
+        private String contrasenia;
         private String nombre;
         private String apellido;
         private String correo;
@@ -20,15 +19,32 @@ import javax.persistence.TemporalType;
 
     public Usuario() {
     }
-    
-    public Usuario(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
+// //borrar luego de agregar contrasenia   
+//    public Usuario(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
+//        this.nickname = nickname;
+//        this.nombre = nombre;
+//        this.apellido = apellido;
+//        this.correo = correo;
+//        this.fNacimiento = fNacimiento;
+//    }
+
+    public Usuario(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento) {
         this.nickname = nickname;
+        this.contrasenia = contrasenia;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.fNacimiento = fNacimiento;
     }
 
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+    
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }

@@ -5,31 +5,35 @@
 package persistencia;
 
 import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import logica.Actividad;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import logica.Proveedor;
+import logica.Turista;
+import persistencia.exceptions.CorreoElectronicoExistenteException;
+import persistencia.exceptions.NicknameExistenteException;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author carlo
+ * @author natil
  */
 public class ProveedorJpaController implements Serializable {
 
     public ProveedorJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    //la vacia
     public ProveedorJpaController() {
-       emf = Persistence.createEntityManagerFactory("Lab01PU");
+        emf = Persistence.createEntityManagerFactory("Lab1PU");
     }
     private EntityManagerFactory emf = null;
 
@@ -37,76 +41,90 @@ public class ProveedorJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Proveedor proveedor) throws PreexistingEntityException, Exception {
-        if (proveedor.getListaActividades() == null) {
-            proveedor.setListaActividades(new ArrayList<Actividad>());
+   public void create(Proveedor proveedor) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
+
+        EmailExistenceChecker emailChecker = new EmailExistenceChecker(em);
+        NicknameExistenceChecker nicknameChecker = new NicknameExistenceChecker(em);
+
+        // Verificar si el correo electrónico ya existe en la base de datos para proveedores
+        if (emailChecker.correoElectronicoExiste(proveedor.getCorreo(), Proveedor.class)) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un proveedor: " + proveedor.getCorreo());
         }
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            ArrayList<Actividad> attachedListaActividades = new ArrayList<Actividad>();
-            for (Actividad listaActividadesActividadToAttach : proveedor.getListaActividades()) {
-                listaActividadesActividadToAttach = em.getReference(listaActividadesActividadToAttach.getClass(), listaActividadesActividadToAttach.getNombre());
-                attachedListaActividades.add(listaActividadesActividadToAttach);
-            }
-            proveedor.setListaActividades(attachedListaActividades);
-            em.persist(proveedor);
-            for (Actividad listaActividadesActividad : proveedor.getListaActividades()) {
-                Proveedor oldProveedorOfListaActividadesActividad = listaActividadesActividad.getProveedor();
-                listaActividadesActividad.setProveedor(proveedor);
-                listaActividadesActividad = em.merge(listaActividadesActividad);
-                if (oldProveedorOfListaActividadesActividad != null) {
-                    oldProveedorOfListaActividadesActividad.getListaActividades().remove(listaActividadesActividad);
-                    oldProveedorOfListaActividadesActividad = em.merge(oldProveedorOfListaActividadesActividad);
-                }
-            }
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findProveedor(proveedor.getNickname()) != null) {
-                throw new PreexistingEntityException("Proveedor " + proveedor + " already exists.", ex);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+
+        // Verificar si el correo electrónico ya existe en la base de datos para turistas
+        if (emailChecker.correoElectronicoExiste(proveedor.getCorreo(), Turista.class)) {
+            throw new CorreoElectronicoExistenteException("Correo electrónico ya en uso por un turista: " + proveedor.getCorreo());
+        }
+
+        // Verificar si el nickname ya existe en la base de datos para proveedores
+        if (nicknameChecker.nicknameExiste(proveedor.getNickname(), Proveedor.class)) {
+            throw new NicknameExistenteException("Nickname ya en uso por un proveedor: " + proveedor.getNickname());
+        }
+
+        // Verificar si el nickname ya existe en la base de datos para turistas
+        if (nicknameChecker.nicknameExiste(proveedor.getNickname(), Turista.class)) {
+            throw new NicknameExistenteException("Nickname ya en uso por un turista: " + proveedor.getNickname());
+        }
+
+        em.persist(proveedor);
+        em.getTransaction().commit();
+    } catch (Exception ex) {
+        if (findProveedor(proveedor.getNickname()) != null) {
+            throw new PreexistingEntityException("Proveedor " + proveedor.getNickname() + " already exists.", ex);
+        }
+        throw ex;
+    } finally {
+        if (em != null) {
+            em.close();
         }
     }
+}
+
+
+
+public class EmailExistenceChecker {
+
+    private EntityManager em;
+
+    public EmailExistenceChecker(EntityManager em) {
+        this.em = em;
+    }
+
+    public boolean correoElectronicoExiste(String correo, Class<?> entityClass) {
+        TypedQuery<?> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.correo = :correo", entityClass);
+        query.setParameter("correo", correo);
+        List<?> resultList = query.getResultList();
+        return !resultList.isEmpty();
+    }
+}
+
+public class NicknameExistenceChecker {
+
+    private EntityManager em;
+
+    public NicknameExistenceChecker(EntityManager em) {
+        this.em = em;
+    }
+
+    public boolean nicknameExiste(String nickname, Class<?> entityClass) {
+        TypedQuery<?> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.nickname = :nickname", entityClass);
+        query.setParameter("nickname", nickname);
+        List<?> resultList = query.getResultList();
+        return !resultList.isEmpty();
+    }
+}
+
 
     public void edit(Proveedor proveedor) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Proveedor persistentProveedor = em.find(Proveedor.class, proveedor.getNickname());
-            ArrayList<Actividad> listaActividadesOld = persistentProveedor.getListaActividades();
-            ArrayList<Actividad> listaActividadesNew = proveedor.getListaActividades();
-            ArrayList<Actividad> attachedListaActividadesNew = new ArrayList<Actividad>();
-            for (Actividad listaActividadesNewActividadToAttach : listaActividadesNew) {
-                listaActividadesNewActividadToAttach = em.getReference(listaActividadesNewActividadToAttach.getClass(), listaActividadesNewActividadToAttach.getNombre());
-                attachedListaActividadesNew.add(listaActividadesNewActividadToAttach);
-            }
-            listaActividadesNew = attachedListaActividadesNew;
-            proveedor.setListaActividades(listaActividadesNew);
             proveedor = em.merge(proveedor);
-            for (Actividad listaActividadesOldActividad : listaActividadesOld) {
-                if (!listaActividadesNew.contains(listaActividadesOldActividad)) {
-                    listaActividadesOldActividad.setProveedor(null);
-                    listaActividadesOldActividad = em.merge(listaActividadesOldActividad);
-                }
-            }
-            for (Actividad listaActividadesNewActividad : listaActividadesNew) {
-                if (!listaActividadesOld.contains(listaActividadesNewActividad)) {
-                    Proveedor oldProveedorOfListaActividadesNewActividad = listaActividadesNewActividad.getProveedor();
-                    listaActividadesNewActividad.setProveedor(proveedor);
-                    listaActividadesNewActividad = em.merge(listaActividadesNewActividad);
-                    if (oldProveedorOfListaActividadesNewActividad != null && !oldProveedorOfListaActividadesNewActividad.equals(proveedor)) {
-                        oldProveedorOfListaActividadesNewActividad.getListaActividades().remove(listaActividadesNewActividad);
-                        oldProveedorOfListaActividadesNewActividad = em.merge(oldProveedorOfListaActividadesNewActividad);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -135,11 +153,6 @@ public class ProveedorJpaController implements Serializable {
                 proveedor.getNickname();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The proveedor with id " + id + " no longer exists.", enfe);
-            }
-            ArrayList<Actividad> listaActividades = proveedor.getListaActividades();
-            for (Actividad listaActividadesActividad : listaActividades) {
-                listaActividadesActividad.setProveedor(null);
-                listaActividadesActividad = em.merge(listaActividadesActividad);
             }
             em.remove(proveedor);
             em.getTransaction().commit();

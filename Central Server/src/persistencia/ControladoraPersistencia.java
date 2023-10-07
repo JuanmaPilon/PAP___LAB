@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Actividad;
+import logica.Categoria;
 import logica.DTActividad;
 import logica.DTSalidaTuristica;
 import logica.DTTurista;
@@ -34,6 +35,7 @@ public class ControladoraPersistencia {
     DepartamentoJpaController departamentoJpa = new DepartamentoJpaController();
     TuristaJpaController turistaJpa = new TuristaJpaController();
     ProveedorJpaController proveedorJpa = new ProveedorJpaController();
+    CategoriaJpaController categoriaJpa = new CategoriaJpaController();
     InscripcionJpaController inscripcionJpa = new InscripcionJpaController();
     ImagenPerfilJpaController imagenPerfilJpa = new ImagenPerfilJpaController();
     
@@ -83,7 +85,7 @@ public class ControladoraPersistencia {
     return nicks;
     }
  //////////////////////
-         public ArrayList<String> listaActividades(){
+    public ArrayList<String> listaActividades(){
     ArrayList<String> nombre = new ArrayList<String>();
   
     try {
@@ -464,5 +466,50 @@ public ArrayList<DTUsuario> traerUsuarios(){
      public ImagenPerfil buscarImagen(String nickname){
              return  imagenPerfilJpa.findImagenPerfilByNickname(nickname);
     }
+
+    public void guardarCategoria(Categoria cat) throws PreexistingEntityException, Exception {
+        try {
+            //crear Departamento en BD
+            categoriaJpa.create(cat);
+        } catch (PreexistingEntityException ex) {
+            throw new PreexistingEntityException("Nombre ya esta en uso por otra categoria");
+        }
+
+ 
      
 }
+
+    public ArrayList<String> traerCategoria() {
+            ArrayList<String> listaCategorias = new ArrayList<String>();
+    try {
+        List<Categoria> categorias = categoriaJpa.findCategoriaEntities();
+        for (Categoria c : categorias) {
+            listaCategorias.add(c.getNombre());
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return listaCategorias;
+    }
+
+//    public Categoria traerCategoria(String nombre) {
+//        return categoriaJpa.findCategoria(nombre);
+//    }
+
+    public void asignarCategoriaActividad(String nombre, String nombreActividad) {
+    Categoria categoria = categoriaJpa.findCategoria(nombre);
+    Actividad actividad = actividadJpa.findActividad(nombreActividad);
+     
+     //categoria.getListaActividad().add(actividad);
+     actividad.getListaCategoria().add(categoria);
+       
+        try {
+            actividadJpa.edit(actividad);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+       
+    }
+    
+}//fin

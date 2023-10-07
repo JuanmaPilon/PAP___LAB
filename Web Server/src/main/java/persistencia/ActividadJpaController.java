@@ -9,30 +9,30 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import logica.Departamento;
-import logica.Proveedor;
-import logica.SalidaTuristica;
+import logica.Paquete;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import logica.Actividad;
-import logica.Paquete;
+import logica.DTActividad;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author carlo
+ * @author natil
  */
 public class ActividadJpaController implements Serializable {
 
     public ActividadJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-     public ActividadJpaController() {
-       emf = Persistence.createEntityManagerFactory("Lab01PU");
+    public ActividadJpaController() {
+        emf = Persistence.createEntityManagerFactory("Lab1PU");
     }
     private EntityManagerFactory emf = null;
 
@@ -41,9 +41,6 @@ public class ActividadJpaController implements Serializable {
     }
 
     public void create(Actividad actividad) throws PreexistingEntityException, Exception {
-        if (actividad.getListaSalidaTuristica() == null) {
-            actividad.setListaSalidaTuristica(new ArrayList<SalidaTuristica>());
-        }
         if (actividad.getListaPaquete() == null) {
             actividad.setListaPaquete(new ArrayList<Paquete>());
         }
@@ -51,22 +48,6 @@ public class ActividadJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Departamento departamento = actividad.getDepartamento();
-            if (departamento != null) {
-                departamento = em.getReference(departamento.getClass(), departamento.getNombre());
-                actividad.setDepartamento(departamento);
-            }
-            Proveedor proveedor = actividad.getProveedor();
-            if (proveedor != null) {
-                proveedor = em.getReference(proveedor.getClass(), proveedor.getNickname());
-                actividad.setProveedor(proveedor);
-            }
-            ArrayList<SalidaTuristica> attachedListaSalidaTuristica = new ArrayList<SalidaTuristica>();
-            for (SalidaTuristica listaSalidaTuristicaSalidaTuristicaToAttach : actividad.getListaSalidaTuristica()) {
-                listaSalidaTuristicaSalidaTuristicaToAttach = em.getReference(listaSalidaTuristicaSalidaTuristicaToAttach.getClass(), listaSalidaTuristicaSalidaTuristicaToAttach.getNombre());
-                attachedListaSalidaTuristica.add(listaSalidaTuristicaSalidaTuristicaToAttach);
-            }
-            actividad.setListaSalidaTuristica(attachedListaSalidaTuristica);
             ArrayList<Paquete> attachedListaPaquete = new ArrayList<Paquete>();
             for (Paquete listaPaquetePaqueteToAttach : actividad.getListaPaquete()) {
                 listaPaquetePaqueteToAttach = em.getReference(listaPaquetePaqueteToAttach.getClass(), listaPaquetePaqueteToAttach.getNombre());
@@ -74,23 +55,6 @@ public class ActividadJpaController implements Serializable {
             }
             actividad.setListaPaquete(attachedListaPaquete);
             em.persist(actividad);
-            if (departamento != null) {
-                departamento.getListaActTur().add(actividad);
-                departamento = em.merge(departamento);
-            }
-            if (proveedor != null) {
-                proveedor.getListaActividades().add(actividad);
-                proveedor = em.merge(proveedor);
-            }
-            for (SalidaTuristica listaSalidaTuristicaSalidaTuristica : actividad.getListaSalidaTuristica()) {
-                Actividad oldActividadOfListaSalidaTuristicaSalidaTuristica = listaSalidaTuristicaSalidaTuristica.getActividad();
-                listaSalidaTuristicaSalidaTuristica.setActividad(actividad);
-                listaSalidaTuristicaSalidaTuristica = em.merge(listaSalidaTuristicaSalidaTuristica);
-                if (oldActividadOfListaSalidaTuristicaSalidaTuristica != null) {
-                    oldActividadOfListaSalidaTuristicaSalidaTuristica.getListaSalidaTuristica().remove(listaSalidaTuristicaSalidaTuristica);
-                    oldActividadOfListaSalidaTuristicaSalidaTuristica = em.merge(oldActividadOfListaSalidaTuristicaSalidaTuristica);
-                }
-            }
             for (Paquete listaPaquetePaquete : actividad.getListaPaquete()) {
                 listaPaquetePaquete.getListaActividades().add(actividad);
                 listaPaquetePaquete = em.merge(listaPaquetePaquete);
@@ -114,29 +78,8 @@ public class ActividadJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Actividad persistentActividad = em.find(Actividad.class, actividad.getNombre());
-            Departamento departamentoOld = persistentActividad.getDepartamento();
-            Departamento departamentoNew = actividad.getDepartamento();
-            Proveedor proveedorOld = persistentActividad.getProveedor();
-            Proveedor proveedorNew = actividad.getProveedor();
-            ArrayList<SalidaTuristica> listaSalidaTuristicaOld = persistentActividad.getListaSalidaTuristica();
-            ArrayList<SalidaTuristica> listaSalidaTuristicaNew = actividad.getListaSalidaTuristica();
             ArrayList<Paquete> listaPaqueteOld = persistentActividad.getListaPaquete();
             ArrayList<Paquete> listaPaqueteNew = actividad.getListaPaquete();
-            if (departamentoNew != null) {
-                departamentoNew = em.getReference(departamentoNew.getClass(), departamentoNew.getNombre());
-                actividad.setDepartamento(departamentoNew);
-            }
-            if (proveedorNew != null) {
-                proveedorNew = em.getReference(proveedorNew.getClass(), proveedorNew.getNickname());
-                actividad.setProveedor(proveedorNew);
-            }
-            ArrayList<SalidaTuristica> attachedListaSalidaTuristicaNew = new ArrayList<SalidaTuristica>();
-            for (SalidaTuristica listaSalidaTuristicaNewSalidaTuristicaToAttach : listaSalidaTuristicaNew) {
-                listaSalidaTuristicaNewSalidaTuristicaToAttach = em.getReference(listaSalidaTuristicaNewSalidaTuristicaToAttach.getClass(), listaSalidaTuristicaNewSalidaTuristicaToAttach.getNombre());
-                attachedListaSalidaTuristicaNew.add(listaSalidaTuristicaNewSalidaTuristicaToAttach);
-            }
-            listaSalidaTuristicaNew = attachedListaSalidaTuristicaNew;
-            actividad.setListaSalidaTuristica(listaSalidaTuristicaNew);
             ArrayList<Paquete> attachedListaPaqueteNew = new ArrayList<Paquete>();
             for (Paquete listaPaqueteNewPaqueteToAttach : listaPaqueteNew) {
                 listaPaqueteNewPaqueteToAttach = em.getReference(listaPaqueteNewPaqueteToAttach.getClass(), listaPaqueteNewPaqueteToAttach.getNombre());
@@ -145,39 +88,6 @@ public class ActividadJpaController implements Serializable {
             listaPaqueteNew = attachedListaPaqueteNew;
             actividad.setListaPaquete(listaPaqueteNew);
             actividad = em.merge(actividad);
-            if (departamentoOld != null && !departamentoOld.equals(departamentoNew)) {
-                departamentoOld.getListaActTur().remove(actividad);
-                departamentoOld = em.merge(departamentoOld);
-            }
-            if (departamentoNew != null && !departamentoNew.equals(departamentoOld)) {
-                departamentoNew.getListaActTur().add(actividad);
-                departamentoNew = em.merge(departamentoNew);
-            }
-            if (proveedorOld != null && !proveedorOld.equals(proveedorNew)) {
-                proveedorOld.getListaActividades().remove(actividad);
-                proveedorOld = em.merge(proveedorOld);
-            }
-            if (proveedorNew != null && !proveedorNew.equals(proveedorOld)) {
-                proveedorNew.getListaActividades().add(actividad);
-                proveedorNew = em.merge(proveedorNew);
-            }
-            for (SalidaTuristica listaSalidaTuristicaOldSalidaTuristica : listaSalidaTuristicaOld) {
-                if (!listaSalidaTuristicaNew.contains(listaSalidaTuristicaOldSalidaTuristica)) {
-                    listaSalidaTuristicaOldSalidaTuristica.setActividad(null);
-                    listaSalidaTuristicaOldSalidaTuristica = em.merge(listaSalidaTuristicaOldSalidaTuristica);
-                }
-            }
-            for (SalidaTuristica listaSalidaTuristicaNewSalidaTuristica : listaSalidaTuristicaNew) {
-                if (!listaSalidaTuristicaOld.contains(listaSalidaTuristicaNewSalidaTuristica)) {
-                    Actividad oldActividadOfListaSalidaTuristicaNewSalidaTuristica = listaSalidaTuristicaNewSalidaTuristica.getActividad();
-                    listaSalidaTuristicaNewSalidaTuristica.setActividad(actividad);
-                    listaSalidaTuristicaNewSalidaTuristica = em.merge(listaSalidaTuristicaNewSalidaTuristica);
-                    if (oldActividadOfListaSalidaTuristicaNewSalidaTuristica != null && !oldActividadOfListaSalidaTuristicaNewSalidaTuristica.equals(actividad)) {
-                        oldActividadOfListaSalidaTuristicaNewSalidaTuristica.getListaSalidaTuristica().remove(listaSalidaTuristicaNewSalidaTuristica);
-                        oldActividadOfListaSalidaTuristicaNewSalidaTuristica = em.merge(oldActividadOfListaSalidaTuristicaNewSalidaTuristica);
-                    }
-                }
-            }
             for (Paquete listaPaqueteOldPaquete : listaPaqueteOld) {
                 if (!listaPaqueteNew.contains(listaPaqueteOldPaquete)) {
                     listaPaqueteOldPaquete.getListaActividades().remove(actividad);
@@ -218,21 +128,6 @@ public class ActividadJpaController implements Serializable {
                 actividad.getNombre();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The actividad with id " + id + " no longer exists.", enfe);
-            }
-            Departamento departamento = actividad.getDepartamento();
-            if (departamento != null) {
-                departamento.getListaActTur().remove(actividad);
-                departamento = em.merge(departamento);
-            }
-            Proveedor proveedor = actividad.getProveedor();
-            if (proveedor != null) {
-                proveedor.getListaActividades().remove(actividad);
-                proveedor = em.merge(proveedor);
-            }
-            ArrayList<SalidaTuristica> listaSalidaTuristica = actividad.getListaSalidaTuristica();
-            for (SalidaTuristica listaSalidaTuristicaSalidaTuristica : listaSalidaTuristica) {
-                listaSalidaTuristicaSalidaTuristica.setActividad(null);
-                listaSalidaTuristicaSalidaTuristica = em.merge(listaSalidaTuristicaSalidaTuristica);
             }
             ArrayList<Paquete> listaPaquete = actividad.getListaPaquete();
             for (Paquete listaPaquetePaquete : listaPaquete) {
@@ -293,5 +188,45 @@ public class ActividadJpaController implements Serializable {
             em.close();
         }
     }
+    
+//    public List<String> findByDepartamento(String departamento) { 
+//        EntityManager em = getEntityManager();
+//        String query = "SELECT NOMBRE FROM actividad WHERE DEPARTAMENTO_NOMBRE LIKE '%"+departamento+"%'";
+//	@SuppressWarnings("unchecked")
+//	List<String> r = (List<String>) em.createNativeQuery(query).getResultList();
+//        return r;
+//    }
+    
+//    //Sirve para crear una tabla con la info delas actividades asociadas a un departamento
+//    public ArrayList<DTActividad> findActividadByDepartamento(String departamento) {
+//    EntityManager em = getEntityManager();
+//    
+//    // Cambiamos la consulta a JPQL
+//    String jpqlQuery = "SELECT a FROM Actividad a " +
+//                       "JOIN a.departamento d " +
+//                       "WHERE d.nombre LIKE :departamento";
+//    
+//    TypedQuery<Actividad> typedQuery = em.createQuery(jpqlQuery, Actividad.class);
+//    typedQuery.setParameter("departamento", "%" + departamento + "%");
+//
+//    List<Actividad> activities = typedQuery.getResultList();
+//    
+//    ArrayList<DTActividad> resultList = new ArrayList<>();
+//    
+//    for (Actividad activity : activities) {
+//        DTActividad dtActividad = new DTActividad(
+//            activity.getNombre(),
+//            activity.getDescripcion(),
+//            activity.getDuracion(),
+//            activity.getCosto(),
+//            activity.getCiudad(),
+//            activity.getfAlta(), 
+//            activity.getProveedor().getNickname()
+//        );
+//        resultList.add(dtActividad);
+//    }
+    
+//    return resultList;
+//}
     
 }

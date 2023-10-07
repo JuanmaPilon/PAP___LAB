@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static logica.TipoEstado.agregada;
+import logica.exceptions.ConstraseniasDistintas;
 import persistencia.ControladoraPersistencia;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.NicknameExistenteException;
@@ -43,7 +45,7 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, 
+    public void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido,String contrasenia, String correo, 
                                         Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception{
     
         Turista turista = new Turista(); 
@@ -53,6 +55,7 @@ public class Controlador implements IControlador{
         turista.setCorreo(correo);
         turista.setfNacimiento(fNacimiento);
         turista.setNacionalidad(nacionalidad);
+        turista.setContrasenia(contrasenia);
         
         try {
            controlPersis.guardarTurista(turista);
@@ -69,7 +72,7 @@ public class Controlador implements IControlador{
     };
    
     @Override
-    public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, 
+    public void AltaDeUsuarioProveedor(String nickname,  String nombre, String apellido, String contrasenia, String correo, 
    Date fNacimiento, String descripcion, String link) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
    Proveedor proveedor = new Proveedor();
    proveedor.setNickname(nickname);
@@ -79,6 +82,7 @@ public class Controlador implements IControlador{
    proveedor.setfNacimiento(fNacimiento);
    proveedor.setDescripcion(descripcion);
    proveedor.setLink(link);
+   proveedor.setContrasenia(contrasenia);
    
    try {
            controlPersis.guardarProveedor(proveedor);
@@ -89,9 +93,20 @@ public class Controlador implements IControlador{
         }
 }
 
+@Override
+public void AltaCategoria(String nombre) throws PreexistingEntityException, Exception {
+
+    Categoria cat = new Categoria();
+    cat.setNombre(nombre);
+     
+    controlPersis.guardarCategoria(cat);
+    
+    
+
+};
     //String nombreProveedor, String nombreDep,
     @Override
-    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha,String nombreProveedor, String nombreDepartamento) throws PreexistingEntityException, Exception{
+    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha,String nombreProveedor, String nombreDepartamento, ArrayList<String> listaCategorias) throws PreexistingEntityException, Exception{
         Actividad actividad = new Actividad();
         actividad.setCiudad(nombreCuidad);
         actividad.setNombre(nombreActividad);
@@ -99,10 +114,12 @@ public class Controlador implements IControlador{
         actividad.setDuracion(duracionActividad);
         actividad.setCosto(costoActividad);
         actividad.setfAlta(fecha);
+        actividad.setEstado(TipoEstado.agregada);
+        
    
         Departamento dep = new Departamento();//creo dep auxiliar
         dep = controlPersis.traerDepartamento(nombreDepartamento);// encuentro el departamento y lo cargo en dep
-        // dep.getListaActTur().add(actividad);
+        
         actividad.setDepartamento(controlPersis.traerDepartamento(nombreDepartamento));// hago que mi actividad apunte al departamento que me traje
         //idem con proveedor
         
@@ -115,7 +132,13 @@ public class Controlador implements IControlador{
         }catch (PreexistingEntityException e) {
             throw new PreexistingEntityException("Ya existe ua actividad con ese nombre");
         }
-
+        //asingnar categoria
+         for (String nombre : listaCategorias){
+            //Categoria c = traerCategoria(nombre);
+            controlPersis.asignarCategoriaActividad(nombre, nombreActividad);
+           
+            
+        }
    }
    
    @Override
@@ -188,12 +211,13 @@ public class Controlador implements IControlador{
    
    
    @Override
-   public void AltaDeActividadTuristica(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete){
+   public void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria){
 
     Actividad actividad = new Actividad();
        
     //falta control si nombre ya existe o si es null nombre
     actividad.setNombre(nombre);
+    actividad.setEstado(TipoEstado.agregada);
     actividad.setDescripcion(descripcion);
     actividad.setDuracion(duracion);
     actividad.setCosto(costo);
@@ -201,6 +225,7 @@ public class Controlador implements IControlador{
     actividad.setfAlta(fAlta);
     actividad.setListaSalidaTuristica(listaSalidaTuristica);
     actividad.setListaPaquete(listaPaquete);
+    actividad.setListaCategoria(listaCategoria);
 
     //controlPersis.guardarActividad(actividad);
 
@@ -568,19 +593,19 @@ try{
         SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
-            AltaDeUsuarioTurista("lachiqui", "Rosa Marıa", "Martınez", "mirtha.legrand.ok@hotmail.com.ar", fecha.parse("23/2/1927"), "argentina");
-            AltaDeUsuarioTurista("isabelita", "Elizabeth", "Windsor", "isabelita@thecrown.co.uk", fecha.parse("21/04/1926"), "inglesa");
-            AltaDeUsuarioTurista("anibal", "Anıbal", "Lecter", "anibal@fing.edu.uy", fecha.parse("31/12/1937"), "lituana");
-            AltaDeUsuarioTurista("waston", "Emma", "Waston", "e.waston@gmail.com", fecha.parse("15/4/1990"), "inglesa");
-            AltaDeUsuarioTurista("elelvis", "Elvis", "Lacio", "suavemente@hotmail.com", fecha.parse("30/07/1971"), "estadounidense");
-            AltaDeUsuarioTurista("eleven11", "Eleven", "Once", "eleven11@gmail.com", fecha.parse("19/02/2004"), "espanola");
-            AltaDeUsuarioTurista("bobesponja", "Bob", "Esponja" ,"bobesponja@nickelodeon.com", fecha.parse("01/05/1999"), "japonesa");
-            AltaDeUsuarioTurista("tony", "Antonio", "Pacheco", "eltony@manya.org.uy", fecha.parse("11/04/1976"), "uruguaya");
-            AltaDeUsuarioTurista("chino", "Alvaro", "Recoba", "chino@trico.org.uy", fecha.parse("17/03/1976"), "uruguaya");
-            AltaDeUsuarioTurista("mastropiero", "Johann Sebastian", "Mastropiero", "johann.sebastian@gmail.com", fecha.parse("07/02/1922"), "austrıaca");
-            AltaDeUsuarioProveedor("washington", "Washington", "Rocha", "washington@turismorocha.gub.uy", fecha.parse("14/09/1970"), "Hola! me llamo Washington y soy el encargado del portal de turismo del departamento de Rocha - Uruguay", "http://turismorocha.gub.uy/");
-            AltaDeUsuarioProveedor("eldiez", "Pablo", "Bengoechea", "eldiez@socfomturriv.org.uy", fecha.parse("27/06/1965"), "Pablo es el presidente de la Sociedad de Fomento Turıstico de Rivera (conocida como Socfomturriv)", "http://wwww.socfomturriv.org.uy");
-            AltaDeUsuarioProveedor("meche" ,"Mercedes", "Venn", "meche@colonia.gub.uy", fecha.parse("31/12/1990"), "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
+            AltaDeUsuarioTurista("lachiqui", "Rosa Marıa", "Martınez", "contra","mirtha.legrand.ok@hotmail.com.ar", fecha.parse("23/2/1927"), "argentina");
+            AltaDeUsuarioTurista("isabelita", "Elizabeth", "Windsor", "contra", "isabelita@thecrown.co.uk", fecha.parse("21/04/1926"), "inglesa");
+            AltaDeUsuarioTurista("anibal", "Anıbal", "Lecter", "contra","anibal@fing.edu.uy", fecha.parse("31/12/1937"), "lituana");
+            AltaDeUsuarioTurista("waston", "Emma", "Waston", "contra","e.waston@gmail.com", fecha.parse("15/4/1990"), "inglesa");
+            AltaDeUsuarioTurista("elelvis", "Elvis", "Lacio", "contra","suavemente@hotmail.com", fecha.parse("30/07/1971"), "estadounidense");
+            AltaDeUsuarioTurista("eleven11", "Eleven", "Once","contra", "eleven11@gmail.com", fecha.parse("19/02/2004"), "espanola");
+            AltaDeUsuarioTurista("bobesponja", "Bob", "Esponja" , "contra","bobesponja@nickelodeon.com", fecha.parse("01/05/1999"), "japonesa");
+            AltaDeUsuarioTurista("tony", "Antonio", "Pacheco","contra", "eltony@manya.org.uy", fecha.parse("11/04/1976"), "uruguaya");
+            AltaDeUsuarioTurista("chino", "Alvaro", "Recoba","contra", "chino@trico.org.uy", fecha.parse("17/03/1976"), "uruguaya");
+            AltaDeUsuarioTurista("mastropiero", "Johann Sebastian", "Mastropiero", "contra","johann.sebastian@gmail.com", fecha.parse("07/02/1922"), "austrıaca");
+            AltaDeUsuarioProveedor("washington","Washington", "Rocha", "contra","washington@turismorocha.gub.uy", fecha.parse("14/09/1970"), "Hola! me llamo Washington y soy el encargado del portal de turismo del departamento de Rocha - Uruguay", "http://turismorocha.gub.uy/");
+            AltaDeUsuarioProveedor("eldiez",  "Pablo", "Bengoechea","contra", "eldiez@socfomturriv.org.uy", fecha.parse("27/06/1965"), "Pablo es el presidente de la Sociedad de Fomento Turıstico de Rivera (conocida como Socfomturriv)", "http://wwww.socfomturriv.org.uy");
+            AltaDeUsuarioProveedor("meche" , "Mercedes", "Venn","contra", "meche@colonia.gub.uy", fecha.parse("31/12/1990"), "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
     
        } catch (ParseException ex) {
     Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -626,12 +651,12 @@ try{
  
         //Actividades Turisticas y Salidas Turisticas
         try {
-            guardarActividad("Degusta", "Festival gastronomico de productos locales en Rocha", 3, 800, "Rocha", fecha.parse("20/7/2022"), "washington", "Rocha");
-            guardarActividad("Teatro con Sabores", "En el mes aniversario del Club Deportivo Uni´on de Rocha te invitamos a una merienda deliciosa.", 3, 500, "Rocha", fecha.parse("21/7/2022"), "washington", "Rocha");
-            guardarActividad("Tour por Colonia del Sacramento", "Con guia especializado y en varios idiomas. Varios circuitos posibles.", 2, 400, "Colonia del Sacramento Colonia", fecha.parse("1/8/2022"), "meche", "Colonia");
-            guardarActividad("Almuerzo en el Real de San Carlos", "Restaurante en la renovada Plaza de Toros con menu internacional", 2, 800, "Colonia del Sacramento", fecha.parse("1/8/2022"), "meche", "Colonia");
-            guardarActividad("Almuerzo en Valle del Lunarejo", "Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.", 2, 300, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera");
-            guardarActividad("Cabalgata en Valle del Lunarejo", "Cabalgata por el ´area protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera"); 
+            guardarActividad("Degusta", "Festival gastronomico de productos locales en Rocha", 3, 800, "Rocha", fecha.parse("20/7/2022"), "washington", "Rocha", null);
+            guardarActividad("Teatro con Sabores", "En el mes aniversario del Club Deportivo Uni´on de Rocha te invitamos a una merienda deliciosa.", 3, 500, "Rocha", fecha.parse("21/7/2022"), "washington", "Rocha", null);
+            guardarActividad("Tour por Colonia del Sacramento", "Con guia especializado y en varios idiomas. Varios circuitos posibles.", 2, 400, "Colonia del Sacramento Colonia", fecha.parse("1/8/2022"), "meche", "Colonia", null);
+            guardarActividad("Almuerzo en el Real de San Carlos", "Restaurante en la renovada Plaza de Toros con menu internacional", 2, 800, "Colonia del Sacramento", fecha.parse("1/8/2022"), "meche", "Colonia", null);
+            guardarActividad("Almuerzo en Valle del Lunarejo", "Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.", 2, 300, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera", null);
+            guardarActividad("Cabalgata en Valle del Lunarejo", "Cabalgata por el ´area protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera", null); 
         } catch (PreexistingEntityException ex) {
     JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
 } catch (Exception ex) {
@@ -703,6 +728,26 @@ try{
         }
 
     }
+
+public void ValidarContrasenias(String contrasenia, String confirmarContrasenia) throws ConstraseniasDistintas {
+        
+        if (!contrasenia.equals(confirmarContrasenia)){
+            throw new ConstraseniasDistintas("Las constrasenias no coinciden");
+        }
+    }
+
+    public ArrayList<String> traerCategorias() {
+        return controlPersis.traerCategoria();
+    }
+
+    public ArrayList<String> listaActividadesAgregadas() {
+        return null;
+    }
+
+
+
+
+
 
 
 

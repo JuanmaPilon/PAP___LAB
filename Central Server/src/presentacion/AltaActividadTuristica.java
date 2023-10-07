@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import logica.Controlador;
 
 /**
@@ -52,6 +55,9 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
         aceptarAltaActividadTuristica = new javax.swing.JButton();
         cancelarAltaActividadTuristica = new javax.swing.JButton();
         ciudadActividadTuristica = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaCategorias = new javax.swing.JTable();
 
         setClosable(true);
         setTitle("Alta de Actividad Turistica");
@@ -100,56 +106,74 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel9.setText("Elegir Categoria:");
+
+        tablaCategorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaCategorias);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(proveedorActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(departamentoActividadTuristica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(nombreActividadTuristica))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(descripcionActividadTuristica))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(duracionActividadTuristica))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(costoActividadTuristica))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(ciudadActividadTuristica))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cancelarAltaActividadTuristica)
-                                .addGap(131, 131, 131)
-                                .addComponent(aceptarAltaActividadTuristica))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(diaAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(mesAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(anioAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(18, 18, 18)
+                            .addComponent(proveedorActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(departamentoActividadTuristica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(18, 18, 18)
+                            .addComponent(nombreActividadTuristica))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(descripcionActividadTuristica))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(18, 18, 18)
+                            .addComponent(duracionActividadTuristica))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(18, 18, 18)
+                            .addComponent(costoActividadTuristica))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addGap(18, 18, 18)
+                            .addComponent(ciudadActividadTuristica))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(cancelarAltaActividadTuristica)
+                                    .addGap(131, 131, 131)
+                                    .addComponent(aceptarAltaActividadTuristica))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(diaAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(mesAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(anioAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jLabel9)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,11 +212,15 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
                     .addComponent(diaAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mesAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(anioAltaActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarAltaActividadTuristica)
                     .addComponent(aceptarAltaActividadTuristica))
-                .addGap(61, 61, 61))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -219,9 +247,26 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
             calendar.set(Calendar.MONTH, mesA - 1); // Los meses en Calendar se indexan desde 0 (enero) hasta 11 (diciembre) sasa
             calendar.set(Calendar.DAY_OF_MONTH, diaA);
             Date fecha = calendar.getTime();
+            
+            //creo lista de categorias seleccionadas por los checkbox
+            ArrayList<String> listaCategorias = new ArrayList();
+            //columna 1 es las de los checkbox
+            for (int i=0; i<tablaCategorias.getRowCount(); i++){
+                if (estaSeleccionada(i, 1, tablaCategorias)){
+                    listaCategorias.add(tablaCategorias.getValueAt(i,0).toString());
+                    //System.out.println(listaCategorias.get(i));
+                }
+            }
+            //si no se seleccionó nada tiro un mensaje
+            if (!listaCategorias.isEmpty()){
+                control.guardarActividad(nombreActividad, descripcionActividad, duracionActividad, costoActividad, nombreCuidad, fecha, nombreProveedor, nombreDepartamento, listaCategorias);
+                JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Debe seleccionar al menos una Categoria", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            
 
-            control.guardarActividad(nombreActividad, descripcionActividad, duracionActividad, costoActividad, nombreCuidad, fecha, nombreProveedor, nombreDepartamento);
-            JOptionPane.showMessageDialog(null, "Alta realizada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Duracion y Costo tienen que ser numeros", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -257,6 +302,8 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
         for (int i = 0; i < nicks.size(); i++) {
             departamentoActividadTuristica.addItem(nicks.get(i));
         }
+        
+        cargarTablaCategoria();
     }//GEN-LAST:event_formComponentShown
 
 
@@ -278,8 +325,63 @@ public class AltaActividadTuristica extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner mesAltaActividadTuristica;
     private javax.swing.JTextField nombreActividadTuristica;
     private javax.swing.JComboBox<String> proveedorActividadTuristica;
+    private javax.swing.JTable tablaCategorias;
     // End of variables declaration//GEN-END:variables
+
+public void agregarCheckBox(int columna, JTable tabla){
+    TableColumn tc = tabla.getColumnModel().getColumn(columna);
+    tc.setCellEditor(tabla.getDefaultEditor(Boolean.class));
+    tc.setCellRenderer(tabla.getDefaultRenderer(Boolean.class));
+
+}  
+
+public boolean estaSeleccionada(int fila, int columna, JTable tabla){
+    return tabla.getValueAt(fila, columna) != null;
+
+}
+    
+private void cargarTablaCategoria() {
+        //definir el modelo
+        DefaultTableModel tablaCategoria = new DefaultTableModel(){
+            //que filas y columnas no sean editables
+            @Override
+            public boolean isCellEditable(int row, int column){
+                if (column == 0){
+                    return false;
+            }else {return true;}
+            };
+        };
+       
+        
+        //establecemos los nombres de las columnas
+        String titulos[] = {"Categoria", "Seleccionar"};
+        
+        tablaCategoria.setColumnIdentifiers(titulos);
+        
+        //carga de los datos desde la BD
+        ArrayList<String> listaCategorias = control.traerCategorias();
+        
+        //recorrer la lista y mostrar cada elemento en la tabla
+        if (listaCategorias != null){
+            for (String c : listaCategorias){
+                Object[] objeto = {c};
+                tablaCategoria.addRow(objeto);   
+  
+            }
+        }
+        
+        tablaCategorias.setModel(tablaCategoria);
+        
+        agregarCheckBox(1, tablaCategorias);
+    }
+
+
+
+
+
 }
