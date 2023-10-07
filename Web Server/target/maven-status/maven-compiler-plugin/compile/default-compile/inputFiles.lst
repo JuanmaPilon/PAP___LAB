@@ -17,6 +17,7 @@ C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\ja
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Paquete.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\resources\JavaEE8Resource.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\TipoEstado.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\TuristaJpaController.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Usuario.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\ImagenPerfil.java
@@ -35,8 +36,11 @@ C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\ja
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTProveedor.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\IllegalOrphanException.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\SalidaTuristica.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\CategoriaJpaController.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvProveedor.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\InscripcionJpaController.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\ProveedorJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Categoria.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\NonexistentEntityException.java
 C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Proveedor.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\ConstraseniasDistintas.java
