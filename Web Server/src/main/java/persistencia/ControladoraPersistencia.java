@@ -512,4 +512,32 @@ public ArrayList<DTUsuario> traerUsuarios(){
        
     }
     
+   public ArrayList<Usuario> listaUsuariosNicknemeYContrasenia() { //santi
+    ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+    try {
+        List<Turista> turistas = turistaJpa.findTuristaEntities();
+        for (Turista turista : turistas) {
+            String nickname = turista.getNickname();
+            String contrasenia = turista.getContrasenia();
+            usuarios.add(new Usuario(nickname, contrasenia));
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    try {
+        List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+        for (Proveedor proveedor : proveedores) {
+            String nickname = proveedor.getNickname();
+            String contrasenia = proveedor.getContrasenia();
+            usuarios.add(new Usuario(nickname, contrasenia));
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    return usuarios;
+} 
+    
 }//fin

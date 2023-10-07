@@ -30,6 +30,7 @@ logica\Usuario_.class
 persistencia\TuristaJpaController$EmailExistenceChecker.class
 logica\Departamento_.class
 persistencia\exceptions\NonexistentEntityException.class
+Servlets\SvAutenticarUsuario.class
 logica\exceptions\ConstraseniasDistintas.class
 Servlets\SvProveedor.class
 persistencia\InscripcionJpaController.class

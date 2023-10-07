@@ -37,6 +37,10 @@ import javax.persistence.TemporalType;
         this.fNacimiento = fNacimiento;
     }
 
+    public Usuario(String nickname, String contrasenia){
+        this.nickname = nickname;
+        this.contrasenia = contrasenia;
+    }
     public String getContrasenia() {
         return contrasenia;
     }

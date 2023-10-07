@@ -194,6 +194,10 @@ public void AltaCategoria(String nombre) throws PreexistingEntityException, Exce
      return controlPersis.listaUsuarios();
    };
    
+   public ArrayList<Usuario> listaUsuariosNicknameYContrasenia(){ //santi
+     return controlPersis.listaUsuariosNicknemeYContrasenia();
+   };
+   
     @Override
    public ArrayList<String> listaProveedores(){
      return controlPersis.listaProveedores();

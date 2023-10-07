@@ -22,7 +22,7 @@
     <main>
     <section id="login-section">
         <h2>Iniciar Sesión</h2>
-        <form action="procesar_login.jsp" method="post" onsubmit="return validarFormulario()">
+        <form action="SvAutenticarUsuario" method="GET" onsubmit="return validarFormulario()">
             <div class="form-group">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" required>
@@ -31,10 +31,20 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <input type="hidden" name="login" value="true"> <!-- Campo oculto para identificar el inicio de sesión -->
             <button type="submit">Iniciar Sesión</button>
         </form>
+        
+        <div class="error-message">
+            <%-- Muestra el mensaje de error si está presente en la sesión --%>
+            <% String errorMensaje = (String) session.getAttribute("errorMensaje"); %>
+            <% if (errorMensaje != null) { %>
+                <p><%= errorMensaje %></p>
+            <% } %>
+        </div>
     </section>
-   </main>
+</main>
+
 
 <script>
     function validarFormulario() {
@@ -45,18 +55,12 @@
             alert("Por favor, complete todos los campos.");
             return false; // Evita que el formulario se envíe si hay campos vacíos.
         }
-        window.location.href = "logedUser.jsp";
-        return false; // Envía el formulario si no hay campos vacíos.
+        // El formulario se enviará al servlet SvBuscarUsuario para la autenticación.
+        return true;
     }
 </script>
-</html>
 
- 
-    
-      
-
-    
-  
+</html> 
     <footer>
         <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
         <p>&copy; 2023 Turismo.uy</p>
