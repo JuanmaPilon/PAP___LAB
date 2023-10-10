@@ -43,6 +43,7 @@ logica\DTProveedor.class
 logica\DTActividad.class
 persistencia\ControladoraPersistencia.class
 logica\Fabrica.class
+.netbeans_automatic_build
 persistencia\ActividadJpaController.class
 logica\exceptions\NonexistentEntityException.class
 logica\Actividad_.class
