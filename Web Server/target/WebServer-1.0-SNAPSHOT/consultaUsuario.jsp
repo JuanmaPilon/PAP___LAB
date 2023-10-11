@@ -21,7 +21,7 @@
                 </form>
             </div>
             <div id="login">
-                <a href="logedUser.jsp" src="logedUser.jsp">Cancelar Consulta Usuario</a>
+                <a href="logedUser.jsp" src="logedUser.jsp">Volver al inicio</a>
             </div>
         </header>
 

@@ -19,7 +19,7 @@
             </form>
         </div>
         <div id="login">
-        <a href="index.jsp" src="index.jsp">Cancelar Alta Usuario</a>
+        <a href="index.jsp" src="index.jsp">Volver al inicio</a>
         </div>
     </header>
 
@@ -48,9 +48,9 @@ function mostrarCampos() {
                 }
             }
 
-// Esta función se ejecutará cuando se cargue la página
+// Esta funciï¿½n se ejecutarï¿½ cuando se cargue la pï¿½gina
             window.onload = function () {
-                // Llamamos a mostrarCampos() para asegurarnos de que el formulario tenga la acción correcta al cargar la página
+                // Llamamos a mostrarCampos() para asegurarnos de que el formulario tenga la acciï¿½n correcta al cargar la pï¿½gina
                 mostrarCampos();
             };
         </script>
@@ -65,7 +65,7 @@ function mostrarCampos() {
             <label for="apellido">Apellido:</label>
             <input placeholder="Sito" type="text" id="apellido" name="apellido" required>
 
-            <label for="contrasenia">Contraseña:</label>
+            <label for="contrasenia">Contraseï¿½a:</label>
             <input type="password" id="contrasenia" name="contrasenia" required>
 
             <label for="confirmacion">Confirmar Contrasenia:</label>

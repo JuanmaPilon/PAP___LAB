@@ -24,7 +24,7 @@
                     String usuario = (String) request.getSession().getAttribute("usuario");
                     if (usuario != null) {
                 %>
-                <a href="#" onclick="consultarPerfil('<%= usuario%>')"><%= usuario%></a> | <a href="cerrarSesion.jsp">Cerrar Sesión</a> | <a href="altaUsuario.jsp">Alta Usuario</a>
+                <a href="#" onclick="consultarPerfil('<%= usuario%>')"><%= usuario%></a> | <a href="index.jsp">Cerrar Sesión</a> | <a href="altaUsuario.jsp">Alta Usuario</a>
                 <%
                 } else {
                 %>
@@ -45,6 +45,7 @@
                 <li><a href="#">Otros...</a></li>
                 <li><a href="consultaUsuario.jsp">Consulta Usuario</a></li>
                 <li><a href="altaActividadTuristica.jsp">Alta Actividad</a></li>
+                <li><a href="modificarUsuario.jsp">Modificareishon mai iuser</a></li>
 
             </ul>
             <h2>Departamentos</h2>
