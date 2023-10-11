@@ -70,6 +70,20 @@ public class ControladoraPersistencia {
         }
         return departamentos;
     }
+    
+    public ArrayList<Categoria> listaCategorias() {
+    ArrayList<Categoria> categorias = new ArrayList<>();
+    try {
+        List<Categoria> categoria = categoriaJpa.findCategoriaEntities();
+        for (int i = 0; i < categoria.size(); i++) {
+            categorias.add(categoria.get(i));
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return categorias;
+}
+
  
      public ArrayList<String> listaDeptos(){
     ArrayList<String> nicks = new ArrayList<String>();

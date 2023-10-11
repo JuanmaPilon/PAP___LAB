@@ -2,6 +2,7 @@ logica\IControlador.class
 persistencia\exceptions\NicknameExistenteException.class
 logica\Turista_.class
 logica\Usuario.class
+Servlets\SvDepartamento.class
 logica\Inscripcion_.class
 logica\Controlador.class
 logica\DTSalidaTuristica.class
@@ -45,6 +46,7 @@ logica\DTActividad.class
 persistencia\ControladoraPersistencia.class
 logica\Fabrica.class
 persistencia\ActividadJpaController.class
+Servlets\SvCategoria.class
 logica\exceptions\NonexistentEntityException.class
 logica\Actividad_.class
 logica\DTPaquete.class
