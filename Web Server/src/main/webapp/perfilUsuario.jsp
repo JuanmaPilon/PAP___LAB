@@ -23,7 +23,7 @@
                 </form>
             </div>
             <div id="login">
-                <a href="logedUser.jsp" src="logedUser.jsp">Cancelar Consulta Usuario</a>
+                <a href="logedUser.jsp" src="logedUser.jsp">Volver al inicio</a>
             </div>
         </header>
 
@@ -87,14 +87,13 @@
         </div>
         <script>
             jQuery(document).ready(function () {
-                alert("funciona");
-            });
             jQuery('.tab-links a').on('click', function (e) {
                 var currVal = jQuery(this).attr('href');
                 jQuery('.tabs ' + currVal).show().siblings().hide();
                 jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
                 e.preventDefault();
             });
+        });
         </script> 
     </main>
 

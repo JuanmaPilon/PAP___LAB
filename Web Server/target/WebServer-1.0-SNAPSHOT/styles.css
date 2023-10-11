@@ -229,7 +229,3 @@ input[type="text"]:not(.no-estilo) {
 .tab {
     display: none;
 }
-
-.tab.active {
-    display: block;
-}
