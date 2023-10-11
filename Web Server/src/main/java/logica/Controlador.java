@@ -180,6 +180,12 @@ public void AltaCategoria(String nombre) throws PreexistingEntityException, Exce
    public ArrayList<Departamento> listaDepartamentos(){
        return controlPersis.listaDepartamentos();
    };
+   
+   
+   public ArrayList<Categoria> listaCategorias(){
+       return controlPersis.listaCategorias();
+   };
+   
    @Override
    public ArrayList<String> listaDeptos(){//tiene el nombre de los departamentos, no el objeto
        return controlPersis.listaDeptos();
