@@ -10,17 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import logica.Controlador;
+import logica.IControlador;
 /**
  *
  * @author natil
  */
 public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame {
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
     
     /**
      * Creates new form AgregarActividadTuristicaPaquete
      */
-    public AgregarActividadTuristicaPaquete() {
+    public AgregarActividadTuristicaPaquete(IControlador icu) {
+        control = icu;
         initComponents();
        
     }

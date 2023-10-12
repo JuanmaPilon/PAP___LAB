@@ -7,9 +7,11 @@ package presentacion;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import logica.Controlador;
 import logica.DTActividad;
 import logica.DTSalidaTuristica;
+import logica.IControlador;
 
 /**
  *
@@ -17,15 +19,17 @@ import logica.DTSalidaTuristica;
  */
 public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
 
-    Controlador control = Controlador.getInstance();
+     private IControlador control;
     /**
      * Creates new form ConsultaActividadTuristica2
      */
-    public ConsultaActividadTuristica() {
+    public ConsultaActividadTuristica(IControlador icu) {
+        control = icu;
         initComponents();
     }
 
-    public ConsultaActividadTuristica(String nombreActividad) {
+    public ConsultaActividadTuristica(String nombreActividad, IControlador icu) {
+        control = icu;
         initComponents();
         //aca tengo la actividad
         DTActividad actividad = control.traerDTActividad(nombreActividad);
@@ -79,6 +83,9 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtADescripcion = new javax.swing.JTextArea();
         btnCerrar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaCategorias = new javax.swing.JTable();
+        jLabel13 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Consulta Actividad Turistica");
@@ -174,61 +181,82 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
             }
         });
 
+        tablaCategorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tablaCategorias);
+
+        jLabel13.setText("Lista Categorias:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(37, 37, 37)
+                            .addComponent(cmbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel8)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(verPaqueteTuristico))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(34, 34, 34)
+                        .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(verSalidaTuristica))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel10)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(cmbDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
+                                    .addGap(21, 21, 21)
+                                    .addComponent(jLabel7)
                                     .addGap(18, 18, 18)
-                                    .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtCiudad)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                                    .addComponent(txtProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(verPaqueteTuristico))
-                            .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtFAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(34, 34, 34)
-                                .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(verSalidaTuristica))))
+                                    .addGap(34, 34, 34)
+                                    .addComponent(jLabel9)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtFAlta))
+                                .addComponent(txtNombre)
+                                .addComponent(txtCiudad)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                                .addComponent(txtProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
-                        .addComponent(btnCerrar)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                        .addGap(256, 256, 256)
+                        .addComponent(btnCerrar))
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,20 +286,20 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtFAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtFAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addComponent(jLabel13)
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(cmbSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,9 +309,9 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
                     .addComponent(jLabel12)
                     .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(verPaqueteTuristico))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addComponent(btnCerrar)
-                .addGap(21, 21, 21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -293,7 +321,7 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
          if(cmbSalidas.getSelectedIndex() != -1){
         String nombreSalida = (String) cmbSalidas.getSelectedItem();
         
-        ConsultaDeSalidaTuristica verConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(nombreSalida);
+        ConsultaDeSalidaTuristica verConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(nombreSalida, control);
         getParent().add(verConsultaDeSalidaTuristica);        
         verConsultaDeSalidaTuristica.show();
          }
@@ -360,6 +388,10 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             String fecha = formatoFecha.format(dtactividad.getfAlta());            
             txtFAlta.setText(fecha);
+            
+            //Agrego las categorias
+            
+            cargarTablaCategoria(actividadSeleccionada);
                        
             ArrayList<String> salidas = control.listaSalActividadTuristica(actividadSeleccionada);
             
@@ -417,6 +449,7 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -426,6 +459,8 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaCategorias;
     private javax.swing.JTextArea txtADescripcion;
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtCosto;
@@ -436,4 +471,38 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
     private javax.swing.JButton verPaqueteTuristico;
     private javax.swing.JButton verSalidaTuristica;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTablaCategoria(String actividad) {
+        //definir el modelo
+        DefaultTableModel tablaCategoria = new DefaultTableModel(){
+            //que filas y columnas no sean editables
+            @Override
+            public boolean isCellEditable(int row, int column){
+                    return false;
+            };
+        };
+        
+        //establecemos los nombres de las columnas
+        String titulos[] = {"Categoria"};
+        
+        tablaCategoria.setColumnIdentifiers(titulos);
+        
+        //carga de los datos desde la BD
+        ArrayList<String> listaCategoriasActividad = control.traerCategoriasActividad(actividad);
+        
+        //recorrer la lista y mostrar cada elemento en la tabla
+        if (listaCategoriasActividad != null){
+            for (String c : listaCategoriasActividad){
+                Object[] objeto = {c};
+                tablaCategoria.addRow(objeto);   
+  
+            }
+        }
+        
+        tablaCategorias.setModel(tablaCategoria);
+        
+        
+    }
+
+
 }

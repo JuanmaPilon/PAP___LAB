@@ -17,6 +17,7 @@ import logica.Controlador;
 import logica.DTActividad;
 import logica.DTSalidaTuristica;
 import logica.DTTurista;
+import logica.IControlador;
 //import logica.Departamento;
 //import logica.Inscripcion;
 //import logica.SalidaTuristica;
@@ -27,11 +28,7 @@ import logica.DTTurista;
  * @author Pc
  */
 public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
-     Controlador control = Controlador.getInstance();
-     //private ArrayList<Departamento> departamentos = null;
-     //private ArrayList<DTTurista> turistas= null;
-     //private ArrayList<SalidaTuristica> salidas;
-     //private ArrayList<Actividad> actividades;
+    private IControlador control;
      private DefaultTableModel tabla = new DefaultTableModel(){
             //que filas y columnas no sean editables
             @Override
@@ -42,7 +39,8 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
      /**
      * Creates new form InscripciónASalidaTurística
      */
-    public InscripcionASalidaTuristica() {
+    public InscripcionASalidaTuristica(IControlador icu) {
+        control = icu;
         initComponents();
     }
 
@@ -102,11 +100,6 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameOpened(evt);
-            }
-        });
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
             }
         });
 
@@ -310,30 +303,6 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//    private void cargar(){
-//        
-//         cmbDepartamento.removeAllItems();
-//        // Llamar a obtenerNombresDepartamentos para obtener la lista de nombres de departamentos y llenar el cmboBoxDep
-//         List<String> nombresDepartamentos = control.listaDeptos();
-//        // Llenar el JComboBox con los nombres de los departamentos
-//         for (String nombre : nombresDepartamentos) {
-//             cmbDepartamento.addItem(nombre);
-//        }
-//         
-//        //cmbTurista.removeAllItems();
-//        ArrayList<DTTurista> listaTuristas = control.traerUsuarioTurista();
-//         for (DTTurista dtTurista : listaTuristas) {
-//             cmbTurista.addItem(dtTurista.getNickname());
-//        }
-//        
-//        
-//        if(cmbActividad.getItemCount()>0)
-//            cargarSalidas((String) cmbActividad.getSelectedItem());
-//    };
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
-       // cargar();
-    }//GEN-LAST:event_formComponentShown
 
     private void cmbDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDepartamentoItemStateChanged
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaSalidas.getModel();

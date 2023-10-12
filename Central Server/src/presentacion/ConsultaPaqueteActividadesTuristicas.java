@@ -5,19 +5,21 @@
 package presentacion;
 
 import java.util.ArrayList;
-import logica.Controlador;
+import javax.swing.table.DefaultTableModel;
 import logica.DTPaquete;
+import logica.IControlador;
 
 /**
  *
  * @author natil
  */
 public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalFrame {
-     Controlador control = Controlador.getInstance();
+     private IControlador control;
     /**
      * Creates new form ConsultaPaqueteActividadesTuristicas2
      */
-    public ConsultaPaqueteActividadesTuristicas() {
+    public ConsultaPaqueteActividadesTuristicas(IControlador icu) {
+        control = icu;
         initComponents();
     }
     
@@ -58,6 +60,9 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
         cmbActividades = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaCategorias = new javax.swing.JTable();
 
         setClosable(true);
         setTitle("Consulta Paquete de Actividad Turistica");
@@ -121,6 +126,21 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
             }
         });
 
+        jLabel13.setText("Lista Categorias del Paquete:");
+
+        tablaCategorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tablaCategorias);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,37 +148,47 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
-                                        .addComponent(cmbActividades, 0, 312, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel6))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNombre)
-                                            .addComponent(txtValidez)
-                                            .addComponent(txtDescripcion)
-                                            .addComponent(txtDescuento))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnVer))))
+                                        .addComponent(cmbPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(cmbActividades, 0, 312, Short.MAX_VALUE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel5)
+                                                    .addComponent(jLabel4)
+                                                    .addComponent(jLabel3)
+                                                    .addComponent(jLabel6))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtNombre)
+                                                    .addComponent(txtValidez)
+                                                    .addComponent(txtDescripcion)
+                                                    .addComponent(txtDescuento))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnVer))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(289, 289, 289)
+                                .addComponent(btnCerrar)))
+                        .addGap(0, 90, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(309, 309, 309)
-                        .addComponent(btnCerrar)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,9 +220,13 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
                     .addComponent(jLabel7)
                     .addComponent(cmbActividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVer))
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel13)
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnCerrar)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -202,7 +236,7 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
         
          if(cmbActividades.getSelectedIndex() != -1){
             String nombreActividad = (String) cmbActividades.getSelectedItem();
-            ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad);
+            ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad, control);
             getParent().add(verConsultaActividadTuristica);        
             verConsultaActividadTuristica.show();
         }
@@ -216,6 +250,7 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
         ArrayList<DTPaquete> paquetes = control.traerListaDTPaquetes();
         
         for (DTPaquete dtpaquete : paquetes){
+            System.out.println("acap"+dtpaquete.getNombre());
             cmbPaquetes.addItem(dtpaquete.getNombre());
         }
     }//GEN-LAST:event_formInternalFrameOpened
@@ -247,6 +282,9 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
                 for (String actividad : actividades) {
                     cmbActividades.addItem(actividad);
                 }
+                
+            //Cargo Categorias del paquete= concatenacion de categorias de las actividades que lo integran
+            cargarTablaCategoria(paqueteSeleccionado);
             }
         } else {
             // Si no se seleccionó un departamento válido, puedes limpiar cmbActividades y cmbSalidas
@@ -265,15 +303,53 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
     private javax.swing.JComboBox<String> cmbActividades;
     private javax.swing.JComboBox<String> cmbPaquetes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaCategorias;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtDescuento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtValidez;
     // End of variables declaration//GEN-END:variables
+
+     private void cargarTablaCategoria(String paquete) {
+        //definir el modelo
+        DefaultTableModel tablaCategoria = new DefaultTableModel(){
+            //que filas y columnas no sean editables
+            @Override
+            public boolean isCellEditable(int row, int column){
+                    return false;
+            };
+        };
+        
+        //establecemos los nombres de las columnas
+        String titulos[] = {"Categoria"};
+        
+        tablaCategoria.setColumnIdentifiers(titulos);
+        
+        //carga de los datos desde la BD
+        ArrayList<String> listaCategoriasPaquete = control.traerCategoriasPaquete(paquete);
+        
+        //recorrer la lista y mostrar cada elemento en la tabla
+        if (listaCategoriasPaquete != null){
+            for (String c : listaCategoriasPaquete){
+                Object[] objeto = {c};
+                tablaCategoria.addRow(objeto);   
+  
+            }
+        }
+        
+        tablaCategorias.setModel(tablaCategoria);
+        
+        
+    }
+
+
+
 }

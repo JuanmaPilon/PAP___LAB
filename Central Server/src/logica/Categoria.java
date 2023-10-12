@@ -16,6 +16,10 @@ public class Categoria implements Serializable {
     public Categoria() {
     }
 
+    public Categoria(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Categoria(String nombre, ArrayList<Actividad> listaActividad) {
         this.nombre = nombre;
         this.listaActividad = listaActividad;

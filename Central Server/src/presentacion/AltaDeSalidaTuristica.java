@@ -7,17 +7,19 @@ package presentacion;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import logica.Controlador;
+import logica.IControlador;
 
 /**
  *
  * @author natil
  */
 public class AltaDeSalidaTuristica extends javax.swing.JInternalFrame {
-Controlador control = Controlador.getInstance();
+    private IControlador control;
     /**
      * Creates new form AltaDeSalidaTuristica
      */
-    public AltaDeSalidaTuristica(String deptoSeleccionado, String actividadSeleccionado) {
+    public AltaDeSalidaTuristica(String deptoSeleccionado, String actividadSeleccionado, IControlador icu) {
+        control = icu;
         initComponents();
         cargarDatos( deptoSeleccionado,  actividadSeleccionado);
     }

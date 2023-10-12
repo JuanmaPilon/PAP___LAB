@@ -2,14 +2,15 @@
 package presentacion;
 
 import javax.swing.JOptionPane;
-import logica.Controlador;
+import logica.IControlador;
 
 
 public class AltaCategoria extends javax.swing.JInternalFrame {
     
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
 
-    public AltaCategoria() {
+    public AltaCategoria(IControlador icu) {
+        control = icu;
         initComponents();
     }
 

@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Actividad;
 import logica.Categoria;
+import logica.Compra;
 import logica.DTActividad;
 import logica.DTSalidaTuristica;
 import logica.DTTurista;
@@ -38,6 +39,7 @@ public class ControladoraPersistencia {
     CategoriaJpaController categoriaJpa = new CategoriaJpaController();
     InscripcionJpaController inscripcionJpa = new InscripcionJpaController();
     ImagenPerfilJpaController imagenPerfilJpa = new ImagenPerfilJpaController();
+    CompraJpaController compraJpa = new CompraJpaController();
     
     //Consultas
     public SalidaTuristica consultaSalida(String nombreSalida){
@@ -72,12 +74,12 @@ public class ControladoraPersistencia {
     }
  
      public ArrayList<String> listaDeptos(){
-    ArrayList<String> nicks = new ArrayList<String>();
+    ArrayList<String> nicks = new ArrayList();
   
     try {
         List<Departamento> deptos = departamentoJpa.findDepartamentoEntities();
-        for (int i = 0; i < deptos.size(); i++) {
-            nicks.add(deptos.get(i).getNombre());
+        for (Departamento d: deptos) {
+            nicks.add(d.getNombre());
         }
     }catch(Exception ex){
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
@@ -511,5 +513,21 @@ public ArrayList<DTUsuario> traerUsuarios(){
      
        
     }
+
+    public void modificarActividad(Actividad a) {
+        try {
+            actividadJpa.edit(a);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Departamento> traerDepartamentos() {
+        return departamentoJpa.findDepartamentoEntities();
+ }
+
+    public void guardarCompra(Compra c) {
+        compraJpa.create(c);
+ }
     
 }//fin

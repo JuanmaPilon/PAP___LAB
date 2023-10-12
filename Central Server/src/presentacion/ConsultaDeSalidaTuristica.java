@@ -8,16 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import logica.Controlador;
 import logica.DTSalidaTuristica;
+import logica.IControlador;
 
 public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
 
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
     
-    public ConsultaDeSalidaTuristica() {
+    public ConsultaDeSalidaTuristica(IControlador icu) {
+        control = icu;
         initComponents();
     }
 
-    public ConsultaDeSalidaTuristica(String nombreSalida) {
+    public ConsultaDeSalidaTuristica(String nombreSalida, IControlador icu) {
         initComponents();
         //aca tengo la actividad
         DTSalidaTuristica salida = control.traerDTSalidaTuristica(nombreSalida);
