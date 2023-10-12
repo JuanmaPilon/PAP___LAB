@@ -25,6 +25,7 @@ logica\ImagenPerfil_.class
 persistencia\ProveedorJpaController$NicknameExistenceChecker.class
 logica\Categoria.class
 persistencia\ProveedorJpaController.class
+Servlets\SvAltaSalidaTuristica.class
 logica\Turista.class
 persistencia\CategoriaJpaController.class
 logica\Usuario_.class
@@ -52,9 +53,11 @@ logica\Actividad_.class
 logica\DTPaquete.class
 persistencia\TuristaJpaController$NicknameExistenceChecker.class
 logica\ImagenPerfil.class
+Servlets\SvCargarDepartamentos.class
 logica\Compra.class
 persistencia\DepartamentoJpaController.class
 logica\Inscripcion.class
+Servlets\SvCargarActividades.class
 logica\Paquete_.class
 persistencia\exceptions\CorreoElectronicoExistenteException.class
 logica\Categoria_.class
