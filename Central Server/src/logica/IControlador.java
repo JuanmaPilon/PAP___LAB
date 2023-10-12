@@ -66,8 +66,11 @@ public abstract DTActividad traerDTActividad(String nombreActividad);
 public abstract String traerDepartamentoSalida(String nombreActividad);
 public abstract ArrayList<String> traerCategoriasActividad(String actividad);
 public abstract void cambiarEstadoActividad(String nombreActividad, TipoEstado tipoEstado);
-public abstract ArrayList<String> listaActividadesAgregadas() ;
+public abstract ArrayList<String> listaActividadesPorEstado(TipoEstado estado) ;
 public abstract void CompraDePaquete(String nickname, String nombrePaquete, int cantTurista, Date fechaCompra) throws PaqueteSinActividad, PaqueteYaComprado;
-
+public abstract ArrayList<String> listaPaquetesSinCompra();
 public abstract void cargarDatosDePrueba();
+public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
+
+    
 }

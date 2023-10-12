@@ -7,6 +7,7 @@ package presentacion;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.IControlador;
+import logica.TipoEstado;
 import static logica.TipoEstado.confirmada;
 import static logica.TipoEstado.rechazada;
 
@@ -124,7 +125,7 @@ public class AceptarRechazarActividadTuristica extends javax.swing.JInternalFram
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         //Cargo combo box de actividades agregadas
         cmbActividades.removeAllItems();
-        ArrayList<String> actividadesAgregadas = control.listaActividadesAgregadas();
+        ArrayList<String> actividadesAgregadas = control.listaActividadesPorEstado(TipoEstado.agregada);
         for (String aAgr : actividadesAgregadas) {
             cmbActividades.addItem(aAgr);
         }

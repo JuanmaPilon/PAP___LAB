@@ -140,9 +140,9 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         paqueteAgregarActividadPaquete.removeAllItems();
-        ArrayList<String> nicknames = control.listaPaquetes();
-        for (int i = 0; i < nicknames.size(); i++) {
-            paqueteAgregarActividadPaquete.addItem(nicknames.get(i));
+        ArrayList<String> nombresPaquete = control.listaPaquetesSinCompra();
+        for (String p : nombresPaquete) {
+            paqueteAgregarActividadPaquete.addItem(p);
 
         }
         departamentoAgregarActividadPaquete.removeAllItems();
@@ -162,7 +162,7 @@ public class AgregarActividadTuristicaPaquete extends javax.swing.JInternalFrame
       
     if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
         String departamentoSeleccionado = (String) departamentoAgregarActividadPaquete.getSelectedItem();
-        List<String> actividades = control.listaActividadesTuristicas(departamentoSeleccionado);
+        List<String> actividades = control.listaActividadesTuristicasConfirmadas(departamentoSeleccionado);
 
            paqueteAgregarActividadTuristica.removeAllItems();
            

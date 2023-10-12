@@ -610,17 +610,17 @@ try{
     }
 
     @Override
-    public ArrayList<String> listaActividadesAgregadas() {
-        ArrayList<String> listaActividadesAgregadas = new ArrayList();
+    public ArrayList<String> listaActividadesPorEstado(TipoEstado estado) {
+        ArrayList<String> listaActividadesPorEstado = new ArrayList();
         
         List<Actividad> listaActividades = controlPersis.traerActividades();
         for (Actividad a : listaActividades ){
-            if (a.getEstado()==TipoEstado.agregada){
-                listaActividadesAgregadas.add(a.getNombre());
+            if (a.getEstado()==estado){
+                listaActividadesPorEstado.add(a.getNombre());
             }
         }
         
-        return listaActividadesAgregadas;
+        return listaActividadesPorEstado;
     }
 
     @Override
@@ -707,6 +707,31 @@ try{
                 
 
        
+    }
+    
+    @Override
+    public  ArrayList<String> listaPaquetesSinCompra(){
+        ArrayList<String> listaPaquetesSinCompra = controlPersis.listaPaquetes();
+        List<Compra> listaPaquetesComprados = controlPersis.listarCompras();
+        
+        //recorre las compras y va sacando los paquetes comprados de la lista "total" de paquetes
+        for (Compra c: listaPaquetesComprados){
+            listaPaquetesSinCompra.remove(c.getPaquete().getNombre());
+        }
+        return listaPaquetesSinCompra;
+    }
+    
+    @Override
+    public  ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado){
+        ArrayList<String> listaActividadesTuristicas = new ArrayList();
+       for (Actividad a: controlPersis.traerActividades()){
+            if(a.getDepartamento().getNombre().equals(departamentoSeleccionado)&& a.getEstado().equals(TipoEstado.confirmada)){
+                listaActividadesTuristicas.add(a.getNombre());
+            }    
+       }
+      
+       return listaActividadesTuristicas;
+    
     }
     
     //Carga de los Datos de Prueba

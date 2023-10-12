@@ -529,5 +529,9 @@ public ArrayList<DTUsuario> traerUsuarios(){
     public void guardarCompra(Compra c) {
         compraJpa.create(c);
  }
+
+    public List<Compra> listarCompras() {
+        return compraJpa.findCompraEntities();
+   }
     
 }//fin
