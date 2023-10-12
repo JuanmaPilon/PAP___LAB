@@ -95,6 +95,7 @@
                 xhr.send();
             }
 
+<<<<<<< HEAD
             function cargarContenido() {
                 cargarDeptos();
                 cargarActividades();
@@ -108,4 +109,17 @@
         </footer>
 
     </body>
+=======
+    <script>
+        document.querySelector('form').addEventListener('submit', function (event) {
+            const cantidadMaxTuristas = document.getElementById('cantidadMaxTuristas').value;
+            if (cantidadMaxTuristas < 0) {
+                alert('La cantidad máxima de turistas no puede ser negativa');
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+>>>>>>> 90a5027d919e6d933dcd9778436327f665b96dff
 </html>

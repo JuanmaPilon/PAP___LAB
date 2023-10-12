@@ -54,19 +54,21 @@
         </aside>
         <%Usuario usu = (Usuario) request.getSession().getAttribute("usuPerfil");%>
         <h1>Informacion del Usuario</h1>
-        <p>nombre del user: <%=usu.getNombre()%></p>
+        <h2><%=usu.getNombre()%></h2>
         <div class="tabs">
             <ul class="tab-links">
                 <li class="active"><a href="#tab1">Perfil</a></li>
                 <li><a href="#tab2">Salidas</a></li>
                 <li><a href="#tab3">Paquetes</a></li>
-                <li><a href="#tab4">Otra Tab</a></li>
             </ul>
 
             <div class="tab-content">
                 <div id="tab1" class="tab active">
-                    <p>Tab1</p>
-                    <p>Texto1</p>
+                    <p><b>Nombre:</b> <%=usu.getNickname()%></p>
+                    <p><b>Nombre:</b> <%=usu.getNombre()%></p>
+                    <p><b>Apellido:</b> <%=usu.getApellido()%></p>
+                    <p><b>Email:</b> <%=usu.getCorreo()%></p>
+                    <p><b>Fecha de Nacimiento:</b> <%=usu.getfNacimiento()%></p>
                 </div>
 
                 <div id="tab2" class="tab">
@@ -78,23 +80,20 @@
                     <p>Tab3</p>
                     <p>Texto3</p>
                 </div>
-
-                <div id="tab4" class="tab">
-                    <p>Tab4</p>
-                    <p>Texto4</p>
-                </div>
             </div>
         </div>
         <script>
             jQuery(document).ready(function () {
-            jQuery('.tab-links a').on('click', function (e) {
-                var currVal = jQuery(this).attr('href');
-                jQuery('.tabs ' + currVal).show().siblings().hide();
-                jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
-                e.preventDefault();
+                jQuery('.tab-links li:first').addClass('active');
+                jQuery('.tab-content .tab:first').show();
+                jQuery('.tab-links a').on('click', function (e) {
+                    var currVal = jQuery(this).attr('href');
+                    jQuery('.tabs ' + currVal).show().siblings().hide();
+                    jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+                    e.preventDefault();
+                });
             });
-        });
-        </script> 
+        </script>
     </main>
 
 
