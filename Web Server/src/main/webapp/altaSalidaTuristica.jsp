@@ -68,5 +68,15 @@
         <p>&copy; 2023 Turismo.uy</p>
     </footer>
 
+    <script>
+        document.querySelector('form').addEventListener('submit', function (event) {
+            const cantidadMaxTuristas = document.getElementById('cantidadMaxTuristas').value;
+            if (cantidadMaxTuristas < 0) {
+                alert('La cantidad máxima de turistas no puede ser negativa');
+                event.preventDefault();
+            }
+        });
+    </script>
+
 </body>
 </html>

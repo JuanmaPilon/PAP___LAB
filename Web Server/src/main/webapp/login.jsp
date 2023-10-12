@@ -17,6 +17,14 @@
 </style>
 </head>
 <body>
+    <header>
+        <div id="logo">
+            <h1>Turismo.uy</h1>
+        </div>
+        <div id="login">
+            <a href="index.jsp" src="index.jsp">Volver al inicio</a>
+        </div>
+    </header>
 
     
     <main>
