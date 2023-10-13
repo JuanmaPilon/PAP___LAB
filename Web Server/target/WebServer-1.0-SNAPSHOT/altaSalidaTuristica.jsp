@@ -45,7 +45,7 @@
                 <input type="text" id="lugarSalida" name="lugarSalida" required>
 
                 <label for="cantidadMaxTuristas">Cantidad Máxima de Turistas:</label>
-                <input type="number" id="cantidadMaxTuristas" name="cantidadMaxTuristas" required>
+                <input type="number" id="cantidadMaxTuristas" name="cantidadMaxTuristas" min="1" required>
 
                 <label for="imagenSalida">Imagen (opcional):</label>
                 <input type="file" id="imagenSalida" name="imagenSalida">
@@ -59,30 +59,44 @@
 
             function cargarDeptos() {
                 var xhr = new XMLHttpRequest();
+                var select = document.getElementById("departamento");
+
                 xhr.open("GET", "SvCargarDepartamentos?startIndex=" + startIndex, true);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var departamentos = xhr.responseText.split(",");
-                        var select = document.getElementById("departamento");
                         for (var i = 0; i < departamentos.length; i++) {
                             var option = document.createElement("option");
                             option.value = departamentos[i];
                             option.text = departamentos[i];
                             select.appendChild(option);
                         }
+
+                        select.onchange = function () {
+                            startIndex1 = 0; // Reinicia el índice de actividades cuando se selecciona un nuevo departamento
+                            cargarActividades(select.value, startIndex1);
+                        };
+
                         startIndex += departamentos.length;
+                        if (select.value) {
+                            cargarActividades(select.value, startIndex1);
+                        } else if (departamentos.length > 0) {
+                            cargarActividades(departamentos[0], startIndex1);
+                        }
                     }
                 };
                 xhr.send();
             }
 
-            function cargarActividades() {
+
+            function cargarActividades(departamento, startIndex1) {
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "SvCargarActividades?startIndex1=" + startIndex1, true);
+                var select = document.getElementById("actividadTuristica");
+                select.innerHTML = "";
+                xhr.open("GET", "SvCargarActividades?departamento=" + departamento + "&startIndex1=" + startIndex1, true);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var actividades = xhr.responseText.split(",");
-                        var select = document.getElementById("actividadTuristica");
                         for (var i = 0; i < actividades.length; i++) {
                             var option = document.createElement("option");
                             option.value = actividades[i];
@@ -95,31 +109,11 @@
                 xhr.send();
             }
 
-<<<<<<< HEAD
-            function cargarContenido() {
-                cargarDeptos();
-                cargarActividades();
-            }
 
-            window.onload = cargarContenido;
+            window.onload = function () {
+                cargarDeptos(); // Cargar departamentos al cargar la página
+            };
         </script>
-        <footer>
-            <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
-            <p>&copy; 2023 Turismo.uy</p>
-        </footer>
-
-    </body>
-=======
-    <script>
-        document.querySelector('form').addEventListener('submit', function (event) {
-            const cantidadMaxTuristas = document.getElementById('cantidadMaxTuristas').value;
-            if (cantidadMaxTuristas < 0) {
-                alert('La cantidad máxima de turistas no puede ser negativa');
-                event.preventDefault();
-            }
-        });
-    </script>
 
 </body>
->>>>>>> 90a5027d919e6d933dcd9778436327f665b96dff
 </html>

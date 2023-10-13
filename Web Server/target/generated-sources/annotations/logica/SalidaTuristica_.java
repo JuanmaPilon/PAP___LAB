@@ -8,11 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import logica.Actividad;
 import logica.Inscripcion;
 
-<<<<<<< HEAD
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-11T22:21:47")
-=======
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-12T13:00:24")
->>>>>>> 95e542fcaa7b9563546acf0a6c51f8901032b29c
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-12T22:36:36")
 @StaticMetamodel(SalidaTuristica.class)
 public class SalidaTuristica_ { 
 

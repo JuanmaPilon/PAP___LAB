@@ -24,29 +24,47 @@
     </header>
     
     <main>
-        <h2>Perfil de Actividad Turistica</h2>
-     
         <div class="actividad">
             <img src="imagen_actividad.jpg" alt="Imagen de la actividad">
             <h3>Nombre de la Actividad</h3>
-            <p>Descripción de la actividad</p>
+            <p>Descripcion de la actividad</p>
             <p>Fecha: Fecha X</p>
             <p>Lugar: Lugar X</p>
             <p>Categorías: Lista X</p>
         </div>
         
-      
         <h3>Salidas Asociadas</h3>
-        <ul>
-            <li><a href="perfilSalidaTuristica.jsp">Salida 1</a></li>
-            <li><a href="perfilSalidaTuristica.jsp">Salida X</a></li>
+        <ul class="list-asociadas">
+            <li>
+                <div class="asociada">
+                    <img src="salida1.jpg" alt="Salida 1">
+                    <h4><a href="perfilSalidaTuristica.jsp">Salida 1</a></h4>
+                </div>
+            </li>
+            <li>
+                <div class="asociada">
+                    <img src="salidaX.jpg" alt="Salida X">
+                    <h4><a href="perfilSalidaTuristica.jsp">Salida X</a></h4>
+                </div>
+            </li>
         </ul>
         
         <h3>Paquetes Asociados</h3>
-        <ul>
-            <li><a href="perfilPaqueteActividades.jsp">Paquete 1</a></li>
-            <li><a href="perfilPaqueteActividades.jsp">Paquete X</a></li>
+        <ul class="list-asociadas">
+            <li>
+                <div class="asociada">
+                    <img src="paquete1.jpg" alt="Paquete 1">
+                    <h4><a href="perfilPaqueteActividades.jsp">Paquete 1</a></h4>
+                </div>
+            </li>
+            <li>
+                <div class="asociada">
+                    <img src="paqueteX.jpg" alt="Paquete X">
+                    <h4><a href="perfilPaqueteActividades.jsp">Paquete X</a></h4>
+                </div>
+            </li>
         </ul>
+        
     </main>
     
     <footer>
