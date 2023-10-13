@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.Controlador;
 import logica.DTSalidaTuristica;
-import logica.Departamento;
+import logica.Fabrica;
+import logica.IControlador;
 import logica.Proveedor;
 import logica.Turista;
 import logica.Usuario;
@@ -23,7 +23,8 @@ import logica.Usuario;
 @WebServlet(name = "SvPerfilUsuario", urlPatterns = {"/SvPerfilUsuario"})
 public class SvPerfilUsuario extends HttpServlet {
 
-    Controlador control = Controlador.getInstance();
+    Fabrica fabrica = Fabrica.getInstance();
+    IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Actividad;
 import logica.Categoria;
+import logica.Compra;
 import logica.DTActividad;
 import logica.DTSalidaTuristica;
 import logica.DTTurista;
@@ -40,6 +41,7 @@ public class ControladoraPersistencia {
     InscripcionJpaController inscripcionJpa = new InscripcionJpaController();
     ImagenPerfilJpaController imagenPerfilJpa = new ImagenPerfilJpaController();
     imagenActividadJpaController imagenActividadJpa = new imagenActividadJpaController();
+    CompraJpaController compraJpa = new CompraJpaController();
     
     //Consultas
     public SalidaTuristica consultaSalida(String nombreSalida){
@@ -72,28 +74,14 @@ public class ControladoraPersistencia {
         }
         return departamentos;
     }
-    
-    public ArrayList<Categoria> listaCategorias() {
-    ArrayList<Categoria> categorias = new ArrayList<>();
-    try {
-        List<Categoria> categoria = categoriaJpa.findCategoriaEntities();
-        for (int i = 0; i < categoria.size(); i++) {
-            categorias.add(categoria.get(i));
-        }
-    } catch (Exception ex) {
-        Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return categorias;
-}
-
  
      public ArrayList<String> listaDeptos(){
-    ArrayList<String> nicks = new ArrayList<String>();
+    ArrayList<String> nicks = new ArrayList();
   
     try {
         List<Departamento> deptos = departamentoJpa.findDepartamentoEntities();
-        for (int i = 0; i < deptos.size(); i++) {
-            nicks.add(deptos.get(i).getNombre());
+        for (Departamento d: deptos) {
+            nicks.add(d.getNombre());
         }
     }catch(Exception ex){
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
@@ -203,13 +191,13 @@ public class ControladoraPersistencia {
 
 public ArrayList<DTUsuario> traerProveedores() {
 
-    ArrayList<DTUsuario> listaDTUsuario = new ArrayList<DTUsuario>();
+    ArrayList<DTUsuario> listaDTUsuario = new ArrayList();
     try {
         List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
         for (Proveedor p : proveedores) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String fnac = sdf.format(p.getfNacimiento());
-            DTUsuario dtusuario = new DTUsuario(p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fnac);
+            DTUsuario dtusuario = new DTUsuario(p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fnac, p.getContrasenia());
             listaDTUsuario.add(dtusuario);
         }
     } catch (Exception ex) {
@@ -230,7 +218,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
         for (Turista t : turistas) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String fnac = sdf.format(t.getfNacimiento());
-            DTUsuario dtusuario = new DTUsuario(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(), fnac );
+            DTUsuario dtusuario = new DTUsuario(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(), fnac , t.getContrasenia());
             listaDTUsuario.add(dtusuario);
         }
     }catch(Exception ex){
@@ -241,7 +229,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
         for (Proveedor p : proveedores) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String fnac = sdf.format(p.getfNacimiento());
-            DTUsuario dtusuario = new DTUsuario(p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fnac );
+            DTUsuario dtusuario = new DTUsuario(p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fnac, p.getContrasenia() );
             listaDTUsuario.add(dtusuario);
         }
     }catch(Exception ex){
@@ -469,7 +457,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
         return actividadJpa.findActividadEntities();
     }
     
-     public void guardarImagenPerfil(ImagenPerfil imagenPerfil) throws PreexistingEntityException, Exception{
+      public void guardarImagenPerfil(ImagenPerfil imagenPerfil) throws PreexistingEntityException, Exception{
            try{
                 imagenPerfilJpa.create(imagenPerfil);
            } catch (PreexistingEntityException e){
@@ -490,6 +478,7 @@ public ArrayList<DTUsuario> traerUsuarios(){
      public ImagenPerfil buscarImagen(String nickname){
              return  imagenPerfilJpa.findImagenPerfilByNickname(nickname);
     }
+     
 
     public void guardarCategoria(Categoria cat) throws PreexistingEntityException, Exception {
         try {
@@ -535,33 +524,28 @@ public ArrayList<DTUsuario> traerUsuarios(){
      
        
     }
+
+    public void modificarActividad(Actividad a) {
+        try {
+            actividadJpa.edit(a);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Departamento> traerDepartamentos() {
+        return departamentoJpa.findDepartamentoEntities();
+ }
+
+    public void guardarCompra(Compra c) {
+        compraJpa.create(c);
+ }
+
+    public List<Compra> listarCompras() {
+        return compraJpa.findCompraEntities();
+   }
+
     
-   public ArrayList<Usuario> listaUsuariosNicknemeYContrasenia() { //santi
-    ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-
-    try {
-        List<Turista> turistas = turistaJpa.findTuristaEntities();
-        for (Turista turista : turistas) {
-            String nickname = turista.getNickname();
-            String contrasenia = turista.getContrasenia();
-            usuarios.add(new Usuario(nickname, contrasenia));
-        }
-    } catch (Exception ex) {
-        Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-    try {
-        List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
-        for (Proveedor proveedor : proveedores) {
-            String nickname = proveedor.getNickname();
-            String contrasenia = proveedor.getContrasenia();
-            usuarios.add(new Usuario(nickname, contrasenia));
-        }
-    } catch (Exception ex) {
-        Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-    return usuarios;
-} 
+    
     
 }//fin

@@ -3,6 +3,7 @@ package logica;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -10,6 +11,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static logica.TipoEstado.agregada;
 import logica.exceptions.ConstraseniasDistintas;
+import logica.exceptions.PaqueteSinActividad;
+import logica.exceptions.PaqueteYaComprado;
 import persistencia.ControladoraPersistencia;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.NicknameExistenteException;
@@ -20,30 +23,32 @@ public class Controlador implements IControlador{
     
     public Controlador() {}
     
-    private static Controlador control;
-    public static Controlador getInstance(){
-        if (control == null){
-            control = new Controlador();
-        }
-            return control;
-    };
+//    private static Controlador control;
+//    public static Controlador getInstance(){
+//        if (control == null){
+//            control = new Controlador();
+//        }
+//            return control;
+//    };
    
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
     //descomentado por una prueba:
-    
+    @Override
     public ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception{
         
            return  controlPersis.buscarImagen(nickname);
     }
     
-    public  void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
+    @Override
+    public void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
         
         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
         controlPersis.guardarImagenPerfil(imagenPerfil);
         
     }
     
+    @Override
     public  void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception{
         
         imagenActividad ImagenActividad = new imagenActividad(imagenNombre, imagenRuta, nombreActividad);
@@ -147,6 +152,8 @@ public void AltaCategoria(String nombre) throws PreexistingEntityException, Exce
             
         }
    }
+    
+
    
    @Override
    public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception{
@@ -187,28 +194,31 @@ public void AltaCategoria(String nombre) throws PreexistingEntityException, Exce
    public ArrayList<Departamento> listaDepartamentos(){
        return controlPersis.listaDepartamentos();
    };
-   
-   
-   public ArrayList<Categoria> listaCategorias(){
-       return controlPersis.listaCategorias();
-   };
-   
    @Override
    public ArrayList<String> listaDeptos(){//tiene el nombre de los departamentos, no el objeto
-       return controlPersis.listaDeptos();
+       ArrayList<String> nicks = new ArrayList();
+  
+    
+        List<Departamento> deptos = controlPersis.traerDepartamentos();
+        for (Departamento d: deptos) {
+            
+            nicks.add(d.getNombre());
+        }
+       return nicks;
    };
    @Override
    public ArrayList<String> listaActividadesTuristicas(String departamento){
-       return controlPersis.listaActividadesTuristicas(departamento);
+       ArrayList<String> listaActividadesTuristicas = new ArrayList();
+       for (String s: controlPersis.listaActividadesTuristicas(departamento)){
+           listaActividadesTuristicas.add(s);
+       }
+      
+       return listaActividadesTuristicas;
    };
    
    @Override
    public ArrayList<String> listaUsuarios(){
      return controlPersis.listaUsuarios();
-   };
-   
-   public ArrayList<Usuario> listaUsuariosNicknameYContrasenia(){ //santi
-     return controlPersis.listaUsuariosNicknemeYContrasenia();
    };
    
     @Override
@@ -495,20 +505,6 @@ try{
     
     @Override
         public ArrayList<DTActividad> traerActividadesDelProveedor(String nickname) {
-//            Proveedor p = (Proveedor) ConsultaDeUsuario(nickname);
-//            
-//            ArrayList<DTActividad> listaActividadesDelProveedor = new ArrayList();
-//            
-//            for (Actividad a : p.getListaActividades()){
-//                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), 
-//                                                      a.getDuracion(), 
-//                                                        a.getCosto(), a.getCiudad(),
-//                                                    a.getfAlta(), 
-//                                            a.getProveedor().getNombre());
-//                listaActividadesDelProveedor.add(dtactividad);
-//            }
-//            
-//            return listaActividadesDelProveedor;
 
         List<Actividad> listaActividades = controlPersis.traerActividades();
          ArrayList<DTActividad> listaActividadesDelProveedor = new ArrayList();
@@ -543,6 +539,7 @@ try{
             return listaSalidasDelProveedor;
         }
     
+    @Override
     public String traerDepartamentoSalida(String nombreActividad) {
         Actividad a = ConsultaActividadTuristica(nombreActividad);
         return a.getDepartamento().getNombre();
@@ -560,6 +557,7 @@ try{
         return listaPaquetesDeActividad;
     }
     
+    @Override
     public DTActividad traerDTActividad(String nombreActividad){
         Actividad a = ConsultaActividadTuristica(nombreActividad);
         //DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, String nombreProveedor) 
@@ -570,6 +568,7 @@ try{
     }
     
     
+    @Override
     public ArrayList<DTPaquete> traerListaDTPaquetes(){
         List<Paquete> listaPaquetes = consultaPaquetes();
         
@@ -583,6 +582,7 @@ try{
         return listaDTPaquete;
     }
     
+    @Override
     public ArrayList<String> listaActividadesDelPaquete(String nombrePaquete) {
         Paquete p = controlPersis.traerPaquete(nombrePaquete);
         
@@ -595,12 +595,167 @@ try{
         return listaActividadesDelPaquete;
     }
     
+    @Override
     public DTPaquete traerDTPaquete(String nombrePaquete) {
          Paquete p = controlPersis.traerPaquete(nombrePaquete);
          
          DTPaquete dtpaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
          
          return dtpaquete;
+    }
+
+    
+    
+    @Override
+    public void ValidarContrasenias(String contrasenia, String confirmarContrasenia) throws ConstraseniasDistintas {
+        
+        if (!contrasenia.equals(confirmarContrasenia)){
+            throw new ConstraseniasDistintas("Las constrasenias no coinciden");
+        }
+    }
+@Override
+    public ArrayList<String> traerCategorias() {
+        return controlPersis.traerCategoria();
+    }
+
+    @Override
+    public ArrayList<String> listaActividadesPorEstado(TipoEstado estado) {
+        ArrayList<String> listaActividadesPorEstado = new ArrayList();
+        
+        List<Actividad> listaActividades = controlPersis.traerActividades();
+        for (Actividad a : listaActividades ){
+            if (a.getEstado()==estado){
+                listaActividadesPorEstado.add(a.getNombre());
+            }
+        }
+        
+        return listaActividadesPorEstado;
+    }
+
+    @Override
+    public void cambiarEstadoActividad(String nombreActividad, TipoEstado tipoEstado) {
+        Actividad a = controlPersis.consultaActividad(nombreActividad);
+        a.setEstado(tipoEstado);
+        controlPersis.modificarActividad(a);
+    }
+
+    @Override
+    public ArrayList<String> traerCategoriasActividad(String actividad) {
+        Actividad a = controlPersis.consultaActividad(actividad);
+        ArrayList<String> listaCategoriasActividad = new ArrayList();
+        for (Categoria c : a.getListaCategoria()){
+            listaCategoriasActividad.add(c.getNombre());            
+        }
+        return listaCategoriasActividad;
+    }
+    //son la agregacion de categorias de las actividades que pertenece al paquete
+    @Override
+    public ArrayList<String> traerCategoriasPaquete(String paquete) {
+        Paquete p = controlPersis.traerPaquete(paquete);
+        
+        ArrayList<Categoria> listaCategoriasPaquete = new ArrayList();
+         ArrayList<String> listaCategoriasPaqueteString = new ArrayList();
+        for (Actividad a : p.getListaActividades()){
+            for (Categoria c: a.getListaCategoria()){
+            
+                if (!listaCategoriasPaquete.contains(c)){
+                    listaCategoriasPaquete.add(c);
+                }
+            }
+        }    
+        //paso a string los nombres de las categorias
+        for (Categoria c: listaCategoriasPaquete ){
+            listaCategoriasPaqueteString.add(c.getNombre());
+        }
+        
+        return listaCategoriasPaqueteString;
+  
+
+    }
+    
+    @Override
+    public void CompraDePaquete(String nickname, String nombrePaquete, int cantTurista, Date fechaCompra) throws PaqueteSinActividad, PaqueteYaComprado{
+        Turista t = controlPersis.traerTurista(nickname);
+        Paquete p = controlPersis.traerPaquete(nombrePaquete);
+        
+        if (t.getListaCompras() != null){
+            //me fijo si ya ha comprado el paquete 
+            for(Compra compra: t.getListaCompras()){
+                if (compra.getPaquete().getNombre().equals(nombrePaquete)){
+                    throw new PaqueteYaComprado("El paqeute seleccionado " + p.getNombre() + " ya fue comprado por el turista");
+                }
+            }
+        
+        }
+        if (p.getListaActividades() == null){
+            throw new PaqueteSinActividad("El paqeute seleccionado " + p.getNombre() + " no tiene actividades agregadas");
+        }else{
+           float costoTotal = 0;
+           float costoActividades = 0;
+            for (Actividad a: p.getListaActividades()){
+
+                costoActividades = (float) costoActividades + a.getCosto();
+            }
+            
+
+            Compra c = new Compra(t, p, cantTurista, fechaCompra);
+            
+            costoTotal = (float) ((costoActividades)*(0.01)*(100-p.getDescuento())*(cantTurista));
+
+            c.setCostoTotal(costoTotal);
+            
+            Date fechaVencimiento = new Date();
+            Calendar d = Calendar.getInstance();
+            d.setTime(fechaCompra);
+            d.add(Calendar.DATE, p.getValidez());
+            fechaVencimiento = d.getTime();
+            c.setVencimiento(fechaVencimiento);
+            
+            controlPersis.guardarCompra(c);
+        }
+                
+
+       
+    }
+    
+    @Override
+    public  ArrayList<String> listaPaquetesSinCompra(){
+        ArrayList<String> listaPaquetesSinCompra = controlPersis.listaPaquetes();
+        List<Compra> listaPaquetesComprados = controlPersis.listarCompras();
+        
+        //recorre las compras y va sacando los paquetes comprados de la lista "total" de paquetes
+        for (Compra c: listaPaquetesComprados){
+            listaPaquetesSinCompra.remove(c.getPaquete().getNombre());
+        }
+        return listaPaquetesSinCompra;
+    }
+    
+    @Override
+    public  ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado){
+        ArrayList<String> listaActividadesTuristicas = new ArrayList();
+       for (Actividad a: controlPersis.traerActividades()){
+            if(a.getDepartamento().getNombre().equals(departamentoSeleccionado)&& a.getEstado().equals(TipoEstado.confirmada)){
+                listaActividadesTuristicas.add(a.getNombre());
+            }    
+       }
+      
+       return listaActividadesTuristicas;
+    }
+    
+    @Override
+    public ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor){
+        
+        ArrayList<String> listaActividadesProveedorConfirmadas = new ArrayList();
+        //me traigo las actividades de la bd
+        List<Actividad> listaActividades = controlPersis.traerActividades();
+        //recorro la lista de actividades y agrego a la lista a devolver la que tienen el proveedor buscado y este confirmada
+        for (Actividad a : listaActividades){     
+            if (a.getProveedor().getNickname().equals(nicknameProveedor)&&a.getEstado().equals(TipoEstado.confirmada)){
+                listaActividadesProveedorConfirmadas.add(a.getNombre());
+            }      
+        }
+        
+        return listaActividadesProveedorConfirmadas;
     }
     
     //Carga de los Datos de Prueba
@@ -665,19 +820,86 @@ try{
             }
         }
         
- 
+        try {
+            //Categorias
+            AltaCategoria("Aventura y Deporte");
+            AltaCategoria("Campo y Naturaleza");
+            AltaCategoria("Cultura y Patrimonio");
+            AltaCategoria("Gastronomia");
+            AltaCategoria("Turismo Playas");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al guardar Categoria: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+      
+        
+        
         //Actividades Turisticas y Salidas Turisticas
         try {
-            guardarActividad("Degusta", "Festival gastronomico de productos locales en Rocha", 3, 800, "Rocha", fecha.parse("20/7/2022"), "washington", "Rocha", null);
-            guardarActividad("Teatro con Sabores", "En el mes aniversario del Club Deportivo Uni´on de Rocha te invitamos a una merienda deliciosa.", 3, 500, "Rocha", fecha.parse("21/7/2022"), "washington", "Rocha", null);
-            guardarActividad("Tour por Colonia del Sacramento", "Con guia especializado y en varios idiomas. Varios circuitos posibles.", 2, 400, "Colonia del Sacramento Colonia", fecha.parse("1/8/2022"), "meche", "Colonia", null);
-            guardarActividad("Almuerzo en el Real de San Carlos", "Restaurante en la renovada Plaza de Toros con menu internacional", 2, 800, "Colonia del Sacramento", fecha.parse("1/8/2022"), "meche", "Colonia", null);
-            guardarActividad("Almuerzo en Valle del Lunarejo", "Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.", 2, 300, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera", null);
-            guardarActividad("Cabalgata en Valle del Lunarejo", "Cabalgata por el ´area protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera", null); 
+            
+            ArrayList<String> lcat1 = new ArrayList();
+            lcat1.add("Gastronomia");
+            
+            ArrayList<String> lcat2 = new ArrayList();
+            lcat2.add("Cultura y Patrimonio");
+            lcat2.add("Gastronomia");
+            
+            ArrayList<String> lcat3 = new ArrayList();
+            lcat3.add("Cultura y Patrimonio");
+            
+            ArrayList<String> lcat4 = new ArrayList();
+            lcat4.add("Gastronomia");
+            
+            ArrayList<String> lcat5 = new ArrayList();
+            lcat5.add("Campo y Naturaleza");
+            lcat5.add("Gastronomia");
+            
+            ArrayList<String> lcat6 = new ArrayList();
+            lcat6.add("Campo y Naturaleza");
+
+            ArrayList<String> lcat7 = new ArrayList();
+            lcat7.add("Cultura y Patrimonio");
+
+            ArrayList<String> lcat8 = new ArrayList();
+            lcat8.add("Cultura y Patrimonio");            
+            
+            ArrayList<String> lcat9 = new ArrayList();
+            lcat9.add("Aventura y Deporte");
+            lcat9.add("Turismo Playas");
+            
+            ArrayList<String> lcat10 = new ArrayList();
+            lcat10.add("Cultura y Patrimonio");            
+            
+            guardarActividad("Degusta", "Festival gastronomico de productos locales en Rocha", 3, 800, "Rocha", fecha.parse("20/7/2022"), "washington", "Rocha", lcat1);
+            cambiarEstadoActividad("Degusta", TipoEstado.confirmada);
+            guardarActividad("Teatro con Sabores", "En el mes aniversario del Club Deportivo Uni´on de Rocha te invitamos a una merienda deliciosa.", 3, 500, "Rocha", fecha.parse("21/7/2022"), "washington", "Rocha", lcat2);
+            cambiarEstadoActividad("Teatro con Sabores", TipoEstado.confirmada);
+            guardarActividad("Tour por Colonia del Sacramento", "Con guia especializado y en varios idiomas. Varios circuitos posibles.", 2, 400, "Colonia del Sacramento Colonia", fecha.parse("1/8/2022"), "meche", "Colonia", lcat3);
+            cambiarEstadoActividad("Tour por Colonia del Sacramento", TipoEstado.confirmada);
+            guardarActividad("Almuerzo en el Real de San Carlos", "Restaurante en la renovada Plaza de Toros con menu internacional", 2, 800, "Colonia del Sacramento", fecha.parse("1/8/2022"), "meche", "Colonia", lcat4);
+            cambiarEstadoActividad("Almuerzo en el Real de San Carlos", TipoEstado.confirmada);
+            guardarActividad("Almuerzo en Valle del Lunarejo", "Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.", 2, 300, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera", lcat5);
+            cambiarEstadoActividad("Almuerzo en Valle del Lunarejo", TipoEstado.confirmada);
+            guardarActividad("Cabalgata en Valle del Lunarejo", "Cabalgata por el ´area protegida. Varios recorridos para elegir.", 2, 150, "Tranqueras", fecha.parse("1/8/2022"), "eldiez", "Rivera", lcat6); 
+            cambiarEstadoActividad("Cabalgata en Valle del Lunarejo", TipoEstado.confirmada);
+            
+            //estado agregado
+            guardarActividad("Bus turıstico Colonia", "Recorrida por los principales atractivos de la ciudad", 3, 600, "Colonia del Sacramento", fecha.parse("1/9/2022"), "meche", "Colonia", lcat7);   
+            
+            guardarActividad("Colonia Premium Tour", "Visita lugares exclusivos y relevantes", 4, 2600, "Colonia del Sacramento", fecha.parse("3/9/2022"), "meche", "Colonia", lcat8);         
+            cambiarEstadoActividad("Colonia Premium Tour", TipoEstado.rechazada);
+            
+            //estado agregado
+            guardarActividad("Deportes nauticos sin uso de motor", "kitsurf - windsurf - kayakismo - canotaje en Rocha", 3, 1200, "Rocha", fecha.parse("3/9/2022"), "washington", "Rocha", lcat9);         
+            
+            guardarActividad("Descubre Rivera", "Rivera es un departamento de extraordinaria riqueza natural patrimonial y cultural con una ubicacion geografica privilegiada", 2, 650, "Rivera", fecha.parse("16/9/2022"), "eldiez", "Rivera", lcat10);         
+            cambiarEstadoActividad("Descubre Rivera", TipoEstado.rechazada);
+                  
+        
         } catch (PreexistingEntityException ex) {
     JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
 } catch (Exception ex) {
-    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Error al guardar Actividad: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 }
         
         
@@ -700,7 +922,7 @@ try{
          } catch (PreexistingEntityException ex) {
     JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra salida", "Error", JOptionPane.ERROR_MESSAGE);
 } catch (Exception ex) {
-    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Error al guardar Salida Turistica: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 }
         
 
@@ -709,10 +931,11 @@ try{
         try {
             crearPaqueteActividadTuristica("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomıa", 60, fecha.parse("10/08/2022"), 20);
             crearPaqueteActividadTuristica("Un dıa en Colonia", "Paseos por el casco historico y se puede terminar con Almuerzo en la Plaza de Toros", 45, fecha.parse("01/08/2022"), 15);
-       } catch (PreexistingEntityException ex) {
-    JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
+            crearPaqueteActividadTuristica("Valle Del Lunarejo", "Visite un area protegida con un paisaje natural hermoso", 60, fecha.parse("15/09/2022"), 15);      
+        } catch (PreexistingEntityException ex) {
+    JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otro paquete", "Error", JOptionPane.ERROR_MESSAGE);
 } catch (Exception ex) {
-    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Error al crear paquete." + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 }
 
 
@@ -722,14 +945,32 @@ try{
         asignarActividadPaquete("Disfrutar Rocha", "Teatro con Sabores");
         asignarActividadPaquete("Un dıa en Colonia", "Tour por Colonia del Sacramento");
         asignarActividadPaquete("Un dıa en Colonia", "Almuerzo en el Real de San Carlos");
+        asignarActividadPaquete("Valle Del Lunarejo", "Almuerzo en Valle del Lunarejo");
+        asignarActividadPaquete("Valle Del Lunarejo", "Cabalgata en Valle del Lunarejo");
         } catch (NonexistentEntityException ex) {
     JOptionPane.showMessageDialog(null, "El paquete con ese nombre no existe", "Error", JOptionPane.ERROR_MESSAGE);
 } catch (Exception ex) {
-    JOptionPane.showMessageDialog(null, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Error al asignar actividad al paquete. " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 }
+        //compra
+        try {     
 
+            CompraDePaquete("lachiqui", "Disfrutar Rocha", 2, fecha.parse("15/8/2022"));
+            CompraDePaquete("lachiqui", "Un dıa en Colonia", 5, fecha.parse("20/8/2022"));
+            CompraDePaquete("waston", "Un dıa en Colonia", 1, fecha.parse("15/9/2022"));  
+            CompraDePaquete("elelvis", "Disfrutar Rocha", 10, fecha.parse("1/9/2022"));
+            CompraDePaquete("elelvis", "Un dıa en Colonia", 2, fecha.parse("18/9/2022"));
+            CompraDePaquete("mastropiero", "Un dıa en Colonia", 6, fecha.parse("2/9/2022"));
+            
+        } catch (ParseException | PaqueteSinActividad | PaqueteYaComprado e) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
+        }    
+
+        
+        
+         //inscripcion
         try {
-            //inscripcion
+           
             InscripcionASalidaTuristica("Degusta Agosto", "lachiqui", 3, 2400, fecha.parse("15/8/2022"));
             InscripcionASalidaTuristica("Degusta Agosto", "elelvis", 5, 4000, fecha.parse("16/8/2022"));
             InscripcionASalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui", 3, 1200, fecha.parse("18/8/2022"));
@@ -746,20 +987,6 @@ try{
 
     }
 
-public void ValidarContrasenias(String contrasenia, String confirmarContrasenia) throws ConstraseniasDistintas {
-        
-        if (!contrasenia.equals(confirmarContrasenia)){
-            throw new ConstraseniasDistintas("Las constrasenias no coinciden");
-        }
-    }
-
-    public ArrayList<String> traerCategorias() {
-        return controlPersis.traerCategoria();
-    }
-
-    public ArrayList<String> listaActividadesAgregadas() {
-        return null;
-    }
 
 
 

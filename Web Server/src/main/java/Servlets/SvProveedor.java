@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import logica.Controlador;
+import logica.Fabrica;
+import logica.IControlador;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.PreexistingEntityException;
 
@@ -28,7 +30,8 @@ import persistencia.exceptions.PreexistingEntityException;
 )
 public class SvProveedor extends HttpServlet {
 
-    Controlador control = Controlador.getInstance();
+    Fabrica fabrica = Fabrica.getInstance();
+    IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

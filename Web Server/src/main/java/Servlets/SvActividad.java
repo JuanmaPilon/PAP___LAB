@@ -27,7 +27,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Controlador;
+import logica.Fabrica;
+import logica.IControlador;
 import persistencia.exceptions.PreexistingEntityException;
 
 @WebServlet(name = "SvActividad", urlPatterns = {"/SvActividad"})
@@ -38,7 +39,8 @@ import persistencia.exceptions.PreexistingEntityException;
 
 public class SvActividad extends HttpServlet {
 
-    Controlador control = new Controlador();
+    Fabrica fabrica = Fabrica.getInstance();
+    IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -14,6 +14,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "nickname")
 public class Turista extends Usuario implements Serializable {
     private String nacionalidad;
+    @OneToMany(mappedBy="turista")
     private ArrayList<Compra> listaCompras;
     @OneToMany(mappedBy="turista")
     private ArrayList<Inscripcion> listaInscripcion;

@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Categoria;
-import logica.Controlador;
-import logica.Departamento;
+import logica.Fabrica;
+import logica.IControlador;
 
 /**
  *
@@ -23,7 +23,8 @@ import logica.Departamento;
  */
 @WebServlet(name = "SvCategoria", urlPatterns = {"/SvCategoria"})
 public class SvCategoria extends HttpServlet {
-Controlador control = Controlador.getInstance();
+    Fabrica fabrica = Fabrica.getInstance();
+    IControlador control = fabrica.getIControlador();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
@@ -31,13 +32,10 @@ Controlador control = Controlador.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-    List<Categoria> listaCategorias = control.listaCategorias(); // Cambiar listaDepartamentos a listaCategorias
-    ArrayList<String> nombresCategorias = new ArrayList<>(); // Cambiar nombresDepartamentos a nombresCategorias
-    for (Categoria categoria : listaCategorias) { // Cambiar Departamento a Categoria
-        nombresCategorias.add(categoria.getNombre()); // Cambiar getNombre() a un método adecuado para obtener el nombre de la categoría
-    }
+    ArrayList<String> listaCategorias = control.traerCategorias(); // Cambiar listaDepartamentos a listaCategorias
 
-    String categorias = String.join(",", nombresCategorias);
+
+    String categorias = String.join(",", listaCategorias);
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
     response.getWriter().write(categorias);

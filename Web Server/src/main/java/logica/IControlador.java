@@ -4,14 +4,19 @@ package logica;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import logica.exceptions.ConstraseniasDistintas;
+import logica.exceptions.PaqueteSinActividad;
+import logica.exceptions.PaqueteYaComprado;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.NicknameExistenteException;
 import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
+
 public interface IControlador {
 
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;
+public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception;
 public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String descripcion, String link) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract void AltaCategoria(String nombre) throws PreexistingEntityException, Exception;
@@ -52,6 +57,23 @@ public abstract ArrayList<DTActividad> traerInscActividadesDeTurista(String nick
 public abstract ArrayList<String> listaPaquetesDeActividad(String nombreActividad);
 public abstract ArrayList<DTSalidaTuristica> traerSalidasDelProveedor(String nickname);
 public abstract ArrayList<DTActividad> traerActividadesDelProveedor(String nickname);
-
+public abstract ArrayList<String> traerCategorias();
+public abstract void ValidarContrasenias(String contrasenia, String confirmarContrasenia) throws ConstraseniasDistintas;
+public abstract ArrayList<DTPaquete> traerListaDTPaquetes();
+public abstract ArrayList<String> listaActividadesDelPaquete(String nombrePaquete);
+public abstract ArrayList<String> traerCategoriasPaquete(String paquete);
+public abstract DTPaquete traerDTPaquete(String nombrePaquete);
+public abstract DTActividad traerDTActividad(String nombreActividad);
+public abstract String traerDepartamentoSalida(String nombreActividad);
+public abstract ArrayList<String> traerCategoriasActividad(String actividad);
+public abstract void cambiarEstadoActividad(String nombreActividad, TipoEstado tipoEstado);
+public abstract ArrayList<String> listaActividadesPorEstado(TipoEstado estado) ;
+public abstract void CompraDePaquete(String nickname, String nombrePaquete, int cantTurista, Date fechaCompra) throws PaqueteSinActividad, PaqueteYaComprado;
+public abstract ArrayList<String> listaPaquetesSinCompra();
+public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
+public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
 public abstract void cargarDatosDePrueba();
+
+
+    
 }

@@ -6,19 +6,24 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Controlador;
+import logica.DTUsuario;
+import logica.Fabrica;
+import logica.IControlador;
 import logica.Usuario;
 
 
 @WebServlet(name = "SvAutenticarUsuario", urlPatterns = {"/SvAutenticarUsuario"})
 public class SvAutenticarUsuario extends HttpServlet {
-Controlador control = new Controlador();
+    Fabrica fabrica = Fabrica.getInstance();
+    IControlador control = fabrica.getIControlador();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -44,10 +49,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
     
      private boolean autenticarUsuario(String username, String password) {
-        List<Usuario> listaUsuarios = control.listaUsuariosNicknameYContrasenia(); // Obtén la lista de usuarios con nombres de usuario y contraseñas
+        ArrayList<DTUsuario> listaUsuarios = control.traerUsuarioMod(); // Obtén la lista de usuarios con nombres de usuario y contraseñas
         
         // Recorre la lista de usuarios para verificar las credenciales
-    for (Usuario usuario : listaUsuarios) {
+    for (DTUsuario usuario : listaUsuarios) {
         if (usuario.getNickname().equals(username) && usuario.getContrasenia().equals(password)) {
             // Las credenciales son correctas
             return true;
