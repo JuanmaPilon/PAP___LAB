@@ -48,6 +48,7 @@
                 <li><a href="modificarUsuario.jsp">Modificareishon mai iuser</a></li>
                 <li><a href="altaSalidaTuristica.jsp">Alta Salida Turistica</a></li>
                 <li><a href="consultaActividadTuristica.jsp">Consulta Actividad Turistica</a></li>
+                <li><a href="perfilActividadTuristica.jsp">Perfil Actividad Turistica</a></li>
 
             </ul>
             <h2>Departamentos</h2>

@@ -76,6 +76,21 @@
                 event.preventDefault();
             }
         });
+
+// una vez hecha la validacion se puede usar este control para no tener que mandar el formulario.
+//         <%
+// String cantidadMaxTuristasStr = request.getParameter("cantidadMaxTuristas");
+// int cantidadMaxTuristas = Integer.parseInt(cantidadMaxTuristasStr);
+
+// if (cantidadMaxTuristas < 0) {
+// %>
+//     <p style="color: red;">La cantidad máxima de turistas no puede ser negativa.</p>
+// <%
+// } else {
+//    
+//    
+// }
+// %>
     </script>
 
 </body>
