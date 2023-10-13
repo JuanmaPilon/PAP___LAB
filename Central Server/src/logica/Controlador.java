@@ -34,7 +34,6 @@ public class Controlador implements IControlador{
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
     
     //descomentado por una prueba:
-    
     @Override
     public ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception{
         
@@ -42,10 +41,18 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public  void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
+    public void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
         
         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
         controlPersis.guardarImagenPerfil(imagenPerfil);
+        
+    }
+    
+    @Override
+    public  void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception{
+        
+        imagenActividad ImagenActividad = new imagenActividad(imagenNombre, imagenRuta, nombreActividad);
+        controlPersis.guardarImagenActividad(ImagenActividad);
         
     }
     
@@ -145,6 +152,8 @@ public void AltaCategoria(String nombre) throws PreexistingEntityException, Exce
             
         }
    }
+    
+
    
    @Override
    public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception{
