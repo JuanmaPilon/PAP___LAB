@@ -6,6 +6,7 @@ package presentacion;
 import java.util.ArrayList;
 import logica.Usuario;
 import logica.Controlador;
+import logica.IControlador;
 import logica.Proveedor;
 import logica.Turista;
 /**
@@ -14,11 +15,14 @@ import logica.Turista;
  */
 public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
     
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
+    
+//    private IControlador control;
     /**
      * Creates new form listaDeUsuarios
      */
-    public ConsultaDeUsuarios() {
+    public ConsultaDeUsuarios(IControlador icu) {
+       control = icu;
         initComponents();
     }
 
@@ -106,11 +110,11 @@ public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
         String nickname = cmbListaUsuarios.getSelectedItem().toString();
         Usuario consultado = control.ConsultaDeUsuario(nickname);
         if (consultado instanceof Proveedor){
-            ConsultaUsuarioProveedor verConsultaUsuarioProveedor = new ConsultaUsuarioProveedor(nickname);
+            ConsultaUsuarioProveedor verConsultaUsuarioProveedor = new ConsultaUsuarioProveedor(nickname, control);
             getParent().add(verConsultaUsuarioProveedor);        
             verConsultaUsuarioProveedor.show();
         } else  {
-            ConsultaUsuarioTurista verConsultaUsuarioTurista = new ConsultaUsuarioTurista(nickname);
+            ConsultaUsuarioTurista verConsultaUsuarioTurista = new ConsultaUsuarioTurista(nickname, control);
             getParent().add(verConsultaUsuarioTurista);
             verConsultaUsuarioTurista.show();
         }

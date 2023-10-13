@@ -10,20 +10,17 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
 import logica.DTTurista;
+import logica.IControlador;
 
 /**
  *
  * @author natil
  */
 public class ModificarDatosTurista extends javax.swing.JInternalFrame {
-    //cambiar forma de instanciar control
-    Controlador control = Controlador.getInstance();
-    //variable global
-    //String nickname;
-    //cargar ventan
+    private IControlador control;
     
-    
-    public ModificarDatosTurista(String nickname) {
+    public ModificarDatosTurista(String nickname, IControlador icu) {
+        control = icu;
         initComponents();
         cargarDatosTurista(nickname);
     }

@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.DTUsuario;
 import logica.Controlador;
+import logica.IControlador;
 import logica.Proveedor;
 import logica.Usuario;
 
@@ -17,8 +18,9 @@ import logica.Usuario;
  */
 public class ListaUsuarios extends javax.swing.JInternalFrame {
 
-    Controlador control = Controlador.getInstance();
-    public ListaUsuarios() {
+    private IControlador control;
+    public ListaUsuarios(IControlador icu) {
+        control = icu;
         initComponents();
     }
 
@@ -132,14 +134,14 @@ public class ListaUsuarios extends javax.swing.JInternalFrame {
                 //veo si es proveedor o turista y muestro pantalla de modificacion correspondiente
                 Usuario consultado = control.ConsultaDeUsuario(nickname);
                 if (consultado instanceof Proveedor){
-                    ModificarDatosProveedor verModificarProveedor = new ModificarDatosProveedor(nickname);  
+                    ModificarDatosProveedor verModificarProveedor = new ModificarDatosProveedor(nickname, control);  
                     getParent().add(verModificarProveedor);
                     verModificarProveedor.show();
                      this.dispose();
                   
                 } else  {
                     
-                    ModificarDatosTurista verModificarTurista = new ModificarDatosTurista(nickname);  
+                    ModificarDatosTurista verModificarTurista = new ModificarDatosTurista(nickname, control);  
                     getParent().add(verModificarTurista);
                     verModificarTurista.show();
                       this.dispose();

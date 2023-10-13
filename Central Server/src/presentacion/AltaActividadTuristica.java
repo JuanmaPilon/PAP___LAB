@@ -12,17 +12,19 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import logica.Controlador;
+import logica.IControlador;
 
 /**
  *
  * @author natil
  */
 public class AltaActividadTuristica extends javax.swing.JInternalFrame {
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
     /**
      * Creates new form AltaActividadTuristica
      */
-    public AltaActividadTuristica() {
+    public AltaActividadTuristica(IControlador icu) {
+        control = icu;
         initComponents();
     }
 

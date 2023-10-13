@@ -5,18 +5,23 @@
 package presentacion;
 
 import java.util.ArrayList;
-import logica.Controlador;
+import javax.swing.JOptionPane;
+import logica.IControlador;
+import logica.TipoEstado;
+import static logica.TipoEstado.confirmada;
+import static logica.TipoEstado.rechazada;
 
 /**
  *
  * @author natil
  */
 public class AceptarRechazarActividadTuristica extends javax.swing.JInternalFrame {
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
     /**
      * Creates new form AceptarRechazarActividadTuristica
      */
-    public AceptarRechazarActividadTuristica() {
+    public AceptarRechazarActividadTuristica(IControlador icu) {
+        control = icu;
         initComponents();
     }
 
@@ -57,6 +62,11 @@ public class AceptarRechazarActividadTuristica extends javax.swing.JInternalFram
         jLabel1.setText("Seleccione Actividad:");
 
         btnConfirmar.setText("Confirmar Actividad");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         btnRechazar.setText("Rechazar Actividad");
         btnRechazar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,17 +112,37 @@ public class AceptarRechazarActividadTuristica extends javax.swing.JInternalFram
 
     private void btnRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRechazarActionPerformed
         // TODO add your handling code here:
+       try{
+        String nombreActividad = (String) cmbActividades.getSelectedItem();
+        control.cambiarEstadoActividad(nombreActividad, rechazada);
+        JOptionPane.showMessageDialog(null, "Rechazo de Actividad realizada.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
+       }catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo modificar. No se seleccionó actividad.", "Error", JOptionPane.ERROR_MESSAGE);
+       }
     }//GEN-LAST:event_btnRechazarActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         //Cargo combo box de actividades agregadas
         cmbActividades.removeAllItems();
-        ArrayList<String> actividadesAgregadas = control.listaActividadesAgregadas();
+        ArrayList<String> actividadesAgregadas = control.listaActividadesPorEstado(TipoEstado.agregada);
         for (String aAgr : actividadesAgregadas) {
             cmbActividades.addItem(aAgr);
         }
         
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        try{
+            String nombreActividad = (String) cmbActividades.getSelectedItem();
+            control.cambiarEstadoActividad(nombreActividad, confirmada);
+            JOptionPane.showMessageDialog(null, "Confirmacion de Actividad realizada.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+       }catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo modificar. No se seleccionó actividad.", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

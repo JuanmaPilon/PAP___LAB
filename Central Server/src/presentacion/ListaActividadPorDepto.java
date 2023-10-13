@@ -14,17 +14,19 @@ import javax.swing.table.DefaultTableModel;
 import logica.Actividad;
 import logica.Controlador;
 import logica.DTActividad;
+import logica.IControlador;
 import logica.SalidaTuristica;
 /**
  *
  * @author Pc
  */
 public class ListaActividadPorDepto extends javax.swing.JInternalFrame {
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
     /**
      * Creates new form AltaDeSalidaTuristica
      */
-    public ListaActividadPorDepto() {
+    public ListaActividadPorDepto(IControlador icu) {
+        control = icu;
         initComponents();
     }
 
@@ -186,7 +188,7 @@ public class ListaActividadPorDepto extends javax.swing.JInternalFrame {
                 //me traigo la actividad (esta mal)
                 //Actividad consultado = control.ConsultaActividadTuristica(nombreActividad);
                 
-                AltaDeSalidaTuristica verAltaDeSalidaTuristica = new AltaDeSalidaTuristica(deptoSeleccionado, nombreActividad);  
+                AltaDeSalidaTuristica verAltaDeSalidaTuristica = new AltaDeSalidaTuristica(deptoSeleccionado, nombreActividad, control);  
                 getParent().add(verAltaDeSalidaTuristica);
                 verAltaDeSalidaTuristica.show();
                 

@@ -7,16 +7,18 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import logica.Controlador;
+import logica.IControlador;
 /**
  *
  * @author natil
  */
 public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
-    Controlador control = Controlador.getInstance();
+ private IControlador control;
     /**
      * Creates new form CrearPaqueteActividadTuristica
      */
-    public CrearPaqueteActividadTuristica() {
+    public CrearPaqueteActividadTuristica(IControlador icu) {
+        control = icu;
         initComponents();
     }
 

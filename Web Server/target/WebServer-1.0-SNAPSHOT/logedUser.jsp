@@ -44,7 +44,7 @@
                 <li><a href="#">Otro caso de uso</a></li>
                 <li><a href="#">Otros...</a></li>
                 <li><a href="consultaUsuario.jsp">Consulta Usuario</a></li>
-                <li><a href="altaActividadTuristica.jsp">Alta Actividad</a></li>
+                <a href="altaActividadTuristica.jsp?usuario=<%= usuario %>">Alta Actividad</a>
                 <li><a href="modificarUsuario.jsp">Modificareishon mai iuser</a></li>
                 <li><a href="altaSalidaTuristica.jsp">Alta Salida Turistica</a></li>
                 <li><a href="consultaActividadTuristica.jsp">Consulta Actividad Turistica</a></li>

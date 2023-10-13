@@ -16,16 +16,17 @@ public class SvUsuario extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Puedes manejar solicitudes adicionales aquí si es necesario
     }
-// este doget de usuarios solo devuelve una lista de strings 
+// este doget de usuarios solo devuelve una lista de strings (de 10 en 10, por motivos de rendimiento)
     @Override
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     List<String> listaUsuarios = control.listaUsuarios();
-    String usuarios = String.join(",", listaUsuarios); // Convierte la lista a texto, separando los usuarios con una coma
+    int startIndex = Integer.parseInt(request.getParameter("startIndex"));
+    int endIndex = Math.min(startIndex + 10, listaUsuarios.size()); // Envía 10 usuarios a la vez, puedes ajustar este número según tus necesidades
+    String usuariosSubset = String.join(",", listaUsuarios.subList(startIndex, endIndex));
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
-    response.getWriter().write(usuarios);
+    response.getWriter().write(usuariosSubset);
 }
 
     @Override

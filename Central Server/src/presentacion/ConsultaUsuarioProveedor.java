@@ -17,6 +17,7 @@ import logica.Controlador;
 import logica.DTActividad;
 import logica.DTProveedor;
 import logica.DTSalidaTuristica;
+import logica.IControlador;
 import logica.ImagenPerfil;
 
 /**
@@ -25,11 +26,12 @@ import logica.ImagenPerfil;
  */
 public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
 
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
     /**
      * Creates new form ConsultaUsuarioProveedor2
      */
-    public ConsultaUsuarioProveedor(String nickname) {
+    public ConsultaUsuarioProveedor(String nickname, IControlador icu) {
+        control = icu;
         initComponents();
         cargarDatosProveedor(nickname);
         cargarSalidasDelProveedor(nickname);
@@ -204,7 +206,7 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
         if(cmbActividades.getSelectedIndex() != -1){
         String nombreActividad = (String) cmbActividades.getSelectedItem();
         
-        ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad);
+        ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad, control);
         getParent().add(verConsultaActividadTuristica);        
         verConsultaActividadTuristica.show();
         }
@@ -214,7 +216,7 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
          if(cmbSalidas.getSelectedIndex() != -1){
         String nombreSalida = (String) cmbSalidas.getSelectedItem();
         
-        ConsultaDeSalidaTuristica verConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(nombreSalida);
+        ConsultaDeSalidaTuristica verConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(nombreSalida, control);
         getParent().add(verConsultaDeSalidaTuristica);        
         verConsultaDeSalidaTuristica.show();
          }

@@ -69,10 +69,11 @@
 
         </main>
         <script>
-            // Función para cargar usuarios en el select
+            var startIndex = 0;
+
             function cargarUsuarios() {
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "SvUsuario", true);
+                xhr.open("GET", "SvUsuario?startIndex=" + startIndex, true);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var usuarios = xhr.responseText.split(",");
@@ -83,6 +84,7 @@
                             option.text = usuarios[i];
                             select.appendChild(option);
                         }
+                        startIndex += usuarios.length; // Actualiza el índice desde el cual cargar la próxima vez
                     }
                 };
                 xhr.send();

@@ -4,24 +4,23 @@
  */
 package presentacion;
 
-import static java.awt.SystemColor.control;
+
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import logica.Controlador;
 import logica.Proveedor;
 import logica.IControlador;
-import logica.Controlador;
+
 //import
 
 
-import static java.awt.SystemColor.control;
+
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import logica.Controlador;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import  persistencia.exceptions.PreexistingEntityException;
 import logica.Turista;
@@ -36,14 +35,15 @@ import persistencia.exceptions.NicknameExistenteException;
  * @author natil
  */
 public class AltaUsuarioProveedor extends javax.swing.JInternalFrame {
-    Controlador control = Controlador.getInstance();
+     private IControlador control;
     String imagenNombre="";
     String imagenRuta;
     String nombreUsuario;
     /**
      * Creates new form AltaUsuario
      */
-    public AltaUsuarioProveedor() {
+    public AltaUsuarioProveedor(IControlador icu) {
+        control = icu;
         initComponents();
         
     }

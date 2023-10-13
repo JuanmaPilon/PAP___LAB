@@ -44,6 +44,13 @@ public class Controlador implements IControlador{
         
     }
     
+    public  void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception{
+        
+        imagenActividad ImagenActividad = new imagenActividad(imagenNombre, imagenRuta, nombreActividad);
+        controlPersis.guardarImagenActividad(ImagenActividad);
+        
+    }
+    
     @Override
     public void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido,String contrasenia, String correo, 
                                         Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception{

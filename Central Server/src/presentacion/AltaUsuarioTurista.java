@@ -17,6 +17,7 @@ import logica.Controlador;
 import java.text.ParseException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import logica.IControlador;
 import logica.exceptions.ConstraseniasDistintas;
 import persistencia.exceptions.NicknameExistenteException;
 /**
@@ -25,12 +26,13 @@ import persistencia.exceptions.NicknameExistenteException;
  */
 public class AltaUsuarioTurista extends javax.swing.JInternalFrame {
 
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
     String imagenNombre="";
     String imagenRuta;
     String nombreUsuario;
     
-    public AltaUsuarioTurista() {
+    public AltaUsuarioTurista(IControlador icu) {
+         control = icu;
         initComponents();
     }
 

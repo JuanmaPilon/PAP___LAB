@@ -13,7 +13,8 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Inscripcion implements Serializable{ 
-    @Id @GeneratedValue
+    @Id 
+    @GeneratedValue
     private Long id;
     @ManyToOne
     @JoinColumn(name="TURISTA_NICKNAME")

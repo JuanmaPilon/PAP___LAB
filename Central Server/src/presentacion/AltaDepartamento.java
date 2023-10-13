@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
+import logica.IControlador;
 
 /**
  *
@@ -16,9 +17,10 @@ import logica.Controlador;
  */
 public class AltaDepartamento extends javax.swing.JInternalFrame {
 
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
     
-    public AltaDepartamento() {
+    public AltaDepartamento(IControlador icu) {
+          control = icu;
         initComponents();
     }
 

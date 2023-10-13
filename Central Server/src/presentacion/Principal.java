@@ -9,6 +9,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
+import logica.IControlador;
 
 //import logica.IControlador;
 //import logica.Usuario;
@@ -23,9 +24,11 @@ import logica.Controlador;
  * @author natil
  */
 public class Principal extends javax.swing.JFrame {
-    Controlador control = Controlador.getInstance();
+    private IControlador control;
+  
     boolean datosyacargados =false;
-    public Principal() {
+    public Principal(IControlador icu ) {
+        control = icu;
         initComponents();
     }
 
@@ -266,82 +269,82 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void altaDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaDepartamentoActionPerformed
-        AltaDepartamento verAltaDepartamento = new AltaDepartamento();
+        AltaDepartamento verAltaDepartamento = new AltaDepartamento(control);
         contenedorPrincipal.add(verAltaDepartamento);
         verAltaDepartamento.show();
     }//GEN-LAST:event_altaDepartamentoActionPerformed
 
     private void altaAgregarActividadPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaAgregarActividadPaqueteActionPerformed
-        AgregarActividadTuristicaPaquete verAgregarActividadPaquete = new AgregarActividadTuristicaPaquete();
+        AgregarActividadTuristicaPaquete verAgregarActividadPaquete = new AgregarActividadTuristicaPaquete(control);
         contenedorPrincipal.add(verAgregarActividadPaquete);
         verAgregarActividadPaquete.show();
     }//GEN-LAST:event_altaAgregarActividadPaqueteActionPerformed
 
     private void altaCrearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaCrearPaqueteActionPerformed
-        CrearPaqueteActividadTuristica verCrearPaquete = new CrearPaqueteActividadTuristica();
+        CrearPaqueteActividadTuristica verCrearPaquete = new CrearPaqueteActividadTuristica(control);
         contenedorPrincipal.add(verCrearPaquete);
         verCrearPaquete.show();
     }//GEN-LAST:event_altaCrearPaqueteActionPerformed
 
     private void altaActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaActividadTuristicaActionPerformed
-        AltaActividadTuristica verAltaActividadTuristica = new AltaActividadTuristica();
+        AltaActividadTuristica verAltaActividadTuristica = new AltaActividadTuristica(control);
         contenedorPrincipal.add(verAltaActividadTuristica);
         verAltaActividadTuristica.show();
     }//GEN-LAST:event_altaActividadTuristicaActionPerformed
 
     private void altaUsuarioProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaUsuarioProveedorActionPerformed
-        AltaUsuarioProveedor verAltaUsuarioProveedor = new AltaUsuarioProveedor();
+        AltaUsuarioProveedor verAltaUsuarioProveedor = new AltaUsuarioProveedor(control);
         contenedorPrincipal.add(verAltaUsuarioProveedor);
         verAltaUsuarioProveedor.show();
     }//GEN-LAST:event_altaUsuarioProveedorActionPerformed
 
     private void altaUsuarioTuristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaUsuarioTuristaActionPerformed
-        AltaUsuarioTurista verAltaUsuarioTurista = new AltaUsuarioTurista();
+        AltaUsuarioTurista verAltaUsuarioTurista = new AltaUsuarioTurista(control);
         contenedorPrincipal.add(verAltaUsuarioTurista);
         verAltaUsuarioTurista.show();
     }//GEN-LAST:event_altaUsuarioTuristaActionPerformed
 
     private void consPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consPaqueteActionPerformed
-        ConsultaPaqueteActividadesTuristicas verConsultaPaquete = new ConsultaPaqueteActividadesTuristicas();
+        ConsultaPaqueteActividadesTuristicas verConsultaPaquete = new ConsultaPaqueteActividadesTuristicas(control);
         contenedorPrincipal.add(verConsultaPaquete);
         verConsultaPaquete.show();
     }//GEN-LAST:event_consPaqueteActionPerformed
 
     private void consActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consActividadTuristicaActionPerformed
-        ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica();
+        ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(control);
         contenedorPrincipal.add(verConsultaActividadTuristica);
         verConsultaActividadTuristica.show();
     }//GEN-LAST:event_consActividadTuristicaActionPerformed
 
     private void consUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consUsuarioActionPerformed
         // TODO add your handling code here:
-        ConsultaDeUsuarios verConsultaUsuarios = new ConsultaDeUsuarios();
+        ConsultaDeUsuarios verConsultaUsuarios = new ConsultaDeUsuarios(control);
         contenedorPrincipal.add(verConsultaUsuarios);
         verConsultaUsuarios.show();
     }//GEN-LAST:event_consUsuarioActionPerformed
 
     private void consSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consSalidaTuristicaActionPerformed
         // TODO add your handling code here:
-        ConsultaDeSalidaTuristica verSalidaConsTuristica = new ConsultaDeSalidaTuristica();
+        ConsultaDeSalidaTuristica verSalidaConsTuristica = new ConsultaDeSalidaTuristica(control);
         contenedorPrincipal.add(verSalidaConsTuristica);
         verSalidaConsTuristica.show();
     }//GEN-LAST:event_consSalidaTuristicaActionPerformed
 
     private void altaSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaSalidaTuristicaActionPerformed
-        ListaActividadPorDepto verAltaSalidaTuristica = new ListaActividadPorDepto();
+        ListaActividadPorDepto verAltaSalidaTuristica = new ListaActividadPorDepto(control);
         contenedorPrincipal.add(verAltaSalidaTuristica);
         verAltaSalidaTuristica.show();
     }//GEN-LAST:event_altaSalidaTuristicaActionPerformed
 
     private void modUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modUsuarioActionPerformed
-        ListaUsuarios verListaUsuarios = new ListaUsuarios();
+        ListaUsuarios verListaUsuarios = new ListaUsuarios(control);
         contenedorPrincipal.add(verListaUsuarios);
         verListaUsuarios.show();
     }//GEN-LAST:event_modUsuarioActionPerformed
 
     private void altaInscripcionSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaInscripcionSalidaTuristicaActionPerformed
         // TODO add your handling code here:
-        InscripcionASalidaTuristica verIns = new InscripcionASalidaTuristica();
+        InscripcionASalidaTuristica verIns = new InscripcionASalidaTuristica(control);
         contenedorPrincipal.add(verIns);
         verIns.show();
     }//GEN-LAST:event_altaInscripcionSalidaTuristicaActionPerformed
@@ -360,13 +363,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void altaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaCategoriaActionPerformed
            
-        AltaCategoria verAltaCategoria = new AltaCategoria();
+        AltaCategoria verAltaCategoria = new AltaCategoria(control);
         contenedorPrincipal.add(verAltaCategoria);
         verAltaCategoria.show();
     }//GEN-LAST:event_altaCategoriaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        AceptarRechazarActividadTuristica verAceptarRechazarActividadTuristica = new AceptarRechazarActividadTuristica();
+        AceptarRechazarActividadTuristica verAceptarRechazarActividadTuristica = new AceptarRechazarActividadTuristica(control);
         contenedorPrincipal.add(verAceptarRechazarActividadTuristica);
         verAceptarRechazarActividadTuristica.show();
     }//GEN-LAST:event_jMenuItem1ActionPerformed

@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
 import logica.DTProveedor;
+import logica.IControlador;
 
 /**
  *
@@ -17,10 +18,11 @@ import logica.DTProveedor;
  */
 public class ModificarDatosProveedor extends javax.swing.JInternalFrame {
 
-    Controlador control = Controlador.getInstance();
+     private IControlador control;
     
     
-    public ModificarDatosProveedor(String nickname) {
+    public ModificarDatosProveedor(String nickname, IControlador icu) {
+         control = icu;
         initComponents();
          cargarDatosProveedor(nickname);
     }
