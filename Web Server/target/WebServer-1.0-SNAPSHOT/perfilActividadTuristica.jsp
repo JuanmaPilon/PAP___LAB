@@ -12,7 +12,7 @@
         <div id="logo">
             <h1>Turismo.uy</h1>
         </div>
-        <div id="search"> 
+        <div id="search">
             <form action="svlet" method="post">
                 <input type="text" name="query" placeholder="Buscar turistas o paquetes">
                 <button type="submit">Buscar</button>

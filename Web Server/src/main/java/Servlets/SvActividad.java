@@ -27,8 +27,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 import logica.Controlador;
+import persistencia.exceptions.PreexistingEntityException;
 
 @WebServlet(name = "SvActividad", urlPatterns = {"/SvActividad"})
 @MultipartConfig(
@@ -69,52 +69,39 @@ public class SvActividad extends HttpServlet {
             String nombreArchivo = null;
             String rutaImagenNueva = null;
 
-            /*
-            System.out.println("NomArchivo antes delif: " +nombreArchivo);
-            if (archivo != null) {
-                nombreArchivo = archivo.getSubmittedFileName();
-                
-                System.out.println("NomArchivoenElIF: " +nombreArchivo);
-                
-                rutaImagenNueva = "/images/" + nombreArchivo;
-
-                String directorioUsuario = System.getProperty("user.home");
-
-                String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "imagenes" + File.separator + "imagenesActividad" + File.separator + nombreArchivo;
-
-                Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
-            }
-             */
             if (archivo != null) {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
                     rutaImagenNueva = "/images/" + nombreArchivo;
 
-                String directorioUsuario = System.getProperty("user.home");
+                    String directorioUsuario = System.getProperty("user.home");
 
-                String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "imagenes" + File.separator + "imagenesActividad" + File.separator + nombreArchivo;
+                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "imagenes" + File.separator + "imagenesActividad" + File.separator + nombreArchivo;
 
-                Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
                 }
-                    control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
-
+                control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
+                response.sendRedirect("logedUser.jsp");
+                try {
                     if (archivo != null) {
-                        System.out.println("Llego a control.AltaImagenActividad: " + nombreArchivo);
                         control.AltaDeImagenActividad(nombreArchivo, rutaImagenNueva, nombre);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-                }catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("errorMensaje", "El nombre ya está en uso por otra actividad");
-            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+        } catch (PreexistingEntityException ex) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT); // Código de respuesta HTTP 409 (conflicto)
+            response.getWriter().write("Nombre de la actividad ya en uso.");
+        }  catch (Exception ex) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código de respuesta HTTP 500 (error interno del servidor)
+            response.getWriter().write("Departamento y categoria coinciden con otra actividad");
         }
-            }
+    }
 
-            @Override
-            public String getServletInfo
-            
-                () {
+    @Override
+    public String getServletInfo() {
         return "Short description";
-            }// </editor-fold>
+    }// </editor-fold>
 
-        }
+}
