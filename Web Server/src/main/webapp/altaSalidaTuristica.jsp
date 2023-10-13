@@ -114,7 +114,6 @@
                 cargarDeptos(); // Cargar departamentos al cargar la página
             };
         </script>
-<<<<<<< HEAD
         <footer>
             <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
             <p>&copy; 2023 Turismo.uy</p>
@@ -122,20 +121,4 @@
 
     </body>
 
-    <script>
-        document.querySelector('form').addEventListener('submit', function (event) {
-            const cantidadMaxTuristas = document.getElementById('cantidadMaxTuristas').value;
-            if (cantidadMaxTuristas < 0) {
-                alert('La cantidad máxima de turistas no puede ser negativa');
-                event.preventDefault();
-            }
-        });
-    </script>
-
-</body>
-
-=======
-
-</body>
->>>>>>> 4d91fe88c6bccafd55a20560b45a802994e4ed76
 </html>

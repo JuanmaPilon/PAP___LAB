@@ -114,8 +114,6 @@
                 cargarDeptos(); // Cargar departamentos al cargar la página
             };
         </script>
-<<<<<<< HEAD
-=======
         <footer>
             <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
             <p>&copy; 2023 Turismo.uy</p>
@@ -123,35 +121,4 @@
 
     </body>
 
-    <script>
-        document.querySelector('form').addEventListener('submit', function (event) {
-            const cantidadMaxTuristas = document.getElementById('cantidadMaxTuristas').value;
-            if (cantidadMaxTuristas < 0) {
-                alert('La cantidad máxima de turistas no puede ser negativa');
-                event.preventDefault();
-            }
-        });
-
-// una vez hecha la validacion se puede usar este control para no tener que mandar el formulario.
-//         <%
-// String cantidadMaxTuristasStr = request.getParameter("cantidadMaxTuristas");
-// int cantidadMaxTuristas = Integer.parseInt(cantidadMaxTuristasStr);
-
-// if (cantidadMaxTuristas < 0) {
-// %>
-//     <p style="color: red;">La cantidad máxima de turistas no puede ser negativa.</p>
-// <%
-// } else {
-//    
-//    
-// }
-// %>
-    </script>
->>>>>>> 28a95b965703917fb9ff13fcc72e2fbfa6b21348
-
-</body>
-<<<<<<< HEAD
-
-=======
->>>>>>> 4d91fe88c6bccafd55a20560b45a802994e4ed76
 </html>
