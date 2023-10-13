@@ -32,7 +32,6 @@ public class SvAltaSalidaTuristica extends HttpServlet {
   @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-    String departamento = request.getParameter("departamento");
     String actividadTuristica = request.getParameter("actividadTuristica");
     String nombreSalida = request.getParameter("nombreSalida");
     String fechaHoraSalida = request.getParameter("fechaHoraSalida");

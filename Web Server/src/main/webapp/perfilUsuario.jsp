@@ -53,6 +53,7 @@
             </ul>
         </aside>
         <%Usuario usu = (Usuario) request.getSession().getAttribute("usuPerfil");%>
+       
         <h1>Informacion del Usuario</h1>
         <h2><%=usu.getNombre()%></h2>
         <div class="tabs">
