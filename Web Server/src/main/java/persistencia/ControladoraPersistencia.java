@@ -22,6 +22,7 @@ import logica.Usuario;
 import logica.ImagenPerfil;
 import logica.SalidaTuristica;
 import logica.Paquete;
+import logica.imagenActividad;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.NicknameExistenteException;
 import persistencia.exceptions.NonexistentEntityException;
@@ -38,6 +39,7 @@ public class ControladoraPersistencia {
     CategoriaJpaController categoriaJpa = new CategoriaJpaController();
     InscripcionJpaController inscripcionJpa = new InscripcionJpaController();
     ImagenPerfilJpaController imagenPerfilJpa = new ImagenPerfilJpaController();
+    imagenActividadJpaController imagenActividadJpa = new imagenActividadJpaController();
     
     //Consultas
     public SalidaTuristica consultaSalida(String nombreSalida){
@@ -473,8 +475,16 @@ public ArrayList<DTUsuario> traerUsuarios(){
            } catch (PreexistingEntityException e){
                throw new PreexistingEntityException("Nombre de la imagen ya en uso por otro usuario");
            }
-                
-             
+                       
+        }
+     
+     public void guardarImagenActividad(imagenActividad imagenActividad) throws PreexistingEntityException, Exception{
+           try{
+                imagenActividadJpa.create(imagenActividad);
+           } catch (PreexistingEntityException e){
+               throw new PreexistingEntityException("Nombre de la imagen ya en uso por otra actividad");
+           }
+                       
         }
      
      public ImagenPerfil buscarImagen(String nickname){

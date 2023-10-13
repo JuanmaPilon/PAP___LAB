@@ -25,7 +25,8 @@ public class SvCargarActividades extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    List<String> listaActividades = control.listaActividades();
+    String departamento = request.getParameter("departamento");
+    List<String> listaActividades = control.listaActividadesTuristicas(departamento);
     int startIndex1 = Integer.parseInt(request.getParameter("startIndex1"));
     int endIndex = Math.min(startIndex1 + 10, listaActividades.size()); // Envía 10 actividades a la vez, puedes ajustar este número según tus necesidades
     String actividadesSubset = String.join(",", listaActividades.subList(startIndex1, endIndex));

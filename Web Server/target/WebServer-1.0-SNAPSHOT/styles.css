@@ -229,3 +229,48 @@ input[type="text"]:not(.no-estilo) {
 .tab {
     display: none;
 }
+
+.list-asociadas {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.asociada {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 45%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.asociada img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.asociada h4 {
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.asociada a {
+    display: block;
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.asociada a:hover {
+    background-color: #0056b3;
+}
