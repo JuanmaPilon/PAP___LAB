@@ -69,8 +69,10 @@ public abstract void cambiarEstadoActividad(String nombreActividad, TipoEstado t
 public abstract ArrayList<String> listaActividadesPorEstado(TipoEstado estado) ;
 public abstract void CompraDePaquete(String nickname, String nombrePaquete, int cantTurista, Date fechaCompra) throws PaqueteSinActividad, PaqueteYaComprado;
 public abstract ArrayList<String> listaPaquetesSinCompra();
-public abstract void cargarDatosDePrueba();
 public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
+public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
+public abstract void cargarDatosDePrueba();
+
 
     
 }
