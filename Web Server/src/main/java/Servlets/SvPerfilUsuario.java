@@ -55,12 +55,22 @@ public class SvPerfilUsuario extends HttpServlet {
             Proveedor proveedor = (Proveedor) usu;
             misesion.setAttribute("usuPerfil", proveedor);
             System.out.println(proveedor.getNickname() + ": es proveedor");
-            
-            //actividades turisticas que ofrece en estado confirmado           
-            ArrayList<String> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas (proveedor.getNickname());
-            misesion.setAttribute("listaActividadesProveedorConfirmadas", listaActividadesProveedorConfirmadas);
-            
-            
+
+            String usuario = (String) request.getSession().getAttribute("usuario");// nombre del usuario logueado
+
+            String prov = proveedor.getNickname();
+            if (prov.equals(usuario)) {//si es proveedor y esta mirando su propio perfil
+                System.out.println(proveedor.getNickname() + ": es proveedor y esta mirando su perfil");
+                ArrayList<String> listaActividadesProveedor = control.listaActividadesProveedorTodas(prov);
+                misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedor);
+                // se muestran todas sus actividades, no solo las confirmadas
+
+            } else {//si es proveedor pero no esta mirando su propio perfil
+                //actividades turisticas que ofrece en estado confirmado           
+                ArrayList<String> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas(proveedor.getNickname());
+                misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedorConfirmadas);
+            }
+
             //salidas asociadas a el
             List<DTSalidaTuristica> listaSalidas = control.traerSalidasDelProveedor(proveedor.getNickname());
             ArrayList<String> nombresSalidasProveedor = new ArrayList<>();

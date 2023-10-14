@@ -55,7 +55,7 @@
 
             </ul>
         </aside>
-        <%Usuario usu = (Usuario) request.getSession().getAttribute("usuPerfil");%>
+        <%Usuario usu = (Usuario) request.getSession().getAttribute("usuPerfil");//usuario del que se muestra la info%>
 
         <h1>Informacion del Usuario</h1>
         <h2><%=usu.getNombre()%></h2>
@@ -86,12 +86,12 @@
                     <ul>
                         <%
                         // Obteniendo la lista de salidas turísticas desde la sesión
-                        ArrayList<String> listaActividadesProveedorConfirmadas = (ArrayList<String>) request.getSession().getAttribute("listaActividadesProveedorConfirmadas");
+                        ArrayList<String> listaActividadesProveedor = (ArrayList<String>) request.getSession().getAttribute("listaActividadesProveedor");
                 
                         // Verificando si la lista no está vacía
-                        if (listaActividadesProveedorConfirmadas != null && !listaActividadesProveedorConfirmadas.isEmpty()) {
+                        if (listaActividadesProveedor != null && !listaActividadesProveedor.isEmpty()) {
                             // Iterando sobre la lista y mostrando los nombres de las salidas
-                            for (String nombreActividad : listaActividadesProveedorConfirmadas) {
+                            for (String nombreActividad : listaActividadesProveedor) {
                                  out.println("<li><a href='#'>" + nombreActividad + "</a></li>");
                             }
                         } else {
