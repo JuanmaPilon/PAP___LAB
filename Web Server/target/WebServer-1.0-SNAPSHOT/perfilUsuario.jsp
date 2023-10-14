@@ -75,8 +75,22 @@
                 </div>
 
                 <div id="tab2" class="tab">
-                    <p>Tab2</p>
-                    <p>Texto2</p>
+                    <ul>
+                        <%
+                        // Obteniendo la lista de salidas turísticas desde la sesión
+                        ArrayList<String> listaActividadesProveedorConfirmadas = (ArrayList<String>) request.getSession().getAttribute("listaActividadesProveedorConfirmadas");
+                
+                        // Verificando si la lista no está vacía
+                        if (listaActividadesProveedorConfirmadas != null && !listaActividadesProveedorConfirmadas.isEmpty()) {
+                            // Iterando sobre la lista y mostrando los nombres de las salidas
+                            for (String nombreActividad : listaActividadesProveedorConfirmadas) {
+                                 out.println("<li><a href='#'>" + nombreActividad + "</a></li>");
+                            }
+                        } else {
+                            out.println("<li>No hay salidas disponibles para este proveedor.</li>");
+                        }
+                        %>
+                    </ul>
                 </div>
 
                 <div id="tab3" class="tab">

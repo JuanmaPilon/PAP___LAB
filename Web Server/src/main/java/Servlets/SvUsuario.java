@@ -7,8 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Controlador;
-import javax.servlet.http.HttpSession;
 import logica.Fabrica;
 import logica.IControlador;
 
@@ -20,12 +18,12 @@ public class SvUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-// este doget de usuarios solo devuelve una lista de strings (de 10 en 10, por motivos de rendimiento)
+// este doget de usuarios solo devuelve una lista de string de los usuarios concatenados
     @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     List<String> listaUsuarios = control.listaUsuarios();
     int startIndex = Integer.parseInt(request.getParameter("startIndex"));
-    int endIndex = Math.min(startIndex + 10, listaUsuarios.size()); // Envía 10 usuarios a la vez, puedes ajustar este número según tus necesidades
+    int endIndex = Math.min(startIndex + 20, listaUsuarios.size()); // Envía 20 usuarios a la vez
     String usuariosSubset = String.join(",", listaUsuarios.subList(startIndex, endIndex));
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");

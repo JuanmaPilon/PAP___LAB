@@ -58,7 +58,7 @@ public class SvPerfilUsuario extends HttpServlet {
             
             //actividades turisticas que ofrece en estado confirmado           
             ArrayList<String> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas (proveedor.getNickname());
-            misesion.setAttribute("nombresActividadesConfirmadasProveedor", listaActividadesProveedorConfirmadas);
+            misesion.setAttribute("listaActividadesProveedorConfirmadas", listaActividadesProveedorConfirmadas);
             
             
             //salidas asociadas a el
