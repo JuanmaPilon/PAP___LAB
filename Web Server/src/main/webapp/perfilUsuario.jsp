@@ -1,4 +1,5 @@
 <%@page import="logica.Usuario" %>
+<%@ page import="java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,7 +54,7 @@
             </ul>
         </aside>
         <%Usuario usu = (Usuario) request.getSession().getAttribute("usuPerfil");%>
-       
+
         <h1>Informacion del Usuario</h1>
         <h2><%=usu.getNombre()%></h2>
         <div class="tabs">
@@ -96,7 +97,20 @@
             });
         </script>
     </main>
+   <%
+    // Obteniendo la lista desde la sesión
+    ArrayList<String> nombresSalidasProveedor = (ArrayList<String>) request.getSession().getAttribute("nombresSalidas");
 
+    // Verificando si la lista no está vacía
+    if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
+        // Iterando sobre la lista y mostrando los nombres de las salidas
+        for (String nombreSalida : nombresSalidasProveedor) {
+            out.println("Nombre de la Salida: " + nombreSalida + "<br>");
+        }
+    } else {
+        out.println("No hay salidas disponibles para este proveedor.");
+    } 
+%>
 
     <footer>
         <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>

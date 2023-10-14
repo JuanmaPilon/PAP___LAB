@@ -49,23 +49,25 @@ public class SvPerfilUsuario extends HttpServlet {
             for (DTSalidaTuristica dt : listaSalidas) {
                 nombresSalidasTurista.add(dt.getNombre());
             }
-            misesion.setAttribute("nombresSalidasTurista", nombresSalidasTurista);
+            misesion.setAttribute("nombresSalidas", nombresSalidasTurista);
 
         } else if (usu instanceof Proveedor) {
             Proveedor proveedor = (Proveedor) usu;
             misesion.setAttribute("usuPerfil", proveedor);
-            //actividades turisticas qwue ofrece en estado confirmado
-            //(falta funcion de esto en la controladora)
-            //salidas asociadas a el
             System.out.println(proveedor.getNickname() + ": es proveedor");
-            control.traerSalidasDelProveedor(proveedor.getNickname());
-
+            
+            //actividades turisticas que ofrece en estado confirmado           
+            ArrayList<String> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas (proveedor.getNickname());
+            misesion.setAttribute("nombresActividadesConfirmadasProveedor", listaActividadesProveedorConfirmadas);
+            
+            
+            //salidas asociadas a el
             List<DTSalidaTuristica> listaSalidas = control.traerSalidasDelProveedor(proveedor.getNickname());
             ArrayList<String> nombresSalidasProveedor = new ArrayList<>();
             for (DTSalidaTuristica dt : listaSalidas) {
                 nombresSalidasProveedor.add(dt.getNombre());
             }
-            misesion.setAttribute("nombresSalidasProveedor", nombresSalidasProveedor);
+            misesion.setAttribute("nombresSalidas", nombresSalidasProveedor);
         }
         response.sendRedirect("perfilUsuario.jsp");
     }

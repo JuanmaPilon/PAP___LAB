@@ -1,17 +1,17 @@
 package logica;
 
-import java.util.ArrayList;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import logica.Compra;
 import logica.Inscripcion;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-13T13:54:14")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-13T22:47:16")
 @StaticMetamodel(Turista.class)
 public class Turista_ extends Usuario_ {
 
-    public static volatile SingularAttribute<Turista, ArrayList> listaCompras;
+    public static volatile ListAttribute<Turista, Compra> listaCompras;
     public static volatile ListAttribute<Turista, Inscripcion> listaInscripcion;
     public static volatile SingularAttribute<Turista, String> nacionalidad;
 
