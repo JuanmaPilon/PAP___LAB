@@ -50,6 +50,7 @@
                 <li><a href="consultaActividadTuristica.jsp">Consulta Actividad Turistica</a></li>
                 <li><a href="perfilActividadTuristica.jsp">Perfil Actividad Turistica</a></li>
                 <li><a href="inscripcionSalida.jsp">inscripcionSalida</a></li>
+                <li><a href="compraPaquete.jsp">Compra PA K T</a></li>
 
             </ul>
             <h2>Departamentos</h2>

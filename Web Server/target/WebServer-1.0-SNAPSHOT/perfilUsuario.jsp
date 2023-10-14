@@ -74,8 +74,22 @@
                 </div>
 
                 <div id="tab2" class="tab">
-                    <p>Tab2</p>
-                    <p>Texto2</p>
+                    <ul>
+                        <%
+                        // Obteniendo la lista de salidas turísticas desde la sesión
+                        ArrayList<String> nombresSalidasProveedor = (ArrayList<String>) request.getSession().getAttribute("nombresSalidas");
+                
+                        // Verificando si la lista no está vacía
+                        if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
+                            // Iterando sobre la lista y mostrando los nombres de las salidas
+                            for (String nombreSalida : nombresSalidasProveedor) {
+                                 out.println("<li><a href='#'>" + nombreSalida + "</a></li>");
+                            }
+                        } else {
+                            out.println("<li>No hay salidas disponibles para este proveedor.</li>");
+                        }
+                        %>
+                    </ul>
                 </div>
 
                 <div id="tab3" class="tab">
@@ -97,21 +111,7 @@
             });
         </script>
     </main>
-   <%
-    // Obteniendo la lista desde la sesión
-    ArrayList<String> nombresSalidasProveedor = (ArrayList<String>) request.getSession().getAttribute("nombresSalidas");
-
-    // Verificando si la lista no está vacía
-    if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
-        // Iterando sobre la lista y mostrando los nombres de las salidas
-        for (String nombreSalida : nombresSalidasProveedor) {
-            out.println("Nombre de la Salida: " + nombreSalida + "<br>");
-        }
-    } else {
-        out.println("No hay salidas disponibles para este proveedor.");
-    } 
-%>
-
+ 
     <footer>
         <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
         <p>&copy; 2023 Turismo.uy</p>

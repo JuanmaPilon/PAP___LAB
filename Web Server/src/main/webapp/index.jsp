@@ -33,6 +33,11 @@
             <li><a class="departamento" href="#">Maldonado</a></li>
             <li><a class="departamento" href="#">Colonia</a></li>
             <li><a class="departamento" href="#">Rocha</a></li>
+
+            <h2>Caso de Uso</h2>
+            <ul>
+                <li><a href="consultaUsuario.jsp">Consulta Usuario</a></li>
+            </ul>
        
         </ul>
         
