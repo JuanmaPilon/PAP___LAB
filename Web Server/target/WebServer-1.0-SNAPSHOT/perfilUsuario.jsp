@@ -1,4 +1,6 @@
 <%@page import="logica.Usuario" %>
+<%@page import="logica.Proveedor" %>
+<%@page import="logica.Turista" %>
 <%@ page import="java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -59,11 +61,17 @@
         <h2><%=usu.getNombre()%></h2>
         <div class="tabs">
             <ul class="tab-links">
-                <li class="active"><a href="#tab1">Perfil</a></li>
-                <li><a href="#tab2">Actividades</a></li>
-                <li><a href="#tab3">Salidas</a></li>
-                <li><a href="#tab4">Paquetes</a></li>
-            </ul>
+        <li class="active"><a href="#tab1">Perfil</a></li>
+        <%
+            if (usu instanceof Proveedor) {
+        %>
+            <li><a href="#tab2">Actividades</a></li>
+        <%
+            }
+        %>
+        <li><a href="#tab3">Salidas</a></li>
+        <li><a href="#tab4">Paquetes</a></li>
+    </ul>
 
             <div class="tab-content">
                 <div id="tab1" class="tab active">
