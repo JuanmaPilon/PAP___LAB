@@ -37,6 +37,7 @@
             <h2>Caso de Uso</h2>
             <ul>
                 <li><a href="consultaUsuario.jsp">Consulta Usuario</a></li>
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li>
             </ul>
        
         </ul>

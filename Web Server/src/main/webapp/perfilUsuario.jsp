@@ -60,8 +60,9 @@
         <div class="tabs">
             <ul class="tab-links">
                 <li class="active"><a href="#tab1">Perfil</a></li>
-                <li><a href="#tab2">Salidas</a></li>
-                <li><a href="#tab3">Paquetes</a></li>
+                <li><a href="#tab2">Actividades</a></li>
+                <li><a href="#tab3">Salidas</a></li>
+                <li><a href="#tab4">Paquetes</a></li>
             </ul>
 
             <div class="tab-content">
@@ -74,6 +75,11 @@
                 </div>
 
                 <div id="tab2" class="tab">
+                    <p>Tab2</p>
+                    <p>Texto2</p>
+                </div>
+
+                <div id="tab3" class="tab">
                     <ul>
                         <%
                         // Obteniendo la lista de salidas turísticas desde la sesión
@@ -92,10 +98,12 @@
                     </ul>
                 </div>
 
-                <div id="tab3" class="tab">
-                    <p>Tab3</p>
-                    <p>Texto3</p>
+                <div id="tab4" class="tab">
+                    <p>Tab4</p>
+                    <p>Texto4</p>
                 </div>
+
+                
             </div>
         </div>
         <script>
