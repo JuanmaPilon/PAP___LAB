@@ -40,6 +40,11 @@ public class Controlador implements IControlador{
            return  controlPersis.buscarImagen(nickname);
     }
     
+    public void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
+         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
+        controlPersis.modificarImagenPerfil(imagenPerfil);
+    }
+    
     @Override
     public void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
         

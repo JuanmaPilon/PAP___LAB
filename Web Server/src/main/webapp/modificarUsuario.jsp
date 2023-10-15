@@ -1,3 +1,5 @@
+modificarUsuario.jsp:
+
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.util.Date"%>
@@ -30,6 +32,7 @@
                 Usuario usu = (Usuario) request.getSession().getAttribute("usuarioConsulta"); // Usuario devuelto del servlet SvModificarUsuario
                 String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario"); // Usuario: turista o proveedor
                 String errorMensaje = (String) request.getAttribute("errorMensaje");
+                String rutaImagenPerfil =  (String) request.getSession().getAttribute("rutaImagen");
             %>
 
 
@@ -50,7 +53,7 @@
                     System.out.print("fNcimiento: " + fNacimiento);
                     System.out.print("fechaFormateada " + fechaFormateada);
             %>   
-            <form action="SvModificarUsuario" method="post" id="formularioTurista">
+            <form action="SvModificarUsuario" method="POST" enctype="multipart/form-data">
 
                 <label for="TipoUsuario">Tipo Usuario: </label>
                 <input type="text" id="TipoUsuario" name="TipoUsuario" value="<%= tipoUsuario%>" readonly>
@@ -69,6 +72,9 @@
 
                 <label for="fechaNacimiento">Fecha de Nacimiento:</label>
                 <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="<%= fechaFormateada%>">
+
+                <label for="imagen">Imagen (opcional):</label>
+                <input type="file" name="file" id="file">
 
                 <label for="nacionalidad">Nacionalidad</label>
                 <input type="text" id="nacionalidad" name="nacionalidad" value="<%= infoTurista.getNacionalidad()%>">
@@ -95,7 +101,7 @@
                 System.out.print("fechaFormateada " + fechaFormateada);
 
             %>
-            <form action="SvModificarUsuario" method="post" id="formularioProveedor">
+            <form action="SvModificarUsuario" method="POST" enctype="multipart/form-data">
                 <label for="TipoUsuario">Tipo Usuario: </label>
                 <input type="text" id="TipoUsuario" name="TipoUsuario" value="<%= tipoUsuario%>" readonly>
 
@@ -114,6 +120,9 @@
                 <label for="fechaNacimiento">Fecha de Nacimiento:</label>
                 <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="<%= fechaFormateada%>">
 
+                <label for="imagen">Imagen (opcional):</label>
+                <input type="file" name="file" id="file">
+
                 <label for="descripcion">Descripcion</label>
                 <input type="text" id="descripcion" name="descripcion" value="<%= infoProveedor.getDescripcion()%>">
 
@@ -128,6 +137,9 @@
             <%
                 }
             %>
+            
+            <img src="<%= rutaImagenPerfil %>" alt="Imagen de perfil">
+
 
         </main>
 
@@ -138,3 +150,5 @@
 
     </body>
 </html>
+
+

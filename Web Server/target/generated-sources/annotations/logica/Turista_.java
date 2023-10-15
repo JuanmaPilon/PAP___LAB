@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import logica.Compra;
 import logica.Inscripcion;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-14T16:33:05")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-15T01:06:02")
 @StaticMetamodel(Turista.class)
 public class Turista_ extends Usuario_ {
 

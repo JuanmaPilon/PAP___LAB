@@ -11,15 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "nicknameUsuario")
 public class ImagenPerfil implements Serializable {
     
-    @Id
+    
     private String nombre; // Nombre como clave primaria
     
     private String ruta;
     
+    @Id
     private String nicknameUsuario;
 
     // Constructor, getters y setters

@@ -4,9 +4,13 @@
  */
 package Servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,11 +21,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import logica.DTProveedor;
 import logica.DTTurista;
 import logica.Usuario;
 import logica.Fabrica;
 import logica.IControlador;
+import logica.ImagenPerfil;
 import logica.Proveedor;
 import logica.Turista;
 
@@ -42,26 +48,37 @@ public class SvModificarUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String tipoUsuario;
-        String usuario = request.getParameter("usuario"); // Obtener el nombre del usuario de logedUser
-        Usuario usuarioConsulta = control.ConsultaDeUsuario(usuario); // Consultar el usuario
+        try {
+            String tipoUsuario;
+            String usuario = request.getParameter("usuario"); // Obtener el nombre del usuario de logedUser
+            Usuario usuarioConsulta = control.ConsultaDeUsuario(usuario); // Consultar el usuario
+            ImagenPerfil imagenPerfil = control.buscarImagenPorNickname(usuario);
+            String rutaImagen = imagenPerfil.getRuta();
+            //System.out.print("rutaImagen" + rutaImagen );
 
-        if (usuarioConsulta instanceof Turista) {
-            tipoUsuario = "turista";
-            DTTurista infoTurista = control.traerDTTurista(usuario);
+            if (usuarioConsulta instanceof Turista) {
+                tipoUsuario = "turista";
+
+                DTTurista infoTurista = control.traerDTTurista(usuario);
+
+                HttpSession misesion = request.getSession();
+                misesion.setAttribute("infoTurista", infoTurista);
+            } else {
+                tipoUsuario = "proveedor";
+                DTProveedor infoProveedor = control.traerDTProveedor(usuario);
+                HttpSession misesion = request.getSession();
+                misesion.setAttribute("infoProveedor", infoProveedor);
+            }
+
             HttpSession misesion = request.getSession();
-            misesion.setAttribute("infoTurista", infoTurista);
-        } else {
-            tipoUsuario = "proveedor";
-            DTProveedor infoProveedor = control.traerDTProveedor(usuario);
-            HttpSession misesion = request.getSession();
-            misesion.setAttribute("infoProveedor", infoProveedor);
+            misesion.setAttribute("tipoUsuario", tipoUsuario);
+            misesion.setAttribute("rutaImagen", rutaImagen);
+            response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
+
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código de respuesta HTTP 500 (error interno del servidor)
+            response.getWriter().write("Se ha producido un error doGet");
         }
-
-        HttpSession misesion = request.getSession();
-        misesion.setAttribute("tipoUsuario", tipoUsuario);
-
-        response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
     }
 
     @Override
@@ -82,16 +99,57 @@ public class SvModificarUsuario extends HttpServlet {
             String fechaFormateada = formatoSalida.format(fechaNacimientoDate);
             fNacimiento = formatoSalida.parse(fechaFormateada);
 
+            Part archivo = request.getPart("file");
+            System.out.println("archivo:" + archivo);
+            String nombreArchivo = null;
+
+            if (archivo != null) {
+                nombreArchivo = archivo.getSubmittedFileName();
+                if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
+
+                    String directorioUsuario = System.getProperty("user.home");
+
+                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "imagenes" + File.separator + "imagenesPerfil" + File.separator + nombreArchivo;
+
+                    Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
+                }
+            }
+
             if ("turista".equals(tipoUsuario)) {
+
                 String nacionalidad = request.getParameter("nacionalidad");
 
                 control.ModificarDatosDeUsuarioTurista(nickname, nombre, apellido, correo, fNacimiento, nacionalidad);
                 response.sendRedirect("logedUser.jsp");
+/*
+                try {
+                    if (archivo != null) {
+                        String directorioUsuario = System.getProperty("user.home");
+
+                         String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator  + "images"+  File.separator + nombreArchivo;
+                        control.ModificarImagenPerfil(nombreArchivo, rutaCompleta, nickname);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+*/
             } else {
+
                 String descripcion = request.getParameter("descripcion");
                 String link = request.getParameter("sitioWeb");
                 control.ModificarDatosDeUsuarioProveedor(nickname, nombre, apellido, correo, fNacimiento, descripcion, link);
                 response.sendRedirect("logedUser.jsp");
+
+                try {
+                    if (archivo != null) {
+                        String directorioUsuario = System.getProperty("user.home");
+
+                        String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator  + "images"+  File.separator + nombreArchivo;
+                        control.ModificarImagenPerfil(nombreArchivo, rutaCompleta, nickname);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         } catch (ParseException e) {

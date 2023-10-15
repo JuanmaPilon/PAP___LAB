@@ -68,35 +68,29 @@ public class SvTurista extends HttpServlet {
             }
 
             Part archivo = request.getPart("file");
-            System.out.println("archivo:" + archivo);
             String nombreArchivo = null;
-            String rutaImagenNueva = null;
 
             if (archivo != null) {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
-                    rutaImagenNueva = "/images/" + nombreArchivo;
-
                     String directorioUsuario = System.getProperty("user.home");
+                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator  + "images"+  File.separator + nombreArchivo;
 
-                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "imagenes" + File.separator + "imagenesPerfil" + File.separator + nombreArchivo;
+                    try {
+                        Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
 
-                    Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
-                }
-                control.AltaDeUsuarioTurista(nickname, nombre, apellido, contrasenia, correo, fNacimiento, nacionalidad);
-                response.sendRedirect("login.jsp");
+                        control.AltaDeUsuarioTurista(nickname, nombre, apellido, contrasenia, correo, fNacimiento, nacionalidad);
+                        response.sendRedirect("login.jsp");
 
-                try {
-                    if (archivo != null) {
-                        control.AltaDeImagenPerfil(nombreArchivo, rutaImagenNueva, nombre);
+                        control.AltaDeImagenPerfil(nombreArchivo, rutaCompleta, nombre);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
 
         } catch (PreexistingEntityException ex) {
-            response.setStatus(HttpServletResponse.SC_CONFLICT); 
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
             response.getWriter().write("El usuario ya existe. Por favor, elige otro nombre de usuario.");
         } catch (CorreoElectronicoExistenteException ex) {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
@@ -114,3 +108,4 @@ public class SvTurista extends HttpServlet {
     }// </editor-fold>
 
 }
+
