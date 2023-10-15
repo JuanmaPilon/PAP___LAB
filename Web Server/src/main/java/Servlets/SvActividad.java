@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Fabrica;
 import logica.IControlador;
+import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.PreexistingEntityException;
 
 @WebServlet(name = "SvActividad", urlPatterns = {"/SvActividad"})
@@ -54,6 +55,7 @@ public class SvActividad extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String errorMessage = null;
         try {
             String usuario = request.getParameter("usuario");
             String departamento = request.getParameter("departamento");
@@ -70,35 +72,44 @@ public class SvActividad extends HttpServlet {
             System.out.println("archivo:" + archivo);
             String nombreArchivo = null;
             String rutaImagenNueva = null;
+            
+            
+            control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
 
-            if (archivo != null) {
+            if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
-                    rutaImagenNueva = "/images/" + nombreArchivo;
-
                     String directorioUsuario = System.getProperty("user.home");
-
-                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "imagenes" + File.separator + "imagenesActividad" + File.separator + nombreArchivo;
+                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "images" + File.separator + nombreArchivo;
 
                     Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
-                }
-                control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
-                response.sendRedirect("logedUser.jsp");
-                try {
-                    if (archivo != null) {
-                        control.AltaDeImagenActividad(nombreArchivo, rutaImagenNueva, nombre);
+
+                    try {
+                        control.AltaDeImagenActividad(nombreArchivo, rutaCompleta, nombre);
+                    } catch (Exception ex) {
+                        errorMessage = "Imagen ya en uso por otra actividad";
+                        request.setAttribute("errorMessage", errorMessage);
+                        request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         } catch (PreexistingEntityException ex) {
-            response.setStatus(HttpServletResponse.SC_CONFLICT); // Código de respuesta HTTP 409 (conflicto)
-            response.getWriter().write("Nombre de la actividad ya en uso.");
-        }  catch (Exception ex) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código de respuesta HTTP 500 (error interno del servidor)
-            response.getWriter().write("Departamento y categoria coinciden con otra actividad");
+            errorMessage = "Ya hay otra actividad con ese nombre.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+
+
+        } catch (Exception ex) {
+            errorMessage = "Se ha producido un error, compruebe los campos";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+
         }
+        
+        if (errorMessage == null) {
+           response.sendRedirect("logedUser.jsp");
+        } 
     }
 
     @Override

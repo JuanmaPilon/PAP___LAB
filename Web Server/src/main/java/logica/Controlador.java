@@ -47,9 +47,14 @@ public class Controlador implements IControlador{
     
     @Override
     public void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
-        
+         try {
         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
         controlPersis.guardarImagenPerfil(imagenPerfil);
+         } catch(PreexistingEntityException e){
+             throw new PreexistingEntityException("Imagen ya en uso por otro usuario");
+         } catch(Exception ex){
+             throw new Exception("Imagen ya en uso por otro usuario");
+         }
         
     }
     
