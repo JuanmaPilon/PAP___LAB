@@ -25,8 +25,20 @@
         </header>
 
         <main>
+            
+             <%
+                String errorMensaje = (String) request.getAttribute("errorMensaje");
+            %>
+            
+            <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+                <% if (errorMessage != null) {%>
+                <div class="error-message">
+                    <%= errorMessage%>
+                </div>
+                <% }%>   
+            
             <h2>Alta de Salida Turística</h2>
-            <form action="SvAltaSalidaTuristica" method="post" accept-charset="UTF-8">
+            <form action="SvAltaSalidaTuristica" method="post" enctype="multipart/form-data">
                 <label for="departamento">Seleccionar Departamento:</label>
                 <select id="departamento" name="departamento">
                 </select>
@@ -48,7 +60,7 @@
                 <input type="number" id="cantidadMaxTuristas" name="cantidadMaxTuristas" min="1" required>
 
                 <label for="imagenSalida">Imagen (opcional):</label>
-                <input type="file" id="imagenSalida" name="imagenSalida">
+                <input type="file" id="file" name="file">
 
                 <button type="submit">Dar de Alta</button>
             </form>

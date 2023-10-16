@@ -71,7 +71,6 @@ public class SvActividad extends HttpServlet {
             Part archivo = request.getPart("file");
             System.out.println("archivo:" + archivo);
             String nombreArchivo = null;
-            String rutaImagenNueva = null;
             
             
             control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
