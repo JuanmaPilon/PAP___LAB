@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
             <h1>Turismo.uy</h1>
         </div>
         <div id="search">
-            <form action="buscar.jsp" method="post">
+            <form action="ss" method="post">
                 <input type="text" name="query" placeholder="Buscar turistas o paquetes">
                 <button type="submit">Buscar</button>
             </form>
@@ -27,21 +28,28 @@
     
     <main>
         <h2>Consulta de Actividad Turistica</h2>
-        <form action="svlet" method="post">
+        <form action="SvCargarDepartamentos" method="GET">
             <label for="departamento">Seleccionar Departamento:</label>
             <select id="departamento" name="departamento">
           
-                <option value="montevideo">Montevideo</option>
-                <option value="canelones">Canelones</option>
-             
+               <% List<String> listaDepartamentos = (List<String>) request.getAttribute("listaDepartamentos");
+                        if (listaDepartamentos != null) {
+                            for (String departamento : listaDepartamentos) {%>
+                    <option value="<%= departamento%>"><%= departamento%></option>
+                    <% }
+                        }%>
             </select>
             
             <label for="categoria">Seleccionar Categoria:</label>
             <select id="categoria" name="categoria">
-           
-                <option value="aventura">Aventura</option>
-                <option value="naturaleza">Naturaleza</option>
-             
+                
+                 <% List<String> listaCategorias = (List<String>) request.getAttribute("listaCategorias");
+                        if (listaCategorias != null) {
+                            for (String categoria : listaCategorias) {%>
+                    <option value="<%= categoria%>"><%= categoria%></option>
+                    <% }
+                        }%>
+              
             </select>
             
             <button type="submit">Consultar</button>

@@ -32,13 +32,13 @@ public class SvCategoria extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-    ArrayList<String> listaCategorias = control.traerCategorias(); // Cambiar listaDepartamentos a listaCategorias
-
-
-    String categorias = String.join(",", listaCategorias);
+    ArrayList<String> traerCategorias = control.traerCategorias(); // Cambiar listaDepartamentos a listaCategorias
+    int startIndex = Integer.parseInt(request.getParameter("startIndex"));
+    int endIndex = Math.min(startIndex + 10, traerCategorias.size()); // Envía 10 
+    String deptosSubset = String.join(",", traerCategorias.subList(startIndex, endIndex));
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
-    response.getWriter().write(categorias);
+    response.getWriter().write(deptosSubset);
 }
 
 
