@@ -52,6 +52,7 @@
                 <li><a href="inscripcionSalida.jsp">inscripcionSalida</a></li>
                 <li><a href="compraPaquete.jsp">Compra PA K T</a></li>
                 <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li>
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li>
 
             </ul>
             <h2>Departamentos</h2>
