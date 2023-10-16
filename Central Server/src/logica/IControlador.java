@@ -72,6 +72,7 @@ public abstract void CompraDePaquete(String nickname, String nombrePaquete, int 
 public abstract ArrayList<String> listaPaquetesSinCompra();
 public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
 public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
+public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract void cargarDatosDePrueba();
 
 

@@ -742,6 +742,7 @@ try{
        return listaActividadesTuristicas;
     }
     
+    
     @Override
     public ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor){
         
@@ -756,6 +757,21 @@ try{
         }
         
         return listaActividadesProveedorConfirmadas;
+    }
+       @Override
+    public ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor){
+        
+        ArrayList<String> listaActividadesProveedorTodas = new ArrayList();
+        //me traigo las actividades de la bd
+        List<Actividad> listaActividades = controlPersis.traerActividades();
+        //recorro la lista de actividades y agrego a la lista a devolver la que tienen el proveedor buscado y este confirmada
+        for (Actividad a : listaActividades){     
+            if (a.getProveedor().getNickname().equals(nicknameProveedor)){
+                listaActividadesProveedorTodas.add(a.getNombre());
+            }      
+        }
+        
+        return listaActividadesProveedorTodas;
     }
     
     //Carga de los Datos de Prueba

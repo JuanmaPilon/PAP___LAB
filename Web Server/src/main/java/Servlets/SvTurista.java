@@ -47,6 +47,7 @@ public class SvTurista extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String errorMessage = null;
         try {
             Date fNacimiento = null;
 
@@ -68,44 +69,50 @@ public class SvTurista extends HttpServlet {
             }
 
             Part archivo = request.getPart("file");
-            System.out.println("archivo:" + archivo);
             String nombreArchivo = null;
             String rutaImagenNueva = null;
 
-            if (archivo != null) {
+            control.AltaDeUsuarioTurista(nickname, nombre, apellido, contrasenia, correo, fNacimiento, nacionalidad);
+
+            if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
-                    rutaImagenNueva = "/images/" + nombreArchivo;
-
                     String directorioUsuario = System.getProperty("user.home");
-
-                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "imagenes" + File.separator + "imagenesPerfil" + File.separator + nombreArchivo;
+                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "images" + File.separator + nombreArchivo;
 
                     Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
-                }
-                control.AltaDeUsuarioTurista(nickname, nombre, apellido, contrasenia, correo, fNacimiento, nacionalidad);
-                response.sendRedirect("login.jsp");
 
-                try {
-                    if (archivo != null) {
-                        control.AltaDeImagenPerfil(nombreArchivo, rutaImagenNueva, nombre);
+                    try {
+                        control.AltaDeImagenPerfil(nombreArchivo, rutaCompleta, nombre);
+                    } catch (Exception ex) {
+                        errorMessage = "Imagen ya en uso por otro usuario";
+                        request.setAttribute("errorMessage", errorMessage);
+                        request.getRequestDispatcher("altaUsuario.jsp").forward(request, response);
+
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
 
         } catch (PreexistingEntityException ex) {
-            response.setStatus(HttpServletResponse.SC_CONFLICT); 
-            response.getWriter().write("El usuario ya existe. Por favor, elige otro nombre de usuario.");
-        } catch (CorreoElectronicoExistenteException ex) {
-            response.setStatus(HttpServletResponse.SC_CONFLICT);
-            response.getWriter().write("La dirección de correo electrónico ya está en uso. Utiliza otra dirección de correo electrónico.");
-        } catch (Exception ex) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código de respuesta HTTP 500 (error interno del servidor)
-            response.getWriter().write("Se ha producido un error interno. Por favor, inténtalo de nuevo más tarde.");
-        }
+            errorMessage = "El usuario ya existe. Por favor, elige otro nombre de usuario.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("altaUsuario.jsp").forward(request, response);
 
+        } catch (CorreoElectronicoExistenteException ex) {
+            errorMessage = "La dirección de correo electrónico ya está en uso. Utiliza otra dirección de correo electrónico.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("altaUsuario.jsp").forward(request, response);
+
+        } catch (Exception ex) {
+            errorMessage = "Se ha producido un error. Verifique los campos";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("altaUsuario.jsp").forward(request, response);
+
+        }
+        
+        if (errorMessage == null) {
+           response.sendRedirect("login.jsp");
+        } 
     }
 
     @Override
@@ -114,3 +121,4 @@ public class SvTurista extends HttpServlet {
     }// </editor-fold>
 
 }
+

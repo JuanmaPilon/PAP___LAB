@@ -13,7 +13,7 @@ import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
 public interface IControlador {
-
+public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;
 public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception;
@@ -72,6 +72,7 @@ public abstract void CompraDePaquete(String nickname, String nombrePaquete, int 
 public abstract ArrayList<String> listaPaquetesSinCompra();
 public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
 public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
+public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract void cargarDatosDePrueba();
 
 

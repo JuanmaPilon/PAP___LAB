@@ -1,4 +1,6 @@
 <%@page import="logica.Usuario" %>
+<%@page import="logica.Proveedor" %>
+<%@page import="logica.Turista" %>
 <%@ page import="java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -53,17 +55,23 @@
 
             </ul>
         </aside>
-        <%Usuario usu = (Usuario) request.getSession().getAttribute("usuPerfil");%>
+        <%Usuario usu = (Usuario) request.getSession().getAttribute("usuPerfil");//usuario del que se muestra la info%>
 
         <h1>Informacion del Usuario</h1>
         <h2><%=usu.getNombre()%></h2>
         <div class="tabs">
             <ul class="tab-links">
-                <li class="active"><a href="#tab1">Perfil</a></li>
-                <li><a href="#tab2">Actividades</a></li>
-                <li><a href="#tab3">Salidas</a></li>
-                <li><a href="#tab4">Paquetes</a></li>
-            </ul>
+        <li class="active"><a href="#tab1">Perfil</a></li>
+        <%
+            if (usu instanceof Proveedor) {
+        %>
+            <li><a href="#tab2">Actividades</a></li>
+        <%
+            }
+        %>
+        <li><a href="#tab3">Salidas</a></li>
+        <li><a href="#tab4">Paquetes</a></li>
+    </ul>
 
             <div class="tab-content">
                 <div id="tab1" class="tab active">
@@ -75,8 +83,22 @@
                 </div>
 
                 <div id="tab2" class="tab">
-                    <p>Tab2</p>
-                    <p>Texto2</p>
+                    <ul>
+                        <%
+                        // Obteniendo la lista de salidas turísticas desde la sesión
+                        ArrayList<String> listaActividadesProveedor = (ArrayList<String>) request.getSession().getAttribute("listaActividadesProveedor");
+                
+                        // Verificando si la lista no está vacía
+                        if (listaActividadesProveedor != null && !listaActividadesProveedor.isEmpty()) {
+                            // Iterando sobre la lista y mostrando los nombres de las salidas
+                            for (String nombreActividad : listaActividadesProveedor) {
+                                 out.println("<li><a href='#'>" + nombreActividad + "</a></li>");
+                            }
+                        } else {
+                            out.println("<li>No hay salidas disponibles para este proveedor.</li>");
+                        }
+                        %>
+                    </ul>
                 </div>
 
                 <div id="tab3" class="tab">

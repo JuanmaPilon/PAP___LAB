@@ -40,11 +40,21 @@ public class Controlador implements IControlador{
            return  controlPersis.buscarImagen(nickname);
     }
     
+    public void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
+         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
+        controlPersis.modificarImagenPerfil(imagenPerfil);
+    }
+    
     @Override
     public void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception{
-        
+         try {
         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
         controlPersis.guardarImagenPerfil(imagenPerfil);
+         } catch(PreexistingEntityException e){
+             throw new PreexistingEntityException("Imagen ya en uso por otro usuario");
+         } catch(Exception ex){
+             throw new Exception("Imagen ya en uso por otro usuario");
+         }
         
     }
     
@@ -756,6 +766,21 @@ try{
         }
         
         return listaActividadesProveedorConfirmadas;
+    }
+      @Override
+    public ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor){
+        
+        ArrayList<String> listaActividadesProveedorTodas = new ArrayList();
+        //me traigo las actividades de la bd
+        List<Actividad> listaActividades = controlPersis.traerActividades();
+        //recorro la lista de actividades y agrego a la lista a devolver la que tienen el proveedor buscado y este confirmada
+        for (Actividad a : listaActividades){     
+            if (a.getProveedor().getNickname().equals(nicknameProveedor)){
+                listaActividadesProveedorTodas.add(a.getNombre());
+            }      
+        }
+        
+        return listaActividadesProveedorTodas;
     }
     
     //Carga de los Datos de Prueba

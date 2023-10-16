@@ -110,6 +110,13 @@
                 String usuario = request.getParameter("usuario");
                 String errorMensaje = (String) request.getAttribute("errorMensaje");
             %>
+            
+            <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+                <% if (errorMessage != null) {%>
+                <div class="error-message">
+                    <%= errorMessage%>
+                </div>
+                <% }%>
 
             <h2>Alta Actividad Turística</h2>
             <div class="error-message">
