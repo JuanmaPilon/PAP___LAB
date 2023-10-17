@@ -45,6 +45,8 @@ public class SvActividad extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+          String filtro = request.getParameter("filtro");
 
     }
 
