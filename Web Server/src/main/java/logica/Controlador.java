@@ -1026,6 +1026,7 @@ public class Controlador implements IControlador {
         }
 
     }
+<<<<<<< HEAD
     
     public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria){ 
       ArrayList<String> listaActividadesTuristicas = new ArrayList();
@@ -1036,6 +1037,8 @@ public class Controlador implements IControlador {
        return listaActividadesTuristicas;
       
   }
+=======
+>>>>>>> 6f7d3a37885ab2614cf2bcf0a7ec85ba3e78bf9b
 
 }//fin
 
