@@ -29,16 +29,16 @@ public class SvCategoria extends HttpServlet {
             throws ServletException, IOException {
  
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+@Override
+ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-    ArrayList<String> traerCategorias = control.traerCategorias(); // Cambiar listaDepartamentos a listaCategorias
-    int startIndex = Integer.parseInt(request.getParameter("startIndex"));
-    int endIndex = Math.min(startIndex + 10, traerCategorias.size()); // Envía 10 
-    String deptosSubset = String.join(",", traerCategorias.subList(startIndex, endIndex));
+    ArrayList<String> listaCategorias = control.traerCategorias(); // Cambiar listaDepartamentos a listaCategorias
+
+
+    String categorias = String.join(",", listaCategorias);
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
-    response.getWriter().write(deptosSubset);
+    response.getWriter().write(categorias);
 }
 
 
