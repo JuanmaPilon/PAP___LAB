@@ -32,6 +32,7 @@ public abstract void ModificarDatosDeUsuarioTurista(String nickname, String nomb
 public abstract void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria);
 public abstract Actividad ConsultaActividadTuristica(String nombreActividad);
 public abstract ArrayList listaActividadesTuristicas(String departamento);
+public abstract ArrayList listaActividadesTuristicasPorCategoria(String categoria);
 public abstract ArrayList<DTSalidaTuristica> encontraSalidasTuristicasDeActividad(String actividadSeleccionado);
 public abstract ArrayList listaSalActividadTuristica(String actividad);
 public abstract List consultaPaquetes();
@@ -73,6 +74,7 @@ public abstract ArrayList<String> listaPaquetesSinCompra();
 public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
 public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
 public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
+public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
 public abstract void cargarDatosDePrueba();
 
 

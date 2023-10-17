@@ -43,14 +43,20 @@ public class SvPerfilUsuario extends HttpServlet {
             misesion.setAttribute("usuPerfil", turista);
             //salidas a las que se inscribio
             System.out.println(turista.getNickname() + ": es turista");
+            String usuario = (String) request.getSession().getAttribute("usuario");
+            String tur = turista.getNickname();
+            if (tur.equals(usuario)) {
 
-            List<DTSalidaTuristica> listaSalidas = control.traerInscSalidasDeTurista(turista.getNickname());
-            ArrayList<String> nombresSalidasTurista = new ArrayList<>();
-            for (DTSalidaTuristica dt : listaSalidas) {
-                nombresSalidasTurista.add(dt.getNombre());
+                List<DTSalidaTuristica> listaSalidas = control.traerInscSalidasDeTurista(turista.getNickname());
+                ArrayList<String> nombresSalidasTurista = new ArrayList<>();
+                for (DTSalidaTuristica dt : listaSalidas) {
+                    nombresSalidasTurista.add(dt.getNombre());
+                }
+                misesion.setAttribute("nombresSalidas", nombresSalidasTurista);
+                
+                ArrayList<String> paquetesComprados = control.listaPaquetesComprados(tur);
+                misesion.setAttribute("nombresPaquetes", paquetesComprados);
             }
-            misesion.setAttribute("nombresSalidas", nombresSalidasTurista);
-
         } else if (usu instanceof Proveedor) {
             Proveedor proveedor = (Proveedor) usu;
             misesion.setAttribute("usuPerfil", proveedor);

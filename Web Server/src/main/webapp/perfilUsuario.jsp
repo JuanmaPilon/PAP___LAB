@@ -61,17 +61,32 @@
         <h2><%=usu.getNombre()%></h2>
         <div class="tabs">
             <ul class="tab-links">
-        <li class="active"><a href="#tab1">Perfil</a></li>
-        <%
-            if (usu instanceof Proveedor) {
-        %>
-            <li><a href="#tab2">Actividades</a></li>
-        <%
-            }
-        %>
-        <li><a href="#tab3">Salidas</a></li>
-        <li><a href="#tab4">Paquetes</a></li>
-    </ul>
+                <li class="active"><a href="#tab1">Perfil</a></li>
+                    <%
+                        if (usu instanceof Proveedor) {
+                    %>
+                <li><a href="#tab2">Actividades</a></li>
+                <li><a href="#tab3">Salidas</a></li>
+                    <%
+                        }
+                    %>
+
+
+                <%
+                    if (usu instanceof Turista) {
+                        String usuario = (String) request.getSession().getAttribute("usuario");
+                        String tur = usu.getNickname();
+                        if (tur.equals(usuario)) {
+                %>
+                <li><a href="#tab3">Salidas</a></li>
+                <li><a href="#tab4">Paquetes</a></li>
+                    <%
+                            }
+                        }
+                    %>
+
+
+            </ul>
 
             <div class="tab-content">
                 <div id="tab1" class="tab active">
@@ -85,18 +100,18 @@
                 <div id="tab2" class="tab">
                     <ul>
                         <%
-                        // Obteniendo la lista de salidas turísticas desde la sesión
-                        ArrayList<String> listaActividadesProveedor = (ArrayList<String>) request.getSession().getAttribute("listaActividadesProveedor");
-                
-                        // Verificando si la lista no está vacía
-                        if (listaActividadesProveedor != null && !listaActividadesProveedor.isEmpty()) {
-                            // Iterando sobre la lista y mostrando los nombres de las salidas
-                            for (String nombreActividad : listaActividadesProveedor) {
-                                 out.println("<li><a href='#'>" + nombreActividad + "</a></li>");
+                            // Obteniendo la lista de salidas turísticas desde la sesión
+                            ArrayList<String> listaActividadesProveedor = (ArrayList<String>) request.getSession().getAttribute("listaActividadesProveedor");
+
+                            // Verificando si la lista no está vacía
+                            if (listaActividadesProveedor != null && !listaActividadesProveedor.isEmpty()) {
+                                // Iterando sobre la lista y mostrando los nombres de las salidas
+                                for (String nombreActividad : listaActividadesProveedor) {
+                                    out.println("<li><a href='#'>" + nombreActividad + "</a></li>");
+                                }
+                            } else {
+                                out.println("<li>No hay salidas disponibles para este proveedor.</li>");
                             }
-                        } else {
-                            out.println("<li>No hay salidas disponibles para este proveedor.</li>");
-                        }
                         %>
                     </ul>
                 </div>
@@ -104,28 +119,42 @@
                 <div id="tab3" class="tab">
                     <ul>
                         <%
-                        // Obteniendo la lista de salidas turísticas desde la sesión
-                        ArrayList<String> nombresSalidasProveedor = (ArrayList<String>) request.getSession().getAttribute("nombresSalidas");
-                
-                        // Verificando si la lista no está vacía
-                        if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
-                            // Iterando sobre la lista y mostrando los nombres de las salidas
-                            for (String nombreSalida : nombresSalidasProveedor) {
-                                 out.println("<li><a href='#'>" + nombreSalida + "</a></li>");
+                            // Obteniendo la lista de salidas turísticas desde la sesión
+                            ArrayList<String> nombresSalidasProveedor = (ArrayList<String>) request.getSession().getAttribute("nombresSalidas");
+
+                            // Verificando si la lista no está vacía
+                            if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
+                                // Iterando sobre la lista y mostrando los nombres de las salidas
+                                for (String nombreSalida : nombresSalidasProveedor) {
+                                    out.println("<li><a href='#'>" + nombreSalida + "</a></li>");
+                                }
+                            } else {
+                                out.println("<li>No hay salidas disponibles.</li>");
                             }
-                        } else {
-                            out.println("<li>No hay salidas disponibles para este proveedor.</li>");
-                        }
                         %>
                     </ul>
                 </div>
 
                 <div id="tab4" class="tab">
-                    <p>Tab4</p>
-                    <p>Texto4</p>
+                    <ul>
+                        <%
+                            // Obteniendo la lista de salidas turísticas desde la sesión
+                            ArrayList<String> nombresPaquetes = (ArrayList<String>) request.getSession().getAttribute("nombresPaquetes");
+
+                            // Verificando si la lista no está vacía
+                            if (nombresPaquetes != null && !nombresPaquetes.isEmpty()) {
+                                // Iterando sobre la lista y mostrando los nombres de las salidas
+                                for (String P : nombresPaquetes) {
+                                    out.println("<li><a href='#'>" + P + "</a></li>");
+                                }
+                            } else {
+                                out.println("<li>No hay paquetes comprados.</li>");
+                            }
+                        %>
+                    </ul>
                 </div>
 
-                
+
             </div>
         </div>
         <script>
@@ -141,7 +170,7 @@
             });
         </script>
     </main>
- 
+
     <footer>
         <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
         <p>&copy; 2023 Turismo.uy</p>

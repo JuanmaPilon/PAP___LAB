@@ -31,7 +31,7 @@ public class SvCargarDepartamentos extends HttpServlet {
     throws ServletException, IOException {
     List<String> listaDeptos = control.listaDeptos();
     int startIndex = Integer.parseInt(request.getParameter("startIndex"));
-    int endIndex = Math.min(startIndex + 10, listaDeptos.size()); // Envía 10 deptos a la vez, puedes ajustar este número según tus necesidades
+    int endIndex = Math.min(startIndex + 40, listaDeptos.size()); // Envía 10 deptos a la vez, puedes ajustar este número según tus necesidades
     String deptosSubset = String.join(",", listaDeptos.subList(startIndex, endIndex));
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");

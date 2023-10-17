@@ -549,5 +549,22 @@ public class ControladoraPersistencia {
     public List<Compra> listarCompras() {
         return compraJpa.findCompraEntities();
     }
+    
+    public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria) {
+    ArrayList<String> listaActividadesTuristicas = new ArrayList();
+    List<Actividad> listaActividades = actividadJpa.findActividadEntities();
+
+    for (Actividad actividad : listaActividades) {
+        List<Categoria> categorias = actividad.getListaCategoria();
+        
+        for (Categoria cat : categorias) {
+            if (cat.getNombre().equals(categoria)) {
+                listaActividadesTuristicas.add(actividad.getNombre());
+                break; 
+            }
+        }
+    }
+    return listaActividadesTuristicas;
+}
 
 }//fin

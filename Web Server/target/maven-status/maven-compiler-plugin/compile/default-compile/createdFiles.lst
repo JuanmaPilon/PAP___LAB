@@ -54,6 +54,7 @@ Servlets\SvModificarUsuario.class
 logica\SalidaTuristica_.class
 Servlets\SvUsuario.class
 persistencia\PaqueteJpaController.class
+Servlets\SvInscripcionSalida.class
 logica\DTProveedor.class
 Servlets\SvPerfilUsuario.class
 logica\DTActividad.class
