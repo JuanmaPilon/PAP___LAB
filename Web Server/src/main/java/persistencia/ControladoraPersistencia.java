@@ -136,6 +136,29 @@ public class ControladoraPersistencia {
         }
         return listaActividadesTuristicas;
     }
+    
+    
+    public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria) {
+    ArrayList<String> listaActividadesTuristicas = new ArrayList();
+    List<Actividad> listaActividades = actividadJpa.findActividadEntities();
+
+    for (Actividad actividad : listaActividades) {
+        List<Categoria> categorias = actividad.getListaCategoria();
+        
+        for (Categoria cat : categorias) {
+            if (cat.getNombre().equals(categoria)) {
+                listaActividadesTuristicas.add(actividad.getNombre());
+                break; // Puedes salir del bucle interno cuando se encuentra una actividad de la categoría
+            }
+        }
+    }
+    return listaActividadesTuristicas;
+}
+
+    
+    
+    
+    
 
     public Usuario consultaUsuario(String nickname) {
         Usuario usuario = null;

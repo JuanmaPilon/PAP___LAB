@@ -27,6 +27,7 @@ public abstract ArrayList listaDepartamentos(); //devuelve una lista de todos lo
 public abstract ArrayList listaDeptos();//lista que contiene solo los nombres de los departamentos
 public abstract ArrayList listaPaquetes();
 public abstract ArrayList listaActividades();
+public abstract ArrayList<String> listaActividadesTuristicasPorCategoria(String departamento);
 public abstract void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url);
 public abstract void ModificarDatosDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fecha, String nacionalidad);//Nati
 public abstract void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria);

@@ -30,14 +30,20 @@
             String filtro = "";
         %>
         <main>
-            <form action="SvCargarDepartamentos" method="GET">
+            <form action="SvActividad" method="GET">
                 <label for="departamento">Departamento:</label>
                 <select id="departamento" name="departamento"></select>
                 <button type="button" onclick="filtrarPorDepartamento()">Filtrar por Departamento</button>
                 <br>
+
                 <label for="categoria">Categoria:</label>
                 <select id="categoria" name="categoria"></select>
                 <button type="button" onclick="filtrarPorCategoria()">Filtrar por Categoria</button>
+
+                <label for="actividad">Actividades:</label>
+                <select id="actividad" name="actividad"> 
+
+                </select>
                 <br>
 
 
@@ -79,32 +85,61 @@
                                 select.appendChild(option);
                             });
                             // Permite múltiples selecciones
-                            select.multiple = true;
                         })
                         .catch(error => console.error("Error al cargar categorías: " + error));
             }
 
+
+
             function filtrarPorDepartamento() {
-                let filtro = "departamento";
+                const filtro = "FiltroDepartamento";
+                const departamentoSeleccionado = document.getElementById("departamento").value;
 
+                // Construir la URL con el valor seleccionado del departamento
+                const url = "SvActividad?filtro=" + filtro + "&departamento=" + encodeURIComponent(departamentoSeleccionado);
 
-                fetch("SvActividad?filtro=" + filtro)
-                        .then(response => {
+                fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            const select = document.getElementById("actividad");
+                            select.innerHTML = ''; // Limpia las opciones anteriores
 
+                            const actividades = data.split(",");
+                            actividades.forEach(actividad => {
+                                const option = document.createElement("option");
+                                option.value = actividad;
+                                option.text = actividad;
+                                select.appendChild(option);
+                            });
                         })
                         .catch(error => console.error("Error al filtrar por departamento: " + error));
             }
 
+
             function filtrarPorCategoria() {
-                let filtro = "categoria";
+                const filtro = "FiltroCategoria";
+                const categoriaSeleccionada = document.getElementById("categoria").value;
 
+                // Construir la URL con el valor seleccionado de la categoría
+                const url = "SvActividad?filtro=" + filtro + "&categoria=" + encodeURIComponent(categoriaSeleccionada);
 
-                fetch("SvActividad?filtro=" + filtro)
-                        .then(response => {
+                fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            const select = document.getElementById("actividad");
+                            select.innerHTML = ''; // Limpia las opciones anteriores
 
+                            const actividades = data.split(",");
+                            actividades.forEach(actividad => {
+                                const option = document.createElement("option");
+                                option.value = actividad;
+                                option.text = actividad;
+                                select.appendChild(option);
+                            });
                         })
                         .catch(error => console.error("Error al filtrar por categoría: " + error));
             }
+
 
 
             function cargarDatos() {

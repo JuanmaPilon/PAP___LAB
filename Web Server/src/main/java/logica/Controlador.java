@@ -226,6 +226,16 @@ public void AltaCategoria(String nombre) throws PreexistingEntityException, Exce
        return listaActividadesTuristicas;
    };
    
+  public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria){ 
+      ArrayList<String> listaActividadesTuristicas = new ArrayList();
+       for (String s: controlPersis.listaActividadesTuristicasPorCategoria(categoria)){
+           listaActividadesTuristicas.add(s);
+       }
+      
+       return listaActividadesTuristicas;
+      
+  }
+   
    @Override
    public ArrayList<String> listaUsuarios(){
      return controlPersis.listaUsuarios();

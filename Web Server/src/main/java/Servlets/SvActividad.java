@@ -45,15 +45,38 @@ public class SvActividad extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-          String filtro = request.getParameter("filtro");
 
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String filtro = request.getParameter("filtro");
+
+        if ("FiltroDepartamento".equals(filtro)) {
+
+            String departamentoSeleccionado = request.getParameter("departamento");
+
+            ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicas(departamentoSeleccionado);
+
+            String actividades = String.join(",", listaActividadesDepartamento);
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(actividades);
+
+        } else if ("FiltroCategoria".equals(filtro)) {
+            
+             String categoriaSeleccionada = request.getParameter("categoria");
+             
+              ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoria(categoriaSeleccionada);
+              
+            String actividades = String.join(",", listaActividadesCategoria);
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(actividades);
+
+        }
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,8 +96,7 @@ public class SvActividad extends HttpServlet {
             Part archivo = request.getPart("file");
             System.out.println("archivo:" + archivo);
             String nombreArchivo = null;
-            
-            
+
             control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
 
             if (archivo.getSize() > 0) {
@@ -100,17 +122,16 @@ public class SvActividad extends HttpServlet {
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
 
-
         } catch (Exception ex) {
             errorMessage = "Se ha producido un error, compruebe los campos";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
 
         }
-        
+
         if (errorMessage == null) {
-           response.sendRedirect("logedUser.jsp");
-        } 
+            response.sendRedirect("logedUser.jsp");
+        }
     }
 
     @Override
