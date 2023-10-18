@@ -8,11 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logica.Fabrica;
+import logica.IControlador;
+import logica.SalidaTuristica;
 
 
 @WebServlet(name = "SvPerfilSalida", urlPatterns = {"/SvPerfilSalida"})
 public class SvPerfilSalida extends HttpServlet {
-
+ Fabrica fabrica = Fabrica.getInstance();
+    IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -21,10 +25,11 @@ public class SvPerfilSalida extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession misesion = request.getSession();
+        HttpSession misesion = request.getSession();
         String nombreSalida = request.getParameter("nombreSalida");
         System.out.println("Nombre de la Salida: " + nombreSalida);
-
+        SalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
+        misesion.setAttribute("salida", salT);
     }
 
     @Override

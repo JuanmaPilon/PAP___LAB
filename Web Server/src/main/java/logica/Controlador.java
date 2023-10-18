@@ -803,7 +803,6 @@ public class Controlador implements IControlador {
        ArrayList<String> listaPaquetesTurista = new ArrayList ();
        for (Compra c : t.getListaCompras()){
           listaPaquetesTurista.add(c.getPaquete().getNombre());
-           System.out.println(c.getPaquete().getNombre());
        }
        return listaPaquetesTurista;
     }

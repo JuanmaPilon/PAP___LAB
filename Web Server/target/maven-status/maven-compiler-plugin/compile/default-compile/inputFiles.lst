@@ -1,68 +1,68 @@
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\exceptions\PaqueteSinActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Departamento.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\ControladoraPersistencia.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\TuristaJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvProveedor.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvInscripcionSalida.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Categoria.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\CorreoElectronicoExistenteException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\ImagenPerfil.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\NonexistentEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\DTUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\exceptions\ConstraseniasDistintas.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\imagenActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\NicknameExistenteException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Fabrica.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\SalidaTuristica.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\JAXRSConfiguration.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Turista.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Usuario.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\DTTurista.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\imagenActividadJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilSalida.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\DTActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvAltaSalidaTuristica.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\IllegalOrphanException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\DTPaquete.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\exceptions\NonexistentEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Actividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\DTInscripcion.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarDepartamentos.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\CategoriaJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\exceptions\PaqueteYaComprado.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvDepartamento.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\TipoEstado.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\TuristaJpaController1.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\ActividadJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\PaqueteJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Paquete.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarActividades.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Proveedor.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\CompraJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\SalidaTuristicaJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvCategoria.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\NonexistentEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Compra.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvModificarUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvTurista.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\DepartamentoJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\ImagenPerfilJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\ProveedorJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Controlador.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\exceptions\IllegalOrphanException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvAutenticarUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\DTSalidaTuristica.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\Inscripcion.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\IllegalOrphanException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\resources\JavaEE8Resource.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\PreexistingEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\PaqueteJpaController1.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\InscripcionJpaController.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\exceptions\PreexistingEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\DTProveedor.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\PreexistingEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\logica\IControlador.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvCategoria.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Controlador.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Compra.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\PreexistingEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Fabrica.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\PaqueteJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvInscripcionSalida.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvAltaSalidaTuristica.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\resources\JavaEE8Resource.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\ImagenPerfil.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\IControlador.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\JAXRSConfiguration.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\ControladoraPersistencia.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\ImagenPerfilJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\PaqueteJpaController1.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Departamento.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\CorreoElectronicoExistenteException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvDepartamento.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\SalidaTuristica.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\ProveedorJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\PaqueteSinActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Proveedor.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvTurista.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTPaquete.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\NicknameExistenteException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Turista.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\NonexistentEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\SalidaTuristicaJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\IllegalOrphanException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Inscripcion.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilSalida.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\IllegalOrphanException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTSalidaTuristica.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\PreexistingEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Paquete.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarActividades.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\TipoEstado.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\TuristaJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarDepartamentos.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Usuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\PaqueteYaComprado.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\DepartamentoJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\TuristaJpaController1.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\CompraJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Actividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvModificarUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTTurista.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvAutenticarUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\PreexistingEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTInscripcion.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\NonexistentEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\imagenActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\ActividadJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\DTProveedor.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\IllegalOrphanException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\CategoriaJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvProveedor.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\InscripcionJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\Categoria.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\NonexistentEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\persistencia\imagenActividadJpaController.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\logica\exceptions\ConstraseniasDistintas.java
