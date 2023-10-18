@@ -66,11 +66,26 @@
                         if (usu instanceof Proveedor) {
                     %>
                 <li><a href="#tab2">Actividades</a></li>
+                <li><a href="#tab3">Salidas</a></li>
                     <%
                         }
                     %>
+
+
+                <%
+                    if (usu instanceof Turista) {
+                        String usuario = (String) request.getSession().getAttribute("usuario");
+                        String tur = usu.getNickname();
+                        if (tur.equals(usuario)) {
+                %>
                 <li><a href="#tab3">Salidas</a></li>
                 <li><a href="#tab4">Paquetes</a></li>
+                    <%
+                            }
+                        }
+                    %>
+
+
             </ul>
 
             <div class="tab-content">
@@ -123,8 +138,22 @@
                 </div>
 
                 <div id="tab4" class="tab">
-                    <p>Tab4</p>
-                    <p>Texto4</p>
+                    <ul>
+                        <%
+                            // Obteniendo la lista de salidas turísticas desde la sesión
+                            ArrayList<String> nombresPaquetes = (ArrayList<String>) request.getSession().getAttribute("nombresPaquetes");
+
+                            // Verificando si la lista no está vacía
+                            if (nombresPaquetes != null && !nombresPaquetes.isEmpty()) {
+                                // Iterando sobre la lista y mostrando los nombres de las salidas
+                                for (String P : nombresPaquetes) {
+                                    out.println("<li><a href='#'>" + P + "</a></li>");
+                                }
+                            } else {
+                                out.println("<li>No hay paquetes comprados.</li>");
+                            }
+                        %>
+                    </ul>
                 </div>
 
 
@@ -144,7 +173,7 @@
         </script>
 
         <script>
-       
+
             function mostrarInformacion(element) {
                 var xhr = new XMLHttpRequest();
                 var nombreActividad = element.getAttribute('data-id');
