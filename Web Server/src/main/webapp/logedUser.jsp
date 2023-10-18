@@ -40,19 +40,17 @@
         <aside>
             <h2>Mi perfil</h2>
             <ul>
-                <li><a href="#">Inscripcion a Salida</a></li>
-                <li><a href="#">Otro caso de uso</a></li>
-                <li><a href="#">Otros...</a></li>
-                <li><a href="consultaUsuario.jsp">Consulta Usuario</a></li>
-                <a href="altaActividadTuristica.jsp?usuario=<%= usuario %>">Alta Actividad</a>
-                <li><a href="SvModificarUsuario?usuario=<%= usuario %>">Modificar mis datos</a></li>
-                <li><a href="altaSalidaTuristica.jsp">Alta Salida Turistica</a></li>
-                <li><a href="consultaActividadTuristica.jsp">Consulta Actividad Turistica</a></li>
-                <li><a href="perfilActividadTuristica.jsp">Perfil Actividad Turistica</a></li>
-                <li><a href="inscripcionSalida.jsp">inscripcionSalida</a></li>
-                <li><a href="compraPaquete.jsp">Compra PA K T</a></li>
-                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li>
-                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario %>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario %>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="compraPaquete.jsp">Compra de Paquete</a></li> <!-- Turista -->
+                
+                
 
             </ul>
             <h2>Departamentos</h2>

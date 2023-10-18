@@ -4,6 +4,7 @@ logica\Turista_.class
 logica\Usuario.class
 logica\exceptions\PaqueteYaComprado.class
 Servlets\exceptions\PreexistingEntityException.class
+Servlets\SvPerfilSalida.class
 Servlets\SvDepartamento.class
 logica\Compra_.class
 logica\Inscripcion_.class

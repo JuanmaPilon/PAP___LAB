@@ -109,8 +109,7 @@
                                 int cont = 1;
                                 // Iterando sobre la lista y mostrando los nombres de las salidas
                                 for (String nombreActividad : listaActividadesProveedor) {
-                                    out.println("<li data-id='" + nombreActividad + "'> <a href='#' onclick='mostrarInformacion(this)'>" + nombreActividad + "</a></li>");
-
+                                    out.println("<li> <a href='#' onclick='mostrarActividad(\"" + nombreActividad + "\")'>" + nombreActividad + "</a></li>");
                                     cont++;
                                 }
                             } else {
@@ -128,7 +127,7 @@
 
                             if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
                                 for (String nombreSalida : nombresSalidasProveedor) {
-                                    out.println("<li><a href='#'>" + nombreSalida + "</a></li>");
+                                    out.println("<li data-id='" + nombreSalida + "'> <a href='#' onclick='mostrarInformacionSalida'>" + nombreSalida + "</a></li>");
                                 }
                             } else {
                                 out.println("<li>No hay salidas disponibles para este proveedor.</li>");
@@ -172,17 +171,19 @@
             });
         </script>
 
-        <script>
+ 
+        
+                <script>
 
-            function mostrarInformacion(element) {
+            function mostrarInformacionSalida(element) {
                 var xhr = new XMLHttpRequest();
-                var nombreActividad = element.getAttribute('data-id');
-                xhr.open("GET", "SvPerfilActividad?nombreActividad=" + nombreActividad, true);
+                var nombreSalida = element.getAttribute('data-id');
+                xhr.open("GET", "SvPerfilSalida?nombreSalida=" + nombreSalida, true);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         // Haz lo que necesites con la respuesta del servidor, si es necesario
                         // Por ejemplo, redirigir a la página de perfil del usuario
-                        window.location.href = "perfilActividadTuristica.jsp";
+                        
                     }
                 };
                 xhr.send();
@@ -197,4 +198,20 @@
         <p>&copy; 2023 Turismo.uy</p>
     </footer>
 </body>
+
+<script>
+
+    function mostrarActividad(nombreActividad) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "SvPerfilActividad?nombreActividad=" + nombreActividad, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Haz lo que necesites con la respuesta del servidor, si es necesario
+            }
+        };
+        xhr.send();
+    }
+
+
+</script>
 </html>
