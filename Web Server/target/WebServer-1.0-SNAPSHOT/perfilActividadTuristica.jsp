@@ -1,3 +1,5 @@
+<%@page import="logica.SalidaTuristica"%>
+<%@page import="logica.Categoria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="logica.Actividad" %>
 <%@ page import="java.util.ArrayList" %>
@@ -5,7 +7,9 @@
 <html>
     <%
         Actividad act = (Actividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
-        ArrayList<String> cat = (ArrayList<String>) request.getSession().getAttribute("categorias");
+        //ArrayList<String> cat = (ArrayList<String>) request.getSession().getAttribute("categorias");
+        ArrayList<Categoria> categorias = act.getListaCategoria();
+        ArrayList<SalidaTuristica> salidas = act.getListaSalidaTuristica();
     %>
     <head>
         <meta charset="UTF-8">
@@ -36,36 +40,39 @@
                 <p>Descripcion: <%=act.getDescripcion()%></p>
                 <p>Fecha: <%=act.getfAlta()%></p>
                 <p>Lugar: <%=act.getCiudad()%></p>
-                <p>Categorías: </p>
+                <p>Categorias: </p>
                 <ul>
-                    
-                 <%
-                            if (cat != null && !cat.isEmpty()) {
-                                for (String c : cat) {
-                                     out.println("<li> <a href='#'>" + c + "</a></li>");
+                    <%
+                        if (categorias != null && !categorias.isEmpty()) {
+                            for (Categoria categoria : categorias) {
+                    %>
+                    <li> <a href='#'><%= categoria.getNombre()%></a></li>
+                        <%
                                 }
                             }
-                  %>
+                        %>
                 </ul>
-           
-                
-            </div>
 
-            <h3>Salidas Asociadas</h3>
-            <ul class="list-asociadas">
-                <li>
-                    <div class="asociada">
-                        <img src="salida1.jpg" alt="Salida 1">
-                        <h4><a href="perfilSalidaTuristica.jsp">Salida 1</a></h4>
-                    </div>
-                </li>
-                <li>
-                    <div class="asociada">
-                        <img src="salidaX.jpg" alt="Salida X">
-                        <h4><a href="perfilSalidaTuristica.jsp">Salida X</a></h4>
-                    </div>
-                </li>
-            </ul>
+
+            </div>
+            <div class="actividad">
+                <h3>Salidas Asociadas</h3>
+                <ul>
+                    <%
+                        if (salidas != null && !salidas.isEmpty()) {
+                            for (SalidaTuristica salida : salidas) {
+                    %>
+                    <li><a href='#'><%= salida.getNombre()%></a></li>
+                        <%
+                            }
+                        } else {
+                        %>
+                    <li>No hay salidas asociadas.</li>
+                        <%
+                            }
+                        %>
+                </ul>
+            </div>
 
             <h3>Paquetes Asociados</h3>
             <ul class="list-asociadas">

@@ -27,8 +27,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import logica.Actividad;
+import logica.Categoria;
 import logica.Fabrica;
 import logica.IControlador;
+import logica.SalidaTuristica;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.PreexistingEntityException;
 
@@ -65,11 +69,11 @@ public class SvActividad extends HttpServlet {
             response.getWriter().write(actividades);
 
         } else if ("FiltroCategoria".equals(filtro)) {
-            
-             String categoriaSeleccionada = request.getParameter("categoria");
-             
-              ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoria(categoriaSeleccionada);
-              
+
+            String categoriaSeleccionada = request.getParameter("categoria");
+
+            ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoria(categoriaSeleccionada);
+
             String actividades = String.join(",", listaActividadesCategoria);
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
@@ -77,6 +81,31 @@ public class SvActividad extends HttpServlet {
 
         }
 
+        String nombreActividad = (String) request.getParameter("actividad");
+
+        Actividad actividadConsultada = control.ConsultaActividadTuristica(nombreActividad);
+
+        HttpSession misesion = request.getSession();
+        misesion.setAttribute("actividad", actividadConsultada);
+        response.sendRedirect("perfilActividadTuristica.jsp");
+
+//        String nomActividad = actividadConsultada.getNombre();
+//        String descripacion = actividadConsultada.getDescripcion();
+//        int duracionActividad = actividadConsultada.getDuracion();
+//        String ciudadActividad = actividadConsultada.getCiudad();
+//        String actividadProveedor = actividadConsultada.getProveedor().getNickname();
+//        ArrayList<SalidaTuristica> actividadSalidas = actividadConsultada.getListaSalidaTuristica();
+//        ArrayList<Categoria> actividadPaquetes = actividadConsultada.getListaCategoria();
+//
+//        misesion.setAttribute("nomActividad", nomActividad);
+//        misesion.setAttribute("descripcion", descripacion);
+//        misesion.setAttribute("duracionActividad", duracionActividad);
+//        misesion.setAttribute("ciudadActividad", ciudadActividad);
+//        misesion.setAttribute("actividadProveedor", actividadProveedor);
+//        misesion.setAttribute("actividadSalidas", actividadSalidas);
+//        misesion.setAttribute("actividadPaquetes", actividadPaquetes);
+//
+//        response.sendRedirect("mostrarActividadTuristica.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
