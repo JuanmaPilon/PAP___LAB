@@ -63,6 +63,7 @@ logica\Fabrica.class
 persistencia\ActividadJpaController.class
 Servlets\SvCategoria.class
 logica\exceptions\NonexistentEntityException.class
+Servlets\SvPerfilActividad.class
 logica\Actividad_.class
 logica\DTPaquete.class
 persistencia\TuristaJpaController$NicknameExistenceChecker.class

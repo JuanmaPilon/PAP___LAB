@@ -66,26 +66,11 @@
                         if (usu instanceof Proveedor) {
                     %>
                 <li><a href="#tab2">Actividades</a></li>
-                <li><a href="#tab3">Salidas</a></li>
                     <%
                         }
                     %>
-
-
-                <%
-                    if (usu instanceof Turista) {
-                        String usuario = (String) request.getSession().getAttribute("usuario");
-                        String tur = usu.getNickname();
-                        if (tur.equals(usuario)) {
-                %>
                 <li><a href="#tab3">Salidas</a></li>
                 <li><a href="#tab4">Paquetes</a></li>
-                    <%
-                            }
-                        }
-                    %>
-
-
             </ul>
 
             <div class="tab-content">
@@ -105,9 +90,13 @@
 
                             // Verificando si la lista no está vacía
                             if (listaActividadesProveedor != null && !listaActividadesProveedor.isEmpty()) {
+
+                                int cont = 1;
                                 // Iterando sobre la lista y mostrando los nombres de las salidas
                                 for (String nombreActividad : listaActividadesProveedor) {
-                                    out.println("<li><a href='#'>" + nombreActividad + "</a></li>");
+                                    out.println("<li data-id='" + nombreActividad + "'> <a href='#' onclick='mostrarInformacion(this)'>" + nombreActividad + "</a></li>");
+
+                                    cont++;
                                 }
                             } else {
                                 out.println("<li>No hay salidas disponibles para este proveedor.</li>");
@@ -122,36 +111,20 @@
                             // Obteniendo la lista de salidas turísticas desde la sesión
                             ArrayList<String> nombresSalidasProveedor = (ArrayList<String>) request.getSession().getAttribute("nombresSalidas");
 
-                            // Verificando si la lista no está vacía
                             if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
-                                // Iterando sobre la lista y mostrando los nombres de las salidas
                                 for (String nombreSalida : nombresSalidasProveedor) {
                                     out.println("<li><a href='#'>" + nombreSalida + "</a></li>");
                                 }
                             } else {
-                                out.println("<li>No hay salidas disponibles.</li>");
+                                out.println("<li>No hay salidas disponibles para este proveedor.</li>");
                             }
                         %>
                     </ul>
                 </div>
 
                 <div id="tab4" class="tab">
-                    <ul>
-                        <%
-                            // Obteniendo la lista de salidas turísticas desde la sesión
-                            ArrayList<String> nombresPaquetes = (ArrayList<String>) request.getSession().getAttribute("nombresPaquetes");
-
-                            // Verificando si la lista no está vacía
-                            if (nombresPaquetes != null && !nombresPaquetes.isEmpty()) {
-                                // Iterando sobre la lista y mostrando los nombres de las salidas
-                                for (String P : nombresPaquetes) {
-                                    out.println("<li><a href='#'>" + P + "</a></li>");
-                                }
-                            } else {
-                                out.println("<li>No hay paquetes comprados.</li>");
-                            }
-                        %>
-                    </ul>
+                    <p>Tab4</p>
+                    <p>Texto4</p>
                 </div>
 
 
@@ -169,6 +142,25 @@
                 });
             });
         </script>
+
+        <script>
+       
+            function mostrarInformacion(element) {
+                var xhr = new XMLHttpRequest();
+                var nombreActividad = element.getAttribute('data-id');
+                xhr.open("GET", "SvPerfilActividad?nombreActividad=" + nombreActividad, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Haz lo que necesites con la respuesta del servidor, si es necesario
+                        // Por ejemplo, redirigir a la página de perfil del usuario
+                        window.location.href = "perfilActividadTuristica.jsp";
+                    }
+                };
+                xhr.send();
+            }
+
+        </script>
+
     </main>
 
     <footer>
