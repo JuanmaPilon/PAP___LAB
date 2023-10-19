@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="logica.Usuario" %>
+<%@page import="logica.Proveedor" %>
+<%@page import="logica.Turista" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,6 +25,7 @@
             <div id="login">
                 <%
                     String usuario = (String) request.getSession().getAttribute("usuario");
+                    Usuario usu = (Usuario) request.getSession().getAttribute("usu");
                     if (usuario != null) {
                 %>
                 <a href="#" onclick="consultarPerfil('<%= usuario%>')"><%= usuario%></a> | <a href="index.jsp">Cerrar Sesión</a>
@@ -40,17 +44,36 @@
         <aside>
             <h2>Mi perfil</h2>
             <ul>
+                <%
+                    if (usu instanceof Proveedor) {
+                %>
                 <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
-                <li><a href="SvModificarUsuario?usuario=<%= usuario %>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
-                <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario %>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario%>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
                 <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                 <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+
+                <%
+                    }
+                %>
+
+
+                <%
+                    if (usu instanceof Turista) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                 <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
                 <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
                 <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                 <li><a href="compraPaquete.jsp">Compra de Paquete</a></li> <!-- Turista -->
-                
-                
+                    <%
+                        }
+                    %>
+
 
             </ul>
             <h2>Departamentos</h2>
@@ -107,18 +130,18 @@
         </footer>
     </body>
     <script>
-function consultarPerfil(usuario) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "SvPerfilUsuario?usuario=" + usuario, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Haz lo que necesites con la respuesta del servidor, si es necesario
-            // Por ejemplo, redirigir a la página de perfil del usuario
-            window.location.href = "perfilUsuario.jsp";
+        function consultarPerfil(usuario) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "SvPerfilUsuario?usuario=" + usuario, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Haz lo que necesites con la respuesta del servidor, si es necesario
+                    // Por ejemplo, redirigir a la página de perfil del usuario
+                    window.location.href = "perfilUsuario.jsp";
+                }
+            };
+            xhr.send();
         }
-    };
-    xhr.send();
-}
-</script>
+    </script>
 
 </html>
