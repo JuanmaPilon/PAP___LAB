@@ -150,7 +150,7 @@
 
                 consultaForm.addEventListener("submit", function (event) {
                     const actividadSeleccionada = document.getElementById("actividad").value;
-                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento") {
+                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento"|| actividadSeleccionada === ""|| actividadSeleccionada === null) {
                         event.preventDefault(); // Prevenir el envío del formulario
                         alert("Por favor, selecciona una actividad válida."); // Mostrar mensaje de error
                     }

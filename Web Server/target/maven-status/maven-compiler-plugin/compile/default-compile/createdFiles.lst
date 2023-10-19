@@ -53,6 +53,7 @@ persistencia\InscripcionJpaController.class
 Servlets\SvActividad.class
 persistencia\TuristaJpaController.class
 logica\Proveedor_.class
+Servlets\SvDeptosYCategorias.class
 Servlets\SvModificarUsuario.class
 logica\SalidaTuristica_.class
 Servlets\SvUsuario.class

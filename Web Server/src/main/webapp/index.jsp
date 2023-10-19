@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="logica.Categoria"%>
+<%@page import="logica.Departamento"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,8 +10,12 @@
         <title>Turismo.uy - Reserva de Paquetes Turísticos</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
-    <body>
-
+    <body onload="cargarDatos()">
+        <%
+            ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>) request.getAttribute("listaCategorias");
+           
+            ArrayList<Departamento> listaDepartamentos = (ArrayList<Departamento>) request.getAttribute("listaDepartamentos");
+        %>
         <header>
             <div id="logo">
                 <h1>Turismo.uy</h1>
@@ -35,20 +42,28 @@
             </ul>
             <h2>Departamentos</h2>
             <ul>
-                <li><a class="departamento" href="#">Montevideo</a></li>
-                <li><a class="departamento" href="#">Canelones</a></li>
-                <li><a class="departamento" href="#">Maldonado</a></li>
-                <li><a class="departamento" href="#">Colonia</a></li>
-                <li><a class="departamento" href="#">Rocha</a></li>
+                <%
+                    if (listaDepartamentos != null && !listaDepartamentos.isEmpty()) {
+                        for (Departamento d : listaDepartamentos) {
+                            out.println("<li> <a href='#'>" + d.getNombre() + "</a></li>");
+                        }
+                    } else {
+                        out.println("<li>No hay departamentos con actividades confirmadas.</li>");
+                    }
+                %>
             </ul>
 
             <h2>Categorías</h2>
             <ul>
-                <li><a href="#">Aventura y Deporte</a></li>
-                <li><a href="#">Campo y Naturaleza</a></li>
-                <li><a href="#">Cultura y Patrimonio</a></li>
-                <li><a href="#">Gastronomia</a></li>
-                <li><a href="#" target="_blank">Turismo Playas</a></li>
+                <%
+                    if (listaCategorias != null && !listaCategorias.isEmpty()) {
+                        for (Categoria c : listaCategorias) {
+                            out.println("<li> <a href='#'>" + c.getNombre() + "</a></li>");
+                        }
+                    } else {
+                        out.println("<li>No hay categorias con actividades confirmadas.</li>");
+                    }
+                %>
 
             </ul>
         </aside>
@@ -84,4 +99,19 @@
             <p>&copy; 2023 Turismo.uy</p>
         </footer>
     </body>
+    <script>
+        function cargarDatos() {
+            console.log("La función cargarDatos se está ejecutando...");
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "SvDeptosYCategorias", true);
+             xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                
+            }
+        };
+            xhr.send();
+        }
+
+
+    </script>
 </html>

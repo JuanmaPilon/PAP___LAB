@@ -807,6 +807,17 @@ public class Controlador implements IControlador {
        return listaPaquetesTurista;
     }
 
+    @Override
+    public ArrayList<Actividad> listaActividadesConfirmadas(){
+        ArrayList<Actividad> listaActividadesConfirmadas = new ArrayList<Actividad>() ;
+        for(Actividad a:  controlPersis.traerActividades()){
+            if(a.getEstado().equals(TipoEstado.confirmada)){
+                listaActividadesConfirmadas.add(a);
+            }
+        }
+        return listaActividadesConfirmadas;
+        
+    }
     //Carga de los Datos de Prueba
     @Override
     public void cargarDatosDePrueba() {

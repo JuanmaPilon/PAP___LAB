@@ -75,6 +75,7 @@ public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String d
 public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
 public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
+public abstract ArrayList<Actividad> listaActividadesConfirmadas();
 public abstract void cargarDatosDePrueba();
 
 
