@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,27 +45,26 @@
     </aside>
 
     <main>
-        <h1>Consulta de Paquete de Actividades Turisticas</h1>
+        
 
-        <div class="actividad">
-            <img src="imagen_paquete.jpg" alt="Imagen del paquete">
-            <h3>Nombre del Paquete</h3>
-            <p>Descripción del paquete</p>
-            <p>Duracion del paquete en días</p>
-            <p>Precio: $</p>
-        </div>
+            <h2>Consulta de Paquetes</h2>
+            <form action="SvPerfilPaquete" method="GET" name="perfilPaquete">
+                <label for="paquete">Selecciona un paquete</label>
+                <select id="paquete" name="paquete">
+                    <% ArrayList<String> listaPaquetes = (ArrayList<String>) request.getSession().getAttribute("listaPaquetes");
+                        if (listaPaquetes != null) {
+                       
+                            for (String paquete : listaPaquetes) {%>
+                    <option value="<%= paquete%>"><%= paquete%></option>
+                    
+                    <% }
+                        }%>
 
-        <h3>Actividades Incluidas en el Paquete</h3>
-        <ul>
-            <li>
-                <a href="perfilActividadTuristica.jsp">Nombre de la Actividad 1</a>
-                <p>Descripción de la Actividad 1</p>
-            </li>
-            <li>
-                <a href="perfilActividadTuristica.jsp">Nombre de la Actividad X</a>
-                <p>Descripción de la Actividad X</p>
-            </li>
-        </ul>
+                </select>
+                <button type="submit">Consultar
+                </button>
+
+            </form>
     </main>
 
     <footer>

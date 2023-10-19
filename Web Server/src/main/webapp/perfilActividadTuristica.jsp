@@ -1,3 +1,4 @@
+<%@page import="logica.Paquete"%>
 <%@page import="logica.SalidaTuristica"%>
 <%@page import="logica.Categoria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,6 +11,7 @@
         //ArrayList<String> cat = (ArrayList<String>) request.getSession().getAttribute("categorias");
         ArrayList<Categoria> categorias = act.getListaCategoria();
         ArrayList<SalidaTuristica> salidas = act.getListaSalidaTuristica();
+        ArrayList<Paquete> paquetes = act.getListaPaquete();
     %>
     <head>
         <meta charset="UTF-8">
@@ -73,23 +75,24 @@
                         %>
                 </ul>
             </div>
-
+            <div class="actividad">
             <h3>Paquetes Asociados</h3>
-            <ul class="list-asociadas">
-                <li>
-                    <div class="asociada">
-                        <img src="paquete1.jpg" alt="Paquete 1">
-                        <h4><a href="perfilPaqueteActividades.jsp">Paquete 1</a></h4>
-                    </div>
-                </li>
-                <li>
-                    <div class="asociada">
-                        <img src="paqueteX.jpg" alt="Paquete X">
-                        <h4><a href="perfilPaqueteActividades.jsp">Paquete X</a></h4>
-                    </div>
-                </li>
-            </ul>
-
+                <ul>
+                    <%
+                        if (paquetes != null && !paquetes.isEmpty()) {
+                            for (Paquete paquete : paquetes) {
+                    %>
+                    <li><a href='#'><%= paquete.getNombre()%></a></li>
+                        <%
+                            }
+                        } else {
+                        %>
+                    <li>No hay paquetes asociados.</li>
+                        <%
+                            }
+                        %>
+                </ul>
+            </div>
         </main>
 
         <footer>
