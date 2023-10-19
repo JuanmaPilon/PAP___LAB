@@ -1,72 +1,202 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Turismo.uy - Inscripción a Salida Turistica</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-    <header>
-        <div id="logo">
-            <h1>Turismo.uy</h1>
-        </div>
-        <div id="search">
-            <form action="buscar.jsp" method="post">
-                <input type="text" name="query" placeholder="Buscar turistas o paquetes">
-                <button type="submit">Buscar</button>
+    <head>
+        <meta charset="UTF-8">
+        <title>Turismo.uy - Inscripción a Salida Turistica</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body onload="cargarDatos()">
+        <header>
+            <div id="logo">
+                <h1>Turismo.uy - Inscripción a Salida Turística  </h1>
+            </div>
+            <div id="login">
+                <a href="logedUser.jsp">Volver al inicio</a>
+            </div>
+        </header>
+
+        <%
+            String filtro = "";
+        %>
+
+        <main>
+            <form action="SvActividad" method="GET">
+                <label for="departamento">Departamento:</label>
+                <select id="departamento" name="departamento"></select>
+                <button type="button" onclick="filtrarPorDepartamento()">Filtrar por Departamento</button>
+
+
+                <label for="categoria">Categoria:</label>
+                <select id="categoria" name="categoria"></select>
+                <button type="button" onclick="filtrarPorCategoria()">Filtrar por Categoria</button>
+
+
+                <label for="actividad">Actividades:</label>
+                <select id="actividad" name="actividad"></select>
+                <button type="button" onclick="verDetalles()">Ver Detalles Actividad</button>
+
+
+                <label for="actividadSalida">Salidas:</label>
+                <select id="actividadSalida" name="actividadSalida"></select>
+                <button type="button" onclick="cargarSalidasDeActividad()">Cargar Salidas de la Actividad</button>
+
+
+                <button type="button" onclick="verDetallesSalida()">Ver Detalles Salida</button> 
+
+
+                <label for="cantTuristas">Nº Turistas:</label>
+                <input type="number" id="cantTuristas" name="cantTuristas">
+
+                <label for="formaPago">Forma de pago:</label>
+                <select name="formaPago" id="formaPago">
+                    <option value="general">General</option>
+                    <option value="por_paquete">Por Paquete</option>
+                </select>
+
+                <button type="submit">Inscribirse</button>
             </form>
-        </div>
-        <div id="login">
-            <a href="logedUser.jsp" src="logedUser.jsp">Volver al inicio</a>
-        </div>
-    </header>
-    
-    <main>
-        <h2>Inscripción a Salida Turistica</h2>
-     
-        <form action="procesarInscripcion.jsp" method="post">
-            <label for="departamento">Departamento:</label>
-            <select name="departamento" id="departamento">
-                <option value="departamento1">Departamento 1</option>
-                <option value="departamento2">Departamento X</option>
-              
-            </select>
-            
-            <label for="categoria">Categoría:</label>
-            <select name="categoria" id="categoria">
-                <option value="categoria1">Categoria 1</option>
-                <option value="categoria2">Categoria X</option>
-           
-            </select>
-            
-            <!-- Si esta confirmado -->
-            
-            <label for="salida">Salida:</label>
-            <select name="salida" id="salida">
-                <option value="salida1">Salida 1</option>
-                <option value="salida2">Salida X</option>
-                <!-- Muestra segun cat seleccionada -->
-            </select>
-            
-            <label for="cantidadTuristas">Cantidad de Turistas:</label>
-            <input type="number" name="cantidadTuristas" id="cantidadTuristas" min="1">
-            
-            <label for="formaPago">Forma de Pago:</label>
-            <select name="formaPago" id="formaPago">
-                <option value="general">Pago General</option>
-                <option value="paquete">Pago por Paquete</option>
-            </select>
-            
-          <!-- Pago por paqueteeeee-->
-            
-            <button type="submit">Inscribirse</button>
-        </form>
-    </main>
-    
-    <footer>
-        <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
-        <p>&copy; 2023 Turismo.uy</p>
-    </footer>
-</body>
+
+
+        </main>
+
+        <script>
+
+            function cargarDepartamentos() {
+                fetch("SvDepartamento")
+                        .then(response => response.text())
+                        .then(data => {
+                            const departamentos = data.split(",");
+                            const select = document.getElementById("departamento");
+                            departamentos.forEach(departamento => {
+                                const option = document.createElement("option");
+                                option.value = departamento;
+                                option.text = departamento;
+                                select.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error("Error al cargar departamentos: " + error));
+            }
+
+            function cargarCategorias() {
+                fetch("SvCategoria")
+                        .then(response => response.text())
+                        .then(data => {
+                            const categorias = data.split(",");
+                            const select = document.getElementById("categoria");
+                            categorias.forEach(categoria => {
+                                const option = document.createElement("option");
+                                option.value = categoria;
+                                option.text = categoria;
+                                select.appendChild(option);
+                            });
+                            // Permite múltiples selecciones
+                        })
+                        .catch(error => console.error("Error al cargar categorías: " + error));
+            }
+
+
+
+            function filtrarPorDepartamento() {
+                const filtro = "FiltroDepartamento";
+                const departamentoSeleccionado = document.getElementById("departamento").value;
+
+                // Construir la URL con el valor seleccionado del departamento
+                const url = "SvActividad?filtro=" + filtro + "&departamento=" + encodeURIComponent(departamentoSeleccionado);
+
+                fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            const select = document.getElementById("actividad");
+                            select.innerHTML = ''; // Limpia las opciones anteriores
+
+                            const actividades = data.split(",");
+                            actividades.forEach(actividad => {
+                                const option = document.createElement("option");
+                                option.value = actividad;
+                                option.text = actividad;
+                                select.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error("Error al filtrar por departamento: " + error));
+            }
+
+
+            function filtrarPorCategoria() {
+                const filtro = "FiltroCategoria";
+                const categoriaSeleccionada = document.getElementById("categoria").value;
+
+                // Construir la URL con el valor seleccionado de la categoría
+                const url = "SvActividad?filtro=" + filtro + "&categoria=" + encodeURIComponent(categoriaSeleccionada);
+
+                fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            const select = document.getElementById("actividad");
+                            select.innerHTML = ''; // Limpia las opciones anteriores
+
+                            const actividades = data.split(",");
+                            actividades.forEach(actividad => {
+                                const option = document.createElement("option");
+                                option.value = actividad;
+                                option.text = actividad;
+                                select.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error("Error al filtrar por categoría: " + error));
+            }
+
+            function verDetalles() {
+                var actividadSeleccionada = document.getElementById("actividad").value;
+                var url = "SvActividad?actividad=" + actividadSeleccionada;
+                window.open(url, '_blank');
+            }
+
+            function cargarSalidasDeActividad() {
+                //  const filtro = "FiltroSalidasPorNomActividad";
+                const actividadSeleccionada = document.getElementById("actividad").value;
+                const url = "SvSalida?actividad=" + encodeURIComponent(actividadSeleccionada);
+
+                fetch(url)
+                        .then(response => response.text()) // Espera datos de texto
+                        .then(data => {
+                            const select = document.getElementById("actividadSalida");
+
+                            select.innerHTML = ''; // Limpia las opciones anteriores
+
+                            const actividadSalidas = data.split(",");
+                            actividadSalidas.forEach(actividadSalida => {
+                                if (actividadSalida) { // Evita opciones vacías
+                                    const option = document.createElement("option");
+                                    option.value = actividadSalida;
+                                    option.text = actividadSalida;
+                                    select.appendChild(option);
+                                }
+                            });
+                        })
+                        .catch(error => console.error("Error al cargar las salidas: " + error));
+            }
+
+            function verDetallesSalida() {
+                const filtro = "FiltroSalidasPorNomSalida";
+                var salidaSeleccionada = document.getElementById("actividadSalida").value;
+                var url = "SvSalida?actividadSalida=" + salidaSeleccionada;
+                window.open(url, '_blank');
+            }
+
+
+
+            function cargarDatos() {
+                cargarDepartamentos();
+                cargarCategorias();
+            }
+        </script>
+
+
+        <footer>
+            <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
+            <p>&copy; 2023 Turismo.uy</p>
+        </footer>
+    </body>
 </html>
