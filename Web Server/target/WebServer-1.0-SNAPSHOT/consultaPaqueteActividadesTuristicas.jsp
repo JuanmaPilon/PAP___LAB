@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
-<body>
+<body onload="cargarPaquetes()">
     <header>
         <div id="logo">
             <h1>Turismo.uy</h1>
@@ -51,17 +51,8 @@
             <form action="SvPerfilPaquete" method="GET" name="perfilPaquete">
                 <label for="paquete">Selecciona un paquete</label>
                 <select id="paquete" name="paquete">
-                    <% ArrayList<String> listaPaquetes = (ArrayList<String>) request.getSession().getAttribute("listaPaquetes");
-                        if (listaPaquetes != null) {
-                       
-                            for (String paquete : listaPaquetes) {%>
-                    <option value="<%= paquete%>"><%= paquete%></option>
-                    
-                    <% }
-                        }%>
-
                 </select>
-                <button type="submit">Consultar
+                            <button type="submit">Consultar
                 </button>
 
             </form>
@@ -72,4 +63,24 @@
         <p>&copy; 2023 Turismo.uy</p>
     </footer>
 </body>
+<script>
+                function cargarPaquetes() {
+                fetch("SvPaquete")
+                        .then(response => response.text())
+                        .then(data => {
+                            const departamentos = data.split(",");
+                            const select = document.getElementById("paquete");
+                            departamentos.forEach(departamento => {
+                                const option = document.createElement("option");
+                                option.value = departamento;
+                                option.text = departamento;
+                                select.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error("Error al paquetes: " + error));
+            }
+    
+    
+</script>    
+
 </html>

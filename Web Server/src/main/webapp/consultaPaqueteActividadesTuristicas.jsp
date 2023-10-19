@@ -51,15 +51,6 @@
             <form action="SvPerfilPaquete" method="GET" name="perfilPaquete">
                 <label for="paquete">Selecciona un paquete</label>
                 <select id="paquete" name="paquete">
-                    <% ArrayList<String> listaPaquetes = (ArrayList<String>) request.getSession().getAttribute("listaPaquetes");
-                        if (listaPaquetes != null) {
-                       
-                            for (String paquete : listaPaquetes) {%>
-                    <option value="<%= paquete%>"><%= paquete%></option>
-                    
-                    <% }
-                        }%>
-
                 </select>
                             <button type="submit">Consultar
                 </button>
@@ -86,7 +77,7 @@
                                 select.appendChild(option);
                             });
                         })
-                        .catch(error => console.error("Error al cargar departamentos: " + error));
+                        .catch(error => console.error("Error al paquetes: " + error));
             }
     
     

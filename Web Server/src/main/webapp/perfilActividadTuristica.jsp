@@ -61,36 +61,33 @@
                 <h3>Salidas Asociadas</h3>
                 <ul>
                     <%
+                        // Verificando si la lista no está vacía
                         if (salidas != null && !salidas.isEmpty()) {
+                            // Iterando sobre la lista y mostrando los nombres de las salidas
                             for (SalidaTuristica salida : salidas) {
-                    %>
-                    <li><a href='#'><%= salida.getNombre()%></a></li>
-                        <%
+                                out.println("<li> <a href='#' onclick='mostrarSalida(\"" + salida.getNombre() + "\")'>" + salida.getNombre() + "</a></li>");
                             }
                         } else {
-                        %>
-                    <li>No hay salidas asociadas.</li>
-                        <%
-                            }
-                        %>
+                            out.println("<li>No hay salidas asociadas.</li>");
+                        }
+                    %>
                 </ul>
             </div>
             <div class="actividad">
-            <h3>Paquetes Asociados</h3>
-                 <ul>
-                        <%
-                           
-                            // Verificando si la lista no está vacía
-                            if (paquetes != null && !paquetes.isEmpty()) {
-                                // Iterando sobre la lista y mostrando los nombres de las salidas
-                                for (Paquete nombrePaquete : paquetes) {
-                                    out.println("<li> <a href='#' onclick='mostrarPaquete(\"" + nombrePaquete.getNombre() + "\")'>" + nombrePaquete.getNombre() + "</a></li>");
-                                }
-                            } else {
-                                out.println("<li>No hay paquetes asociados.</li>");
+                <h3>Paquetes Asociados</h3>
+                <ul>
+                    <%
+                        // Verificando si la lista no está vacía
+                        if (paquetes != null && !paquetes.isEmpty()) {
+                            // Iterando sobre la lista y mostrando los nombres de las salidas
+                            for (Paquete nombrePaquete : paquetes) {
+                                out.println("<li> <a href='#' onclick='mostrarPaquete(\"" + nombrePaquete.getNombre() + "\")'>" + nombrePaquete.getNombre() + "</a></li>");
                             }
-                        %>
-                    </ul>
+                        } else {
+                            out.println("<li>No hay paquetes asociados.</li>");
+                        }
+                    %>
+                </ul>
             </div>
         </main>
 
@@ -100,18 +97,29 @@
         </footer>
     </body>
     <script>
-            function mostrarPaquete(paquete) {
-        var xhr = new XMLHttpRequest();
-        console.log("mostrarpaquete");
-        xhr.open("GET", "SvPerfilPaquete?paquete=" + paquete, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                 window.location.href = "perfilPaquete.jsp";
-            }
-        };
-        xhr.send();
-    }
-</script>
-    
-    
+        function mostrarPaquete(paquete) {
+            var xhr = new XMLHttpRequest();
+            console.log("mostrarpaquete");
+            xhr.open("GET", "SvPerfilPaquete?paquete=" + paquete, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    window.location.href = "perfilPaquete.jsp";
+                }
+            };
+            xhr.send();
+        }
+        function mostrarSalida(nombreSalida) {
+            var xhr = new XMLHttpRequest();
+            console.log("mostrarsalida");
+            xhr.open("GET", "SvPerfilSalida?nombreSalida=" + nombreSalida, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    window.location.href = "perfilSalidaTuristica.jsp";
+                }
+            };
+            xhr.send();
+        }
+    </script>
+
+
 </html>

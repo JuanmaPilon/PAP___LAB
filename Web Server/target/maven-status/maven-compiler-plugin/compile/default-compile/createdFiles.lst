@@ -30,6 +30,7 @@ Servlets\SvTurista.class
 logica\DTTurista.class
 logica\TipoEstado.class
 persistencia\ImagenPerfilJpaController.class
+Servlets\SvSalida.class
 logica\ImagenPerfil_.class
 persistencia\ProveedorJpaController$NicknameExistenceChecker.class
 logica\Categoria.class

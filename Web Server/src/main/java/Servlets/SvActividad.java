@@ -58,12 +58,16 @@ public class SvActividad extends HttpServlet {
         String filtro = request.getParameter("filtro");
 
         if ("FiltroDepartamento".equals(filtro)) {
-
             String departamentoSeleccionado = request.getParameter("departamento");
 
             ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicas(departamentoSeleccionado);
-
             String actividades = String.join(",", listaActividadesDepartamento);
+
+            if (actividades.isEmpty()) {
+                // Si la lista de actividades está vacía, envía una respuesta indicando que no hay actividades disponibles
+                actividades = "No hay actividades disponibles para este departamento";
+            }
+
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(actividades);
@@ -75,6 +79,12 @@ public class SvActividad extends HttpServlet {
             ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoria(categoriaSeleccionada);
 
             String actividades = String.join(",", listaActividadesCategoria);
+
+            if (actividades.isEmpty()) {
+                // Si la lista de actividades está vacía, envía una respuesta indicando que no hay actividades disponibles
+                actividades = "No hay actividades disponibles para esta categoria";
+            }
+
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(actividades);
@@ -82,32 +92,15 @@ public class SvActividad extends HttpServlet {
         }
 
         String nombreActividad = (String) request.getParameter("actividad");
-
         Actividad actividadConsultada = control.ConsultaActividadTuristica(nombreActividad);
 
         HttpSession misesion = request.getSession();
         misesion.setAttribute("actividad", actividadConsultada);
         response.sendRedirect("perfilActividadTuristica.jsp");
 
-//        String nomActividad = actividadConsultada.getNombre();
-//        String descripacion = actividadConsultada.getDescripcion();
-//        int duracionActividad = actividadConsultada.getDuracion();
-//        String ciudadActividad = actividadConsultada.getCiudad();
-//        String actividadProveedor = actividadConsultada.getProveedor().getNickname();
-//        ArrayList<SalidaTuristica> actividadSalidas = actividadConsultada.getListaSalidaTuristica();
-//        ArrayList<Categoria> actividadPaquetes = actividadConsultada.getListaCategoria();
-//
-//        misesion.setAttribute("nomActividad", nomActividad);
-//        misesion.setAttribute("descripcion", descripacion);
-//        misesion.setAttribute("duracionActividad", duracionActividad);
-//        misesion.setAttribute("ciudadActividad", ciudadActividad);
-//        misesion.setAttribute("actividadProveedor", actividadProveedor);
-//        misesion.setAttribute("actividadSalidas", actividadSalidas);
-//        misesion.setAttribute("actividadPaquetes", actividadPaquetes);
-//
-//        response.sendRedirect("mostrarActividadTuristica.jsp");
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String errorMessage = null;
         try {
@@ -166,6 +159,6 @@ public class SvActividad extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

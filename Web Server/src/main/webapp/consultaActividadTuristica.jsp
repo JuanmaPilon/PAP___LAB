@@ -30,7 +30,7 @@
             String filtro = "";
         %>
         <main>
-            <form action="SvActividad" method="GET">
+            <form id="consultaForm" action="SvActividad" method="GET">
                 <label for="departamento">Departamento:</label>
                 <select id="departamento" name="departamento"></select>
                 <button type="button" onclick="filtrarPorDepartamento()">Filtrar por Departamento</button>
@@ -145,6 +145,16 @@
             function cargarDatos() {
                 cargarDepartamentos();
                 cargarCategorias();
+
+                const consultaForm = document.getElementById("consultaForm");
+
+                consultaForm.addEventListener("submit", function (event) {
+                    const actividadSeleccionada = document.getElementById("actividad").value;
+                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento") {
+                        event.preventDefault(); // Prevenir el envío del formulario
+                        alert("Por favor, selecciona una actividad válida."); // Mostrar mensaje de error
+                    }
+                });
             }
 
         </script>

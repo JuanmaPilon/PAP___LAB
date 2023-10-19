@@ -41,7 +41,7 @@ public class SvPerfilPaquete extends HttpServlet {
         HttpSession misesion = request.getSession();
         misesion.setAttribute("dtpaquete", dtpaquete);
         misesion.setAttribute("listaActividadesPaquete", listaActividadesPaquete);
-        //response.sendRedirect("perfilPaquete.jsp");
+        response.sendRedirect("perfilPaquete.jsp");
         
     }
 
