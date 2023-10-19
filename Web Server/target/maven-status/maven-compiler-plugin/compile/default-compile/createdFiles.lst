@@ -25,6 +25,7 @@ persistencia\exceptions\IllegalOrphanException.class
 com\turismouy\pap___lab\resources\JavaEE8Resource.class
 persistencia\ProveedorJpaController$EmailExistenceChecker.class
 logica\Actividad.class
+Servlets\SvPaquete.class
 Servlets\SvTurista.class
 logica\DTTurista.class
 logica\TipoEstado.class
@@ -59,6 +60,7 @@ Servlets\SvInscripcionSalida.class
 logica\DTProveedor.class
 Servlets\SvPerfilUsuario.class
 logica\DTActividad.class
+Servlets\SvPerfilPaquete.class
 persistencia\ControladoraPersistencia.class
 logica\Fabrica.class
 persistencia\ActividadJpaController.class
