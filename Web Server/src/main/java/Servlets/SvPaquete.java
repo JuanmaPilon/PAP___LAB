@@ -39,7 +39,12 @@ public class SvPaquete extends HttpServlet {
                 
         misesion.setAttribute("listaPaquetes", listaPaquetes);
         
-        response.sendRedirect("consultaPaqueteActividadesTuristicas.jsp");
+        String paq = String.join(",", listaPaquetes);
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(paq);
+        
+        //response.sendRedirect("consultaPaqueteActividadesTuristicas.jsp");
     }
 
 

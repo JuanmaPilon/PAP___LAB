@@ -30,6 +30,7 @@ public class SvPerfilSalida extends HttpServlet {
         System.out.println("Nombre de la Salida: " + nombreSalida);
         SalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
         misesion.setAttribute("salida", salT);
+        //response.sendRedirect("perfilSalida.jsp");
     }
 
     @Override

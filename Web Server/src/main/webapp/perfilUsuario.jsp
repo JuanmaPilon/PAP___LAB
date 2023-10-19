@@ -139,8 +139,8 @@
                             // Verificando si la lista no está vacía
                             if (nombresPaquetes != null && !nombresPaquetes.isEmpty()) {
                                 // Iterando sobre la lista y mostrando los nombres de las salidas
-                                for (String P : nombresPaquetes) {
-                                    out.println("<li><a href='#'>" + P + "</a></li>");
+                                for (String nombrePaquete : nombresPaquetes) {
+                                    out.println("<li> <a href='#' onclick='mostrarPaquete(\"" + nombrePaquete + "\")'>" + nombrePaquete + "</a></li>");
                                 }
                             } else {
                                 out.println("<li>No hay paquetes comprados.</li>");
@@ -196,6 +196,18 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                  window.location.href = "perfilSalidaTuristica.jsp";
+            }
+        };
+        xhr.send();
+    }
+    
+        function mostrarPaquete(paquete) {
+        var xhr = new XMLHttpRequest();
+        console.log("mostrarpaquete");
+        xhr.open("GET", "SvPerfilPaquete?paquete=" + paquete, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                 window.location.href = "perfilPaquete.jsp";
             }
         };
         xhr.send();

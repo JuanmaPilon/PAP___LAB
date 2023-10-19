@@ -1,6 +1,13 @@
+<%@page import="logica.SalidaTuristica"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="logica.Actividad"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+        <%
+        SalidaTuristica salida = (SalidaTuristica) request.getSession().getAttribute("salida");//usuario del que se muestra la info
+
+    %>
 <head>
     <meta charset="UTF-8">
     <title>Turismo.uy - Perfil de Salida Turística</title>
@@ -43,21 +50,22 @@
         </ul>
     </aside>
 
+  
+    
+    
     <main>
         <h2>Perfil de Salida Turistica</h2>
 
         <div class="actividad">
-            <img src="imagenactividad.jpg" alt="Imagen de la actividad">
-            <h3>Nombre de la Actividad</h3>
-            <p>Descripción de la actividad</p>
+                <img src="imagen_actividad.jpg" alt="Imagen de la actividad">
+                <h3><%=salida.getNombre()%></h3>
+                <p>Cantidad máxima de turistas <%=salida.getCantMax() %></p>
+                <p>Fecha de la Salida <%=salida.getfSalida() %></p>
+                <p>Lugar: <%=salida.getLugar() %></p>
+                <p>Fecha de Alta: <%=salida.getfAlta() %> </p>
         </div>
 
-        <h3>Salida Turistica Seleccionada</h3>
-        <div class="salida-turistica">
-            <img src="imagensalida.jpg" alt="Imagen de la salida">
-            <h3>Nombre</h3>
-            <p>Descri</p>
-        </div>
+
     </main>
 
     <footer>

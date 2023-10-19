@@ -77,21 +77,20 @@
             </div>
             <div class="actividad">
             <h3>Paquetes Asociados</h3>
-                <ul>
-                    <%
-                        if (paquetes != null && !paquetes.isEmpty()) {
-                            for (Paquete paquete : paquetes) {
-                    %>
-                    <li><a href='#'><%= paquete.getNombre()%></a></li>
+                 <ul>
                         <%
+                           
+                            // Verificando si la lista no está vacía
+                            if (paquetes != null && !paquetes.isEmpty()) {
+                                // Iterando sobre la lista y mostrando los nombres de las salidas
+                                for (Paquete nombrePaquete : paquetes) {
+                                    out.println("<li> <a href='#' onclick='mostrarPaquete(\"" + nombrePaquete.getNombre() + "\")'>" + nombrePaquete.getNombre() + "</a></li>");
+                                }
+                            } else {
+                                out.println("<li>No hay paquetes asociados.</li>");
                             }
-                        } else {
                         %>
-                    <li>No hay paquetes asociados.</li>
-                        <%
-                            }
-                        %>
-                </ul>
+                    </ul>
             </div>
         </main>
 
@@ -100,4 +99,19 @@
             <p>&copy; 2023 Turismo.uy</p>
         </footer>
     </body>
+    <script>
+            function mostrarPaquete(paquete) {
+        var xhr = new XMLHttpRequest();
+        console.log("mostrarpaquete");
+        xhr.open("GET", "SvPerfilPaquete?paquete=" + paquete, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                 window.location.href = "perfilPaquete.jsp";
+            }
+        };
+        xhr.send();
+    }
+</script>
+    
+    
 </html>

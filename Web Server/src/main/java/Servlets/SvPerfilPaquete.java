@@ -37,11 +37,11 @@ public class SvPerfilPaquete extends HttpServlet {
         DTPaquete dtpaquete = control.traerDTPaquete(paquete);
         
         ArrayList<String> listaActividadesPaquete = control.listaActividadesDelPaquete(paquete);
-        
+        System.out.println("aca svperfilpaque" + paquete);
         HttpSession misesion = request.getSession();
         misesion.setAttribute("dtpaquete", dtpaquete);
         misesion.setAttribute("listaActividadesPaquete", listaActividadesPaquete);
-        response.sendRedirect("perfilPaquete.jsp");
+        //response.sendRedirect("perfilPaquete.jsp");
         
     }
 
