@@ -78,7 +78,7 @@
                 <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
                 <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
                 <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
-                <li><a href="compraPaquete.jsp">Compra de Paquete</a></li> <!-- Turista -->
+                <li><a href="compraPaquete.jsp?usuario=<%= usuario%>">Comprar Paquete</a></li>  <!-- Turista -->
                     <%
                         }
                     %>
