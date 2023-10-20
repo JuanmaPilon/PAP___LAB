@@ -77,7 +77,7 @@
             String filtro = "";
         %>
         <main>
-            <form id="consultaForm" action="SvActividad" method="GET">
+            <form id="consultaForm" action="SvActividad" class="desplegable-menu" method="GET">
                 <label for="departamento">Departamento:</label>
                 <select id="departamento" name="departamento"></select>
                 <button type="button" onclick="filtrarPorDepartamento()">Filtrar por Departamento</button>

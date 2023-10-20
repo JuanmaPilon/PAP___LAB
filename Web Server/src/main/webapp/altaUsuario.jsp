@@ -12,7 +12,7 @@
 
             <header>
                 <div id="logo">
-                    <h1>Turismo.uy</h1>
+                    <h1>Turismo.uy - Alta de Usuario</h1>
                 </div>
                 <div id="search">
                     <form action="buscar.jsp" method="post">
@@ -26,7 +26,6 @@
             </header>
 
             <main>
-                <h2>Alta de Usuario</h2>
                 <script>
                     function mostrarCampos() {
                         var tipoUsuario = document.getElementById("tipoUsuario").value;
@@ -75,7 +74,7 @@
                     <label for="apellido">Apellido:</label>
                     <input placeholder="Sito" type="text" id="apellido" name="apellido" required>
 
-                    <label for="contrasenia">Contraseï¿½a:</label>
+                    <label for="contrasenia">Contrasenia:</label>
                     <input type="password" id="contrasenia" name="contrasenia" required>
 
                     <label for="confirmacion">Confirmar Contrasenia:</label>

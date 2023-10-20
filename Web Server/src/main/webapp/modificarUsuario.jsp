@@ -24,13 +24,14 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
+        <div class="container">
 
         <header>
             <div id="logo">
                 <h1>Turismo.uy - Modificar mis Datos</h1>
             </div>
             <div id="login">
-                <a href="logedUser.jsp">Volver a inicio</a>
+                <a href="logedUser.jsp">Volver al inicio</a>
             </div>
         </header>
         
@@ -189,7 +190,7 @@
             <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
             <p>&copy; 2023 Turismo.uy</p>
         </footer>
-
+            </div>
     </body>
 </html>
 

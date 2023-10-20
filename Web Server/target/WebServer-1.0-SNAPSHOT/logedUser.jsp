@@ -15,11 +15,11 @@
     <head>
         <meta charset="UTF-8">
         <link href="styles.css" src="styles.css"">
-        <title>Turismo.uy - Reserva de Paquetes Turísticos</title>
+        <title>Turismo.uy</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
-
+        <div class="container" class="clearfix">
         <header>
             <div id="logo">
                 <h1>Turismo.uy</h1>
@@ -134,8 +134,6 @@
                 <p>Disfruta de nuestras playas en Maldonado</p>
                 <a href="paquete.jsp?id=3">Ver paquetes</a>
             </section>
-
-
         </main>
 
 
@@ -143,6 +141,7 @@
             <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
             <p>&copy; 2023 Turismo.uy</p>
         </footer>
+        </div>
     </body>
     <script>
         function consultarPerfil(usuario) {

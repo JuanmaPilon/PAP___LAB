@@ -19,7 +19,7 @@
 <body onload="cargarPaquetes()">
     <header>
         <div id="logo">
-            <h1>Turismo.uy</h1>
+            <h1>Turismo.uy - Consulta de Paquete de Actividades Turisticas</h1>
         </div>
         <div id="search">
             <form action="svlet" method="post">
@@ -72,9 +72,6 @@
                     </aside>
 
     <main>
-        
-
-            <h2>Consulta de Paquetes</h2>
             <form action="SvPerfilPaquete" method="GET" name="perfilPaquete">
                 <label for="paquete">Selecciona un paquete</label>
                 <select id="paquete" name="paquete">

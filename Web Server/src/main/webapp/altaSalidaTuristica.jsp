@@ -18,7 +18,7 @@
     <body>
         <header>
             <div id="logo">
-                <h1>Turismo.uy</h1>
+                <h1>Turismo.uy - Alta de Salida Turistica</h1>
             </div>
             <div id="search">
                 <form action="svlet" method="get">
@@ -84,8 +84,7 @@
                     <%= errorMessage%>
                 </div>
                 <% }%>   
-            
-            <h2>Alta de Salida Turística</h2>
+
             <form action="SvAltaSalidaTuristica" method="post" enctype="multipart/form-data">
                 <label for="departamento">Seleccionar Departamento:</label>
                 <select id="departamento" name="departamento">

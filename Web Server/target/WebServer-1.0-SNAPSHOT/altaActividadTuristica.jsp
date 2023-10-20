@@ -79,7 +79,7 @@
     <body onload="cargarDatos()">
         <header>
             <div id="logo">
-                <h1>Turismo.uy</h1>
+                <h1>Turismo.uy - Alta Actividad Turistica</h1>
             </div>
             <div id="search">
                 <form action="buscar.jsp" method="post">
@@ -164,12 +164,10 @@
                 <%= errorMessage%>
             </div>
             <% }%>
-
-            <h2>Alta Actividad Turística</h2>
             <div class="error-message">
                 <%= (errorMensaje != null) ? errorMensaje : ""%>
             </div>
-            <form action="SvActividad" method="POST" enctype="multipart/form-data">
+            <form action="SvActividad" method="POST" enctype="multipart/form-data" >
                 <label for="departamento">Departamento:</label>
                 <select id="departamento" name="departamento"></select>
                 <label for="nombre">Nombre de la actividad:</label>
@@ -177,9 +175,9 @@
                 <label for="descripcion">Descripción:</label>
                 <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
                 <label for="duracion">Duración (en horas):</label>
-                <input type="number" id="duracion" name="duracion" required>
+                <input type="number" id="duracion" name="duracion" min="1" required>
                 <label for "costo">Costo (en pesos uruguayos):</label>
-                <input type="number" id="costo" name="costo" required>
+                <input type="number" id="costo" name="costo" required min="1">
                 <label for="ciudad">Ciudad:</label>
                 <input type="text" id="ciudad" name="ciudad" required>
                 <label for="imagen">Imagen (opcional):</label>

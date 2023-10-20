@@ -17,10 +17,10 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body onload="cargarUsuarios()">
-
+        <div class="container">
         <header>
             <div id="logo">
-                <h1>Turismo.uy</h1>
+                <h1>Turismo.uy - Consulta de Usuario</h1>
             </div>
             <div id="search">
                 <form action="buscar.jsp" method="post">
@@ -73,8 +73,7 @@
         </aside>
 
         <main>
-            <h2>Consulta de Usuario</h2>
-            <form action="SvPerfilUsuario" method="GET" name="cmbUsuarios">
+            <form action="SvPerfilUsuario" method="GET" name="cmbUsuarios" class="desplegable-menu">
                 <label for="usuario">Selecciona un usuario:</label>
                 <select id="usuario" name="usuario">
                     <% List<String> listaUsuarios = (List<String>) request.getAttribute("listaUsuarios");
@@ -119,5 +118,6 @@
             <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
             <p>&copy; 2023 Turismo.uy</p>
         </footer>
+        </div>
     </body>
 </html>

@@ -14,10 +14,11 @@
     </head>
 
     <body>
+        <div class="container">
 
         <header>
             <div id="logo">
-                <h1>Turismo.uy</h1>
+                <h1>Turismo.uy - Informacion de Usuario</h1>
             </div>
             <div id="search">
                 <form action="buscar.jsp" method="post">
@@ -57,8 +58,7 @@
         </aside>
         <%Usuario usu = (Usuario) request.getSession().getAttribute("usuPerfil");//usuario del que se muestra la info%>
 
-        <h1>Informacion del Usuario</h1>
-        <h2><%=usu.getNombre()%></h2>
+        <h1>Usuario: <%=usu.getNombre()%></h1>
         <div class="tabs">
             <ul class="tab-links">
                 <li class="active"><a href="#tab1">Perfil</a></li>
@@ -90,7 +90,7 @@
 
             <div class="tab-content">
                 <div id="tab1" class="tab active">
-                    <p><b>Nombre:</b> <%=usu.getNickname()%></p>
+                    <p><b>Nick:</b> <%=usu.getNickname()%></p>
                     <p><b>Nombre:</b> <%=usu.getNombre()%></p>
                     <p><b>Apellido:</b> <%=usu.getApellido()%></p>
                     <p><b>Email:</b> <%=usu.getCorreo()%></p>
@@ -175,6 +175,7 @@
         <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
         <p>&copy; 2023 Turismo.uy</p>
     </footer>
+    </div>
 </body>
 
 <script>
