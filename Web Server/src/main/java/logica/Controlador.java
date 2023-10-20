@@ -800,24 +800,46 @@ public class Controlador implements IControlador {
     @Override
     public ArrayList<String> listaPaquetesComprados(String nicknameTurista) {
         Turista t = controlPersis.traerTurista(nicknameTurista);
-       ArrayList<String> listaPaquetesTurista = new ArrayList ();
-       for (Compra c : t.getListaCompras()){
-          listaPaquetesTurista.add(c.getPaquete().getNombre());
-       }
-       return listaPaquetesTurista;
+        ArrayList<String> listaPaquetesTurista = new ArrayList();
+        for (Compra c : t.getListaCompras()) {
+            listaPaquetesTurista.add(c.getPaquete().getNombre());
+        }
+        return listaPaquetesTurista;
     }
 
     @Override
-    public ArrayList<Actividad> listaActividadesConfirmadas(){
-        ArrayList<Actividad> listaActividadesConfirmadas = new ArrayList<Actividad>() ;
-        for(Actividad a:  controlPersis.traerActividades()){
-            if(a.getEstado().equals(TipoEstado.confirmada)){
+    public ArrayList<Actividad> listaActividadesConfirmadas() {
+        ArrayList<Actividad> listaActividadesConfirmadas = new ArrayList<Actividad>();
+        for (Actividad a : controlPersis.traerActividades()) {
+            if (a.getEstado().equals(TipoEstado.confirmada)) {
                 listaActividadesConfirmadas.add(a);
             }
         }
         return listaActividadesConfirmadas;
-        
+
     }
+
+    @Override
+    public ArrayList<Paquete> listaPaquetesVigentesSalida(String nombreSalida) {
+        Date fechaActual = new Date();
+        SalidaTuristica salt = controlPersis.consultaSalida(nombreSalida);
+        ArrayList<Paquete> listaPaquetes = salt.getActividad().getListaPaquete();
+        ArrayList<Paquete> listaPaquetesVigentes = new ArrayList();
+        Calendar calendar = Calendar.getInstance();
+        for (Paquete p : listaPaquetes) {
+            calendar.setTime(p.getFechaAlta());  // Establece la fecha de alta del paquete
+            calendar.add(Calendar.DAY_OF_MONTH, p.getValidez());  // Agrega la validez en días al calendario
+            Date fechaVencimiento = calendar.getTime();  // Obtiene la fecha de vencimiento
+            if (!fechaVencimiento.before(fechaActual)) {//  !(si la fecha de vencimiento ya paso) osea, si aun no vencio
+                if(!listaPaquetesVigentes.contains(p)){// si no esta en el arraylist 
+                    listaPaquetesVigentes.add(p); //lo agrego
+                }
+            }
+        }
+
+        return listaPaquetesVigentes;
+    }
+
     //Carga de los Datos de Prueba
     @Override
     public void cargarDatosDePrueba() {
@@ -1036,16 +1058,15 @@ public class Controlador implements IControlador {
         }
 
     }
+
     @Override
-    public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria){ 
-      ArrayList<String> listaActividadesTuristicas = new ArrayList();
-       for (String s: controlPersis.listaActividadesTuristicasPorCategoria(categoria)){
-           listaActividadesTuristicas.add(s);
-       }
-      
-       return listaActividadesTuristicas;
-      
+    public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria) {
+        ArrayList<String> listaActividadesTuristicas = new ArrayList();
+        for (String s : controlPersis.listaActividadesTuristicasPorCategoria(categoria)) {
+            listaActividadesTuristicas.add(s);
+        }
+
+        return listaActividadesTuristicas;
 
     }
 }
-

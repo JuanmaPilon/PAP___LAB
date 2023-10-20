@@ -107,7 +107,7 @@ public class SvSalida extends HttpServlet {
 //
 //        response.sendRedirect("mostrarActividadTuristica.jsp");
     }
-
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String errorMessage = null;
         try {
