@@ -1,14 +1,21 @@
+<%@page import="logica.Usuario" %>
+<%@page import="logica.Proveedor" %>
+<%@page import="logica.Turista" %>
+<%@page import="java.util.ArrayList"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <% String usuario = (String) request.getSession().getAttribute("usuario");
+            Usuario usu = (Usuario) request.getSession().getAttribute("usu");
+        %>
         <meta charset="UTF-8">
         <link href="styles.css" rel="stylesheet">
         <title>Turismo.uy - Alta de Salida Turística</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
-
         <header>
             <div id="logo">
                 <h1>Turismo.uy</h1>
@@ -24,7 +31,48 @@
             </div>
         </header>
 
-        <main>
+       
+            
+             <aside>
+            <h2>Mi perfil</h2>
+            <ul>
+                <%
+                    if (usu instanceof Proveedor) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario%>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+
+                <%
+                    }
+                %>
+
+
+                <%
+                    if (usu instanceof Turista) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="compraPaquete.jsp">Compra de Paquete</a></li> <!-- Turista -->
+                    <%
+                        }
+                    %>
+
+
+            </ul>
+                    
+                    </aside>
+                    
+                     <main>
             
              <%
                 String errorMensaje = (String) request.getAttribute("errorMensaje");

@@ -4,11 +4,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="logica.Actividad" %>
 <%@ page import="java.util.ArrayList" %>
+
+<%@page import="logica.Usuario" %>
+<%@page import="logica.Proveedor" %>
+<%@page import="logica.Turista" %>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
     <%
         Actividad act = (Actividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
         ArrayList<SalidaTuristica> salidas = act.getListaSalidaTuristica();
+        String usuario = (String) request.getSession().getAttribute("usuario");
+        Usuario usu = (Usuario) request.getSession().getAttribute("usu");
+
 
     %>
     <head>
@@ -32,15 +41,51 @@
                 <a href="logedUser.jsp" src="logedUser.jsp">Volver al inicio</a>
             </div>
         </header>
+        
+         <aside>
+                      <h2>Mi perfil</h2>
+            <ul>
+                <%
+                    if (usu instanceof Proveedor) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario%>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+
+                <%
+                    }
+                %>
+
+
+                <%
+                    if (usu instanceof Turista) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="compraPaquete.jsp">Compra de Paquete</a></li> <!-- Turista -->
+                    <%
+                        }
+                    %>
+
+
+            </ul>
+        </aside>
 
         <main>
 
             <div class="actividad">
                 <h3>Salidas Asociadas</h3>
                 <ul>
-                    <%         
-
-                        if (salidas != null && !salidas.isEmpty()) {
+                    <%                        if (salidas != null && !salidas.isEmpty()) {
                             for (SalidaTuristica nombreSalida : salidas) {
                                 System.out.println(nombreSalida.getNombre());
                                 out.println("<li> <a href='#' onclick='mostrarSalida(\"" + nombreSalida.getNombre() + "\")'>" + nombreSalida.getNombre() + "</a></li>");
@@ -67,9 +112,9 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     window.location.href = "perfilSalidaTuristica.jsp";
                 }
-            };
-            xhr.send();
-        }
+                ;
+                xhr.send();
+            }
     </script>
 
 </html>

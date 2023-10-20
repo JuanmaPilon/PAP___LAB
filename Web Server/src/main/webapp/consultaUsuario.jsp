@@ -1,8 +1,16 @@
+<%@page import="logica.Usuario" %>
+<%@page import="logica.Proveedor" %>
+<%@page import="logica.Turista" %>
+<%@page import="java.util.ArrayList"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
+            <%      String usuario = (String) request.getSession().getAttribute("usuario");
+            Usuario usu = (Usuario) request.getSession().getAttribute("usu");
+        %>
         <meta charset="UTF-8">
         <link href="styles.css" src="styles.css"">
         <title>Turismo.uy - Reserva de Paquetes Turísticos</title>
@@ -27,25 +35,38 @@
 
 
         <aside>
-            <h2>Departamentos</h2>
+                      <h2>Mi perfil</h2>
             <ul>
-                <li><a href="#">Montevideo</a></li>
-                <li><a href="#">Canelones</a></li>
-                <li><a href="#">Maldonado</a></li>
-                <li><a href="#">Colonia</a></li>
-                <li><a href="#">Rocha</a></li>
+                <%
+                    if (usu instanceof Proveedor) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario%>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
 
-            </ul>
-
-            <h2>Categorías</h2>
-            <ul>
-                <li><a href="#">Aventura y Deporte</a></li>
-                <li><a href="#">Campo y Naturaleza</a></li>
-                <li><a href="#">Cultura y Patrimonio</a></li>
-                <li><a href="#">Gastronomia</a></li>
-                <li><a href="#" target="_blank">Turismo Playas</a></li>
+                <%
+                    }
+                %>
 
 
+                <%
+                    if (usu instanceof Turista) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="compraPaquete.jsp">Compra de Paquete</a></li> <!-- Turista -->
+                    <%
+                        }
+                    %>
 
 
             </ul>
@@ -58,8 +79,8 @@
                 <select id="usuario" name="usuario">
                     <% List<String> listaUsuarios = (List<String>) request.getAttribute("listaUsuarios");
                         if (listaUsuarios != null) {
-                            for (String usuario : listaUsuarios) {%>
-                    <option value="<%= usuario%>"><%= usuario%></option>
+                            for (String u : listaUsuarios) {%>
+                    <option value="<%= u%>"><%= u%></option>
                     <% }
                         }%>
 

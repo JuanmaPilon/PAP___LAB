@@ -1,5 +1,3 @@
-modificarUsuario.jsp:
-
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.util.Date"%>
@@ -7,10 +5,19 @@ modificarUsuario.jsp:
 <%@page import="logica.DTProveedor"%>
 <%@page import="logica.DTTurista"%>
 <%@page import="logica.Usuario"%>
+
+<%@page import="logica.Usuario" %>
+<%@page import="logica.Proveedor" %>
+<%@page import="logica.Turista" %>
+<%@page import="java.util.ArrayList"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <%      String usua = (String) request.getSession().getAttribute("usuario");
+            Usuario usi = (Usuario) request.getSession().getAttribute("usu");
+        %>
         <meta charset="UTF-8">
         <link href="styles.css" rel="stylesheet">
         <title>Turismo.uy - Modificar Usuario</title>
@@ -26,6 +33,41 @@ modificarUsuario.jsp:
                 <a href="logedUser.jsp">Volver a inicio</a>
             </div>
         </header>
+        
+        <aside>
+                      <h2>Mi perfil</h2>
+            <ul>
+                <%
+                    if (usi instanceof Proveedor) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usua%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="altaActividadTuristica.jsp?usuario=<%= usua%>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+
+                <%
+                    }
+                %>
+
+
+                <%
+                    if (usi instanceof Turista) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usua%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="compraPaquete.jsp">Compra de Paquete</a></li> <!-- Turista -->
+                    <%
+                        }
+                    %>
+                </aside>
         <main>
             <%
                 String usuario = request.getParameter("usuario"); // Para tener el nickname del usuario al acceder a la página

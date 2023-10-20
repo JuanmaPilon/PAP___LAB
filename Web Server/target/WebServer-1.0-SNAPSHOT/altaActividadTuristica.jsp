@@ -1,7 +1,16 @@
+<%@page import="logica.Usuario" %>
+<%@page import="logica.Proveedor" %>
+<%@page import="logica.Turista" %>
+<%@page import="java.util.ArrayList"%>
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <% String usuario = (String) request.getSession().getAttribute("usuario");
+            Usuario usu = (Usuario) request.getSession().getAttribute("usu");
+        %>
         <meta charset="UTF-8">
         <title>Turismo.uy - Alta de Actividad Turística</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
@@ -83,8 +92,45 @@
             </div>
         </header>
 
-        <%--
         <aside>
+            <h2>Mi perfil</h2>
+            <ul>
+                <%
+                    if (usu instanceof Proveedor) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario%>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+
+                <%
+                    }
+                %>
+
+
+                <%
+                    if (usu instanceof Turista) {
+                %>
+                <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
+                <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
+                <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                <li><a href="compraPaquete.jsp">Compra de Paquete</a></li> <!-- Turista -->
+                    <%
+                        }
+                    %>
+
+
+            </ul>
+
+            <%--
+
             <h2>Departamentos</h2>
             <ul>
                 <li><a href="#">Montevideo</a></li>
@@ -101,22 +147,23 @@
                 <li><a href="#">Cultura y Patrimonio</a></li>
                 <li><a href="#">Gastronomía</a></li>
                 <li><a href="#">Turismo Playas</a></li>
+               
             </ul>
+            --%>
         </aside>
-        --%>
+
 
         <main>
             <%
-                String usuario = request.getParameter("usuario");
                 String errorMensaje = (String) request.getAttribute("errorMensaje");
             %>
-            
+
             <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-                <% if (errorMessage != null) {%>
-                <div class="error-message">
-                    <%= errorMessage%>
-                </div>
-                <% }%>
+            <% if (errorMessage != null) {%>
+            <div class="error-message">
+                <%= errorMessage%>
+            </div>
+            <% }%>
 
             <h2>Alta Actividad Turística</h2>
             <div class="error-message">
