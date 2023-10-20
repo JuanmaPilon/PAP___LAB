@@ -2,8 +2,16 @@
 <%@page import="logica.Usuario" %>
 <%@page import="logica.Proveedor" %>
 <%@page import="logica.Turista" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="logica.Categoria"%>
+<%@page import="logica.Departamento"%>
 <!DOCTYPE html>
 <html>
+     <%
+            ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>) request.getSession().getAttribute("listaCategorias");
+           
+            ArrayList<Departamento> listaDepartamentos = (ArrayList<Departamento>) request.getSession().getAttribute("listaDepartamentos");
+        %>
     <head>
         <meta charset="UTF-8">
         <link href="styles.css" src="styles.css"">
@@ -77,24 +85,30 @@
 
 
             </ul>
-            <h2>Departamentos</h2>
+              <h2>Departamentos</h2>
             <ul>
-                <li><a href="#">Montevideo</a></li>
-                <li><a href="#">Canelones</a></li>
-                <li><a href="#">Maldonado</a></li>
-                <li><a href="#">Colonia</a></li>
-                <li><a href="#">Rocha</a></li>
-
+                <%
+                    if (listaDepartamentos != null && !listaDepartamentos.isEmpty()) {
+                        for (Departamento d : listaDepartamentos) {
+                            out.println("<li> <a href='#'>" + d.getNombre() + "</a></li>");
+                        }
+                    } else {
+                        out.println("<li>No hay departamentos con actividades confirmadas.</li>");
+                    }
+                %>
             </ul>
 
             <h2>Categorías</h2>
             <ul>
-                <li><a href="#">Aventura y Deporte</a></li>
-                <li><a href="#">Campo y Naturaleza</a></li>
-                <li><a href="#">Cultura y Patrimonio</a></li>
-                <li><a href="#">Gastronomia</a></li>
-                <li><a href="#" target="_blank">Turismo Playas</a></li>
-
+                <%
+                    if (listaCategorias != null && !listaCategorias.isEmpty()) {
+                        for (Categoria c : listaCategorias) {
+                            out.println("<li> <a href='#'>" + c.getNombre() + "</a></li>");
+                        }
+                    } else {
+                        out.println("<li>No hay categorias con actividades confirmadas.</li>");
+                    }
+                %>
             </ul>
         </aside>
 

@@ -10,11 +10,11 @@
         <title>Turismo.uy - Reserva de Paquetes Turísticos</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
-    <body onload="cargarDatos()">
+    <body >
         <%
-            ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>) request.getAttribute("listaCategorias");
+            ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>) request.getSession().getAttribute("listaCategorias");
            
-            ArrayList<Departamento> listaDepartamentos = (ArrayList<Departamento>) request.getAttribute("listaDepartamentos");
+            ArrayList<Departamento> listaDepartamentos = (ArrayList<Departamento>) request.getSession().getAttribute("listaDepartamentos");
         %>
         <header>
             <div id="logo">
@@ -99,19 +99,5 @@
             <p>&copy; 2023 Turismo.uy</p>
         </footer>
     </body>
-    <script>
-        function cargarDatos() {
-            console.log("La función cargarDatos se está ejecutando...");
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "SvDeptosYCategorias", true);
-             xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                
-            }
-        };
-            xhr.send();
-        }
-
-
-    </script>
+   
 </html>
