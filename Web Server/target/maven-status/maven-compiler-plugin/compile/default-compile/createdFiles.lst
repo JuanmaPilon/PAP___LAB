@@ -86,3 +86,4 @@ logica\DTInscripcion.class
 persistencia\SalidaTuristicaJpaController.class
 logica\exceptions\IllegalOrphanException.class
 logica\Paquete.class
+Servlets\SvInscripcion.class

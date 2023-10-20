@@ -94,7 +94,7 @@
 
 
                 <label for="cantTuristas">Nº Turistas:</label>
-                <input type="number" id="cantTuristas" name="cantTuristas">
+                <input type="number" id="cantTuristas" name="cantTuristas" min="1">
 
                 <label for="formaPago">Forma de pago:</label>
                 <select name="formaPago" id="formaPago">
@@ -203,7 +203,7 @@
             function cargarSalidasDeActividad() {
                 //  const filtro = "FiltroSalidasPorNomActividad";
                 const actividadSeleccionada = document.getElementById("actividad").value;
-                const url = "SvSalida?actividad=" + encodeURIComponent(actividadSeleccionada);
+                const url = "SvInscripcion?actividad=" + encodeURIComponent(actividadSeleccionada);
 
                 fetch(url)
                         .then(response => response.text()) // Espera datos de texto

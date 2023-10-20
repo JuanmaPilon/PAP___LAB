@@ -836,7 +836,7 @@ public class Controlador implements IControlador {
                 }
             }
         }
-
+        // falta ver que solo te retorne los paquetes que compro el turista y que tenga inscripciones disponibles   
         return listaPaquetesVigentes;
     }
 
