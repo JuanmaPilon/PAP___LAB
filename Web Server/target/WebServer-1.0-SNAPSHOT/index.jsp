@@ -13,7 +13,7 @@
     <body >
         <%
             ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>) request.getSession().getAttribute("listaCategorias");
-           
+
             ArrayList<Departamento> listaDepartamentos = (ArrayList<Departamento>) request.getSession().getAttribute("listaDepartamentos");
         %>
         <header>
@@ -42,15 +42,18 @@
             </ul>
             <h2>Departamentos</h2>
             <ul>
-                <%
-                    if (listaDepartamentos != null && !listaDepartamentos.isEmpty()) {
-                        for (Departamento d : listaDepartamentos) {
-                            out.println("<li> <a href='#'>" + d.getNombre() + "</a></li>");
+                <ul>
+                    <%
+                        if (listaDepartamentos != null && !listaDepartamentos.isEmpty()) {
+                            for (Departamento d : listaDepartamentos) {
+                                out.println("<li> <a href='#' id='" + d.getNombre() + "'>" + d.getNombre() + "</a></li>");
+                            }
+                        } else {
+                            out.println("<li>No hay departamentos con actividades confirmadas.</li>");
                         }
-                    } else {
-                        out.println("<li>No hay departamentos con actividades confirmadas.</li>");
-                    }
-                %>
+                    %>
+                </ul>
+
             </ul>
 
             <h2>Categorías</h2>
@@ -84,11 +87,8 @@
                 <a href="paquete.jsp?id=2">Ver paquetes</a>
             </section>
 
-            <section class="actividad">
-                <img src="./images/playaFoto.jpg" alt="VisitaPlaya">
-                <h3>Visita las Playas</h3>
-                <p>Disfruta de nuestras playas en Maldonado.</p>
-                <a href="paquete.jsp?id=3">Ver paquetes</a>
+            <section id="actividadesContainer" class="actividadesContainer">
+
             </section>
 
         </main>
@@ -99,5 +99,38 @@
             <p>&copy; 2023 Turismo.uy</p>
         </footer>
     </body>
-   
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener la referencia al contenedor de actividades
+            var actividadesContainer = document.getElementById("actividadesContainer");
+
+            // Obtener todos los enlaces de departamentos
+            var links = document.querySelectorAll('ul li a');
+
+            // Iterar sobre los enlaces y agregar un controlador de eventos para el clic
+            links.forEach(function (link) {
+                link.addEventListener("click", function (event) {
+                    event.preventDefault();
+
+                    // Obtener el id del departamento seleccionado
+                    var departamentoId = link.id;
+                    console.log("Departamento clickeado: "+departamentoId);
+
+                    // Realizar una solicitud al servidor para obtener las actividades del departamento seleccionado
+                    var xhr = new XMLHttpRequest();
+                    var url = "SvObtenerActividades?departamentoId=" + departamentoId;
+                    console.log("URL de solicitud: " + url);
+                    xhr.open("GET", url, true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // Manejar la respuesta del servidor y mostrar las actividades en el contenedor
+                            actividadesContainer.innerHTML = xhr.responseText;
+                        }
+                    };
+                    xhr.send();
+                });
+            });
+        });
+
+    </script>
 </html>

@@ -72,6 +72,7 @@ Servlets\SvPerfilActividad.class
 logica\Actividad_.class
 logica\DTPaquete.class
 persistencia\TuristaJpaController$NicknameExistenceChecker.class
+Servlets\SvObtenerActividades.class
 logica\ImagenPerfil.class
 Servlets\SvCargarDepartamentos.class
 logica\Compra.class
