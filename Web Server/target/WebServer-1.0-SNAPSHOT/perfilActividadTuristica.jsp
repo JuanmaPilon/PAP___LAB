@@ -12,6 +12,8 @@
         ArrayList<Categoria> categorias = act.getListaCategoria();
         ArrayList<SalidaTuristica> salidas = act.getListaSalidaTuristica();
         ArrayList<Paquete> paquetes = act.getListaPaquete();
+        String rutaAlaImagen = (String) request.getSession().getAttribute("imagen");
+        
     %>
     <head>
         <meta charset="UTF-8">
@@ -36,8 +38,9 @@
         </header>
 
         <main>
+          
             <div class="actividad">
-                <img src="imagen_actividad.jpg" alt="Imagen de la actividad">
+                <img src="<%= rutaAlaImagen %>" alt="Imagen de la actividad" style="width: 500px; height: 500px;" />
                 <h3><%=act.getNombre()%></h3>
                 <p>Descripcion: <%=act.getDescripcion()%></p>
                 <p>Fecha: <%=act.getfAlta()%></p>
@@ -89,6 +92,10 @@
                     %>
                 </ul>
             </div>
+                
+                    
+
+                   <%-- <img src="images/img1.jpg" alt="alt"/> --%>
         </main>
 
         <footer>

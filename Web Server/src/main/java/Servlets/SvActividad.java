@@ -33,6 +33,7 @@ import logica.Categoria;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.SalidaTuristica;
+import logica.imagenActividad;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.PreexistingEntityException;
 
@@ -90,13 +91,30 @@ public class SvActividad extends HttpServlet {
             response.getWriter().write(actividades);
 
         }
+        try {
+            String nombreActividad = (String) request.getParameter("actividad");
+            Actividad actividadConsultada = control.ConsultaActividadTuristica(nombreActividad);
+            imagenActividad imagen = control.buscarImagenPorActividad(nombreActividad);
+            
+            if (imagen == null) {
+                
+                String imagenVacia = "images/sinImagen.png";
+                HttpSession misesion = request.getSession();
+                misesion.setAttribute("actividad", actividadConsultada);
+                misesion.setAttribute("imagen", imagenVacia);
+                response.sendRedirect("perfilActividadTuristica.jsp");
 
-        String nombreActividad = (String) request.getParameter("actividad");
-        Actividad actividadConsultada = control.ConsultaActividadTuristica(nombreActividad);
+            } else {
+                String imagenRuta = imagen.getRuta();
+                HttpSession misesion = request.getSession();
+                misesion.setAttribute("actividad", actividadConsultada);
+                misesion.setAttribute("imagen", imagenRuta);
+                response.sendRedirect("perfilActividadTuristica.jsp");
+            }
 
-        HttpSession misesion = request.getSession();
-        misesion.setAttribute("actividad", actividadConsultada);
-        response.sendRedirect("perfilActividadTuristica.jsp");
+        } catch (Exception ex) {
+
+        }
 
     }
 

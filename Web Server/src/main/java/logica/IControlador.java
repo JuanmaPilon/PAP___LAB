@@ -13,6 +13,7 @@ import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
 public interface IControlador {
+public abstract imagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception;
 public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;

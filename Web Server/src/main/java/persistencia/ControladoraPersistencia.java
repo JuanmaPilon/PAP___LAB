@@ -44,6 +44,11 @@ public class ControladoraPersistencia {
     CompraJpaController compraJpa = new CompraJpaController();
 
     //Consultas
+    
+    public imagenActividad buscarImagenActividad(String nombreActividad) {
+        return imagenActividadJpa.findImagenPerfilByNombreActividad(nombreActividad);
+    }
+    
     public SalidaTuristica consultaSalida(String nombreSalida) {
         return salidaTuristicaJpa.findSalidaTuristica(nombreSalida);
     }

@@ -34,6 +34,14 @@ public class Controlador implements IControlador {
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
     //descomentado por una prueba:
+    
+    @Override
+    public imagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception {
+
+        return controlPersis.buscarImagenActividad(nombreActividad);
+        
+    }
+    
     @Override
     public ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception {
 
