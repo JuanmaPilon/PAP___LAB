@@ -831,7 +831,7 @@ public class Controlador implements IControlador {
             calendar.add(Calendar.DAY_OF_MONTH, p.getValidez());  // Agrega la validez en días al calendario
             Date fechaVencimiento = calendar.getTime();  // Obtiene la fecha de vencimiento
             if (!fechaVencimiento.before(fechaActual)) {//  !(si la fecha de vencimiento ya paso) osea, si aun no vencio
-                if(!listaPaquetesVigentes.contains(p)){// si no esta en el arraylist 
+                if (!listaPaquetesVigentes.contains(p)) {// si no esta en el arraylist 
                     listaPaquetesVigentes.add(p); //lo agrego
                 }
             }
@@ -839,9 +839,10 @@ public class Controlador implements IControlador {
         // falta ver que solo te retorne los paquetes que compro el turista y que tenga inscripciones disponibles   
         return listaPaquetesVigentes;
     }
+
     @Override
-    public ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento){
-       ArrayList<Actividad> listaActividadesTuristicas = new ArrayList();
+    public ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento) {
+        ArrayList<Actividad> listaActividadesTuristicas = new ArrayList();
         for (Actividad a : controlPersis.traerActividades()) {
             if (a.getDepartamento().getNombre().equals(nombreDepartamento) && a.getEstado().equals(TipoEstado.confirmada)) {
                 listaActividadesTuristicas.add(controlPersis.consultaActividad(a.getNombre()));
@@ -849,7 +850,6 @@ public class Controlador implements IControlador {
         }
         return listaActividadesTuristicas;
     }
-    
 
     //Carga de los Datos de Prueba
     @Override
@@ -1080,4 +1080,10 @@ public class Controlador implements IControlador {
         return listaActividadesTuristicas;
 
     }
+     @Override
+    public Categoria traerCategoria(String categoria) {
+        return controlPersis.traerCategoria(categoria);
+
+    }
+  
 }

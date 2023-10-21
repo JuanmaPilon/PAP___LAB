@@ -79,6 +79,7 @@ public abstract ArrayList<Actividad> listaActividadesConfirmadas();
 public abstract ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
 public abstract ArrayList<Paquete> listaPaquetesVigentesSalida(String nombreSalida);//para inscripcion
 public abstract void cargarDatosDePrueba();
+public abstract Categoria traerCategoria(String categoria);
 
 
     

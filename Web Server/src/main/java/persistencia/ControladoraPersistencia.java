@@ -511,10 +511,11 @@ public class ControladoraPersistencia {
         }
         return listaCategorias;
     }
+ 
 
-//    public Categoria traerCategoria(String nombre) {
-//        return categoriaJpa.findCategoria(nombre);
-//    }
+    public Categoria traerCategoria(String nombre) {
+       return categoriaJpa.findCategoria(nombre);
+    }
     public void asignarCategoriaActividad(String nombre, String nombreActividad) {
         Categoria categoria = categoriaJpa.findCategoria(nombre);
         Actividad actividad = actividadJpa.findActividad(nombreActividad);

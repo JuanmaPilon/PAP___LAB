@@ -42,11 +42,11 @@
             </ul>
             <h2>Departamentos</h2>
             <ul>
-                <ul>
+                <ul id="miContenedor">
                     <%
                         if (listaDepartamentos != null && !listaDepartamentos.isEmpty()) {
                             for (Departamento d : listaDepartamentos) {
-                                out.println("<li> <a href='#' id='" + d.getNombre() + "'>" + d.getNombre() + "</a></li>");
+                                out.println("<li> <a href='#' id='departamento-" + d.getNombre() + "'>" + d.getNombre() + "</a></li>");
                             }
                         } else {
                             out.println("<li>No hay departamentos con actividades confirmadas.</li>");
@@ -57,11 +57,11 @@
             </ul>
 
             <h2>Categorías</h2>
-            <ul>
+            <ul id="miContenedor2">
                 <%
                     if (listaCategorias != null && !listaCategorias.isEmpty()) {
                         for (Categoria c : listaCategorias) {
-                            out.println("<li> <a href='#'>" + c.getNombre() + "</a></li>");
+                            out.println("<li> <a href='#' id='categoria-" + c.getNombre() + "'>" + c.getNombre() + "</a></li>");
                         }
                     } else {
                         out.println("<li>No hay categorias con actividades confirmadas.</li>");
@@ -73,21 +73,8 @@
 
 
         <main>
-            <section class="actividad">
-                <img src="./images/paseoColonia.jpg" alt="PaseoColonia">
-                <h3>Paseo por Colonia</h3>
-                <p>Disfruta de nuestros paseos en Colonia.</p>
-                <a href="paquete.jsp?id=1">Ver paquetes</a>
-            </section>
 
-            <section class="actividad">
-                <img src="./images/aventuraActividad.jpg" alt="Aventura">
-                <h3>Excursiones de Aventura</h3>
-                <p>Vive emocionantes aventuras en la naturaleza de Uruguay.</p>
-                <a href="paquete.jsp?id=2">Ver paquetes</a>
-            </section>
-
-            <section id="actividadesContainer" class="actividadesContainer">
+            <section id="actividadesContainer" class="asd" >
 
             </section>
 
@@ -100,25 +87,78 @@
         </footer>
     </body>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+       document.addEventListener("DOMContentLoaded", function () {
             // Obtener la referencia al contenedor de actividades
             var actividadesContainer = document.getElementById("actividadesContainer");
 
-            // Obtener todos los enlaces de departamentos
-            var links = document.querySelectorAll('ul li a');
+            // Obtener todos los enlaces de departamentos y categorías
+            var contenedor = document.getElementById("miContenedor");
+
+            // Obtener los enlaces solo dentro del contenedor específico
+            var links = contenedor.querySelectorAll('ul li a');
 
             // Iterar sobre los enlaces y agregar un controlador de eventos para el clic
             links.forEach(function (link) {
                 link.addEventListener("click", function (event) {
                     event.preventDefault();
 
-                    // Obtener el id del departamento seleccionado
-                    var departamentoId = link.id;
-                    console.log("Departamento clickeado: "+departamentoId);
+                    // Obtener el id del departamento o categoría seleccionada
 
-                    // Realizar una solicitud al servidor para obtener las actividades del departamento seleccionado
+                    var id = link.id;
+                    console.log("Elemento clickeado: " + id);
+
+                    // Realizar una solicitud al servidor para obtener las actividades del departamento o categoría seleccionada
                     var xhr = new XMLHttpRequest();
-                    var url = "SvObtenerActividades?departamentoId=" + departamentoId;
+                    var url;
+
+                    // Verificar si es un enlace de departamento o categoría y construir la URL correspondiente
+                    if (id.startsWith("departamento-")) {
+                        var departamentoId = id.split("-")[1];
+                        url = "SvObtenerActividades?departamentoId=" + departamentoId;
+                    }
+
+                    console.log("URL de solicitud: " + url);
+                    xhr.open("GET", url, true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // Manejar la respuesta del servidor y mostrar las actividades en el contenedor
+                            actividadesContainer.innerHTML = xhr.responseText;
+                        }
+                    };
+                    xhr.send();
+                });
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener la referencia al contenedor de actividades
+            var actividadesContainer = document.getElementById("actividadesContainer");
+
+            // Obtener todos los enlaces de departamentos y categorías
+            var contenedor = document.getElementById("miContenedor2");
+
+            // Obtener los enlaces solo dentro del contenedor específico
+            var links = contenedor.querySelectorAll('ul li a');
+
+            // Iterar sobre los enlaces y agregar un controlador de eventos para el clic
+            links.forEach(function (link) {
+                link.addEventListener("click", function (event) {
+                    event.preventDefault();
+
+                    // Obtener el id del departamento o categoría seleccionada
+
+                    var id = link.id;
+                    console.log("Elemento clickeado: " + id);
+
+                    // Realizar una solicitud al servidor para obtener las actividades del departamento o categoría seleccionada
+                    var xhr = new XMLHttpRequest();
+                    var url;
+
+                    // Verificar si es un enlace de departamento o categoría y construir la URL correspondiente
+                    if (id.startsWith("categoria-")) {
+                        var categoriaId = id.split("-")[1];
+                        url = "SvObtenerActividadesCategoria?categoriaId=" + categoriaId;
+                    }
+
                     console.log("URL de solicitud: " + url);
                     xhr.open("GET", url, true);
                     xhr.onreadystatechange = function () {
