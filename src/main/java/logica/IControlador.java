@@ -13,13 +13,17 @@ import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
 public interface IControlador {
+public abstract imagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception;
 public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;
 public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception;
 public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String descripcion, String link) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
-public abstract void AltaCategoria(String nombre) throws PreexistingEntityException, Exception;
+
+public abstract void AltaCategoria(String nombre) throws PreexistingEntityException, Exception;//test
+public abstract Categoria traerCategoria(String categoria);//test ok y fail
+
 public abstract Usuario ConsultaDeUsuario(String nickname); //Devuelve el usuario 
 public abstract ArrayList listaUsuarios();  //devuelve una lista de todos los usuarios sin discriminar su tipo
 public abstract ArrayList listaProveedores(); //devuelve una lista de todos los proveedores
@@ -76,7 +80,10 @@ public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String n
 public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
 public abstract ArrayList<Actividad> listaActividadesConfirmadas();
+public abstract ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
+public abstract ArrayList<Paquete> listaPaquetesVigentesSalida(String nombreSalida);//para inscripcion
 public abstract void cargarDatosDePrueba();
+
 
 
     
