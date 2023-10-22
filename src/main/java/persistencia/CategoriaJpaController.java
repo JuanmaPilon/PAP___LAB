@@ -71,76 +71,9 @@ public class CategoriaJpaController implements Serializable {
         }
     }
 
-    public void edit(Categoria categoria) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Categoria persistentCategoria = em.find(Categoria.class, categoria.getNombre());
-            ArrayList<Actividad> listaActividadOld = persistentCategoria.getListaActividad();
-            ArrayList<Actividad> listaActividadNew = categoria.getListaActividad();
-            ArrayList<Actividad> attachedListaActividadNew = new ArrayList<Actividad>();
-            for (Actividad listaActividadNewActividadToAttach : listaActividadNew) {
-                listaActividadNewActividadToAttach = em.getReference(listaActividadNewActividadToAttach.getClass(), listaActividadNewActividadToAttach.getNombre());
-                attachedListaActividadNew.add(listaActividadNewActividadToAttach);
-            }
-            listaActividadNew = attachedListaActividadNew;
-            categoria.setListaActividad(listaActividadNew);
-            categoria = em.merge(categoria);
-            for (Actividad listaActividadOldActividad : listaActividadOld) {
-                if (!listaActividadNew.contains(listaActividadOldActividad)) {
-                    listaActividadOldActividad.getListaCategoria().remove(categoria);
-                    listaActividadOldActividad = em.merge(listaActividadOldActividad);
-                }
-            }
-            for (Actividad listaActividadNewActividad : listaActividadNew) {
-                if (!listaActividadOld.contains(listaActividadNewActividad)) {
-                    listaActividadNewActividad.getListaCategoria().add(categoria);
-                    listaActividadNewActividad = em.merge(listaActividadNewActividad);
-                }
-            }
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                String id = categoria.getNombre();
-                if (findCategoria(id) == null) {
-                    throw new NonexistentEntityException("The categoria with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
 
-    public void destroy(String id) throws NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Categoria categoria;
-            try {
-                categoria = em.getReference(Categoria.class, id);
-                categoria.getNombre();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The categoria with id " + id + " no longer exists.", enfe);
-            }
-            ArrayList<Actividad> listaActividad = categoria.getListaActividad();
-            for (Actividad listaActividadActividad : listaActividad) {
-                listaActividadActividad.getListaCategoria().remove(categoria);
-                listaActividadActividad = em.merge(listaActividadActividad);
-            }
-            em.remove(categoria);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
+
+
 
     public List<Categoria> findCategoriaEntities() {
         return findCategoriaEntities(true, -1, -1);
@@ -175,17 +108,6 @@ public class CategoriaJpaController implements Serializable {
         }
     }
 
-    public int getCategoriaCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Categoria> rt = cq.from(Categoria.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
-    }
+
     
 }

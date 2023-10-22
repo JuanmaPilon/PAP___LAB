@@ -303,9 +303,7 @@ public class ControladoraPersistencia {
         }
     }
 
-    public List<String> llenarCmboBoxDepPersis() {
-        return departamentoJpa.obtenerNombresDepartamentos();
-    }
+
 
     public void guardarSalidaTuristica(SalidaTuristica salidaTuristica, Actividad actividad) throws PreexistingEntityException, Exception {
         try {

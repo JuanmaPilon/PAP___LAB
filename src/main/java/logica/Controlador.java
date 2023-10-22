@@ -322,10 +322,7 @@ public class Controlador implements IControlador {
 
     ;
    
-   @Override
-    public List<String> llenarCmboBoxDep() {
-        return controlPersis.llenarCmboBoxDepPersis();
-    }
+
 
     @Override
     public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) throws PreexistingEntityException, Exception {

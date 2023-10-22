@@ -155,7 +155,7 @@ public class ListaActividadPorDepto extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
          cmbDepto.removeAllItems();
         // Llamar a obtenerNombresDepartamentos para obtener la lista de nombres de departamentos y llenar el cmboBoxDep
-         List<String> nombresDepartamentos = control.llenarCmboBoxDep();
+         ArrayList<String> nombresDepartamentos = control.listaDeptos();
         // Llenar el JComboBox con los nombres de los departamentos
          for (String nombre : nombresDepartamentos) {
              cmbDepto.addItem(nombre);

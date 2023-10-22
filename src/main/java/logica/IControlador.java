@@ -18,17 +18,18 @@ public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;
 public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception;
-public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
+
+public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception; //test ok
 public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String descripcion, String link) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 
-public abstract void AltaCategoria(String nombre) throws PreexistingEntityException, Exception;//test
-public abstract Categoria traerCategoria(String categoria);//test ok y fail
+public abstract void AltaCategoria(String nombre) throws PreexistingEntityException, Exception;//test ok, falta test ex
+public abstract Categoria traerCategoria(String categoria);//test ok 
 
 public abstract Usuario ConsultaDeUsuario(String nickname); //Devuelve el usuario 
 public abstract ArrayList listaUsuarios();  //devuelve una lista de todos los usuarios sin discriminar su tipo
 public abstract ArrayList listaProveedores(); //devuelve una lista de todos los proveedores
 public abstract ArrayList listaDepartamentos(); //devuelve una lista de todos los departamentos
-public abstract ArrayList listaDeptos();//lista que contiene solo los nombres de los departamentos
+
 public abstract ArrayList listaPaquetes();
 public abstract ArrayList listaActividades();
 public abstract void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url);
@@ -42,8 +43,13 @@ public abstract ArrayList listaSalActividadTuristica(String actividad);
 public abstract List consultaPaquetes();
 public abstract SalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
 public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) throws PreexistingEntityException, Exception;
-public abstract void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception;
-public abstract List<String> llenarCmboBoxDep();
+
+
+public abstract void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception; //test ok, falta ex
+
+public abstract ArrayList listaDeptos();//lista que contiene solo los nombres de los departamentos
+
+
 public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception;
 public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento, ArrayList<String> listaCategorias) throws PreexistingEntityException, Exception;
 public ArrayList<DTUsuario> traerUsuarioMod();
@@ -51,7 +57,6 @@ public ArrayList<DTTurista> traerUsuarioTurista();
 public DTTurista traerDTTurista(String nickname);
 public DTProveedor traerDTProveedor(String nickname);
 public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada) throws NonexistentEntityException, Exception;
-//public abstract List findSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae lista de strings con los nombres de las actividades asociadas a un depto att:carlangas
 public abstract ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
 public abstract void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, int costo, Date fecha );
 public abstract boolean salidaTuristicaLlena(String salida, int cantAInscribir);
