@@ -23,7 +23,7 @@ public class SvUsuario extends HttpServlet {
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     List<String> listaUsuarios = control.listaUsuarios();
     int startIndex = Integer.parseInt(request.getParameter("startIndex"));
-    int endIndex = Math.min(startIndex + 20, listaUsuarios.size()); // Envía 20 usuarios a la vez
+    int endIndex = Math.min(startIndex + 40, listaUsuarios.size()); // Envía 40 usuarios a la vez
     String usuariosSubset = String.join(",", listaUsuarios.subList(startIndex, endIndex));
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");

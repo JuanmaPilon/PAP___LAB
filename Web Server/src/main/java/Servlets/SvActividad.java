@@ -1,17 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Servlets;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import java.io.IOException;
@@ -21,6 +10,9 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -29,13 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Actividad;
-import logica.Categoria;
 import logica.Fabrica;
 import logica.IControlador;
-import logica.SalidaTuristica;
 import logica.imagenActividad;
-import persistencia.exceptions.CorreoElectronicoExistenteException;
-import persistencia.exceptions.PreexistingEntityException;
 
 @WebServlet(name = "SvActividad", urlPatterns = {"/SvActividad"})
 @MultipartConfig(
@@ -118,7 +106,7 @@ public class SvActividad extends HttpServlet {
 
     }
 
-    @Override
+  @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String errorMessage = null;
         try {
@@ -142,35 +130,25 @@ public class SvActividad extends HttpServlet {
             if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
-                    String directorioUsuario = System.getProperty("user.home");
-                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "images" + File.separator + nombreArchivo;
+                    ServletContext context = request.getServletContext();
+                    String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
+                    // Copiar el archivo a la ubicación relativa
                     Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
 
+                    String rutaRelativa = "images" + File.separator + nombreArchivo;
+
                     try {
-                        control.AltaDeImagenActividad(nombreArchivo, rutaCompleta, nombre);
+                        control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre);
                     } catch (Exception ex) {
                         errorMessage = "Imagen ya en uso por otra actividad";
                         request.setAttribute("errorMessage", errorMessage);
                         request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
-
                     }
                 }
             }
-        } catch (PreexistingEntityException ex) {
-            errorMessage = "Ya hay otra actividad con ese nombre.";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
-
         } catch (Exception ex) {
-            errorMessage = "Se ha producido un error, compruebe los campos";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
-
-        }
-
-        if (errorMessage == null) {
-            response.sendRedirect("logedUser.jsp");
+            Logger.getLogger(SvActividad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

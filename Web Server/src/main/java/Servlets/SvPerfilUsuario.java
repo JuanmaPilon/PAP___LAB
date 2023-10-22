@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +17,7 @@ import logica.IControlador;
 import logica.Proveedor;
 import logica.Turista;
 import logica.Usuario;
+import logica.ImagenPerfil;
 
 @WebServlet(name = "SvPerfilUsuario", urlPatterns = {"/SvPerfilUsuario"})
 public class SvPerfilUsuario extends HttpServlet {
@@ -53,7 +52,7 @@ public class SvPerfilUsuario extends HttpServlet {
                     nombresSalidasTurista.add(dt.getNombre());
                 }
                 misesion.setAttribute("nombresSalidas", nombresSalidasTurista);
-                
+
                 ArrayList<String> paquetesComprados = control.listaPaquetesComprados(tur);
                 misesion.setAttribute("nombresPaquetes", paquetesComprados);
             }
@@ -85,6 +84,22 @@ public class SvPerfilUsuario extends HttpServlet {
             }
             misesion.setAttribute("nombresSalidas", nombresSalidasProveedor);
         }
+
+        ImagenPerfil imagen;
+        try {
+            imagen = control.buscarImagenPorNickname(usu.getNickname());
+            if (imagen == null) {
+                String imagenVacia = "images/usuarioSinFoto.png";
+                misesion.setAttribute("imagen", imagenVacia);
+
+            } else {
+                String imagenRuta = imagen.getRuta();
+                misesion.setAttribute("imagen", imagenRuta);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(SvPerfilUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         response.sendRedirect("perfilUsuario.jsp");
     }
 
@@ -100,3 +115,4 @@ public class SvPerfilUsuario extends HttpServlet {
     }
 
 }
+

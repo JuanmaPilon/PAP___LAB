@@ -3,6 +3,8 @@ package Servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import logica.Actividad;
 import logica.Fabrica;
 import logica.IControlador;
+import logica.imagenActividad;
 
 @WebServlet(name = "SvObtenerActividades", urlPatterns = {"/SvObtenerActividades"})
 public class SvObtenerActividades extends HttpServlet {
@@ -34,10 +37,26 @@ public class SvObtenerActividades extends HttpServlet {
         // Generar el fragmento de HTML con las actividades del departamento
         StringBuilder htmlResponse = new StringBuilder();
         for (Actividad actividad : actividades) {
-            htmlResponse.append("<div class='actividad'>");
-            htmlResponse.append("<h3>").append(actividad.getNombre()).append("</h3>");
-            htmlResponse.append("<p>").append(actividad.getDescripcion()).append("</p>");
-            htmlResponse.append("</div>");
+            imagenActividad imagen;
+            try {
+                imagen = control.buscarImagenPorActividad(actividad.getNombre());
+                String imagenRuta = "images/sinImagen.png";
+
+                if (imagen == null) {
+                    imagenRuta = "images/sinImagen.png";
+
+                } else {
+                    imagenRuta = imagen.getRuta();
+                }
+                htmlResponse.append("<div class='actividad'>");
+                htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la actividad\" style=\"width: 300px; height: 300px;\">");
+                htmlResponse.append("<h3>").append(actividad.getNombre()).append("</h3>");
+                htmlResponse.append("<p>").append(actividad.getDescripcion()).append("</p>");
+                htmlResponse.append("</div>");
+            } catch (Exception ex) {
+                Logger.getLogger(SvObtenerActividadesCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
 
         // Configurar la respuesta como HTML
