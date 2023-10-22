@@ -77,26 +77,6 @@ public class SalidaTuristicaJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            SalidaTuristica salidaTuristica;
-            try {
-                salidaTuristica = em.getReference(SalidaTuristica.class, id);
-                salidaTuristica.getNombre();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The salidaTuristica with id " + id + " no longer exists.", enfe);
-            }
-            em.remove(salidaTuristica);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
 
     public List<SalidaTuristica> findSalidaTuristicaEntities() {
         return findSalidaTuristicaEntities(true, -1, -1);
@@ -131,25 +111,7 @@ public class SalidaTuristicaJpaController implements Serializable {
         }
     }
 
-    public int getSalidaTuristicaCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<SalidaTuristica> rt = cq.from(SalidaTuristica.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
-    }
-//    
-//    public List<String> findByActividad(String actividad) { 
-//        EntityManager em = getEntityManager();
-//        String query = "SELECT listaSalidaTuristica_NOMBRE FROM actividad_salidaturistica WHERE Actividad_NOMBRE LIKE '%"+actividad+"%'";
-//	@SuppressWarnings("unchecked")
-//	List<String> r = (List<String>) em.createNativeQuery(query).getResultList();
-//        return r;
-//    }
+
+
     
 }

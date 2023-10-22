@@ -274,27 +274,27 @@ public class Controlador implements IControlador {
     ;
    
    
-   @Override
-    public void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria) {
-
-        Actividad actividad = new Actividad();
-
-        //falta control si nombre ya existe o si es null nombre
-        actividad.setNombre(nombre);
-        actividad.setEstado(TipoEstado.agregada);
-        actividad.setDescripcion(descripcion);
-        actividad.setDuracion(duracion);
-        actividad.setCosto(costo);
-        actividad.setCiudad(ciudad);
-        actividad.setfAlta(fAlta);
-        actividad.setListaSalidaTuristica(listaSalidaTuristica);
-        actividad.setListaPaquete(listaPaquete);
-        actividad.setListaCategoria(listaCategoria);
-
-        //controlPersis.guardarActividad(actividad);
-    }
-
-    ;//Juanma
+//   @Override
+//    public void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria) {
+//
+//        Actividad actividad = new Actividad();
+//
+//        //falta control si nombre ya existe o si es null nombre
+//        actividad.setNombre(nombre);
+//        actividad.setEstado(TipoEstado.agregada);
+//        actividad.setDescripcion(descripcion);
+//        actividad.setDuracion(duracion);
+//        actividad.setCosto(costo);
+//        actividad.setCiudad(ciudad);
+//        actividad.setfAlta(fAlta);
+//        actividad.setListaSalidaTuristica(listaSalidaTuristica);
+//        actividad.setListaPaquete(listaPaquete);
+//        actividad.setListaCategoria(listaCategoria);
+//
+//        //controlPersis.guardarActividad(actividad);
+//    }
+//
+//    ;//Juanma
    
    //Devuelve la Salida Turistica con nombre nombreSalida
    @Override

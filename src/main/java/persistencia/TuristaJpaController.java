@@ -139,26 +139,7 @@ public class NicknameExistenceChecker {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Turista turista;
-            try {
-                turista = em.getReference(Turista.class, id);
-                turista.getNickname();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The turista with id " + id + " no longer exists.", enfe);
-            }
-            em.remove(turista);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
+
 
     public List<Turista> findTuristaEntities() {
         return findTuristaEntities(true, -1, -1);
@@ -193,17 +174,6 @@ public class NicknameExistenceChecker {
         }
     }
 
-    public int getTuristaCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Turista> rt = cq.from(Turista.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
-    }
+
     
 }

@@ -79,26 +79,7 @@ public class ImagenPerfilJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            ImagenPerfil imagenPerfil;
-            try {
-                imagenPerfil = em.getReference(ImagenPerfil.class, id);
-                imagenPerfil.getNombre();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The imagenPerfil with id " + id + " no longer exists.", enfe);
-            }
-            em.remove(imagenPerfil);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
+
 
     public List<ImagenPerfil> findImagenPerfilEntities() {
         return findImagenPerfilEntities(true, -1, -1);
@@ -133,18 +114,7 @@ public class ImagenPerfilJpaController implements Serializable {
         }
     }
 
-    public int getImagenPerfilCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<ImagenPerfil> rt = cq.from(ImagenPerfil.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
-    }
+
     
     public ImagenPerfil findImagenPerfilByNickname(String nicknameUsuario) {
     EntityManager em = getEntityManager();

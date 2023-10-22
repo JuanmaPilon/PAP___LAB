@@ -18,6 +18,7 @@ public class Turista extends Usuario implements Serializable {
     private ArrayList<Compra> listaCompras;
     @OneToMany(mappedBy="turista")
     private ArrayList<Inscripcion> listaInscripcion;
+    
     public Turista(){
     super();
     }

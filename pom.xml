@@ -80,11 +80,42 @@
     
     <build>
     <plugins>
-        <!-- Otros plugins -->
+               <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.2</version> <!-- Asegúrate de usar la última versión disponible -->
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>turismo.TurismoUy</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
         <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.7</version> <!-- Asegúrate de usar la última versión disponible -->
+                        <configuration>
+                <excludes>
+                    <exclude>presentacion**/*</exclude>
+                    <exclude>turismo**/*</exclude>
+                    <exclude>logica/Actividad_.class</exclude>
+                    <exclude>logica/Paquete_.class</exclude>
+                    <exclude>logica/Turista_.class</exclude>
+                    <exclude>logica/Proveedor_.class</exclude>
+                    <exclude>logica/Categoria_.class</exclude>
+                    <exclude>logica/imagenActividad_.class</exclude>
+                    <exclude>logica/ImagenPerfil_.class</exclude>
+                    <exclude>logica/Compra_.class</exclude>
+                    <exclude>logica/Departamento_.class</exclude>
+                    <exclude>logica/Usuario_.class</exclude>
+                    <exclude>logica/Inscripcion_.class</exclude>
+                    <exclude>logica/SalidaTuristica_.class</exclude>
+                </excludes>
+            </configuration>
+            
+            
             <executions>
                 <execution>
                     <goals>
@@ -107,6 +138,5 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <exec.mainClass>com.mycompany.estaciontrabajo.EstacionTrabajo</exec.mainClass>
     </properties>
 </project>
