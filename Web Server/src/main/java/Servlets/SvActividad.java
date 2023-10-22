@@ -24,6 +24,7 @@ import logica.Actividad;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.imagenActividad;
+import persistencia.exceptions.PreexistingEntityException;
 
 @WebServlet(name = "SvActividad", urlPatterns = {"/SvActividad"})
 @MultipartConfig(
@@ -83,9 +84,9 @@ public class SvActividad extends HttpServlet {
             String nombreActividad = (String) request.getParameter("actividad");
             Actividad actividadConsultada = control.ConsultaActividadTuristica(nombreActividad);
             imagenActividad imagen = control.buscarImagenPorActividad(nombreActividad);
-            
+
             if (imagen == null) {
-                
+
                 String imagenVacia = "images/sinImagen.png";
                 HttpSession misesion = request.getSession();
                 misesion.setAttribute("actividad", actividadConsultada);
@@ -106,7 +107,7 @@ public class SvActividad extends HttpServlet {
 
     }
 
-  @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String errorMessage = null;
         try {
@@ -122,7 +123,6 @@ public class SvActividad extends HttpServlet {
             ArrayList<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
 
             Part archivo = request.getPart("file");
-            System.out.println("archivo:" + archivo);
             String nombreArchivo = null;
 
             control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
@@ -147,8 +147,21 @@ public class SvActividad extends HttpServlet {
                     }
                 }
             }
+
+        } catch (PreexistingEntityException ex) {
+            errorMessage = "Ya hay otra actividad con ese nombre.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+
         } catch (Exception ex) {
-            Logger.getLogger(SvActividad.class.getName()).log(Level.SEVERE, null, ex);
+            errorMessage = "Se ha producido un error, compruebe los campos";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+
+        }
+
+        if (errorMessage == null) {
+            response.sendRedirect("logedUser.jsp");
         }
     }
 

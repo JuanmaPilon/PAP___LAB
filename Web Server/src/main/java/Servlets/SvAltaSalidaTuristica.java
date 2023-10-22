@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -79,13 +80,16 @@ public class SvAltaSalidaTuristica extends HttpServlet {
             if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
-                    String directorioUsuario = System.getProperty("user.home");
-                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "images" + File.separator + nombreArchivo;
+                    ServletContext context = request.getServletContext();
+                    String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
+                    // Copiar el archivo a la ubicación relativa
                     Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
 
+                    String rutaRelativa = "images" + File.separator + nombreArchivo;
+
                     try {
-                        control.AltaDeImagenActividad(nombreArchivo, rutaCompleta, actividadTuristica);
+                        control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombreSalida);
                     } catch (Exception ex) {
                         errorMessage = "Imagen ya en uso por otra actividad";
                         request.setAttribute("errorMessage", errorMessage);

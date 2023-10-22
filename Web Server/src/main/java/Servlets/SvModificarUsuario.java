@@ -14,6 +14,7 @@ import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -51,9 +52,8 @@ public class SvModificarUsuario extends HttpServlet {
         try {
             String tipoUsuario;
             String usuario = request.getParameter("usuario"); // Obtener el nombre del usuario de logedUser
-            
+
             Usuario usuarioConsulta = control.ConsultaDeUsuario(usuario); // Consultar el usuario
-            
 
             if (usuarioConsulta instanceof Turista) {
                 tipoUsuario = "turista";
@@ -68,23 +68,22 @@ public class SvModificarUsuario extends HttpServlet {
                 HttpSession misesion = request.getSession();
                 misesion.setAttribute("infoProveedor", infoProveedor);
             }
-            
-            try{
-            ImagenPerfil imagenPerfil = control.buscarImagenPorNickname(usuario);
-            String rutaImagen = imagenPerfil.getRuta();
-            
-            HttpSession misesion = request.getSession();
-            misesion.setAttribute("tipoUsuario", tipoUsuario);
-            misesion.setAttribute("rutaImagen", rutaImagen);
-            response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
-             } catch (Exception e) {
-            String rutaImagen = "";
-            HttpSession misesion = request.getSession();
-            misesion.setAttribute("tipoUsuario", tipoUsuario);
-            misesion.setAttribute("rutaImagen", rutaImagen);
-            response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
-        }
 
+            try {
+                ImagenPerfil imagenPerfil = control.buscarImagenPorNickname(usuario);
+                String rutaImagen = imagenPerfil.getRuta();
+
+                HttpSession misesion = request.getSession();
+                misesion.setAttribute("tipoUsuario", tipoUsuario);
+                misesion.setAttribute("rutaImagen", rutaImagen);
+                response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
+            } catch (Exception e) {
+                String rutaImagen = "";
+                HttpSession misesion = request.getSession();
+                misesion.setAttribute("tipoUsuario", tipoUsuario);
+                misesion.setAttribute("rutaImagen", rutaImagen);
+                response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
+            }
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código de respuesta HTTP 500 (error interno del servidor)
@@ -112,9 +111,7 @@ public class SvModificarUsuario extends HttpServlet {
             fNacimiento = formatoSalida.parse(fechaFormateada);
 
             Part archivo = request.getPart("file");
-            System.out.println("archivo:" + archivo);
             String nombreArchivo = null;
-
 
             if ("turista".equals(tipoUsuario)) {
 
@@ -123,10 +120,14 @@ public class SvModificarUsuario extends HttpServlet {
                 control.ModificarDatosDeUsuarioTurista(nickname, nombre, apellido, correo, fNacimiento, nacionalidad);
                 try {
                     if (archivo.getSize() > 0) {
-                        String directorioUsuario = System.getProperty("user.home");
+                        nombreArchivo = archivo.getSubmittedFileName();
+                        ServletContext context = request.getServletContext();
+                        String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
-                         String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator  + "images"+  File.separator + nombreArchivo;
-                        control.ModificarImagenPerfil(nombreArchivo, rutaCompleta, nickname);
+                        // Copiar el archivo a la ubicación relativa
+                        Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
+                        String rutaRelativa = "images" + File.separator + nombreArchivo;
+                        control.ModificarImagenPerfil(nombreArchivo, rutaRelativa, nickname);
                     }
                 } catch (Exception ex) {
                     errorMessage = "Imagen ya en uso por otro usuario. Se modifico el resto de atributos.";
@@ -141,10 +142,15 @@ public class SvModificarUsuario extends HttpServlet {
 
                 try {
                     if (archivo.getSize() > 0) {
-                        String directorioUsuario = System.getProperty("user.home");
+                        nombreArchivo = archivo.getSubmittedFileName();
+                        ServletContext context = request.getServletContext();
+                        String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
-                        String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "images" + File.separator + nombreArchivo;
-                        control.ModificarImagenPerfil(nombreArchivo, rutaCompleta, nickname);
+                        // Copiar el archivo a la ubicación relativa
+                        Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
+                        String rutaRelativa = "images" + File.separator + nombreArchivo;
+
+                        control.ModificarImagenPerfil(nombreArchivo, rutaRelativa, nickname);
                     }
                 } catch (Exception ex) {
                     errorMessage = "Imagen ya en uso por otro usuario. Se modifico el resto de atributos.";
@@ -160,10 +166,10 @@ public class SvModificarUsuario extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código de respuesta HTTP 500 (error interno del servidor)
             response.getWriter().write("Se ha producido un error interno. Por favor, compruebe los campos.");
         }
-        
+
         if (errorMessage == null) {
-           response.sendRedirect("logedUser.jsp");
-        } 
+            response.sendRedirect("logedUser.jsp");
+        }
 
     }
 

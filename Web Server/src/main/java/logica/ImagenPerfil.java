@@ -17,13 +17,14 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "nombre")
 public class ImagenPerfil implements Serializable {
     
-    @Id
+    
     private String nombre; // Nombre como clave primaria
     
     private String ruta;
     
-    
+    @Id
     private String nicknameUsuario;
+
 
     // Constructor, getters y setters
     
