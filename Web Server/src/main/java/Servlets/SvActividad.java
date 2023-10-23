@@ -109,7 +109,6 @@ public class SvActividad extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String errorMessage = null;
         try {
             String usuario = request.getParameter("usuario");
             String departamento = request.getParameter("departamento");
@@ -141,27 +140,27 @@ public class SvActividad extends HttpServlet {
                     try {
                         control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre);
                     } catch (Exception ex) {
-                        errorMessage = "Imagen ya en uso por otra actividad";
-                        request.setAttribute("errorMessage", errorMessage);
-                        request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+                        ex.printStackTrace();
+                        String errorMessage = "Ya existe otra actividad con esa imagen, se ha dado de alta la actividad sin imagen";
+                        String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
+                        response.getWriter().write(alertScript);
+
                     }
+
                 }
             }
-
+          response.sendRedirect("logedUser.jsp");
         } catch (PreexistingEntityException ex) {
-            errorMessage = "Ya hay otra actividad con ese nombre.";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+            ex.printStackTrace();
+            String errorMessage = "Ya existe otra actividad con ee nombre";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
+            response.getWriter().write(alertScript);
 
         } catch (Exception ex) {
-            errorMessage = "Se ha producido un error, compruebe los campos";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
-
-        }
-
-        if (errorMessage == null) {
-            response.sendRedirect("logedUser.jsp");
+            ex.printStackTrace();
+            String errorMessage = "Se ha prodicido un error, porvafor verifique los campos";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
+            response.getWriter().write(alertScript);
         }
     }
 

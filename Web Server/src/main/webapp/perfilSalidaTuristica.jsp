@@ -6,6 +6,7 @@
 <html>
         <%
         SalidaTuristica salida = (SalidaTuristica) request.getSession().getAttribute("salida");//usuario del que se muestra la info
+        String rutaImagenPerfil =  (String) request.getSession().getAttribute("imagen");
 
     %>
 <head>
@@ -54,10 +55,11 @@
     
     
     <main>
+      
         <h2>Perfil de Salida Turistica</h2>
 
         <div class="actividad">
-                <img src="imagen_actividad.jpg" alt="Imagen de la actividad">
+                 <img src="<%= rutaImagenPerfil%>" alt="alt" style="width: 100px; height: 100px;" />
                 <h3><%=salida.getNombre()%></h3>
                 <p>Cantidad máxima de turistas <%=salida.getCantMax() %></p>
                 <p>Fecha de la Salida <%=salida.getfSalida() %></p>

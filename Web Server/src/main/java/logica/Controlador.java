@@ -487,10 +487,10 @@ public class Controlador implements IControlador {
 
     //Alta de Inscripcion. Pre-condicion: exite salida turistica y turista con los respectivos nombres; los parametros vienen en el formato correcto.
     @Override
-    public void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, int costo, Date fecha) {
+    public void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, float costo, Date fecha, TipoPago tipoPago) {
         SalidaTuristica salida = ConsultaSalidaTuristica(nombreSalidaSeleccionada);
         Turista turista = (Turista) ConsultaDeUsuario(nicknameTurista);
-        Inscripcion inscripcion = new Inscripcion(turista, salida, fecha, cantTurista, costo);
+        Inscripcion inscripcion = new Inscripcion(turista, salida, fecha, cantTurista, costo, tipoPago);
 
         controlPersis.guardarInscripcion(inscripcion);
     }
@@ -1060,6 +1060,7 @@ public class Controlador implements IControlador {
         }
 
         //inscripcion
+        /*
         try {
 
             InscripcionASalidaTuristica("Degusta Agosto", "lachiqui", 3, 2400, fecha.parse("15/8/2022"));
@@ -1072,10 +1073,11 @@ public class Controlador implements IControlador {
             InscripcionASalidaTuristica("Teatro con Sabores 2", "bobesponja", 2, 1000, fecha.parse("20/8/2022"));
             InscripcionASalidaTuristica("Teatro con Sabores 2", "anibal", 1, 500, fecha.parse("21/8/2022"));
             InscripcionASalidaTuristica("Degusta Setiembre", "tony", 11, 8800, fecha.parse("21/8/2022"));
+
         } catch (ParseException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+*/
     }
 
     @Override

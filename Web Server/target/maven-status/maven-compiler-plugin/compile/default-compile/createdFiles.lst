@@ -37,14 +37,15 @@ logica\Categoria.class
 persistencia\PaqueteJpaController1.class
 persistencia\ProveedorJpaController.class
 Servlets\exceptions\NonexistentEntityException.class
-Servlets\SvAltaSalidaTuristica.class
 logica\Turista.class
 persistencia\CategoriaJpaController.class
+logica\TipoPago.class
 logica\Usuario_.class
 persistencia\TuristaJpaController$EmailExistenceChecker.class
 logica\exceptions\PaqueteSinActividad.class
 logica\Departamento_.class
 logica\imagenActividad.class
+Servlets\SvPaquetesDeSalida.class
 persistencia\exceptions\NonexistentEntityException.class
 Servlets\SvAutenticarUsuario.class
 logica\exceptions\ConstraseniasDistintas.class

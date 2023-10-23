@@ -48,7 +48,6 @@ public class SvTurista extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String errorMessage = null;
         try {
             Date fNacimiento = null;
 
@@ -89,34 +88,37 @@ public class SvTurista extends HttpServlet {
                     try {
                         control.AltaDeImagenPerfil(nombreArchivo, rutaRelativa, nombre);
                     } catch (Exception ex) {
-                        errorMessage = "Imagen ya en uso por otro usuario";
-                        request.setAttribute("errorMessage", errorMessage);
-                        request.getRequestDispatcher("altaUsuario.jsp").forward(request, response);
+                        ex.printStackTrace();
+                        String errorMessage = "Ya existe otro usuario con esa imagen, se ha dado de alta el usuario sin imagen";
+                        String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'login.jsp';</script>";
+                        response.getWriter().write(alertScript);
 
                     }
+
                 }
             }
 
+            response.sendRedirect("login.jsp");
         } catch (PreexistingEntityException ex) {
-            errorMessage = "El usuario ya existe. Por favor, elige otro nombre de usuario.";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaUsuario.jsp").forward(request, response);
+            ex.printStackTrace();
+            String errorMessage = "Ya existe otro usuario con ese nickname";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaUsuario.jsp';</script>";
+            response.getWriter().write(alertScript);
 
         } catch (CorreoElectronicoExistenteException ex) {
-            errorMessage = "La dirección de correo electrónico ya está en uso. Utiliza otra dirección de correo electrónico.";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaUsuario.jsp").forward(request, response);
+            ex.printStackTrace();
+            String errorMessage = "Ya existe otro usuario con ese correo";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaUsuario.jsp';</script>";
+            response.getWriter().write(alertScript);
 
         } catch (Exception ex) {
-            errorMessage = "Se ha producido un error. Verifique los campos";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaUsuario.jsp").forward(request, response);
+            ex.printStackTrace();
+            String errorMessage = "Se ha producido un error, porvafor verifique los campos";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaUsuario.jsp';</script>";
+            response.getWriter().write(alertScript);
 
         }
 
-        if (errorMessage == null) {
-            response.sendRedirect("login.jsp");
-        }
     }
 
     @Override

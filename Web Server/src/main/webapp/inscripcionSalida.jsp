@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%      String usuario = (String) request.getSession().getAttribute("usuario");
+        <%      String usuario = (String) request.getSession().getAttribute("usuario");
             Usuario usu = (Usuario) request.getSession().getAttribute("usu");
         %>
         <meta charset="UTF-8">
@@ -25,9 +25,9 @@
                 <a href="logedUser.jsp">Volver al inicio</a>
             </div>
         </header>
-        
-         <aside>
-                      <h2>Mi perfil</h2>
+
+        <aside>
+            <h2>Mi perfil</h2>
             <ul>
                 <%
                     if (usu instanceof Proveedor) {
@@ -66,10 +66,15 @@
 
         <%
             String filtro = "";
+
         %>
 
         <main>
-            <form action="SvActividad" method="GET">
+            <form action="SvPaquetesDeSalida" method="POST">
+                <input type="hidden" name="usuarioV" id="usuarioV" value="<%= usuario%>"> 
+
+
+
                 <label for="departamento">Departamento:</label>
                 <select id="departamento" name="departamento"></select>
                 <button type="button" onclick="filtrarPorDepartamento()">Filtrar por Departamento</button>
@@ -96,7 +101,11 @@
                 <label for="cantTuristas">Nº Turistas:</label>
                 <input type="number" id="cantTuristas" name="cantTuristas" min="1">
 
-                <label for="formaPago">Forma de pago:</label>
+                <label for="paquetes">Paquetes:</label>
+                <select id="paquetes" name="paquetes"></select>
+                <button type="button" onclick="cargarPaquetes()">Obtener paquetes</button>
+                
+                 <label for="formaPago">Forma de pago:</label>
                 <select name="formaPago" id="formaPago">
                     <option value="general">General</option>
                     <option value="por_paquete">Por Paquete</option>
@@ -232,7 +241,40 @@
                 window.open(url, '_blank');
             }
 
+            function cargarPaquetes() {
+                const actividadSeleccionada = document.getElementById("actividadSalida").value;
+                const usuarioSeleccionado = document.getElementById("usuarioV").value;
+                console.log(usuarioSeleccionado);
+                const url = "SvPaquetesDeSalida?actividadSalida=" + encodeURIComponent(actividadSeleccionada) + "&usuario=" + encodeURIComponent(usuarioSeleccionado);
 
+                fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            const select = document.getElementById("paquetes");
+                            select.innerHTML = ''; // Limpia las opciones anteriores
+
+                            const nombresPaquetesFiltrados = data.split(",");
+                            nombresPaquetesFiltrados.forEach(paquete => {
+                                if (paquete) { // Evita opciones vacías
+                                    const option = document.createElement("option");
+                                    option.value = paquete;
+                                    option.text = paquete;
+                                    select.appendChild(option);
+                                }
+                            });
+
+                            if (paquetesSelect == null) {
+                                // Si está vacío, habilita la opción "General" y deshabilita la opción "Por Paquete"
+                                formaPagoSelect.querySelector("option[value='general']").disabled = false;
+                                formaPagoSelect.querySelector("option[value='por_paquete']").disabled = true;
+                            } else {
+                                // Si no está vacío, habilita ambas opciones
+                                formaPagoSelect.querySelector("option[value='general']").disabled = false;
+                                formaPagoSelect.querySelector("option[value='por_paquete']").disabled = false;
+                            }
+                        })
+                        .catch(error => console.error("Error al cargar los paquetes: " + error));
+            }
 
             function cargarDatos() {
                 cargarDepartamentos();

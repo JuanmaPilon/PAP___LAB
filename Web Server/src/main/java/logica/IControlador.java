@@ -50,7 +50,7 @@ public DTProveedor traerDTProveedor(String nickname);
 public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada) throws NonexistentEntityException, Exception;
 //public abstract List findSalidasTuristicasDepartamento(String departamentoSeleccionado);//trae lista de strings con los nombres de las actividades asociadas a un depto att:carlangas
 public abstract ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
-public abstract void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, int costo, Date fecha );
+public abstract void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, float costo, Date fecha, TipoPago tipoPago );
 public abstract boolean salidaTuristicaLlena(String salida, int cantAInscribir);
 public abstract boolean turistaYaInscriptoSalidaTuristica(String salida, String turistaAlta);
 public abstract DTSalidaTuristica traerDTSalidaTuristica(String nombreSalida);

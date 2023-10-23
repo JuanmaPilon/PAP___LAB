@@ -85,7 +85,7 @@
                 </div>
                 <% }%>   
 
-            <form action="SvAltaSalidaTuristica" method="post" enctype="multipart/form-data">
+            <form action="SvSalida" method="post" enctype="multipart/form-data">
                 <label for="departamento">Seleccionar Departamento:</label>
                 <select id="departamento" name="departamento">
                 </select>

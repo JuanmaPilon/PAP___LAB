@@ -18,9 +18,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -109,58 +113,72 @@ public class SvSalida extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String errorMessage = null;
         try {
-            String usuario = request.getParameter("usuario");
-            String departamento = request.getParameter("departamento");
-            String nombre = request.getParameter("nombre");
-            String descripcion = request.getParameter("descripcion");
-            int duracion = Integer.parseInt(request.getParameter("duracion"));
-            float costo = Float.parseFloat(request.getParameter("costo"));
-            String ciudad = request.getParameter("ciudad");
-            Date fecha = new Date();
-            String[] categorias = request.getParameterValues("categoria");
-            ArrayList<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
+            String actividadTuristica = request.getParameter("actividadTuristica");
+            String nombreSalida = request.getParameter("nombreSalida");
+            String fechaHoraSalida = request.getParameter("fechaHoraSalida");
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime fechaHoraLocal = LocalDateTime.parse(fechaHoraSalida, formatter);
+            Date fechaHoraDate = java.util.Date.from(fechaHoraLocal.atZone(java.time.ZoneId.systemDefault()).toInstant());
+
+            String lugarSalida = request.getParameter("lugarSalida");
+            String cantidadMaxTuristasStr = request.getParameter("cantidadMaxTuristas");
 
             Part archivo = request.getPart("file");
-            System.out.println("archivo:" + archivo);
             String nombreArchivo = null;
 
-            control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
+            int cantidadMaxTuristas = 0;
+            if (cantidadMaxTuristasStr != null && !cantidadMaxTuristasStr.isEmpty()) {
+                try {
+                    cantidadMaxTuristas = Integer.parseInt(cantidadMaxTuristasStr);
+                } catch (NumberFormatException e) {
+                }
+            }
+
+            Date fechaHoraActual = Date.from(fechaHoraLocal.atZone(ZoneId.systemDefault()).toInstant());
+
+            control.AltaSalidaTuristica(nombreSalida, cantidadMaxTuristas, fechaHoraActual, fechaHoraDate, lugarSalida, actividadTuristica);
 
             if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
-                    String directorioUsuario = System.getProperty("user.home");
-                    String rutaCompleta = directorioUsuario + File.separator + "PAP___LAB" + File.separator + "Web Server" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "images" + File.separator + nombreArchivo;
+                    ServletContext context = request.getServletContext();
+                    String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
+                    // Copiar el archivo a la ubicación relativa
                     Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
 
+                    String rutaRelativa = "images" + File.separator + nombreArchivo;
+
                     try {
-                        control.AltaDeImagenActividad(nombreArchivo, rutaCompleta, nombre);
+                        control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombreSalida);
                     } catch (Exception ex) {
-                        errorMessage = "Imagen ya en uso por otra actividad";
-                        request.setAttribute("errorMessage", errorMessage);
-                        request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+                        ex.printStackTrace();
+                        String errorMessage = "Ya existe otra salida con esta imagen, se ha dado de alta la salida sin imagen";
+                        String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaSalidaTuristica.jsp';</script>";
+                        response.getWriter().write(alertScript);
 
                     }
                 }
             }
+         response.sendRedirect("logedUser.jsp");
         } catch (PreexistingEntityException ex) {
-            errorMessage = "Ya hay otra actividad con ese nombre.";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+            ex.printStackTrace();
+            String errorMessage = "Ya existe otra salida con ese nombre";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaSalidaTuristica.jsp';</script>";
+            response.getWriter().write(alertScript);
+
 
         } catch (Exception ex) {
-            errorMessage = "Se ha producido un error, compruebe los campos";
-            request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("altaActividadTuristica.jsp").forward(request, response);
+             ex.printStackTrace();
+            String errorMessage = "Ha ocurrido un error, verifique los campos.";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaSalidaTuristica.jsp';</script>";
+            response.getWriter().write(alertScript);
 
         }
 
-        if (errorMessage == null) {
-            response.sendRedirect("logedUser.jsp");
-        }
+
     }
 
     @Override

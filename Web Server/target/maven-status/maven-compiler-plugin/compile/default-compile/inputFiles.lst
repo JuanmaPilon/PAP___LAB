@@ -1,8 +1,8 @@
+C:\Users\Pc\PAP___LAB\Web Server\src\main\java\logica\TipoPago.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\PreexistingEntityException.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\persistencia\PaqueteJpaController1.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\Servlets\SvDeptosYCategorias.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\logica\Fabrica.java
-C:\Users\Pc\PAP___LAB\Web Server\src\main\java\Servlets\SvAltaSalidaTuristica.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\JAXRSConfiguration.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\persistencia\CategoriaJpaController.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\logica\exceptions\IllegalOrphanException.java
@@ -52,6 +52,7 @@ C:\Users\Pc\PAP___LAB\Web Server\src\main\java\persistencia\ImagenPerfilJpaContr
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\logica\Departamento.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\persistencia\exceptions\IllegalOrphanException.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquete.java
+C:\Users\Pc\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquetesDeSalida.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\Servlets\SvSalida.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\logica\DTUsuario.java
 C:\Users\Pc\PAP___LAB\Web Server\src\main\java\persistencia\ActividadJpaController.java

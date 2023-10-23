@@ -85,13 +85,15 @@
             <div class="actividad">
                 <h3>Salidas Asociadas</h3>
                 <ul>
-                    <%                        if (salidas != null && !salidas.isEmpty()) {
-                            for (SalidaTuristica nombreSalida : salidas) {
-                                System.out.println(nombreSalida.getNombre());
-                                out.println("<li> <a href='#' onclick='mostrarSalida(\"" + nombreSalida.getNombre() + "\")'>" + nombreSalida.getNombre() + "</a></li>");
+                   <%
+                        // Verificando si la lista no está vacía
+                        if (salidas != null && !salidas.isEmpty()) {
+                            // Iterando sobre la lista y mostrando los nombres de las salidas
+                            for (SalidaTuristica salida : salidas) {
+                                out.println("<li> <a href='#' onclick='mostrarSalida(\"" + salida.getNombre() + "\")'>" + salida.getNombre() + "</a></li>");
                             }
                         } else {
-                            out.println("<li>No hay salidas disponibles para esta actividad.</li>");
+                            out.println("<li>No hay salidas asociadas.</li>");
                         }
                     %>
                 </ul>
@@ -105,16 +107,17 @@
         </footer>
     </body>
     <script>
-        function mostrarSalida(nombreSalida) {
+       function mostrarSalida(nombreSalida) {
             var xhr = new XMLHttpRequest();
+            console.log("mostrarsalida");
             xhr.open("GET", "SvPerfilSalida?nombreSalida=" + nombreSalida, true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     window.location.href = "perfilSalidaTuristica.jsp";
                 }
-                ;
-                xhr.send();
-            }
+            };
+            xhr.send();
+        }
     </script>
 
 </html>
