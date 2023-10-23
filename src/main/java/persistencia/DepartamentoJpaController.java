@@ -146,16 +146,6 @@ public class DepartamentoJpaController implements Serializable {
         }
     }
     
-     //obtener la lista de departamentos y  convertirla en una lista de objetos que puedan mostrarse en el JComboBox (AltaDeSalidaTuristica)
-    public List<String> obtenerNombresDepartamentos() {
-    List<Departamento> departamentos = findDepartamentoEntities(true, 0, 0);
-    List<String> nombresDepartamentos = new ArrayList<>();
 
-    for (Departamento departamento : departamentos) {
-        nombresDepartamentos.add(departamento.getNombre()); // Suponiendo que existe un método "getNombre()" en la clase Departamento
-    }
-
-    return nombresDepartamentos;
-}
     
 }

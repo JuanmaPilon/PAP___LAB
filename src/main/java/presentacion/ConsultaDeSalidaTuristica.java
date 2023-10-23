@@ -21,6 +21,7 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
 
     public ConsultaDeSalidaTuristica(String nombreSalida, IControlador icu) {
         initComponents();
+        control = icu;
         //aca tengo la actividad
         DTSalidaTuristica salida = control.traerDTSalidaTuristica(nombreSalida);
         String departamentoSalida = control.traerDepartamentoSalida(salida.getNombreActividad());

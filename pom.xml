@@ -112,6 +112,7 @@
                     <exclude>logica/Usuario_.class</exclude>
                     <exclude>logica/Inscripcion_.class</exclude>
                     <exclude>logica/SalidaTuristica_.class</exclude>
+                    <exclude>logica/DatosDePrueba.class</exclude>
                 </excludes>
             </configuration>
             

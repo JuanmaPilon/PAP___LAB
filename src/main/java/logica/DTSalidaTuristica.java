@@ -23,13 +23,7 @@ public class DTSalidaTuristica {
     public DTSalidaTuristica() {
     }
 
-    public DTSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) {
-        this.nombre = nombre;
-        this.cantMax = cantMax;
-        this.fAlta = fAlta;
-        this.fSalida = fSalida;
-        this.lugar = lugar;
-    }
+
 
     public DTSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) {
         this.nombre = nombre;
@@ -40,15 +34,6 @@ public class DTSalidaTuristica {
         this.nombreActividad = nombreActividad;
     }
 
-    public DTSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, ArrayList<Integer> listaIdInscripciones, String nombreActividad) {
-        this.nombre = nombre;
-        this.cantMax = cantMax;
-        this.fAlta = fAlta;
-        this.fSalida = fSalida;
-        this.lugar = lugar;
-        this.listaIdInscripciones = listaIdInscripciones;
-        this.nombreActividad = nombreActividad;
-    }
 
     public String getNombre() {
         return nombre;
@@ -70,9 +55,7 @@ public class DTSalidaTuristica {
         return lugar;
     }
 
-    public ArrayList<Integer> getListaIdInscripciones() {
-        return listaIdInscripciones;
-    }
+
 
     public String getNombreActividad() {
         return nombreActividad;

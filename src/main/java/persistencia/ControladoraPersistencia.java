@@ -303,9 +303,6 @@ public class ControladoraPersistencia {
         }
     }
 
-    public List<String> llenarCmboBoxDepPersis() {
-        return departamentoJpa.obtenerNombresDepartamentos();
-    }
 
     public void guardarSalidaTuristica(SalidaTuristica salidaTuristica, Actividad actividad) throws PreexistingEntityException, Exception {
         try {
@@ -452,8 +449,8 @@ public class ControladoraPersistencia {
         Actividad a = actividadJpa.findActividad(actividadSeleccionado);
 
         for (SalidaTuristica sT : a.getListaSalidaTuristica()) {
-
-            DTSalidaTuristica dtSalida = new DTSalidaTuristica(sT.getNombre(), sT.getCantMax(), sT.getfAlta(), sT.getfSalida(), sT.getLugar());
+            
+            DTSalidaTuristica dtSalida = new DTSalidaTuristica(sT.getNombre(), sT.getCantMax(), sT.getfAlta(), sT.getfSalida(), sT.getLugar(), a.getNombre());
             listaDTSalidaTuristica.add(dtSalida);
 
         }

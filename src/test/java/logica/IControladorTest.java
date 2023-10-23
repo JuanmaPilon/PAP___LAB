@@ -85,21 +85,21 @@ public class IControladorTest {
     @Test
     public void testAltaDepartamento() throws Exception {
         System.out.println("TestAltaDeDepartamento");
-        String nombre = "Rocha";
+        String nombre = "Rochaa";
         String descripcion = "Rocha de fiesta";
         String url = "www.rocha.gub.uy";
 
         control.AltaDeDepartamento(nombre, descripcion, url);
 
         ArrayList<Departamento> listaDeptos1 = control.listaDepartamentos();
-        assertEquals("Coinciden los nombres", listaDeptos1.get(0).getNombre(), "Rocha");
+        assertEquals("Coinciden los nombres", listaDeptos1.get(0).getNombre(), "Rochaa");
 
         Throwable exception1 = assertThrows(PreexistingEntityException.class, () -> {
             control.AltaDeDepartamento(nombre, descripcion, url);
         });
 
         ArrayList<String> listaDeptos2 = control.listaDeptos();
-        assertEquals("Coinciden los nombres", listaDeptos2.get(0), "Rocha");
+        assertEquals("Coinciden los nombres", listaDeptos2.get(0), "Rochaa");
 
         System.out.println("testGetYSet");
         String nombre3 = "Salto";
@@ -186,6 +186,7 @@ public class IControladorTest {
         Throwable exception2 = assertThrows(CorreoElectronicoExistenteException.class, () -> {
             control.AltaDeUsuarioTurista("nickname", nombre1, apellido1, contrasenia1, correo1, fNacimiento1, nacionalidad1);
         });
+        
         
         control.ModificarDatosDeUsuarioTurista(nickname1, nombre1, apellido1, correo1, fNacimiento1, nacionalidad1);
 
@@ -352,10 +353,16 @@ public class IControladorTest {
         control.AltaDeUsuarioProveedor("pAct", "pnom", "Pape", "contra", "PActcorreo",fAlta1, "PActdesc", "PActlink" );
         
         control.guardarActividad(nombre1, descripcion1, duracion1, costo1, ciudad1, fAlta1, "pAct", "dAct", listcat1);
-
+        
+        DTActividad dtasola = control.traerDTActividad(nombre1);
+        
+        Throwable exception1 = assertThrows(PreexistingEntityException.class, () -> {
+            control.guardarActividad(nombre1, descripcion1, duracion1, costo1, ciudad1, fAlta1, "pAct", "dAct", listcat1);
+        });
+        
         control.cambiarEstadoActividad(nombre1, estado1);
         //ArrayList<Actividad> listaActConfirmadas = control.listaActividadesConfirmadas();
-        
+        String nomDepto = control.traerDepartamentoSalida(nombre1);
         ArrayList<String> listaActConfirmadasDepto = control.listaActividadesTuristicasConfirmadas("dAct");
         
         ArrayList<Actividad> listaActConfirmadasAct = control.listaActividadesConfirmadasDepartamento("dAct");
@@ -401,6 +408,56 @@ public class IControladorTest {
         public void testAltaSalidaTuristica() throws Exception {
         System.out.println("TestAltaSalidaTursitica");
         
+        String nombre1 = "Salnom";
+        String lugar1 = "Sallugar";
+        
+        SimpleDateFormat fecha0 = new SimpleDateFormat("dd/MM/yyyy");
+        Date fAlta1 = fecha0.parse("23/2/1927");
+        SimpleDateFormat fecha1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date fSalida1 = fecha1.parse("23/2/1928");
+ 
+        control.AltaDeDepartamento("dActSal", "deptoDesc", "deptoURL");
+        control.AltaCategoria("catActSal");
+        ArrayList<String> listcat1 = new ArrayList();
+        listcat1.add("catActSal");
+        
+        control.AltaDeUsuarioProveedor("pActSal", "pnom", "Pape", "contra", "PActSalcorreo",fAlta1, "PActdesc", "PActlink" );
+        
+        control.guardarActividad("ActSal", "ActSalDesc", 1, 1, "ActSalCiu", fAlta1, "pActSal", "dActSal", listcat1);
+        
+        control.AltaSalidaTuristica("Sal", 2, fAlta1, fSalida1, lugar1,"ActSal" );
+        
+        Throwable exception1 = assertThrows(PreexistingEntityException.class, () -> {
+            control.AltaSalidaTuristica("Sal", 2, fAlta1, fSalida1, lugar1,"ActSal" );
+        });
+        
+        SalidaTuristica s = control.ConsultaSalidaTuristica("Sal");
+        
+        ArrayList<DTSalidaTuristica> dts = control.encontraSalidasTuristicasDeActividad("ActSal");
+        ArrayList<String> listaSalidaAct = control.listaSalActividadTuristica("ActSal");
+        DTSalidaTuristica dtsnull = new DTSalidaTuristica();
+        
+        assertEquals(s.getNombre(), dts.get(0).getNombre());
+        assertEquals(s.getActividad().getNombre(), dts.get(0).getNombreActividad());
+        assertEquals(s.getCantMax(), dts.get(0).getCantMax());
+        assertEquals(s.getLugar(), dts.get(0).getLugar());
+        SimpleDateFormat fechaS1 = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat fechadtS2 = new SimpleDateFormat("dd/MM/yyyy");
+        String fAlta = fechaS1.format(s.getfAlta());
+        String fAlta2 = fechadtS2.format(dts.get(0).getfAlta());
+        assertEquals(fAlta, fAlta2);
+        fAlta = fechaS1.format(s.getfSalida());
+        fAlta2 = fechadtS2.format(dts.get(0).getfSalida());
+        assertEquals(fAlta, fAlta2);
+        
+        assertTrue(control.salidaTuristicaLlena("Sal", 3));
+        
+        DTSalidaTuristica dts2 = control.traerDTSalidaTuristica("Sal");
+        
+        ArrayList<DTSalidaTuristica> listaDtSalida = control.traerSalidasDelProveedor("pActSal");
+        
+        
+       
         
         
         
