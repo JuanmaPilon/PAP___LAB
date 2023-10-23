@@ -113,6 +113,19 @@
                     <exclude>logica/Inscripcion_.class</exclude>
                     <exclude>logica/SalidaTuristica_.class</exclude>
                     <exclude>logica/DatosDePrueba.class</exclude>
+                    <exclude>logica/imagenActividad.class</exclude>
+                    <exclude>logica/ImagenPerfil.class</exclude>
+                    <exclude>persistencia/ActividadJpaController.class</exclude>
+                    <exclude>persistencia/CategoriaJpaController.class</exclude>
+                    <exclude>persistencia/CompraJpaController.class</exclude>
+                    <exclude>persistencia/DepartamentoJpaController.class</exclude>
+                    <exclude>persistencia/ImagenPerfilJpaController.class</exclude>
+                    <exclude>persistencia/imagenActividadJpaController.class</exclude>
+                    <exclude>persistencia/InscripcionJpaController.class</exclude>
+                    <exclude>persistencia/PaqueteJpaController.class</exclude>
+                    <exclude>persistencia/ProveedorJpaController.class</exclude>
+                    <exclude>persistencia/SalidaTuristicaJpaController.class</exclude>
+                    <exclude>persistencia/TuristaJpaController.class</exclude>                 
                 </excludes>
             </configuration>
             

@@ -456,12 +456,53 @@ public class IControladorTest {
         
         ArrayList<DTSalidaTuristica> listaDtSalida = control.traerSalidasDelProveedor("pActSal");
         
-        
-       
-        
-        
-        
+        assertEquals(dts2.getNombre(), listaDtSalida.get(0).getNombre());
         
         }    
-    
+        @Test
+        public void testAltaPaquete() throws Exception {
+            System.out.println("TestAltaPaquetessssssssssssssssssssssss");
+            
+            SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+            Date fAlta1 = fecha.parse("23/2/1927");
+ 
+            control.AltaDeDepartamento("dActPaq", "deptoDesc", "deptoURL");
+            control.AltaCategoria("catActPaq");
+            ArrayList<String> listcat1 = new ArrayList();
+            listcat1.add("catActPaq");
+            control.AltaDeUsuarioProveedor("pActSalPaq", "pnom", "Pape", "contra", "PActSalPaqcorreo",fAlta1, "PActdesc", "PActlink" );
+            control.guardarActividad("ActSalPaq", "ActSalPaqDesc", 1, 1, "ActSalPaqCiu", fAlta1, "pActSalPaq", "dActPaq", listcat1);
+            control.AltaSalidaTuristica("SalPaq", 2, fAlta1, fAlta1, "ActSalPaqCiu","ActSalPaq" );
+            
+            control.crearPaqueteActividadTuristica("Paq", "PaqDesc", 10, fAlta1, 20);
+            control.asignarActividadPaquete( "Paq", "ActSalPaq");
+            
+            Throwable exception1 = assertThrows(PreexistingEntityException.class, () -> {
+                control.crearPaqueteActividadTuristica("Paq", "PaqDesc", 10, fAlta1, 20);
+        });
+            
+            Throwable exception2 = assertThrows(NullPointerException.class, () -> {
+                 control.asignarActividadPaquete( "Paq", "ActSalPaq111");
+        });
+            
+            DTPaquete dtpaq = control.traerDTPaquete("Paq");
+            
+            List<Paquete> listPaqS = control.consultaPaquetes();
+            ArrayList<String> listaPaqS = control.listaPaquetes();
+            
+            assertEquals(dtpaq.getNombre(), (String) listPaqS.get(0).getNombre());
+            assertEquals(dtpaq.getNombre(), listaPaqS.get(0));
+            
+            ArrayList<String> listaActPaqS = control.listaPaquetesDeActividad("ActSalPaq");
+            
+            assertEquals("Paq", listaActPaqS.get(0));
+            
+            ArrayList<DTPaquete> listaDTPaq = control.traerListaDTPaquetes();
+            
+            assertEquals(dtpaq.getDescripcion(), listaDTPaq.get(0).getDescripcion());
+            assertEquals(dtpaq.getDescuento(), listaDTPaq.get(0).getDescuento()); 
+            assertEquals(dtpaq.getValidez(), listaDTPaq.get(0).getValidez());
+            
+            
+    }
 }//fin

@@ -26,7 +26,7 @@ public abstract ArrayList listaUsuarios();  //devuelve una lista de todos los us
 public abstract ArrayList listaProveedores(); //devuelve una lista de todos los proveedores
 public abstract ArrayList listaDepartamentos(); //devuelve una lista de todos los departamentos
 public abstract ArrayList listaDeptos();//lista que contiene solo los nombres de los departamentos
-public abstract ArrayList listaPaquetes();
+
 public abstract ArrayList listaActividades();
 public abstract void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url);
 public abstract void ModificarDatosDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fecha, String nacionalidad);//Nati
@@ -44,8 +44,20 @@ public abstract DTSalidaTuristica traerDTSalidaTuristica(String nombreSalida);
 public abstract ArrayList<DTSalidaTuristica> traerSalidasDelProveedor(String nickname);
 
 
-public abstract List consultaPaquetes();
+
 public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) throws PreexistingEntityException, Exception;
+public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada) throws NonexistentEntityException, Exception;
+public abstract List consultaPaquetes();
+public abstract ArrayList listaPaquetes();
+public abstract ArrayList<String> listaPaquetesDeActividad(String nombreActividad);
+public abstract ArrayList<DTPaquete> traerListaDTPaquetes();
+public abstract ArrayList<String> listaActividadesDelPaquete(String nombrePaquete);
+public abstract ArrayList<String> traerCategoriasPaquete(String paquete);
+public abstract DTPaquete traerDTPaquete(String nombrePaquete);
+public abstract ArrayList<String> listaPaquetesSinCompra();
+public abstract ArrayList<Paquete> listaPaquetesVigentesSalida(String nombreSalida);//para inscripcion
+
+
 public abstract void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception;
 
 
@@ -55,7 +67,7 @@ public ArrayList<DTUsuario> traerUsuarioMod();
 public ArrayList<DTTurista> traerUsuarioTurista();
 public DTTurista traerDTTurista(String nickname);
 public DTProveedor traerDTProveedor(String nickname);
-public abstract void asignarActividadPaquete(String paqueteSeleccionado,String actividadSeleccionada) throws NonexistentEntityException, Exception;
+
 
 public abstract ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado);//trae dtactividad asociados a un depto
 public abstract void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, float costo, Date fecha, TipoPago tipoPago );
@@ -64,15 +76,12 @@ public abstract boolean turistaYaInscriptoSalidaTuristica(String salida, String 
 
 public abstract ArrayList<DTSalidaTuristica> traerInscSalidasDeTurista(String nickname);
 public abstract ArrayList<DTActividad> traerInscActividadesDeTurista(String nickname);
-public abstract ArrayList<String> listaPaquetesDeActividad(String nombreActividad);
+
 
 public abstract ArrayList<DTActividad> traerActividadesDelProveedor(String nickname);
 public abstract ArrayList<String> traerCategorias();
 public abstract void ValidarContrasenias(String contrasenia, String confirmarContrasenia) throws ConstraseniasDistintas;
-public abstract ArrayList<DTPaquete> traerListaDTPaquetes();
-public abstract ArrayList<String> listaActividadesDelPaquete(String nombrePaquete);
-public abstract ArrayList<String> traerCategoriasPaquete(String paquete);
-public abstract DTPaquete traerDTPaquete(String nombrePaquete);
+
 public abstract DTActividad traerDTActividad(String nombreActividad);
 
 public abstract String traerDepartamentoSalida(String nombreActividad);
@@ -81,14 +90,14 @@ public abstract ArrayList<String> traerCategoriasActividad(String actividad);
 public abstract void cambiarEstadoActividad(String nombreActividad, TipoEstado tipoEstado);
 public abstract ArrayList<String> listaActividadesPorEstado(TipoEstado estado) ;
 public abstract void CompraDePaquete(String nickname, String nombrePaquete, int cantTurista, Date fechaCompra) throws PaqueteSinActividad, PaqueteYaComprado;
-public abstract ArrayList<String> listaPaquetesSinCompra();
+
 public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
 public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
 public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
 public abstract ArrayList<Actividad> listaActividadesConfirmadas();
 public abstract ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
-public abstract ArrayList<Paquete> listaPaquetesVigentesSalida(String nombreSalida);//para inscripcion
+
 public abstract void cargarDatosDePrueba();
 public abstract Categoria traerCategoria(String categoria);
 
