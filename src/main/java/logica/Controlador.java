@@ -274,27 +274,27 @@ public class Controlador implements IControlador {
     ;
    
    
-//   @Override
-//    public void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria) {
-//
-//        Actividad actividad = new Actividad();
-//
-//        //falta control si nombre ya existe o si es null nombre
-//        actividad.setNombre(nombre);
-//        actividad.setEstado(TipoEstado.agregada);
-//        actividad.setDescripcion(descripcion);
-//        actividad.setDuracion(duracion);
-//        actividad.setCosto(costo);
-//        actividad.setCiudad(ciudad);
-//        actividad.setfAlta(fAlta);
-//        actividad.setListaSalidaTuristica(listaSalidaTuristica);
-//        actividad.setListaPaquete(listaPaquete);
-//        actividad.setListaCategoria(listaCategoria);
-//
-//        //controlPersis.guardarActividad(actividad);
-//    }
-//
-//    ;//Juanma
+   @Override
+    public void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria) {
+
+        Actividad actividad = new Actividad();
+
+        //falta control si nombre ya existe o si es null nombre
+        actividad.setNombre(nombre);
+        actividad.setEstado(TipoEstado.agregada);
+        actividad.setDescripcion(descripcion);
+        actividad.setDuracion(duracion);
+        actividad.setCosto(costo);
+        actividad.setCiudad(ciudad);
+        actividad.setfAlta(fAlta);
+        actividad.setListaSalidaTuristica(listaSalidaTuristica);
+        actividad.setListaPaquete(listaPaquete);
+        actividad.setListaCategoria(listaCategoria);
+
+        //controlPersis.guardarActividad(actividad);
+    }
+
+    ;//Juanma
    
    //Devuelve la Salida Turistica con nombre nombreSalida
    @Override
@@ -322,7 +322,10 @@ public class Controlador implements IControlador {
 
     ;
    
-
+   @Override
+    public List<String> llenarCmboBoxDep() {
+        return controlPersis.llenarCmboBoxDepPersis();
+    }
 
     @Override
     public void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) throws PreexistingEntityException, Exception {
@@ -484,10 +487,10 @@ public class Controlador implements IControlador {
 
     //Alta de Inscripcion. Pre-condicion: exite salida turistica y turista con los respectivos nombres; los parametros vienen en el formato correcto.
     @Override
-    public void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, int costo, Date fecha) {
+    public void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, float costo, Date fecha, TipoPago tipoPago) {
         SalidaTuristica salida = ConsultaSalidaTuristica(nombreSalidaSeleccionada);
         Turista turista = (Turista) ConsultaDeUsuario(nicknameTurista);
-        Inscripcion inscripcion = new Inscripcion(turista, salida, fecha, cantTurista, costo);
+        Inscripcion inscripcion = new Inscripcion(turista, salida, fecha, cantTurista, costo, tipoPago);
 
         controlPersis.guardarInscripcion(inscripcion);
     }
@@ -525,11 +528,8 @@ public class Controlador implements IControlador {
         //paso la lista de actividades a DT (asi no se repite la actividad, si el turista esta inscpto a dos salidas de la misma actividad.
 
         for (Actividad a : actividades) {
-            DTActividad dtActividad = new DTActividad(a.getNombre(), a.getDescripcion(),
-                    a.getDuracion(),
-                    a.getCosto(), a.getCiudad(),
-                    a.getfAlta(),
-                    a.getProveedor().getNombre());
+            DTActividad dtActividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), 
+                    a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname(), a.getDepartamento().getNombre());
 
             listaInscActividadesDeTurista.add(dtActividad);
         }
@@ -543,11 +543,9 @@ public class Controlador implements IControlador {
         ArrayList<DTActividad> listaActividadesDelProveedor = new ArrayList();
         for (Actividad a : listaActividades) {
             if (a.getProveedor().getNickname().equals(nickname)) {
-                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(),
-                        a.getDuracion(),
-                        a.getCosto(), a.getCiudad(),
-                        a.getfAlta(),
-                        a.getProveedor().getNombre());
+                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), 
+                    a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname(), a.getDepartamento().getNombre());
+
                 listaActividadesDelProveedor.add(dtactividad);
             }
 
@@ -595,7 +593,7 @@ public class Controlador implements IControlador {
         Actividad a = ConsultaActividadTuristica(nombreActividad);
         //DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, String nombreProveedor) 
         DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(),
-                a.getCosto(), a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname());
+                a.getCosto(), a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname(), a.getDepartamento().getNombre());
 
         return dtactividad;
     }
@@ -1057,6 +1055,7 @@ public class Controlador implements IControlador {
         }
 
         //inscripcion
+        /*
         try {
 
             InscripcionASalidaTuristica("Degusta Agosto", "lachiqui", 3, 2400, fecha.parse("15/8/2022"));
@@ -1069,10 +1068,11 @@ public class Controlador implements IControlador {
             InscripcionASalidaTuristica("Teatro con Sabores 2", "bobesponja", 2, 1000, fecha.parse("20/8/2022"));
             InscripcionASalidaTuristica("Teatro con Sabores 2", "anibal", 1, 500, fecha.parse("21/8/2022"));
             InscripcionASalidaTuristica("Degusta Setiembre", "tony", 11, 8800, fecha.parse("21/8/2022"));
+
         } catch (ParseException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+*/
     }
 
     @Override

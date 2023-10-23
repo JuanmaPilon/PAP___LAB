@@ -142,7 +142,26 @@ public class NicknameExistenceChecker {
         }
     }
 
-
+    public void destroy(String id) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Proveedor proveedor;
+            try {
+                proveedor = em.getReference(Proveedor.class, id);
+                proveedor.getNickname();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The proveedor with id " + id + " no longer exists.", enfe);
+            }
+            em.remove(proveedor);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 
     public List<Proveedor> findProveedorEntities() {
         return findProveedorEntities(true, -1, -1);
@@ -177,5 +196,17 @@ public class NicknameExistenceChecker {
         }
     }
 
+    public int getProveedorCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Proveedor> rt = cq.from(Proveedor.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
     
 }

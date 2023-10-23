@@ -80,7 +80,26 @@ public class imagenActividadJpaController implements Serializable {
         }
     }
 
-
+    public void destroy(String id) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            imagenActividad imagenActividad;
+            try {
+                imagenActividad = em.getReference(imagenActividad.class, id);
+                imagenActividad.getNombre();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The imagenActividad with id " + id + " no longer exists.", enfe);
+            }
+            em.remove(imagenActividad);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 
     public List<imagenActividad> findimagenActividadEntities() {
         return findimagenActividadEntities(true, -1, -1);
@@ -115,6 +134,18 @@ public class imagenActividadJpaController implements Serializable {
         }
     }
 
+    public int getimagenActividadCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<imagenActividad> rt = cq.from(imagenActividad.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
     
     public imagenActividad findImagenPerfilByNombreActividad(String nombreActividad) {
     EntityManager em = getEntityManager();

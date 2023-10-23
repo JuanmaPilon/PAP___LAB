@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package presentacion;
 
-import static java.lang.Integer.parseInt;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,16 +9,12 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-//import logica.Actividad;
-import logica.Controlador;
 import logica.DTActividad;
 import logica.DTSalidaTuristica;
 import logica.DTTurista;
 import logica.IControlador;
-//import logica.Departamento;
-//import logica.Inscripcion;
-//import logica.SalidaTuristica;
-//import logica.Turista;
+import logica.TipoPago;
+
 
 /**
  *
@@ -386,8 +379,9 @@ public class InscripcionASalidaTuristica extends javax.swing.JInternalFrame {
                                     Calendar calendar = Calendar.getInstance();
                                     calendar.set(anio, mes - 1, dia); // El mes se cuenta desde 0 (enero) a 11 (diciembre)
                                     Date fecha = calendar.getTime();
+                                    TipoPago pago = TipoPago.general;
 
-                                    control.InscripcionASalidaTuristica(nombreSalidaSeleccionada, nicknameTurista, cantidadTurista, costo, fecha);
+                                    control.InscripcionASalidaTuristica(nombreSalidaSeleccionada, nicknameTurista, cantidadTurista, costo, fecha, pago);
 
                                     mostrsarMensaje("Incripcion realizada", "Info", "Inscripcion realizada con exito");
                                 } catch (NumberFormatException ex) {

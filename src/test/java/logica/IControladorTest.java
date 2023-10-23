@@ -58,7 +58,7 @@ public class IControladorTest {
 
     @Test
     public void testAltaCategoria() throws Exception {
-        System.out.println("AltaDeCategoria");
+        System.out.println("TestAltaDeCategoria");
         String nombre = "Cat1";
         control.AltaCategoria("Cat1");
         Categoria c1 = control.traerCategoria("Cat1");
@@ -84,7 +84,7 @@ public class IControladorTest {
 
     @Test
     public void testAltaDepartamento() throws Exception {
-        System.out.println("AltaDeDepartamento");
+        System.out.println("TestAltaDeDepartamento");
         String nombre = "Rocha";
         String descripcion = "Rocha de fiesta";
         String url = "www.rocha.gub.uy";
@@ -130,6 +130,7 @@ public class IControladorTest {
 
     @Test
     public void testAltaTurista() throws Exception {
+        System.out.println("testAltaTurista");
         String nickname1 = "T1";
         String nombre1 = "T1nom";
         String apellido1 = "T1ape";
@@ -185,6 +186,8 @@ public class IControladorTest {
         Throwable exception2 = assertThrows(CorreoElectronicoExistenteException.class, () -> {
             control.AltaDeUsuarioTurista("nickname", nombre1, apellido1, contrasenia1, correo1, fNacimiento1, nacionalidad1);
         });
+        
+        control.ModificarDatosDeUsuarioTurista(nickname1, nombre1, apellido1, correo1, fNacimiento1, nacionalidad1);
 
         String nickname2 = "T2";
         String nombre2 = "T2nom";
@@ -245,6 +248,7 @@ public class IControladorTest {
 
     @Test
     public void testAltaProveedor() throws Exception {
+         System.out.println("testAltaProveedor");
         String nickname1 = "P1";
         String nombre1 = "P1nom";
         String apellido1 = "P1ape";
@@ -276,6 +280,7 @@ public class IControladorTest {
         ArrayList<String> listaProveedores = control.listaProveedores();
         assertEquals(listaProveedores.get(0), nickname1);        
         
+        control.ModificarDatosDeUsuarioProveedor(nickname1, nombre1, apellido1, correo1, fNacimiento1, descripcion1, link1);
         
         String nickname2 = "P2";
         String nombre2 = "P2nom";
@@ -307,7 +312,13 @@ public class IControladorTest {
         assertEquals(p2.getLink(), link2);
         assertEquals(p2.getDescripcion(), descripcion2);
         assertEquals(p2.getListaActividades(), null);
-
+        
+       control.ValidarContrasenias(contrasenia2, contrasenia2);
+        
+        Throwable exception4 = assertThrows(ConstraseniasDistintas.class, () -> {
+            control.ValidarContrasenias(contrasenia2, "otraContrasenia");
+        });
+       
         String nickname3 = "P3";
         String nombre3 = "P3nom";
         String apellido3 = "P3ape";
@@ -323,17 +334,77 @@ public class IControladorTest {
 
     @Test
     public void testAltaActividad() throws Exception {
-
+        System.out.println("TestAltaActividadsssssssssssssssssssssss");
         String nombre1 = "A1nom";
         String descripcion1 = "A1desc";
         int duracion1 = 1;
         float costo1 = 1;
-        String ciudad = "A1ciu";
-        TipoEstado estado = TipoEstado.agregada;
+        String ciudad1 = "A1ciu";
+        TipoEstado estado1 = TipoEstado.confirmada;
         SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
         Date fAlta1 = fecha.parse("23/2/1927");
+ 
+        control.AltaDeDepartamento("dAct", "deptoDesc", "deptoURL");
+        control.AltaCategoria("catAct");
+        ArrayList<String> listcat1 = new ArrayList();
+        listcat1.add("catAct");
         
+        control.AltaDeUsuarioProveedor("pAct", "pnom", "Pape", "contra", "PActcorreo",fAlta1, "PActdesc", "PActlink" );
         
+        control.guardarActividad(nombre1, descripcion1, duracion1, costo1, ciudad1, fAlta1, "pAct", "dAct", listcat1);
 
+        control.cambiarEstadoActividad(nombre1, estado1);
+        //ArrayList<Actividad> listaActConfirmadas = control.listaActividadesConfirmadas();
+        
+        ArrayList<String> listaActConfirmadasDepto = control.listaActividadesTuristicasConfirmadas("dAct");
+        
+        ArrayList<Actividad> listaActConfirmadasAct = control.listaActividadesConfirmadasDepartamento("dAct");
+        
+       ArrayList<String> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas("pAct");
+        
+        Actividad a = new Actividad();
+        a.setListaCategoria(null);
+        a = control.ConsultaActividadTuristica(nombre1);
+        a.setListaPaquete(null);
+        a.setListaSalidaTuristica(null);
+        a.getListaPaquete();
+        a.getListaSalidaTuristica();
+        
+        //System.out.println("acaaaa"+a.getDepartamento().getNombre());
+        ArrayList<String> listaAct = control.listaActividades();
+        ArrayList<String> listaAct2 = control.listaActividadesTuristicas("dAct");
+        
+        
+        ArrayList<DTActividad> dta = control.traerActividadesDelProveedor("pAct");        
+        ArrayList<DTActividad> dta2 = control.encontraActividadDepartamento("dAct");
+        assertEquals(a.getCiudad(), dta.get(0).getCiudad());
+        //assertEquals(a.getCosto(), dta.get(0).getCosto());
+        assertEquals(a.getDepartamento().getNombre(), dta.get(0).getNombreDepartamento());
+        assertEquals(a.getDescripcion(), dta.get(0).getDescripcion());
+        assertEquals(a.getEstado(), TipoEstado.confirmada);
+        assertEquals(a.getNombre(), dta.get(0).getNombre());
+        assertEquals(a.getProveedor().getNickname(),dta.get(0).getNombreProveedor());
+        float tolerancia = 0.0001f;
+        assertEquals(a.getDuracion(), dta.get(0).getDuracion());
+        assertEquals(a.getCosto(), dta.get(0).getCosto(), tolerancia);
+        Actividad a1= new Actividad("act11nom", "act2desc", 2, 2, "act2ciu", fAlta1, null, null, a.getDepartamento(), a.getProveedor());
+        Actividad a2 = new Actividad("act22nom", "act22desc", 2, 2, "act22ciu",estado1, fAlta1, null, null, a.getDepartamento(), a.getProveedor(), a.getListaCategoria());
+        a.setListaSalidaTuristica(null);
+        a.setListaPaquete(null);
+        SimpleDateFormat fechaA = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat fechadtA = new SimpleDateFormat("dd/MM/yyyy");
+        String fAlta = fechaA.format(a.getfAlta());
+        String fAlta2 = fechadtA.format(dta.get(0).getfAlta());
+        assertEquals(fAlta, fAlta2);
     }
+        @Test
+        public void testAltaSalidaTuristica() throws Exception {
+        System.out.println("TestAltaSalidaTursitica");
+        
+        
+        
+        
+        
+        }    
+    
 }//fin

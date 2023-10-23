@@ -114,7 +114,31 @@ public class PaqueteJpaController implements Serializable {
         }
     }
 
-
+    public void destroy(String id) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Paquete paquete;
+            try {
+                paquete = em.getReference(Paquete.class, id);
+                paquete.getNombre();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The paquete with id " + id + " no longer exists.", enfe);
+            }
+            ArrayList<Actividad> listaActividades = paquete.getListaActividades();
+            for (Actividad listaActividadesActividad : listaActividades) {
+                listaActividadesActividad.getListaPaquete().remove(paquete);
+                listaActividadesActividad = em.merge(listaActividadesActividad);
+            }
+            em.remove(paquete);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 
     public List<Paquete> findPaqueteEntities() {
         return findPaqueteEntities(true, -1, -1);
@@ -149,6 +173,17 @@ public class PaqueteJpaController implements Serializable {
         }
     }
 
-
+    public int getPaqueteCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Paquete> rt = cq.from(Paquete.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
     
 }

@@ -96,7 +96,31 @@ public class InscripcionJpaController implements Serializable {
         }
     }
 
-
+    public void destroy(Long id) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Inscripcion inscripcion;
+            try {
+                inscripcion = em.getReference(Inscripcion.class, id);
+                inscripcion.getId();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The inscripcion with id " + id + " no longer exists.", enfe);
+            }
+            Turista turista = inscripcion.getTurista();
+            if (turista != null) {
+                turista.getListaInscripcion().remove(inscripcion);
+                turista = em.merge(turista);
+            }
+            em.remove(inscripcion);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 
     public List<Inscripcion> findInscripcionEntities() {
         return findInscripcionEntities(true, -1, -1);
@@ -131,6 +155,17 @@ public class InscripcionJpaController implements Serializable {
         }
     }
 
-
+    public int getInscripcionCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Inscripcion> rt = cq.from(Inscripcion.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
     
 }

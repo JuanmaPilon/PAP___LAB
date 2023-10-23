@@ -97,7 +97,31 @@ public class CompraJpaController implements Serializable {
         }
     }
 
-
+    public void destroy(Long id) throws NonexistentEntityException {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Compra compra;
+            try {
+                compra = em.getReference(Compra.class, id);
+                compra.getId();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The compra with id " + id + " no longer exists.", enfe);
+            }
+            Turista turista = compra.getTurista();
+            if (turista != null) {
+                turista.getListaCompras().remove(compra);
+                turista = em.merge(turista);
+            }
+            em.remove(compra);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 
     public List<Compra> findCompraEntities() {
         return findCompraEntities(true, -1, -1);
@@ -132,6 +156,17 @@ public class CompraJpaController implements Serializable {
         }
     }
 
-
+    public int getCompraCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Compra> rt = cq.from(Compra.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
     
 }
