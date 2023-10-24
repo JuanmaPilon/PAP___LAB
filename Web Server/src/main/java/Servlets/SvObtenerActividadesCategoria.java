@@ -54,7 +54,7 @@ public class SvObtenerActividadesCategoria extends HttpServlet {
                 }
                 htmlResponse.append("<div class='actividad'>");
                 htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la actividad\" style=\"width: 300px; height: 300px;\">");
-                htmlResponse.append("<h3>").append(actividad.getNombre()).append("</h3>");
+               htmlResponse.append("<h3 onclick=\"mostrarActividad('" + actividad.getNombre() + "')\">").append(actividad.getNombre()).append("</h3>");
                 htmlResponse.append("<p>").append(actividad.getDescripcion()).append("</p>");
                 htmlResponse.append("</div>");
             } catch (Exception ex) {

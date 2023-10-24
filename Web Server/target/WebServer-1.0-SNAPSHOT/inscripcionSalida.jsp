@@ -19,7 +19,13 @@
     <body onload="cargarDatos()">
         <header>
             <div id="logo">
-                <h1>Turismo.uy - Inscripción a Salida Turística  </h1>
+                <h1>Turismo.uy - Inscripcion a Salida Turistica  </h1>
+            </div>
+            <div id="search">
+                <form action="svlet" method="post">
+                    <input type="text" name="query" placeholder="Buscar turistas o paquetes">
+                    <button type="submit">Buscar</button>
+                </form>
             </div>
             <div id="login">
                 <a href="logedUser.jsp">Volver al inicio</a>
@@ -247,12 +253,12 @@
                 console.log("antes del if");
                 // Verifica si salidaSeleccionada es null o está vacía
                 if (salidaSeleccionada === null || salidaSeleccionada === "") {
-                     console.log("return");
+                    console.log("return");
                     return; // No hace nada si es null o vacía
                 }
                 console.log("antes del var");
                 var url = "SvSalida?actividadSalida=" + salidaSeleccionada + "&filtro=" + filtro;
-                 window.open(url, '_blank');
+                window.open(url, '_blank');
             }
 
             function cargarPaquetes() {

@@ -34,7 +34,6 @@
 
         <main>
             <div class="actividad">
-                <img src="imagen_actividad.jpg" alt="Imagen de la actividad">
                 <h3><%=dtpaquete.getNombre()%></h3>
                 <p>Descripcion: <%=dtpaquete.getDescripcion()%></p>
                 <p>Validez (días): <%=dtpaquete.getValidez()%></p>

@@ -10,35 +10,41 @@
         <header>
             <div id="logo">
                 <h1>Turismo.uy - Compra de Paquete</h1>
-            </div>
+                </div>
+           <div id="search">
+                    <form action="buscar.jsp" method="post">
+                        <input type="text" name="query" placeholder="Buscar turistas o paquetes">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
             <div id="login">
                 <a href="logedUser.jsp" src="logedUser.jsp">Volver al inicio</a>
             </div>
         </header>
 
         <main>
-            
+
             <%
-                String usuario = request.getParameter("usuario"); 
+                String usuario = request.getParameter("usuario");
             %>
 
             <form id="consultaPaqueteForm" action="SvPaquete" method="POST">
-                
+
                 <input type="hidden" id="usuario" name="usuario" value="<%= usuario%>">
-                
+
                 <label for="paquete">Paquetes:</label>
                 <select id="paquete" name="paquete"></select>
-                
+
                 <label for="cantTuristas">Cantidad Turistas:</label>
-                <input type="number" id="cantTuristas" name="cantTuristas">
+                <input type="number" id="cantTuristas" name="cantTuristas" min="1">
 
                 <button type="submit">Comprar Paquete</button>
             </form>
         </main>
 
-       <script>
+        <script>
 
-            function cargarPaquetes(){
+            function cargarPaquetes() {
                 fetch("SvPaquete?actividades=true")
                         .then(response => response.text())
                         .then(data => {
@@ -56,10 +62,19 @@
 
         </script>    
 
-        <footer>
-            <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
-            <p>&copy; 2023 Turismo.uy</p>
-        </footer>
-    </body>
+    </script>    
+    <script>
+        // Verifica si la compra fue exitosa
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('compraExitosa') && urlParams.get('compraExitosa') === 'true') {
+            alert("¡Compra exitosa! Gracias por su compra.");
+        }
+    </script>
+
+    <footer>
+        <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
+        <p>&copy; 2023 Turismo.uy</p>
+    </footer>
+</body>
 </html>
 

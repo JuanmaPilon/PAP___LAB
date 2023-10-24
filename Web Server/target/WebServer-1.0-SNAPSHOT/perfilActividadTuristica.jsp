@@ -24,7 +24,7 @@
     <body>
         <header>
             <div id="logo">
-                <h1>Turismo.uy</h1>
+                <h1>Turismo.uy - Perfil de Actividad Turistica</h1>
             </div>
             <div id="search">
                 <form action="svlet" method="post">
