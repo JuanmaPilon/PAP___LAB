@@ -104,8 +104,8 @@
                 <label for="paquetes">Paquetes:</label>
                 <select id="paquetes" name="paquetes"></select>
                 <button type="button" onclick="cargarPaquetes()">Obtener paquetes</button>
-                
-                 <label for="formaPago">Forma de pago:</label>
+
+                <label for="formaPago">Forma de pago:</label>
                 <select name="formaPago" id="formaPago">
                     <option value="general">General</option>
                     <option value="por_paquete">Por Paquete</option>
@@ -205,6 +205,12 @@
 
             function verDetalles() {
                 var actividadSeleccionada = document.getElementById("actividad").value;
+
+                // Verifica si actividadSeleccionada es null o está vacía
+                if (actividadSeleccionada === null || actividadSeleccionada === "") {
+                    return; // No hace nada si es null o vacía
+                }
+
                 var url = "SvActividad?actividad=" + actividadSeleccionada;
                 window.open(url, '_blank');
             }
@@ -235,10 +241,18 @@
             }
 
             function verDetallesSalida() {
-                const filtro = "FiltroSalidasPorNomSalida";
+                console.log("verDetalleSalida");
+                const filtro = "FiltroSalidas";
                 var salidaSeleccionada = document.getElementById("actividadSalida").value;
-                var url = "SvSalida?actividadSalida=" + salidaSeleccionada;
-                window.open(url, '_blank');
+                console.log("antes del if");
+                // Verifica si salidaSeleccionada es null o está vacía
+                if (salidaSeleccionada === null || salidaSeleccionada === "") {
+                     console.log("return");
+                    return; // No hace nada si es null o vacía
+                }
+                console.log("antes del var");
+                var url = "SvSalida?actividadSalida=" + salidaSeleccionada + "&filtro=" + filtro;
+                 window.open(url, '_blank');
             }
 
             function cargarPaquetes() {

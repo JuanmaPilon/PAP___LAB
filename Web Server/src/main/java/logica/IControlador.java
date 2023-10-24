@@ -83,5 +83,8 @@ public abstract void cargarDatosDePrueba();
 public abstract Categoria traerCategoria(String categoria);
 
 
+public abstract Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete);
+public abstract void nuevaCantTurista(Compra compraTurista) throws Exception;
+
     
 }

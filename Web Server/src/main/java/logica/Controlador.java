@@ -36,6 +36,17 @@ public class Controlador implements IControlador {
     //descomentado por una prueba:
     
     @Override
+    public  void nuevaCantTurista(Compra compraTurista) throws Exception{
+        controlPersis.nuevaCantTurista(compraTurista);
+        
+    }
+    
+    @Override
+    public  Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete){
+       return  controlPersis.traerCompraDelTurista( nombreTurista, nombrePaquete);
+    }
+    
+    @Override
     public imagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception {
 
         return controlPersis.buscarImagenActividad(nombreActividad);

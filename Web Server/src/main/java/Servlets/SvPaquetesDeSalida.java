@@ -15,11 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Actividad;
+import logica.Compra;
+import logica.DTPaquete;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.Paquete;
 import logica.SalidaTuristica;
 import logica.TipoPago;
+import persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -88,26 +91,106 @@ public class SvPaquetesDeSalida extends HttpServlet {
         
         Actividad actividad = control.ConsultaActividadTuristica( nombreActividad);
         
-        float costo = actividad.getCosto();
+        //DTPaquete  traerDTPaquete(String nombrePaquete);
+        
+        
+        
+       // float costo = actividad.getCosto();
         
         Date fecha = new Date();
         
         TipoPago pago = TipoPago.paquete;
         
-        if("general".equals(formaDePago) ){
-             pago = TipoPago.general;
-        }
+        try{
         
-        if((salida.getCantMax() - cantTuristas) < 0){
-            
-            String errorMessage = "Salida llena";
-            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'inscripcionSalida.jsp';</script>";
+        if("paquete".equals(formaDePago) ){
+             pago = TipoPago.paquete;
+             
+             if(!control.salidaTuristicaLlena( nombreSalida, cantTuristas)){
+                 
+                 
+                 boolean YaInscripto =  control.turistaYaInscriptoSalidaTuristica( nombreSalida, nombreTurista);
+                 if(!YaInscripto){
+                     
+                     Compra compraDelTurista = control.traerCompraDelTurista( nombreTurista,  paquete);
+                     
+                     if(compraDelTurista.getCantTuristas() <= cantTuristas){
+                         
+                         int nuevaCantidad = (compraDelTurista.getCantTuristas() - cantTuristas);
+                         compraDelTurista.setCantTuristas(nuevaCantidad);
+                         
+                         DTPaquete paquete2 = control.traerDTPaquete(paquete);
+                         float costo = (float) ((100 - paquete2.getDescuento()) * (0.01 * cantTuristas * actividad.getCosto()));
+                         control.nuevaCantTurista(compraDelTurista);
+                         control.InscripcionASalidaTuristica(nombreSalida,  nombreTurista, cantTuristas, costo, fecha,  pago);
+                          String errorMessage = "¡Se ha inscripto correctamente! Costo = " + costo;
+                          String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
+                         response.getWriter().write(alertScript);
+                     } else{
+                         
+                          String errorMessage = "Compra exede la cantidad de inscriptos";
+                          String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'inscripcionSalida.jsp';</script>";
+                         response.getWriter().write(alertScript);
+                     }
+                     
+                 } else {
+                      String errorMessage = "Usted ya esta inscripto a esta salida";
+                      String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'inscripcionSalida.jsp';</script>";
+                      response.getWriter().write(alertScript);
+                        }
+                 
             
         } else{
+            String errorMessage = "Salida llena";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'inscripcionSalida.jsp';</script>";
+            response.getWriter().write(alertScript);
+             }
+             
+      
+             //if general
+        } else {
             
-            control.InscripcionASalidaTuristica(nombreSalida,  nombreTurista, cantTuristas, costo, fecha,  pago);
-            response.sendRedirect("logedUser.jsp");
+            if(!control.salidaTuristicaLlena( nombreSalida, cantTuristas)){
+                 
+                 
+                 boolean YaInscripto =  control.turistaYaInscriptoSalidaTuristica( nombreSalida, nombreTurista);
+                 if(!YaInscripto){
+                     
+                 
+                         float costo2 = (float) ((cantTuristas * actividad.getCosto()));
+                         control.InscripcionASalidaTuristica(nombreSalida,  nombreTurista, cantTuristas, costo2, fecha,  pago);
+                          String errorMessage = "¡Se ha inscripto correctamente! Costo = " + costo2;
+                          String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
+                         response.getWriter().write(alertScript);
+                    
+                     
+                 } else {
+                      String errorMessage = "Usted ya esta inscripto a esta salida";
+                      String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'inscripcionSalida.jsp';</script>";
+                      response.getWriter().write(alertScript);
+                        }
+                 
+            
+        } else{
+            String errorMessage = "Salida llena";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'inscripcionSalida.jsp';</script>";
+            response.getWriter().write(alertScript);
+             }
+            
         }
+        
+        }catch(NonexistentEntityException ex){
+             String errorMessage = "Error: NonexistentEntityException";
+             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'inscripcionSalida.jsp';</script>";
+             response.getWriter().write(alertScript);
+            
+        } catch(Exception e){
+             String errorMessage = "Error: Exception";
+             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'inscripcionSalida.jsp';</script>";
+             response.getWriter().write(alertScript);
+            
+        }
+        
         
 
     }

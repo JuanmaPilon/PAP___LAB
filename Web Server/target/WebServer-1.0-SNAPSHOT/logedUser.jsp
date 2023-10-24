@@ -63,21 +63,26 @@
                     <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                     <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
 
-                    <%
-                        }
-                    %>
+                    
 
 
-                    <%
-                        if (usu instanceof Turista) {
+                    <% } else if (usu instanceof Turista) {
+
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
                     <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                     <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
-                    <li><a href="inscripcionSalida.jsp?usuario=<%= usuario%>">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
+                    <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
                     <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                     <li><a href="compraPaquete.jsp?usuario=<%= usuario%>">Comprar Paquete</a></li>  <!-- Turista -->
+                        <%
+                        } else {
+                        %>
+                    <li> <a href = "consultaUsuario.jsp"> Consulta de Usuario</a> </li> 
+                    <li> <a href = "consultaActividadTuristica.jsp" > Consulta de Actividad Turistica</a > </li>
+                    <li> <a href = "consultaSalidaTuristica.jsp" > Consulta de Salida Turistica</a > </li>
+                    <li> <a href = "consultaPaqueteActividadesTuristicas.jsp" > Consulta de Paquete de Actividades Turisticas</a > </li>
                         <%
                             }
                         %>
@@ -97,7 +102,6 @@
                     %>
                 </ul>
 
-                </ul>
 
                 <h2>Categorías</h2>
                 <ul id="miContenedor2">

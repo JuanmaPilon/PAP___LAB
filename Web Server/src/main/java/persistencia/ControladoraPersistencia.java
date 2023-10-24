@@ -45,6 +45,27 @@ public class ControladoraPersistencia {
 
     //Consultas
     
+    
+     public void nuevaCantTurista(Compra compraTurista) throws Exception{
+         
+        compraJpa.edit(compraTurista);
+        
+    } 
+    
+   public Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
+    List<Compra> todasLasCompras = compraJpa.findCompraEntities();
+    
+    for (Compra compra : todasLasCompras) {
+        if (compra.getTurista().getNombre().equals(nombreTurista) && compra.getPaquete().getNombre().equals(nombrePaquete)) {
+            return compra; // Encontraste la compra deseada
+        }
+    }
+    
+    // Manejar el caso en que no se encontró ninguna compra
+    return null;
+}
+
+   
     public imagenActividad buscarImagenActividad(String nombreActividad) {
         return imagenActividadJpa.findImagenPerfilByNombreActividad(nombreActividad);
     }

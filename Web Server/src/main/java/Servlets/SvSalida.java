@@ -37,6 +37,7 @@ import logica.Categoria;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.SalidaTuristica;
+import logica.imagenActividad;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.PreexistingEntityException;
 
@@ -83,6 +84,38 @@ public class SvSalida extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(actividades);
 
+        } else  if ("FiltroSalidas".equals(filtro)) {
+            
+             try {
+            HttpSession misesion = request.getSession();
+            String nombreSalida = request.getParameter("actividadSalida");
+            SalidaTuristica salidaTuristica = control.ConsultaSalidaTuristica(nombreSalida);
+            imagenActividad imagen = control.buscarImagenPorActividad(nombreSalida);
+
+            imagenActividad ImagenActividad = control.buscarImagenPorActividad(nombreSalida);
+             if (ImagenActividad == null) {
+                
+                String imagenVacia = "images/sinImagen.png";
+               
+                
+                SalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
+                 misesion.setAttribute("salida", salT);
+                 misesion.setAttribute("imagen", imagenVacia);
+                response.sendRedirect("perfilSalidaTuristica.jsp");
+                return;
+            } else {
+                String imagenRuta = ImagenActividad.getRuta();
+                SalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
+                 misesion.setAttribute("imagen", imagenRuta);
+                 misesion.setAttribute("salida", salT);
+                response.sendRedirect("perfilSalidaTuristica.jsp");
+                return;
+            }
+
+        } catch (Exception e) {
+
+        }     
+            
         }
 
         String nombreActividad = (String) request.getParameter("actividad");
@@ -93,23 +126,6 @@ public class SvSalida extends HttpServlet {
         misesion.setAttribute("actividad", actividadConsultada);
         response.sendRedirect("listaSalidasTuristicas.jsp");
 
-//        String nomActividad = actividadConsultada.getNombre();
-//        String descripacion = actividadConsultada.getDescripcion();
-//        int duracionActividad = actividadConsultada.getDuracion();
-//        String ciudadActividad = actividadConsultada.getCiudad();
-//        String actividadProveedor = actividadConsultada.getProveedor().getNickname();
-//        ArrayList<SalidaTuristica> actividadSalidas = actividadConsultada.getListaSalidaTuristica();
-//        ArrayList<Categoria> actividadPaquetes = actividadConsultada.getListaCategoria();
-//
-//        misesion.setAttribute("nomActividad", nomActividad);
-//        misesion.setAttribute("descripcion", descripacion);
-//        misesion.setAttribute("duracionActividad", duracionActividad);
-//        misesion.setAttribute("ciudadActividad", ciudadActividad);
-//        misesion.setAttribute("actividadProveedor", actividadProveedor);
-//        misesion.setAttribute("actividadSalidas", actividadSalidas);
-//        misesion.setAttribute("actividadPaquetes", actividadPaquetes);
-//
-//        response.sendRedirect("mostrarActividadTuristica.jsp");
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
