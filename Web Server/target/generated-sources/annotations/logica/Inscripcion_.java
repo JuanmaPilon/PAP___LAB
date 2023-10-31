@@ -8,7 +8,7 @@ import logica.SalidaTuristica;
 import logica.TipoPago;
 import logica.Turista;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-24T12:15:35")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-31T14:13:20")
 @StaticMetamodel(Inscripcion.class)
 public class Inscripcion_ { 
 

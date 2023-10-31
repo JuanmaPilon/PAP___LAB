@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Actividad;
+import logica.DTActividad;
+import logica.DTImagenActividad;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.imagenActividad;
@@ -82,8 +84,9 @@ public class SvActividad extends HttpServlet {
         }
         try {
             String nombreActividad = (String) request.getParameter("actividad");
-            Actividad actividadConsultada = control.ConsultaActividadTuristica(nombreActividad);
-            imagenActividad imagen = control.buscarImagenPorActividad(nombreActividad);
+            DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
+            DTImagenActividad imagen = control.traerDTImagenActividad(nombreActividad);
+            //imagenActividad imagen = control.buscarImagenPorActividad(nombreActividad);
 
             if (imagen == null) {
 

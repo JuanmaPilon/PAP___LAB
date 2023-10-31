@@ -1,3 +1,4 @@
+<%@page import="logica.DTActividad"%>
 <%@page import="logica.Paquete"%>
 <%@page import="logica.SalidaTuristica"%>
 <%@page import="logica.Categoria"%>
@@ -7,11 +8,11 @@
 <!DOCTYPE html>
 <html>
     <%
-        Actividad act = (Actividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
+        DTActividad act = (DTActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
         //ArrayList<String> cat = (ArrayList<String>) request.getSession().getAttribute("categorias");
-        ArrayList<Categoria> categorias = act.getListaCategoria();
-        ArrayList<SalidaTuristica> salidas = act.getListaSalidaTuristica();
-        ArrayList<Paquete> paquetes = act.getListaPaquete();
+        ArrayList<String> categorias = act.getNombresCategoria();
+        ArrayList<String> salidas = act.getNombresSalidaTuristica();
+        ArrayList<String> paquetes = act.getNombresPaquete();
         String rutaAlaImagen = (String) request.getSession().getAttribute("imagen");
         
     %>
@@ -49,9 +50,9 @@
                 <ul>
                     <%
                         if (categorias != null && !categorias.isEmpty()) {
-                            for (Categoria categoria : categorias) {
+                            for (String categoria : categorias) {
                     %>
-                    <li> <a href='#'><%= categoria.getNombre()%></a></li>
+                    <li> <a href='#'><%= categoria%></a></li>
                         <%
                                 }
                             }
@@ -67,8 +68,8 @@
                         // Verificando si la lista no está vacía
                         if (salidas != null && !salidas.isEmpty()) {
                             // Iterando sobre la lista y mostrando los nombres de las salidas
-                            for (SalidaTuristica salida : salidas) {
-                                out.println("<li> <a href='#' onclick='mostrarSalida(\"" + salida.getNombre() + "\")'>" + salida.getNombre() + "</a></li>");
+                            for (String salida : salidas) {
+                                out.println("<li> <a href='#' onclick='mostrarSalida(\"" + salida + "\")'>" + salida + "</a></li>");
                             }
                         } else {
                             out.println("<li>No hay salidas asociadas.</li>");
@@ -83,8 +84,8 @@
                         // Verificando si la lista no está vacía
                         if (paquetes != null && !paquetes.isEmpty()) {
                             // Iterando sobre la lista y mostrando los nombres de las salidas
-                            for (Paquete nombrePaquete : paquetes) {
-                                out.println("<li> <a href='#' onclick='mostrarPaquete(\"" + nombrePaquete.getNombre() + "\")'>" + nombrePaquete.getNombre() + "</a></li>");
+                            for (String nombrePaquete : paquetes) {
+                                out.println("<li> <a href='#' onclick='mostrarPaquete(\"" + nombrePaquete + "\")'>" + nombrePaquete + "</a></li>");
                             }
                         } else {
                             out.println("<li>No hay paquetes asociados.</li>");

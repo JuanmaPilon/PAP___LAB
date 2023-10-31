@@ -7,7 +7,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import logica.Actividad;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-24T12:15:35")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-10-31T14:13:20")
 @StaticMetamodel(Paquete.class)
 public class Paquete_ { 
 

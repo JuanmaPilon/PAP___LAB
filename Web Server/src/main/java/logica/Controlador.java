@@ -34,25 +34,24 @@ public class Controlador implements IControlador {
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
 
     //descomentado por una prueba:
-    
     @Override
-    public  void nuevaCantTurista(Compra compraTurista) throws Exception{
+    public void nuevaCantTurista(Compra compraTurista) throws Exception {
         controlPersis.nuevaCantTurista(compraTurista);
-        
+
     }
-    
+
     @Override
-    public  Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete){
-       return  controlPersis.traerCompraDelTurista( nombreTurista, nombrePaquete);
+    public Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
+        return controlPersis.traerCompraDelTurista(nombreTurista, nombrePaquete);
     }
-    
+
     @Override
     public imagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception {
 
         return controlPersis.buscarImagenActividad(nombreActividad);
-        
+
     }
-    
+
     @Override
     public ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception {
 
@@ -400,6 +399,16 @@ public class Controlador implements IControlador {
         return dtSalida;
     }
 
+    public DTImagenActividad traerDTImagenActividad(String nombreActividad) throws Exception {
+        imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
+        if (imagen != null) {
+            DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad());
+            return dtImagen;
+        } else {
+            return null; // No se encontró la imagen, devuelve null
+        }
+    }
+
     //Persiste la modificacion de Usuario Proveedor. nickname y correo no se modifican. 
     @Override
     public void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url) {
@@ -605,14 +614,43 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public DTActividad traerDTActividad(String nombreActividad) {
-        Actividad a = ConsultaActividadTuristica(nombreActividad);
-        //DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, String nombreProveedor) 
-        DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(),
-                a.getCosto(), a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname());
+public DTActividad traerDTActividad(String nombreActividad) {
+    Actividad a = ConsultaActividadTuristica(nombreActividad);
 
-        return dtactividad;
+    // Crea un nuevo objeto DTActividad y establece sus propiedades
+    DTActividad dtactividad = new DTActividad();
+    dtactividad.setNombre(a.getNombre());
+    dtactividad.setDescripcion(a.getDescripcion());
+    dtactividad.setDuracion(a.getDuracion());
+    dtactividad.setCosto(a.getCosto());
+    dtactividad.setCiudad(a.getCiudad());
+    dtactividad.setfAlta(a.getfAlta());
+    dtactividad.setNombreProveedor(a.getProveedor().getNickname());
+
+    // Para listaNombresSalidaTuristica, debes convertir la lista de objetos SalidaTuristica a una lista de nombres
+    List<String> listaNombresSalidaTuristica = new ArrayList<>();
+    for (SalidaTuristica salida : a.getListaSalidaTuristica()) {
+        listaNombresSalidaTuristica.add(salida.getNombre());
     }
+    dtactividad.setListaNombresSalidaTuristica((ArrayList<String>) listaNombresSalidaTuristica);
+
+    // Para listaNombresPaquete, de manera similar, convierte la lista de objetos Paquete a una lista de nombres
+    List<String> listaNombresPaquete = new ArrayList<>();
+    for (Paquete paquete : a.getListaPaquete()) {
+        listaNombresPaquete.add(paquete.getNombre());
+    }
+    dtactividad.setListaNombresPaquete((ArrayList<String>) listaNombresPaquete);
+
+    // Para listaNombresCategoria, convierte la lista de objetos Categoria a una lista de nombres
+    List<String> listaNombresCategoria = new ArrayList<>();
+    for (Categoria categoria : a.getListaCategoria()) {
+        listaNombresCategoria.add(categoria.getNombre());
+    }
+    dtactividad.setListaNombresCategoria((ArrayList<String>) listaNombresCategoria);
+
+    return dtactividad;
+}
+
 
     @Override
     public ArrayList<DTPaquete> traerListaDTPaquetes() {
@@ -1088,7 +1126,7 @@ public class Controlador implements IControlador {
         } catch (ParseException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-*/
+         */
     }
 
     @Override
@@ -1101,10 +1139,11 @@ public class Controlador implements IControlador {
         return listaActividadesTuristicas;
 
     }
-     @Override
+
+    @Override
     public Categoria traerCategoria(String categoria) {
         return controlPersis.traerCategoria(categoria);
 
     }
-  
+
 }

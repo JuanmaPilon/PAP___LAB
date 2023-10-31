@@ -77,6 +77,7 @@ Servlets\SvObtenerActividades.class
 logica\ImagenPerfil.class
 Servlets\SvCargarDepartamentos.class
 logica\Compra.class
+logica\DTImagenActividad.class
 Servlets\SvObtenerActividadesCategoria.class
 persistencia\DepartamentoJpaController.class
 logica\Inscripcion.class
