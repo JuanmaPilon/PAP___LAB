@@ -44,32 +44,29 @@ public class ControladoraPersistencia {
     CompraJpaController compraJpa = new CompraJpaController();
 
     //Consultas
-    
-    
-     public void nuevaCantTurista(Compra compraTurista) throws Exception{
-         
-        compraJpa.edit(compraTurista);
-        
-    } 
-    
-   public Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
-    List<Compra> todasLasCompras = compraJpa.findCompraEntities();
-    
-    for (Compra compra : todasLasCompras) {
-        if (compra.getTurista().getNombre().equals(nombreTurista) && compra.getPaquete().getNombre().equals(nombrePaquete)) {
-            return compra; // Encontraste la compra deseada
-        }
-    }
-    
-    // Manejar el caso en que no se encontró ninguna compra
-    return null;
-}
+    public void nuevaCantTurista(Compra compraTurista) throws Exception {
 
-   
+        compraJpa.edit(compraTurista);
+
+    }
+
+    public Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
+        List<Compra> todasLasCompras = compraJpa.findCompraEntities();
+
+        for (Compra compra : todasLasCompras) {
+            if (compra.getTurista().getNombre().equals(nombreTurista) && compra.getPaquete().getNombre().equals(nombrePaquete)) {
+                return compra; // Encontraste la compra deseada
+            }
+        }
+
+        // Manejar el caso en que no se encontró ninguna compra
+        return null;
+    }
+
     public imagenActividad buscarImagenActividad(String nombreActividad) {
         return imagenActividadJpa.findImagenPerfilByNombreActividad(nombreActividad);
     }
-    
+
     public SalidaTuristica consultaSalida(String nombreSalida) {
         return salidaTuristicaJpa.findSalidaTuristica(nombreSalida);
     }
@@ -271,6 +268,59 @@ public class ControladoraPersistencia {
 
         return listaDTUsuario;
 
+    }
+
+    public DTUsuario traerDTUsuario(String nickname) {
+        Usuario usuario = null;
+
+        try {
+            usuario = turistaJpa.findTurista(nickname);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (usuario == null) {
+            try {
+                usuario = proveedorJpa.findProveedor(nickname);
+            } catch (Exception ex) {
+                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (usuario != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String fnac = sdf.format(usuario.getfNacimiento());
+            DTUsuario dtUsuario = new DTUsuario(usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), fnac, usuario.getContrasenia());
+            return dtUsuario;
+        }
+        return null;
+    }
+
+    public String devolverTipoUsuario(String nickname) {
+        Usuario usuario = null;
+        boolean esProveedor = false;
+
+        try {
+            usuario = turistaJpa.findTurista(nickname);
+            if (usuario != null) {
+                esProveedor = false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (!esProveedor) {
+            try {
+                usuario = proveedorJpa.findProveedor(nickname);
+            } catch (Exception ex) {
+                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (esProveedor) {
+            return "proveedor";
+        } else {
+            return "turista";
+        }
     }
 
 //Guardar Departamento
@@ -537,11 +587,11 @@ public class ControladoraPersistencia {
         }
         return listaCategorias;
     }
- 
 
     public Categoria traerCategoria(String nombre) {
-       return categoriaJpa.findCategoria(nombre);
+        return categoriaJpa.findCategoria(nombre);
     }
+
     public void asignarCategoriaActividad(String nombre, String nombreActividad) {
         Categoria categoria = categoriaJpa.findCategoria(nombre);
         Actividad actividad = actividadJpa.findActividad(nombreActividad);
@@ -576,22 +626,22 @@ public class ControladoraPersistencia {
     public List<Compra> listarCompras() {
         return compraJpa.findCompraEntities();
     }
-    
-    public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria) {
-    ArrayList<String> listaActividadesTuristicas = new ArrayList();
-    List<Actividad> listaActividades = actividadJpa.findActividadEntities();
 
-    for (Actividad actividad : listaActividades) {
-        List<Categoria> categorias = actividad.getListaCategoria();
-        
-        for (Categoria cat : categorias) {
-            if (cat.getNombre().equals(categoria)) {
-                listaActividadesTuristicas.add(actividad.getNombre());
-                break; 
+    public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria) {
+        ArrayList<String> listaActividadesTuristicas = new ArrayList();
+        List<Actividad> listaActividades = actividadJpa.findActividadEntities();
+
+        for (Actividad actividad : listaActividades) {
+            List<Categoria> categorias = actividad.getListaCategoria();
+
+            for (Categoria cat : categorias) {
+                if (cat.getNombre().equals(categoria)) {
+                    listaActividadesTuristicas.add(actividad.getNombre());
+                    break;
+                }
             }
         }
+        return listaActividadesTuristicas;
     }
-    return listaActividadesTuristicas;
-}
 
 }//fin

@@ -1,3 +1,4 @@
+<%@page import="logica.DTUsuario"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.util.Date"%>
@@ -14,9 +15,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <%      String usua = (String) request.getSession().getAttribute("usuario");
-            Usuario usi = (Usuario) request.getSession().getAttribute("usu");
+    <head>      
+        <%      
+            String usua = (String) request.getSession().getAttribute("usuario");
+            DTUsuario usi = (DTUsuario) request.getSession().getAttribute("usu");
+            String tipoUsuario2 = (String) request.getSession().getAttribute("tipoUsuario");
         %>
         <meta charset="UTF-8">
         <link href="styles.css" rel="stylesheet">
@@ -45,7 +48,7 @@
                 <h2>Mi perfil</h2>
                 <ul>
                     <%
-                        if (usi instanceof Proveedor) {
+                        if (tipoUsuario2 == "proveedor") {
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="SvModificarUsuario?usuario=<%= usua%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
@@ -62,7 +65,7 @@
 
 
                     <%
-                        if (usi instanceof Turista) {
+                        if (tipoUsuario2 == "turista"){
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="SvModificarUsuario?usuario=<%= usua%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->

@@ -86,6 +86,8 @@ public abstract Categoria traerCategoria(String categoria);
 public abstract Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete);
 public abstract void nuevaCantTurista(Compra compraTurista) throws Exception;
 public abstract DTImagenActividad traerDTImagenActividad(String nombreActividad) throws  Exception;
+public abstract DTUsuario traerDTUsuario(String nickname);
+public abstract String devolverTipoUsuario(String nickname);
 
     
 }

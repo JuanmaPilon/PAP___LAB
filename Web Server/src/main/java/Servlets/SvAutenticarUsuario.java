@@ -40,8 +40,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
     if (autenticado) {
         request.getSession().setAttribute("usuario", usuario);  // Si el usuario es autenticado, puedes almacenar información de sesión
-        Usuario usu = control.ConsultaDeUsuario(usuario);
+        //Usuario usu = control.ConsultaDeUsuario(usuario);
+        DTUsuario usu = control.traerDTUsuario(usuario);
+        String tipoUsuario = control.devolverTipoUsuario(usu.getNickname());
         request.getSession().setAttribute("usu", usu);
+        request.getSession().setAttribute("tipoUsuario", tipoUsuario);
         response.sendRedirect("logedUser.jsp"); // Redirige al usuario a la página de inicio
     } else {
         request.getSession().setAttribute("errorMensaje", "Usuario y/o contrasenia incorrectas"); // Almacena un mensaje de error en la sesión

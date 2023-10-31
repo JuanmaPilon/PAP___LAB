@@ -357,6 +357,17 @@ public class Controlador implements IControlador {
     public ArrayList<DTUsuario> traerUsuarioMod() {
         return controlPersis.traerUsuarios();
     }
+    
+    @Override
+    public DTUsuario traerDTUsuario(String nickname){
+        return controlPersis.traerDTUsuario(nickname);
+        
+    }
+    
+    @Override
+    public String devolverTipoUsuario(String nickname){
+        return controlPersis.devolverTipoUsuario(nickname);
+    }
 
     //Lista auxiliar para traer los DT de Turista registrados en la BD.
     @Override
