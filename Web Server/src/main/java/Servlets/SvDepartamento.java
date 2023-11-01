@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.DTDepartamento;
 import logica.Departamento;
 import logica.Fabrica;
 import logica.IControlador;
@@ -37,9 +38,9 @@ public class SvDepartamento extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Departamento> listaDepartamentos = control.listaDepartamentos();
+        ArrayList<DTDepartamento> listaDepartamentos = control.listaDTDepartamentos();
         ArrayList<String> nombresDepartamentos = new ArrayList<>();
-        for (Departamento departamento : listaDepartamentos) {
+        for (DTDepartamento departamento : listaDepartamentos) {
             nombresDepartamentos.add(departamento.getNombre());
         }
 

@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Actividad;
 import logica.Compra;
+import logica.DTActividad;
 import logica.DTPaquete;
+import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.Paquete;
@@ -48,19 +50,19 @@ public class SvPaquetesDeSalida extends HttpServlet {
         String nombreTurista = request.getParameter("usuario");
         
 
-        ArrayList<Paquete> nombrePaquetes = control.listaPaquetesVigentesSalida(nombreSalida);
+        ArrayList<DTPaquete> nombrePaquetes = control.listaPaquetesVigentesSalida(nombreSalida);
         ArrayList<String> paquetesComprados = control.listaPaquetesComprados(nombreTurista);
 
         // Filtra los paquetes que tienen nombres en común con paquetesComprados
-        ArrayList<Paquete> paquetesFiltrados = new ArrayList<>();
-        for (Paquete paquete : nombrePaquetes) {
+        ArrayList<DTPaquete> paquetesFiltrados = new ArrayList<>();
+        for (DTPaquete paquete : nombrePaquetes) {
             if (paquetesComprados.contains(paquete.getNombre())) {
                 paquetesFiltrados.add(paquete);
             }
         }
 
         ArrayList<String> nombresPaquetesFiltrados = new ArrayList<>();
-        for (Paquete paquete : paquetesFiltrados) {
+        for (DTPaquete paquete : paquetesFiltrados) {
             nombresPaquetesFiltrados.add(paquete.getNombre());
         }
 
@@ -87,9 +89,9 @@ public class SvPaquetesDeSalida extends HttpServlet {
         String paquete = request.getParameter("paquetes");
         
         
-        SalidaTuristica salida = control.ConsultaSalidaTuristica(nombreSalida);
+        //DTSalidaTuristica salida = control.ConsultaSalidaTuristica(nombreSalida);
         
-        Actividad actividad = control.ConsultaActividadTuristica( nombreActividad);
+        DTActividad actividad = control.traerDTActividad(nombreActividad);
         
         //DTPaquete  traerDTPaquete(String nombrePaquete);
         
@@ -149,7 +151,7 @@ public class SvPaquetesDeSalida extends HttpServlet {
       
              //if general
         } else {
-            
+             pago = pago.general;
             if(!control.salidaTuristicaLlena( nombreSalida, cantTuristas)){
                  
                  

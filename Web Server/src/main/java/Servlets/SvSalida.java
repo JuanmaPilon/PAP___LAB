@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -32,13 +31,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.Actividad;
-import logica.Categoria;
+import logica.DTActividad;
+import logica.DTImagenActividad;
+import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
-import logica.SalidaTuristica;
-import logica.imagenActividad;
-import persistencia.exceptions.CorreoElectronicoExistenteException;
 import persistencia.exceptions.PreexistingEntityException;
 
 @WebServlet(name = "SvSalida", urlPatterns = {"/SvSalida"})
@@ -84,49 +81,51 @@ public class SvSalida extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(actividades);
 
-        } else  if ("FiltroSalidas".equals(filtro)) {
-            
-             try {
+        } else if ("FiltroSalidas".equals(filtro)) {
+
             HttpSession misesion = request.getSession();
             String nombreSalida = request.getParameter("actividadSalida");
-            SalidaTuristica salidaTuristica = control.ConsultaSalidaTuristica(nombreSalida);
-            imagenActividad imagen = control.buscarImagenPorActividad(nombreSalida);
+            DTSalidaTuristica salidaTuristica = control.ConsultaSalidaTuristica(nombreSalida);
+            misesion.setAttribute("salida", salidaTuristica);
+            try {
+                DTImagenActividad imagen = control.buscarImagenPorActividad(nombreSalida);
 
-            imagenActividad ImagenActividad = control.buscarImagenPorActividad(nombreSalida);
-             if (ImagenActividad == null) {
-                
-                String imagenVacia = "images/sinImagen.png";
-               
-                
-                SalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
-                 misesion.setAttribute("salida", salT);
-                 misesion.setAttribute("imagen", imagenVacia);
+                //  if (imagen == null) {
+                //   return;
+                // } else {
+                String imagenRuta = imagen.getRuta();
+                //DTSalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
+                misesion.setAttribute("imagen", imagenRuta);
+                //misesion.setAttribute("salida", salT);
                 response.sendRedirect("perfilSalidaTuristica.jsp");
                 return;
-            } else {
-                String imagenRuta = ImagenActividad.getRuta();
-                SalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
-                 misesion.setAttribute("imagen", imagenRuta);
-                 misesion.setAttribute("salida", salT);
+                // }
+
+            } catch (Exception e) {
+
+                String imagenVacia = "images/sinImagen.png";
+
+                // DTSalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
+                //misesion.setAttribute("salida", salT);
+                misesion.setAttribute("imagen", imagenVacia);
                 response.sendRedirect("perfilSalidaTuristica.jsp");
                 return;
             }
 
-        } catch (Exception e) {
-
-        }     
-            
         }
 
         String nombreActividad = (String) request.getParameter("actividad");
 
-        Actividad actividadConsultada = control.ConsultaActividadTuristica(nombreActividad);
+        DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
+        ArrayList<DTSalidaTuristica> salidas = control.encontraSalidasTuristicasDeActividad(nombreActividad);
 
         HttpSession misesion = request.getSession();
         misesion.setAttribute("actividad", actividadConsultada);
+        misesion.setAttribute("salidas", salidas);
         response.sendRedirect("listaSalidasTuristicas.jsp");
 
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -178,22 +177,20 @@ public class SvSalida extends HttpServlet {
                     }
                 }
             }
-         response.sendRedirect("logedUser.jsp");
+            response.sendRedirect("logedUser.jsp");
         } catch (PreexistingEntityException ex) {
             ex.printStackTrace();
             String errorMessage = "Ya existe otra salida con ese nombre";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaSalidaTuristica.jsp';</script>";
             response.getWriter().write(alertScript);
 
-
         } catch (Exception ex) {
-             ex.printStackTrace();
+            ex.printStackTrace();
             String errorMessage = "Ha ocurrido un error, verifique los campos.";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaSalidaTuristica.jsp';</script>";
             response.getWriter().write(alertScript);
 
         }
-
 
     }
 

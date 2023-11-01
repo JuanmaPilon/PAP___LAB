@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import logica.DTImagenPerfil;
 import logica.DTProveedor;
 import logica.DTTurista;
 import logica.Usuario;
@@ -70,7 +71,7 @@ public class SvModificarUsuario extends HttpServlet {
             }
 
             try {
-                ImagenPerfil imagenPerfil = control.buscarImagenPorNickname(usuario);
+                DTImagenPerfil imagenPerfil = control.buscarImagenPorNickname(usuario);
                 String rutaImagen = imagenPerfil.getRuta();
 
                 HttpSession misesion = request.getSession();

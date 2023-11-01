@@ -1,3 +1,4 @@
+<%@page import="logica.DTUsuario"%>
 <%@page import="logica.Usuario" %>
 <%@page import="logica.Proveedor" %>
 <%@page import="logica.Turista" %>
@@ -8,8 +9,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-                <%      String usuario = (String) request.getSession().getAttribute("usuario");
-            Usuario usu = (Usuario) request.getSession().getAttribute("usu");
+        <%
+            String usuario = (String) request.getSession().getAttribute("usuario");
+            DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
+            String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
         %>
         <meta charset="UTF-8">
         <link href="styles.css" src="styles.css">
@@ -33,12 +36,12 @@
                 <a href="logedUser.jsp" src="logedUser.jsp">Volver al inicio</a>
             </div>
         </header>
-        
+
         <aside>
             <h2>Mi perfil</h2>
             <ul>
                 <%
-                    if (usu instanceof Proveedor) {
+                    if (tipoUsuario == "proveedor") {
                 %>
                 <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                 <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
@@ -55,7 +58,7 @@
 
 
                 <%
-                    if (usu instanceof Turista) {
+                    if (tipoUsuario == "turista") {
                 %>
                 <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                 <li><a href="SvModificarUsuario?usuario=<%= usuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
@@ -70,8 +73,8 @@
 
 
             </ul>
-                    
-                    </aside>
+
+        </aside>
 
         <%
             String filtro = "";
@@ -197,7 +200,7 @@
 
                 consultaForm.addEventListener("submit", function (event) {
                     const actividadSeleccionada = document.getElementById("actividad").value;
-                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento"|| actividadSeleccionada === ""|| actividadSeleccionada === null) {
+                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento" || actividadSeleccionada === "" || actividadSeleccionada === null) {
                         event.preventDefault(); // Prevenir el envío del formulario
                         alert("Por favor, selecciona una actividad válida."); // Mostrar mensaje de error
                     }

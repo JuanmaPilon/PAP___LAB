@@ -12,8 +12,8 @@ logica\Controlador.class
 logica\DTSalidaTuristica.class
 persistencia\imagenActividadJpaController.class
 logica\SalidaTuristica.class
+logica\DTDepartamento.class
 logica\exceptions\PreexistingEntityException.class
-persistencia\TuristaJpaController1.class
 Servlets\exceptions\IllegalOrphanException.class
 logica\imagenActividad_.class
 logica\Departamento.class
@@ -34,7 +34,6 @@ Servlets\SvSalida.class
 logica\ImagenPerfil_.class
 persistencia\ProveedorJpaController$NicknameExistenceChecker.class
 logica\Categoria.class
-persistencia\PaqueteJpaController1.class
 persistencia\ProveedorJpaController.class
 Servlets\exceptions\NonexistentEntityException.class
 logica\Turista.class
@@ -50,16 +49,17 @@ persistencia\exceptions\NonexistentEntityException.class
 Servlets\SvAutenticarUsuario.class
 logica\exceptions\ConstraseniasDistintas.class
 Servlets\SvProveedor.class
+logica\DTImagenPerfil.class
 persistencia\InscripcionJpaController.class
 Servlets\SvActividad.class
 persistencia\TuristaJpaController.class
 logica\Proveedor_.class
 Servlets\SvDeptosYCategorias.class
+logica\DTCategoria.class
 Servlets\SvModificarUsuario.class
 logica\SalidaTuristica_.class
 Servlets\SvUsuario.class
 persistencia\PaqueteJpaController.class
-Servlets\SvInscripcionSalida.class
 logica\DTProveedor.class
 Servlets\SvPerfilUsuario.class
 logica\DTActividad.class

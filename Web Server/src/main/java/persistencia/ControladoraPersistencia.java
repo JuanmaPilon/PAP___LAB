@@ -296,32 +296,7 @@ public class ControladoraPersistencia {
         return null;
     }
 
-    public String devolverTipoUsuario(String nickname) {
-        Usuario usuario = null;
-        boolean esProveedor = false;
 
-        try {
-            usuario = turistaJpa.findTurista(nickname);
-            if (usuario != null) {
-                esProveedor = false;
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (!esProveedor) {
-            try {
-                usuario = proveedorJpa.findProveedor(nickname);
-            } catch (Exception ex) {
-                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if (esProveedor) {
-            return "proveedor";
-        } else {
-            return "turista";
-        }
-    }
 
 //Guardar Departamento
     public void guardarDepartamento(Departamento depto) throws PreexistingEntityException, Exception {
@@ -443,7 +418,7 @@ public class ControladoraPersistencia {
             for (Actividad a : actividades) {
                 if (a.getDepartamento().getNombre().equals(departamentoSeleccionado)) {
                     DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(),
-                            a.getCosto(), a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname());
+                            a.getCosto(), a.getCiudad(), a.getfAlta(), a.getEstado(), a.getDepartamento().getNombre(), a.getProveedor().getNickname());
                     listaDTActividad.add(dtactividad);
                 }
             }
@@ -489,7 +464,7 @@ public class ControladoraPersistencia {
             for (Turista t : turistas) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String fnac = sdf.format(t.getfNacimiento());
-                DTTurista dtTurista = new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(), fnac, t.getNacionalidad());
+                DTTurista dtTurista = new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(), fnac, t.getContrasenia(), t.getNacionalidad());
                 listaDTTurista.add(dtTurista);
             }
         } catch (Exception ex) {
@@ -523,7 +498,7 @@ public class ControladoraPersistencia {
 
         for (SalidaTuristica sT : a.getListaSalidaTuristica()) {
 
-            DTSalidaTuristica dtSalida = new DTSalidaTuristica(sT.getNombre(), sT.getCantMax(), sT.getfAlta(), sT.getfSalida(), sT.getLugar());
+            DTSalidaTuristica dtSalida = new DTSalidaTuristica(sT.getNombre(), sT.getCantMax(), sT.getfAlta(), sT.getfSalida(), sT.getLugar(), sT.getActividad().getNombre());
             listaDTSalidaTuristica.add(dtSalida);
 
         }

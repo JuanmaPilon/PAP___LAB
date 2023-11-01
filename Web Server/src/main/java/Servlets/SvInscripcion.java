@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.Actividad;
+import logica.DTActividad;
+import logica.DTPaquete;
+import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
-import logica.Paquete;
 import logica.SalidaTuristica;
 
 @WebServlet(name = "SvInscripcion", urlPatterns = {"/SvInscripcion"})
@@ -29,10 +30,10 @@ public class SvInscripcion extends HttpServlet {
             throws ServletException, IOException {
         HttpSession misesion = request.getSession();
         String nombreActividad = (String) request.getParameter("actividad");
-        Actividad actividadConsultada = control.ConsultaActividadTuristica(nombreActividad);
-        ArrayList<SalidaTuristica> Salidas = actividadConsultada.getListaSalidaTuristica();
+        DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
+        ArrayList<DTSalidaTuristica> Salidas = control.encontraSalidasTuristicasDeActividad(actividadConsultada.getNombre());
         ArrayList<String> nombreSalidas = new ArrayList();
-        for (SalidaTuristica S : Salidas) {
+        for (DTSalidaTuristica S : Salidas) {
             nombreSalidas.add(S.getNombre());
         }
         String Salts = String.join(",", nombreSalidas);
@@ -50,7 +51,7 @@ public class SvInscripcion extends HttpServlet {
         String cantidadMaxTuristasStr = request.getParameter("cantTuristas");
         String formaPago = request.getParameter("formaPago");
         
-        ArrayList<Paquete> paquetesVigentes = control.listaPaquetesVigentesSalida(salidaSeleccionada);
+        ArrayList<DTPaquete> paquetesVigentes = control.listaPaquetesVigentesSalida(salidaSeleccionada);
         
         
         int cantidadMaxTuristas = 0;

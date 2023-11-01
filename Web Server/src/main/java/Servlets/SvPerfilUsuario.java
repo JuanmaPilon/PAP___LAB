@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logica.DTImagenPerfil;
+import logica.DTProveedor;
 import logica.DTSalidaTuristica;
+import logica.DTTurista;
+import logica.DTUsuario;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.Proveedor;
@@ -35,18 +39,17 @@ public class SvPerfilUsuario extends HttpServlet {
             throws ServletException, IOException {
         HttpSession misesion = request.getSession();
         String usuarioSeleccionado = request.getParameter("usuario");
-        Usuario usu = control.ConsultaDeUsuario(usuarioSeleccionado);
+        String tipoUsuario = control.devolverTipoUsuario(usuarioSeleccionado);
 
-        if (usu instanceof Turista) {
-            Turista turista = (Turista) usu;
-            misesion.setAttribute("usuPerfil", turista);
+        if (tipoUsuario.equals("turista")) {
+            DTTurista dtTurista = control.traerDTTurista(usuarioSeleccionado);
+            misesion.setAttribute("usuPerfil", dtTurista);
             //salidas a las que se inscribio
-            System.out.println(turista.getNickname() + ": es turista");
             String usuario = (String) request.getSession().getAttribute("usuario");
-            String tur = turista.getNickname();
+            String tur = dtTurista.getNickname();
             if (tur.equals(usuario)) {
 
-                List<DTSalidaTuristica> listaSalidas = control.traerInscSalidasDeTurista(turista.getNickname());
+                List<DTSalidaTuristica> listaSalidas = control.traerInscSalidasDeTurista(dtTurista.getNickname());
                 ArrayList<String> nombresSalidasTurista = new ArrayList<>();
                 for (DTSalidaTuristica dt : listaSalidas) {
                     nombresSalidasTurista.add(dt.getNombre());
@@ -56,8 +59,8 @@ public class SvPerfilUsuario extends HttpServlet {
                 ArrayList<String> paquetesComprados = control.listaPaquetesComprados(tur);
                 misesion.setAttribute("nombresPaquetes", paquetesComprados);
             }
-        } else if (usu instanceof Proveedor) {
-            Proveedor proveedor = (Proveedor) usu;
+        } else if (tipoUsuario.equals("proveedor")) {
+            DTProveedor proveedor = control.traerDTProveedor(usuarioSeleccionado);
             misesion.setAttribute("usuPerfil", proveedor);
             System.out.println(proveedor.getNickname() + ": es proveedor");
 
@@ -65,7 +68,6 @@ public class SvPerfilUsuario extends HttpServlet {
 
             String prov = proveedor.getNickname();
             if (prov.equals(usuario)) {//si es proveedor y esta mirando su propio perfil
-                System.out.println(proveedor.getNickname() + ": es proveedor y esta mirando su perfil");
                 ArrayList<String> listaActividadesProveedor = control.listaActividadesProveedorTodas(prov);
                 misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedor);
                 // se muestran todas sus actividades, no solo las confirmadas
@@ -85,19 +87,15 @@ public class SvPerfilUsuario extends HttpServlet {
             misesion.setAttribute("nombresSalidas", nombresSalidasProveedor);
         }
 
-        ImagenPerfil imagen;
+        DTImagenPerfil imagen;
         try {
-            imagen = control.buscarImagenPorNickname(usu.getNickname());
-            if (imagen == null) {
-                String imagenVacia = "images/usuarioSinFoto.png";
-                misesion.setAttribute("imagen", imagenVacia);
+            imagen = control.buscarImagenPorNickname(usuarioSeleccionado);
 
-            } else {
-                String imagenRuta = imagen.getRuta();
-                misesion.setAttribute("imagen", imagenRuta);
-            }
+            String imagenRuta = imagen.getRuta();
+            misesion.setAttribute("imagen", imagenRuta);
         } catch (Exception ex) {
-            Logger.getLogger(SvPerfilUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            String imagenVacia = "images/usuarioSinFoto.png";
+            misesion.setAttribute("imagen", imagenVacia);
         }
 
         response.sendRedirect("perfilUsuario.jsp");
@@ -115,4 +113,3 @@ public class SvPerfilUsuario extends HttpServlet {
     }
 
 }
-

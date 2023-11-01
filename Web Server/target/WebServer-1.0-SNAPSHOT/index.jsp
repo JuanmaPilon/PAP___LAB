@@ -12,9 +12,9 @@
     </head>
     <body >
         <%
-            ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>) request.getSession().getAttribute("listaCategorias");
+            ArrayList<String> listaCategorias = (ArrayList<String>) request.getSession().getAttribute("listaCategorias");
 
-            ArrayList<Departamento> listaDepartamentos = (ArrayList<Departamento>) request.getSession().getAttribute("listaDepartamentos");
+            ArrayList<String> listaDepartamentos = (ArrayList<String>) request.getSession().getAttribute("listaDepartamentos");
         %>
         <header>
             <div id="logo">
@@ -45,8 +45,8 @@
                 <ul id="miContenedor">
                     <%
                         if (listaDepartamentos != null && !listaDepartamentos.isEmpty()) {
-                            for (Departamento d : listaDepartamentos) {
-                                out.println("<li> <a href='#' id='departamento-" + d.getNombre() + "'>" + d.getNombre() + "</a></li>");
+                            for (String d : listaDepartamentos) {
+                                out.println("<li> <a href='#' id='departamento-" + d + "'>" + d + "</a></li>");
                             }
                         } else {
                             out.println("<li>No hay departamentos con actividades confirmadas.</li>");
@@ -60,8 +60,8 @@
             <ul id="miContenedor2">
                 <%
                     if (listaCategorias != null && !listaCategorias.isEmpty()) {
-                        for (Categoria c : listaCategorias) {
-                            out.println("<li> <a href='#' id='categoria-" + c.getNombre() + "'>" + c.getNombre() + "</a></li>");
+                        for (String c : listaCategorias) {
+                            out.println("<li> <a href='#' id='categoria-" + c + "'>" + c + "</a></li>");
                         }
                     } else {
                         out.println("<li>No hay categorias con actividades confirmadas.</li>");

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Actividad;
 import logica.Categoria;
+import logica.DTActividad;
 import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
@@ -31,7 +32,7 @@ public class SvPerfilActividad extends HttpServlet {
         HttpSession misesion = request.getSession();
         String nombreActividad = request.getParameter("nombreActividad");
        // System.out.println("Nombre de la actividad: " + nombreActividad);
-        Actividad act = control.ConsultaActividadTuristica(nombreActividad);
+        DTActividad act = control.traerDTActividad(nombreActividad);
         ArrayList<String> listaCategoria = control.traerCategoriasActividad(act.getNombre()); // categorias de la actividad
         
         

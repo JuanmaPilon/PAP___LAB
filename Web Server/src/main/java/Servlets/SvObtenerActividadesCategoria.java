@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Actividad;
 import logica.Categoria;
+import logica.DTImagenActividad;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.imagenActividad;
@@ -41,7 +42,7 @@ public class SvObtenerActividadesCategoria extends HttpServlet {
         // Generar el fragmento de HTML con las actividades de la categoria
         StringBuilder htmlResponse = new StringBuilder();
         for (Actividad actividad : actividades) {
-            imagenActividad imagen;
+            DTImagenActividad imagen;
             try {
                 imagen = control.buscarImagenPorActividad(actividad.getNombre());
                 String imagenRuta = "images/sinImagen.png";

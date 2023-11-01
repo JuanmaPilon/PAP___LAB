@@ -1,3 +1,4 @@
+<%@page import="logica.DTSalidaTuristica"%>
 <%@page import="logica.DTActividad"%>
 <%@page import="logica.Paquete"%>
 <%@page import="logica.SalidaTuristica"%>
@@ -10,9 +11,9 @@
     <%
         DTActividad act = (DTActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
         //ArrayList<String> cat = (ArrayList<String>) request.getSession().getAttribute("categorias");
-        ArrayList<String> categorias = act.getNombresCategoria();
-        ArrayList<String> salidas = act.getNombresSalidaTuristica();
-        ArrayList<String> paquetes = act.getNombresPaquete();
+        ArrayList<String> categorias = (ArrayList<String>) request.getSession().getAttribute("categorias");
+        ArrayList<DTSalidaTuristica> salidas = (ArrayList<DTSalidaTuristica>) request.getSession().getAttribute("salidas");
+        ArrayList<String> paquetes = (ArrayList<String>) request.getSession().getAttribute("paquetes");
         String rutaAlaImagen = (String) request.getSession().getAttribute("imagen");
         
     %>
@@ -68,8 +69,8 @@
                         // Verificando si la lista no está vacía
                         if (salidas != null && !salidas.isEmpty()) {
                             // Iterando sobre la lista y mostrando los nombres de las salidas
-                            for (String salida : salidas) {
-                                out.println("<li> <a href='#' onclick='mostrarSalida(\"" + salida + "\")'>" + salida + "</a></li>");
+                            for (DTSalidaTuristica salida : salidas) {
+                                out.println("<li> <a href='#' onclick='mostrarSalida(\"" + salida.getNombre() + "\")'>" + salida.getNombre() + "</a></li>");
                             }
                         } else {
                             out.println("<li>No hay salidas asociadas.</li>");

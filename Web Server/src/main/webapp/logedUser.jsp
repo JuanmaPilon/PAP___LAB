@@ -9,8 +9,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>) request.getSession().getAttribute("listaCategorias");
-        ArrayList<Departamento> listaDepartamentos = (ArrayList<Departamento>) request.getSession().getAttribute("listaDepartamentos");
+        ArrayList<String> listaCategorias = (ArrayList<String>) request.getSession().getAttribute("listaCategorias");
+        ArrayList<String> listaDepartamentos = (ArrayList<String>) request.getSession().getAttribute("listaDepartamentos");
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
     %>
     <head>
@@ -63,7 +63,7 @@
                     <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
                     <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
-                    <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+
 
                     
 
@@ -78,6 +78,7 @@
                     <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
                     <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                     <li><a href="compraPaquete.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Comprar Paquete</a></li>  <!-- Turista -->
+                    <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Turista -->
                         <%
                         } else {
                         %>
@@ -95,8 +96,8 @@
                 <ul id="miContenedor">
                     <%
                         if (listaDepartamentos != null && !listaDepartamentos.isEmpty()) {
-                            for (Departamento d : listaDepartamentos) {
-                                out.println("<li> <a href='#' id='departamento-" + d.getNombre() + "'>" + d.getNombre() + "</a></li>");
+                            for (String d : listaDepartamentos) {
+                                out.println("<li> <a href='#' id='departamento-" + d + "'>" + d + "</a></li>");
                             }
                         } else {
                             out.println("<li>No hay departamentos con actividades confirmadas.</li>");
@@ -109,8 +110,8 @@
                 <ul id="miContenedor2">
                     <%
                         if (listaCategorias != null && !listaCategorias.isEmpty()) {
-                            for (Categoria c : listaCategorias) {
-                                out.println("<li> <a href='#' id='categoria-" + c.getNombre() + "'>" + c.getNombre() + "</a></li>");
+                            for (String c : listaCategorias) {
+                                out.println("<li> <a href='#' id='categoria-" + c + "'>" + c + "</a></li>");
                             }
                         } else {
                             out.println("<li>No hay categorias con actividades confirmadas.</li>");

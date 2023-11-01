@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import logica.Actividad;
 import logica.DTActividad;
 import logica.DTImagenActividad;
+import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.imagenActividad;
@@ -86,13 +87,18 @@ public class SvActividad extends HttpServlet {
             String nombreActividad = (String) request.getParameter("actividad");
             DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
             DTImagenActividad imagen = control.traerDTImagenActividad(nombreActividad);
-            //imagenActividad imagen = control.buscarImagenPorActividad(nombreActividad);
+            ArrayList<DTSalidaTuristica> salidas = control.encontraSalidasTuristicasDeActividad(actividadConsultada.getNombre());
+            ArrayList<String> categorias = control.traerCategoriasActividad(actividadConsultada.getNombre());
+            ArrayList<String> paquetes = control.listaPaquetesDeActividad(actividadConsultada.getNombre());
 
             if (imagen == null) {
 
                 String imagenVacia = "images/sinImagen.png";
                 HttpSession misesion = request.getSession();
                 misesion.setAttribute("actividad", actividadConsultada);
+                misesion.setAttribute("salidas", salidas);
+                misesion.setAttribute("categorias", categorias);
+                misesion.setAttribute("paquetes", paquetes);
                 misesion.setAttribute("imagen", imagenVacia);
                 response.sendRedirect("perfilActividadTuristica.jsp");
 
@@ -100,6 +106,9 @@ public class SvActividad extends HttpServlet {
                 String imagenRuta = imagen.getRuta();
                 HttpSession misesion = request.getSession();
                 misesion.setAttribute("actividad", actividadConsultada);
+                 misesion.setAttribute("salidas", salidas);
+                misesion.setAttribute("categorias", categorias);
+                misesion.setAttribute("paquetes", paquetes);
                 misesion.setAttribute("imagen", imagenRuta);
                 response.sendRedirect("perfilActividadTuristica.jsp");
             }

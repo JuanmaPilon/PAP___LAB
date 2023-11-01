@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logica.DTImagenActividad;
+import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.SalidaTuristica;
@@ -26,30 +28,20 @@ public class SvPerfilSalida extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        HttpSession misesion = request.getSession();
+        String nombreSalida = request.getParameter("nombreSalida");
+        DTSalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
+        misesion.setAttribute("salida", salT);
         try {
-            HttpSession misesion = request.getSession();
-            String nombreSalida = request.getParameter("nombreSalida");
-
-            imagenActividad ImagenActividad = control.buscarImagenPorActividad(nombreSalida);
-             if (ImagenActividad == null) {
-                String imagenVacia = "images/usuarioSinFoto.png";
-                misesion.setAttribute("imagen", imagenVacia);
-
-            } else {
-                String imagenRuta = ImagenActividad.getRuta();
-                misesion.setAttribute("imagen", imagenRuta);
-            }
-
-            SalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
-            misesion.setAttribute("salida", salT);
+            DTImagenActividad ImagenActividad = control.buscarImagenPorActividad(nombreSalida);
+            String imagenRuta = ImagenActividad.getRuta();
+            misesion.setAttribute("imagen", imagenRuta);
 
         } catch (Exception e) {
-//            HttpSession misesion = request.getSession();
-//            String nombreSalida = request.getParameter("nombreSalida");
-//            String rutaImagen = "";
-//            SalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
-//            misesion.setAttribute("salida", salT);
-//            misesion.setAttribute("rutaImagen", rutaImagen);
+            String imagenVacia = "images/usuarioSinFoto.png";
+            misesion.setAttribute("imagen", imagenVacia);
+
         }
         //response.sendRedirect("perfilSalida.jsp");
     }

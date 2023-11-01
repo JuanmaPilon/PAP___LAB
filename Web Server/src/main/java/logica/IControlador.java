@@ -13,10 +13,10 @@ import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
 public interface IControlador {
-public abstract imagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception;
+public abstract DTImagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception;
 public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
-public abstract ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;
+public abstract DTImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;
 public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception;
 public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String descripcion, String link) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
@@ -31,13 +31,12 @@ public abstract ArrayList listaActividades();
 public abstract void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url);
 public abstract void ModificarDatosDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fecha, String nacionalidad);//Nati
 public abstract void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria);
-public abstract Actividad ConsultaActividadTuristica(String nombreActividad);
 public abstract ArrayList listaActividadesTuristicas(String departamento);
 public abstract ArrayList listaActividadesTuristicasPorCategoria(String categoria);
 public abstract ArrayList<DTSalidaTuristica> encontraSalidasTuristicasDeActividad(String actividadSeleccionado);
 public abstract ArrayList listaSalActividadTuristica(String actividad);
 public abstract List consultaPaquetes();
-public abstract SalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
+public abstract DTSalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
 public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) throws PreexistingEntityException, Exception;
 public abstract void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception;
 public abstract List<String> llenarCmboBoxDep();
@@ -76,9 +75,9 @@ public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String d
 public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
 public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
-public abstract ArrayList<Actividad> listaActividadesConfirmadas();
+
 public abstract ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
-public abstract ArrayList<Paquete> listaPaquetesVigentesSalida(String nombreSalida);//para inscripcion
+public abstract ArrayList<DTPaquete> listaPaquetesVigentesSalida(String nombreSalida);//para inscripcion
 public abstract void cargarDatosDePrueba();
 public abstract Categoria traerCategoria(String categoria);
 
@@ -86,8 +85,10 @@ public abstract Categoria traerCategoria(String categoria);
 public abstract Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete);
 public abstract void nuevaCantTurista(Compra compraTurista) throws Exception;
 public abstract DTImagenActividad traerDTImagenActividad(String nombreActividad) throws  Exception;
+
 public abstract DTUsuario traerDTUsuario(String nickname);
 public abstract String devolverTipoUsuario(String nickname);
-
+public abstract ArrayList listaDTDepartamentos();
+public abstract ArrayList<DTActividad> listaActividadesConfirmadas();
     
 }

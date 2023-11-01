@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logica.Actividad;
 import logica.Categoria;
+import logica.DTActividad;
+import logica.DTCategoria;
 import logica.Departamento;
 import logica.Fabrica;
 import logica.IControlador;
@@ -32,27 +34,25 @@ public class SvDeptosYCategorias extends HttpServlet {
 
         HttpSession misesion = request.getSession();
 
-        ArrayList<Categoria> categoriasConActividadesConfirmadas = new ArrayList<>();       
-        ArrayList<Actividad> listaActividadesConfirmadas = control.listaActividadesConfirmadas();
-        for (Actividad actividad : listaActividadesConfirmadas) {
-                ArrayList<Categoria> categoriasDeActividad = actividad.getListaCategoria();
-                for (Categoria categoria : categoriasDeActividad) {
+        ArrayList<String> categoriasConActividadesConfirmadas = new ArrayList<>();       
+        ArrayList<DTActividad> listaActividadesConfirmadas = control.listaActividadesConfirmadas();
+        for (DTActividad actividad : listaActividadesConfirmadas) {
+                ArrayList<String> categoriasDeActividad = control.traerCategoriasActividad(actividad.getNombre());
+                for (String categoria : categoriasDeActividad) {
                     if (!categoriasConActividadesConfirmadas.contains(categoria)) {
                         categoriasConActividadesConfirmadas.add(categoria);
-                        System.out.println("nombrecat"+ categoria.getNombre());
                     }
                 }
         }
         misesion.setAttribute("listaCategorias", categoriasConActividadesConfirmadas);
 
-        ArrayList<Departamento> departamentosConActividadesConfirmadas = new ArrayList<>();
+        ArrayList<String> departamentosConActividadesConfirmadas = new ArrayList<>();
         
-        ArrayList<Actividad> listaActividades2 = control.listaActividadesConfirmadas();
-        for (Actividad actividad : listaActividades2) {
-                Departamento departamento = actividad.getDepartamento();
+        ArrayList<DTActividad> listaActividades2 = control.listaActividadesConfirmadas();
+        for (DTActividad actividad : listaActividades2) {
+                String departamento = actividad.getNombreDepartamento();
                 if (!departamentosConActividadesConfirmadas.contains(departamento)) {
                     departamentosConActividadesConfirmadas.add(departamento);
-                    System.out.println("nombredepto"+ departamento.getNombre());
                 }
         }
         misesion.setAttribute("listaDepartamentos", departamentosConActividadesConfirmadas);
