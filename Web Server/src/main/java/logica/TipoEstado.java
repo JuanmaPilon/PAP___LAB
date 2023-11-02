@@ -3,6 +3,6 @@ package logica;
 
 
 public enum TipoEstado {
-    agregada, confirmada, rechazada
+    agregada, confirmada, rechazada, finalizada
     
 }

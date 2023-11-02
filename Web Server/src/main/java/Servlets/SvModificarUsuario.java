@@ -26,6 +26,7 @@ import javax.servlet.http.Part;
 import logica.DTImagenPerfil;
 import logica.DTProveedor;
 import logica.DTTurista;
+import logica.DTUsuario;
 import logica.Usuario;
 import logica.Fabrica;
 import logica.IControlador;
@@ -51,12 +52,11 @@ public class SvModificarUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String tipoUsuario;
-            String usuario = request.getParameter("usuario"); // Obtener el nombre del usuario de logedUser
+            String tipoUsuario = request.getParameter("tipoUsuario");
+            String usuario = (String) request.getParameter("usuario"); // Obtener el nombre del usuario de logedUser
+            
 
-            Usuario usuarioConsulta = control.ConsultaDeUsuario(usuario); // Consultar el usuario
-
-            if (usuarioConsulta instanceof Turista) {
+            if (tipoUsuario.equals("turista")) {
                 tipoUsuario = "turista";
 
                 DTTurista infoTurista = control.traerDTTurista(usuario);

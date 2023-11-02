@@ -12,6 +12,8 @@
         ArrayList<String> listaCategorias = (ArrayList<String>) request.getSession().getAttribute("listaCategorias");
         ArrayList<String> listaDepartamentos = (ArrayList<String>) request.getSession().getAttribute("listaDepartamentos");
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
+        String usuario = (String) request.getSession().getAttribute("usuario");
+        DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
     %>
     <head>
         <meta charset="UTF-8">
@@ -33,8 +35,6 @@
                 </div>
                 <div id="login">
                     <%
-                        String usuario = (String) request.getSession().getAttribute("usuario");
-                        DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
                         if (usuario != null) {
                     %>
                     <a href="#" onclick="consultarPerfil('<%= usuario%>')"><%= usuario%></a> | <a href="index.jsp">Cerrar Sesión</a>
@@ -54,10 +54,10 @@
                 <h2>Mi perfil</h2>
                 <ul>
                     <%
-                        if (tipoUsuario == "proveedor") {
+                        if (tipoUsuario.equals("proveedor")) {
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
-                    <li><a href="SvModificarUsuario?usuario=<%= usu%>&tipoUsuario=<%= tipoUsuario %>">Modificar mis datos</a></li> <!-- Proveedor, Turista -->
+                    <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Modificar mis datos</a></li>
                     <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
                     <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                     <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
@@ -68,7 +68,7 @@
                     
 
 
-                    <% } else if (tipoUsuario == "turista") {
+                    <% } else if (tipoUsuario.equals("turista")) {
 
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
@@ -81,6 +81,7 @@
                     <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Turista -->
                         <%
                         } else {
+                          System.out.println(tipoUsuario);
                         %>
                     <li> <a href = "consultaUsuario.jsp"> Consulta de Usuario</a> </li> 
                     <li> <a href = "consultaActividadTuristica.jsp" > Consulta de Actividad Turistica</a > </li>

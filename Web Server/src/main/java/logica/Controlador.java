@@ -859,6 +859,8 @@ public class Controlador implements IControlador {
 
         return listaActividadesTuristicas;
     }
+    
+    
 
     @Override
     public ArrayList<String> listaActividadesProveedorConfirmadas(String nicknameProveedor) {
@@ -924,6 +926,20 @@ public class Controlador implements IControlador {
         }
         return listaPaquetesTuristaVigentesDT;
     }
+        
+   @Override
+   public boolean actividadSinSalidaVigente(String nombreActividad){ // true = act sin salidas vigentes, act false = con salidas vigentes
+       Actividad actividad = controlPersis.consultaActividad(nombreActividad);
+        Date fechaActual = new Date();
+        boolean noHaySalidasAFuturo = true;
+      for(SalidaTuristica s : actividad.getListaSalidaTuristica()){
+          if (s.getfSalida().after(fechaActual)) {
+              noHaySalidasAFuturo = false;
+      }
+          
+   }
+      return noHaySalidasAFuturo;
+   }
 
     @Override
     public ArrayList<DTActividad> listaActividadesConfirmadas() {
@@ -1183,6 +1199,24 @@ public class Controlador implements IControlador {
         ArrayList<String> listaActividadesTuristicas = new ArrayList();
         for (String s : controlPersis.listaActividadesTuristicasPorCategoria(categoria)) {
             listaActividadesTuristicas.add(s);
+        }
+
+        return listaActividadesTuristicas;
+
+    }
+    
+    @Override
+    public ArrayList<String> listaActividadesTuristicasPorCategoriaConfirmadas(String categoria){
+          List<Actividad> listaActividades = controlPersis.traerActividades();
+          ArrayList<String> listaActividadesTuristicas = new ArrayList();
+        for (Actividad actividad : listaActividades) {
+            List<Categoria> categorias = actividad.getListaCategoria();
+
+            for (Categoria cat : categorias) {
+                if (cat.getNombre().equals(categoria) && actividad.getEstado().equals(TipoEstado.confirmada)) {
+                    listaActividadesTuristicas.add(actividad.getNombre());
+                }
+            }
         }
 
         return listaActividadesTuristicas;

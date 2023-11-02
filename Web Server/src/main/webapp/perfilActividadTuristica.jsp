@@ -1,3 +1,4 @@
+<%@page import="logica.DTUsuario"%>
 <%@page import="logica.DTSalidaTuristica"%>
 <%@page import="logica.DTActividad"%>
 <%@page import="logica.Paquete"%>
@@ -10,7 +11,8 @@
 <html>
     <%
         DTActividad act = (DTActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
-        //ArrayList<String> cat = (ArrayList<String>) request.getSession().getAttribute("categorias");
+        String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
+        String usuario = (String) request.getSession().getAttribute("usuario");
         ArrayList<String> categorias = (ArrayList<String>) request.getSession().getAttribute("categorias");
         ArrayList<DTSalidaTuristica> salidas = (ArrayList<DTSalidaTuristica>) request.getSession().getAttribute("salidas");
         ArrayList<String> paquetes = (ArrayList<String>) request.getSession().getAttribute("paquetes");
@@ -40,9 +42,9 @@
         </header>
 
         <main>
-          
+
             <div class="actividad">
-                <img src="<%= rutaAlaImagen %>" alt="Imagen de la actividad" style="width: 500px; height: 500px;" />
+                <img src="<%= rutaAlaImagen%>" alt="Imagen de la actividad" style="width: 500px; height: 500px;" />
                 <h3><%=act.getNombre()%></h3>
                 <p>Descripcion: <%=act.getDescripcion()%></p>
                 <p>Fecha: <%=act.getfAlta()%></p>
@@ -94,14 +96,27 @@
                     %>
                 </ul>
             </div>
-                <div class ="video">
-                     <iframe width="560" height="315" src="<%= video %>" title="YouTube video player" 
-                      frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-                
+            <div class="finalizarActividad">
+                <% if (tipoUsuario.equals("proveedor")) { %>
+                <form id="consultaForm" action="SvActividad" class="desplegable-menu" method="POST">
+                    <input type="hidden" name="tipoUsuario" id="tipoUsuario" value="<%= tipoUsuario%>"> 
+                    <input type="hidden" name="usuario" id="usuario" value="<%= usuario%>"> 
+                    <input type="hidden" name="finalizar" id="finalizar" value="finalizar"> 
+                    <input type="text" name="nombreActividad" id="nombreActividad" value="<%=act.getNombre()%>"> 
                     
+                    <button type="submit">Finalizar Actividad</button>
+                </form>
+                <% }%>
 
-                   <%-- <img src="images/img1.jpg" alt="alt"/> --%>
+            </div>
+            <div class ="video">
+                <iframe width="560" height="315" src="<%= video%>" title="YouTube video player" 
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+
+
+            <%-- <img src="images/img1.jpg" alt="alt"/> --%>
         </main>
 
         <footer>

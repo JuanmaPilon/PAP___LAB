@@ -26,6 +26,7 @@ import logica.DTImagenActividad;
 import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
+import logica.TipoEstado;
 import logica.imagenActividad;
 import persistencia.exceptions.PreexistingEntityException;
 
@@ -53,7 +54,7 @@ public class SvActividad extends HttpServlet {
         if ("FiltroDepartamento".equals(filtro)) {
             String departamentoSeleccionado = request.getParameter("departamento");
 
-            ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicas(departamentoSeleccionado);
+            ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicasConfirmadas(departamentoSeleccionado);
             String actividades = String.join(",", listaActividadesDepartamento);
 
             if (actividades.isEmpty()) {
@@ -69,7 +70,7 @@ public class SvActividad extends HttpServlet {
 
             String categoriaSeleccionada = request.getParameter("categoria");
 
-            ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoria(categoriaSeleccionada);
+            ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoriaConfirmadas(categoriaSeleccionada);
 
             String actividades = String.join(",", listaActividadesCategoria);
 
@@ -85,6 +86,7 @@ public class SvActividad extends HttpServlet {
         }
         try {
             String nombreActividad = (String) request.getParameter("actividad");
+            String tipoUsuario = (String) request.getParameter("tipoUsuario");
             DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
             DTImagenActividad imagen = control.traerDTImagenActividad(nombreActividad);
             ArrayList<DTSalidaTuristica> salidas = control.encontraSalidasTuristicasDeActividad(actividadConsultada.getNombre());
@@ -105,6 +107,7 @@ public class SvActividad extends HttpServlet {
                 UrlVideo = imagen.getUrlVideo();
             }
 
+            misesion.setAttribute("tipoUsuario", tipoUsuario);
             misesion.setAttribute("actividad", actividadConsultada);
             misesion.setAttribute("salidas", salidas);
             misesion.setAttribute("categorias", categorias);
@@ -121,8 +124,27 @@ public class SvActividad extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
+            String finalizar = request.getParameter("finalizar");
+            String nombreActividad = request.getParameter("nombreActividad");
             String usuario = request.getParameter("usuario");
+            String tipoUsuario = request.getParameter("tipoUsuario");
+            
+            if(finalizar.equals("finalizar")){
+                if(control.actividadSinSalidaVigente(nombreActividad)){
+                control.cambiarEstadoActividad(nombreActividad, TipoEstado.finalizada);
+              // String errorMessage = "Actividad finalizada correctamente";
+              // String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
+               //response.getWriter().write(alertScript);
+               response.sendRedirect("logedUser.jsp");
+                } else {
+                String errorMessage = "Actividad con salidas vigentes";
+                String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario + "';</script>";
+                response.getWriter().write(alertScript);
+                }      
+            } else {
+        
+        try {
+           // String usuario = request.getParameter("usuario");
             String departamento = request.getParameter("departamento");
             String nombre = request.getParameter("nombre");
             String descripcion = request.getParameter("descripcion");
@@ -133,6 +155,11 @@ public class SvActividad extends HttpServlet {
             String[] categorias = request.getParameterValues("categoria");
             ArrayList<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
             String UrlVideo = request.getParameter("urlVideo");
+            
+            
+           
+                
+            
 
             Part archivo = request.getPart("file");
             String nombreArchivo = null;
@@ -170,7 +197,10 @@ public class SvActividad extends HttpServlet {
             if ((archivo.getSize() == 0) && (UrlVideo != null)) {
                 control.AltaDeImagenActividad(null, null, nombre, UrlVideo);
             }
+            
+            
             response.sendRedirect("logedUser.jsp");
+        
         } catch (PreexistingEntityException ex) {
             ex.printStackTrace();
             String errorMessage = "Ya existe otra actividad con ee nombre";
@@ -178,11 +208,13 @@ public class SvActividad extends HttpServlet {
             response.getWriter().write(alertScript);
 
         } catch (Exception ex) {
+            
             ex.printStackTrace();
             String errorMessage = "Se ha prodicido un error, porvafor verifique los campos";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
             response.getWriter().write(alertScript);
         }
+            }
     }
 
     @Override

@@ -90,5 +90,7 @@ public abstract DTUsuario traerDTUsuario(String nickname);
 public abstract String devolverTipoUsuario(String nickname);
 public abstract ArrayList listaDTDepartamentos();
 public abstract ArrayList<DTActividad> listaActividadesConfirmadas();
-    public abstract ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista);
+public abstract ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista);
+ public abstract ArrayList<String> listaActividadesTuristicasPorCategoriaConfirmadas(String categoria);
+ public abstract boolean actividadSinSalidaVigente(String nombreActividad);
 }
