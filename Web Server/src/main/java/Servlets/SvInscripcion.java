@@ -50,8 +50,9 @@ public class SvInscripcion extends HttpServlet {
         String salidaSeleccionada = (String) request.getParameter("actividadSalida");
         String cantidadMaxTuristasStr = request.getParameter("cantTuristas");
         String formaPago = request.getParameter("formaPago");
+        String nombreTurista = request.getParameter("nombreTurista");
         
-        ArrayList<DTPaquete> paquetesVigentes = control.listaPaquetesVigentesSalida(salidaSeleccionada);
+        ArrayList<DTPaquete> paquetesVigentes = control.listaPaquetesCompradosVigentes(nombreTurista);
         
         
         int cantidadMaxTuristas = 0;

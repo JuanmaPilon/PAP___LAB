@@ -50,22 +50,15 @@ public class SvPaquetesDeSalida extends HttpServlet {
         String nombreTurista = request.getParameter("usuario");
         
 
-        ArrayList<DTPaquete> nombrePaquetes = control.listaPaquetesVigentesSalida(nombreSalida);
-        ArrayList<String> paquetesComprados = control.listaPaquetesComprados(nombreTurista);
 
-        // Filtra los paquetes que tienen nombres en común con paquetesComprados
-        ArrayList<DTPaquete> paquetesFiltrados = new ArrayList<>();
-        for (DTPaquete paquete : nombrePaquetes) {
-            if (paquetesComprados.contains(paquete.getNombre())) {
-                paquetesFiltrados.add(paquete);
-            }
-        }
+        ArrayList<DTPaquete> paquetesComprados = control.listaPaquetesCompradosVigentes(nombreTurista);
+
 
         ArrayList<String> nombresPaquetesFiltrados = new ArrayList<>();
-        for (DTPaquete paquete : paquetesFiltrados) {
+        for (DTPaquete paquete : paquetesComprados) {
             nombresPaquetesFiltrados.add(paquete.getNombre());
         }
-
+        misesion.setAttribute("nombreTurista", nombreTurista);
         String nombresPaquetesStr = String.join(",", nombresPaquetesFiltrados);
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");

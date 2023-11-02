@@ -53,7 +53,7 @@
                 <li><a href="altaSalidaTuristica.jsp?tipoUsuario=<%= tipoUsuario%>">Alta de Salida Turistica</a></li> <!-- Proveedor -->
                 <li><a href="consultaSalidaTuristica.jsp?tipoUsuario=<%= tipoUsuario%>">Consulta Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                 <li><a href="consultaPaqueteActividadesTuristicas.jsp?tipoUsuario=<%= tipoUsuario%>">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
-                <li><a href="inscripcionSalida.jsp?tipoUsuario=<%= tipoUsuario%>">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                
 
                 <%
                     }

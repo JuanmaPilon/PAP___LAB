@@ -47,7 +47,7 @@
                 <li><a href="altaSalidaTuristica.jsp?tipoUsuario=<%= tipoUsuario%>">Alta de Salida Turistica</a></li> <!-- Proveedor -->
                 <li><a href="consultaSalidaTuristica.jsp?tipoUsuario=<%= tipoUsuario%>">Consulta Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                 <li><a href="consultaPaqueteActividadesTuristicas.jsp?tipoUsuario=<%= tipoUsuario%>">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
-                <li><a href="inscripcionSalida.jsp?tipoUsuario=<%= tipoUsuario%>">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                
 
                 <%
                     }
@@ -284,7 +284,7 @@
                                 }
                             });
 
-                            if (paquetesSelect == null) {
+                            if (paquetesSelect === null) {
                                 // Si está vacío, habilita la opción "General" y deshabilita la opción "Por Paquete"
                                 formaPagoSelect.querySelector("option[value='general']").disabled = false;
                                 formaPagoSelect.querySelector("option[value='por_paquete']").disabled = true;

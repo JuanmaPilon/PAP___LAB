@@ -39,14 +39,16 @@ public class SvPerfilUsuario extends HttpServlet {
             throws ServletException, IOException {
         HttpSession misesion = request.getSession();
         String usuarioSeleccionado = request.getParameter("usuario");
-        String tipoUsuario = control.devolverTipoUsuario(usuarioSeleccionado);
+        String tipoUsuarioConsultado = control.devolverTipoUsuario(usuarioSeleccionado);
 
-        if (tipoUsuario.equals("turista")) {
+        if (tipoUsuarioConsultado.equals("turista")) {
             DTTurista dtTurista = control.traerDTTurista(usuarioSeleccionado);
             misesion.setAttribute("usuPerfil", dtTurista);
+
             //salidas a las que se inscribio
             String usuario = (String) request.getSession().getAttribute("usuario");
             String tur = dtTurista.getNickname();
+            System.out.println("Servlets.SvPerfilUsuario.doGet()" + usuario +" tur " + tur);
             if (tur.equals(usuario)) {
 
                 List<DTSalidaTuristica> listaSalidas = control.traerInscSalidasDeTurista(dtTurista.getNickname());
@@ -59,14 +61,14 @@ public class SvPerfilUsuario extends HttpServlet {
                 ArrayList<String> paquetesComprados = control.listaPaquetesComprados(tur);
                 misesion.setAttribute("nombresPaquetes", paquetesComprados);
             }
-        } else if (tipoUsuario.equals("proveedor")) {
-            DTProveedor proveedor = control.traerDTProveedor(usuarioSeleccionado);
-            misesion.setAttribute("usuPerfil", proveedor);
-            System.out.println(proveedor.getNickname() + ": es proveedor");
+        } else if (tipoUsuarioConsultado.equals("proveedor")) {
+            DTProveedor dtProveedor = control.traerDTProveedor(usuarioSeleccionado);
+            misesion.setAttribute("usuPerfil", dtProveedor);
+            System.out.println(dtProveedor.getNickname() + ": es proveedor");
 
             String usuario = (String) request.getSession().getAttribute("usuario");// nombre del usuario logueado
 
-            String prov = proveedor.getNickname();
+            String prov = dtProveedor.getNickname();
             if (prov.equals(usuario)) {//si es proveedor y esta mirando su propio perfil
                 ArrayList<String> listaActividadesProveedor = control.listaActividadesProveedorTodas(prov);
                 misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedor);
@@ -74,12 +76,12 @@ public class SvPerfilUsuario extends HttpServlet {
 
             } else {//si es proveedor pero no esta mirando su propio perfil
                 //actividades turisticas que ofrece en estado confirmado           
-                ArrayList<String> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas(proveedor.getNickname());
+                ArrayList<String> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas(dtProveedor.getNickname());
                 misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedorConfirmadas);
             }
 
             //salidas asociadas a el
-            List<DTSalidaTuristica> listaSalidas = control.traerSalidasDelProveedor(proveedor.getNickname());
+            List<DTSalidaTuristica> listaSalidas = control.traerSalidasDelProveedor(dtProveedor.getNickname());
             ArrayList<String> nombresSalidasProveedor = new ArrayList<>();
             for (DTSalidaTuristica dt : listaSalidas) {
                 nombresSalidasProveedor.add(dt.getNombre());
@@ -97,7 +99,7 @@ public class SvPerfilUsuario extends HttpServlet {
             String imagenVacia = "images/usuarioSinFoto.png";
             misesion.setAttribute("imagen", imagenVacia);
         }
-
+        misesion.setAttribute("tipoUsuarioConsultado", tipoUsuarioConsultado);
         response.sendRedirect("perfilUsuario.jsp");
     }
 

@@ -901,6 +901,29 @@ public class Controlador implements IControlador {
         }
         return listaPaquetesTurista;
     }
+    
+    
+    @Override
+        public ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista) {
+        Turista t = controlPersis.traerTurista(nicknameTurista);
+        ArrayList<DTPaquete> listaPaquetesTuristaVigentesDT = new ArrayList();
+        ArrayList<Paquete> listaPaquetesTuristaVigentes = new ArrayList();
+        Date fechaActual = new Date();
+        for (Compra c : t.getListaCompras()) {
+            if (!c.getVencimiento().before(fechaActual)) {//  !(si la fecha de vencimiento ya paso) osea, si aun no vencio
+                Paquete p = c.getPaquete();
+                if (!listaPaquetesTuristaVigentes.contains(p)) {// si no esta en el arraylist                   
+                    listaPaquetesTuristaVigentes.add(p); //lo agrego
+                }
+            }
+        }
+        // pasaje a dt
+        for (Paquete p :listaPaquetesTuristaVigentes ){
+            DTPaquete dtPaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
+            listaPaquetesTuristaVigentesDT.add(dtPaquete);
+        }
+        return listaPaquetesTuristaVigentesDT;
+    }
 
     @Override
     public ArrayList<DTActividad> listaActividadesConfirmadas() {
@@ -922,28 +945,6 @@ public class Controlador implements IControlador {
         return listaDTActividadesConfirmadas;
     }
 
-    @Override
-    public ArrayList<DTPaquete> listaPaquetesVigentesSalida(String nombreSalida) {
-        Date fechaActual = new Date();
-        SalidaTuristica salt = controlPersis.consultaSalida(nombreSalida);
-        ArrayList<Paquete> listaPaquetes = salt.getActividad().getListaPaquete();
-        ArrayList<DTPaquete> listaPaquetesVigentes = new ArrayList();
-        Calendar calendar = Calendar.getInstance();
-        for (Paquete p : listaPaquetes) {
-            calendar.setTime(p.getFechaAlta());  // Establece la fecha de alta del paquete
-            calendar.add(Calendar.DAY_OF_MONTH, p.getValidez());  // Agrega la validez en días al calendario
-            Date fechaVencimiento = calendar.getTime();  // Obtiene la fecha de vencimiento
-            if (!fechaVencimiento.before(fechaActual)) {//  !(si la fecha de vencimiento ya paso) osea, si aun no vencio
-                if (!listaPaquetesVigentes.contains(p)) {// si no esta en el arraylist 
-                    DTPaquete dtPaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
-                    listaPaquetesVigentes.add(dtPaquete); //lo agrego
-                }
-            }
-        }
-        // falta ver que solo te retorne los paquetes que compro el turista y que tenga inscripciones disponibles   
-        return listaPaquetesVigentes;
-    }
-    //DTPaquete(String nombre, String descripcion, int validez, int descuento, Date fechaAlta)
 
     @Override
     public ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento) {

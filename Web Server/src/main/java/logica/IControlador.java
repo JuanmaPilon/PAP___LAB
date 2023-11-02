@@ -77,7 +77,7 @@ public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknam
 public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
 
 public abstract ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
-public abstract ArrayList<DTPaquete> listaPaquetesVigentesSalida(String nombreSalida);//para inscripcion
+
 public abstract void cargarDatosDePrueba();
 public abstract Categoria traerCategoria(String categoria);
 
@@ -90,5 +90,5 @@ public abstract DTUsuario traerDTUsuario(String nickname);
 public abstract String devolverTipoUsuario(String nickname);
 public abstract ArrayList listaDTDepartamentos();
 public abstract ArrayList<DTActividad> listaActividadesConfirmadas();
-    
+    public abstract ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista);
 }

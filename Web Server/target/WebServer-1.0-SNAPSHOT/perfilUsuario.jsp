@@ -14,9 +14,10 @@
     <head>
 
         <%
-            String usuario = (String) request.getSession().getAttribute("usua");
-            DTUsuario us = (DTUsuario) request.getSession().getAttribute("us");
+            String usuario = (String) request.getSession().getAttribute("usuario");
+            DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usuPerfil");
             String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
+            String tipoUsuarioConsultado = (String) request.getSession().getAttribute("tipoUsuarioConsultado");
         %>
         <meta charset="UTF-8">
         <link href="styles.css" src="styles.css"">
@@ -57,7 +58,7 @@
                     <li><a href="altaSalidaTuristica.jsp?tipoUsuario=<%= tipoUsuario%>">Alta de Salida Turistica</a></li> <!-- Proveedor -->
                     <li><a href="consultaSalidaTuristica.jsp?tipoUsuario=<%= tipoUsuario%>">Consulta Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                     <li><a href="consultaPaqueteActividadesTuristicas.jsp?tipoUsuario=<%= tipoUsuario%>">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
-                    <li><a href="inscripcionSalida.jsp?tipoUsuario=<%= tipoUsuario%>">Inscripcion Salida Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
+                    
 
                     <%
                         }
@@ -80,7 +81,7 @@
 
                 </ul>
             </aside>
-            <%DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usuPerfil");//usuario del que se muestra la info
+            <%
                 String rutaImg = (String) request.getSession().getAttribute("imagen");
 
 
@@ -91,7 +92,7 @@
                 <ul class="tab-links">
                     <li class="active"><a href="#tab1">Perfil</a></li>
                         <%
-                            if (tipoUsuario == "proveedor") {
+                            if (tipoUsuarioConsultado == "proveedor") {
                         %>
                     <li><a href="#tab2">Actividades</a></li>
                     <li><a href="#tab3">Salidas</a></li>
@@ -101,12 +102,12 @@
 
 
                     <%
-                        if (tipoUsuario == "turista") {
+                        if (tipoUsuarioConsultado == "turista") {
                             String tur = usu.getNickname();
                             if (tur.equals(usuario)) {
                     %>
-                    <li><a href="#tab3">Salidas</a></li>
-                    <li><a href="#tab4">Paquetes</a></li>
+                    <li><a href="#tab3">Salidas Inscriptas</a></li>
+                    <li><a href="#tab4">Paquetes Comprados</a></li>
                         <%
                                 }
                             }
