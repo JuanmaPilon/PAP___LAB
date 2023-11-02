@@ -63,7 +63,7 @@ public class SvSalida extends HttpServlet {
 
             String departamentoSeleccionado = request.getParameter("departamento");
 
-            ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicas(departamentoSeleccionado);
+            ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicasConfirmadas(departamentoSeleccionado);
 
             String actividades = String.join(",", listaActividadesDepartamento);
             response.setContentType("text/plain");
@@ -74,7 +74,7 @@ public class SvSalida extends HttpServlet {
 
             String categoriaSeleccionada = request.getParameter("categoria");
 
-            ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoria(categoriaSeleccionada);
+            ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoriaConfirmadas(categoriaSeleccionada);
 
             String actividades = String.join(",", listaActividadesCategoria);
             response.setContentType("text/plain");

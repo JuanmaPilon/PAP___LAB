@@ -132,13 +132,12 @@ public class SvActividad extends HttpServlet {
             if(finalizar.equals("finalizar")){
                 if(control.actividadSinSalidaVigente(nombreActividad)){
                 control.cambiarEstadoActividad(nombreActividad, TipoEstado.finalizada);
-              // String errorMessage = "Actividad finalizada correctamente";
-              // String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
-               //response.getWriter().write(alertScript);
-               response.sendRedirect("logedUser.jsp");
+               String errorMessage = "Actividad finalizada correctamente";
+               String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
+               response.getWriter().write(alertScript);
                 } else {
                 String errorMessage = "Actividad con salidas vigentes";
-                String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario + "';</script>";
+                String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp';</script>";
                 response.getWriter().write(alertScript);
                 }      
             } else {
