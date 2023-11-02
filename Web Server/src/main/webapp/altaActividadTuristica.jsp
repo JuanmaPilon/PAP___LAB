@@ -185,6 +185,8 @@
                 <select id="categoria" name="categoria" multiple></select>
                 <p class="instructions">Mantén presionada la tecla Ctrl (o Cmd en Mac) y haz clic para seleccionar múltiples categorías.</p>
                 <input type="hidden" id="usuario" name="usuario" value="<%= usuario%>">
+                <label for="urlVideo">URL Video (Opcional)</label>
+                <input type="url" id="urlVideo" name="urlVideo">
                 <button type="submit">Dar de Alta</button>
             </form>
         </main>

@@ -91,27 +91,27 @@ public class SvActividad extends HttpServlet {
             ArrayList<String> categorias = control.traerCategoriasActividad(actividadConsultada.getNombre());
             ArrayList<String> paquetes = control.listaPaquetesDeActividad(actividadConsultada.getNombre());
 
+            HttpSession misesion = request.getSession();
+            String imagenRuta = "images/sinImagen.png";
+            String UrlVideo = "";
+
             if (imagen == null) {
-
-                String imagenVacia = "images/sinImagen.png";
-                HttpSession misesion = request.getSession();
-                misesion.setAttribute("actividad", actividadConsultada);
-                misesion.setAttribute("salidas", salidas);
-                misesion.setAttribute("categorias", categorias);
-                misesion.setAttribute("paquetes", paquetes);
-                misesion.setAttribute("imagen", imagenVacia);
-                response.sendRedirect("perfilActividadTuristica.jsp");
-
-            } else {
-                String imagenRuta = imagen.getRuta();
-                HttpSession misesion = request.getSession();
-                misesion.setAttribute("actividad", actividadConsultada);
-                 misesion.setAttribute("salidas", salidas);
-                misesion.setAttribute("categorias", categorias);
-                misesion.setAttribute("paquetes", paquetes);
-                misesion.setAttribute("imagen", imagenRuta);
-                response.sendRedirect("perfilActividadTuristica.jsp");
+            } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo() != null)) {
+                imagenRuta = imagen.getRuta();
+                UrlVideo = imagen.getUrlVideo();
+            } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo() == null)) {
+                imagenRuta = imagen.getRuta();
+            } else if ((imagen.getNombre() == null) && (imagen.getUrlVideo() != null)) {
+                UrlVideo = imagen.getUrlVideo();
             }
+
+            misesion.setAttribute("actividad", actividadConsultada);
+            misesion.setAttribute("salidas", salidas);
+            misesion.setAttribute("categorias", categorias);
+            misesion.setAttribute("paquetes", paquetes);
+            misesion.setAttribute("imagen", imagenRuta);
+            misesion.setAttribute("UrlVideo", UrlVideo);
+            response.sendRedirect("perfilActividadTuristica.jsp");
 
         } catch (Exception ex) {
 
@@ -132,6 +132,7 @@ public class SvActividad extends HttpServlet {
             Date fecha = new Date();
             String[] categorias = request.getParameterValues("categoria");
             ArrayList<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
+            String UrlVideo = request.getParameter("urlVideo");
 
             Part archivo = request.getPart("file");
             String nombreArchivo = null;
@@ -150,7 +151,11 @@ public class SvActividad extends HttpServlet {
                     String rutaRelativa = "images" + File.separator + nombreArchivo;
 
                     try {
-                        control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre);
+                        if (UrlVideo == null) {
+                            control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, null);
+                        } else if(UrlVideo != null){
+                            control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, UrlVideo);
+                        }
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         String errorMessage = "Ya existe otra actividad con esa imagen, se ha dado de alta la actividad sin imagen";
@@ -161,7 +166,11 @@ public class SvActividad extends HttpServlet {
 
                 }
             }
-          response.sendRedirect("logedUser.jsp");
+
+            if ((archivo.getSize() == 0) && (UrlVideo != null)) {
+                control.AltaDeImagenActividad(null, null, nombre, UrlVideo);
+            }
+            response.sendRedirect("logedUser.jsp");
         } catch (PreexistingEntityException ex) {
             ex.printStackTrace();
             String errorMessage = "Ya existe otra actividad con ee nombre";

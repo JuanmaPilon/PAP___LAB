@@ -167,7 +167,7 @@ public class SvSalida extends HttpServlet {
                     String rutaRelativa = "images" + File.separator + nombreArchivo;
 
                     try {
-                        control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombreSalida);
+                        control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombreSalida, null);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         String errorMessage = "Ya existe otra salida con esta imagen, se ha dado de alta la salida sin imagen";

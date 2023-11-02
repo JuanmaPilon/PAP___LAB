@@ -17,7 +17,7 @@ public abstract DTImagenActividad buscarImagenPorActividad(String nombreActivida
 public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract DTImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;
-public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception;
+public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException, Exception;
 public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String descripcion, String link) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract void AltaCategoria(String nombre) throws PreexistingEntityException, Exception;

@@ -15,7 +15,7 @@
         ArrayList<DTSalidaTuristica> salidas = (ArrayList<DTSalidaTuristica>) request.getSession().getAttribute("salidas");
         ArrayList<String> paquetes = (ArrayList<String>) request.getSession().getAttribute("paquetes");
         String rutaAlaImagen = (String) request.getSession().getAttribute("imagen");
-        
+        String video = (String) request.getSession().getAttribute("UrlVideo");
     %>
     <head>
         <meta charset="UTF-8">
@@ -94,6 +94,10 @@
                     %>
                 </ul>
             </div>
+                <div class ="video">
+                     <iframe width="560" height="315" src="<%= video %>" title="YouTube video player" 
+                      frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
                 
                     
 

@@ -48,7 +48,7 @@ public class Controlador implements IControlador {
     @Override
     public DTImagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception {
         imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
-        DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad());
+        DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad(), imagen.getUrlVideo());
         return dtImagen;
 
     }
@@ -80,9 +80,9 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void AltaDeImagenActividad(String imagenNombre, String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception {
+    public void AltaDeImagenActividad(String imagenNombre, String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException, Exception {
 
-        imagenActividad ImagenActividad = new imagenActividad(imagenNombre, imagenRuta, nombreActividad);
+        imagenActividad ImagenActividad = new imagenActividad(imagenNombre, imagenRuta, nombreActividad, UrlVideo);
         controlPersis.guardarImagenActividad(ImagenActividad);
 
     }
@@ -433,7 +433,7 @@ public class Controlador implements IControlador {
     public DTImagenActividad traerDTImagenActividad(String nombreActividad) throws Exception {
         imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
         if (imagen != null) {
-            DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad());
+            DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad(), imagen.getUrlVideo());
             return dtImagen;
         } else {
             return null;
