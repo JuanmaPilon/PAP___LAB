@@ -14,61 +14,97 @@ public class DTActividad {
     private float costo;
     private String ciudad;
     private Date fAlta;
+    private TipoEstado estado;
+    private ArrayList<String> listaNombresSalidaTuristica; 
+    private ArrayList<String> listaNombresPaquete; 
     private String nombreDepartamento;
     private String nombreProveedor;
-
-    // Constructores, getters  para DTActividad
-
-
-    public DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, String nombreProveedor, String nombreDepartamento) {
+    private ArrayList<String> listaNombresCategoria; 
+    
+     public DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta,TipoEstado estado, String nombreDepartamento, String nombreProveedor) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.costo = costo;
         this.ciudad = ciudad;
         this.fAlta = fAlta;
-        this.nombreProveedor = nombreProveedor;
+        this.estado = estado;
         this.nombreDepartamento = nombreDepartamento;
+        this.nombreProveedor = nombreProveedor;
+    }
+     
+  
+
+    public DTActividad() {
+        
     }
 
-
-    
-    
-    
-    
     public String getNombre() {
         return nombre;
     }
+
+    
 
     public String getDescripcion() {
         return descripcion;
     }
 
+    
+
     public int getDuracion() {
         return duracion;
     }
+
+    
 
     public float getCosto() {
         return costo;
     }
 
+    
+
     public String getCiudad() {
         return ciudad;
     }
 
+    
+
     public Date getfAlta() {
         return fAlta;
     }
+    
+    public TipoEstado getEstado() {
+        return estado;
+    }
 
+    
+
+    public ArrayList<String> getNombresSalidaTuristica() {
+        return listaNombresSalidaTuristica;
+    }
+
+   
+
+    public ArrayList<String> getNombresPaquete() {
+        return listaNombresPaquete;
+    }
+
+    
 
     public String getNombreDepartamento() {
         return nombreDepartamento;
     }
 
+    
     public String getNombreProveedor() {
         return nombreProveedor;
     }
-    
-    
 
+  
+    public ArrayList<String> getNombresCategoria() {
+        return listaNombresCategoria;
+    }
+
+    
 }
+

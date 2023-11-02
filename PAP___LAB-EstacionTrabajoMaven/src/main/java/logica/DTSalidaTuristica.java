@@ -17,12 +17,10 @@ public class DTSalidaTuristica {
     private Date fAlta;
     private Date fSalida;
     private String lugar;
-    private ArrayList<Integer> listaIdInscripciones;
     private String nombreActividad;
 
     public DTSalidaTuristica() {
     }
-
 
 
     public DTSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) {
@@ -33,7 +31,6 @@ public class DTSalidaTuristica {
         this.lugar = lugar;
         this.nombreActividad = nombreActividad;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -54,8 +51,6 @@ public class DTSalidaTuristica {
     public String getLugar() {
         return lugar;
     }
-
-
 
     public String getNombreActividad() {
         return nombreActividad;

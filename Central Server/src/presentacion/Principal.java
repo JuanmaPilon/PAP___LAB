@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import logica.Controlador;
+
 import logica.IControlador;
 
 //import logica.IControlador;

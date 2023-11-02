@@ -23,10 +23,10 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
         initComponents();
     }
     
-    public ConsultaPaqueteActividadesTuristicas(String nombrePaquete) {
+    public ConsultaPaqueteActividadesTuristicas(String nombrePaquete, IControlador icu) {
         initComponents();
         //aca tengo la actividad
-        
+        control = icu;
         cmbPaquetes.removeAllItems();
         cmbPaquetes.addItem(nombrePaquete);
         //cmbActividades.setSelectedItem(salida.getNombreActividad());

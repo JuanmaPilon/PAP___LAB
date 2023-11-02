@@ -26,17 +26,16 @@ public class CompraJpaController implements Serializable {
     public CompraJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-       //la vacia
-    public CompraJpaController() {
-        emf = Persistence.createEntityManagerFactory("Lab1PU");
-    }
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    //la vacia
+    public CompraJpaController() {
+        emf = Persistence.createEntityManagerFactory("Lab1PU");
+    }
     public void create(Compra compra) {
         EntityManager em = null;
         try {

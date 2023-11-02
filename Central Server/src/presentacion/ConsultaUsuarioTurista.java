@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import logica.DTTurista;
 import logica.Controlador;
 import logica.DTActividad;
+import logica.DTImagenPerfil;
 import logica.DTSalidaTuristica;
 import logica.IControlador;
 import logica.ImagenPerfil;
@@ -81,34 +82,34 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel3.setText("Datos turista:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(6, 14, 113, 18);
+        jLabel3.setBounds(6, 14, 95, 21);
 
         jLabel16.setText("Correo electronico:");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(10, 160, 140, 18);
+        jLabel16.setBounds(10, 160, 140, 21);
 
         txtFNacimiento.setEditable(false);
         getContentPane().add(txtFNacimiento);
-        txtFNacimiento.setBounds(168, 189, 260, 24);
+        txtFNacimiento.setBounds(168, 189, 260, 29);
 
         jLabel17.setText("F. de nacimiento:");
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(6, 192, 150, 18);
+        jLabel17.setBounds(6, 192, 150, 21);
 
         jLabel11.setText("Actividad Turistica");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(6, 362, 140, 18);
+        jLabel11.setBounds(6, 362, 140, 21);
 
         txtNombre.setEditable(false);
         getContentPane().add(txtNombre);
-        txtNombre.setBounds(148, 87, 280, 24);
+        txtNombre.setBounds(148, 87, 280, 29);
 
         getContentPane().add(cmbActividades);
-        cmbActividades.setBounds(148, 359, 330, 24);
+        cmbActividades.setBounds(148, 359, 330, 29);
 
         txtApellido.setEditable(false);
         getContentPane().add(txtApellido);
-        txtApellido.setBounds(148, 127, 280, 24);
+        txtApellido.setBounds(148, 127, 280, 29);
 
         btnVerActividad.setText("Ver");
         btnVerActividad.addActionListener(new java.awt.event.ActionListener() {
@@ -117,30 +118,30 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnVerActividad);
-        btnVerActividad.setBounds(490, 359, 72, 24);
+        btnVerActividad.setBounds(490, 359, 90, 29);
 
         txtCorreo.setEditable(false);
         getContentPane().add(txtCorreo);
-        txtCorreo.setBounds(170, 160, 260, 24);
+        txtCorreo.setBounds(170, 160, 260, 29);
 
         jLabel2.setText("nickname:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(6, 50, 100, 18);
+        jLabel2.setBounds(6, 50, 100, 21);
 
         jLabel18.setText("Salidas Turisticas");
         getContentPane().add(jLabel18);
-        jLabel18.setBounds(6, 323, 130, 18);
+        jLabel18.setBounds(6, 323, 130, 21);
 
         txtNickname.setEditable(false);
         getContentPane().add(txtNickname);
-        txtNickname.setBounds(148, 47, 280, 24);
+        txtNickname.setBounds(148, 47, 280, 29);
 
         getContentPane().add(cmbSalidas);
-        cmbSalidas.setBounds(148, 320, 330, 24);
+        cmbSalidas.setBounds(148, 320, 330, 29);
 
         jLabel13.setText("Nacionalidad:");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(6, 226, 110, 18);
+        jLabel13.setBounds(6, 226, 110, 21);
 
         btnVerSalida.setText("Ver");
         btnVerSalida.addActionListener(new java.awt.event.ActionListener() {
@@ -149,24 +150,24 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnVerSalida);
-        btnVerSalida.setBounds(490, 320, 72, 24);
+        btnVerSalida.setBounds(490, 320, 90, 29);
 
         jLabel14.setText("Nombre:");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(6, 90, 90, 18);
+        jLabel14.setBounds(6, 90, 90, 21);
 
         txtNacionalidad.setEditable(false);
         getContentPane().add(txtNacionalidad);
-        txtNacionalidad.setBounds(127, 223, 301, 24);
+        txtNacionalidad.setBounds(127, 223, 301, 29);
 
         jLabel15.setText("Apellido:");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(6, 130, 90, 18);
+        jLabel15.setBounds(6, 130, 90, 21);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel4.setText("Inscripto a:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(6, 287, 110, 18);
+        jLabel4.setBounds(6, 287, 110, 21);
 
         labelImagen.setBackground(new java.awt.Color(51, 51, 51));
         labelImagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -270,7 +271,7 @@ public void mostrarMensaje(String mensaje, String tipo, String titulo){
 
 public void mostrarImagenPerfil(String nickname){
     try {
-        ImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
+        DTImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
 
         if (imagen != null) {
             String rutaImagen = imagen.getRuta();

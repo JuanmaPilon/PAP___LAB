@@ -331,7 +331,7 @@ public class ConsultaActividadTuristica extends javax.swing.JInternalFrame {
          if(cmbPaquetes.getSelectedIndex() != -1){
             String nombrePaquete = (String) cmbPaquetes.getSelectedItem();
         
-        ConsultaPaqueteActividadesTuristicas verConsultaPaqueteActividadesTuristicas = new ConsultaPaqueteActividadesTuristicas(nombrePaquete);
+        ConsultaPaqueteActividadesTuristicas verConsultaPaqueteActividadesTuristicas = new ConsultaPaqueteActividadesTuristicas(nombrePaquete, control);
         getParent().add(verConsultaPaqueteActividadesTuristicas);        
         verConsultaPaqueteActividadesTuristicas.show();
          }

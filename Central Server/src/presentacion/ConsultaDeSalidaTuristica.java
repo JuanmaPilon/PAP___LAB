@@ -21,6 +21,7 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
 
     public ConsultaDeSalidaTuristica(String nombreSalida, IControlador icu) {
         initComponents();
+        control = icu;
         //aca tengo la actividad
         DTSalidaTuristica salida = control.traerDTSalidaTuristica(nombreSalida);
         String departamentoSalida = control.traerDepartamentoSalida(salida.getNombreActividad());
@@ -156,9 +157,8 @@ public class ConsultaDeSalidaTuristica extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(cmbSalidas, 0, 281, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(cmbDepartamentos, 0, 281, Short.MAX_VALUE)
-                                            .addComponent(cmbActividades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(cmbDepartamentos, javax.swing.GroupLayout.Alignment.LEADING, 0, 281, Short.MAX_VALUE)
+                                        .addComponent(cmbActividades, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)

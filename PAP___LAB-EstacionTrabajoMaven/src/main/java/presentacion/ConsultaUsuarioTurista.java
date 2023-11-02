@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import logica.DTTurista;
 import logica.Controlador;
 import logica.DTActividad;
+import logica.DTImagenPerfil;
 import logica.DTSalidaTuristica;
 import logica.IControlador;
 import logica.ImagenPerfil;
@@ -270,7 +271,7 @@ public void mostrarMensaje(String mensaje, String tipo, String titulo){
 
 public void mostrarImagenPerfil(String nickname){
     try {
-        ImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
+        DTImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
 
         if (imagen != null) {
             String rutaImagen = imagen.getRuta();

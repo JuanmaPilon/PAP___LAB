@@ -23,28 +23,42 @@ public class Controlador implements IControlador {
 
     public Controlador() {
     }
+
+//    private static Controlador control;
+//    public static Controlador getInstance(){
+//        if (control == null){
+//            control = new Controlador();
+//        }
+//            return control;
+//    };
     ControladoraPersistencia controlPersis = new ControladoraPersistencia();
-        @Override
-    public  void nuevaCantTurista(Compra compraTurista) throws Exception{
+
+    //descomentado por una prueba:
+    @Override
+    public void nuevaCantTurista(Compra compraTurista) throws Exception {
         controlPersis.nuevaCantTurista(compraTurista);
-        
-    }
-    
-    @Override
-    public  Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete){
-       return  controlPersis.traerCompraDelTurista( nombreTurista, nombrePaquete);
-    }
-    @Override
-    public imagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception {
 
-        return controlPersis.buscarImagenActividad(nombreActividad);
-        
     }
-    
-    @Override
-    public ImagenPerfil buscarImagenPorNickname(String nickname) throws Exception {
 
-        return controlPersis.buscarImagen(nickname);
+    @Override
+    public Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
+        return controlPersis.traerCompraDelTurista(nombreTurista, nombrePaquete);
+    }
+
+    @Override
+    public DTImagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception {
+        imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
+        DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad());
+        return dtImagen;
+
+    }
+
+    @Override
+    public DTImagenPerfil buscarImagenPorNickname(String nickname) throws Exception {
+        ImagenPerfil imagen = controlPersis.buscarImagen(nickname);
+        DTImagenPerfil dtImagen = new DTImagenPerfil(imagen.getNombre(), imagen.getRuta(), imagen.getNicknameUsuario());
+        return dtImagen;
+
     }
 
     public void ModificarImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception {
@@ -95,11 +109,15 @@ public class Controlador implements IControlador {
         }
     }
 
+    ;
+   
     @Override
     public List<Paquete> consultaPaquetes() {
         return controlPersis.consultaPaquete();
     }
 
+    ;
+   
     @Override
     public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo,
             Date fNacimiento, String descripcion, String link) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
@@ -131,7 +149,8 @@ public class Controlador implements IControlador {
         controlPersis.guardarCategoria(cat);
 
     }
-    
+
+    ;
     //String nombreProveedor, String nombreDep,
     @Override
     public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha, String nombreProveedor, String nombreDepartamento, ArrayList<String> listaCategorias) throws PreexistingEntityException, Exception {
@@ -176,7 +195,7 @@ public class Controlador implements IControlador {
         salidaTuristica.setfSalida(fSalida);
         salidaTuristica.setLugar(lugar);
 
-        Actividad actividad = ConsultaActividadTuristica(nombreActividad);
+        Actividad actividad = controlPersis.consultaActividad(nombreActividad);
         salidaTuristica.setActividad(actividad);
         actividad.getListaSalidaTuristica().add(salidaTuristica);
         try {
@@ -192,22 +211,42 @@ public class Controlador implements IControlador {
         return controlPersis.listaActividades();
     }
 
+    ;
    @Override
     public ArrayList<String> listaPaquetes() {//tiene el nombre de los departamentos, no el objeto
         return controlPersis.listaPaquetes();
     }
 
+    ;
+   ///////
    @Override
     public ArrayList<String> listaSalActividadTuristica(String actividad) {
 
         return controlPersis.listaSalActividadTuristica(actividad);
     }
 
+    ;
+   
    @Override
     public ArrayList<Departamento> listaDepartamentos() {
         return controlPersis.listaDepartamentos();
     }
 
+    @Override
+    public ArrayList<DTDepartamento> listaDTDepartamentos() {
+        ArrayList<Departamento> listaDepartamentos = controlPersis.listaDepartamentos();
+        ArrayList<DTDepartamento> listaDTDepartamentos = new ArrayList<>();
+
+        for (Departamento departamento : listaDepartamentos) {
+            ArrayList<Actividad> listaActTur = departamento.getListaActTur();
+            DTDepartamento dtDepartamento = new DTDepartamento(departamento.getNombre(), departamento.getDescripcion(), departamento.getUrl(), listaActTur);
+            listaDTDepartamentos.add(dtDepartamento);
+        }
+
+        return listaDTDepartamentos;
+    }
+
+    ;
    @Override
     public ArrayList<String> listaDeptos() {//tiene el nombre de los departamentos, no el objeto
         ArrayList<String> nicks = new ArrayList();
@@ -220,6 +259,7 @@ public class Controlador implements IControlador {
         return nicks;
     }
 
+    ;
    @Override
     public ArrayList<String> listaActividadesTuristicas(String departamento) {
         ArrayList<String> listaActividadesTuristicas = new ArrayList();
@@ -230,32 +270,64 @@ public class Controlador implements IControlador {
         return listaActividadesTuristicas;
     }
 
+    ;
+   
    @Override
     public ArrayList<String> listaUsuarios() {
         return controlPersis.listaUsuarios();
     }
 
+    ;
+   
     @Override
     public ArrayList<String> listaProveedores() {
         return controlPersis.listaProveedores();
     }
 
+    ;
+ 
    @Override
     public Usuario ConsultaDeUsuario(String nickname) {
         return controlPersis.consultaUsuario(nickname);
     }
 
+    ;
+   
+
+   
+   
    @Override
-    public Actividad ConsultaActividadTuristica(String nombreActividad) {
-        return controlPersis.consultaActividad(nombreActividad);
+    public void AltaDeActividadTuristica(String nombre, TipoEstado estado, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, ArrayList<Categoria> listaCategoria) {
+
+        Actividad actividad = new Actividad();
+
+        //falta control si nombre ya existe o si es null nombre
+        actividad.setNombre(nombre);
+        actividad.setEstado(TipoEstado.agregada);
+        actividad.setDescripcion(descripcion);
+        actividad.setDuracion(duracion);
+        actividad.setCosto(costo);
+        actividad.setCiudad(ciudad);
+        actividad.setfAlta(fAlta);
+        actividad.setListaSalidaTuristica(listaSalidaTuristica);
+        actividad.setListaPaquete(listaPaquete);
+        actividad.setListaCategoria(listaCategoria);
+
+        //controlPersis.guardarActividad(actividad);
     }
 
+    ;//Juanma
+   
    //Devuelve la Salida Turistica con nombre nombreSalida
    @Override
-    public SalidaTuristica ConsultaSalidaTuristica(String nombreSalida) {
-        return controlPersis.consultaSalida(nombreSalida);
+    public DTSalidaTuristica ConsultaSalidaTuristica(String nombreSalida) {
+        SalidaTuristica salida = controlPersis.consultaSalida(nombreSalida);
+        DTSalidaTuristica dtSalida = new DTSalidaTuristica(salida.getNombre(), salida.getCantMax(), salida.getfAlta(), salida.getfSalida(), salida.getLugar(), salida.getActividad().getNombre());
+        return dtSalida;
     }
 
+    ;
+    
     //Alta de Departamento. No requiere GUI.
     @Override
     public void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception {
@@ -270,6 +342,13 @@ public class Controlador implements IControlador {
         } catch (PreexistingEntityException e) {
             throw new PreexistingEntityException("Ya existe un departamento con ese nombre");
         }
+    }
+
+    ;
+   
+   @Override
+    public List<String> llenarCmboBoxDep() {
+        return controlPersis.llenarCmboBoxDepPersis();
     }
 
     @Override
@@ -293,6 +372,22 @@ public class Controlador implements IControlador {
         return controlPersis.traerUsuarios();
     }
 
+    @Override
+    public DTUsuario traerDTUsuario(String nickname) {
+        return controlPersis.traerDTUsuario(nickname);
+
+    }
+
+    @Override
+    public String devolverTipoUsuario(String nickname) {
+        Usuario usuario = controlPersis.consultaUsuario(nickname);
+        if (usuario instanceof Turista) {
+            return "turista";
+        } else {
+            return "proveedor";
+        }
+    }
+
     //Lista auxiliar para traer los DT de Turista registrados en la BD.
     @Override
     public ArrayList<DTTurista> traerUsuarioTurista() {
@@ -309,7 +404,7 @@ public class Controlador implements IControlador {
         String fnac = sdf.format(t.getfNacimiento());
 
         return new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
-                fnac, t.getNacionalidad());
+                fnac, t.getContrasenia(), t.getNacionalidad());
     }
     //Devuelve DTProveedor del Proveedor a partir del nickname
 
@@ -321,7 +416,7 @@ public class Controlador implements IControlador {
         String fnac = sdf.format(t.getfNacimiento());
 
         return new DTProveedor(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
-                fnac, t.getDescripcion(), t.getLink());
+                fnac, t.getContrasenia(), t.getDescripcion(), t.getLink());
     }
 
     //Devuelve el DTSalidaTuristica a partir del nombre de la Salida Turistica
@@ -332,6 +427,17 @@ public class Controlador implements IControlador {
                 salida.getfAlta(), salida.getfSalida(), salida.getLugar(), salida.getActividad().getNombre());
 
         return dtSalida;
+    }
+
+    @Override
+    public DTImagenActividad traerDTImagenActividad(String nombreActividad) throws Exception {
+        imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
+        if (imagen != null) {
+            DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad());
+            return dtImagen;
+        } else {
+            return null;
+        }
     }
 
     //Persiste la modificacion de Usuario Proveedor. nickname y correo no se modifican. 
@@ -361,7 +467,11 @@ public class Controlador implements IControlador {
         controlPersis.modificarTurista(t);
     }
 
-    
+    //
+//    @Override
+//    public List<String> findSalidasTuristicasDepartamento(String departamentoSeleccionado) {
+//        return controlPersis.findSalidasTuristicasDepartamentoPersis(departamentoSeleccionado);
+//    }
     //Devuelve lista de DT Actividad para un nombre de Departamento dado
     @Override
     public ArrayList<DTActividad> encontraActividadDepartamento(String departamentoSeleccionado) {
@@ -393,7 +503,7 @@ public class Controlador implements IControlador {
         boolean resultado = true;
         int cantTotal = 0;
         //busco los obj salidaTuristica
-        SalidaTuristica salidaTuristica = ConsultaSalidaTuristica(salida);
+        SalidaTuristica salidaTuristica = controlPersis.consultaSalida(salida);
         //busco las inscripciones para ese obj salidaTuristica
         ArrayList<Inscripcion> inscripcionesSalidaTuristica = controlPersis.listarInscripcionesDeSalidaTuristica(salida);
         //me fijo en las inscripciones la cantidad de inscriptos
@@ -429,7 +539,7 @@ public class Controlador implements IControlador {
     //Alta de Inscripcion. Pre-condicion: exite salida turistica y turista con los respectivos nombres; los parametros vienen en el formato correcto.
     @Override
     public void InscripcionASalidaTuristica(String nombreSalidaSeleccionada, String nicknameTurista, int cantTurista, float costo, Date fecha, TipoPago tipoPago) {
-        SalidaTuristica salida = ConsultaSalidaTuristica(nombreSalidaSeleccionada);
+        SalidaTuristica salida = controlPersis.consultaSalida(nombreSalidaSeleccionada);;
         Turista turista = (Turista) ConsultaDeUsuario(nicknameTurista);
         Inscripcion inscripcion = new Inscripcion(turista, salida, fecha, cantTurista, costo, tipoPago);
 
@@ -444,9 +554,9 @@ public class Controlador implements IControlador {
 
         //DTSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar) 
         for (Inscripcion insc : t.getListaInscripcion()) {
-            SalidaTuristica s = ConsultaSalidaTuristica(insc.getSalida().getNombre());
             DTSalidaTuristica dtSalida = new DTSalidaTuristica(insc.getSalida().getNombre(), insc.getSalida().getCantMax(),
-                    insc.getSalida().getfAlta(), insc.getSalida().getfSalida(), insc.getSalida().getLugar(), s.getActividad().getNombre());
+                    insc.getSalida().getfAlta(), insc.getSalida().getfSalida(), insc.getSalida().getLugar(),
+                    insc.getSalida().getActividad().getNombre());
 
             listaInscSalidasDeTurista.add(dtSalida);
         }
@@ -470,8 +580,13 @@ public class Controlador implements IControlador {
         //paso la lista de actividades a DT (asi no se repite la actividad, si el turista esta inscpto a dos salidas de la misma actividad.
 
         for (Actividad a : actividades) {
-            DTActividad dtActividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), 
-                    a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname(), a.getDepartamento().getNombre());
+            DTActividad dtActividad = new DTActividad(a.getNombre(), a.getDescripcion(),
+                    a.getDuracion(),
+                    a.getCosto(), a.getCiudad(),
+                    a.getfAlta(),
+                    a.getEstado(),
+                    a.getDepartamento().getNombre(),
+                    a.getProveedor().getNickname());
 
             listaInscActividadesDeTurista.add(dtActividad);
         }
@@ -485,9 +600,13 @@ public class Controlador implements IControlador {
         ArrayList<DTActividad> listaActividadesDelProveedor = new ArrayList();
         for (Actividad a : listaActividades) {
             if (a.getProveedor().getNickname().equals(nickname)) {
-                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), 
-                    a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname(), a.getDepartamento().getNombre());
-
+                DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(),
+                        a.getDuracion(),
+                        a.getCosto(), a.getCiudad(),
+                        a.getfAlta(),
+                        a.getEstado(),
+                        a.getDepartamento().getNombre(),
+                        a.getProveedor().getNickname());
                 listaActividadesDelProveedor.add(dtactividad);
             }
 
@@ -514,13 +633,13 @@ public class Controlador implements IControlador {
 
     @Override
     public String traerDepartamentoSalida(String nombreActividad) {
-        Actividad a = ConsultaActividadTuristica(nombreActividad);
+        Actividad a = controlPersis.consultaActividad(nombreActividad);
         return a.getDepartamento().getNombre();
     }
 
     @Override
     public ArrayList<String> listaPaquetesDeActividad(String nombreActividad) {
-        Actividad a = ConsultaActividadTuristica(nombreActividad);
+        Actividad a = controlPersis.consultaActividad(nombreActividad);
         ArrayList<String> listaPaquetesDeActividad = new ArrayList();
 
         for (Paquete p : a.getListaPaquete()) {
@@ -532,10 +651,41 @@ public class Controlador implements IControlador {
 
     @Override
     public DTActividad traerDTActividad(String nombreActividad) {
-        Actividad a = ConsultaActividadTuristica(nombreActividad);
-        //DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, String nombreProveedor) 
-        DTActividad dtactividad = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(),
-                a.getCosto(), a.getCiudad(), a.getfAlta(), a.getProveedor().getNickname(), a.getDepartamento().getNombre());
+        Actividad a = controlPersis.consultaActividad(nombreActividad);
+
+        // Crea un nuevo objeto DTActividad usando el constructor con todos los atributos
+        DTActividad dtactividad = new DTActividad(
+                a.getNombre(),
+                a.getDescripcion(),
+                a.getDuracion(),
+                a.getCosto(),
+                a.getCiudad(),
+                a.getfAlta(),
+                a.getEstado(),
+                a.getDepartamento().getNombre(),
+                a.getProveedor().getNickname()
+        );
+
+        // Para listaNombresSalidaTuristica, debes convertir la lista de objetos SalidaTuristica a una lista de nombres
+        List<String> listaNombresSalidaTuristica = new ArrayList<>();
+        for (SalidaTuristica salida : a.getListaSalidaTuristica()) {
+            listaNombresSalidaTuristica.add(salida.getNombre());
+        }
+        //dtactividad.setListaNombresSalidaTuristica((ArrayList<String>) listaNombresSalidaTuristica);
+
+        // Para listaNombresPaquete, de manera similar, convierte la lista de objetos Paquete a una lista de nombres
+        List<String> listaNombresPaquete = new ArrayList<>();
+        for (Paquete paquete : a.getListaPaquete()) {
+            listaNombresPaquete.add(paquete.getNombre());
+        }
+        //dtactividad.setListaNombresPaquete((ArrayList<String>) listaNombresPaquete);
+
+        // Para listaNombresCategoria, convierte la lista de objetos Categoria a una lista de nombres
+        List<String> listaNombresCategoria = new ArrayList<>();
+        for (Categoria categoria : a.getListaCategoria()) {
+            listaNombresCategoria.add(categoria.getNombre());
+        }
+        //dtactividad.setListaNombresCategoria((ArrayList<String>) listaNombresCategoria);
 
         return dtactividad;
     }
@@ -669,19 +819,7 @@ public class Controlador implements IControlador {
             }
 
             Compra c = new Compra(t, p, cantTurista, fechaCompra);
-            
-            ArrayList<Compra> listaCompra = new ArrayList();
-            
-            listaCompra.add(c);
-            
-            t.setListaCompras(listaCompra);
-            
-            try {
-                controlPersis.modificarTurista(t);
-            }  catch (Exception ex) {
-                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+
             costoTotal = (float) ((costoActividades) * (0.01) * (100 - p.getDescuento()) * (cantTurista));
 
             c.setCostoTotal(costoTotal);
@@ -692,7 +830,7 @@ public class Controlador implements IControlador {
             d.add(Calendar.DATE, p.getValidez());
             fechaVencimiento = d.getTime();
             c.setVencimiento(fechaVencimiento);
-            
+
             controlPersis.guardarCompra(c);
         }
 
@@ -763,39 +901,50 @@ public class Controlador implements IControlador {
         }
         return listaPaquetesTurista;
     }
-
+    
+    
     @Override
-    public ArrayList<Actividad> listaActividadesConfirmadas() {
-        ArrayList<Actividad> listaActividadesConfirmadas = new ArrayList<Actividad>();
-        for (Actividad a : controlPersis.traerActividades()) {
-            if (a.getEstado().equals(TipoEstado.confirmada)) {
-                listaActividadesConfirmadas.add(a);
-            }
-        }
-        return listaActividadesConfirmadas;
-
-    }
-
-    @Override
-    public ArrayList<Paquete> listaPaquetesVigentesSalida(String nombreSalida) {
+        public ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista) {
+        Turista t = controlPersis.traerTurista(nicknameTurista);
+        ArrayList<DTPaquete> listaPaquetesTuristaVigentesDT = new ArrayList();
+        ArrayList<Paquete> listaPaquetesTuristaVigentes = new ArrayList();
         Date fechaActual = new Date();
-        SalidaTuristica salt = controlPersis.consultaSalida(nombreSalida);
-        ArrayList<Paquete> listaPaquetes = salt.getActividad().getListaPaquete();
-        ArrayList<Paquete> listaPaquetesVigentes = new ArrayList();
-        Calendar calendar = Calendar.getInstance();
-        for (Paquete p : listaPaquetes) {
-            calendar.setTime(p.getFechaAlta());  // Establece la fecha de alta del paquete
-            calendar.add(Calendar.DAY_OF_MONTH, p.getValidez());  // Agrega la validez en días al calendario
-            Date fechaVencimiento = calendar.getTime();  // Obtiene la fecha de vencimiento
-            if (!fechaVencimiento.before(fechaActual)) {//  !(si la fecha de vencimiento ya paso) osea, si aun no vencio
-                if (!listaPaquetesVigentes.contains(p)) {// si no esta en el arraylist 
-                    listaPaquetesVigentes.add(p); //lo agrego
+        for (Compra c : t.getListaCompras()) {
+            if (!c.getVencimiento().before(fechaActual)) {//  !(si la fecha de vencimiento ya paso) osea, si aun no vencio
+                Paquete p = c.getPaquete();
+                if (!listaPaquetesTuristaVigentes.contains(p)) {// si no esta en el arraylist                   
+                    listaPaquetesTuristaVigentes.add(p); //lo agrego
                 }
             }
         }
-        // falta ver que solo te retorne los paquetes que compro el turista y que tenga inscripciones disponibles   
-        return listaPaquetesVigentes;
+        // pasaje a dt
+        for (Paquete p :listaPaquetesTuristaVigentes ){
+            DTPaquete dtPaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
+            listaPaquetesTuristaVigentesDT.add(dtPaquete);
+        }
+        return listaPaquetesTuristaVigentesDT;
     }
+
+    @Override
+    public ArrayList<DTActividad> listaActividadesConfirmadas() {
+        List<Actividad> listaActividades = controlPersis.traerActividades();
+        ArrayList<DTActividad> listaDTActividadesConfirmadas = new ArrayList<>();
+
+        for (Actividad actividad : listaActividades) {
+            if (actividad.getEstado().equals(TipoEstado.confirmada)) {
+                Proveedor proveedor = actividad.getProveedor();
+                String nombreProveedor = proveedor.getNickname();
+
+                DTActividad dtActividad = new DTActividad(actividad.getNombre(), actividad.getDescripcion(), actividad.getDuracion(),
+                        actividad.getCosto(), actividad.getCiudad(), actividad.getfAlta(), actividad.getEstado(), actividad.getDepartamento().getNombre(), nombreProveedor);
+
+                listaDTActividadesConfirmadas.add(dtActividad);
+            }
+        }
+
+        return listaDTActividadesConfirmadas;
+    }
+
 
     @Override
     public ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento) {
@@ -808,7 +957,14 @@ public class Controlador implements IControlador {
         return listaActividadesTuristicas;
     }
 
-        @Override
+        
+    @Override
+    public void cargarDatosDePrueba() {
+        DatosDePrueba dp = new DatosDePrueba();
+        dp.cargarDatosDePrueba();
+    }
+
+    @Override
     public ArrayList<String> listaActividadesTuristicasPorCategoria(String categoria) {
         ArrayList<String> listaActividadesTuristicas = new ArrayList();
         for (String s : controlPersis.listaActividadesTuristicasPorCategoria(categoria)) {
@@ -818,18 +974,11 @@ public class Controlador implements IControlador {
         return listaActividadesTuristicas;
 
     }
-     @Override
+
+    @Override
     public Categoria traerCategoria(String categoria) {
         return controlPersis.traerCategoria(categoria);
 
     }
-    
-    @Override
-    public void cargarDatosDePrueba() {
-        DatosDePrueba dp = new DatosDePrueba();
-        dp.cargarDatosDePrueba();
-    }
 
-
-  
-}//fin
+}

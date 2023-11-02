@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import logica.Controlador;
 import logica.DTActividad;
+import logica.DTImagenPerfil;
 import logica.DTProveedor;
 import logica.DTSalidaTuristica;
 import logica.IControlador;
@@ -82,18 +83,18 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Actividad Turistica:");
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(10, 380, 140, 18);
+        jLabel11.setBounds(10, 380, 140, 21);
 
         jLabel15.setText("Apellido:");
         getContentPane().add(jLabel15);
-        jLabel15.setBounds(6, 136, 90, 18);
+        jLabel15.setBounds(6, 136, 90, 21);
 
         getContentPane().add(cmbActividades);
-        cmbActividades.setBounds(150, 370, 300, 24);
+        cmbActividades.setBounds(150, 370, 300, 29);
 
         jLabel16.setText("Correo electronico:");
         getContentPane().add(jLabel16);
-        jLabel16.setBounds(6, 170, 150, 18);
+        jLabel16.setBounds(6, 170, 150, 21);
 
         btnVerActividad.setText("Ver");
         btnVerActividad.addActionListener(new java.awt.event.ActionListener() {
@@ -102,26 +103,26 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnVerActividad);
-        btnVerActividad.setBounds(500, 370, 72, 24);
+        btnVerActividad.setBounds(500, 370, 90, 29);
 
         jLabel17.setText("F. de nacimiento:");
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(6, 200, 170, 18);
+        jLabel17.setBounds(6, 200, 170, 21);
 
         jLabel12.setText("Saida Turistica:");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(10, 420, 120, 18);
+        jLabel12.setBounds(10, 420, 120, 21);
 
         txtNombre.setEditable(false);
         getContentPane().add(txtNombre);
-        txtNombre.setBounds(137, 93, 306, 24);
+        txtNombre.setBounds(137, 93, 306, 29);
 
         getContentPane().add(cmbSalidas);
-        cmbSalidas.setBounds(150, 410, 300, 24);
+        cmbSalidas.setBounds(150, 410, 300, 29);
 
         txtApellido.setEditable(false);
         getContentPane().add(txtApellido);
-        txtApellido.setBounds(137, 133, 306, 24);
+        txtApellido.setBounds(137, 133, 306, 29);
 
         btnVerSalida.setText("Ver");
         btnVerSalida.addActionListener(new java.awt.event.ActionListener() {
@@ -130,49 +131,49 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnVerSalida);
-        btnVerSalida.setBounds(500, 410, 72, 24);
+        btnVerSalida.setBounds(500, 410, 90, 29);
 
         txtCorreo.setEditable(false);
         getContentPane().add(txtCorreo);
-        txtCorreo.setBounds(153, 167, 290, 24);
+        txtCorreo.setBounds(153, 167, 290, 29);
 
         jLabel2.setText("nickname:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(6, 56, 100, 18);
+        jLabel2.setBounds(6, 56, 100, 21);
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel18.setText("Ofrece:");
         getContentPane().add(jLabel18);
-        jLabel18.setBounds(10, 350, 62, 18);
+        jLabel18.setBounds(10, 350, 50, 21);
 
         txtNickname.setEditable(false);
         getContentPane().add(txtNickname);
-        txtNickname.setBounds(137, 53, 306, 24);
+        txtNickname.setBounds(137, 53, 306, 29);
 
         jLabel19.setText("URL:");
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(6, 234, 70, 18);
+        jLabel19.setBounds(6, 234, 70, 21);
 
         jLabel13.setText("Descripcion:");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(6, 271, 100, 18);
+        jLabel13.setBounds(6, 271, 100, 21);
 
         txtUrl.setEditable(false);
         getContentPane().add(txtUrl);
-        txtUrl.setBounds(137, 231, 306, 24);
+        txtUrl.setBounds(137, 231, 306, 29);
 
         jLabel14.setText("Nombre:");
         getContentPane().add(jLabel14);
-        jLabel14.setBounds(6, 96, 90, 18);
+        jLabel14.setBounds(6, 96, 90, 21);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel3.setText("Datos proveedor:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(6, 14, 142, 18);
+        jLabel3.setBounds(6, 14, 121, 21);
 
         txtFNacimiento.setEditable(false);
         getContentPane().add(txtFNacimiento);
-        txtFNacimiento.setBounds(153, 197, 290, 24);
+        txtFNacimiento.setBounds(153, 197, 290, 29);
 
         txtADescripcion.setEditable(false);
         txtADescripcion.setColumns(20);
@@ -189,7 +190,7 @@ public class ConsultaUsuarioProveedor extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(250, 460, 100, 24);
+        jButton1.setBounds(250, 460, 100, 29);
 
         labelImagen.setBackground(new java.awt.Color(51, 51, 51));
         getContentPane().add(labelImagen);
@@ -308,7 +309,7 @@ public void mostrarMensaje(String mensaje, String tipo, String titulo){
 
 public void mostrarImagenPerfil(String nickname){
     try {
-        ImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
+        DTImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
 
         if (imagen != null) {
             String rutaImagen = imagen.getRuta();

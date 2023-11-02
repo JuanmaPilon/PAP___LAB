@@ -11,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import logica.imagenActividad;
@@ -145,5 +146,26 @@ public class imagenActividadJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public imagenActividad findImagenPerfilByNombreActividad(String nombreActividad) {
+    EntityManager em = getEntityManager();
+    try {
+        TypedQuery<imagenActividad> query = em.createQuery(
+            "SELECT ip FROM imagenActividad ip WHERE ip.nombreActividad = :nombreActividad", 
+            imagenActividad.class
+        );
+        query.setParameter("nombreActividad", nombreActividad);
+        
+        List<imagenActividad> resultados = query.getResultList();
+        
+        if (!resultados.isEmpty()) {
+            return resultados.get(0); // Devuelve la primera imagen encontrada (puede ser única)
+        } else {
+            return null; // Si no se encuentra ninguna imagen asociada a la actividad
+        }
+    } finally {
+        em.close();
+    }
+}
     
 }

@@ -52,11 +52,7 @@ public class CrearPaqueteActividadTuristica extends javax.swing.JInternalFrame {
 
         jlabel1.setText("Nombre del Paquete:");
 
-        nombrePaquete.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-
         jLabel1.setText("Descripcion:");
-
-        descripcionPaquete.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
 
         jLabel2.setText("Periodo de Validez (dias):");
 

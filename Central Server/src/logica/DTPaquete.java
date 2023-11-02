@@ -18,7 +18,6 @@ public class DTPaquete {
     private int validez;
     private int descuento;
     private Date fechaAlta;
-    private ArrayList<String> listaNombreActividades;
 
     public DTPaquete() {
     }
@@ -31,14 +30,6 @@ public class DTPaquete {
         this.fechaAlta = fechaAlta;
     }
 
-    public DTPaquete(String nombre, String descripcion, int validez, int descuento, Date fechaAlta, ArrayList<String> listaNombreActividades) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.validez = validez;
-        this.descuento = descuento;
-        this.fechaAlta = fechaAlta;
-        this.listaNombreActividades = listaNombreActividades;
-    }
 
     public String getNombre() {
         return nombre;
@@ -60,9 +51,6 @@ public class DTPaquete {
         return fechaAlta;
     }
 
-    public ArrayList<String> getListaNombreActividades() {
-        return listaNombreActividades;
-    }
     
     
     
