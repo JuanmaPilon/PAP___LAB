@@ -618,5 +618,10 @@ public class ControladoraPersistencia {
         }
         return listaActividadesTuristicas;
     }
+    
+    public void marcarActividadComoFavorita(Turista turista) throws Exception{
+        
+        turistaJpa.edit(turista);
+    }
 
 }//fin

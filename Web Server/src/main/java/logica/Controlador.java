@@ -859,8 +859,6 @@ public class Controlador implements IControlador {
 
         return listaActividadesTuristicas;
     }
-    
-    
 
     @Override
     public ArrayList<String> listaActividadesProveedorConfirmadas(String nicknameProveedor) {
@@ -903,10 +901,9 @@ public class Controlador implements IControlador {
         }
         return listaPaquetesTurista;
     }
-    
-    
+
     @Override
-        public ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista) {
+    public ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista) {
         Turista t = controlPersis.traerTurista(nicknameTurista);
         ArrayList<DTPaquete> listaPaquetesTuristaVigentesDT = new ArrayList();
         ArrayList<Paquete> listaPaquetesTuristaVigentes = new ArrayList();
@@ -920,26 +917,26 @@ public class Controlador implements IControlador {
             }
         }
         // pasaje a dt
-        for (Paquete p :listaPaquetesTuristaVigentes ){
+        for (Paquete p : listaPaquetesTuristaVigentes) {
             DTPaquete dtPaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
             listaPaquetesTuristaVigentesDT.add(dtPaquete);
         }
         return listaPaquetesTuristaVigentesDT;
     }
-        
-   @Override
-   public boolean actividadSinSalidaVigente(String nombreActividad){ // true = act sin salidas vigentes, act false = con salidas vigentes
-       Actividad actividad = controlPersis.consultaActividad(nombreActividad);
+
+    @Override
+    public boolean actividadSinSalidaVigente(String nombreActividad) { // true = act sin salidas vigentes, act false = con salidas vigentes
+        Actividad actividad = controlPersis.consultaActividad(nombreActividad);
         Date fechaActual = new Date();
         boolean noHaySalidasAFuturo = true;
-      for(SalidaTuristica s : actividad.getListaSalidaTuristica()){
-          if (s.getfSalida().after(fechaActual)) {
-              noHaySalidasAFuturo = false;
-      }
-          
-   }
-      return noHaySalidasAFuturo;
-   }
+        for (SalidaTuristica s : actividad.getListaSalidaTuristica()) {
+            if (s.getfSalida().after(fechaActual)) {
+                noHaySalidasAFuturo = false;
+            }
+
+        }
+        return noHaySalidasAFuturo;
+    }
 
     @Override
     public ArrayList<DTActividad> listaActividadesConfirmadas() {
@@ -960,7 +957,6 @@ public class Controlador implements IControlador {
 
         return listaDTActividadesConfirmadas;
     }
-
 
     @Override
     public ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento) {
@@ -1204,11 +1200,11 @@ public class Controlador implements IControlador {
         return listaActividadesTuristicas;
 
     }
-    
+
     @Override
-    public ArrayList<String> listaActividadesTuristicasPorCategoriaConfirmadas(String categoria){
-          List<Actividad> listaActividades = controlPersis.traerActividades();
-          ArrayList<String> listaActividadesTuristicas = new ArrayList();
+    public ArrayList<String> listaActividadesTuristicasPorCategoriaConfirmadas(String categoria) {
+        List<Actividad> listaActividades = controlPersis.traerActividades();
+        ArrayList<String> listaActividadesTuristicas = new ArrayList();
         for (Actividad actividad : listaActividades) {
             List<Categoria> categorias = actividad.getListaCategoria();
 
@@ -1221,6 +1217,25 @@ public class Controlador implements IControlador {
 
         return listaActividadesTuristicas;
 
+    }
+
+    @Override
+    public void marcarActividadComoFavorita(String nicknameUsuario, String nombreActividad) {
+        try {
+            Turista turista = (Turista) controlPersis.traerTurista(nicknameUsuario);
+            ArrayList<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
+            if (listaActividadesFavoritas == null) {
+                listaActividadesFavoritas = new ArrayList<>();
+            }
+
+            listaActividadesFavoritas.add(nombreActividad);
+            turista.setListaActividadesFavoritas(listaActividadesFavoritas);
+            controlPersis.marcarActividadComoFavorita(turista);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Error al marcar la actividad como favorita: " + ex.getMessage());
+
+        }
     }
 
     @Override

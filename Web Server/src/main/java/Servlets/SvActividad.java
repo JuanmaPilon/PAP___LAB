@@ -124,100 +124,102 @@ public class SvActividad extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String finalizar = request.getParameter("finalizar");
-            String nombreActividad = request.getParameter("nombreActividad");
-            String usuario = request.getParameter("usuario");
-            String tipoUsuario = request.getParameter("tipoUsuario");
-            
-            if(finalizar.equals("finalizar")){
-                if(control.actividadSinSalidaVigente(nombreActividad)){
+        String finalizar = request.getParameter("finalizar"); //FINALIZAR ACTIVIDAD
+        String marcarActividad = request.getParameter("marcarActividad"); //MARCAR ACTIVIDAD COMO FAVORITA
+        String nombreActividad = request.getParameter("nombreActividad");
+        String usuario = request.getParameter("usuario");
+        String tipoUsuario = request.getParameter("tipoUsuario");
+
+        if (finalizar.equals("finalizar")) {
+            if (control.actividadSinSalidaVigente(nombreActividad)) {
                 control.cambiarEstadoActividad(nombreActividad, TipoEstado.finalizada);
-               String errorMessage = "Actividad finalizada correctamente";
-               String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
-               response.getWriter().write(alertScript);
-                } else {
+                String errorMessage = "Actividad finalizada correctamente";
+                String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
+                response.getWriter().write(alertScript);
+            } else {
                 String errorMessage = "Actividad con salidas vigentes";
                 String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp';</script>";
                 response.getWriter().write(alertScript);
-                }      
-            } else {
-        
-        try {
-           // String usuario = request.getParameter("usuario");
-            String departamento = request.getParameter("departamento");
-            String nombre = request.getParameter("nombre");
-            String descripcion = request.getParameter("descripcion");
-            int duracion = Integer.parseInt(request.getParameter("duracion"));
-            float costo = Float.parseFloat(request.getParameter("costo"));
-            String ciudad = request.getParameter("ciudad");
-            Date fecha = new Date();
-            String[] categorias = request.getParameterValues("categoria");
-            ArrayList<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
-            String UrlVideo = request.getParameter("urlVideo");
-            
-            
-           
-                
-            
+            }
+        } else if (marcarActividad.equals("marcarActividad")) {
+            System.out.println(usuario + nombreActividad);
+            control.marcarActividadComoFavorita(usuario, nombreActividad);
+            String errorMessage = "Actividad marcada como favorita";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp';</script>";
+            response.getWriter().write(alertScript);
+        } else {
 
-            Part archivo = request.getPart("file");
-            String nombreArchivo = null;
+            try {
+                // String usuario = request.getParameter("usuario");
+                String departamento = request.getParameter("departamento");
+                String nombre = request.getParameter("nombre");
+                String descripcion = request.getParameter("descripcion");
+                int duracion = Integer.parseInt(request.getParameter("duracion"));
+                float costo = Float.parseFloat(request.getParameter("costo"));
+                String ciudad = request.getParameter("ciudad");
+                Date fecha = new Date();
+                String[] categorias = request.getParameterValues("categoria");
+                ArrayList<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
+                String UrlVideo = request.getParameter("urlVideo");
 
-            control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
+                Part archivo = request.getPart("file");
+                String nombreArchivo = null;
 
-            if (archivo.getSize() > 0) {
-                nombreArchivo = archivo.getSubmittedFileName();
-                if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
-                    ServletContext context = request.getServletContext();
-                    String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
+                control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
 
-                    // Copiar el archivo a la ubicación relativa
-                    Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
+                if (archivo.getSize() > 0) {
+                    nombreArchivo = archivo.getSubmittedFileName();
+                    if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
+                        ServletContext context = request.getServletContext();
+                        String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
-                    String rutaRelativa = "images" + File.separator + nombreArchivo;
+                        // Copiar el archivo a la ubicación relativa
+                        Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
 
-                    try {
-                        if (UrlVideo == null) {
-                            control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, null);
-                        } else if(UrlVideo != null){
-                            control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, UrlVideo);
+                        String rutaRelativa = "images" + File.separator + nombreArchivo;
+
+                        try {
+                            if (UrlVideo == null) {
+                                control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, null);
+                            } else if (UrlVideo != null) {
+                                control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, UrlVideo);
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            String errorMessage = "Ya existe otra actividad con esa imagen, se ha dado de alta la actividad sin imagen";
+                            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
+                            response.getWriter().write(alertScript);
+
                         }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        String errorMessage = "Ya existe otra actividad con esa imagen, se ha dado de alta la actividad sin imagen";
-                        String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
-                        response.getWriter().write(alertScript);
 
                     }
-
                 }
-            }
 
-            if ((archivo.getSize() == 0) && (UrlVideo != null)) {
-                control.AltaDeImagenActividad(null, null, nombre, UrlVideo);
-            }
-            
-            
-            response.sendRedirect("logedUser.jsp");
-        
-        } catch (PreexistingEntityException ex) {
-            ex.printStackTrace();
-            String errorMessage = "Ya existe otra actividad con ee nombre";
-            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
-            response.getWriter().write(alertScript);
+                if ((archivo.getSize() == 0) && (UrlVideo != null)) {
+                    control.AltaDeImagenActividad(null, null, nombre, UrlVideo);
+                }
 
-        } catch (Exception ex) {
-            
-            ex.printStackTrace();
-            String errorMessage = "Se ha prodicido un error, porvafor verifique los campos";
-            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
-            response.getWriter().write(alertScript);
+                response.sendRedirect("logedUser.jsp");
+
+            } catch (PreexistingEntityException ex) {
+                ex.printStackTrace();
+                String errorMessage = "Ya existe otra actividad con ee nombre";
+                String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
+                response.getWriter().write(alertScript);
+
+            } catch (Exception ex) {
+
+                ex.printStackTrace();
+                String errorMessage = "Se ha prodicido un error, porvafor verifique los campos";
+                String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
+                response.getWriter().write(alertScript);
+            }
         }
-            }
     }
 
-    @Override
-    public String getServletInfo() {
+
+@Override
+public String getServletInfo() {
         return "Short description";
     }
 

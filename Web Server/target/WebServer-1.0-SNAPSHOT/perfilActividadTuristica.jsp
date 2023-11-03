@@ -102,11 +102,24 @@
                     <input type="hidden" name="tipoUsuario" id="tipoUsuario" value="<%= tipoUsuario%>"> 
                     <input type="hidden" name="usuario" id="usuario" value="<%= usuario%>"> 
                     <input type="hidden" name="finalizar" id="finalizar" value="finalizar"> 
-                    <input type="text" name="nombreActividad" id="nombreActividad" value="<%=act.getNombre()%>"> 
+                     <input type="hidden" name="marcarActividad" id="marcarActividad" value="NULL"> 
+                    <input type="hidden" name="nombreActividad" id="nombreActividad" value="<%=act.getNombre()%>"> 
                     
                     <button type="submit">Finalizar Actividad</button>
                 </form>
-                <% }%>
+                <% } else if(tipoUsuario.equals("turista")){ %>
+                  <form id="consultaForm" action="SvActividad" class="desplegable-menu" method="POST">
+                    <input type="hidden" name="tipoUsuario" id="tipoUsuario" value="<%= tipoUsuario%>"> 
+                    <input type="hidden" name="usuario" id="usuario" value="<%= usuario%>"> 
+                    <input type="hidden" name="finalizar" id="finalizar" value="NULL"> 
+                    <input type="hidden" name="marcarActividad" id="marcarActividad" value="marcarActividad"> 
+                    <input type="hidden" name="nombreActividad" id="nombreActividad" value="<%=act.getNombre()%>"> 
+                    
+                    <button type="submit">Marcar Actividad como Favorita</button>
+                </form>
+                
+                
+                <% } %>
 
             </div>
             <div class ="video">

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -18,7 +19,9 @@ public class Turista extends Usuario implements Serializable {
     private ArrayList<Compra> listaCompras;
     @OneToMany(mappedBy="turista")
     private ArrayList<Inscripcion> listaInscripcion;
+    @ElementCollection
     private ArrayList<String> listaActividadesFavoritas;
+
     
     public Turista(){
     super();
@@ -28,11 +31,12 @@ public class Turista extends Usuario implements Serializable {
     }
     
 
-    public Turista(String nacionalidad, ArrayList<Compra> listaCompras, ArrayList<Inscripcion> listaInscripcion, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento) {
+    public Turista(String nacionalidad, ArrayList<Compra> listaCompras, ArrayList<Inscripcion> listaInscripcion, ArrayList<String> listaActividadesFavoritas, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento) {
         super(nickname, contrasenia, nombre, apellido, correo, fNacimiento);
         this.nacionalidad = nacionalidad;
         this.listaCompras = listaCompras;
         this.listaInscripcion = listaInscripcion;
+        this.listaActividadesFavoritas = listaActividadesFavoritas;
     }
 
     public String getNacionalidad() {
@@ -58,6 +62,15 @@ public class Turista extends Usuario implements Serializable {
     public void setListaInscripcion(ArrayList<Inscripcion> listaInscripcion) {
         this.listaInscripcion = listaInscripcion;
     }
+    
+    public ArrayList<String> getListaActividadesFavoritas() {
+        return listaActividadesFavoritas;
+    }
+
+    public void setListaActividadesFavoritas(ArrayList<String> listaActividadesFavoritas) {
+        this.listaActividadesFavoritas = listaActividadesFavoritas;
+    }
+    
 
 
 }
