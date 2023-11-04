@@ -48,7 +48,7 @@ public class ActividadJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ArrayList<Paquete> attachedListaPaquete = new ArrayList<Paquete>();
+            List<Paquete> attachedListaPaquete = new ArrayList<Paquete>();
             for (Paquete listaPaquetePaqueteToAttach : actividad.getListaPaquete()) {
                 listaPaquetePaqueteToAttach = em.getReference(listaPaquetePaqueteToAttach.getClass(), listaPaquetePaqueteToAttach.getNombre());
                 attachedListaPaquete.add(listaPaquetePaqueteToAttach);
@@ -78,9 +78,9 @@ public class ActividadJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Actividad persistentActividad = em.find(Actividad.class, actividad.getNombre());
-            ArrayList<Paquete> listaPaqueteOld = persistentActividad.getListaPaquete();
-            ArrayList<Paquete> listaPaqueteNew = actividad.getListaPaquete();
-            ArrayList<Paquete> attachedListaPaqueteNew = new ArrayList<Paquete>();
+            List<Paquete> listaPaqueteOld = persistentActividad.getListaPaquete();
+            List<Paquete> listaPaqueteNew = actividad.getListaPaquete();
+            List<Paquete> attachedListaPaqueteNew = new ArrayList<Paquete>();
             for (Paquete listaPaqueteNewPaqueteToAttach : listaPaqueteNew) {
                 listaPaqueteNewPaqueteToAttach = em.getReference(listaPaqueteNewPaqueteToAttach.getClass(), listaPaqueteNewPaqueteToAttach.getNombre());
                 attachedListaPaqueteNew.add(listaPaqueteNewPaqueteToAttach);
@@ -129,7 +129,7 @@ public class ActividadJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The actividad with id " + id + " no longer exists.", enfe);
             }
-            ArrayList<Paquete> listaPaquete = actividad.getListaPaquete();
+            List<Paquete> listaPaquete = actividad.getListaPaquete();
             for (Paquete listaPaquetePaquete : listaPaquete) {
                 listaPaquetePaquete.getListaActividades().remove(actividad);
                 listaPaquetePaquete = em.merge(listaPaquetePaquete);

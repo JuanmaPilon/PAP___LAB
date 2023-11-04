@@ -4,7 +4,7 @@
  */
 package logica;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 public class DTActividad {
@@ -15,11 +15,11 @@ public class DTActividad {
     private String ciudad;
     private Date fAlta;
     private TipoEstado estado;
-    private ArrayList<String> listaNombresSalidaTuristica; 
-    private ArrayList<String> listaNombresPaquete; 
+    private List<String> listaNombresSalidaTuristica; 
+    private List<String> listaNombresPaquete; 
     private String nombreDepartamento;
     private String nombreProveedor;
-    private ArrayList<String> listaNombresCategoria; 
+    private List<String> listaNombresCategoria; 
     
      public DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta,TipoEstado estado, String nombreDepartamento, String nombreProveedor) {
         this.nombre = nombre;
@@ -79,13 +79,13 @@ public class DTActividad {
 
     
 
-    public ArrayList<String> getNombresSalidaTuristica() {
+    public List<String> getNombresSalidaTuristica() {
         return listaNombresSalidaTuristica;
     }
 
    
 
-    public ArrayList<String> getNombresPaquete() {
+    public List<String> getNombresPaquete() {
         return listaNombresPaquete;
     }
 
@@ -101,7 +101,7 @@ public class DTActividad {
     }
 
   
-    public ArrayList<String> getNombresCategoria() {
+    public List<String> getNombresCategoria() {
         return listaNombresCategoria;
     }
 

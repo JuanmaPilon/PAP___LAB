@@ -3,7 +3,7 @@ package logica;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,7 +34,7 @@ public class Compra implements Serializable{
     @JoinColumn(name="PAQUETE_NOMBRE")
     private Paquete paquete;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Inscripcion> listaInscripcion;  
+    private List<Inscripcion> listaInscripcion;  
 
     public Compra() {
     }

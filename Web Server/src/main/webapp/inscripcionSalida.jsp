@@ -219,15 +219,12 @@
             }
 
             function verDetalles() {
+                // Obtén el valor seleccionado en el campo de selección
                 var actividadSeleccionada = document.getElementById("actividad").value;
 
-                // Verifica si actividadSeleccionada es null o está vacía
-                if (actividadSeleccionada === null || actividadSeleccionada === "") {
-                    return; // No hace nada si es null o vacía
-                }
-
+                // Abre una nueva pestaña con la URL del servidor y pasa la variable actividad como parámetro
                 var url = "SvActividad?actividad=" + actividadSeleccionada;
-                window.open(url, '_blank');
+                window.open(url, "_blank");
             }
 
             function cargarSalidasDeActividad() {
@@ -256,16 +253,9 @@
             }
 
             function verDetallesSalida() {
-                console.log("verDetalleSalida");
                 const filtro = "FiltroSalidas";
                 var salidaSeleccionada = document.getElementById("actividadSalida").value;
-                console.log("antes del if");
-                // Verifica si salidaSeleccionada es null o está vacía
-                if (salidaSeleccionada === null || salidaSeleccionada === "") {
-                    console.log("return");
-                    return; // No hace nada si es null o vacía
-                }
-                console.log("antes del var");
+                
                 var url = "SvSalida?actividadSalida=" + salidaSeleccionada + "&filtro=" + filtro;
                 window.open(url, '_blank');
             }

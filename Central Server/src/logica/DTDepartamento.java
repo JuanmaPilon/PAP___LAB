@@ -4,18 +4,18 @@
  */
 package logica;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DTDepartamento {
     private String nombre;
     private String descripcion;
     private String url;
-    private ArrayList<Actividad> listaActTur;
+    private List<Actividad> listaActTur;
 
     public DTDepartamento() {
     }
 
-    public DTDepartamento(String nombre, String descripcion, String url, ArrayList<Actividad> listaActTur) {
+    public DTDepartamento(String nombre, String descripcion, String url, List<Actividad> listaActTur) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.url = url;
@@ -35,7 +35,7 @@ public class DTDepartamento {
     }
 
 
-    public ArrayList<Actividad> getListaActTur() {
+    public List<Actividad> getListaActTur() {
         return listaActTur;
     }
   

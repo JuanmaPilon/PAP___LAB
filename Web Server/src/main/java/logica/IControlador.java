@@ -41,7 +41,7 @@ public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, Stri
 public abstract void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception;
 public abstract List<String> llenarCmboBoxDep();
 public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception;
-public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento, ArrayList<String> listaCategorias) throws PreexistingEntityException, Exception;
+public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento, List<String> listaCategorias) throws PreexistingEntityException, Exception;
 public ArrayList<DTUsuario> traerUsuarioMod();
 public ArrayList<DTTurista> traerUsuarioTurista();
 public DTTurista traerDTTurista(String nickname);
@@ -84,7 +84,7 @@ public abstract Categoria traerCategoria(String categoria);
 
 public abstract Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete);
 public abstract void nuevaCantTurista(Compra compraTurista) throws Exception;
-public abstract DTImagenActividad traerDTImagenActividad(String nombreActividad) throws  Exception;
+public abstract DTImagenActividad traerDTImagenActividad(String nombreActividad);
 
 public abstract DTUsuario traerDTUsuario(String nickname);
 public abstract String devolverTipoUsuario(String nickname);

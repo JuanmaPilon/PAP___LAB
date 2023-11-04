@@ -77,8 +77,8 @@ public class CategoriaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Categoria persistentCategoria = em.find(Categoria.class, categoria.getNombre());
-            ArrayList<Actividad> listaActividadOld = persistentCategoria.getListaActividad();
-            ArrayList<Actividad> listaActividadNew = categoria.getListaActividad();
+            List<Actividad> listaActividadOld = persistentCategoria.getListaActividad();
+            List<Actividad> listaActividadNew = categoria.getListaActividad();
             ArrayList<Actividad> attachedListaActividadNew = new ArrayList<Actividad>();
             for (Actividad listaActividadNewActividadToAttach : listaActividadNew) {
                 listaActividadNewActividadToAttach = em.getReference(listaActividadNewActividadToAttach.getClass(), listaActividadNewActividadToAttach.getNombre());
@@ -128,7 +128,7 @@ public class CategoriaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The categoria with id " + id + " no longer exists.", enfe);
             }
-            ArrayList<Actividad> listaActividad = categoria.getListaActividad();
+            List<Actividad> listaActividad = categoria.getListaActividad();
             for (Actividad listaActividadActividad : listaActividad) {
                 listaActividadActividad.getListaCategoria().remove(categoria);
                 listaActividadActividad = em.merge(listaActividadActividad);

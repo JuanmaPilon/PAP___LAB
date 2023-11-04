@@ -47,7 +47,7 @@ public class CategoriaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ArrayList<Actividad> attachedListaActividad = new ArrayList<Actividad>();
+            List<Actividad> attachedListaActividad = new ArrayList<Actividad>();
             for (Actividad listaActividadActividadToAttach : categoria.getListaActividad()) {
                 listaActividadActividadToAttach = em.getReference(listaActividadActividadToAttach.getClass(), listaActividadActividadToAttach.getNombre());
                 attachedListaActividad.add(listaActividadActividadToAttach);
@@ -77,9 +77,9 @@ public class CategoriaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Categoria persistentCategoria = em.find(Categoria.class, categoria.getNombre());
-            ArrayList<Actividad> listaActividadOld = persistentCategoria.getListaActividad();
-            ArrayList<Actividad> listaActividadNew = categoria.getListaActividad();
-            ArrayList<Actividad> attachedListaActividadNew = new ArrayList<Actividad>();
+            List<Actividad> listaActividadOld = persistentCategoria.getListaActividad();
+            List<Actividad> listaActividadNew = categoria.getListaActividad();
+           List<Actividad> attachedListaActividadNew = new ArrayList<Actividad>();
             for (Actividad listaActividadNewActividadToAttach : listaActividadNew) {
                 listaActividadNewActividadToAttach = em.getReference(listaActividadNewActividadToAttach.getClass(), listaActividadNewActividadToAttach.getNombre());
                 attachedListaActividadNew.add(listaActividadNewActividadToAttach);
@@ -128,7 +128,7 @@ public class CategoriaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The categoria with id " + id + " no longer exists.", enfe);
             }
-            ArrayList<Actividad> listaActividad = categoria.getListaActividad();
+            List<Actividad> listaActividad = categoria.getListaActividad();
             for (Actividad listaActividadActividad : listaActividad) {
                 listaActividadActividad.getListaCategoria().remove(categoria);
                 listaActividadActividad = em.merge(listaActividadActividad);

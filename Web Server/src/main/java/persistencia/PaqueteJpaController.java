@@ -75,8 +75,8 @@ public class PaqueteJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Paquete persistentPaquete = em.find(Paquete.class, paquete.getNombre());
-            ArrayList<Actividad> listaActividadesOld = persistentPaquete.getListaActividades();
-            ArrayList<Actividad> listaActividadesNew = paquete.getListaActividades();
+            List<Actividad> listaActividadesOld = persistentPaquete.getListaActividades();
+            List<Actividad> listaActividadesNew = paquete.getListaActividades();
             ArrayList<Actividad> attachedListaActividadesNew = new ArrayList<Actividad>();
             for (Actividad listaActividadesNewActividadToAttach : listaActividadesNew) {
                 listaActividadesNewActividadToAttach = em.getReference(listaActividadesNewActividadToAttach.getClass(), listaActividadesNewActividadToAttach.getNombre());
@@ -126,7 +126,7 @@ public class PaqueteJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The paquete with id " + id + " no longer exists.", enfe);
             }
-            ArrayList<Actividad> listaActividades = paquete.getListaActividades();
+            List<Actividad> listaActividades = paquete.getListaActividades();
             for (Actividad listaActividadesActividad : listaActividades) {
                 listaActividadesActividad.getListaPaquete().remove(paquete);
                 listaActividadesActividad = em.merge(listaActividadesActividad);

@@ -96,7 +96,7 @@ public class SvSalida extends HttpServlet {
                 String imagenRuta = imagen.getRuta();
                 //DTSalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
                 misesion.setAttribute("imagen", imagenRuta);
-                //misesion.setAttribute("salida", salT);
+                //misesion.setAttribute("tipoUsuario", "turista");
                 response.sendRedirect("perfilSalidaTuristica.jsp");
                 return;
                 // }

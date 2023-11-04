@@ -10,6 +10,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -84,7 +85,7 @@ public class SvActividad extends HttpServlet {
             response.getWriter().write(actividades);
 
         }
-        try {
+        //try {
             String nombreActividad = (String) request.getParameter("actividad");
             String tipoUsuario = (String) request.getParameter("tipoUsuario");
             DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
@@ -97,8 +98,8 @@ public class SvActividad extends HttpServlet {
             String imagenRuta = "images/sinImagen.png";
             String UrlVideo = "";
 
-            if (imagen == null) {
-            } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo() != null)) {
+            if (imagen != null) {
+            if ((imagen.getNombre() != null) && (imagen.getUrlVideo() != null)) {
                 imagenRuta = imagen.getRuta();
                 UrlVideo = imagen.getUrlVideo();
             } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo() == null)) {
@@ -106,8 +107,13 @@ public class SvActividad extends HttpServlet {
             } else if ((imagen.getNombre() == null) && (imagen.getUrlVideo() != null)) {
                 UrlVideo = imagen.getUrlVideo();
             }
-
-            misesion.setAttribute("tipoUsuario", tipoUsuario);
+            }
+            
+            if(tipoUsuario != null){ //INSCRIPCION, NO FUNCIONA SI SE TRAE TIPO USUARIO
+                misesion.setAttribute("tipoUsuario", tipoUsuario);
+            } else{
+                misesion.setAttribute("tipoUsuario", "turista");
+            }
             misesion.setAttribute("actividad", actividadConsultada);
             misesion.setAttribute("salidas", salidas);
             misesion.setAttribute("categorias", categorias);
@@ -116,9 +122,9 @@ public class SvActividad extends HttpServlet {
             misesion.setAttribute("UrlVideo", UrlVideo);
             response.sendRedirect("perfilActividadTuristica.jsp");
 
-        } catch (Exception ex) {
-
-        }
+      //  } catch (Exception ex) {
+      //     ex.printStackTrace();
+      //  }
 
     }
 
@@ -129,6 +135,13 @@ public class SvActividad extends HttpServlet {
         String nombreActividad = request.getParameter("nombreActividad");
         String usuario = request.getParameter("usuario");
         String tipoUsuario = request.getParameter("tipoUsuario");
+        
+        if(finalizar == null){
+            finalizar = "NULL";
+        }
+        if(marcarActividad == null){
+            marcarActividad = "NULL";
+        }
 
         if (finalizar.equals("finalizar")) {
             if (control.actividadSinSalidaVigente(nombreActividad)) {
@@ -142,7 +155,6 @@ public class SvActividad extends HttpServlet {
                 response.getWriter().write(alertScript);
             }
         } else if (marcarActividad.equals("marcarActividad")) {
-            System.out.println(usuario + nombreActividad);
             control.marcarActividadComoFavorita(usuario, nombreActividad);
             String errorMessage = "Actividad marcada como favorita";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp';</script>";
@@ -159,7 +171,7 @@ public class SvActividad extends HttpServlet {
                 String ciudad = request.getParameter("ciudad");
                 Date fecha = new Date();
                 String[] categorias = request.getParameterValues("categoria");
-                ArrayList<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
+                List<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
                 String UrlVideo = request.getParameter("urlVideo");
 
                 Part archivo = request.getPart("file");
@@ -195,8 +207,10 @@ public class SvActividad extends HttpServlet {
                     }
                 }
 
-                if ((archivo.getSize() == 0) && (UrlVideo != null)) {
+                if ((archivo.getSize() == 0) && (!UrlVideo.equals(""))) {
                     control.AltaDeImagenActividad(null, null, nombre, UrlVideo);
+                } else if((archivo.getSize() == 0) && (UrlVideo == null)){
+                    
                 }
 
                 response.sendRedirect("logedUser.jsp");

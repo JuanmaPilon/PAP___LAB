@@ -3,7 +3,7 @@ package logica;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,7 +23,7 @@ public class SalidaTuristica implements Serializable {
     private Date fSalida;
     private String lugar;
     @OneToMany(mappedBy = "salida")
-    private ArrayList<Inscripcion> listaInscripciones;
+    private List<Inscripcion> listaInscripciones;
     @ManyToOne
     @JoinColumn(name="ACTIVIDAD_NOMBRE")
     private Actividad actividad;
@@ -31,7 +31,7 @@ public class SalidaTuristica implements Serializable {
     public SalidaTuristica() {
     }
 
-    public SalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, ArrayList<Inscripcion> listaInscripciones, Actividad actividad) {
+    public SalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, List<Inscripcion> listaInscripciones, Actividad actividad) {
         this.nombre = nombre;
         this.cantMax = cantMax;
         this.fAlta = fAlta;
@@ -61,7 +61,7 @@ public class SalidaTuristica implements Serializable {
         return lugar;
     }
 
-    public ArrayList<Inscripcion> getListaInscripciones() {
+    public List<Inscripcion> getListaInscripciones() {
         return listaInscripciones;
     }
 
@@ -89,7 +89,7 @@ public class SalidaTuristica implements Serializable {
         this.lugar = lugar;
     }
 
-    public void setListaInscripciones(ArrayList<Inscripcion> listaInscripciones) {
+    public void setListaInscripciones(List<Inscripcion> listaInscripciones) {
         this.listaInscripciones = listaInscripciones;
     }
 

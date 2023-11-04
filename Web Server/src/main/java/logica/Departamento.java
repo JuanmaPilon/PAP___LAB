@@ -2,7 +2,7 @@
 package logica;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -14,12 +14,12 @@ public class Departamento implements Serializable {
     private String descripcion;
     private String url;
     @OneToMany(mappedBy="departamento")
-    private ArrayList<Actividad> listaActTur;
+    private List<Actividad> listaActTur;
 
     public Departamento() {
     }
 
-    public Departamento(String nombre, String descripcion, String url, ArrayList<Actividad> listaActTur) {
+    public Departamento(String nombre, String descripcion, String url, List<Actividad> listaActTur) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.url = url;
@@ -50,11 +50,11 @@ public class Departamento implements Serializable {
         this.url = url;
     }
 
-    public ArrayList<Actividad> getListaActTur() {
+    public List<Actividad> getListaActTur() {
         return listaActTur;
     }
 
-    public void setListaActTur(ArrayList<Actividad> listaActTur) {
+    public void setListaActTur(List<Actividad> listaActTur) {
         this.listaActTur = listaActTur;
     }
 

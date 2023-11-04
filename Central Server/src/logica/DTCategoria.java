@@ -4,11 +4,11 @@
  */
 package logica;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DTCategoria {
     private String nombre;
-    private ArrayList<Actividad> listaActividad;
+    private List<Actividad> listaActividad;
 
     public DTCategoria() {
     }
@@ -17,7 +17,7 @@ public class DTCategoria {
         this.nombre = nombre;
     }
 
-    public DTCategoria(String nombre, ArrayList<Actividad> listaActividad) {
+    public DTCategoria(String nombre, List<Actividad> listaActividad) {
         this.nombre = nombre;
         this.listaActividad = listaActividad;
     }
@@ -26,7 +26,7 @@ public class DTCategoria {
         return nombre;
     }
 
-    public ArrayList<Actividad> getListaActividad() {
+    public List<Actividad> getListaActividad() {
         return listaActividad;
     }
 

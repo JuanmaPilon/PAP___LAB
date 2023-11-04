@@ -153,7 +153,7 @@ public class Controlador implements IControlador {
     ;
     //String nombreProveedor, String nombreDep,
     @Override
-    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha, String nombreProveedor, String nombreDepartamento, ArrayList<String> listaCategorias) throws PreexistingEntityException, Exception {
+    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha, String nombreProveedor, String nombreDepartamento, List<String> listaCategorias) throws PreexistingEntityException, Exception {
         Actividad actividad = new Actividad();
         actividad.setCiudad(nombreCuidad);
         actividad.setNombre(nombreActividad);
@@ -238,7 +238,7 @@ public class Controlador implements IControlador {
         ArrayList<DTDepartamento> listaDTDepartamentos = new ArrayList<>();
 
         for (Departamento departamento : listaDepartamentos) {
-            ArrayList<Actividad> listaActTur = departamento.getListaActTur();
+            List<Actividad> listaActTur = departamento.getListaActTur();
             DTDepartamento dtDepartamento = new DTDepartamento(departamento.getNombre(), departamento.getDescripcion(), departamento.getUrl(), listaActTur);
             listaDTDepartamentos.add(dtDepartamento);
         }
@@ -430,7 +430,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public DTImagenActividad traerDTImagenActividad(String nombreActividad) throws Exception {
+    public DTImagenActividad traerDTImagenActividad(String nombreActividad) {
         imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
         if (imagen != null) {
             DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad(), imagen.getUrlVideo());
@@ -1223,7 +1223,7 @@ public class Controlador implements IControlador {
     public void marcarActividadComoFavorita(String nicknameUsuario, String nombreActividad) {
         try {
             Turista turista = (Turista) controlPersis.traerTurista(nicknameUsuario);
-            ArrayList<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
+            List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
             if (listaActividadesFavoritas == null) {
                 listaActividadesFavoritas = new ArrayList<>();
             }

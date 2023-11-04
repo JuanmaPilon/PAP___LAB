@@ -3,7 +3,7 @@ package logica;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,13 +15,13 @@ public class Proveedor extends Usuario implements Serializable {
     private String descripcion;
     private String link;
     @OneToMany(mappedBy="proveedor")
-    private ArrayList<Actividad> listaActividades;  
+    private List<Actividad> listaActividades;  
 
     public Proveedor() {
         super();
     }
 
-    public Proveedor(String descripcion, String link, ArrayList<Actividad> listaActividades, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento) {
+    public Proveedor(String descripcion, String link, List<Actividad> listaActividades, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento) {
         super(nickname,  nombre, apellido, contrasenia, correo, fNacimiento);
         this.descripcion = descripcion;
         this.link = link;
@@ -44,11 +44,11 @@ public class Proveedor extends Usuario implements Serializable {
         this.link = link;
     }
 
-    public ArrayList<Actividad> getListaActividades() {
+    public List<Actividad> getListaActividades() {
         return listaActividades;
     }
 
-    public void setListaActividades(ArrayList<Actividad> listaActividades) {
+    public void setListaActividades(List<Actividad> listaActividades) {
         this.listaActividades = listaActividades;
     }
 

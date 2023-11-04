@@ -3,6 +3,7 @@ package Servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -37,7 +38,7 @@ public class SvObtenerActividadesCategoria extends HttpServlet {
         System.out.println("Departamento ID recibido: " + categoriaId);
         // Lógica para obtener las actividades de la categoria con el ID proporcionado   
         Categoria cat = control.traerCategoria(categoriaId);
-        ArrayList<Actividad> actividades = cat.getListaActividad();
+        List<Actividad> actividades = cat.getListaActividad();
 
         // Generar el fragmento de HTML con las actividades de la categoria
         StringBuilder htmlResponse = new StringBuilder();

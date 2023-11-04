@@ -78,8 +78,8 @@ public class ActividadJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Actividad persistentActividad = em.find(Actividad.class, actividad.getNombre());
-            ArrayList<Paquete> listaPaqueteOld = persistentActividad.getListaPaquete();
-            ArrayList<Paquete> listaPaqueteNew = actividad.getListaPaquete();
+            List<Paquete> listaPaqueteOld = persistentActividad.getListaPaquete();
+            List<Paquete> listaPaqueteNew = actividad.getListaPaquete();
             ArrayList<Paquete> attachedListaPaqueteNew = new ArrayList<Paquete>();
             for (Paquete listaPaqueteNewPaqueteToAttach : listaPaqueteNew) {
                 listaPaqueteNewPaqueteToAttach = em.getReference(listaPaqueteNewPaqueteToAttach.getClass(), listaPaqueteNewPaqueteToAttach.getNombre());
@@ -129,7 +129,7 @@ public class ActividadJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The actividad with id " + id + " no longer exists.", enfe);
             }
-            ArrayList<Paquete> listaPaquete = actividad.getListaPaquete();
+            List<Paquete> listaPaquete = actividad.getListaPaquete();
             for (Paquete listaPaquetePaquete : listaPaquete) {
                 listaPaquetePaquete.getListaActividades().remove(actividad);
                 listaPaquetePaquete = em.merge(listaPaquetePaquete);

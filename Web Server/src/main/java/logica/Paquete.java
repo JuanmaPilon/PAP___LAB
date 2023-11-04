@@ -3,7 +3,7 @@ package logica;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,12 +22,12 @@ public class Paquete implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaAlta;
     @ManyToMany(mappedBy="listaPaquete")
-    private ArrayList<Actividad> listaActividades;
+    private List<Actividad> listaActividades;
 
 public Paquete() {
 }
 
-    public Paquete(String nombre, String descripcion, int validez, int descuento, ArrayList<Actividad> listaActividades) {
+    public Paquete(String nombre, String descripcion, int validez, int descuento, List<Actividad> listaActividades) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.validez = validez;
@@ -75,11 +75,11 @@ public Paquete() {
         this.descuento = descuento;
     }
 
-    public ArrayList<Actividad> getListaActividades() {
+    public List<Actividad> getListaActividades() {
         return listaActividades;
     }
 
-    public void setListaActividades(ArrayList<Actividad> listaActividades) {
+    public void setListaActividades(List<Actividad> listaActividades) {
         this.listaActividades = listaActividades;
     }
 

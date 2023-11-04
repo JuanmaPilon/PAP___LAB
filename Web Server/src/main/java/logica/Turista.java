@@ -5,7 +5,7 @@ package logica;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -16,11 +16,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Turista extends Usuario implements Serializable {
     private String nacionalidad;
     @OneToMany(mappedBy="turista")
-    private ArrayList<Compra> listaCompras;
+    private List<Compra> listaCompras;
     @OneToMany(mappedBy="turista")
-    private ArrayList<Inscripcion> listaInscripcion;
+    private List<Inscripcion> listaInscripcion;
     @ElementCollection
-    private ArrayList<String> listaActividadesFavoritas;
+    private List<String> listaActividadesFavoritas;
 
     
     public Turista(){
@@ -31,7 +31,7 @@ public class Turista extends Usuario implements Serializable {
     }
     
 
-    public Turista(String nacionalidad, ArrayList<Compra> listaCompras, ArrayList<Inscripcion> listaInscripcion, ArrayList<String> listaActividadesFavoritas, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento) {
+    public Turista(String nacionalidad, List<Compra> listaCompras, List<Inscripcion> listaInscripcion, List<String> listaActividadesFavoritas, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento) {
         super(nickname, contrasenia, nombre, apellido, correo, fNacimiento);
         this.nacionalidad = nacionalidad;
         this.listaCompras = listaCompras;
@@ -47,27 +47,27 @@ public class Turista extends Usuario implements Serializable {
         this.nacionalidad = nacionalidad;
     }
 
-    public ArrayList<Compra> getListaCompras() {
+    public List<Compra> getListaCompras() {
         return listaCompras;
     }
 
-    public void setListaCompras(ArrayList<Compra> listaCompras) {
+    public void setListaCompras(List<Compra> listaCompras) {
         this.listaCompras = listaCompras;
     }
 
-    public ArrayList<Inscripcion> getListaInscripcion() {
+    public List<Inscripcion> getListaInscripcion() {
         return listaInscripcion;
     }
 
-    public void setListaInscripcion(ArrayList<Inscripcion> listaInscripcion) {
+    public void setListaInscripcion(List<Inscripcion> listaInscripcion) {
         this.listaInscripcion = listaInscripcion;
     }
     
-    public ArrayList<String> getListaActividadesFavoritas() {
+    public List<String> getListaActividadesFavoritas() {
         return listaActividadesFavoritas;
     }
 
-    public void setListaActividadesFavoritas(ArrayList<String> listaActividadesFavoritas) {
+    public void setListaActividadesFavoritas(List<String> listaActividadesFavoritas) {
         this.listaActividadesFavoritas = listaActividadesFavoritas;
     }
     

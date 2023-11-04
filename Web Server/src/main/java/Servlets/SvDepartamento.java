@@ -39,7 +39,7 @@ public class SvDepartamento extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<DTDepartamento> listaDepartamentos = control.listaDTDepartamentos();
-        ArrayList<String> nombresDepartamentos = new ArrayList<>();
+        List<String> nombresDepartamentos = new ArrayList<>();
         for (DTDepartamento departamento : listaDepartamentos) {
             nombresDepartamentos.add(departamento.getNombre());
         }

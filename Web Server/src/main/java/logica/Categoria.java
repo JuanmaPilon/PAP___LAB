@@ -1,7 +1,7 @@
 package logica;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -11,7 +11,7 @@ public class Categoria implements Serializable {
     @Id
     private String nombre;
     @ManyToMany(mappedBy="listaCategoria")
-    private ArrayList<Actividad> listaActividad;
+    private List<Actividad> listaActividad;
 
     public Categoria() {
     }
@@ -20,7 +20,7 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    public Categoria(String nombre, ArrayList<Actividad> listaActividad) {
+    public Categoria(String nombre, List<Actividad> listaActividad) {
         this.nombre = nombre;
         this.listaActividad = listaActividad;
     }
@@ -33,11 +33,11 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    public ArrayList<Actividad> getListaActividad() {
+    public List<Actividad> getListaActividad() {
         return listaActividad;
     }
 
-    public void setListaActividad(ArrayList<Actividad> listaActividad) {
+    public void setListaActividad(List<Actividad> listaActividad) {
         this.listaActividad = listaActividad;
     }
     

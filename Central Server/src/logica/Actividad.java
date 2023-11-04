@@ -2,7 +2,7 @@ package logica;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,9 +25,9 @@ public class Actividad implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fAlta;
     @OneToMany(mappedBy="actividad")
-    private ArrayList<SalidaTuristica> listaSalidaTuristica;
+    private List<SalidaTuristica> listaSalidaTuristica;
     @ManyToMany
-    private ArrayList<Paquete> listaPaquete;
+    private List<Paquete> listaPaquete;
     @ManyToOne
     @JoinColumn(name="DEPARTAMENTO_NOMBRE")
     private Departamento departamento;
@@ -35,12 +35,12 @@ public class Actividad implements Serializable {
     @JoinColumn(name="PROVEEDOR_NICKNAME")
     private Proveedor proveedor; 
     @ManyToMany
-    private ArrayList<Categoria> listaCategoria;
+    private List<Categoria> listaCategoria;
 
     public Actividad() {
     }
 //borrar luego de agregar estado
-    public Actividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, Departamento departamento, Proveedor proveedor) {
+    public Actividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta, List<SalidaTuristica> listaSalidaTuristica, List<Paquete> listaPaquete, Departamento departamento, Proveedor proveedor) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -53,7 +53,7 @@ public class Actividad implements Serializable {
         this.proveedor = proveedor;
     }
 
-    public Actividad(String nombre, String descripcion, int duracion, float costo, String ciudad, TipoEstado estado, Date fAlta, ArrayList<SalidaTuristica> listaSalidaTuristica, ArrayList<Paquete> listaPaquete, Departamento departamento, Proveedor proveedor, ArrayList<Categoria> listaCategoria) {
+    public Actividad(String nombre, String descripcion, int duracion, float costo, String ciudad, TipoEstado estado, Date fAlta, List<SalidaTuristica> listaSalidaTuristica, List<Paquete> listaPaquete, Departamento departamento, Proveedor proveedor, List<Categoria> listaCategoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -76,11 +76,11 @@ public class Actividad implements Serializable {
         this.estado = estado;
     }
 
-    public ArrayList<Categoria> getListaCategoria() {
+    public List<Categoria> getListaCategoria() {
         return listaCategoria;
     }
 
-    public void setListaCategoria(ArrayList<Categoria> listaCategoria) {
+    public void setListaCategoria(List<Categoria> listaCategoria) {
         this.listaCategoria = listaCategoria;
     }
    
@@ -109,11 +109,11 @@ public class Actividad implements Serializable {
         return fAlta;
     }
 
-    public ArrayList<SalidaTuristica> getListaSalidaTuristica() {
+    public List<SalidaTuristica> getListaSalidaTuristica() {
         return listaSalidaTuristica;
     }
 
-    public ArrayList<Paquete> getListaPaquete() {
+    public List<Paquete> getListaPaquete() {
         return listaPaquete;
     }
 
@@ -149,11 +149,11 @@ public class Actividad implements Serializable {
         this.fAlta = fAlta;
     }
 
-    public void setListaSalidaTuristica(ArrayList<SalidaTuristica> listaSalidaTuristica) {
+    public void setListaSalidaTuristica(List<SalidaTuristica> listaSalidaTuristica) {
         this.listaSalidaTuristica = listaSalidaTuristica;
     }
 
-    public void setListaPaquete(ArrayList<Paquete> listaPaquete) {
+    public void setListaPaquete(List<Paquete> listaPaquete) {
         this.listaPaquete = listaPaquete;
     }
 

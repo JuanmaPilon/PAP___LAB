@@ -4,6 +4,7 @@ package logica;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -114,37 +115,37 @@ control.AltaDeImagenPerfil("4hs4v9c5.jpg", "images/4hs4v9c5.jpg", "meche");
         //Actividades Turisticas y Salidas Turisticas
         try {
 
-            ArrayList<String> lcat1 = new ArrayList();
+            List<String> lcat1 = new ArrayList();
             lcat1.add("Gastronomia");
 
-            ArrayList<String> lcat2 = new ArrayList();
+            List<String> lcat2 = new ArrayList();
             lcat2.add("Cultura y Patrimonio");
             lcat2.add("Gastronomia");
 
-            ArrayList<String> lcat3 = new ArrayList();
+            List<String> lcat3 = new ArrayList();
             lcat3.add("Cultura y Patrimonio");
 
-            ArrayList<String> lcat4 = new ArrayList();
+            List<String> lcat4 = new ArrayList();
             lcat4.add("Gastronomia");
 
-            ArrayList<String> lcat5 = new ArrayList();
+            List<String> lcat5 = new ArrayList();
             lcat5.add("Campo y Naturaleza");
             lcat5.add("Gastronomia");
 
-            ArrayList<String> lcat6 = new ArrayList();
+            List<String> lcat6 = new ArrayList();
             lcat6.add("Campo y Naturaleza");
 
-            ArrayList<String> lcat7 = new ArrayList();
+            List<String> lcat7 = new ArrayList();
             lcat7.add("Cultura y Patrimonio");
 
-            ArrayList<String> lcat8 = new ArrayList();
+            List<String> lcat8 = new ArrayList();
             lcat8.add("Cultura y Patrimonio");
 
-            ArrayList<String> lcat9 = new ArrayList();
+            List<String> lcat9 = new ArrayList();
             lcat9.add("Aventura y Deporte");
             lcat9.add("Turismo Playas");
 
-            ArrayList<String> lcat10 = new ArrayList();
+            List<String> lcat10 = new ArrayList();
             lcat10.add("Cultura y Patrimonio");
 
             control.guardarActividad("Degusta", "Festival gastronomico de productos locales en Rocha", 3, 800, "Rocha", fecha.parse("20/7/2022"), "washington", "Rocha", lcat1);
