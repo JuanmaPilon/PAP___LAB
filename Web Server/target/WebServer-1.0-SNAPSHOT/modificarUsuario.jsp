@@ -18,7 +18,7 @@
     <head>      
         <%
             String usuario = (String) request.getSession().getAttribute("usuario");
-            DTUsuario usi = (DTUsuario) request.getSession().getAttribute("usu");
+            //DTUsuario usi = (DTUsuario) request.getSession().getAttribute("usu");
             String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
             String errorMensaje = (String) request.getAttribute("errorMensaje");
             String rutaImagenPerfil = (String) request.getSession().getAttribute("rutaImagen");

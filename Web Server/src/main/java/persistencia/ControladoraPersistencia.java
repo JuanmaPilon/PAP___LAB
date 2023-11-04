@@ -270,31 +270,7 @@ public class ControladoraPersistencia {
 
     }
 
-    public DTUsuario traerDTUsuario(String nickname) {
-        Usuario usuario = null;
-
-        try {
-            usuario = turistaJpa.findTurista(nickname);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (usuario == null) {
-            try {
-                usuario = proveedorJpa.findProveedor(nickname);
-            } catch (Exception ex) {
-                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        if (usuario != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String fnac = sdf.format(usuario.getfNacimiento());
-            DTUsuario dtUsuario = new DTUsuario(usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), fnac, usuario.getContrasenia());
-            return dtUsuario;
-        }
-        return null;
-    }
+ 
 
 
 
@@ -625,6 +601,21 @@ public class ControladoraPersistencia {
     
     public void DesMarcarActividad(Turista turista) throws Exception{   
         turistaJpa.edit(turista);
+    }
+    
+    public void marcarUsuarioComoFavorito(Usuario usuario) throws Exception{
+        Usuario usuario2 = usuario;
+        List<String> listaUsuariosFavoritos = usuario.getListaUsuariosFavoritas();
+        
+       if(usuario instanceof Turista ){
+           Turista turista = turistaJpa.findTurista(usuario.getNickname());
+           turista.setListaUsuariosFavoritas(((Turista) usuario).getListaActividadesFavoritas());
+           turistaJpa.edit(turista);
+       } else {
+           Proveedor proveedor = proveedorJpa.findProveedor(usuario.getNickname());
+           proveedor.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
+           proveedorJpa.edit(proveedor);
+       }
     }
 
 

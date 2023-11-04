@@ -374,8 +374,18 @@ public class Controlador implements IControlador {
 
     @Override
     public DTUsuario traerDTUsuario(String nickname) {
-        return controlPersis.traerDTUsuario(nickname);
-
+       Usuario usuario = controlPersis.consultaUsuario(nickname);
+       
+      if (usuario instanceof Turista) {
+            DTTurista dtTurista =  traerDTTurista(nickname);
+            dtTurista.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
+            return dtTurista;
+        } else {
+            DTProveedor dtProveedor =  traerDTProveedor(nickname);
+            dtProveedor.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
+            return dtProveedor;
+        }
+ 
     }
 
     @Override
@@ -1240,6 +1250,27 @@ public class Controlador implements IControlador {
     }
     
     @Override
+    public void marcarUsuarioComoFavorita(String nicknameUsuario, String nickanmeUsuarioFavorito){
+        try{
+            Usuario usuario = controlPersis.consultaUsuario(nicknameUsuario);
+            List<String> listaUsuariosFavoritos = usuario.getListaUsuariosFavoritas();
+            if (listaUsuariosFavoritos == null) {
+                listaUsuariosFavoritos = new ArrayList<>();
+            } else if(!listaUsuariosFavoritos.contains(nickanmeUsuarioFavorito)){
+            listaUsuariosFavoritos.add(nickanmeUsuarioFavorito);
+            usuario.setListaUsuariosFavoritas(listaUsuariosFavoritos);
+            controlPersis.marcarUsuarioComoFavorito(usuario);
+            }
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Error al marcar el usuario como favorito: " + ex.getMessage());
+
+        }
+        
+    }
+    
+    @Override
     public  ArrayList<String> traerActividadesFavoritasDelTurista(String nicknameTurista){
         Turista turista = (Turista) controlPersis.traerTurista(nicknameTurista);
         List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
@@ -1247,6 +1278,11 @@ public class Controlador implements IControlador {
         return arrayListActividadesFavoritas;
     }
     
+//    @Override
+//    public ArrayList<String> traerUsuariosFavoritosDelUsuario(String nicknameUsuario){
+//        
+//    }
+//    
     
     public void DesMarcarActividad(String usuario, String nombreActividad){
         try {

@@ -19,7 +19,7 @@
         DTActividad act = (DTActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
         ArrayList<DTSalidaTuristica> salidas = (ArrayList<DTSalidaTuristica>) request.getSession().getAttribute("salidas");
         String usuario = (String) request.getSession().getAttribute("usuario");
-        DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
+        //DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
 
     %>

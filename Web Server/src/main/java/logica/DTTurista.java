@@ -4,6 +4,8 @@
  */
 package logica;
 
+import java.util.List;
+
 
 public class DTTurista extends DTUsuario{
     private String nacionalidad;

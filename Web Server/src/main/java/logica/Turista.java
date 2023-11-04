@@ -31,8 +31,8 @@ public class Turista extends Usuario implements Serializable {
     }
     
 
-    public Turista(String nacionalidad, List<Compra> listaCompras, List<Inscripcion> listaInscripcion, List<String> listaActividadesFavoritas, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento) {
-        super(nickname, contrasenia, nombre, apellido, correo, fNacimiento);
+    public Turista(String nacionalidad, List<Compra> listaCompras, List<Inscripcion> listaInscripcion, List<String> listaActividadesFavoritas, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento, List<String> listaUsuariosFavoritos) {
+        super(nickname, contrasenia, nombre, apellido, correo, fNacimiento, listaUsuariosFavoritos);
         this.nacionalidad = nacionalidad;
         this.listaCompras = listaCompras;
         this.listaInscripcion = listaInscripcion;

@@ -42,7 +42,7 @@ public class SvPerfilUsuario extends HttpServlet {
         String tipoUsuarioConsultado = control.devolverTipoUsuario(usuarioSeleccionado);
 
         if (tipoUsuarioConsultado.equals("turista")) {
-            DTTurista dtTurista = control.traerDTTurista(usuarioSeleccionado);
+            DTTurista dtTurista = (DTTurista) control.traerDTUsuario(usuarioSeleccionado);
             misesion.setAttribute("usuPerfil", dtTurista);
 
             //salidas a las que se inscribio

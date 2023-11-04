@@ -43,11 +43,13 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         //Usuario usu = control.ConsultaDeUsuario(usuario);
         DTUsuario usu = control.traerDTUsuario(usuario);
         String tipoUsuario = control.devolverTipoUsuario(usu.getNickname());
+        
         if(tipoUsuario.equals("turista")){
             ArrayList<String> actividadesFavoritas = control.traerActividadesFavoritasDelTurista(usuario);
             request.getSession().setAttribute("actividadesFavoritas", actividadesFavoritas);
         }
         request.getSession().setAttribute("usu", usu);
+        //request.getSession().setAttribute("usuariosFavoritos", usuariosFavoritos);
         request.getSession().setAttribute("tipoUsuario", tipoUsuario);
         response.sendRedirect("logedUser.jsp"); // Redirige al usuario a la página de inicio
     } else {

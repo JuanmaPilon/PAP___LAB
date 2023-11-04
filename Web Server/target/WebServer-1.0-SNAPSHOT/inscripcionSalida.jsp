@@ -10,7 +10,7 @@
 <html>
     <head>
         <%      String usuario = (String) request.getSession().getAttribute("usuario");
-            DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
+            //DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
             String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
         %>
         <meta charset="UTF-8">

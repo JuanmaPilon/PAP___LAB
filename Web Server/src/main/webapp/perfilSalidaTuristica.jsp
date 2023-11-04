@@ -15,7 +15,7 @@
         DTSalidaTuristica salida = (DTSalidaTuristica) request.getSession().getAttribute("salida");//usuario del que se muestra la info
         String rutaImagenPerfil = (String) request.getSession().getAttribute("imagen");
         String usuario = (String) request.getSession().getAttribute("usuario");
-        DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
+        //DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
 
     %>

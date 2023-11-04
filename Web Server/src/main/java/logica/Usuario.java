@@ -1,6 +1,8 @@
 package logica;
 
 import java.util.Date;
+import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -16,17 +18,21 @@ import javax.persistence.TemporalType;
         private String correo;
         @Temporal(TemporalType.DATE)
         private Date fNacimiento;
+        @ElementCollection
+        private List<String> listaUsuariosFavoritas;
 
     public Usuario() {
     }
-// //borrar luego de agregar contrasenia   
-//    public Usuario(String nickname, String nombre, String apellido, String correo, Date fNacimiento) {
-//        this.nickname = nickname;
-//        this.nombre = nombre;
-//        this.apellido = apellido;
-//        this.correo = correo;
-//        this.fNacimiento = fNacimiento;
-//    }
+    
+ public Usuario(String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento, List<String> listaUsuariosFavoritas) {
+        this.nickname = nickname;
+        this.contrasenia = contrasenia;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.fNacimiento = fNacimiento;
+        this.listaUsuariosFavoritas = listaUsuariosFavoritas;
+    }
 
     public Usuario(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento) {
         this.nickname = nickname;
@@ -84,6 +90,14 @@ import javax.persistence.TemporalType;
     public Date getfNacimiento() {
         return fNacimiento;
     } 
+    
+    public List<String> getListaUsuariosFavoritas() {
+        return listaUsuariosFavoritas;
+    }
+
+    public void setListaUsuariosFavoritas(List<String> listaUsuariosFavoritas) {
+        this.listaUsuariosFavoritas = listaUsuariosFavoritas;
+    }
     
 
 }
