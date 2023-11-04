@@ -94,4 +94,6 @@ public abstract ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nickn
 public abstract ArrayList<String> listaActividadesTuristicasPorCategoriaConfirmadas(String categoria);
 public abstract boolean actividadSinSalidaVigente(String nombreActividad);
 public abstract void marcarActividadComoFavorita(String nicknameUsuario, String nombreActividad);
+public abstract ArrayList<String> traerActividadesFavoritasDelTurista(String nicknameTurista);
+public abstract void DesMarcarActividad(String usuario, String nombreActividad);
 }

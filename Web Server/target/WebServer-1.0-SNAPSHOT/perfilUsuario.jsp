@@ -114,6 +114,7 @@
                     %>
                     <li><a href="#tab3">Salidas Inscriptas</a></li>
                     <li><a href="#tab4">Paquetes Comprados</a></li>
+                    <li><a href="#tab5">Actividades Favoritas</a></li>
                         <%
                                 }
                             }
@@ -182,6 +183,22 @@
                                 }
                             %>
                         </ul>
+                    </div>
+
+                    <div id="tab5" class="tab">
+                        <%
+                            ArrayList<String> actividadesFavoritas = (ArrayList) request.getSession().getAttribute("actividadesFavoritas");
+
+                            if (actividadesFavoritas != null && !actividadesFavoritas.isEmpty()) {
+                                for (String nombreActividad : actividadesFavoritas) {
+                                    out.println("<li> <a href='#' onclick='mostrarActividad(\"" + nombreActividad + "\")'>" + nombreActividad + "</a></li>");
+                                }
+                            } else {
+                                out.println("<li>No hay salidas disponibles para este proveedor.</li>");
+                            }
+                        %>
+
+
                     </div>
 
 

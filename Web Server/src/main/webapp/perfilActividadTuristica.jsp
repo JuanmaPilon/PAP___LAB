@@ -18,6 +18,10 @@
         ArrayList<String> paquetes = (ArrayList<String>) request.getSession().getAttribute("paquetes");
         String rutaAlaImagen = (String) request.getSession().getAttribute("imagen");
         String video = (String) request.getSession().getAttribute("UrlVideo");
+         ArrayList<String> actividadesFavoritas = new ArrayList<>();
+        if(tipoUsuario.equals("turista")){
+            actividadesFavoritas = (ArrayList) request.getSession().getAttribute("actividadesFavoritas");
+         } 
     %>
     <head>
         <meta charset="UTF-8">
@@ -106,7 +110,7 @@
                     
                     <button type="submit">Finalizar Actividad</button>
                 </form>
-                <% } else if(tipoUsuario.equals("turista")){ %>
+                    <% } else if((tipoUsuario.equals("turista")) && (!actividadesFavoritas.contains(act.getNombre()))){ %>
                   <form id="consultaForm" action="SvActividad" class="desplegable-menu" method="POST">
                     <input type="hidden" name="tipoUsuario" id="tipoUsuario" value="<%= tipoUsuario%>"> 
                     <input type="hidden" name="usuario" id="usuario" value="<%= usuario%>"> 
@@ -116,6 +120,16 @@
                     <button type="submit">Marcar Actividad como Favorita</button>
                 </form>
                 
+                
+                <% } else if((tipoUsuario.equals("turista")) && (actividadesFavoritas.contains(act.getNombre()))){ %>
+                   <form id="consultaForm" action="SvActividad" class="desplegable-menu" method="POST">
+                    <input type="hidden" name="tipoUsuario" id="tipoUsuario" value="<%= tipoUsuario%>"> 
+                    <input type="hidden" name="usuario" id="usuario" value="<%= usuario%>"> 
+                    <input type="hidden" name="DesMarcarActividad" id="DesMarcarActividad" value="DesMarcarActividad"> 
+                    <input type="hidden" name="nombreActividad" id="nombreActividad" value="<%=act.getNombre()%>"> 
+                    
+                    <button type="submit">Desmarcar Actividad como Favorita</button>
+                </form>
                 
                 <% } %>
 

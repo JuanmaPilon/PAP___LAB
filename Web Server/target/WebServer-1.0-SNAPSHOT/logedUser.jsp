@@ -69,7 +69,7 @@
 
 
                     <% } else if (tipoUsuario.equals("turista")) {
-
+                         ArrayList<String> actividadesFavoritas = (ArrayList<String>) request.getSession().getAttribute("actividadesFavoritas");
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Modificar mis datos</a></li> <!-- Proveedor, Turista --> <!-- Proveedor, Turista -->
@@ -80,7 +80,7 @@
                     <li><a href="inscripcionSalida.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Inscripcion Salida Turistica</a></li> <!-- Turista -->
                         <%
                         } else {
-                          System.out.println(tipoUsuario);
+                          
                         %>
                     <li> <a href = "consultaUsuario.jsp"> Consulta de Usuario</a> </li> 
                     <li> <a href = "consultaActividadTuristica.jsp" > Consulta de Actividad Turistica</a > </li>

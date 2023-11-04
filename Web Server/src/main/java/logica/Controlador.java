@@ -1226,14 +1226,38 @@ public class Controlador implements IControlador {
             List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
             if (listaActividadesFavoritas == null) {
                 listaActividadesFavoritas = new ArrayList<>();
-            }
-
+            } else if(!listaActividadesFavoritas.contains(nombreActividad)){
             listaActividadesFavoritas.add(nombreActividad);
             turista.setListaActividadesFavoritas(listaActividadesFavoritas);
             controlPersis.marcarActividadComoFavorita(turista);
+            }
+        
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("Error al marcar la actividad como favorita: " + ex.getMessage());
+
+        }
+    }
+    
+    @Override
+    public  ArrayList<String> traerActividadesFavoritasDelTurista(String nicknameTurista){
+        Turista turista = (Turista) controlPersis.traerTurista(nicknameTurista);
+        List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
+        ArrayList<String> arrayListActividadesFavoritas = new ArrayList<>(listaActividadesFavoritas);
+        return arrayListActividadesFavoritas;
+    }
+    
+    
+    public void DesMarcarActividad(String usuario, String nombreActividad){
+        try {
+         Turista turista = (Turista) controlPersis.traerTurista(usuario);
+         List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
+         listaActividadesFavoritas.remove(nombreActividad);
+         turista.setListaActividadesFavoritas(listaActividadesFavoritas);
+         controlPersis.DesMarcarActividad(turista);
+          } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Error al desmarcar la actividad como favorita: " + ex.getMessage());
 
         }
     }

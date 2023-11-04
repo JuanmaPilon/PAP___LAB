@@ -622,5 +622,10 @@ public class ControladoraPersistencia {
     public void marcarActividadComoFavorita(Turista turista) throws Exception{   
         turistaJpa.edit(turista);
     }
+    
+    public void DesMarcarActividad(Turista turista) throws Exception{   
+        turistaJpa.edit(turista);
+    }
+
 
 }//fin

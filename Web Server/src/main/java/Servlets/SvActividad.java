@@ -99,14 +99,15 @@ public class SvActividad extends HttpServlet {
             String UrlVideo = "";
 
             if (imagen != null) {
-            if ((imagen.getNombre() != null) && (imagen.getUrlVideo() != null)) {
+            if ((imagen.getNombre() != null) && (!imagen.getUrlVideo().equals("") )) {
                 imagenRuta = imagen.getRuta();
                 UrlVideo = imagen.getUrlVideo();
-            } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo() == null)) {
+            } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo().equals(""))) {
                 imagenRuta = imagen.getRuta();
-            } else if ((imagen.getNombre() == null) && (imagen.getUrlVideo() != null)) {
+            } else if ((imagen.getNombre() == null) && (!imagen.getUrlVideo().equals(""))) {
                 UrlVideo = imagen.getUrlVideo();
             }
+            
             }
             
             if(tipoUsuario != null){ //INSCRIPCION, NO FUNCIONA SI SE TRAE TIPO USUARIO
@@ -132,6 +133,7 @@ public class SvActividad extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String finalizar = request.getParameter("finalizar"); //FINALIZAR ACTIVIDAD
         String marcarActividad = request.getParameter("marcarActividad"); //MARCAR ACTIVIDAD COMO FAVORITA
+        String DesMarcarActividad = request.getParameter("DesMarcarActividad");
         String nombreActividad = request.getParameter("nombreActividad");
         String usuario = request.getParameter("usuario");
         String tipoUsuario = request.getParameter("tipoUsuario");
@@ -141,6 +143,9 @@ public class SvActividad extends HttpServlet {
         }
         if(marcarActividad == null){
             marcarActividad = "NULL";
+        }
+        if(DesMarcarActividad == null){
+            DesMarcarActividad = "NULL";
         }
 
         if (finalizar.equals("finalizar")) {
@@ -156,10 +161,22 @@ public class SvActividad extends HttpServlet {
             }
         } else if (marcarActividad.equals("marcarActividad")) {
             control.marcarActividadComoFavorita(usuario, nombreActividad);
+            //REINICIAR Y SETTER LA NUEVA LISTA
+            ArrayList<String> actividadesFavoritas = control.traerActividadesFavoritasDelTurista(usuario);
+            request.getSession().setAttribute("actividadesFavoritas", actividadesFavoritas);
             String errorMessage = "Actividad marcada como favorita";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp';</script>";
             response.getWriter().write(alertScript);
+        } else if(DesMarcarActividad.equals("DesMarcarActividad")){
+            control.DesMarcarActividad(usuario, nombreActividad);
+            //REINICIAR Y SETTER LA NUEVA LISTA
+            ArrayList<String> actividadesFavoritas = control.traerActividadesFavoritasDelTurista(usuario);
+            request.getSession().setAttribute("actividadesFavoritas", actividadesFavoritas);
+            String errorMessage = "Actividad desmarcada como favorita";
+            String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp';</script>";
+            response.getWriter().write(alertScript);
         } else {
+            
 
             try {
                 // String usuario = request.getParameter("usuario");

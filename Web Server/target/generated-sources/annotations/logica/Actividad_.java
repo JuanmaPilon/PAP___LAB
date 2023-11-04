@@ -12,7 +12,7 @@ import logica.Proveedor;
 import logica.SalidaTuristica;
 import logica.TipoEstado;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-11-04T14:24:48")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-11-04T15:45:15")
 @StaticMetamodel(Actividad.class)
 public class Actividad_ { 
 
