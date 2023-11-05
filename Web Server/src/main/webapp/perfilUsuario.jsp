@@ -1,3 +1,4 @@
+<%@page import="logica.DTActividad"%>
 <%@page import="logica.DTUsuario"%>
 <%@page import="logica.Usuario" %>
 <%@page import="logica.Proveedor" %>
@@ -102,7 +103,9 @@
                 <input type="hidden" name="usuario" value="<%= usuario%>" />
                 <input type="hidden" name="nickname" value="<%= usu.getNickname()%>" />           
                 <input type="hidden" name="DesmarcarUsuario" id="DesmarcarUsuario" value="DesmarcarUsuario"> 
+                <% if (!(usu.getNickname().equals(usuYo.getNickname()))){%>
                  <button type="submit" name="DesmarcarUsuario">Desmarcar como Favorito</button>
+                  <%} %>
             </form>   
                 
                 
@@ -111,7 +114,9 @@
                 <input type="hidden" name="usuario" value="<%= usuario%>" />
                 <input type="hidden" name="nickname" value="<%= usu.getNickname()%>" />           
                  <input type="hidden" name="marcarUsuario" id="marcarUsuario" value="marcarUsuario"> 
+                 <% if (!(usu.getNickname().equals(usuYo.getNickname()))){%>
                  <button type="submit" name="marcarFavorito">Marcar como Favorito</button>
+                 <%} %>
             </form>   
                  
                  <% } %>
@@ -167,11 +172,13 @@
                     <div id="tab2" class="tab">
                         <ul>
                             <%
-                                ArrayList<String> listaActividadesProveedor = (ArrayList<String>) request.getSession().getAttribute("listaActividadesProveedor");
+                                ArrayList<DTActividad> listaActividadesProveedor = (ArrayList<DTActividad>) request.getSession().getAttribute("listaActividadesProveedor");
 
                                 if (listaActividadesProveedor != null && !listaActividadesProveedor.isEmpty()) {
-                                    for (String nombreActividad : listaActividadesProveedor) {
-                                        out.println("<li> <a href='#' onclick='mostrarActividad(\"" + nombreActividad + "\")'>" + nombreActividad + "</a></li>");
+                                    for (DTActividad dtActividad : listaActividadesProveedor) {
+                                        out.println("<li> <a href='#' onclick='mostrarActividad(\"" + dtActividad.getNombre() + "\")'>" + dtActividad.getNombre() + "</a></li>");
+                                       out.println("<p><b>Estado: </b>" + dtActividad.getEstado() + "</p>");
+
                                     }
                                 } else {
                                     out.println("<li>No hay salidas disponibles para este proveedor.</li>");
@@ -189,6 +196,7 @@
                                 if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
                                     for (String nombreSalida : nombresSalidasProveedor) {
                                         out.println("<li> <a href='#' onclick='mostrarSalida(\"" + nombreSalida + "\")'>" + nombreSalida + "</a></li>");
+                                        out.println(" <a href='#' onclick='generarPDF(\"" + usuario + "\", \"" + nombreSalida + "\")'>" + "Generar PDF " + nombreSalida + "</a>");
                                     }
                                 } else {
                                     out.println("<li>No hay salidas disponibles para este proveedor.</li>");
@@ -301,6 +309,20 @@
         xhr.send();
     }
 
+
+    function generarPDF(usuario, nombreSalida) {
+        var xhr = new XMLHttpRequest();
+        console.log("GenerarPDF" + usuario + "   " + nombreSalida);
+        //xhr.open("GET", "SvCargarActividades?departamento=" + departamento + "&startIndex1=" + startIndex1, true);
+        xhr.open("POST", "SvPerfilUsuario?usuario=" + usuario + "&nombreSalida=" + nombreSalida, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert("Se generó el PDF para la Salida Turistica correctamente.");
+                //window.location.href = "perfil.jsp";
+            }
+        };
+        xhr.send();
+    }
 
 
 </script>

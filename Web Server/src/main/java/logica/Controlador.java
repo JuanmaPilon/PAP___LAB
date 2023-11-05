@@ -1,5 +1,15 @@
 package logica;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -374,18 +384,18 @@ public class Controlador implements IControlador {
 
     @Override
     public DTUsuario traerDTUsuario(String nickname) {
-       Usuario usuario = controlPersis.consultaUsuario(nickname);
-       
-      if (usuario instanceof Turista) {
-            DTTurista dtTurista =  traerDTTurista(nickname);
+        Usuario usuario = controlPersis.consultaUsuario(nickname);
+
+        if (usuario instanceof Turista) {
+            DTTurista dtTurista = traerDTTurista(nickname);
             dtTurista.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
             return dtTurista;
         } else {
-            DTProveedor dtProveedor =  traerDTProveedor(nickname);
+            DTProveedor dtProveedor = traerDTProveedor(nickname);
             dtProveedor.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
             return dtProveedor;
         }
- 
+
     }
 
     @Override
@@ -871,15 +881,18 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public ArrayList<String> listaActividadesProveedorConfirmadas(String nicknameProveedor) {
+    public ArrayList<DTActividad> listaActividadesProveedorConfirmadas(String nicknameProveedor) {
 
-        ArrayList<String> listaActividadesProveedorConfirmadas = new ArrayList();
+        ArrayList<DTActividad> listaActividadesProveedorConfirmadas = new ArrayList();
         //me traigo las actividades de la bd
         List<Actividad> listaActividades = controlPersis.traerActividades();
         //recorro la lista de actividades y agrego a la lista a devolver la que tienen el proveedor buscado y este confirmada
         for (Actividad a : listaActividades) {
             if (a.getProveedor().getNickname().equals(nicknameProveedor) && a.getEstado().equals(TipoEstado.confirmada)) {
-                listaActividadesProveedorConfirmadas.add(a.getNombre());
+                DTActividad dta = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), a.getCiudad(), a.getfAlta(),
+                a.getEstado(), a.getDepartamento().getNombre(), a.getProveedor().getNickname());
+                
+                listaActividadesProveedorConfirmadas.add(dta);
             }
         }
 
@@ -887,15 +900,20 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public ArrayList<String> listaActividadesProveedorTodas(String nicknameProveedor) {
+    public ArrayList<DTActividad> listaActividadesProveedorTodas(String nicknameProveedor) {
 
-        ArrayList<String> listaActividadesProveedorTodas = new ArrayList();
+        ArrayList<DTActividad> listaActividadesProveedorTodas = new ArrayList();
         //me traigo las actividades de la bd
         List<Actividad> listaActividades = controlPersis.traerActividades();
         //recorro la lista de actividades y agrego a la lista a devolver la que tienen el proveedor buscado y este confirmada
         for (Actividad a : listaActividades) {
             if (a.getProveedor().getNickname().equals(nicknameProveedor)) {
-                listaActividadesProveedorTodas.add(a.getNombre());
+                //DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta,
+                //TipoEstado estado, String nombreDepartamento, String nombreProveedor)
+                DTActividad dta = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), a.getCiudad(), a.getfAlta(),
+                a.getEstado(), a.getDepartamento().getNombre(), a.getProveedor().getNickname());
+                
+                listaActividadesProveedorTodas.add(dta);
             }
         }
 
@@ -1236,84 +1254,128 @@ public class Controlador implements IControlador {
             List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
             if (listaActividadesFavoritas == null) {
                 listaActividadesFavoritas = new ArrayList<>();
-            } else if(!listaActividadesFavoritas.contains(nombreActividad)){
-            listaActividadesFavoritas.add(nombreActividad);
-            turista.setListaActividadesFavoritas(listaActividadesFavoritas);
-            controlPersis.marcarActividadComoFavorita(turista);
+            } else if (!listaActividadesFavoritas.contains(nombreActividad)) {
+                listaActividadesFavoritas.add(nombreActividad);
+                turista.setListaActividadesFavoritas(listaActividadesFavoritas);
+                controlPersis.marcarActividadComoFavorita(turista);
             }
-        
+
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("Error al marcar la actividad como favorita: " + ex.getMessage());
 
         }
     }
-    
+
     @Override
-    public void marcarUsuarioComoFavorita(String nicknameUsuario, String nickanmeUsuarioFavorito){
-        try{
+    public void marcarUsuarioComoFavorita(String nicknameUsuario, String nickanmeUsuarioFavorito) {
+        try {
             Usuario usuario = controlPersis.consultaUsuario(nicknameUsuario);
             List<String> listaUsuariosFavoritos = usuario.getListaUsuariosFavoritas();
             if (listaUsuariosFavoritos == null) {
                 listaUsuariosFavoritos = new ArrayList<>();
-            } else if(!listaUsuariosFavoritos.contains(nickanmeUsuarioFavorito)){
-            listaUsuariosFavoritos.add(nickanmeUsuarioFavorito);
-            usuario.setListaUsuariosFavoritas(listaUsuariosFavoritos);
-            controlPersis.marcarUsuarioComoFavorito(usuario);
-            }     
+            } else if (!listaUsuariosFavoritos.contains(nickanmeUsuarioFavorito)) {
+                listaUsuariosFavoritos.add(nickanmeUsuarioFavorito);
+                usuario.setListaUsuariosFavoritas(listaUsuariosFavoritos);
+                controlPersis.marcarUsuarioComoFavorito(usuario);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("Error al marcar el usuario como favorito: " + ex.getMessage());
         }
     }
-    
+
     @Override
-    public void DesMarcarUsuarioFavorito(String nickname, String nicknameUsuarioFavorito){
-        try { 
+    public void DesMarcarUsuarioFavorito(String nickname, String nicknameUsuarioFavorito) {
+        try {
             Usuario usuario = controlPersis.consultaUsuario(nickname);
             List<String> listaUsuariosFavoritos = usuario.getListaUsuariosFavoritas();
             if (listaUsuariosFavoritos == null) {
                 listaUsuariosFavoritos = new ArrayList<>();
-            } else if(listaUsuariosFavoritos.contains(nicknameUsuarioFavorito)){
-            listaUsuariosFavoritos.remove(nicknameUsuarioFavorito);
-            usuario.setListaUsuariosFavoritas(listaUsuariosFavoritos);
-            controlPersis.marcarUsuarioComoFavorito(usuario);
+            } else if (listaUsuariosFavoritos.contains(nicknameUsuarioFavorito)) {
+                listaUsuariosFavoritos.remove(nicknameUsuarioFavorito);
+                usuario.setListaUsuariosFavoritas(listaUsuariosFavoritos);
+                controlPersis.marcarUsuarioComoFavorito(usuario);
             }
-            } catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("Error al desmarcar el usuario como favorito: " + ex.getMessage());
         }
     }
-    
+
     @Override
-    public  ArrayList<String> traerActividadesFavoritasDelTurista(String nicknameTurista){
+    public ArrayList<String> traerActividadesFavoritasDelTurista(String nicknameTurista) {
         Turista turista = (Turista) controlPersis.traerTurista(nicknameTurista);
         List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
         ArrayList<String> arrayListActividadesFavoritas = new ArrayList<>(listaActividadesFavoritas);
         return arrayListActividadesFavoritas;
     }
-    
+
 //    @Override
 //    public ArrayList<String> traerUsuariosFavoritosDelUsuario(String nicknameUsuario){
 //        
 //    }
 //    
-    
-    public void DesMarcarActividad(String usuario, String nombreActividad){
+    public void DesMarcarActividad(String usuario, String nombreActividad) {
         try {
-         Turista turista = (Turista) controlPersis.traerTurista(usuario);
-         List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
-         listaActividadesFavoritas.remove(nombreActividad);
-         turista.setListaActividadesFavoritas(listaActividadesFavoritas);
-         controlPersis.DesMarcarActividad(turista);
-          } catch (Exception ex) {
+            Turista turista = (Turista) controlPersis.traerTurista(usuario);
+            List<String> listaActividadesFavoritas = turista.getListaActividadesFavoritas();
+            listaActividadesFavoritas.remove(nombreActividad);
+            turista.setListaActividadesFavoritas(listaActividadesFavoritas);
+            controlPersis.DesMarcarActividad(turista);
+        } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("Error al desmarcar la actividad como favorita: " + ex.getMessage());
 
         }
     }
-    
-    
+
+    @Override
+    public void generarPDFInscripcionSalida(String nickname, String nombreSalida) {
+        Document document = new Document();
+        String outputPath = "C:\\Users\\natil\\Documents\\GitHub\\PAP___LAB\\Web Server\\src\\main\\webapp\\PDFs\\"+nickname+".pdf";
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(outputPath));
+            document.open();
+
+            ArrayList<DTSalidaTuristica> listaDTSalidaInscUsuario = traerInscSalidasDeTurista(nickname);
+            for (DTSalidaTuristica dtSalida : listaDTSalidaInscUsuario) {
+
+                if (dtSalida.getNombre().equals(nombreSalida)) {
+                    //me traigo la actividad de la salida
+                    Turista t = controlPersis.traerTurista(nickname);
+                    List<Inscripcion> listaIncDelTurista = t.getListaInscripcion();
+                    int cantInscriptosSalida = 0;
+                    for (Inscripcion insc : listaIncDelTurista) {
+                        if (insc.getSalida().getNombre().equals(nombreSalida)) {
+                            cantInscriptosSalida = insc.getCantTurista();
+                        }
+                    }
+                    // Agregar el título
+                    String titulo = "Lista de Inscripciones:";
+                    document.add(new Paragraph("        " + titulo));
+
+                    // Saltar una línea en blanco
+                    document.add(new Paragraph(" "));
+                    document.add(new Paragraph(" "));
+                   
+                    document.add(new Paragraph("Nombre Turista: " + t.getNombre()));
+                    document.add(new Paragraph("Nombre Actividad: " + dtSalida.getNombreActividad()));
+                    document.add(new Paragraph("Nombre Salida Turistica: " + dtSalida.getNombre()));
+                    document.add(new Paragraph("Fecha y hora Salida Turistica: " + dtSalida.getfSalida()));
+                    document.add(new Paragraph("Cantidad de Turistas: " + cantInscriptosSalida));
+                    document.add(new Paragraph("\n"));
+                }
+            }
+
+            document.close();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public Categoria traerCategoria(String categoria) {

@@ -72,8 +72,8 @@ public abstract ArrayList<String> listaActividadesPorEstado(TipoEstado estado) ;
 public abstract void CompraDePaquete(String nickname, String nombrePaquete, int cantTurista, Date fechaCompra) throws PaqueteSinActividad, PaqueteYaComprado;
 public abstract ArrayList<String> listaPaquetesSinCompra();
 public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
-public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
-public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
+public abstract ArrayList<DTActividad> listaActividadesProveedorConfirmadas (String nicknameProveedor);
+public abstract ArrayList<DTActividad> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
 
 public abstract ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
@@ -99,4 +99,6 @@ public abstract void DesMarcarActividad(String usuario, String nombreActividad);
 public abstract void marcarUsuarioComoFavorita(String nicknameUsuario, String nicknameUsuarioFavorito);
 public abstract void DesMarcarUsuarioFavorito(String nickname, String nicknameUsuarioFavorito);
 //public abstract ArrayList<String> traerUsuariosFavoritosDelUsuario(String nicknameUsuario);
+
+public abstract void generarPDFInscripcionSalida(String nickname, String nombreSalida);
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logica.DTActividad;
 import logica.DTImagenPerfil;
 import logica.DTProveedor;
 import logica.DTSalidaTuristica;
@@ -70,13 +71,13 @@ public class SvPerfilUsuario extends HttpServlet {
 
             String prov = dtProveedor.getNickname();
             if (prov.equals(usuario)) {//si es proveedor y esta mirando su propio perfil
-                ArrayList<String> listaActividadesProveedor = control.listaActividadesProveedorTodas(prov);
+                ArrayList<DTActividad> listaActividadesProveedor = control.listaActividadesProveedorTodas(prov);
                 misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedor);
                 // se muestran todas sus actividades, no solo las confirmadas
 
             } else {//si es proveedor pero no esta mirando su propio perfil
                 //actividades turisticas que ofrece en estado confirmado           
-                ArrayList<String> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas(dtProveedor.getNickname());
+                ArrayList<DTActividad> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas(dtProveedor.getNickname());
                 misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedorConfirmadas);
             }
 
@@ -106,6 +107,12 @@ public class SvPerfilUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession misesion = request.getSession();
+        String usuario = request.getParameter("usuario");
+        String nombreSalida = request.getParameter("nombreSalida");
+        
+        control.generarPDFInscripcionSalida(usuario, nombreSalida);
 
     }
 
