@@ -15,6 +15,7 @@
 
         <%
             String usuario = (String) request.getSession().getAttribute("usuario");
+            DTUsuario usuYo = (DTUsuario) request.getSession().getAttribute("usu");
             DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usuPerfil");
             String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
             String tipoUsuarioConsultado = (String) request.getSession().getAttribute("tipoUsuarioConsultado");
@@ -95,7 +96,29 @@
             %>
 
             <h1>Usuario: <%=usu.getNombre()%></h1>
+            <% if(usuYo.getListaUsuariosFavoritas().contains(usu.getNickname())){ %>
+            
+            <form id="consultaForm" action="SvUsuario" method="POST">
+                <input type="hidden" name="usuario" value="<%= usuario%>" />
+                <input type="hidden" name="nickname" value="<%= usu.getNickname()%>" />           
+                <input type="hidden" name="DesmarcarUsuario" id="DesmarcarUsuario" value="DesmarcarUsuario"> 
+                 <button type="submit" name="DesmarcarUsuario">Desmarcar como Favorito</button>
+            </form>   
+                
+                
+                <% } else { %> 
+            <form id="consultaForm" action="SvUsuario" method="POST">
+                <input type="hidden" name="usuario" value="<%= usuario%>" />
+                <input type="hidden" name="nickname" value="<%= usu.getNickname()%>" />           
+                 <input type="hidden" name="marcarUsuario" id="marcarUsuario" value="marcarUsuario"> 
+                 <button type="submit" name="marcarFavorito">Marcar como Favorito</button>
+            </form>   
+                 
+                 <% } %>
+            <div>                            
+                
             <div class="tabs">
+                
                 <ul class="tab-links">
                     <li class="active"><a href="#tab1">Perfil</a></li>
                         <%
@@ -138,6 +161,7 @@
                             <li><%= usuarioFavorito%></li>
                                 <% } %>
                         </ul>
+                        
                     </div>
 
                     <div id="tab2" class="tab">
@@ -207,6 +231,10 @@
 
 
                     </div>
+                        
+                        
+                    
+                
 
 
                 </div>

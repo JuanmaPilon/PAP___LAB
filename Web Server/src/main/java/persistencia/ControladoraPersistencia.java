@@ -609,7 +609,7 @@ public class ControladoraPersistencia {
         
        if(usuario instanceof Turista ){
            Turista turista = turistaJpa.findTurista(usuario.getNickname());
-           turista.setListaUsuariosFavoritas(((Turista) usuario).getListaActividadesFavoritas());
+           turista.setListaUsuariosFavoritas((usuario.getListaUsuariosFavoritas()));
            turistaJpa.edit(turista);
        } else {
            Proveedor proveedor = proveedorJpa.findProveedor(usuario.getNickname());
@@ -617,6 +617,21 @@ public class ControladoraPersistencia {
            proveedorJpa.edit(proveedor);
        }
     }
+    
+//    public void DesmarcarUsuarioComoFavorito(Usuario usuario){
+//        Usuario usuario2 = usuario;
+//        List<String> listaUsuariosFavoritos = usuario.getListaUsuariosFavoritas();
+//        
+//       if(usuario instanceof Turista ){
+//           Turista turista = turistaJpa.findTurista(usuario.getNickname());
+//           turista.setListaUsuariosFavoritas((usuario.getListaUsuariosFavoritas()));
+//           turistaJpa.edit(turista);
+//       } else {
+//           Proveedor proveedor = proveedorJpa.findProveedor(usuario.getNickname());
+//           proveedor.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
+//           proveedorJpa.edit(proveedor);
+//       }
+//    }
 
 
 }//fin

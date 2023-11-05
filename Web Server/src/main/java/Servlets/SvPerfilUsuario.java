@@ -62,7 +62,7 @@ public class SvPerfilUsuario extends HttpServlet {
                 misesion.setAttribute("nombresPaquetes", paquetesComprados);
             }
         } else if (tipoUsuarioConsultado.equals("proveedor")) {
-            DTProveedor dtProveedor = control.traerDTProveedor(usuarioSeleccionado);
+            DTProveedor dtProveedor = (DTProveedor) control.traerDTUsuario(usuarioSeleccionado);
             misesion.setAttribute("usuPerfil", dtProveedor);
             System.out.println(dtProveedor.getNickname() + ": es proveedor");
 

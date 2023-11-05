@@ -97,5 +97,6 @@ public abstract void marcarActividadComoFavorita(String nicknameUsuario, String 
 public abstract ArrayList<String> traerActividadesFavoritasDelTurista(String nicknameTurista);
 public abstract void DesMarcarActividad(String usuario, String nombreActividad);
 public abstract void marcarUsuarioComoFavorita(String nicknameUsuario, String nicknameUsuarioFavorito);
+public abstract void DesMarcarUsuarioFavorito(String nickname, String nicknameUsuarioFavorito);
 //public abstract ArrayList<String> traerUsuariosFavoritosDelUsuario(String nicknameUsuario);
 }

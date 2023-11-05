@@ -1260,14 +1260,29 @@ public class Controlador implements IControlador {
             listaUsuariosFavoritos.add(nickanmeUsuarioFavorito);
             usuario.setListaUsuariosFavoritas(listaUsuariosFavoritos);
             controlPersis.marcarUsuarioComoFavorito(usuario);
-            }
-            
+            }     
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("Error al marcar el usuario como favorito: " + ex.getMessage());
-
         }
-        
+    }
+    
+    @Override
+    public void DesMarcarUsuarioFavorito(String nickname, String nicknameUsuarioFavorito){
+        try { 
+            Usuario usuario = controlPersis.consultaUsuario(nickname);
+            List<String> listaUsuariosFavoritos = usuario.getListaUsuariosFavoritas();
+            if (listaUsuariosFavoritos == null) {
+                listaUsuariosFavoritos = new ArrayList<>();
+            } else if(listaUsuariosFavoritos.contains(nicknameUsuarioFavorito)){
+            listaUsuariosFavoritos.remove(nicknameUsuarioFavorito);
+            usuario.setListaUsuariosFavoritas(listaUsuariosFavoritos);
+            controlPersis.marcarUsuarioComoFavorito(usuario);
+            }
+            } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Error al desmarcar el usuario como favorito: " + ex.getMessage());
+        }
     }
     
     @Override
@@ -1297,6 +1312,8 @@ public class Controlador implements IControlador {
 
         }
     }
+    
+    
 
     @Override
     public Categoria traerCategoria(String categoria) {
