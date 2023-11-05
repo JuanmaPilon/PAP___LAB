@@ -1383,4 +1383,16 @@ public class Controlador implements IControlador {
 
     }
 
+    @Override
+    //devuelve false si el nickname ya existe en la BD
+    public boolean validarNickname(String nickname){
+        
+        ArrayList<String> listaUsuariosTotal = controlPersis.listaUsuarios();
+        if (!listaUsuariosTotal.contains(nickname))
+            return true;
+        else return false;
+    
+    }
+    
+    
 }

@@ -101,4 +101,6 @@ public abstract void DesMarcarUsuarioFavorito(String nickname, String nicknameUs
 //public abstract ArrayList<String> traerUsuariosFavoritosDelUsuario(String nicknameUsuario);
 
 public abstract void generarPDFInscripcionSalida(String nickname, String nombreSalida);
+
+public abstract boolean validarNickname(String nickname);
 }
