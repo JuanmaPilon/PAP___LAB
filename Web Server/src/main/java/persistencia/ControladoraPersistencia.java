@@ -206,6 +206,27 @@ public class ControladoraPersistencia {
         }
         return nicknames;
     }
+    
+        public ArrayList<String> listaUsuariosCorreo() {
+        ArrayList<String> correos = new ArrayList<String>();
+        try {
+            List<Turista> turistas = turistaJpa.findTuristaEntities();
+            for (int i = 0; i < turistas.size(); i++) {
+                correos.add(turistas.get(i).getCorreo());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+            for (int i = 0; i < proveedores.size(); i++) {
+                correos.add(proveedores.get(i).getCorreo());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return correos;
+    }
 
     public ArrayList<String> listaProveedores() {
         ArrayList<String> nicknames = new ArrayList<String>();

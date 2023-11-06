@@ -7,6 +7,7 @@
             <link href="styles.css" src="styles.css"">
             <title>Turismo.uy - Reserva de Paquetes Turisticos</title>
             <link rel="stylesheet" type="text/css" href="styles.css">
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         </head>
         <body>
 
@@ -67,7 +68,7 @@
                 <form id="formularioRegistro" action=SvTurista method="post" enctype="multipart/form-data">
                     <label for="nickname">Nickname:</label>
                     <input placeholder="JuanitoKpo777" type="text" id="nickname" name="nickname" required>
-                    <div id="nicknameStatus"></div> 
+                    <span class="red-text accent-4" id="resultNickname"></span>
 
                     <label for="nombre">Nombre:</label>
                     <input placeholder="Juan" type="text" id="nombre" name="nombre" required>
@@ -83,7 +84,7 @@
 
                     <label for="correo">Correo Electrónico:</label>
                     <input placeholder="juanitopotter777@sucio.com" type="email" id="correo" name="correo" required>
-                    <!-- <div id="correoStatus"></div> -->
+                    <span class="red-text accent-4" id="resultCorreo"></span>
 
                     <label for="fechaNacimiento">Fecha de Nacimiento:</label>
                     <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
@@ -124,29 +125,43 @@
 
 
         </body>
-        
-        <script>
-            // Función para validar el nickname en tiempo real
-            document.getElementById("nickname").addEventListener("input", function () {
-                
-                
-                const nickname = this.value;
-                const nicknameStatus = document.getElementById("nicknameStatus");
-                console.log("nickname::::"+nickname);
 
-                // Realiza una solicitud AJAX para verificar si el nickname está en uso
-                // Reemplaza 'url_validacion_nickname' con la URL adecuada en tu servidor
-                // Debe responder con un JSON que indique si el nickname está disponible o en uso
-                fetch('SvValidarNickname?nickname=' + nickname)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.disponible) {
-                                nicknameStatus.textContent = "Nickname disponible";
-                            } else {
-                                nicknameStatus.textContent = "Nickname en uso";
-                            }
-                        });
+        <script>
+            $(document).ready(function () {
+                $('#nickname').on('input', function () {
+                    var nickname = $('#nickname').val();
+                    $.ajax({
+                        type: 'POST',
+                        data: {nickname: nickname},
+                        url: 'SvValidarNickname',
+                        success: function (resultNickname) {
+                            $('#resultNickname').html(resultNickname);
+                        }
+
+                    });
+
+                });
+
             });
+
+            $(document).ready(function () {
+                $('#correo').on('input', function () {
+                    var correo = $('#correo').val();
+                    $.ajax({
+                        type: 'POST',
+                        data: {correo: correo},
+                        url: 'SvValidarCorreo',
+                        success: function (resultCorreo) {
+                            $('#resultCorreo').html(resultCorreo);
+                        }
+
+                    });
+
+                });
+
+            });
+
+
 
         </script>        
 

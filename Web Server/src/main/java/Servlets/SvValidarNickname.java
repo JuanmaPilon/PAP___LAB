@@ -33,21 +33,21 @@ public class SvValidarNickname extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        response.setContentType("application/json");
+
         String nickname = request.getParameter("nickname");
 
         boolean nicknameDisponible = control.validarNickname(nickname);
 
-        // Crea un objeto JSON para la respuesta
-        JSONObject jsonResponse = new JSONObject();
-        jsonResponse.put("disponible", nicknameDisponible);
+        if (nicknameDisponible) {
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.print("nickname disponible");
+        } else {
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.print("nickname NO disponible");
+        }
 
-        // Envía la respuesta JSON al cliente
-        
-        response.getWriter().write(jsonResponse.toString());
-         
-        
-        
     }
 
 }

@@ -1395,4 +1395,15 @@ public class Controlador implements IControlador {
     }
     
     
+    @Override
+    public boolean validarCorreo(String correo){
+        
+        ArrayList<String> listaUsuariosCorreoTotal = controlPersis.listaUsuariosCorreo();
+        if (!listaUsuariosCorreoTotal.contains(correo))
+            return true;
+        else return false;
+    
+    }
+    
+    
 }

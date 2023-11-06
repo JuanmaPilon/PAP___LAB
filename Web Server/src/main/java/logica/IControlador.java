@@ -103,4 +103,6 @@ public abstract void DesMarcarUsuarioFavorito(String nickname, String nicknameUs
 public abstract void generarPDFInscripcionSalida(String nickname, String nombreSalida);
 
 public abstract boolean validarNickname(String nickname);
+
+public abstract boolean validarCorreo(String correo);
 }

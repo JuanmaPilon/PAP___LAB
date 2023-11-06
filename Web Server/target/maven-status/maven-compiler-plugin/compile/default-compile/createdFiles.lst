@@ -16,6 +16,7 @@ logica\DTDepartamento.class
 logica\exceptions\PreexistingEntityException.class
 Servlets\exceptions\IllegalOrphanException.class
 logica\imagenActividad_.class
+Servlets\SvValidarCorreo.class
 logica\Departamento.class
 persistencia\exceptions\PreexistingEntityException.class
 com\turismouy\pap___lab\JAXRSConfiguration.class
