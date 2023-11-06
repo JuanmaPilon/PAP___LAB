@@ -81,7 +81,9 @@
 
                     <label for="confirmacion">Confirmar Contrasenia:</label>
                     <input type="password" id="confirmacion" name="confirmacion" required>
-
+                    
+                    <div id="mensaje-validacion"></div>
+                    
                     <label for="correo">Correo Electrónico:</label>
                     <input placeholder="juanitopotter777@sucio.com" type="email" id="correo" name="correo" required>
                     <span class="red-text accent-4" id="resultCorreo"></span>
@@ -161,7 +163,27 @@
 
             });
 
+ document.addEventListener('DOMContentLoaded', function () {
+    var contrasenia = document.getElementById('contrasenia');
+    var confirmacion = document.getElementById('confirmacion');
+    var mensajeValidacion = document.getElementById('mensaje-validacion');
 
+    contrasenia.addEventListener('input', validarContrasenias);
+    confirmacion.addEventListener('input', validarContrasenias);
+
+    function validarContrasenias() {
+      var contraseniaValor = contrasenia.value;
+      var confirmacionValor = confirmacion.value;
+
+      if (contraseniaValor === confirmacionValor) {
+        mensajeValidacion.textContent = 'Las contraseñas coinciden.';
+        mensajeValidacion.style.color = 'green';
+      } else {
+        mensajeValidacion.textContent = 'Las contraseñas no coinciden.';
+        mensajeValidacion.style.color = 'red';
+      }
+    }
+  });
 
         </script>        
 
