@@ -51,7 +51,9 @@
             <aside>
                 <h2>Mi perfil</h2>
                 <ul>
-                    <%                   if (tipoUsuario.equals("proveedor")) {
+                    <%
+                   if (tipoUsuario != null) {
+                   if (tipoUsuario.equals("proveedor")) {
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Modificar mis datos</a></li>
@@ -77,6 +79,7 @@
                     <li><a href="compraPaquete.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Comprar Paquete</a></li>  <!-- Turista -->
                     <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Turista -->
                         <%
+                            }
                         } else {
                         %>
                     <li> <a href = "consultaUsuario.jsp"> Consulta de Usuario</a> </li> 
@@ -97,7 +100,12 @@
             %>
 
             <h1>Usuario: <%=usu.getNombre()%></h1>
-            <% if(usuYo.getListaUsuariosFavoritas().contains(usu.getNickname())){ %>
+            <% 
+if (tipoUsuario != null) {
+if(usuYo.getListaUsuariosFavoritas().contains(usu.getNickname())){
+                
+                
+            %>
             
             <form id="consultaForm" action="SvUsuario" method="POST">
                 <input type="hidden" name="usuario" value="<%= usuario%>" />
@@ -119,7 +127,9 @@
                  <%} %>
             </form>   
                  
-                 <% } %>
+                 <% } 
+}
+                 %>
             <div>                            
                 
             <div class="tabs">

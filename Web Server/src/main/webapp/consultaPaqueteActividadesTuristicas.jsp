@@ -37,6 +37,7 @@
             <h2>Mi perfil</h2>
             <ul>
                 <%
+                    if (tipoUsuario != null) {
                     if (tipoUsuario.equals("proveedor")) {
                 %>
                 <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
@@ -51,7 +52,7 @@
 
 
 
-                <% } else if (tipoUsuario.equals("turista")) {
+                <% } else  {
 
                 %>
                 <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
@@ -63,8 +64,8 @@
                 <li><a href="compraPaquete.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Comprar Paquete</a></li>  <!-- Turista -->
                 <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Turista -->
                     <%
-                    } else {
-                        System.out.println(tipoUsuario);
+                    } 
+                        } else {
                     %>
                 <li> <a href = "consultaUsuario.jsp"> Consulta de Usuario</a> </li> 
                 <li> <a href = "consultaActividadTuristica.jsp" > Consulta de Actividad Turistica</a > </li>
