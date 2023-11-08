@@ -4,7 +4,6 @@ package logica;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -46,19 +45,19 @@ public DatosDePrueba(){
             control.AltaDeUsuarioProveedor("eldiez", "Pablo", "Bengoechea", "contra", "eldiez@socfomturriv.org.uy", fecha.parse("27/06/1965"), "Pablo es el presidente de la Sociedad de Fomento Turıstico de Rivera (conocida como Socfomturriv)", "http://wwww.socfomturriv.org.uy");
             control.AltaDeUsuarioProveedor("meche", "Mercedes", "Venn", "contra", "meche@colonia.gub.uy", fecha.parse("31/12/1990"), "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
             
-control.AltaDeImagenPerfil("2e3s66tw.jpg", "images/2e3s66tw.jpg", "lachiqui");
-control.AltaDeImagenPerfil("ycy8mbrn.jpg", "images/ycy8mbrn.jpg", "isabelita");
-control.AltaDeImagenPerfil("y2u3tybh.jpg", "images/y2u3tybh.jpg", "anibal");
+control.AltaDeImagenPerfil("2e3s66tw.jpeg", "images/2e3s66tw.jpeg", "lachiqui");
+control.AltaDeImagenPerfil("ycy8mbrn.png", "images/ycy8mbrn.png", "isabelita");
+control.AltaDeImagenPerfil("y2u3tybh.png", "images/y2u3tybh.png", "anibal");
 control.AltaDeImagenPerfil("2p9ed8et.jpg", "images/2p9ed8et.jpg", "waston");
-control.AltaDeImagenPerfil("mtwppxxz.jpg", "images/mtwppxxz.jpg", "elelvis");
+control.AltaDeImagenPerfil("mtwppxxz.jpeg", "images/mtwppxxz.jpeg", "elelvis");
 control.AltaDeImagenPerfil("3ztpasya.jpg", "images/3ztpasya.jpg", "eleven11");
 control.AltaDeImagenPerfil("43zymcch.jpg", "images/43zymcch.jpg", "bobesponja");
 control.AltaDeImagenPerfil("mr3a38w4.jpg", "images/mr3a38w4.jpg", "tony");
 control.AltaDeImagenPerfil("2b556k7t.jpg", "images/2b556k7t.jpg", "chino");
-control.AltaDeImagenPerfil("3mbeyawm.jpg", "images/3mbeyawm.jpg", "mastropiero");
+control.AltaDeImagenPerfil("3mbeyawm.png", "images/3mbeyawm.png", "mastropiero");
 control.AltaDeImagenPerfil("3whe8372.jpg", "images/3whe8372.jpg", "washington");
-control.AltaDeImagenPerfil("mu4jeas3.jpg", "images/mu4jeas3.jpg", "eldiez");
-control.AltaDeImagenPerfil("4hs4v9c5.jpg", "images/4hs4v9c5.jpg", "meche");
+control.AltaDeImagenPerfil("mu4jeas3.jpeg", "images/mu4jeas3.jpeg", "eldiez");
+control.AltaDeImagenPerfil("4hs4v9c5.jpeg", "images/4hs4v9c5.jpeg", "meche");
             
         } catch (ParseException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,37 +114,37 @@ control.AltaDeImagenPerfil("4hs4v9c5.jpg", "images/4hs4v9c5.jpg", "meche");
         //Actividades Turisticas y Salidas Turisticas
         try {
 
-            List<String> lcat1 = new ArrayList();
+            ArrayList<String> lcat1 = new ArrayList();
             lcat1.add("Gastronomia");
 
-            List<String> lcat2 = new ArrayList();
+            ArrayList<String> lcat2 = new ArrayList();
             lcat2.add("Cultura y Patrimonio");
             lcat2.add("Gastronomia");
 
-            List<String> lcat3 = new ArrayList();
+            ArrayList<String> lcat3 = new ArrayList();
             lcat3.add("Cultura y Patrimonio");
 
-            List<String> lcat4 = new ArrayList();
+            ArrayList<String> lcat4 = new ArrayList();
             lcat4.add("Gastronomia");
 
-            List<String> lcat5 = new ArrayList();
+            ArrayList<String> lcat5 = new ArrayList();
             lcat5.add("Campo y Naturaleza");
             lcat5.add("Gastronomia");
 
-            List<String> lcat6 = new ArrayList();
+            ArrayList<String> lcat6 = new ArrayList();
             lcat6.add("Campo y Naturaleza");
 
-            List<String> lcat7 = new ArrayList();
+            ArrayList<String> lcat7 = new ArrayList();
             lcat7.add("Cultura y Patrimonio");
 
-            List<String> lcat8 = new ArrayList();
+            ArrayList<String> lcat8 = new ArrayList();
             lcat8.add("Cultura y Patrimonio");
 
-            List<String> lcat9 = new ArrayList();
+            ArrayList<String> lcat9 = new ArrayList();
             lcat9.add("Aventura y Deporte");
             lcat9.add("Turismo Playas");
 
-            List<String> lcat10 = new ArrayList();
+            ArrayList<String> lcat10 = new ArrayList();
             lcat10.add("Cultura y Patrimonio");
 
             control.guardarActividad("Degusta", "Festival gastronomico de productos locales en Rocha", 3, 800, "Rocha", fecha.parse("20/7/2022"), "washington", "Rocha", lcat1);
@@ -174,16 +173,16 @@ control.AltaDeImagenPerfil("4hs4v9c5.jpg", "images/4hs4v9c5.jpg", "meche");
             control.cambiarEstadoActividad("Descubre Rivera", TipoEstado.rechazada);
             
             
-control.AltaDeImagenActividad("bdehz9bb.jpg", "images/bdehz9bb.jpg", "Degusta");
-control.AltaDeImagenActividad("58fnr5j7.jpg", "images/58fnr5j7.jpg", "Teatro con Sabores");
-control.AltaDeImagenActividad("3rp2vvjf.jpg", "images/3rp2vvjf.jpg", "Tour por Colonia del Sacramento");
-control.AltaDeImagenActividad("2yeu66vb.jpg", "images/2yeu66vb.jpg", "Almuerzo en el Real de San Carlos");
-control.AltaDeImagenActividad("4yrs8y2c.jpg", "images/4yrs8y2c.jpg", "Almuerzo en Valle del Lunarejo");
-control.AltaDeImagenActividad("2vjd382t.jpg", "images/2vjd382t.jpg", "Cabalgata en Valle del Lunarejo");
-control.AltaDeImagenActividad("bdzyrm93.jpg", "images/bdzyrm93.jpg", "Bus turıstico Colonia");
-control.AltaDeImagenActividad("284kr973.jpg", "images/284kr973.jpg", "Colonia Premium Tour");
-control.AltaDeImagenActividad("yck2a92h.jpg", "images/yck2a92h.jpg", "Deportes nauticos sin uso de motor");
-control.AltaDeImagenActividad("y4vbc4xc.jpg", "images/y4vbc4xc.jpg", "Descubre Rivera");
+control.AltaDeImagenActividad("bdehz9bb.jpg", "images/bdehz9bb.jpg", "Degusta","https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0"  );
+control.AltaDeImagenActividad("58fnr5j7.jpg", "images/58fnr5j7.jpg", "Teatro con Sabores", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0" );
+control.AltaDeImagenActividad("3rp2vvjf.jpg", "images/3rp2vvjf.jpg", "Tour por Colonia del Sacramento", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("2yeu66vb.jpg", "images/2yeu66vb.jpg", "Almuerzo en el Real de San Carlos", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("4yrs8y2c.jpg", "images/4yrs8y2c.jpg", "Almuerzo en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("2vjd382t.jpg", "images/2vjd382t.jpg", "Cabalgata en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("bdzyrm93.jpg", "images/bdzyrm93.jpg", "Bus turıstico Colonia", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("284kr973.jpg", "images/284kr973.jpg", "Colonia Premium Tour", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("yck2a92h.jpg", "images/yck2a92h.jpg", "Deportes nauticos sin uso de motor", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0" );
+control.AltaDeImagenActividad("y4vbc4xc.jpeg", "images/y4vbc4xc.jpeg", "Descubre Rivera", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
         } catch (PreexistingEntityException ex) {
             JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
@@ -212,16 +211,16 @@ control.AltaDeImagenActividad("y4vbc4xc.jpg", "images/y4vbc4xc.jpg", "Descubre R
             control.AltaSalidaTuristica("Cabalgata Extrema", 4, fecha.parse("15/09/2022"), fechahora.parse("30/10/2022 16:00"), "Posada del Lunarejo" , "Cabalgata en Valle del Lunarejo");
             control.AltaSalidaTuristica("Almuerzo en el Real 1", 10, fecha.parse("10/10/2022"), fechahora.parse("30/10/2022 12:00"), "Restaurante de la Plaza de Toros", "Almuerzo en el Real de San Carlos");
  
-control.AltaDeImagenActividad("4jwed4jx.jpg", "images/4jwed4jx.jpg", "Degusta Agosto");
-control.AltaDeImagenActividad("2maxmx6c.jpg", "images/2maxmx6c.jpg", "Degusta Setiembre");
-control.AltaDeImagenActividad("2zturssk.jpg", "images/2zturssk.jpg", "Teatro con Sabores 1");
-control.AltaDeImagenActividad("5d5vm953.jpg", "images/5d5vm953.jpg", "Teatro con Sabores 2");
-control.AltaDeImagenActividad("5n7ud8e7.jpg", "images/5n7ud8e7.jpg", "Tour Colonia del Sacramento 11-09");
-control.AltaDeImagenActividad("583b3mbs.jpg", "images/583b3mbs.jpg", "Tour Colonia del Sacramento 18-09");
-control.AltaDeImagenActividad("mryhyr5f.jpg", "images/mryhyr5f.jpg", "Degusta Octubre");
-control.AltaDeImagenActividad("yzz6b7et.jpg", "images/yzz6b7et.jpg", "Degusta Noviembre");
-control.AltaDeImagenActividad("mv7etjx2.jpg", "images/mv7etjx2.jpg", "Tour Colonia del Sacramento 30-10");
-control.AltaDeImagenActividad("3vwzthcr.jpg", "images/3vwzthcr.jpg", "Cabalgata Extrema");
+control.AltaDeImagenActividad("4jwed4jx.jpg", "images/4jwed4jx.jpg", "Degusta Agosto", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0" );
+control.AltaDeImagenActividad("2maxmx6c.jpeg", "images/2maxmx6c.jpeg", "Degusta Setiembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0" );
+control.AltaDeImagenActividad("2zturssk.jpg", "images/2zturssk.jpg", "Teatro con Sabores 1", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("5d5vm953.jpg", "images/5d5vm953.jpg", "Teatro con Sabores 2", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("5n7ud8e7.jpg", "images/5n7ud8e7.jpg", "Tour Colonia del Sacramento 11-09", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("583b3mbs.jpg", "images/583b3mbs.jpg", "Tour Colonia del Sacramento 18-09", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("mryhyr5f.jpg", "images/mryhyr5f.jpg", "Degusta Octubre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("yzz6b7et.jpeg", "images/yzz6b7et.jpeg", "Degusta Noviembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("mv7etjx2.jpg", "images/mv7etjx2.jpg", "Tour Colonia del Sacramento 30-10", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("3vwzthcr.jpg", "images/3vwzthcr.jpg", "Cabalgata Extrema", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0");
             
             
             

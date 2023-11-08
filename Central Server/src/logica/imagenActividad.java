@@ -6,31 +6,31 @@ package logica;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 
 @Entity
-public class imagenActividad implements Serializable {
+public class imagenActividad implements Serializable {  
     
-    @Id
-    private String nombre; // Nombre como clave primaria
+    private String nombre; 
     
     private String ruta;
     
+    @Id
     private String nombreActividad;
+    
+    private String UrlVideo;
 
-    // Constructor, getters y setters
     
     public imagenActividad() {
     }
     
-    public imagenActividad(String nombre, String ruta, String nombreActividad) {
+    public imagenActividad(String nombre, String ruta, String nombreActividad, String UrlVideo) {
         this.nombre = nombre;
         this.ruta = ruta;
         this.nombreActividad = nombreActividad;
+        this.UrlVideo = UrlVideo;
     }
 
     // Getters y setters para nombre y ruta
@@ -57,5 +57,9 @@ public class imagenActividad implements Serializable {
 
     public void setnombreActividad(Actividad actividad) {
         this.nombreActividad = nombreActividad;
+    }
+    
+    public String getUrlVideo() {
+        return UrlVideo;
     }
 }

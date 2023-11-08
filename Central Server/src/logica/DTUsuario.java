@@ -1,6 +1,8 @@
 
 package logica;
 
+import java.util.List;
+
 
 public class DTUsuario {
 
@@ -10,14 +12,25 @@ public class DTUsuario {
     private String correo;
     private String fNacimiento;
     private String contrasenia;
+    private List<String> listaUsuariosFavoritas;
 
-    public DTUsuario(String nickname, String nombre, String apellido, String correo, String fNacimiento, String contrasenia) {
+        public DTUsuario(String nickname, String nombre, String apellido, String correo, String fNacimiento, String contrasenia) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.fNacimiento = fNacimiento;
         this.contrasenia = contrasenia;
+    }
+
+    public DTUsuario(String nickname, String nombre, String apellido, String correo, String fNacimiento, String contrasenia, List<String> listaUsuariosFavoritas) {
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.fNacimiento = fNacimiento;
+        this.contrasenia = contrasenia;
+        this.listaUsuariosFavoritas = listaUsuariosFavoritas;
     }
 
     public String getNickname() {
@@ -48,7 +61,15 @@ public class DTUsuario {
         return fNacimiento;
     }
     
-    
+    public List<String> getListaUsuariosFavoritas() {
+        return listaUsuariosFavoritas;
+    }
+
+    public void setListaUsuariosFavoritas(List<String> listaUsuariosFavoritas) {
+        this.listaUsuariosFavoritas = listaUsuariosFavoritas;
+    }
+
+
     
     
 }

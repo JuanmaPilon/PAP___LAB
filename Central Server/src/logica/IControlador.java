@@ -17,7 +17,7 @@ public abstract DTImagenActividad buscarImagenPorActividad(String nombreActivida
 public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract DTImagenPerfil buscarImagenPorNickname(String nickname) throws Exception;
-public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad) throws PreexistingEntityException, Exception;
+public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException, Exception;
 public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String descripcion, String link) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception;
 public abstract void AltaCategoria(String nombre) throws PreexistingEntityException, Exception;
@@ -72,8 +72,8 @@ public abstract ArrayList<String> listaActividadesPorEstado(TipoEstado estado) ;
 public abstract void CompraDePaquete(String nickname, String nombrePaquete, int cantTurista, Date fechaCompra) throws PaqueteSinActividad, PaqueteYaComprado;
 public abstract ArrayList<String> listaPaquetesSinCompra();
 public abstract ArrayList<String> listaActividadesTuristicasConfirmadas(String departamentoSeleccionado);
-public abstract ArrayList<String> listaActividadesProveedorConfirmadas (String nicknameProveedor);
-public abstract ArrayList<String> listaActividadesProveedorTodas (String nicknameProveedor);
+public abstract ArrayList<DTActividad> listaActividadesProveedorConfirmadas (String nicknameProveedor);
+public abstract ArrayList<DTActividad> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
 
 public abstract ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
@@ -84,11 +84,25 @@ public abstract Categoria traerCategoria(String categoria);
 
 public abstract Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete);
 public abstract void nuevaCantTurista(Compra compraTurista) throws Exception;
-public abstract DTImagenActividad traerDTImagenActividad(String nombreActividad) throws  Exception;
+public abstract DTImagenActividad traerDTImagenActividad(String nombreActividad);
 
 public abstract DTUsuario traerDTUsuario(String nickname);
 public abstract String devolverTipoUsuario(String nickname);
 public abstract ArrayList listaDTDepartamentos();
 public abstract ArrayList<DTActividad> listaActividadesConfirmadas();
-    public abstract ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista);
+public abstract ArrayList<DTPaquete> listaPaquetesCompradosVigentes(String nicknameTurista);
+public abstract ArrayList<String> listaActividadesTuristicasPorCategoriaConfirmadas(String categoria);
+public abstract boolean actividadSinSalidaVigente(String nombreActividad);
+public abstract void marcarActividadComoFavorita(String nicknameUsuario, String nombreActividad);
+public abstract ArrayList<String> traerActividadesFavoritasDelTurista(String nicknameTurista);
+public abstract void DesMarcarActividad(String usuario, String nombreActividad);
+public abstract void marcarUsuarioComoFavorita(String nicknameUsuario, String nicknameUsuarioFavorito);
+public abstract void DesMarcarUsuarioFavorito(String nickname, String nicknameUsuarioFavorito);
+//public abstract ArrayList<String> traerUsuariosFavoritosDelUsuario(String nicknameUsuario);
+
+public abstract void generarPDFInscripcionSalida(String nickname, String nombreSalida);
+
+public abstract boolean validarNickname(String nickname);
+
+public abstract boolean validarCorreo(String correo);
 }

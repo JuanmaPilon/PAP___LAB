@@ -47,7 +47,7 @@ public class CategoriaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ArrayList<Actividad> attachedListaActividad = new ArrayList<Actividad>();
+            List<Actividad> attachedListaActividad = new ArrayList<Actividad>();
             for (Actividad listaActividadActividadToAttach : categoria.getListaActividad()) {
                 listaActividadActividadToAttach = em.getReference(listaActividadActividadToAttach.getClass(), listaActividadActividadToAttach.getNombre());
                 attachedListaActividad.add(listaActividadActividadToAttach);
@@ -79,7 +79,7 @@ public class CategoriaJpaController implements Serializable {
             Categoria persistentCategoria = em.find(Categoria.class, categoria.getNombre());
             List<Actividad> listaActividadOld = persistentCategoria.getListaActividad();
             List<Actividad> listaActividadNew = categoria.getListaActividad();
-            ArrayList<Actividad> attachedListaActividadNew = new ArrayList<Actividad>();
+           List<Actividad> attachedListaActividadNew = new ArrayList<Actividad>();
             for (Actividad listaActividadNewActividadToAttach : listaActividadNew) {
                 listaActividadNewActividadToAttach = em.getReference(listaActividadNewActividadToAttach.getClass(), listaActividadNewActividadToAttach.getNombre());
                 attachedListaActividadNew.add(listaActividadNewActividadToAttach);

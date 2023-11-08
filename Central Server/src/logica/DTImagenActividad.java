@@ -4,10 +4,6 @@
  */
 package logica;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 public class DTImagenActividad {
     
     private String nombre; 
@@ -16,13 +12,16 @@ public class DTImagenActividad {
     
     private String nombreActividad;
     
+    private String UrlVideo;
+    
     public DTImagenActividad() {
     }
 
-    public DTImagenActividad(String nombre, String ruta, String nombreActividad) {
+    public DTImagenActividad(String nombre, String ruta, String nombreActividad, String UrlVideo) {
         this.nombre = nombre;
         this.ruta = ruta;
         this.nombreActividad = nombreActividad;
+        this.UrlVideo = UrlVideo;
     }
 
 
@@ -50,6 +49,8 @@ public class DTImagenActividad {
         this.nombreActividad = nombreActividad;
     }
     
-    
+    public String getUrlVideo() {
+        return UrlVideo;
+    }
     
 }

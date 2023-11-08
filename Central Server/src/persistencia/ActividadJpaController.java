@@ -48,7 +48,7 @@ public class ActividadJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ArrayList<Paquete> attachedListaPaquete = new ArrayList<Paquete>();
+            List<Paquete> attachedListaPaquete = new ArrayList<Paquete>();
             for (Paquete listaPaquetePaqueteToAttach : actividad.getListaPaquete()) {
                 listaPaquetePaqueteToAttach = em.getReference(listaPaquetePaqueteToAttach.getClass(), listaPaquetePaqueteToAttach.getNombre());
                 attachedListaPaquete.add(listaPaquetePaqueteToAttach);
@@ -80,7 +80,7 @@ public class ActividadJpaController implements Serializable {
             Actividad persistentActividad = em.find(Actividad.class, actividad.getNombre());
             List<Paquete> listaPaqueteOld = persistentActividad.getListaPaquete();
             List<Paquete> listaPaqueteNew = actividad.getListaPaquete();
-            ArrayList<Paquete> attachedListaPaqueteNew = new ArrayList<Paquete>();
+            List<Paquete> attachedListaPaqueteNew = new ArrayList<Paquete>();
             for (Paquete listaPaqueteNewPaqueteToAttach : listaPaqueteNew) {
                 listaPaqueteNewPaqueteToAttach = em.getReference(listaPaqueteNewPaqueteToAttach.getClass(), listaPaqueteNewPaqueteToAttach.getNombre());
                 attachedListaPaqueteNew.add(listaPaqueteNewPaqueteToAttach);

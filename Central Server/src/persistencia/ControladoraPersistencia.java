@@ -206,6 +206,27 @@ public class ControladoraPersistencia {
         }
         return nicknames;
     }
+    
+        public ArrayList<String> listaUsuariosCorreo() {
+        ArrayList<String> correos = new ArrayList<String>();
+        try {
+            List<Turista> turistas = turistaJpa.findTuristaEntities();
+            for (int i = 0; i < turistas.size(); i++) {
+                correos.add(turistas.get(i).getCorreo());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            List<Proveedor> proveedores = proveedorJpa.findProveedorEntities();
+            for (int i = 0; i < proveedores.size(); i++) {
+                correos.add(proveedores.get(i).getCorreo());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return correos;
+    }
 
     public ArrayList<String> listaProveedores() {
         ArrayList<String> nicknames = new ArrayList<String>();
@@ -270,31 +291,7 @@ public class ControladoraPersistencia {
 
     }
 
-    public DTUsuario traerDTUsuario(String nickname) {
-        Usuario usuario = null;
-
-        try {
-            usuario = turistaJpa.findTurista(nickname);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (usuario == null) {
-            try {
-                usuario = proveedorJpa.findProveedor(nickname);
-            } catch (Exception ex) {
-                Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        if (usuario != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String fnac = sdf.format(usuario.getfNacimiento());
-            DTUsuario dtUsuario = new DTUsuario(usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getCorreo(), fnac, usuario.getContrasenia());
-            return dtUsuario;
-        }
-        return null;
-    }
+ 
 
 
 
@@ -618,5 +615,44 @@ public class ControladoraPersistencia {
         }
         return listaActividadesTuristicas;
     }
+    
+    public void marcarActividadComoFavorita(Turista turista) throws Exception{   
+        turistaJpa.edit(turista);
+    }
+    
+    public void DesMarcarActividad(Turista turista) throws Exception{   
+        turistaJpa.edit(turista);
+    }
+    
+    public void marcarUsuarioComoFavorito(Usuario usuario) throws Exception{
+        Usuario usuario2 = usuario;
+        List<String> listaUsuariosFavoritos = usuario.getListaUsuariosFavoritas();
+        
+       if(usuario instanceof Turista ){
+           Turista turista = turistaJpa.findTurista(usuario.getNickname());
+           turista.setListaUsuariosFavoritas((usuario.getListaUsuariosFavoritas()));
+           turistaJpa.edit(turista);
+       } else {
+           Proveedor proveedor = proveedorJpa.findProveedor(usuario.getNickname());
+           proveedor.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
+           proveedorJpa.edit(proveedor);
+       }
+    }
+    
+//    public void DesmarcarUsuarioComoFavorito(Usuario usuario){
+//        Usuario usuario2 = usuario;
+//        List<String> listaUsuariosFavoritos = usuario.getListaUsuariosFavoritas();
+//        
+//       if(usuario instanceof Turista ){
+//           Turista turista = turistaJpa.findTurista(usuario.getNickname());
+//           turista.setListaUsuariosFavoritas((usuario.getListaUsuariosFavoritas()));
+//           turistaJpa.edit(turista);
+//       } else {
+//           Proveedor proveedor = proveedorJpa.findProveedor(usuario.getNickname());
+//           proveedor.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
+//           proveedorJpa.edit(proveedor);
+//       }
+//    }
+
 
 }//fin

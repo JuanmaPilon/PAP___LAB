@@ -21,6 +21,7 @@ public class Turista extends Usuario implements Serializable {
     private List<Inscripcion> listaInscripcion;
     @ElementCollection
     private List<String> listaActividadesFavoritas;
+
     
     public Turista(){
     super();
@@ -30,14 +31,13 @@ public class Turista extends Usuario implements Serializable {
     }
     
 
-    public Turista(String nacionalidad, List<Compra> listaCompras, List<Inscripcion> listaInscripcion, List<String> listaActividadesFavoritas, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento) {
-        super(nickname, contrasenia, nombre, apellido, correo, fNacimiento);
+    public Turista(String nacionalidad, List<Compra> listaCompras, List<Inscripcion> listaInscripcion, List<String> listaActividadesFavoritas, String nickname, String contrasenia, String nombre, String apellido, String correo, Date fNacimiento, List<String> listaUsuariosFavoritos) {
+        super(nickname, contrasenia, nombre, apellido, correo, fNacimiento, listaUsuariosFavoritos);
         this.nacionalidad = nacionalidad;
         this.listaCompras = listaCompras;
         this.listaInscripcion = listaInscripcion;
         this.listaActividadesFavoritas = listaActividadesFavoritas;
     }
-
 
     public String getNacionalidad() {
         return nacionalidad;
@@ -63,13 +63,14 @@ public class Turista extends Usuario implements Serializable {
         this.listaInscripcion = listaInscripcion;
     }
     
-      public List<String> getListaActividadesFavoritas() {
+    public List<String> getListaActividadesFavoritas() {
         return listaActividadesFavoritas;
     }
 
     public void setListaActividadesFavoritas(List<String> listaActividadesFavoritas) {
         this.listaActividadesFavoritas = listaActividadesFavoritas;
     }
+    
 
 
 }
