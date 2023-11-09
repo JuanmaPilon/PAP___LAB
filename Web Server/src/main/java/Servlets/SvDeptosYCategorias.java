@@ -31,7 +31,17 @@ public class SvDeptosYCategorias extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // Obtener el agente de usuario del header
+    String userAgent = request.getHeader("User-Agent");
 
+    // Verificar si el agente de usuario indica un dispositivo móvil (puedes ajustar la condición según tus necesidades)
+    if (userAgent != null && (userAgent.contains("Android") || userAgent.contains("iPhone") || userAgent.contains("Mobile"))) {
+        // Redirigir a la versión móvil
+        response.sendRedirect("homeMovil.jsp");
+        return;  // Asegúrate de terminar la ejecución del servlet después de la redirección
+    }
+        
         HttpSession misesion = request.getSession();
 
         ArrayList<String> categoriasConActividadesConfirmadas = new ArrayList<>();       

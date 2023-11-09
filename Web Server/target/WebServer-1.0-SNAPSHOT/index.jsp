@@ -9,6 +9,16 @@
         <link href="styles.css" src="styles.css"">
         <title>Turismo.uy - Reserva de Paquetes Turísticos</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
+    <script>
+  
+        function redirigirSiEsMovil() {
+            if (window.innerWidth <= 800) {
+                window.location.href = 'homeMovil.jsp';
+            }
+        }
+        document.addEventListener("DOMContentLoaded", redirigirSiEsMovil);
+        window.addEventListener("resize", redirigirSiEsMovil);
+    </script>
     </head>
     <body >
         <%
