@@ -115,7 +115,7 @@ public class SvSalida extends HttpServlet {
         }
 
         String nombreActividad = (String) request.getParameter("actividad");
-
+        System.out.println(nombreActividad);
         DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
         ArrayList<DTSalidaTuristica> salidas = control.encontraSalidasTuristicasDeActividad(nombreActividad);
 

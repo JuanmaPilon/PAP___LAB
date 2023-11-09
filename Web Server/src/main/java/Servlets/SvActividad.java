@@ -53,19 +53,23 @@ public class SvActividad extends HttpServlet {
         String filtro = request.getParameter("filtro");
 
         if ("FiltroDepartamento".equals(filtro)) {
+            System.out.println("Servlets.SvActividad.doGet()1");
             String departamentoSeleccionado = request.getParameter("departamento");
-
+            
+            
+            System.out.println("Servlets.SvActividad.doGet()2");
             ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicasConfirmadas(departamentoSeleccionado);
             String actividades = String.join(",", listaActividadesDepartamento);
-
+            System.out.println("Servlets.SvActividad.doGet()3");
             if (actividades.isEmpty()) {
                 // Si la lista de actividades está vacía, envía una respuesta indicando que no hay actividades disponibles
                 actividades = "No hay actividades disponibles para este departamento";
             }
-
+             System.out.println("Servlets.SvActividad.doGet()4");
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(actividades);
+            System.out.println("Servlets.SvActividad.doGet()5");
 
         } else if ("FiltroCategoria".equals(filtro)) {
 
