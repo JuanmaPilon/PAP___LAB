@@ -17,6 +17,8 @@ import logica.DTUsuario;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.Usuario;
+import webServices.WebServices;
+import webServices.WebServicesService;
 
 
 @WebServlet(name = "SvAutenticarUsuario", urlPatterns = {"/SvAutenticarUsuario"})
@@ -42,7 +44,15 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         request.getSession().setAttribute("usuario", usuario);  // Si el usuario es autenticado, puedes almacenar información de sesión
         //Usuario usu = control.ConsultaDeUsuario(usuario);
         DTUsuario usu = control.traerDTUsuario(usuario);
-        String tipoUsuario = control.devolverTipoUsuario(usu.getNickname());
+        
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
+        String tipoUsuario = port.devolverTipoUsuario(usu.getNickname());
+        
+        System.out.println("LLAMADO DE WSDL TIPO USUARIO"+tipoUsuario);
+        
+        //String tipoUsuario = control.devolverTipoUsuario(usu.getNickname());
         
         if(tipoUsuario.equals("turista")){
             ArrayList<String> actividadesFavoritas = control.traerActividadesFavoritasDelTurista(usuario);

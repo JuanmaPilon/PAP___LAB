@@ -9,7 +9,7 @@ import logica.Inscripcion;
 import logica.Paquete;
 import logica.Turista;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-11-09T23:13:37")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2023-11-10T03:01:59")
 @StaticMetamodel(Compra.class)
 public class Compra_ { 
 

@@ -31,12 +31,13 @@ logica\SalidaTuristica_.class
 Servlets\SvUsuario.class
 persistencia\PaqueteJpaController.class
 Servlets\SvValidarNickname.class
+webServices\WebServicesService.class
 logica\DTProveedor.class
+webServices\WebServices.class
 logica\DTActividad.class
 Servlets\SvPerfilPaquete.class
 persistencia\ControladoraPersistencia.class
 logica\Fabrica.class
-.netbeans_automatic_build
 logica\exceptions\NonexistentEntityException.class
 Servlets\SvPerfilActividad.class
 logica\Actividad_.class
