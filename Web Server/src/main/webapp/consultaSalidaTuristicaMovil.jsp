@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-12">
                     <h2>Seleccionar Departamento o Categoría</h2>
-                    <form id="consultaForm" action="SvSalida" method="GET">
+                    <form id="consultaForm" >
                         <div class="mb-3">
                             <label for="departamento" class="form-label">Departamento:</label>
                             <select class="form-select" id="departamento" name="departamento">
@@ -61,17 +61,20 @@
                             </select>
                         </div>
                         <button type="button" class="btn btn-primary" onclick="filtrarPorCategoria()">Filtrar por Categoría</button>
-
-                        <button type="submit" class="btn btn-primary">Consultar</button>
-                        <div class="container mt-5">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h2>Salidas Turisticas Disponibles</h2>
-                                    <select class="form-select" id="actividad" name="actividad">
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="actividad" class="form-label">Actividades:</label>
+                            <select class="form-select" id="actividad" name="actividad">
+                            </select>
                         </div>
+                        <button type="button" class="btn btn-primary" onclick="cargarSalidasDeActividad()">Cargar Salidas de la Actividad</button>
+                        <div class="mb-3">
+                            <label for="actividadSalida" class="form-label">Salidas:</label>
+                            <select class="form-select" id="actividadSalida" name="actividadSalida">
+                            </select>
+                        </div>
+
+
+                        <button id="consultar" type="submit" class="btn btn-primary">Consultar</button>
                     </form>
                 </div>
             </div>
@@ -80,18 +83,13 @@
 
 
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12">
-                    <h2>Detalles de la Salida Turstica</h2>
+        
 
-                    <p>Nombre:</p>
-                    <p>Fecha: </p>
-                    <p>Lugar:</p>
-                    <img src="imagen_salida_turistica.jpg" alt="Salida Turística 1">
-                </div>
-            </div>
-        </div>
+
+                    <section id="datosSalida" >
+
+                    </section>
+            
 
         <%
             String filtro = "";
@@ -113,6 +111,30 @@
                             });
                         })
                         .catch(error => console.error("Error al cargar departamentos: " + error));
+            }
+            function cargarSalidasDeActividad() {
+                //  const filtro = "FiltroSalidasPorNomActividad";
+                const actividadSeleccionada = document.getElementById("actividad").value;
+                const url = "SvInscripcion?actividad=" + encodeURIComponent(actividadSeleccionada);
+                console.log("cargar salidas");
+                fetch(url)
+                        .then(response => response.text()) // Espera datos de texto
+                        .then(data => {
+                            const select = document.getElementById("actividadSalida");
+
+                            select.innerHTML = ''; // Limpia las opciones anteriores
+
+                            const actividadSalidas = data.split(",");
+                            actividadSalidas.forEach(actividadSalida => {
+                                if (actividadSalida) { // Evita opciones vacías
+                                    const option = document.createElement("option");
+                                    option.value = actividadSalida;
+                                    option.text = actividadSalida;
+                                    select.appendChild(option);
+                                }
+                            });
+                        })
+                        .catch(error => console.error("Error al cargar las salidas: " + error));
             }
 
             function cargarCategorias() {
@@ -196,16 +218,40 @@
                 cargarDepartamentos();
                 cargarCategorias();
 
-                const consultaForm = document.getElementById("consultaForm");
 
-                consultaForm.addEventListener("submit", function (event) {
-                    const actividadSeleccionada = document.getElementById("actividad").value;
-                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento" || actividadSeleccionada === "" || actividadSeleccionada === null) {
-                        event.preventDefault(); // Prevenir el envío del formulario
-                        alert("Por favor, selecciona una actividad válida."); // Mostrar mensaje de error
-                    }
-                });
             }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                // Obtén el formulario de consulta
+                var consultaForm = document.getElementById("consultaForm");
+
+                // Agrega un controlador de eventos para el envío del formulario
+                consultaForm.addEventListener("submit", function (event) {
+                    // Previene el envío del formulario
+                    event.preventDefault();
+
+                    // Crea una nueva instancia de XMLHttpRequest
+                    var xhr = new XMLHttpRequest();
+
+                    // Obtiene el valor seleccionado del campo de salida turística
+                    var actividadSalidaId = document.getElementById("actividadSalida").value;
+                    var url = "SvConsultaSalidaMovil?actividadSalidaId=" + actividadSalidaId;
+                    console.log("url: " + url);
+                    // Realiza una solicitud al servidor para obtener los datos de la salida turística
+                    xhr.open("GET", url, true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // Manejar la respuesta del servidor y mostrar las actividades en el contenedor
+                            var datosSalida = document.getElementById("datosSalida");
+                            datosSalida.innerHTML = xhr.responseText;
+                        }
+                    };
+                    xhr.send();
+                });
+            });
+
+
+
         </script>
 
         <div style="background-color:#e5e5e5;text-align:center;padding:10px;margin-top:7px;">Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola - &copy; 2023 Turismo.uy</div>

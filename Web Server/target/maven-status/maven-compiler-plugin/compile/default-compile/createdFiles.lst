@@ -20,6 +20,7 @@ logica\Turista.class
 logica\TipoPago.class
 logica\imagenActividad.class
 Servlets\SvPaquetesDeSalida.class
+Servlets\SvConsultaSalidaMovil.class
 logica\exceptions\ConstraseniasDistintas.class
 Servlets\SvProveedor.class
 persistencia\InscripcionJpaController.class
@@ -35,6 +36,7 @@ logica\DTActividad.class
 Servlets\SvPerfilPaquete.class
 persistencia\ControladoraPersistencia.class
 logica\Fabrica.class
+.netbeans_automatic_build
 logica\exceptions\NonexistentEntityException.class
 Servlets\SvPerfilActividad.class
 logica\Actividad_.class
