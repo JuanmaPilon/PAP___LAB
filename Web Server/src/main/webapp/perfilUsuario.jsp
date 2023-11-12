@@ -1,5 +1,6 @@
+<%@page import="WebServices.DtUsuario"%>
 <%@page import="logica.DTActividad"%>
-<%@page import="logica.DTUsuario"%>
+
 <%@page import="logica.Usuario" %>
 <%@page import="logica.Proveedor" %>
 <%@page import="logica.Turista" %>
@@ -16,11 +17,11 @@
 
         <%
             String usuario = (String) request.getSession().getAttribute("usuario");
-            DTUsuario usuYo = (DTUsuario) request.getSession().getAttribute("usu");
-            DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usuPerfil");
+            DtUsuario usuYo = (DtUsuario) request.getSession().getAttribute("usu");
+            DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usuPerfil");
             String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
             String tipoUsuarioConsultado = (String) request.getSession().getAttribute("tipoUsuarioConsultado");
-            ArrayList<String> usuariosFavoritos = (ArrayList<String>) request.getSession().getAttribute("usuariosFavoritos");
+            List<String> usuariosFavoritos = (ArrayList<String>) request.getSession().getAttribute("usuariosFavoritos");
         %>
         <meta charset="UTF-8">
         <link href="styles.css" src="styles.css"">
@@ -102,7 +103,7 @@
             <h1>Usuario: <%=usu.getNombre()%></h1>
             <% 
 if (tipoUsuario != null) {
-if(usuYo.getListaUsuariosFavoritas().contains(usu.getNickname())){
+if(!usuYo.getListaUsuariosFavoritas().isEmpty() && usuYo.getListaUsuariosFavoritas().contains(usu.getNickname())){
                 
                 
             %>
@@ -169,7 +170,7 @@ if(usuYo.getListaUsuariosFavoritas().contains(usu.getNickname())){
                         <p><b>Nombre:</b> <%=usu.getNombre()%></p>
                         <p><b>Apellido:</b> <%=usu.getApellido()%></p>
                         <p><b>Email:</b> <%=usu.getCorreo()%></p>
-                        <p><b>Fecha de Nacimiento:</b> <%=usu.getfNacimiento()%></p>
+                        <p><b>Fecha de Nacimiento:</b> <%=usu.getFNacimiento()%></p>
                         <h3>Usuarios Favoritos:</h3>
                         <ul>
                             <% for (String usuarioFavorito : usu.getListaUsuariosFavoritas()) {%>

@@ -1,5 +1,12 @@
 package Servlets;
 
+import WebServices.DtActividad;
+import WebServices.DtImagenPerfil;
+import WebServices.DtProveedor;
+import WebServices.DtSalidaTuristica;
+import WebServices.DtTurista;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +34,8 @@ import logica.ImagenPerfil;
 @WebServlet(name = "SvPerfilUsuario", urlPatterns = {"/SvPerfilUsuario"})
 public class SvPerfilUsuario extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,32 +45,38 @@ public class SvPerfilUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         HttpSession misesion = request.getSession();
         String usuarioSeleccionado = request.getParameter("usuario");
-        String tipoUsuarioConsultado = control.devolverTipoUsuario(usuarioSeleccionado);
+        String tipoUsuarioConsultado = port.devolverTipoUsuario(usuarioSeleccionado);
 
         if (tipoUsuarioConsultado.equals("turista")) {
-            DTTurista dtTurista = (DTTurista) control.traerDTUsuario(usuarioSeleccionado);
+            
+            //DtTurista dtTurista = (DtTurista) port.traerDTTurista(usuarioSeleccionado);
+            DtTurista dtTurista = (DtTurista) port.traerDTUsuario(usuarioSeleccionado);
             misesion.setAttribute("usuPerfil", dtTurista);
 
             //salidas a las que se inscribio
             String usuario = (String) request.getSession().getAttribute("usuario");
             String tur = dtTurista.getNickname();
-            System.out.println("Servlets.SvPerfilUsuario.doGet()" + usuario +" tur " + tur);
+            //System.out.println("Servlets.SvPerfilUsuario.doGet()" + usuario +" tur " + tur);
             if (tur.equals(usuario)) {
-
-                List<DTSalidaTuristica> listaSalidas = control.traerInscSalidasDeTurista(dtTurista.getNickname());
+                
+                List<DtSalidaTuristica> listaSalidas = port.traerInscSalidasDeTurista(dtTurista.getNickname()).getLista();
                 ArrayList<String> nombresSalidasTurista = new ArrayList<>();
-                for (DTSalidaTuristica dt : listaSalidas) {
+                for (DtSalidaTuristica dt : listaSalidas) {
                     nombresSalidasTurista.add(dt.getNombre());
                 }
                 misesion.setAttribute("nombresSalidas", nombresSalidasTurista);
 
-                ArrayList<String> paquetesComprados = control.listaPaquetesComprados(tur);
+                List<String> paquetesComprados = port.listaPaquetesComprados(tur).getLista();
                 misesion.setAttribute("nombresPaquetes", paquetesComprados);
             }
         } else if (tipoUsuarioConsultado.equals("proveedor")) {
-            DTProveedor dtProveedor = (DTProveedor) control.traerDTUsuario(usuarioSeleccionado);
+            DtProveedor dtProveedor = port.traerDTProveedor(usuarioSeleccionado);
             misesion.setAttribute("usuPerfil", dtProveedor);
             System.out.println(dtProveedor.getNickname() + ": es proveedor");
 
@@ -71,28 +84,28 @@ public class SvPerfilUsuario extends HttpServlet {
 
             String prov = dtProveedor.getNickname();
             if (prov.equals(usuario)) {//si es proveedor y esta mirando su propio perfil
-                ArrayList<DTActividad> listaActividadesProveedor = control.listaActividadesProveedorTodas(prov);
+                List<DtActividad> listaActividadesProveedor = port.listaActividadesProveedorTodas(prov).getLista();
                 misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedor);
                 // se muestran todas sus actividades, no solo las confirmadas
 
             } else {//si es proveedor pero no esta mirando su propio perfil
                 //actividades turisticas que ofrece en estado confirmado           
-                ArrayList<DTActividad> listaActividadesProveedorConfirmadas = control.listaActividadesProveedorConfirmadas(dtProveedor.getNickname());
+                List<DtActividad> listaActividadesProveedorConfirmadas = port.listaActividadesProveedorConfirmadas(dtProveedor.getNickname()).getLista();
                 misesion.setAttribute("listaActividadesProveedor", listaActividadesProveedorConfirmadas);
             }
 
             //salidas asociadas a el
-            List<DTSalidaTuristica> listaSalidas = control.traerSalidasDelProveedor(dtProveedor.getNickname());
+            List<DtSalidaTuristica> listaSalidas = port.traerSalidasDelProveedor(dtProveedor.getNickname()).getLista();
             ArrayList<String> nombresSalidasProveedor = new ArrayList<>();
-            for (DTSalidaTuristica dt : listaSalidas) {
+            for (DtSalidaTuristica dt : listaSalidas) {
                 nombresSalidasProveedor.add(dt.getNombre());
             }
             misesion.setAttribute("nombresSalidas", nombresSalidasProveedor);
         }
 
-        DTImagenPerfil imagen;
+        DtImagenPerfil imagen;
         try {
-            imagen = control.buscarImagenPorNickname(usuarioSeleccionado);
+            imagen = port.buscarImagenPorNickname(usuarioSeleccionado);
 
             String imagenRuta = imagen.getRuta();
             misesion.setAttribute("imagen", imagenRuta);
@@ -107,12 +120,14 @@ public class SvPerfilUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         HttpSession misesion = request.getSession();
         String usuario = request.getParameter("usuario");
         String nombreSalida = request.getParameter("nombreSalida");
         
-        control.generarPDFInscripcionSalida(usuario, nombreSalida);
+        //port.generarPDFInscripcionSalida(usuario, nombreSalida);
 
     }
 

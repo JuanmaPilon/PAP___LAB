@@ -4,6 +4,9 @@
  */
 package Servlets;
 
+import WebServices.DtUsuario;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -17,8 +20,6 @@ import logica.DTUsuario;
 import logica.Fabrica;
 import logica.IControlador;
 import logica.Usuario;
-import webServices.WebServices;
-import webServices.WebServicesService;
 
 
 @WebServlet(name = "SvAutenticarUsuario", urlPatterns = {"/SvAutenticarUsuario"})
@@ -42,12 +43,17 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
     if (autenticado) {
         request.getSession().setAttribute("usuario", usuario);  // Si el usuario es autenticado, puedes almacenar información de sesión
-        //Usuario usu = control.ConsultaDeUsuario(usuario);
-        DTUsuario usu = control.traerDTUsuario(usuario);
-        
+
         //llamado a wsdl
         WebServicesService service = new WebServicesService();
         WebServices port = service.getWebServicesPort();
+        DtUsuario usu  = port.traerDTUsuario(usuario);
+        
+       // DTUsuario usu = control.traerDTUsuario(usuario);
+        
+        //llamado a wsdl
+       // WebServicesService service = new WebServicesService();
+        // WebServices port = service.getWebServicesPort();
         String tipoUsuario = port.devolverTipoUsuario(usu.getNickname());
         
         System.out.println("LLAMADO DE WSDL TIPO USUARIO"+tipoUsuario);

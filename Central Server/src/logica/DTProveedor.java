@@ -4,10 +4,15 @@
  */
 package logica;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author natil
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTProveedor extends DTUsuario{
     private String descripcion;
     private String link;

@@ -41,7 +41,7 @@ public class TuristaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-     public void create(Turista turista) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
+     public void create(Turista turista) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException {
     EntityManager em = null;
     try {
         em = getEntityManager();

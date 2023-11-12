@@ -41,7 +41,7 @@ public class ProveedorJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-   public void create(Proveedor proveedor) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
+   public void create(Proveedor proveedor) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException{
     EntityManager em = null;
     try {
         em = getEntityManager();

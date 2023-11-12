@@ -1,5 +1,7 @@
 package Servlets;
 
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,8 +16,8 @@ import org.json.simple.JSONObject;
 @WebServlet(name = "SvValidarNickname", urlPatterns = {"/SvValidarNickname"})
 public class SvValidarNickname extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,10 +35,11 @@ public class SvValidarNickname extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         String nickname = request.getParameter("nickname");
 
-        boolean nicknameDisponible = control.validarNickname(nickname);
+        boolean nicknameDisponible = port.validarNickname(nickname);
 
         if (nicknameDisponible) {
             response.setContentType("text/html");

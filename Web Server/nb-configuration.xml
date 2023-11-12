@@ -14,6 +14,12 @@ That way multiple projects can share the same settings (useful for formatting ru
 Any value defined here will override the pom.xml file value but is only applicable to the current project.
 -->
         <org-netbeans-modules-maven-jaxws.rest_2e_config_2e_type>ide</org-netbeans-modules-maven-jaxws.rest_2e_config_2e_type>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_7>http://localhost:9128/webservices?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_7>
         <org-netbeans-modules-maven-jaxws._5f_C_5f_webservices>http://localhost:9128/webservices?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_webservices>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_1>http://localhost:9128/webservices?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_1>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_2>http://localhost:9128/webservices?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_2>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_3>http://localhost:9128/webservices?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_3>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_4>http://localhost:9128/webservices?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_4>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_5>http://localhost:9128/webservices?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_webservices_5f_5>
     </properties>
 </project-shared-configuration>

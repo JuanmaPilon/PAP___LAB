@@ -1,4 +1,4 @@
-<%@page import="logica.DTUsuario"%>
+<%@page import="WebServices.DtUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="logica.Usuario" %>
 <%@page import="logica.Proveedor" %>
@@ -13,7 +13,7 @@
         ArrayList<String> listaDepartamentos = (ArrayList<String>) request.getSession().getAttribute("listaDepartamentos");
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
         String usuario = (String) request.getSession().getAttribute("usuario");
-        DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
+        DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usu");
     %>
     <head>
         <meta charset="UTF-8">

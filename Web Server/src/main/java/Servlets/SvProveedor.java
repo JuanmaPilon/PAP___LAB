@@ -1,5 +1,9 @@
 package Servlets;
 
+import WebServices.CorreoElectronicoExistenteException_Exception;
+import WebServices.PreexistingEntityException_Exception;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,8 +35,8 @@ import persistencia.exceptions.PreexistingEntityException;
 )
 public class SvProveedor extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+   // IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,6 +53,9 @@ public class SvProveedor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+                    //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
             Date fNacimiento = null;
 
             String nickname = request.getParameter("nickname");
@@ -73,7 +80,7 @@ public class SvProveedor extends HttpServlet {
             String nombreArchivo = null;
             String rutaImagenNueva = null;
 
-            control.AltaDeUsuarioProveedor(nickname, nombre, apellido, contrasenia, correo, fNacimiento, descripcion, link);
+            port.altaDeUsuarioProveedor(nickname, nombre, apellido, contrasenia, correo, fechaNacimientoString, descripcion, link);
 
             if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
@@ -87,7 +94,7 @@ public class SvProveedor extends HttpServlet {
                     String rutaRelativa = "images" + File.separator + nombreArchivo;
 
                     try {
-                        control.AltaDeImagenPerfil(nombreArchivo, rutaRelativa, nombre);
+                        port.altaDeImagenPerfil(nombreArchivo, rutaRelativa, nombre);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         String errorMessage = "Ya existe otro usuario con esa imagen, se ha dado de alta el usuario sin imagen";
@@ -98,13 +105,13 @@ public class SvProveedor extends HttpServlet {
                 }
             }
           response.sendRedirect("login.jsp");
-        } catch (PreexistingEntityException ex) {
+        } catch (PreexistingEntityException_Exception ex) {
             ex.printStackTrace();
             String errorMessage = "Ya existe otro usuario con ese nickname";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaUsuario.jsp';</script>";
             response.getWriter().write(alertScript);
 
-        } catch (CorreoElectronicoExistenteException ex) {
+        } catch (CorreoElectronicoExistenteException_Exception ex) {
             ex.printStackTrace();
             String errorMessage = "Ya existe otro usuario con ese correo";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaUsuario.jsp';</script>";

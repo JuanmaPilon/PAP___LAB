@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://webServices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webServices/">
+
+<xs:element name="CorreoElectronicoExistenteException" type="tns:CorreoElectronicoExistenteException"></xs:element>
+
+<xs:element name="ImagenPorNicknameNoExite" type="tns:ImagenPorNicknameNoExite"></xs:element>
+
+<xs:element name="NicknameExistenteException" type="tns:NicknameExistenteException"></xs:element>
+
+<xs:element name="PreexistingEntityException" type="tns:PreexistingEntityException"></xs:element>
+
+<xs:element name="listaDTActividad" type="tns:listaDTActividad"></xs:element>
+
+<xs:element name="listaDTSalidaTuristica" type="tns:listaDTSalidaTuristica"></xs:element>
+
+<xs:element name="listaString" type="tns:listaString"></xs:element>
+
+<xs:complexType name="listaDTSalidaTuristica">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtSalidaTuristica" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtSalidaTuristica">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cantMax" type="xs:int"></xs:element>
+<xs:element name="fAlta" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="fSalida" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="lugar" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombreActividad" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDTActividad">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtActividad" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtActividad">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="duracion" type="xs:int"></xs:element>
+<xs:element name="costo" type="xs:float"></xs:element>
+<xs:element name="ciudad" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fAlta" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="estado" type="tns:tipoEstado" minOccurs="0"></xs:element>
+<xs:element name="listaNombresSalidaTuristica" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="listaNombresPaquete" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="nombreDepartamento" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombreProveedor" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="listaNombresCategoria" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtProveedor">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="link" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dtUsuario">
+<xs:sequence>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fNacimiento" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contrasenia" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="listaUsuariosFavoritas" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtImagenPerfil">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="ruta" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameUsuario" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ImagenPorNicknameNoExite">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaString">
+<xs:sequence>
+<xs:element name="lista" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="PreexistingEntityException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtTurista">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="nacionalidad" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="NicknameExistenteException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="CorreoElectronicoExistenteException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="tipoEstado">
+<xs:restriction base="xs:string">
+<xs:enumeration value="agregada"></xs:enumeration>
+<xs:enumeration value="confirmada"></xs:enumeration>
+<xs:enumeration value="rechazada"></xs:enumeration>
+<xs:enumeration value="finalizada"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

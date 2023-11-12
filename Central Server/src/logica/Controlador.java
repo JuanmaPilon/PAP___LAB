@@ -1,5 +1,6 @@
 package logica;
 
+import logica.exceptions.ImagenPorNicknameNoExite;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -65,10 +66,16 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public DTImagenPerfil buscarImagenPorNickname(String nickname) throws Exception {
-        ImagenPerfil imagen = controlPersis.buscarImagen(nickname);
-        DTImagenPerfil dtImagen = new DTImagenPerfil(imagen.getNombre(), imagen.getRuta(), imagen.getNicknameUsuario());
-        return dtImagen;
+    public DTImagenPerfil buscarImagenPorNickname(String nickname) throws ImagenPorNicknameNoExite {
+
+        try {
+            ImagenPerfil imagen = controlPersis.buscarImagen(nickname);
+            DTImagenPerfil dtImagen = new DTImagenPerfil(imagen.getNombre(), imagen.getRuta(), imagen.getNicknameUsuario());
+            return dtImagen;
+        } catch (Exception e) {
+
+            throw new ImagenPorNicknameNoExite("No hay imagen para dicha actividad");
+        }
 
     }
 
@@ -78,15 +85,13 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void AltaDeImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception {
+    public void AltaDeImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException {
         try {
             ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
             controlPersis.guardarImagenPerfil(imagenPerfil);
         } catch (PreexistingEntityException e) {
             throw new PreexistingEntityException("Imagen ya en uso por otro usuario");
-        } catch (Exception ex) {
-            throw new Exception("Imagen ya en uso por otro usuario");
-        }
+        } 
 
     }
 
@@ -100,7 +105,7 @@ public class Controlador implements IControlador {
 
     @Override
     public void AltaDeUsuarioTurista(String nickname, String nombre, String apellido, String contrasenia, String correo,
-            Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception {
+            Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException {
 
         Turista turista = new Turista();
         turista.setNickname(nickname);
@@ -131,7 +136,7 @@ public class Controlador implements IControlador {
    
     @Override
     public void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo,
-            Date fNacimiento, String descripcion, String link) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException, Exception {
+            Date fNacimiento, String descripcion, String link) throws CorreoElectronicoExistenteException, NicknameExistenteException, PreexistingEntityException {
         Proveedor proveedor = new Proveedor();
         proveedor.setNickname(nickname);
         proveedor.setNombre(nombre);
@@ -425,7 +430,7 @@ public class Controlador implements IControlador {
         String fnac = sdf.format(t.getfNacimiento());
 
         return new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
-                fnac, t.getContrasenia(), t.getNacionalidad());
+                fnac, t.getNacionalidad(), t.getContrasenia());
     }
     //Devuelve DTProveedor del Proveedor a partir del nickname
 
@@ -891,8 +896,8 @@ public class Controlador implements IControlador {
         for (Actividad a : listaActividades) {
             if (a.getProveedor().getNickname().equals(nicknameProveedor) && a.getEstado().equals(TipoEstado.confirmada)) {
                 DTActividad dta = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), a.getCiudad(), a.getfAlta(),
-                a.getEstado(), a.getDepartamento().getNombre(), a.getProveedor().getNickname());
-                
+                        a.getEstado(), a.getDepartamento().getNombre(), a.getProveedor().getNickname());
+
                 listaActividadesProveedorConfirmadas.add(dta);
             }
         }
@@ -912,8 +917,8 @@ public class Controlador implements IControlador {
                 //DTActividad(String nombre, String descripcion, int duracion, float costo, String ciudad, Date fAlta,
                 //TipoEstado estado, String nombreDepartamento, String nombreProveedor)
                 DTActividad dta = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), a.getCiudad(), a.getfAlta(),
-                a.getEstado(), a.getDepartamento().getNombre(), a.getProveedor().getNickname());
-                
+                        a.getEstado(), a.getDepartamento().getNombre(), a.getProveedor().getNickname());
+
                 listaActividadesProveedorTodas.add(dta);
             }
         }
@@ -1121,8 +1126,8 @@ public class Controlador implements IControlador {
     public void generarPDFInscripcionSalida(String nickname, String nombreSalida) {
         Document document = new Document();
         //String outputPath = System.getProperty("catalina.base") + File.separator + "webapps" + File.separator + "TuAppName" + File.separator + "PDFs" + File.separator + nickname + ".pdf";
-        
-       String outputPath = "\\PDFs\\"+nickname+".pdf";
+
+        String outputPath = "\\PDFs\\" + nickname + ".pdf";
         try {
             PdfWriter.getInstance(document, new FileOutputStream(outputPath));
             document.open();
@@ -1147,7 +1152,7 @@ public class Controlador implements IControlador {
                     // Saltar una línea en blanco
                     document.add(new Paragraph(" "));
                     document.add(new Paragraph(" "));
-                   
+
                     document.add(new Paragraph("Nombre Turista: " + t.getNombre()));
                     document.add(new Paragraph("Nombre Actividad: " + dtSalida.getNombreActividad()));
                     document.add(new Paragraph("Nombre Salida Turistica: " + dtSalida.getNombre()));
@@ -1174,25 +1179,27 @@ public class Controlador implements IControlador {
 
     @Override
     //devuelve false si el nickname ya existe en la BD
-    public boolean validarNickname(String nickname){
-        
+    public boolean validarNickname(String nickname) {
+
         ArrayList<String> listaUsuariosTotal = controlPersis.listaUsuarios();
-        if (!listaUsuariosTotal.contains(nickname))
+        if (!listaUsuariosTotal.contains(nickname)) {
             return true;
-        else return false;
-    
+        } else {
+            return false;
+        }
+
     }
-    
-    
+
     @Override
-    public boolean validarCorreo(String correo){
-        
+    public boolean validarCorreo(String correo) {
+
         ArrayList<String> listaUsuariosCorreoTotal = controlPersis.listaUsuariosCorreo();
-        if (!listaUsuariosCorreoTotal.contains(correo))
+        if (!listaUsuariosCorreoTotal.contains(correo)) {
             return true;
-        else return false;
-    
+        } else {
+            return false;
+        }
+
     }
-    
-    
+
 }

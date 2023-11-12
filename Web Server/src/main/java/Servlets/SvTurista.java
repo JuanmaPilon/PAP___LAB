@@ -1,5 +1,9 @@
 package Servlets;
 
+import WebServices.CorreoElectronicoExistenteException_Exception;
+import WebServices.PreexistingEntityException_Exception;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,6 +12,7 @@ import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -31,9 +36,8 @@ import persistencia.exceptions.PreexistingEntityException;
 )
 public class SvTurista extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
-
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -48,8 +52,12 @@ public class SvTurista extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         try {
             Date fNacimiento = null;
+            GregorianCalendar cal = new GregorianCalendar();
 
             String nickname = request.getParameter("nickname");
             String nombre = request.getParameter("nombre");
@@ -66,13 +74,16 @@ public class SvTurista extends HttpServlet {
                 Date fechaNacimientoDate = formatoEntrada.parse(fechaNacimientoString);
                 String fechaFormateada = formatoSalida.format(fechaNacimientoDate);
                 fNacimiento = formatoSalida.parse(fechaFormateada);
+
+                
+                cal.setTime(fNacimiento);
             }
 
             Part archivo = request.getPart("file");
             String nombreArchivo = null;
             String rutaImagenNueva = null;
 
-            control.AltaDeUsuarioTurista(nickname, nombre, apellido, contrasenia, correo, fNacimiento, nacionalidad);
+            port.altaDeUsuarioTurista(nickname, nombre, apellido, contrasenia, correo, fechaNacimientoString, nacionalidad);
 
             if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
@@ -86,7 +97,7 @@ public class SvTurista extends HttpServlet {
                     String rutaRelativa = "images" + File.separator + nombreArchivo;
 
                     try {
-                        control.AltaDeImagenPerfil(nombreArchivo, rutaRelativa, nombre);
+                        port.altaDeImagenPerfil(nombreArchivo, rutaRelativa, nombre);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         String errorMessage = "Ya existe otro usuario con esa imagen, se ha dado de alta el usuario sin imagen";
@@ -99,13 +110,13 @@ public class SvTurista extends HttpServlet {
             }
 
             response.sendRedirect("login.jsp");
-        } catch (PreexistingEntityException ex) {
+        } catch (PreexistingEntityException_Exception ex) {
             ex.printStackTrace();
             String errorMessage = "Ya existe otro usuario con ese nickname";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaUsuario.jsp';</script>";
             response.getWriter().write(alertScript);
 
-        } catch (CorreoElectronicoExistenteException ex) {
+        } catch (CorreoElectronicoExistenteException_Exception ex) {
             ex.printStackTrace();
             String errorMessage = "Ya existe otro usuario con ese correo";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaUsuario.jsp';</script>";

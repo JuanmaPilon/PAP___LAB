@@ -1,6 +1,13 @@
 package Servlets;
 
+
+import WebServices.DtUsuario;
+import WebServices.ListaString;
+
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +21,8 @@ import logica.IControlador;
 @WebServlet(name = "SvUsuario", urlPatterns = {"/SvUsuario"})
 public class SvUsuario extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+//    Fabrica fabrica = Fabrica.getInstance();
+//    IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,7 +31,12 @@ public class SvUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<String> listaUsuarios = control.listaUsuarios();
+
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
+        List<String> listaUsuarios = port.listaUsuarios().getLista();
+
         int startIndex = Integer.parseInt(request.getParameter("startIndex"));
         int endIndex = Math.min(startIndex + 40, listaUsuarios.size()); // Envía 40 usuarios a la vez
         String usuariosSubset = String.join(",", listaUsuarios.subList(startIndex, endIndex));
@@ -40,6 +52,9 @@ public class SvUsuario extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String marcarUsuario = request.getParameter("marcarUsuario"); //MARCAR ACTIVIDAD COMO FAVORITA
         String DesmarcarUsuario = request.getParameter("DesmarcarUsuario");
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
 
         if (marcarUsuario == null) {
             marcarUsuario = "NULL";
@@ -49,16 +64,22 @@ public class SvUsuario extends HttpServlet {
         }
 
         if (marcarUsuario.equals("marcarUsuario")) {
-            control.marcarUsuarioComoFavorita(usuario, usuarioConsultado);
-            DTUsuario restUsu = control.traerDTUsuario(usuario);
+
+            port.marcarUsuarioComoFavorita(usuario, usuarioConsultado);
+            //control.marcarUsuarioComoFavorita(usuario, usuarioConsultado);
+
+            DtUsuario restUsu = port.traerDTUsuario(usuario);
+            //DTUsuario restUsu = control.traerDTUsuario(usuario);
+
             request.getSession().setAttribute("usu", restUsu);
             String errorMessage = "Usuario agregado como favorito";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilUsuario.jsp';</script>";
             response.getWriter().write(alertScript);
         }
         if (DesmarcarUsuario.equals("DesmarcarUsuario")) {
-            control.DesMarcarUsuarioFavorito(usuario, usuarioConsultado);
-            DTUsuario restUsu = control.traerDTUsuario(usuario);
+
+            port.desMarcarUsuarioFavorito(usuario, usuarioConsultado);
+            DtUsuario restUsu = port.traerDTUsuario(usuario);
             request.getSession().setAttribute("usu", restUsu);
             String errorMessage = "Usuario eliminado como favorito";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilUsuario.jsp';</script>";

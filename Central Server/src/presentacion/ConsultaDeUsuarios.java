@@ -126,7 +126,7 @@ public class ConsultaDeUsuarios extends javax.swing.JInternalFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cmbListaUsuarios.removeAllItems();
-        ArrayList<String> nicknames = control.listaUsuarios();
+        ArrayList<String> nicknames = (ArrayList<String>) control.listaUsuarios();
         for (int i = 0; i < nicknames.size();i++){
             cmbListaUsuarios.addItem(nicknames.get(i));
         }      

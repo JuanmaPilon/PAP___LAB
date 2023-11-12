@@ -314,7 +314,7 @@ public class ControladoraPersistencia {
     }
 
     //public void guardarActividad(string nombreProveedor,string nombreDep,string nombreActividad,string descripcionActividad,string duracionActividad,string costoActividad,string nombreCuidad,int dia,int mes,int anio);
-    public void guardarTurista(Turista turista) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception {
+    public void guardarTurista(Turista turista) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException{
         try {
             turistaJpa.create(turista);
         } catch (NicknameExistenteException ex) {
@@ -324,7 +324,7 @@ public class ControladoraPersistencia {
         }
     }
 
-    public void guardarProveedor(Proveedor proveedor) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException, Exception {
+    public void guardarProveedor(Proveedor proveedor) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException {
 
         try {
             proveedorJpa.create(proveedor);
@@ -515,7 +515,7 @@ public class ControladoraPersistencia {
         return actividadJpa.findActividadEntities();
     }
 
-    public void guardarImagenPerfil(ImagenPerfil imagenPerfil) throws PreexistingEntityException, Exception {
+    public void guardarImagenPerfil(ImagenPerfil imagenPerfil) throws PreexistingEntityException {
         try {
             imagenPerfilJpa.create(imagenPerfil);
         } catch (PreexistingEntityException e) {

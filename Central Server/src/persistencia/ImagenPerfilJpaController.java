@@ -37,7 +37,7 @@ public class ImagenPerfilJpaController implements Serializable {
         emf = Persistence.createEntityManagerFactory("Lab1PU");
     }
 
-    public void create(ImagenPerfil imagenPerfil) throws PreexistingEntityException, Exception {
+    public void create(ImagenPerfil imagenPerfil) throws PreexistingEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();

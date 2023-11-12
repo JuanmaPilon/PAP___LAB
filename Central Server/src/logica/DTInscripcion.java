@@ -5,11 +5,14 @@
 package logica;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author natil
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTInscripcion {
     private Long id;
     private String nicknameTurista;

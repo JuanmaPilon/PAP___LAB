@@ -1,6 +1,8 @@
 
 package Servlets;
 
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,8 +17,8 @@ import logica.IControlador;
 @WebServlet(name = "SvValidarCorreo", urlPatterns = {"/SvValidarCorreo"})
 public class SvValidarCorreo extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,10 +37,12 @@ public class SvValidarCorreo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+                //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         String correo = request.getParameter("correo");
 
-        boolean correoDisponible = control.validarCorreo(correo);
+        boolean correoDisponible = port.validarCorreo(correo);
 
         if (correoDisponible) {
             response.setContentType("text/html");
