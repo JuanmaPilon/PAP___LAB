@@ -25,6 +25,7 @@ logica\exceptions\ConstraseniasDistintas.class
 Servlets\SvProveedor.class
 persistencia\InscripcionJpaController.class
 persistencia\TuristaJpaController.class
+Servlets\SvBuscar.class
 Servlets\SvDeptosYCategorias.class
 logica\DTCategoria.class
 logica\SalidaTuristica_.class

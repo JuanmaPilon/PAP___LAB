@@ -30,12 +30,13 @@
             <div id="logo">
                 <h1>Turismo.uy</h1>
             </div>
-            <div id="search">
-                <form action="buscar.jsp" method="get">
-                    <input type="text" calss="no-buscar" name="query" placeholder="Buscar turistas o paquetes">
-                    <button type="submit">Buscar</button>
-                </form>
-            </div>
+                <div id="search">
+                    <form action="SvBuscar" method="GET">
+                        <input type="text" name="consulta" placeholder="Buscar turistas o paquetes">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+
             <div id="login">
                 <a href="login.jsp">Iniciar Sesión</a> | <a href="altaUsuario.jsp">Alta Usuario</a> | <a href="homeMovil.jsp">Inicio Movil</a>
             </div>
