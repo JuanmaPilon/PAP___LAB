@@ -96,7 +96,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void AltaDeImagenActividad(String imagenNombre, String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException, Exception {
+    public void AltaDeImagenActividad(String imagenNombre, String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException {
 
         imagenActividad ImagenActividad = new imagenActividad(imagenNombre, imagenRuta, nombreActividad, UrlVideo);
         controlPersis.guardarImagenActividad(ImagenActividad);
@@ -169,7 +169,7 @@ public class Controlador implements IControlador {
     ;
     //String nombreProveedor, String nombreDep,
     @Override
-    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha, String nombreProveedor, String nombreDepartamento, List<String> listaCategorias) throws PreexistingEntityException, Exception {
+    public void guardarActividad(String nombreActividad, String descripcionActividad, int duracionActividad, float costoActividad, String nombreCuidad, Date fecha, String nombreProveedor, String nombreDepartamento, List<String> listaCategorias) throws PreexistingEntityException {
         Actividad actividad = new Actividad();
         actividad.setCiudad(nombreCuidad);
         actividad.setNombre(nombreActividad);
@@ -255,7 +255,7 @@ public class Controlador implements IControlador {
 
         for (Departamento departamento : listaDepartamentos) {
             List<Actividad> listaActTur = departamento.getListaActTur();
-            DTDepartamento dtDepartamento = new DTDepartamento(departamento.getNombre(), departamento.getDescripcion(), departamento.getUrl(), listaActTur);
+            DTDepartamento dtDepartamento = new DTDepartamento(departamento.getNombre(), departamento.getDescripcion(), departamento.getUrl());
             listaDTDepartamentos.add(dtDepartamento);
         }
 

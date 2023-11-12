@@ -10,26 +10,13 @@
 
 <xs:element name="listaDTActividad" type="tns:listaDTActividad"></xs:element>
 
+<xs:element name="listaDTDepartamento" type="tns:listaDTDepartamento"></xs:element>
+
 <xs:element name="listaDTSalidaTuristica" type="tns:listaDTSalidaTuristica"></xs:element>
 
+<xs:element name="listaDTUsuario" type="tns:listaDTUsuario"></xs:element>
+
 <xs:element name="listaString" type="tns:listaString"></xs:element>
-
-<xs:complexType name="listaDTSalidaTuristica">
-<xs:sequence>
-<xs:element name="lista" type="tns:dtSalidaTuristica" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtSalidaTuristica">
-<xs:sequence>
-<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="cantMax" type="xs:int"></xs:element>
-<xs:element name="fAlta" type="xs:dateTime" minOccurs="0"></xs:element>
-<xs:element name="fSalida" type="xs:dateTime" minOccurs="0"></xs:element>
-<xs:element name="lugar" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nombreActividad" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
 
 <xs:complexType name="listaDTActividad">
 <xs:sequence>
@@ -54,15 +41,10 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="dtProveedor">
-<xs:complexContent>
-<xs:extension base="tns:dtUsuario">
+<xs:complexType name="listaDTUsuario">
 <xs:sequence>
-<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="link" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="lista" type="tns:dtUsuario" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
-</xs:extension>
-</xs:complexContent>
 </xs:complexType>
 
 <xs:complexType name="dtUsuario">
@@ -74,20 +56,6 @@
 <xs:element name="fNacimiento" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="contrasenia" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="listaUsuariosFavoritas" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtImagenPerfil">
-<xs:sequence>
-<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="ruta" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nicknameUsuario" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="ImagenPorNicknameNoExite">
-<xs:sequence>
-<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -122,6 +90,71 @@
 <xs:complexType name="CorreoElectronicoExistenteException">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtImagenActividad">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="ruta" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombreActividad" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="UrlVideo" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDTSalidaTuristica">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtSalidaTuristica" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtSalidaTuristica">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cantMax" type="xs:int"></xs:element>
+<xs:element name="fAlta" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="fSalida" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="lugar" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombreActividad" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtProveedor">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="link" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dtImagenPerfil">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="ruta" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameUsuario" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ImagenPorNicknameNoExite">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDTDepartamento">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtDepartamento" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtDepartamento">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="url" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

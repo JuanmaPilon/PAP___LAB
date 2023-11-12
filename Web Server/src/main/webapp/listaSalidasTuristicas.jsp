@@ -1,23 +1,15 @@
-<%@page import="logica.DTActividad"%>
-<%@page import="logica.DTSalidaTuristica"%>
-<%@page import="logica.DTUsuario"%>
-<%@page import="logica.Paquete"%>
-<%@page import="logica.SalidaTuristica"%>
-<%@page import="logica.Categoria"%>
+<%@page import="WebServices.DtSalidaTuristica"%>
+<%@page import="java.util.List"%>
+<%@page import="WebServices.DtActividad"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="logica.Actividad" %>
 <%@ page import="java.util.ArrayList" %>
 
-<%@page import="logica.Usuario" %>
-<%@page import="logica.Proveedor" %>
-<%@page import="logica.Turista" %>
-<%@page import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
 <html>
     <%
-        DTActividad act = (DTActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
-        ArrayList<DTSalidaTuristica> salidas = (ArrayList<DTSalidaTuristica>) request.getSession().getAttribute("salidas");
+        DtActividad act = (DtActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
+        List<DtSalidaTuristica> salidas = (List<DtSalidaTuristica>) request.getSession().getAttribute("salidas");
         String usuario = (String) request.getSession().getAttribute("usuario");
         //DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
@@ -97,7 +89,7 @@
                         // Verificando si la lista no está vacía
                         if (salidas != null && !salidas.isEmpty()) {
                             // Iterando sobre la lista y mostrando los nombres de las salidas
-                            for (DTSalidaTuristica salida : salidas) {
+                            for (DtSalidaTuristica salida : salidas) {
                                 out.println("<li> <a href='#' onclick='mostrarSalida(\"" + salida.getNombre() + "\")'>" + salida.getNombre() + "</a></li>");
                             }
                         } else {

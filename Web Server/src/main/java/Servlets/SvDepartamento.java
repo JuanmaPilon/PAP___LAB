@@ -4,6 +4,9 @@
  */
 package Servlets;
 
+import WebServices.DtDepartamento;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,10 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.DTDepartamento;
-import logica.Departamento;
-import logica.Fabrica;
-import logica.IControlador;
+
 
 /**
  *
@@ -24,24 +24,29 @@ import logica.IControlador;
  */
 @WebServlet(name = "SvDepartamento", urlPatterns = {"/SvDepartamento"})
 public class SvDepartamento extends HttpServlet {
-    
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
-    
-    
+
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
     }
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<DTDepartamento> listaDepartamentos = control.listaDTDepartamentos();
-        List<String> nombresDepartamentos = new ArrayList<>();
-        for (DTDepartamento departamento : listaDepartamentos) {
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
+        
+        List<DtDepartamento> listaDepartamentos = port.listaDTDepartamentos().getLista();
+        List<String> nombresDepartamentos = new ArrayList();
+        int i=0;
+        for (DtDepartamento departamento : listaDepartamentos) {
+            
             nombresDepartamentos.add(departamento.getNombre());
+            System.out.println("Servlets.SvDepartamento.doGet()"+nombresDepartamentos.get(i));
+            i++;
         }
 
         String departamentos = String.join(",", nombresDepartamentos);
@@ -51,14 +56,12 @@ public class SvDepartamento extends HttpServlet {
 
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";

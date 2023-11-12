@@ -4,6 +4,8 @@
  */
 package Servlets;
 
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,33 +25,36 @@ import logica.IControlador;
  */
 @WebServlet(name = "SvCategoria", urlPatterns = {"/SvCategoria"})
 public class SvCategoria extends HttpServlet {
+
     Fabrica fabrica = Fabrica.getInstance();
     IControlador control = fabrica.getIControlador();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
+
     }
-@Override
- protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    ArrayList<String> listaCategorias = control.traerCategorias(); // Cambiar listaDepartamentos a listaCategorias
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
 
-    String categorias = String.join(",", listaCategorias);
-    response.setContentType("text/plain");
-    response.setCharacterEncoding("UTF-8");
-    response.getWriter().write(categorias);
-}
+        List<String> listaCategorias = port.traerCategorias().getLista(); // Cambiar listaDepartamentos a listaCategorias
 
-
+        String categorias = String.join(",", listaCategorias);
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(categorias);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
- 
     @Override
     public String getServletInfo() {
         return "Short description";

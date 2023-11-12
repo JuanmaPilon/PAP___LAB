@@ -38,7 +38,7 @@ public class imagenActividadJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(imagenActividad imagenActividad) throws PreexistingEntityException, Exception {
+    public void create(imagenActividad imagenActividad) throws PreexistingEntityException{
         EntityManager em = null;
         try {
             em = getEntityManager();

@@ -40,7 +40,7 @@ public class ActividadJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Actividad actividad) throws PreexistingEntityException, Exception {
+    public void create(Actividad actividad) throws PreexistingEntityException{
         if (actividad.getListaPaquete() == null) {
             actividad.setListaPaquete(new ArrayList<Paquete>());
         }

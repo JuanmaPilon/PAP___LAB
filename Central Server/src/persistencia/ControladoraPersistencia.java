@@ -305,7 +305,7 @@ public class ControladoraPersistencia {
         }
     }
 
-    public void guardarActividad(Actividad actividad) throws PreexistingEntityException, CorreoElectronicoExistenteException, Exception {
+    public void guardarActividad(Actividad actividad) throws PreexistingEntityException {
         try {
             actividadJpa.create(actividad);
         } catch (PreexistingEntityException ex) {
@@ -524,7 +524,7 @@ public class ControladoraPersistencia {
 
     }
 
-    public void guardarImagenActividad(imagenActividad imagenActividad) throws PreexistingEntityException, Exception {
+    public void guardarImagenActividad(imagenActividad imagenActividad) throws PreexistingEntityException {
         try {
             imagenActividadJpa.create(imagenActividad);
         } catch (PreexistingEntityException e) {

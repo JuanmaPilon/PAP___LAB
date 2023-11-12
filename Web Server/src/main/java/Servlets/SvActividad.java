@@ -1,5 +1,13 @@
 package Servlets;
 
+import WebServices.DtActividad;
+import WebServices.DtImagenActividad;
+import WebServices.DtSalidaTuristica;
+import WebServices.ListaString;
+import WebServices.PreexistingEntityException_Exception;
+import WebServices.TipoEstado;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.File;
 import javax.servlet.http.Part;
 
@@ -10,6 +18,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,13 +30,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import logica.Actividad;
 import logica.DTActividad;
 import logica.DTImagenActividad;
 import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
-import logica.TipoEstado;
+
 import logica.imagenActividad;
 import persistencia.exceptions.PreexistingEntityException;
 
@@ -39,8 +50,8 @@ import persistencia.exceptions.PreexistingEntityException;
 
 public class SvActividad extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+   // Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,30 +62,31 @@ public class SvActividad extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String filtro = request.getParameter("filtro");
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
 
         if ("FiltroDepartamento".equals(filtro)) {
-            
+
             String departamentoSeleccionado = request.getParameter("departamento");
-            
-            
-         
-            ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicasConfirmadas(departamentoSeleccionado);
+
+            List<String> listaActividadesDepartamento = port.listaActividadesTuristicasConfirmadas(departamentoSeleccionado).getLista();
             String actividades = String.join(",", listaActividadesDepartamento);
-         
+
             if (actividades.isEmpty()) {
                 // Si la lista de actividades está vacía, envía una respuesta indicando que no hay actividades disponibles
                 actividades = "No hay actividades disponibles para este departamento";
             }
-            
+
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(actividades);
-            
+
         } else if ("FiltroCategoria".equals(filtro)) {
 
             String categoriaSeleccionada = request.getParameter("categoria");
 
-            ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoriaConfirmadas(categoriaSeleccionada);
+            List<String> listaActividadesCategoria = port.listaActividadesTuristicasPorCategoriaConfirmadas(categoriaSeleccionada).getLista();
 
             String actividades = String.join(",", listaActividadesCategoria);
 
@@ -89,20 +101,20 @@ public class SvActividad extends HttpServlet {
 
         }
         //try {
-            String nombreActividad = (String) request.getParameter("actividad");
-            String tipoUsuario = (String) request.getParameter("tipoUsuario");
-            DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
-            DTImagenActividad imagen = control.traerDTImagenActividad(nombreActividad);
-            ArrayList<DTSalidaTuristica> salidas = control.encontraSalidasTuristicasDeActividad(actividadConsultada.getNombre());
-            ArrayList<String> categorias = control.traerCategoriasActividad(actividadConsultada.getNombre());
-            ArrayList<String> paquetes = control.listaPaquetesDeActividad(actividadConsultada.getNombre());
+        String nombreActividad = (String) request.getParameter("actividad");
+        String tipoUsuario = (String) request.getParameter("tipoUsuario");
+        DtActividad actividadConsultada = port.traerDTActividad(nombreActividad);
+        DtImagenActividad imagen = port.traerDTImagenActividad(nombreActividad);
+        List<DtSalidaTuristica> salidas = port.encontraSalidasTuristicasDeActividad(actividadConsultada.getNombre()).getLista();
+        List<String> categorias = port.traerCategoriasActividad(actividadConsultada.getNombre()).getLista();
+        List<String> paquetes = port.listaPaquetesDeActividad(actividadConsultada.getNombre()).getLista();
 
-            HttpSession misesion = request.getSession();
-            String imagenRuta = "images/sinImagen.png";
-            String UrlVideo = "";
+        HttpSession misesion = request.getSession();
+        String imagenRuta = "images/sinImagen.png";
+        String UrlVideo = "";
 
-            if (imagen != null) {
-            if ((imagen.getNombre() != null) && (!imagen.getUrlVideo().equals("") )) {
+        if (imagen != null) {
+            if ((imagen.getNombre() != null) && (!imagen.getUrlVideo().equals(""))) {
                 imagenRuta = imagen.getRuta();
                 UrlVideo = imagen.getUrlVideo();
             } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo().equals(""))) {
@@ -110,26 +122,25 @@ public class SvActividad extends HttpServlet {
             } else if ((imagen.getNombre() == null) && (!imagen.getUrlVideo().equals(""))) {
                 UrlVideo = imagen.getUrlVideo();
             }
-            
-            }
-            
-            if(tipoUsuario != null){ //INSCRIPCION, NO FUNCIONA SI SE TRAE TIPO USUARIO
-                misesion.setAttribute("tipoUsuario", tipoUsuario);
-            } else{
-                misesion.setAttribute("tipoUsuario", "turista");
-            }
-            misesion.setAttribute("actividad", actividadConsultada);
-            misesion.setAttribute("salidas", salidas);
-            misesion.setAttribute("categorias", categorias);
-            misesion.setAttribute("paquetes", paquetes);
-            misesion.setAttribute("imagen", imagenRuta);
-            misesion.setAttribute("UrlVideo", UrlVideo);
-            response.sendRedirect("perfilActividadTuristica.jsp");
 
-      //  } catch (Exception ex) {
-      //     ex.printStackTrace();
-      //  }
+        }
 
+        if (tipoUsuario != null) { //INSCRIPCION, NO FUNCIONA SI SE TRAE TIPO USUARIO
+            misesion.setAttribute("tipoUsuario", tipoUsuario);
+        } else {
+            misesion.setAttribute("tipoUsuario", "turista");
+        }
+        misesion.setAttribute("actividad", actividadConsultada);
+        misesion.setAttribute("salidas", salidas);
+        misesion.setAttribute("categorias", categorias);
+        misesion.setAttribute("paquetes", paquetes);
+        misesion.setAttribute("imagen", imagenRuta);
+        misesion.setAttribute("UrlVideo", UrlVideo);
+        response.sendRedirect("perfilActividadTuristica.jsp");
+
+        //  } catch (Exception ex) {
+        //     ex.printStackTrace();
+        //  }
     }
 
     @Override
@@ -140,20 +151,22 @@ public class SvActividad extends HttpServlet {
         String nombreActividad = request.getParameter("nombreActividad");
         String usuario = request.getParameter("usuario");
         String tipoUsuario = request.getParameter("tipoUsuario");
-        
-        if(finalizar == null){
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
+        if (finalizar == null) {
             finalizar = "NULL";
         }
-        if(marcarActividad == null){
+        if (marcarActividad == null) {
             marcarActividad = "NULL";
         }
-        if(DesMarcarActividad == null){
+        if (DesMarcarActividad == null) {
             DesMarcarActividad = "NULL";
         }
 
         if (finalizar.equals("finalizar")) {
-            if (control.actividadSinSalidaVigente(nombreActividad)) {
-                control.cambiarEstadoActividad(nombreActividad, TipoEstado.finalizada);
+            if (port.actividadSinSalidaVigente(nombreActividad)) {
+                port.cambiarEstadoActividad(nombreActividad, TipoEstado.FINALIZADA);
                 String errorMessage = "Actividad finalizada correctamente";
                 String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'logedUser.jsp';</script>";
                 response.getWriter().write(alertScript);
@@ -163,23 +176,22 @@ public class SvActividad extends HttpServlet {
                 response.getWriter().write(alertScript);
             }
         } else if (marcarActividad.equals("marcarActividad")) {
-            control.marcarActividadComoFavorita(usuario, nombreActividad);
+            port.marcarActividadComoFavorita(usuario, nombreActividad);
             //REINICIAR Y SETTER LA NUEVA LISTA
-            ArrayList<String> actividadesFavoritas = control.traerActividadesFavoritasDelTurista(usuario);
+            List<String> actividadesFavoritas = port.traerActividadesFavoritasDelTurista(usuario).getLista();
             request.getSession().setAttribute("actividadesFavoritas", actividadesFavoritas);
             String errorMessage = "Actividad marcada como favorita";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp';</script>";
             response.getWriter().write(alertScript);
-        } else if(DesMarcarActividad.equals("DesMarcarActividad")){
-            control.DesMarcarActividad(usuario, nombreActividad);
+        } else if (DesMarcarActividad.equals("DesMarcarActividad")) {
+            port.desMarcarActividad(usuario, nombreActividad);
             //REINICIAR Y SETTER LA NUEVA LISTA
-            ArrayList<String> actividadesFavoritas = control.traerActividadesFavoritasDelTurista(usuario);
+            List<String> actividadesFavoritas = port.traerActividadesFavoritasDelTurista(usuario).getLista();
             request.getSession().setAttribute("actividadesFavoritas", actividadesFavoritas);
             String errorMessage = "Actividad desmarcada como favorita";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'perfilActividadTuristica.jsp';</script>";
             response.getWriter().write(alertScript);
         } else {
-            
 
             try {
                 // String usuario = request.getParameter("usuario");
@@ -189,15 +201,25 @@ public class SvActividad extends HttpServlet {
                 int duracion = Integer.parseInt(request.getParameter("duracion"));
                 float costo = Float.parseFloat(request.getParameter("costo"));
                 String ciudad = request.getParameter("ciudad");
-                Date fecha = new Date();
+                //Date fecha = new Date();
                 String[] categorias = request.getParameterValues("categoria");
                 List<String> categoriasList = new ArrayList<>(Arrays.asList(categorias));
+
+                ListaString result = new ListaString();
+                for (String cat : categoriasList) {
+                    result.getLista().add(cat);
+                }
+
                 String UrlVideo = request.getParameter("urlVideo");
 
                 Part archivo = request.getPart("file");
                 String nombreArchivo = null;
 
-                control.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, categoriasList);
+                //XMLGregorianCalendar xmlFecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+                //paso cualquier string porque la fecha la setea con la actual en la logica
+                String fecha = "11/11/1950";
+
+                port.guardarActividad(nombre, descripcion, duracion, costo, ciudad, fecha, usuario, departamento, result);
 
                 if (archivo.getSize() > 0) {
                     nombreArchivo = archivo.getSubmittedFileName();
@@ -212,9 +234,9 @@ public class SvActividad extends HttpServlet {
 
                         try {
                             if (UrlVideo == null) {
-                                control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, null);
+                                port.altaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, null);
                             } else if (UrlVideo != null) {
-                                control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, UrlVideo);
+                                port.altaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, UrlVideo);
                             }
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -228,32 +250,25 @@ public class SvActividad extends HttpServlet {
                 }
 
                 if ((archivo.getSize() == 0) && (!UrlVideo.equals(""))) {
-                    control.AltaDeImagenActividad(null, null, nombre, UrlVideo);
-                } else if((archivo.getSize() == 0) && (UrlVideo == null)){
-                    
+                    port.altaDeImagenActividad(null, null, nombre, UrlVideo);
+                } else if ((archivo.getSize() == 0) && (UrlVideo == null)) {
+
                 }
 
                 response.sendRedirect("logedUser.jsp");
 
-            } catch (PreexistingEntityException ex) {
+            } catch (PreexistingEntityException_Exception ex) {
                 ex.printStackTrace();
                 String errorMessage = "Ya existe otra actividad con ee nombre";
                 String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
                 response.getWriter().write(alertScript);
 
-            } catch (Exception ex) {
-
-                ex.printStackTrace();
-                String errorMessage = "Se ha prodicido un error, porvafor verifique los campos";
-                String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaActividadTuristica.jsp';</script>";
-                response.getWriter().write(alertScript);
             }
         }
     }
 
-
-@Override
-public String getServletInfo() {
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }
 

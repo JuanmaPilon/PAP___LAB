@@ -12,6 +12,7 @@ logica\exceptions\PreexistingEntityException.class
 Servlets\exceptions\IllegalOrphanException.class
 WebServices\ImagenPorNicknameNoExite_Exception.class
 Servlets\SvValidarCorreo.class
+WebServices\ListaDTUsuario.class
 logica\Proveedor.class
 persistencia\exceptions\IllegalOrphanException.class
 logica\Actividad.class
@@ -20,6 +21,7 @@ logica\TipoEstado.class
 persistencia\ProveedorJpaController$NicknameExistenceChecker.class
 logica\Categoria.class
 persistencia\ProveedorJpaController.class
+WebServices\DtImagenActividad.class
 logica\Turista.class
 WebServices\WebServicesService.class
 WebServices\DtActividad.class
@@ -69,6 +71,7 @@ WebServices\TipoEstado.class
 logica\exceptions\PaqueteYaComprado.class
 Servlets\exceptions\PreexistingEntityException.class
 logica\Compra_.class
+WebServices\ListaDTDepartamento.class
 logica\Controlador.class
 logica\DTSalidaTuristica.class
 logica\SalidaTuristica.class
@@ -105,6 +108,7 @@ Servlets\SvPerfilUsuario.class
 persistencia\ActividadJpaController.class
 Servlets\SvCategoria.class
 logica\DTPaquete.class
+WebServices\DtDepartamento.class
 WebServices\DtProveedor.class
 Servlets\SvObtenerActividades.class
 logica\ImagenPerfil.class

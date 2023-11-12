@@ -18,7 +18,7 @@ public abstract DTImagenActividad buscarImagenPorActividad(String nombreActivida
 public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException;
 public abstract DTImagenPerfil buscarImagenPorNickname(String nickname) throws ImagenPorNicknameNoExite;
-public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException, Exception;
+public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException;
 public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException;
 public abstract void AltaDeUsuarioProveedor(String nickname, String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String descripcion, String link) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException;
 public abstract void AltaCategoria(String nombre) throws PreexistingEntityException, Exception;
@@ -42,7 +42,7 @@ public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, Stri
 public abstract void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception;
 public abstract List<String> llenarCmboBoxDep();
 public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception;
-public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento, List<String> listaCategorias) throws PreexistingEntityException, Exception;
+public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento, List<String> listaCategorias) throws PreexistingEntityException;
 public ArrayList<DTUsuario> traerUsuarioMod();
 public ArrayList<DTTurista> traerUsuarioTurista();
 public DTTurista traerDTTurista(String nickname);

@@ -1,26 +1,24 @@
-<%@page import="logica.DTUsuario"%>
-<%@page import="logica.DTSalidaTuristica"%>
-<%@page import="logica.DTActividad"%>
-<%@page import="logica.Paquete"%>
-<%@page import="logica.SalidaTuristica"%>
-<%@page import="logica.Categoria"%>
+<%@page import="WebServices.DtSalidaTuristica"%>
+<%@page import="java.util.List"%>
+<%@page import="WebServices.DtActividad"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="logica.Actividad" %>
+
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
     <%
-        DTActividad act = (DTActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
+        DtActividad act = (DtActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
         String usuario = (String) request.getSession().getAttribute("usuario");
-        ArrayList<String> categorias = (ArrayList<String>) request.getSession().getAttribute("categorias");
-        ArrayList<DTSalidaTuristica> salidas = (ArrayList<DTSalidaTuristica>) request.getSession().getAttribute("salidas");
-        ArrayList<String> paquetes = (ArrayList<String>) request.getSession().getAttribute("paquetes");
+        List<String> categorias = (List<String>) request.getSession().getAttribute("categorias");
+        List<DtSalidaTuristica> salidas = (List<DtSalidaTuristica>) request.getSession().getAttribute("salidas");
+        List<String> paquetes = (List<String>) request.getSession().getAttribute("paquetes");
         String rutaAlaImagen = (String) request.getSession().getAttribute("imagen");
         String video = (String) request.getSession().getAttribute("UrlVideo");
-         ArrayList<String> actividadesFavoritas = new ArrayList<>();
+        List<String> actividadesFavoritas = new ArrayList<>();
         if(tipoUsuario.equals("turista")){
-            actividadesFavoritas = (ArrayList) request.getSession().getAttribute("actividadesFavoritas");
+            actividadesFavoritas = (List<String>) request.getSession().getAttribute("actividadesFavoritas");
          } 
     %>
     <head>
@@ -51,7 +49,7 @@
                 <img src="<%= rutaAlaImagen%>" alt="Imagen de la actividad" style="width: 500px; height: 500px;" />
                 <h3><%=act.getNombre()%></h3>
                 <p>Descripcion: <%=act.getDescripcion()%></p>
-                <p>Fecha: <%=act.getfAlta()%></p>
+                <p>Fecha: <%=act.getFAlta()%></p>
                 <p>Lugar: <%=act.getCiudad()%></p>
                 <p>Categorias: </p>
                 <ul>
@@ -75,7 +73,7 @@
                         // Verificando si la lista no está vacía
                         if (salidas != null && !salidas.isEmpty()) {
                             // Iterando sobre la lista y mostrando los nombres de las salidas
-                            for (DTSalidaTuristica salida : salidas) {
+                            for (DtSalidaTuristica salida : salidas) {
                                 out.println("<li> <a href='#' onclick='mostrarSalida(\"" + salida.getNombre() + "\")'>" + salida.getNombre() + "</a></li>");
                             }
                         } else {
