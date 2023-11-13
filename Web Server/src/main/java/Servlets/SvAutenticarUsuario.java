@@ -5,23 +5,19 @@ import WebServices.WebServices;
 import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.DTUsuario;
-import logica.Fabrica;
-import logica.IControlador;
-import logica.Usuario;
+
 
 @WebServlet(name = "SvAutenticarUsuario", urlPatterns = {"/SvAutenticarUsuario"})
 public class SvAutenticarUsuario extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,7 +47,7 @@ public class SvAutenticarUsuario extends HttpServlet {
 
             //String tipoUsuario = control.devolverTipoUsuario(usu.getNickname());
             if (tipoUsuario.equals("turista")) {
-                ArrayList<String> actividadesFavoritas = control.traerActividadesFavoritasDelTurista(usuario);
+                List<String> actividadesFavoritas = port.traerActividadesFavoritasDelTurista(usuario).getLista();
                 request.getSession().setAttribute("actividadesFavoritas", actividadesFavoritas);
             }
             request.getSession().setAttribute("usu", usu);

@@ -56,7 +56,7 @@ public class ImagenPerfilJpaController implements Serializable {
         }
     }
 
-    public void edit(ImagenPerfil imagenPerfil) throws NonexistentEntityException, Exception {
+    public void edit(ImagenPerfil imagenPerfil) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();

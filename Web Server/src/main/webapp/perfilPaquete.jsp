@@ -1,12 +1,12 @@
 
-<%@page import="logica.DTPaquete"%>
+<%@page import="java.util.List"%>
+<%@page import="WebServices.DtPaquete"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="logica.Paquete" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
-    <%DTPaquete dtpaquete = (DTPaquete) request.getSession().getAttribute("dtpaquete");
-        ArrayList<String> listaActividadesPaquete = (ArrayList) request.getSession().getAttribute("listaActividadesPaquete");
+    <%DtPaquete dtpaquete = (DtPaquete) request.getSession().getAttribute("dtpaquete");
+        List<String> listaActividadesPaquete = (List) request.getSession().getAttribute("listaActividadesPaquete");
     %> 
 
     <head>

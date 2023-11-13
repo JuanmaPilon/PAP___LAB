@@ -9,8 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Fabrica;
-import logica.IControlador;
+
 import org.json.simple.JSONObject;
 
 @WebServlet(name = "SvValidarNickname", urlPatterns = {"/SvValidarNickname"})

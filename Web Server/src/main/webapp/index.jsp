@@ -1,7 +1,7 @@
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="logica.Categoria"%>
-<%@page import="logica.Departamento"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,9 +22,9 @@
     </head>
     <body >
         <%
-            ArrayList<String> listaCategorias = (ArrayList<String>) request.getSession().getAttribute("listaCategorias");
+            List<String> listaCategorias = (List<String>) request.getSession().getAttribute("listaCategorias");
 
-            ArrayList<String> listaDepartamentos = (ArrayList<String>) request.getSession().getAttribute("listaDepartamentos");
+            List<String> listaDepartamentos = (List<String>) request.getSession().getAttribute("listaDepartamentos");
         %>
         <header>
             <div id="logo">

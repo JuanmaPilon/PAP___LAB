@@ -44,9 +44,13 @@ public class ControladoraPersistencia {
     CompraJpaController compraJpa = new CompraJpaController();
 
     //Consultas
-    public void nuevaCantTurista(Compra compraTurista) throws Exception {
+    public void editarCompra(Compra compraTurista) throws Exception {
 
-        compraJpa.edit(compraTurista);
+
+            compraJpa.edit(compraTurista);
+
+        
+        
 
     }
 
@@ -350,12 +354,14 @@ public class ControladoraPersistencia {
         return departamentoJpa.obtenerNombresDepartamentos();
     }
 
-    public void guardarSalidaTuristica(SalidaTuristica salidaTuristica, Actividad actividad) throws PreexistingEntityException, Exception {
+    public void guardarSalidaTuristica(SalidaTuristica salidaTuristica, Actividad actividad) throws PreexistingEntityException {
         try {
             salidaTuristicaJpa.create(salidaTuristica);
             actividadJpa.edit(actividad);
         } catch (PreexistingEntityException e) {
             throw new PreexistingEntityException("Ya existe una salida con ese nombre");
+        }catch (Exception e) {
+            throw new PreexistingEntityException("Ya existe una salida con ese nombre de exception");
         }
     }
 
@@ -395,7 +401,7 @@ public class ControladoraPersistencia {
         }
     }
 
-    public void modificarImagenPerfil(ImagenPerfil imagenPerfil) throws PreexistingEntityException, Exception {
+    public void modificarImagenPerfil(ImagenPerfil imagenPerfil) throws PreexistingEntityException {
         try {
             imagenPerfilJpa.edit(imagenPerfil);
         } catch (Exception ex) {
@@ -653,6 +659,10 @@ public class ControladoraPersistencia {
 //           proveedorJpa.edit(proveedor);
 //       }
 //    }
+
+    public Compra traerCompra(Long id) {
+        return compraJpa.findCompra(id);
+    }
 
 
 }//fin

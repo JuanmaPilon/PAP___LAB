@@ -1,27 +1,25 @@
 package Servlets;
 
+import WebServices.DtActividad;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.Actividad;
-import logica.Categoria;
-import logica.DTActividad;
-import logica.DTCategoria;
-import logica.Departamento;
-import logica.Fabrica;
-import logica.IControlador;
+
 
 @WebServlet(name = "SvDeptosYCategorias", urlPatterns = {"/SvDeptosYCategorias"})
 public class SvDeptosYCategorias extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,6 +29,10 @@ public class SvDeptosYCategorias extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+                //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         
         // Obtener el agente de usuario del header
     String userAgent = request.getHeader("User-Agent");
@@ -45,9 +47,9 @@ public class SvDeptosYCategorias extends HttpServlet {
         HttpSession misesion = request.getSession();
 
         ArrayList<String> categoriasConActividadesConfirmadas = new ArrayList<>();       
-        ArrayList<DTActividad> listaActividadesConfirmadas = control.listaActividadesConfirmadas();
-        for (DTActividad actividad : listaActividadesConfirmadas) {
-                ArrayList<String> categoriasDeActividad = control.traerCategoriasActividad(actividad.getNombre());
+        List<DtActividad> listaActividadesConfirmadas = port.listaActividadesConfirmadas().getLista();
+        for (DtActividad actividad : listaActividadesConfirmadas) {
+                List<String> categoriasDeActividad = port.traerCategoriasActividad(actividad.getNombre()).getLista();
                 for (String categoria : categoriasDeActividad) {
                     if (!categoriasConActividadesConfirmadas.contains(categoria)) {
                         categoriasConActividadesConfirmadas.add(categoria);
@@ -58,8 +60,8 @@ public class SvDeptosYCategorias extends HttpServlet {
 
         ArrayList<String> departamentosConActividadesConfirmadas = new ArrayList<>();
         
-        ArrayList<DTActividad> listaActividades2 = control.listaActividadesConfirmadas();
-        for (DTActividad actividad : listaActividades2) {
+        List<DtActividad> listaActividades2 = port.listaActividadesConfirmadas().getLista();
+        for (DtActividad actividad : listaActividades2) {
                 String departamento = actividad.getNombreDepartamento();
                 if (!departamentosConActividadesConfirmadas.contains(departamento)) {
                     departamentosConActividadesConfirmadas.add(departamento);

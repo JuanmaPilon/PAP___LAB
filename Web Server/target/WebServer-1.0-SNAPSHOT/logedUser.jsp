@@ -1,16 +1,13 @@
+<%@page import="java.util.List"%>
 <%@page import="WebServices.DtUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="logica.Usuario" %>
-<%@page import="logica.Proveedor" %>
-<%@page import="logica.Turista" %>
 <%@page import="java.util.ArrayList"%>
-<%@page import="logica.Categoria"%>
-<%@page import="logica.Departamento"%>
+
 <!DOCTYPE html>
 <html>
     <%
-        ArrayList<String> listaCategorias = (ArrayList<String>) request.getSession().getAttribute("listaCategorias");
-        ArrayList<String> listaDepartamentos = (ArrayList<String>) request.getSession().getAttribute("listaDepartamentos");
+        List<String> listaCategorias = (List<String>) request.getSession().getAttribute("listaCategorias");
+        List<String> listaDepartamentos = (List<String>) request.getSession().getAttribute("listaDepartamentos");
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
         String usuario = (String) request.getSession().getAttribute("usuario");
         DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usu");
@@ -69,7 +66,7 @@
 
 
                     <% } else if (tipoUsuario.equals("turista")) {
-                         ArrayList<String> actividadesFavoritas = (ArrayList<String>) request.getSession().getAttribute("actividadesFavoritas");
+                         List<String> actividadesFavoritas = (List<String>) request.getSession().getAttribute("actividadesFavoritas");
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Modificar mis datos</a></li> <!-- Proveedor, Turista --> <!-- Proveedor, Turista -->

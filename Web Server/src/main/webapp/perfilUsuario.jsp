@@ -1,15 +1,7 @@
+<%@page import="WebServices.DtActividad"%>
 <%@page import="WebServices.DtUsuario"%>
-<%@page import="logica.DTActividad"%>
-
-<%@page import="logica.Usuario" %>
-<%@page import="logica.Proveedor" %>
-<%@page import="logica.Turista" %>
 <%@ page import="java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="logica.Usuario" %>
-<%@page import="logica.Proveedor" %>
-<%@page import="logica.Turista" %>
-<%@page import="java.util.ArrayList"%>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +13,7 @@
             DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usuPerfil");
             String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
             String tipoUsuarioConsultado = (String) request.getSession().getAttribute("tipoUsuarioConsultado");
-            List<String> usuariosFavoritos = (ArrayList<String>) request.getSession().getAttribute("usuariosFavoritos");
+            List<String> usuariosFavoritos = (List<String>) request.getSession().getAttribute("usuariosFavoritos");
         %>
         <meta charset="UTF-8">
         <link href="styles.css" src="styles.css"">
@@ -138,7 +130,7 @@ if(!usuYo.getListaUsuariosFavoritas().isEmpty() && usuYo.getListaUsuariosFavorit
                 <ul class="tab-links">
                     <li class="active"><a href="#tab1">Perfil</a></li>
                         <%
-                            if (tipoUsuarioConsultado == "proveedor") {
+                            if (tipoUsuarioConsultado.equals("proveedor")) {
                         %>
                     <li><a href="#tab2">Actividades</a></li>
                     <li><a href="#tab3">Salidas</a></li>
@@ -148,9 +140,12 @@ if(!usuYo.getListaUsuariosFavoritas().isEmpty() && usuYo.getListaUsuariosFavorit
 
 
                     <%
-                        if (tipoUsuarioConsultado == "turista") {
+                        if (tipoUsuarioConsultado.equals("turista")) {
+                         //System.out.println("jsp2" + usuario );
                             String tur = usu.getNickname();
                             if (tur.equals(usuario)) {
+                             //System.out.println("jsp2" + usuario +" tur " + tur);
+
                     %>
                     <li><a href="#tab3">Salidas Inscriptas</a></li>
                     <li><a href="#tab4">Paquetes Comprados</a></li>
@@ -183,10 +178,10 @@ if(!usuYo.getListaUsuariosFavoritas().isEmpty() && usuYo.getListaUsuariosFavorit
                     <div id="tab2" class="tab">
                         <ul>
                             <%
-                                ArrayList<DTActividad> listaActividadesProveedor = (ArrayList<DTActividad>) request.getSession().getAttribute("listaActividadesProveedor");
+                                List<DtActividad> listaActividadesProveedor = (List<DtActividad>) request.getSession().getAttribute("listaActividadesProveedor");
 
                                 if (listaActividadesProveedor != null && !listaActividadesProveedor.isEmpty()) {
-                                    for (DTActividad dtActividad : listaActividadesProveedor) {
+                                    for (DtActividad dtActividad : listaActividadesProveedor) {
                                         out.println("<li> <a href='#' onclick='mostrarActividad(\"" + dtActividad.getNombre() + "\")'>" + dtActividad.getNombre() + "</a></li>");
                                        out.println("<p><b>Estado: </b>" + dtActividad.getEstado() + "</p>");
 
@@ -202,7 +197,7 @@ if(!usuYo.getListaUsuariosFavoritas().isEmpty() && usuYo.getListaUsuariosFavorit
                         <ul>
                             <%
                                 // Obteniendo la lista de salidas turísticas desde la sesión
-                                ArrayList<String> nombresSalidasProveedor = (ArrayList<String>) request.getSession().getAttribute("nombresSalidas");
+                                List<String> nombresSalidasProveedor = (List<String>) request.getSession().getAttribute("nombresSalidas");
 
                                 if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
                                     for (String nombreSalida : nombresSalidasProveedor) {
@@ -220,7 +215,7 @@ if(!usuYo.getListaUsuariosFavoritas().isEmpty() && usuYo.getListaUsuariosFavorit
                         <ul>
                             <%
                                 // Obteniendo la lista de salidas turísticas desde la sesión
-                                ArrayList<String> nombresPaquetes = (ArrayList<String>) request.getSession().getAttribute("nombresPaquetes");
+                                List<String> nombresPaquetes = (List<String>) request.getSession().getAttribute("nombresPaquetes");
 
                                 // Verificando si la lista no está vacía
                                 if (nombresPaquetes != null && !nombresPaquetes.isEmpty()) {
@@ -237,7 +232,7 @@ if(!usuYo.getListaUsuariosFavoritas().isEmpty() && usuYo.getListaUsuariosFavorit
 
                     <div id="tab5" class="tab">
                         <%
-                            ArrayList<String> actividadesFavoritas = (ArrayList) request.getSession().getAttribute("actividadesFavoritas");
+                            List<String> actividadesFavoritas = (List) request.getSession().getAttribute("actividadesFavoritas");
 
                             if (actividadesFavoritas != null && !actividadesFavoritas.isEmpty()) {
                                 for (String nombreActividad : actividadesFavoritas) {

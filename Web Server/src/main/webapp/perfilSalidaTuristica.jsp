@@ -1,18 +1,11 @@
-<%@page import="logica.DTSalidaTuristica"%>
-<%@page import="logica.DTUsuario"%>
-<%@page import="logica.SalidaTuristica"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="logica.Actividad"%>
+<%@page import="WebServices.DtSalidaTuristica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="logica.Usuario" %>
-<%@page import="logica.Proveedor" %>
-<%@page import="logica.Turista" %>
 <%@page import="java.util.ArrayList"%>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <%
-        DTSalidaTuristica salida = (DTSalidaTuristica) request.getSession().getAttribute("salida");//usuario del que se muestra la info
+        DtSalidaTuristica salida = (DtSalidaTuristica) request.getSession().getAttribute("salida");//usuario del que se muestra la info
         String rutaImagenPerfil = (String) request.getSession().getAttribute("imagen");
         String usuario = (String) request.getSession().getAttribute("usuario");
         //DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
@@ -94,9 +87,9 @@
                 <img src="<%= rutaImagenPerfil%>" alt="alt" style="width: 100px; height: 100px;" />
                 <h3><%=salida.getNombre()%></h3>
                 <p>Cantidad máxima de turistas <%=salida.getCantMax()%></p>
-                <p>Fecha de la Salida <%=salida.getfSalida()%></p>
+                <p>Fecha de la Salida <%=salida.getFSalida()%></p>
                 <p>Lugar: <%=salida.getLugar()%></p>
-                <p>Fecha de Alta: <%=salida.getfAlta()%> </p>
+                <p>Fecha de Alta: <%=salida.getFAlta()%> </p>
             </div>
 
 

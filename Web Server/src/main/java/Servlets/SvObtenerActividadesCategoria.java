@@ -1,5 +1,10 @@
 package Servlets;
 
+import WebServices.DtActividad;
+import WebServices.DtCategoria;
+import WebServices.DtImagenActividad;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -12,18 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.Actividad;
-import logica.Categoria;
-import logica.DTImagenActividad;
-import logica.Fabrica;
-import logica.IControlador;
-import logica.imagenActividad;
+
 
 @WebServlet(name = "SvObtenerActividadesCategoria", urlPatterns = {"/SvObtenerActividadesCategoria"})
 public class SvObtenerActividadesCategoria extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,20 +32,22 @@ public class SvObtenerActividadesCategoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         // Obtener el ID del departamento desde los parámetros de la solicitud
         String categoriaId = request.getParameter("categoriaId");
         System.out.println("Departamento ID recibido: " + categoriaId);
         // Lógica para obtener las actividades de la categoria con el ID proporcionado   
-        Categoria cat = control.traerCategoria(categoriaId);
-        List<Actividad> actividades = cat.getListaActividad();
+        DtCategoria cat = port.traerCategoria(categoriaId);
+        List<DtActividad> actividades = cat.getListaActividad();
 
         // Generar el fragmento de HTML con las actividades de la categoria
         StringBuilder htmlResponse = new StringBuilder();
-        for (Actividad actividad : actividades) {
-            DTImagenActividad imagen;
+        for (DtActividad actividad : actividades) {
+            DtImagenActividad imagen;
             try {
-                imagen = control.buscarImagenPorActividad(actividad.getNombre());
+                imagen = port.buscarImagenPorActividad(actividad.getNombre());
                 String imagenRuta = "images/sinImagen.png";
 
                 if (imagen == null) {

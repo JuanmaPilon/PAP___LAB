@@ -1,15 +1,9 @@
-<%@page import="logica.DTUsuario"%>
+<%@page import="WebServices.DtProveedor"%>
+<%@page import="WebServices.DtTurista"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.ParseException"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="logica.DTProveedor"%>
-<%@page import="logica.DTTurista"%>
-<%@page import="logica.Usuario"%>
-
-<%@page import="logica.Usuario" %>
-<%@page import="logica.Proveedor" %>
-<%@page import="logica.Turista" %>
 <%@page import="java.util.ArrayList"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -95,9 +89,9 @@
 
 
                 <%                    if (tipoUsuario.equals("turista")) {
-                        DTTurista infoTurista = (DTTurista) request.getSession().getAttribute("infoTurista");
+                        DtTurista infoTurista = (DtTurista) request.getSession().getAttribute("infoTurista");
                         Date fNacimiento = null;
-                        String fechaNacimientoString = infoTurista.getfNacimiento();
+                        String fechaNacimientoString = infoTurista.getFNacimiento();
 
                         // Realiza la conversión de "dd/MM/yyyy" a "yyyy-MM-dd"
                         SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
@@ -142,9 +136,9 @@
 
                 <%
                 } else {
-                    DTProveedor infoProveedor = (DTProveedor) request.getSession().getAttribute("infoProveedor");
+                    DtProveedor infoProveedor = (DtProveedor) request.getSession().getAttribute("infoProveedor");
                     Date fNacimiento = null;
-                    String fechaNacimientoString = infoProveedor.getfNacimiento();
+                    String fechaNacimientoString = infoProveedor.getFNacimiento();
 
                     // Realiza la conversión de "dd/MM/yyyy" a "yyyy-MM-dd"
                     SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");

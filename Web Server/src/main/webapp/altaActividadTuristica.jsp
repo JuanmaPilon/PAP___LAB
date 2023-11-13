@@ -1,6 +1,4 @@
-<%@page import="logica.Usuario" %>
-<%@page import="logica.Proveedor" %>
-<%@page import="logica.Turista" %>
+
 <%@page import="java.util.ArrayList"%>
 
 

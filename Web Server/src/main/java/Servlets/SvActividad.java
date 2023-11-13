@@ -32,15 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import logica.Actividad;
-import logica.DTActividad;
-import logica.DTImagenActividad;
-import logica.DTSalidaTuristica;
-import logica.Fabrica;
-import logica.IControlador;
 
-import logica.imagenActividad;
-import persistencia.exceptions.PreexistingEntityException;
 
 @WebServlet(name = "SvActividad", urlPatterns = {"/SvActividad"})
 @MultipartConfig(

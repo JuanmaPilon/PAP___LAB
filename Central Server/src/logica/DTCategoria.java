@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DTCategoria {
     private String nombre;
-    private List<Actividad> listaActividad;
+    private List<DTActividad> listaActividad;
 
     public DTCategoria() {
     }
@@ -19,7 +19,7 @@ public class DTCategoria {
         this.nombre = nombre;
     }
 
-    public DTCategoria(String nombre, List<Actividad> listaActividad) {
+    public DTCategoria(String nombre, List<DTActividad> listaActividad) {
         this.nombre = nombre;
         this.listaActividad = listaActividad;
     }
@@ -28,7 +28,7 @@ public class DTCategoria {
         return nombre;
     }
 
-    public List<Actividad> getListaActividad() {
+    public List<DTActividad> getListaActividad() {
         return listaActividad;
     }
 

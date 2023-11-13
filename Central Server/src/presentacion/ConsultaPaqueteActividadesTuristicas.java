@@ -5,6 +5,7 @@
 package presentacion;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import logica.DTPaquete;
 import logica.IControlador;
@@ -247,7 +248,7 @@ public class ConsultaPaqueteActividadesTuristicas extends javax.swing.JInternalF
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        ArrayList<DTPaquete> paquetes = control.traerListaDTPaquetes();
+        List<DTPaquete> paquetes = control.traerListaDTPaquetes();
         
         for (DTPaquete dtpaquete : paquetes){
             System.out.println("acap"+dtpaquete.getNombre());

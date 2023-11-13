@@ -18,18 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.DTActividad;
-import logica.DTImagenPerfil;
-import logica.DTProveedor;
-import logica.DTSalidaTuristica;
-import logica.DTTurista;
-import logica.DTUsuario;
-import logica.Fabrica;
-import logica.IControlador;
-import logica.Proveedor;
-import logica.Turista;
-import logica.Usuario;
-import logica.ImagenPerfil;
+
 
 @WebServlet(name = "SvPerfilUsuario", urlPatterns = {"/SvPerfilUsuario"})
 public class SvPerfilUsuario extends HttpServlet {
@@ -64,7 +53,7 @@ public class SvPerfilUsuario extends HttpServlet {
             String tur = dtTurista.getNickname();
             //System.out.println("Servlets.SvPerfilUsuario.doGet()" + usuario +" tur " + tur);
             if (tur.equals(usuario)) {
-                
+                 System.out.println("Servlets.SvPerfilUsuario.doGet()ACAAA" + usuario +" tur " + tur);
                 List<DtSalidaTuristica> listaSalidas = port.traerInscSalidasDeTurista(dtTurista.getNickname()).getLista();
                 ArrayList<String> nombresSalidasTurista = new ArrayList<>();
                 for (DtSalidaTuristica dt : listaSalidas) {
@@ -127,7 +116,7 @@ public class SvPerfilUsuario extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String nombreSalida = request.getParameter("nombreSalida");
         
-        //port.generarPDFInscripcionSalida(usuario, nombreSalida);
+        port.generarPDFInscripcionSalida(usuario, nombreSalida);
 
     }
 

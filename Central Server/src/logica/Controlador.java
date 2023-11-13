@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static logica.TipoEstado.agregada;
 import logica.exceptions.ConstraseniasDistintas;
+import logica.exceptions.NoExisteCompra;
 import logica.exceptions.PaqueteSinActividad;
 import logica.exceptions.PaqueteYaComprado;
 import persistencia.ControladoraPersistencia;
@@ -47,18 +48,30 @@ public class Controlador implements IControlador {
 
     //descomentado por una prueba:
     @Override
-    public void nuevaCantTurista(Compra compraTurista) throws Exception {
-        controlPersis.nuevaCantTurista(compraTurista);
+    public void nuevaCantTurista(Long id, int nuevaCantTurista) throws   NoExisteCompra  {
+        Compra c = controlPersis.traerCompra(id);
+        c.setCantTuristas(nuevaCantTurista);
+        
+        try {
+            controlPersis.editarCompra(c);
+        } catch (Exception ex) {
+                throw new NoExisteCompra("La Compra id no existe");
+        }
 
     }
 
     @Override
-    public Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
-        return controlPersis.traerCompraDelTurista(nombreTurista, nombrePaquete);
+    public DTCompra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
+        Compra c = controlPersis.traerCompraDelTurista(nombreTurista, nombrePaquete);
+        //(Long id, String nicknameTurista, Date fCompra, int cantTuristas, float costoTotal, Date vencimiento, String nombrePaquete)
+        DTCompra dtc = new DTCompra(c.getId(), c.getTurista().getNickname(), c.getfCompra(), c.getCantTuristas(), 
+                c.getCostoTotal(), c.getVencimiento(), c.getPaquete().getNombre());
+        
+        return dtc;
     }
 
     @Override
-    public DTImagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception {
+    public DTImagenActividad buscarImagenPorActividad(String nombreActividad){
         imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
         DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad(), imagen.getUrlVideo());
         return dtImagen;
@@ -79,7 +92,7 @@ public class Controlador implements IControlador {
 
     }
 
-    public void ModificarImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception {
+    public void ModificarImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException {
         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
         controlPersis.modificarImagenPerfil(imagenPerfil);
     }
@@ -128,8 +141,15 @@ public class Controlador implements IControlador {
     ;
    
     @Override
-    public List<Paquete> consultaPaquetes() {
-        return controlPersis.consultaPaquete();
+    public List<DTPaquete> traerListaDTPaquetes() {
+        List<Paquete> listaPaquetes = controlPersis.consultaPaquete();
+        List<DTPaquete> listaDtPaquetes = new ArrayList();
+        
+        for (Paquete p : listaPaquetes){
+             DTPaquete dtPaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
+             listaDtPaquetes.add(dtPaquete);
+        }
+        return listaDtPaquetes;
     }
 
     ;
@@ -203,7 +223,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception {
+    public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException{
         SalidaTuristica salidaTuristica = new SalidaTuristica();
         salidaTuristica.setNombre(nombre);
         salidaTuristica.setCantMax(cantMax);
@@ -229,7 +249,7 @@ public class Controlador implements IControlador {
 
     ;
    @Override
-    public ArrayList<String> listaPaquetes() {//tiene el nombre de los departamentos, no el objeto
+    public List<String> listaPaquetes() {//tiene el nombre de los departamentos, no el objeto
         return controlPersis.listaPaquetes();
     }
 
@@ -716,19 +736,7 @@ public class Controlador implements IControlador {
         return dtactividad;
     }
 
-    @Override
-    public ArrayList<DTPaquete> traerListaDTPaquetes() {
-        List<Paquete> listaPaquetes = consultaPaquetes();
 
-        ArrayList<DTPaquete> listaDTPaquete = new ArrayList();
-        //DTPaquete(String nombre, String descripcion, int validez, int descuento, Date fechaAlta)
-        for (Paquete p : listaPaquetes) {
-            DTPaquete dtpaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
-            listaDTPaquete.add(dtpaquete);
-        }
-
-        return listaDTPaquete;
-    }
 
     @Override
     public ArrayList<String> listaActividadesDelPaquete(String nombrePaquete) {
@@ -993,11 +1001,14 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento) {
-        ArrayList<Actividad> listaActividadesTuristicas = new ArrayList();
-        for (Actividad a : controlPersis.traerActividades()) {
-            if (a.getDepartamento().getNombre().equals(nombreDepartamento) && a.getEstado().equals(TipoEstado.confirmada)) {
-                listaActividadesTuristicas.add(controlPersis.consultaActividad(a.getNombre()));
+    public ArrayList<DTActividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento) {
+        ArrayList<DTActividad> listaActividadesTuristicas = new ArrayList();
+        for (Actividad actividad : controlPersis.traerActividades()) {
+            if (actividad.getDepartamento().getNombre().equals(nombreDepartamento) && actividad.getEstado().equals(TipoEstado.confirmada)) {
+                DTActividad a = new DTActividad(actividad.getNombre(), actividad.getDescripcion(), actividad.getDuracion(),
+                        actividad.getCosto(), actividad.getCiudad(), actividad.getfAlta(), actividad.getEstado(), actividad.getDepartamento().getNombre(), actividad.getProveedor().getNombre());
+               
+                listaActividadesTuristicas.add(a);
             }
         }
         return listaActividadesTuristicas;
@@ -1172,8 +1183,19 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public Categoria traerCategoria(String categoria) {
-        return controlPersis.traerCategoria(categoria);
+    public DTCategoria traerCategoria(String categoria) {
+        Categoria c = controlPersis.traerCategoria(categoria);
+        List<DTActividad> listDTAct = new ArrayList();
+        
+        for (Actividad actividad : c.getListaActividad()){
+            DTActividad a = new DTActividad(actividad.getNombre(), actividad.getDescripcion(), actividad.getDuracion(),
+                        actividad.getCosto(), actividad.getCiudad(), actividad.getfAlta(), actividad.getEstado(), actividad.getDepartamento().getNombre(), actividad.getProveedor().getNombre());
+               
+            listDTAct.add(a);
+            
+        }
+        DTCategoria dtc = new DTCategoria(c.getNombre(), listDTAct);
+        return dtc;
 
     }
 

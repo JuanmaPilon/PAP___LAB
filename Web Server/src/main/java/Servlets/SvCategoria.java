@@ -15,9 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Categoria;
-import logica.Fabrica;
-import logica.IControlador;
+
 
 /**
  *
@@ -26,8 +24,8 @@ import logica.IControlador;
 @WebServlet(name = "SvCategoria", urlPatterns = {"/SvCategoria"})
 public class SvCategoria extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

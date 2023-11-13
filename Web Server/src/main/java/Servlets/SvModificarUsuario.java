@@ -4,6 +4,11 @@
  */
 package Servlets;
 
+import WebServices.DtImagenPerfil;
+import WebServices.DtProveedor;
+import WebServices.DtTurista;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,16 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import logica.DTImagenPerfil;
-import logica.DTProveedor;
-import logica.DTTurista;
-import logica.DTUsuario;
-import logica.Usuario;
-import logica.Fabrica;
-import logica.IControlador;
-import logica.ImagenPerfil;
-import logica.Proveedor;
-import logica.Turista;
+
 
 @WebServlet(name = "SvModificarUsuario", urlPatterns = {"/SvModificarUsuario"})
 @MultipartConfig(
@@ -41,9 +37,8 @@ import logica.Turista;
 )
 public class SvModificarUsuario extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
-
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -52,26 +47,30 @@ public class SvModificarUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+
+            //llamado a wsdl
+            WebServicesService service = new WebServicesService();
+            WebServices port = service.getWebServicesPort();
+
             String tipoUsuario = request.getParameter("tipoUsuario");
             String usuario = (String) request.getParameter("usuario"); // Obtener el nombre del usuario de logedUser
-            
 
             if (tipoUsuario.equals("turista")) {
                 tipoUsuario = "turista";
 
-                DTTurista infoTurista = control.traerDTTurista(usuario);
+                DtTurista infoTurista = port.traerDTTurista(usuario);
 
                 HttpSession misesion = request.getSession();
                 misesion.setAttribute("infoTurista", infoTurista);
             } else {
                 tipoUsuario = "proveedor";
-                DTProveedor infoProveedor = control.traerDTProveedor(usuario);
+                DtProveedor infoProveedor = port.traerDTProveedor(usuario);
                 HttpSession misesion = request.getSession();
                 misesion.setAttribute("infoProveedor", infoProveedor);
             }
 
             try {
-                DTImagenPerfil imagenPerfil = control.buscarImagenPorNickname(usuario);
+                DtImagenPerfil imagenPerfil = port.buscarImagenPorNickname(usuario);
                 String rutaImagen = imagenPerfil.getRuta();
 
                 HttpSession misesion = request.getSession();
@@ -95,6 +94,11 @@ public class SvModificarUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
+
         String errorMessage = null;
         try {
             String nickname = request.getParameter("nickname");
@@ -118,7 +122,7 @@ public class SvModificarUsuario extends HttpServlet {
 
                 String nacionalidad = request.getParameter("nacionalidad");
 
-                control.ModificarDatosDeUsuarioTurista(nickname, nombre, apellido, correo, fNacimiento, nacionalidad);
+                port.modificarDatosDeUsuarioTurista(nickname, nombre, apellido, correo, fechaNacimientoString, nacionalidad);
                 try {
                     if (archivo.getSize() > 0) {
                         nombreArchivo = archivo.getSubmittedFileName();
@@ -128,7 +132,7 @@ public class SvModificarUsuario extends HttpServlet {
                         // Copiar el archivo a la ubicación relativa
                         Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
                         String rutaRelativa = "images" + File.separator + nombreArchivo;
-                        control.ModificarImagenPerfil(nombreArchivo, rutaRelativa, nickname);
+                        port.modificarImagenPerfil(nombreArchivo, rutaRelativa, nickname);
                     }
                 } catch (Exception ex) {
                     errorMessage = "Imagen ya en uso por otro usuario. Se modifico el resto de atributos.";
@@ -139,7 +143,7 @@ public class SvModificarUsuario extends HttpServlet {
 
                 String descripcion = request.getParameter("descripcion");
                 String link = request.getParameter("sitioWeb");
-                control.ModificarDatosDeUsuarioProveedor(nickname, nombre, apellido, correo, fNacimiento, descripcion, link);
+                port.modificarDatosDeUsuarioProveedor(nickname, nombre, apellido, correo, fechaNacimientoString, descripcion, link);
 
                 try {
                     if (archivo.getSize() > 0) {
@@ -151,7 +155,7 @@ public class SvModificarUsuario extends HttpServlet {
                         Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
                         String rutaRelativa = "images" + File.separator + nombreArchivo;
 
-                        control.ModificarImagenPerfil(nombreArchivo, rutaRelativa, nickname);
+                        port.modificarImagenPerfil(nombreArchivo, rutaRelativa, nickname);
                     }
                 } catch (Exception ex) {
                     errorMessage = "Imagen ya en uso por otro usuario. Se modifico el resto de atributos.";

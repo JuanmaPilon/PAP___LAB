@@ -4,6 +4,8 @@
  */
 package Servlets;
 
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -12,13 +14,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Fabrica;
-import logica.IControlador;
+
 
 @WebServlet(name = "SvCargarActividades", urlPatterns = {"/SvCargarActividades"})
 public class SvCargarActividades extends HttpServlet {
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
@@ -27,8 +28,12 @@ public class SvCargarActividades extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
     String departamento = request.getParameter("departamento");
-    List<String> listaActividades = control.listaActividadesTuristicasConfirmadas(departamento);
+    
+    List<String> listaActividades = port.listaActividadesTuristicasConfirmadas(departamento).getLista();
     int startIndex1 = Integer.parseInt(request.getParameter("startIndex1"));
     int endIndex = Math.min(startIndex1 + 10, listaActividades.size()); // Envía 10 actividades a la vez, puedes ajustar este número según tus necesidades
     String actividadesSubset = String.join(",", listaActividades.subList(startIndex1, endIndex));

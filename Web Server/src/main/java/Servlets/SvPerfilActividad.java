@@ -1,25 +1,25 @@
 package Servlets;
 
+import WebServices.DtActividad;
+import WebServices.DtSalidaTuristica;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.Actividad;
-import logica.Categoria;
-import logica.DTActividad;
-import logica.DTSalidaTuristica;
-import logica.Fabrica;
-import logica.IControlador;
+
 
 @WebServlet(urlPatterns = {"/SvPerfilActividad"})
 public class SvPerfilActividad extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,14 +29,17 @@ public class SvPerfilActividad extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         HttpSession misesion = request.getSession();
         String nombreActividad = request.getParameter("nombreActividad");
        // System.out.println("Nombre de la actividad: " + nombreActividad);
-        DTActividad act = control.traerDTActividad(nombreActividad);
-        ArrayList<String> listaCategoria = control.traerCategoriasActividad(act.getNombre()); // categorias de la actividad
+        DtActividad act = port.traerDTActividad(nombreActividad);
+        List<String> listaCategoria = port.traerCategoriasActividad(act.getNombre()).getLista(); // categorias de la actividad
         
         
-        ArrayList<DTSalidaTuristica> listaDtSalidas = control.encontraSalidasTuristicasDeActividad(act.getNombre() );
+        List<DtSalidaTuristica> listaDtSalidas = port.encontraSalidasTuristicasDeActividad(act.getNombre()).getLista();
 
                 
         misesion.setAttribute("nombresSalidasActividad", listaDtSalidas);

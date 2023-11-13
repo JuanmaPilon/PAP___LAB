@@ -4,6 +4,8 @@
  */
 package Servlets;
 
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -13,13 +15,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import logica.Fabrica;
-import logica.IControlador;
+
 
 @WebServlet(name = "SvCargarDepartamentos", urlPatterns = {"/SvCargarDepartamentos"})
 public class SvCargarDepartamentos extends HttpServlet {
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+//    Fabrica fabrica = Fabrica.getInstance();
+  //  IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,7 +30,11 @@ public class SvCargarDepartamentos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    List<String> listaDeptos = control.listaDeptos();
+                //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
+        
+    List<String> listaDeptos = port.listaDeptos().getLista();
     int startIndex = Integer.parseInt(request.getParameter("startIndex"));
     int endIndex = Math.min(startIndex + 40, listaDeptos.size()); // Envía 10 deptos a la vez, puedes ajustar este número según tus necesidades
     String deptosSubset = String.join(",", listaDeptos.subList(startIndex, endIndex));

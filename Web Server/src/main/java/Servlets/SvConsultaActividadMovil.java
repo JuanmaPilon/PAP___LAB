@@ -1,5 +1,9 @@
 package Servlets;
 
+import WebServices.DtActividad;
+import WebServices.DtImagenActividad;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -9,16 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.DTActividad;
-import logica.DTImagenActividad;
-import logica.Fabrica;
-import logica.IControlador;
+
 
 @WebServlet(name = "SvConsultaActividadMovil", urlPatterns = {"/SvConsultaActividadMovil"})
 public class SvConsultaActividadMovil extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+    //IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,13 +29,16 @@ public class SvConsultaActividadMovil extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         String actividad = request.getParameter("actividadSalidaId");
-        DTActividad act = control.traerDTActividad(actividad);
+        DtActividad act = port.traerDTActividad(actividad);
         StringBuilder htmlResponse = new StringBuilder();
         //DTImagenActividad imagen = null;
         try {
             // cambioar eso por la ruta de la imagen por que de la forma que esta revienta, tiene que estar comentado
-            DTImagenActividad imagen = control.buscarImagenPorActividad(actividad);
+            DtImagenActividad imagen = port.buscarImagenPorActividad(actividad);
             String imagenRuta = "images/sinImagen.png";
 
             if (imagen == null) {

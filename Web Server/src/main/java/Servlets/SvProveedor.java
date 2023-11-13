@@ -22,11 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import logica.Controlador;
-import logica.Fabrica;
-import logica.IControlador;
-import persistencia.exceptions.CorreoElectronicoExistenteException;
-import persistencia.exceptions.PreexistingEntityException;
+
 
 @WebServlet(name = "SvProveedor", urlPatterns = {"/SvProveedor"})
 @MultipartConfig(

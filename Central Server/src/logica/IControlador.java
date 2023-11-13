@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import logica.exceptions.ConstraseniasDistintas;
 import logica.exceptions.ImagenPorNicknameNoExite;
+import logica.exceptions.NoExisteCompra;
 import logica.exceptions.PaqueteSinActividad;
 import logica.exceptions.PaqueteYaComprado;
 import persistencia.exceptions.CorreoElectronicoExistenteException;
@@ -14,8 +15,8 @@ import persistencia.exceptions.NonexistentEntityException;
 import persistencia.exceptions.PreexistingEntityException;
 
 public interface IControlador {
-public abstract DTImagenActividad buscarImagenPorActividad(String nombreActividad) throws Exception;
-public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException, Exception;
+public abstract DTImagenActividad buscarImagenPorActividad(String nombreActividad);
+public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException;
 public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException;
 public abstract DTImagenPerfil buscarImagenPorNickname(String nickname) throws ImagenPorNicknameNoExite;
 public abstract void AltaDeImagenActividad(String imagenNombre,String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException;
@@ -27,7 +28,7 @@ public abstract ArrayList<String> listaUsuarios();  //devuelve una lista de todo
 public abstract ArrayList listaProveedores(); //devuelve una lista de todos los proveedores
 public abstract ArrayList listaDepartamentos(); //devuelve una lista de todos los departamentos
 public abstract ArrayList listaDeptos();//lista que contiene solo los nombres de los departamentos
-public abstract ArrayList listaPaquetes();
+public abstract List listaPaquetes();
 public abstract ArrayList listaActividades();
 public abstract void ModificarDatosDeUsuarioProveedor(String nickname, String nombre, String apellido, String correo, Date fecha, String descripcion, String url);
 public abstract void ModificarDatosDeUsuarioTurista(String nickname, String nombre, String apellido, String correo, Date fecha, String nacionalidad);//Nati
@@ -36,12 +37,12 @@ public abstract ArrayList listaActividadesTuristicas(String departamento);
 public abstract ArrayList listaActividadesTuristicasPorCategoria(String categoria);
 public abstract ArrayList<DTSalidaTuristica> encontraSalidasTuristicasDeActividad(String actividadSeleccionado);
 public abstract ArrayList listaSalActividadTuristica(String actividad);
-public abstract List consultaPaquetes();
+public abstract List<DTPaquete> traerListaDTPaquetes();
 public abstract DTSalidaTuristica ConsultaSalidaTuristica(String nombreSalida);
 public abstract void crearPaqueteActividadTuristica(String nombreDePaquete, String descripcionDePaquete, int validezDePaquete, Date altaDePaquete, int descuentoDePaquete) throws PreexistingEntityException, Exception;
 public abstract void AltaDeDepartamento(String nombre, String descripcion, String url) throws PreexistingEntityException, Exception;
 public abstract List<String> llenarCmboBoxDep();
-public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, Exception;
+public abstract void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException;
 public abstract void guardarActividad(String nombreActividad,String descripcionActividad,int duracionActividad,float costoActividad,String nombreCuidad,Date fecha,String nombreProveedor, String nombreDepartamento, List<String> listaCategorias) throws PreexistingEntityException;
 public ArrayList<DTUsuario> traerUsuarioMod();
 public ArrayList<DTTurista> traerUsuarioTurista();
@@ -61,7 +62,7 @@ public abstract ArrayList<DTSalidaTuristica> traerSalidasDelProveedor(String nic
 public abstract ArrayList<DTActividad> traerActividadesDelProveedor(String nickname);
 public abstract ArrayList<String> traerCategorias();
 public abstract void ValidarContrasenias(String contrasenia, String confirmarContrasenia) throws ConstraseniasDistintas;
-public abstract ArrayList<DTPaquete> traerListaDTPaquetes();
+
 public abstract ArrayList<String> listaActividadesDelPaquete(String nombrePaquete);
 public abstract ArrayList<String> traerCategoriasPaquete(String paquete);
 public abstract DTPaquete traerDTPaquete(String nombrePaquete);
@@ -77,14 +78,14 @@ public abstract ArrayList<DTActividad> listaActividadesProveedorConfirmadas (Str
 public abstract ArrayList<DTActividad> listaActividadesProveedorTodas (String nicknameProveedor);
 public abstract ArrayList<String> listaPaquetesComprados (String nicknameTurista);
 
-public abstract ArrayList<Actividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
+public abstract ArrayList<DTActividad> listaActividadesConfirmadasDepartamento(String nombreDepartamento);
 
 public abstract void cargarDatosDePrueba();
-public abstract Categoria traerCategoria(String categoria);
+public abstract DTCategoria traerCategoria(String categoria);
 
 
-public abstract Compra traerCompraDelTurista(String nombreTurista, String nombrePaquete);
-public abstract void nuevaCantTurista(Compra compraTurista) throws Exception;
+public abstract DTCompra traerCompraDelTurista(String nombreTurista, String nombrePaquete);
+public void nuevaCantTurista(Long id, int nuevaCantTurista) throws   NoExisteCompra;
 public abstract DTImagenActividad traerDTImagenActividad(String nombreActividad);
 
 public abstract DTUsuario traerDTUsuario(String nickname);//listo

@@ -4,6 +4,12 @@
  */
 package Servlets;
 
+import WebServices.DtActividad;
+import WebServices.DtImagenActividad;
+import WebServices.DtSalidaTuristica;
+import WebServices.PreexistingEntityException_Exception;
+import WebServices.WebServices;
+import WebServices.WebServicesService;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,6 +29,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -31,12 +38,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import logica.DTActividad;
-import logica.DTImagenActividad;
-import logica.DTSalidaTuristica;
-import logica.Fabrica;
-import logica.IControlador;
-import persistencia.exceptions.PreexistingEntityException;
+
 
 @WebServlet(name = "SvSalida", urlPatterns = {"/SvSalida"})
 @MultipartConfig(
@@ -46,8 +48,8 @@ import persistencia.exceptions.PreexistingEntityException;
 
 public class SvSalida extends HttpServlet {
 
-    Fabrica fabrica = Fabrica.getInstance();
-    IControlador control = fabrica.getIControlador();
+    //Fabrica fabrica = Fabrica.getInstance();
+   // IControlador control = fabrica.getIControlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,14 +58,16 @@ public class SvSalida extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         String filtro = request.getParameter("filtro");
 
         if ("FiltroDepartamento".equals(filtro)) {
 
             String departamentoSeleccionado = request.getParameter("departamento");
 
-            ArrayList<String> listaActividadesDepartamento = control.listaActividadesTuristicasConfirmadas(departamentoSeleccionado);
+            List<String> listaActividadesDepartamento = port.listaActividadesTuristicasConfirmadas(departamentoSeleccionado).getLista();
 
             String actividades = String.join(",", listaActividadesDepartamento);
             response.setContentType("text/plain");
@@ -74,7 +78,7 @@ public class SvSalida extends HttpServlet {
 
             String categoriaSeleccionada = request.getParameter("categoria");
 
-            ArrayList<String> listaActividadesCategoria = control.listaActividadesTuristicasPorCategoriaConfirmadas(categoriaSeleccionada);
+            List<String> listaActividadesCategoria = port.listaActividadesTuristicasPorCategoriaConfirmadas(categoriaSeleccionada).getLista();
 
             String actividades = String.join(",", listaActividadesCategoria);
             response.setContentType("text/plain");
@@ -85,10 +89,10 @@ public class SvSalida extends HttpServlet {
 
             HttpSession misesion = request.getSession();
             String nombreSalida = request.getParameter("actividadSalida");
-            DTSalidaTuristica salidaTuristica = control.ConsultaSalidaTuristica(nombreSalida);
+            DtSalidaTuristica salidaTuristica = port.consultaSalidaTuristica(nombreSalida);
             misesion.setAttribute("salida", salidaTuristica);
             try {
-                DTImagenActividad imagen = control.buscarImagenPorActividad(nombreSalida);
+                DtImagenActividad imagen = port.buscarImagenPorActividad(nombreSalida);
 
                 //  if (imagen == null) {
                 //   return;
@@ -116,8 +120,8 @@ public class SvSalida extends HttpServlet {
 
         String nombreActividad = (String) request.getParameter("actividad");
         System.out.println(nombreActividad);
-        DTActividad actividadConsultada = control.traerDTActividad(nombreActividad);
-        ArrayList<DTSalidaTuristica> salidas = control.encontraSalidasTuristicasDeActividad(nombreActividad);
+        DtActividad actividadConsultada = port.traerDTActividad(nombreActividad);
+        List<DtSalidaTuristica> salidas = port.encontraSalidasTuristicasDeActividad(nombreActividad).getLista();
 
         HttpSession misesion = request.getSession();
         misesion.setAttribute("actividad", actividadConsultada);
@@ -128,6 +132,9 @@ public class SvSalida extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
         try {
             String actividadTuristica = request.getParameter("actividadTuristica");
             String nombreSalida = request.getParameter("nombreSalida");
@@ -153,7 +160,9 @@ public class SvSalida extends HttpServlet {
 
             Date fechaHoraActual = Date.from(fechaHoraLocal.atZone(ZoneId.systemDefault()).toInstant());
 
-            control.AltaSalidaTuristica(nombreSalida, cantidadMaxTuristas, fechaHoraActual, fechaHoraDate, lugarSalida, actividadTuristica);
+            //no importa la fecha actual, la carga la logica
+            String fechaHoy = "11/11/1900";
+            port.altaSalidaTuristica(nombreSalida, cantidadMaxTuristas, fechaHoy, fechaHoraSalida, lugarSalida, actividadTuristica);
 
             if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
@@ -167,7 +176,7 @@ public class SvSalida extends HttpServlet {
                     String rutaRelativa = "images" + File.separator + nombreArchivo;
 
                     try {
-                        control.AltaDeImagenActividad(nombreArchivo, rutaRelativa, nombreSalida, null);
+                        port.altaDeImagenActividad(nombreArchivo, rutaRelativa, nombreSalida, null);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         String errorMessage = "Ya existe otra salida con esta imagen, se ha dado de alta la salida sin imagen";
@@ -178,7 +187,7 @@ public class SvSalida extends HttpServlet {
                 }
             }
             response.sendRedirect("logedUser.jsp");
-        } catch (PreexistingEntityException ex) {
+        } catch (PreexistingEntityException_Exception ex) {
             ex.printStackTrace();
             String errorMessage = "Ya existe otra salida con ese nombre";
             String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaSalidaTuristica.jsp';</script>";
