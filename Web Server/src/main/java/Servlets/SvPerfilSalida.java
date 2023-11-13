@@ -12,8 +12,7 @@ import logica.DTImagenActividad;
 import logica.DTSalidaTuristica;
 import logica.Fabrica;
 import logica.IControlador;
-import logica.SalidaTuristica;
-import logica.imagenActividad;
+
 
 @WebServlet(name = "SvPerfilSalida", urlPatterns = {"/SvPerfilSalida"})
 public class SvPerfilSalida extends HttpServlet {

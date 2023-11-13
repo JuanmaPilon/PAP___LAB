@@ -104,6 +104,7 @@ Servlets\SvActividad.class
 logica\Proveedor_.class
 Servlets\SvModificarUsuario.class
 WebServices\package-info.class
+Servlets\SvConsultaActividadMovil.class
 Servlets\SvPerfilUsuario.class
 persistencia\ActividadJpaController.class
 Servlets\SvCategoria.class

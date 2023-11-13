@@ -57,37 +57,28 @@
                         <button type="button" class="btn btn-primary" onclick="filtrarPorDepartamento()">Filtrar por Departamento</button>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoría:</label>
-                            <select class="form-select" id="categoria" name="categoria">
-                                <option value="categoria1">Categoria</option>
+                            <select class="form-select" id="categoria" name="categoria">                  
                             </select>
                         </div>
                         <button type="button" class="btn btn-primary" onclick="filtrarPorCategoria()">Filtrar por Categoria</button>
 
-                        <button type="submit" class="btn btn-primary">Consultar</button>
-                        <div class="container mt-5">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h2>Actividades Turisticas Disponibles</h2>
-                                    <select class="form-select" id="actividad" name="actividad"></select>
-                                </div>
-                            </div>
+
+
+
+                        <div class="mb-3">
+                            <label for="actividad" class="form-label">Actividades Turisticas Disponibles: </label>
+                            <select class="form-select" id="actividad" name="actividad"></select>
                         </div>
+
+
+                        <button type="submit" class="btn btn-primary">Consultar</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12">
-                    <h2>Detalles de la Actividad Turistica</h2>
-                    <p>Nombre:</p>
-                    <p>Fecha: </p>
-                    <p>Lugar:</p>
-                    <img src="imagen_actividad_turistica.jpg" alt="Actividad Turistica">
-                </div>
-            </div>
-        </div>
+        <section id="datosActividad" >
+        </section>
 
         <script>
 
@@ -181,16 +172,36 @@
                 cargarDepartamentos();
                 cargarCategorias();
 
-                const consultaForm = document.getElementById("consultaForm");
 
-                consultaForm.addEventListener("submit", function (event) {
-                    const actividadSeleccionada = document.getElementById("actividad").value;
-                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento" || actividadSeleccionada === "" || actividadSeleccionada === null) {
-                        event.preventDefault(); // Prevenir el envío del formulario
-                        alert("Por favor, selecciona una actividad válida."); // Mostrar mensaje de error
-                    }
-                });
             }
+            document.addEventListener("DOMContentLoaded", function () {
+                // Obtén el formulario de consulta
+                var consultaForm = document.getElementById("consultaForm");
+
+                // Agrega un controlador de eventos para el envío del formulario
+                consultaForm.addEventListener("submit", function (event) {
+                    // Previene el envío del formulario
+                    event.preventDefault();
+
+                    // Crea una nueva instancia de XMLHttpRequest
+                    var xhr = new XMLHttpRequest();
+
+                    // Obtiene el valor seleccionado del campo de salida turística
+                    var actividadSalidaId = document.getElementById("actividad").value;
+                    var url = "SvConsultaActividadMovil?actividadSalidaId=" + actividadSalidaId;
+                    console.log("url: " + url);
+                    // Realiza una solicitud al servidor para obtener los datos de la salida turística
+                    xhr.open("GET", url, true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // Manejar la respuesta del servidor y mostrar las actividades en el contenedor
+                            var datosSalida = document.getElementById("datosActividad");
+                            datosSalida.innerHTML = xhr.responseText;
+                        }
+                    };
+                    xhr.send();
+                });
+            });
 
         </script>
 

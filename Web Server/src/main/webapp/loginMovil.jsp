@@ -38,14 +38,14 @@
   <div class="row">
     <div class="col-12">
       <h2>Iniciar Sesion</h2>
-      <form action="procesar_login.jsp" method="post">
+      <form action="SvAutenticarUsuario" method="GET" onsubmit="return validarFormulario()">
         <div class="mb-3">
-          <label for="usuario" class="form-label">Usuario (nick o mail)</label>
-          <input type="text" class="form-control" id="usuario" name="usuario" required>
+          <label for="username" class="form-label">Usuario (nick o mail)</label>
+          <input type="text" class="form-control" id="username" name="username" required>
         </div>
         <div class="mb-3">
-          <label for="contrasena" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
       </form>
@@ -56,4 +56,17 @@
 <div style="background-color:#e5e5e5;text-align:center;padding:10px;margin-top:7px;">Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola - &copy; 2023 Turismo.uy</div>
 
 </body>
+<script>
+    function validarFormulario() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        if (username === "" || password === "") {
+            alert("Por favor, complete todos los campos.");
+            return false; // Evita que el formulario se envíe si hay campos vacíos.
+        }
+        // El formulario se enviará al servlet SvBuscarUsuario para la autenticación.
+        return true;
+    }
+</script>
 </html>

@@ -34,15 +34,14 @@ public class SvConsultaSalidaMovil extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String actividadSalidaId = request.getParameter("actividadSalidaId");
         DTSalidaTuristica salT = control.ConsultaSalidaTuristica(actividadSalidaId);
-
         StringBuilder htmlResponse = new StringBuilder();
-        DTImagenActividad imagen;
+        //DTImagenActividad imagen = null;
         try {
             // cambioar eso por la ruta de la imagen por que de la forma que esta revienta, tiene que estar comentado
-          //  imagen = control.buscarImagenPorActividad(salT.getNombre());
-            imagen = null;
+            DTImagenActividad imagen = control.buscarImagenPorActividad(actividadSalidaId);
             String imagenRuta = "images/sinImagen.png";
 
             if (imagen == null) {
@@ -51,7 +50,7 @@ public class SvConsultaSalidaMovil extends HttpServlet {
             } else {
                 imagenRuta = imagen.getRuta();
             }
-            System.out.println("TAMO ACA Servlets.SvConsultaSalidaMovil.doGet()1");
+           
             htmlResponse.append("<div class='Salida'>");
             htmlResponse.append("<h2>Detalles de la Salida Turstica:</h2>");
             htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
@@ -59,7 +58,17 @@ public class SvConsultaSalidaMovil extends HttpServlet {
             htmlResponse.append("<p>").append(salT.getfSalida()).append("</p>");
             htmlResponse.append("<p>").append(salT.getLugar()).append("</p>");
             htmlResponse.append("</div>");
+            
         } catch (Exception ex) {
+            String imagenRuta = "images/sinImagen.png";
+            imagenRuta = "images/sinImagen.png";
+            htmlResponse.append("<div class='Salida'>");
+            htmlResponse.append("<h2>Detalles de la Salida Turstica:</h2>");
+            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
+            htmlResponse.append("<p>").append(salT.getNombre()).append("</p>");
+            htmlResponse.append("<p>").append(salT.getfSalida()).append("</p>");
+            htmlResponse.append("<p>").append(salT.getLugar()).append("</p>");
+            htmlResponse.append("</div>");
             Logger.getLogger(SvObtenerActividadesCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
 
