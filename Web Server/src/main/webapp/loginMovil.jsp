@@ -29,9 +29,19 @@
         <div class="mb-3">
           <label for="password" class="form-label">Contraseña</label>
           <input type="password" class="form-control" id="password" name="password" required>
-        </div>
+       
+        <input type="hidden" name="login" value="true"> <!-- Campo oculto para identificar el inicio de sesión -->
         <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
       </form>
+       </div>
+           <div class="error-message">
+            <%-- Muestra el mensaje de error si está presente en la sesión --%>
+            <% String errorMensaje = (String) session.getAttribute("errorMensaje"); %>
+            <% if (errorMensaje != null) { %>
+                <p><b><%= errorMensaje %></b></p>
+            <% }
+            %>
+        </div>
     </div>
   </div>
 </div>

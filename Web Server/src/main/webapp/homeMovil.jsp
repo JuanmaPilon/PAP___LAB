@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <%  String usuario = (String) request.getSession().getAttribute("usuario"); %>
+   <%  String usuario = (String) request.getSession().getAttribute("usuario"); 
+   request.getSession().setAttribute("errorMensaje", "");
+   %>
   <title>Turismo.uy Movil</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">

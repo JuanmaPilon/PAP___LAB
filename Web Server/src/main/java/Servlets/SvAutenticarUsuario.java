@@ -1,10 +1,10 @@
 package Servlets;
 
+import WebServices.DtProveedor;
 import WebServices.DtUsuario;
 import WebServices.WebServices;
 import WebServices.WebServicesService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,17 +32,25 @@ public class SvAutenticarUsuario extends HttpServlet {
         String contrasenia = request.getParameter("password"); //Obtengo la contrasenia ingresada
 
         boolean autenticado = autenticarUsuario(usuario, contrasenia);
+        String userAgent = request.getHeader("User-Agent");
 
         if (autenticado) {
+
+            String tipoUsuario = port.devolverTipoUsuario(usuario);
+            
+            //si es proveedor y estamos en movil no se puede loguear
+            if (userAgent != null && (userAgent.contains("Android") || userAgent.contains("iPhone") || userAgent.contains("Mobile"))) {
+                if (tipoUsuario.equals("proveedor")) {
+                    request.getSession().setAttribute("errorMensaje", "Usuario del tipo Proveedor"); // Almacena un mensaje de error en la sesión
+                    response.sendRedirect("loginMovil.jsp");
+                    return;  // Asegúrate de terminar la ejecución del servlet después de la redirección
+                }
+            }
+            
             request.getSession().setAttribute("usuario", usuario);  // Si el usuario es autenticado, puedes almacenar información de sesión
 
             DtUsuario usu = port.traerDTUsuario(usuario);
-
-            // DTUsuario usu = control.traerDTUsuario(usuario);
-            String tipoUsuario = port.devolverTipoUsuario(usu.getNickname());
-
-            System.out.println("LLAMADO DE WSDL TIPO USUARIO" + tipoUsuario);
-
+            
             //String tipoUsuario = control.devolverTipoUsuario(usu.getNickname());
             if (tipoUsuario.equals("turista")) {
                 List<String> actividadesFavoritas = port.traerActividadesFavoritasDelTurista(usuario).getLista();
@@ -51,7 +59,6 @@ public class SvAutenticarUsuario extends HttpServlet {
             request.getSession().setAttribute("usu", usu);
             //request.getSession().setAttribute("usuariosFavoritos", usuariosFavoritos);
             request.getSession().setAttribute("tipoUsuario", tipoUsuario);
-            String userAgent = request.getHeader("User-Agent");
 
             // Verificar si el agente de usuario indica un dispositivo móvil (puedes ajustar la condición según tus necesidades)
             if (userAgent != null && (userAgent.contains("Android") || userAgent.contains("iPhone") || userAgent.contains("Mobile"))) {
@@ -62,7 +69,7 @@ public class SvAutenticarUsuario extends HttpServlet {
                 response.sendRedirect("logedUser.jsp");
             }
         } else {
-            String userAgent = request.getHeader("User-Agent");
+
             request.getSession().setAttribute("errorMensaje", "Usuario y/o contrasenia incorrectas"); // Almacena un mensaje de error en la sesión
             if (userAgent != null && (userAgent.contains("Android") || userAgent.contains("iPhone") || userAgent.contains("Mobile"))) {
                 // Redirigir a la versión móvil
@@ -101,6 +108,6 @@ public class SvAutenticarUsuario extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
