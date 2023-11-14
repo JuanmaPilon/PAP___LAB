@@ -13,7 +13,7 @@
 
             function redirigirSiEsMovil() {
                 if (window.innerWidth <= 800) {
-                    window.location.href = 'homeMovil.jsp';
+                    window.location.href = 'loginMovil.jsp';
                 }
             }
             document.addEventListener("DOMContentLoaded", redirigirSiEsMovil);

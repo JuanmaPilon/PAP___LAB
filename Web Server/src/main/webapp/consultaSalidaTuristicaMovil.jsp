@@ -31,9 +31,9 @@
                 <div class="collapse navbar-collapse" id="navbarsExample01">
                     <ul class="navbar-nav me-auto mb-2">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Ver Actividades</a>
-                            <a class="nav-link active" aria-current="page" href="#">Ver Salidas Turisticas</a>
-                            <a class="nav-link active" aria-current="page" href="#">Salir</a>
+            <a class="nav-link active" aria-current="page" href="consultaActividadTuristicaMovil.jsp">Ver Actividades</a>
+			<a class="nav-link active" aria-current="page" href="consultaSalidaTuristicaMovil.jsp">Ver Salidas Turisticas</a>
+			<a class="nav-link active" aria-current="page" href="loginMovil.jsp">Salir</a>
                         </li>
                     </ul>
                 </div>

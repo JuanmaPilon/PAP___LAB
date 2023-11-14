@@ -17,10 +17,8 @@
     </head>
 
     <body onload="cargarDatos()">
-        <header>
-            <div id="logo">
-                <h1>Turismo.uy - Consulta de Actividad Turistica</h1>
-            </div>
+           <header>
+               <!-- 
             <div id="search">
                 <div id="search">
                     <form action="SvBuscar" method="GET">
@@ -29,6 +27,7 @@
                     </form>
                 </div>
             </div>
+        comment -->
         </header>
 
         <div class="container-fluid p-5 bg-primary text-white text-center">
@@ -45,9 +44,9 @@
                 <div class="collapse navbar-collapse" id="navbarsExample01">
                     <ul class="navbar-nav me-auto mb-2">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Ver Actividades</a>
-                            <a class="nav-link active" aria-current="page" href="#">Ver Salidas Turísticas</a>
-                            <a class="nav-link active" aria-current="page" href="#">Salir</a>
+            <a class="nav-link active" aria-current="page" href="consultaActividadTuristicaMovil.jsp">Ver Actividades</a>
+			<a class="nav-link active" aria-current="page" href="consultaSalidaTuristicaMovil.jsp">Ver Salidas Turisticas</a>
+			<a class="nav-link active" aria-current="page" href="loginMovil.jsp">Salir</a>
                         </li>
                     </ul>
                 </div>

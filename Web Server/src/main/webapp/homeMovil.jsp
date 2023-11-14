@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <%  String usuario = (String) request.getSession().getAttribute("usuario"); %>
   <title>Turismo.uy Movil</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +18,7 @@
   
   <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Bienvenido!</a>
+      <a class="navbar-brand" href="#">Bienvenido, <%=usuario%></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,9 +26,9 @@
       <div class="collapse navbar-collapse" id="navbarsExample01">
         <ul class="navbar-nav me-auto mb-2">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Ver Actividades</a>
-			<a class="nav-link active" aria-current="page" href="#">Ver Salidas Turisticas</a>
-			<a class="nav-link active" aria-current="page" href="#">Salir</a>
+            <a class="nav-link active" aria-current="page" href="consultaActividadTuristicaMovil.jsp">Ver Actividades</a>
+			<a class="nav-link active" aria-current="page" href="consultaSalidaTuristicaMovil.jsp">Ver Salidas Turisticas</a>
+			<a class="nav-link active" aria-current="page" href="loginMovil.jsp">Salir</a>
           </li>
         </ul>
       </div>
@@ -35,27 +36,12 @@
   </nav>
     
   <div class="container mt-5">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Actividad 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Actividad 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Actividad 3</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
+      <h1>BIENVENIDO! ;) </h1>
 </div>  
     
 
-<div style="background-color:#e5e5e5;text-align:center;padding:10px;margin-top:7px;">Grupo 4 - Programación de aplicaciones - </div>
+<div style="background-color:#e5e5e5;text-align:center;padding:10px;margin-top:7px;">Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola - &copy; 2023 Turismo.uy</div>
+
 
 </body>
 </html>

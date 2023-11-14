@@ -12,13 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "SvAutenticarUsuario", urlPatterns = {"/SvAutenticarUsuario"})
 public class SvAutenticarUsuario extends HttpServlet {
 
     //Fabrica fabrica = Fabrica.getInstance();
     //IControlador control = fabrica.getIControlador();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -53,10 +51,26 @@ public class SvAutenticarUsuario extends HttpServlet {
             request.getSession().setAttribute("usu", usu);
             //request.getSession().setAttribute("usuariosFavoritos", usuariosFavoritos);
             request.getSession().setAttribute("tipoUsuario", tipoUsuario);
-            response.sendRedirect("logedUser.jsp"); // Redirige al usuario a la página de inicio
+            String userAgent = request.getHeader("User-Agent");
+
+            // Verificar si el agente de usuario indica un dispositivo móvil (puedes ajustar la condición según tus necesidades)
+            if (userAgent != null && (userAgent.contains("Android") || userAgent.contains("iPhone") || userAgent.contains("Mobile"))) {
+                // Redirigir a la versión móvil
+                response.sendRedirect("homeMovil.jsp");
+                return;  // Asegúrate de terminar la ejecución del servlet después de la redirección
+            } else {
+                response.sendRedirect("logedUser.jsp");
+            }
         } else {
+            String userAgent = request.getHeader("User-Agent");
             request.getSession().setAttribute("errorMensaje", "Usuario y/o contrasenia incorrectas"); // Almacena un mensaje de error en la sesión
-            response.sendRedirect("login.jsp"); // Redirige al usuario nuevamente a la página de inicio de sesión
+            if (userAgent != null && (userAgent.contains("Android") || userAgent.contains("iPhone") || userAgent.contains("Mobile"))) {
+                // Redirigir a la versión móvil
+                response.sendRedirect("loginMovil.jsp");
+                return;  // Asegúrate de terminar la ejecución del servlet después de la redirección
+            } else {
+                response.sendRedirect("login.jsp");
+            }
         }
     }
 
