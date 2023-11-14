@@ -229,6 +229,10 @@
             function cargarSalidasDeActividad() {
                 //  const filtro = "FiltroSalidasPorNomActividad";
                 const actividadSeleccionada = document.getElementById("actividad").value;
+                 if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento" || actividadSeleccionada === "" || actividadSeleccionada === null) {
+                        event.preventDefault(); // Prevenir el envío del formulario
+                        alert("Por favor, seleccione una actividad válida."); // Mostrar mensaje de error
+                    } else {
                 const url = "SvInscripcion?actividad=" + encodeURIComponent(actividadSeleccionada);
 
                 fetch(url)
@@ -249,7 +253,7 @@
                             });
                         })
                         .catch(error => console.error("Error al cargar las salidas: " + error));
-            }
+            }}
 
             function verDetallesSalida() {
                 const filtro = "FiltroSalidas";

@@ -15,7 +15,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body onload="cargarDatos()">
-        
+
         <div class="container-fluid p-5 bg-primary text-white text-center">
             <h1>Turismo.uy - Consulta de Salida Turistica</h1>
         </div>
@@ -31,9 +31,9 @@
                 <div class="collapse navbar-collapse" id="navbarsExample01">
                     <ul class="navbar-nav me-auto mb-2">
                         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="consultaActividadTuristicaMovil.jsp">Ver Actividades</a>
-			<a class="nav-link active" aria-current="page" href="consultaSalidaTuristicaMovil.jsp">Ver Salidas Turisticas</a>
-			<a class="nav-link active" aria-current="page" href="loginMovil.jsp">Salir</a>
+                            <a class="nav-link active" aria-current="page" href="consultaActividadTuristicaMovil.jsp">Ver Actividades</a>
+                            <a class="nav-link active" aria-current="page" href="consultaSalidaTuristicaMovil.jsp">Ver Salidas Turisticas</a>
+                            <a class="nav-link active" aria-current="page" href="loginMovil.jsp">Salir</a>
                         </li>
                     </ul>
                 </div>
@@ -113,6 +113,10 @@
             function cargarSalidasDeActividad() {
                 //  const filtro = "FiltroSalidasPorNomActividad";
                 const actividadSeleccionada = document.getElementById("actividad").value;
+                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento" || actividadSeleccionada === "" || actividadSeleccionada === null) {
+                        event.preventDefault(); // Prevenir el envío del formulario
+                        alert("Por favor, seleccione una actividad válida."); // Mostrar mensaje de error
+                    } else {
                 const url = "SvInscripcion?actividad=" + encodeURIComponent(actividadSeleccionada);
                 console.log("cargar salidas");
                 fetch(url)
@@ -133,7 +137,7 @@
                             });
                         })
                         .catch(error => console.error("Error al cargar las salidas: " + error));
-            }
+            }}
 
             function cargarCategorias() {
                 fetch("SvCategoria")
@@ -225,26 +229,32 @@
 
                 // Agrega un controlador de eventos para el envío del formulario
                 consultaForm.addEventListener("submit", function (event) {
-                    // Previene el envío del formulario
-                    event.preventDefault();
+                    const actividadSeleccionada = document.getElementById("actividad").value;
+                    if (actividadSeleccionada === "No hay actividades disponibles para esta categoria" || actividadSeleccionada === "No hay actividades disponibles para este departamento" || actividadSeleccionada === "" || actividadSeleccionada === null) {
+                        event.preventDefault(); // Prevenir el envío del formulario
+                        alert("Por favor, seleccione una salida válida."); // Mostrar mensaje de error
+                    } else {
+                        event.preventDefault();
 
-                    // Crea una nueva instancia de XMLHttpRequest
-                    var xhr = new XMLHttpRequest();
+                        // Crea una nueva instancia de XMLHttpRequest
+                        var xhr = new XMLHttpRequest();
 
-                    // Obtiene el valor seleccionado del campo de salida turística
-                    var actividadSalidaId = document.getElementById("actividadSalida").value;
-                    var url = "SvConsultaSalidaMovil?actividadSalidaId=" + actividadSalidaId;
-                    console.log("url: " + url);
-                    // Realiza una solicitud al servidor para obtener los datos de la salida turística
-                    xhr.open("GET", url, true);
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            // Manejar la respuesta del servidor y mostrar las actividades en el contenedor
-                            var datosSalida = document.getElementById("datosSalida");
-                            datosSalida.innerHTML = xhr.responseText;
-                        }
-                    };
-                    xhr.send();
+                        // Obtiene el valor seleccionado del campo de salida turística
+                        var actividadSalidaId = document.getElementById("actividadSalida").value;
+                        var url = "SvConsultaSalidaMovil?actividadSalidaId=" + actividadSalidaId;
+
+
+                        // Realiza una solicitud al servidor para obtener los datos de la salida turística
+                        xhr.open("GET", url, true);
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                // Manejar la respuesta del servidor y mostrar las actividades en el contenedor
+                                var datosSalida = document.getElementById("datosSalida");
+                                datosSalida.innerHTML = xhr.responseText;
+                            }
+                        };
+                        xhr.send();
+                    }
                 });
             });
 
