@@ -274,3 +274,11 @@ input[type="text"]:not(.no-estilo) {
 .asociada a:hover {
     background-color: #0056b3;
 }
+
+table {
+    width: 100%; /* Ancho del 100% para que la tabla ocupe todo el ancho del contenedor */
+    max-width: 1200; /* Establece un ancho máximo para evitar que la tabla sea demasiado ancha */
+    margin: 0 auto; /* Centra la tabla horizontalmente en el contenedor */
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+}

@@ -17,6 +17,19 @@
     </head>
 
     <body onload="cargarDatos()">
+        <header>
+            <div id="logo">
+                <h1>Turismo.uy - Consulta de Actividad Turistica</h1>
+            </div>
+            <div id="search">
+                <div id="search">
+                    <form action="SvBuscar" method="GET">
+                        <input type="text" name="consulta" placeholder="Buscar actividades o paquetes">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </header>
 
         <div class="container-fluid p-5 bg-primary text-white text-center">
             <h1>Turismo.uy - Consulta de Actividad Turistica</h1>

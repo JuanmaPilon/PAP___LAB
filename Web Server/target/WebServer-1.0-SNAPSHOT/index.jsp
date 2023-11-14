@@ -9,16 +9,16 @@
         <link href="styles.css" src="styles.css"">
         <title>Turismo.uy - Reserva de Paquetes Turísticos</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
-    <script>
-  
-        function redirigirSiEsMovil() {
-            if (window.innerWidth <= 800) {
-                window.location.href = 'homeMovil.jsp';
+        <script>
+
+            function redirigirSiEsMovil() {
+                if (window.innerWidth <= 800) {
+                    window.location.href = 'homeMovil.jsp';
+                }
             }
-        }
-        document.addEventListener("DOMContentLoaded", redirigirSiEsMovil);
-        window.addEventListener("resize", redirigirSiEsMovil);
-    </script>
+            document.addEventListener("DOMContentLoaded", redirigirSiEsMovil);
+            window.addEventListener("resize", redirigirSiEsMovil);
+        </script>
     </head>
     <body >
         <%
@@ -31,15 +31,17 @@
                 <h1>Turismo.uy</h1>
             </div>
             <div id="search">
-                <form action="buscar.jsp" method="get">
-                    <input type="text" calss="no-buscar" name="query" placeholder="Buscar turistas o paquetes">
-                    <button type="submit">Buscar</button>
-                </form>
+                <div id="search">
+                    <form action="SvBuscar" method="GET">
+                        <input type="text" name="consulta" placeholder="Buscar actividades o paquetes">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
             </div>
             <div id="login">
                 <a href="login.jsp">Iniciar Sesión</a> | <a href="altaUsuario.jsp">Alta Usuario</a> | <a href="homeMovil.jsp">Inicio Movil</a>
             </div>
-            
+
         </header>
 
 
@@ -98,7 +100,7 @@
         </footer>
     </body>
     <script>
-       document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             // Obtener la referencia al contenedor de actividades
             var actividadesContainer = document.getElementById("actividadesContainer");
 

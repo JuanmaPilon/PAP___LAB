@@ -15,10 +15,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body onload="cargarDatos()">
-
+        
         <div class="container-fluid p-5 bg-primary text-white text-center">
             <h1>Turismo.uy - Consulta de Salida Turistica</h1>
         </div>
+
 
         <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
             <div class="container-fluid">
@@ -80,13 +81,13 @@
 
 
 
-        
 
 
-                    <section id="datosSalida" >
 
-                    </section>
-            
+        <section id="datosSalida" >
+
+        </section>
+
 
         <%
             String filtro = "";

@@ -15,8 +15,12 @@ import logica.IControlador;
 //import
 
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JDialog;
@@ -273,7 +277,8 @@ public class AltaUsuarioProveedor extends javax.swing.JInternalFrame {
         control.AltaDeUsuarioProveedor(nickname,  nombre,  apellido, contrasenia, correo,  fecha,  desc,  link);
         
         if (!(imagenNombre.equals(""))){
-            control.AltaDeImagenPerfil(imagenNombre,imagenRuta, nombreUsuario);
+            String imagenRutaRelativa = "images" + File.separator + imagenNombre ;
+            control.AltaDeImagenPerfil(imagenNombre,imagenRutaRelativa, nombreUsuario);
         }
         JOptionPane.showMessageDialog(null, "Alta realizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }catch (ConstraseniasDistintas e) {
@@ -321,6 +326,22 @@ public class AltaUsuarioProveedor extends javax.swing.JInternalFrame {
                 imagenNombre = fileName;
                 imagenRuta = filePath;
                 nombreUsuario = txtnickname.getText();
+
+                // Obtener el directorio de trabajo actual
+                String directorioTrabajo = System.getProperty("user.dir");
+
+                // Definir una carpeta para las imágenes dentro del directorio de trabajo
+                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+
+                // Utilizar la carpeta para construir la ruta completa
+                String rutaCompleta = carpetaImagenes + File.separator + fileName;
+
+                // Convertir las rutas a instancias de Path
+                Path origen = Paths.get(filePath);
+                Path destino = Paths.get(rutaCompleta);
+
+                // Copiar el archivo a la ubicación relativa
+                Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
 
             } catch (Exception ex) {
                 ex.printStackTrace();

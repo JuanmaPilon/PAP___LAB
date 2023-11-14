@@ -40,7 +40,7 @@ public class SvDeptosYCategorias extends HttpServlet {
     // Verificar si el agente de usuario indica un dispositivo móvil (puedes ajustar la condición según tus necesidades)
     if (userAgent != null && (userAgent.contains("Android") || userAgent.contains("iPhone") || userAgent.contains("Mobile"))) {
         // Redirigir a la versión móvil
-        response.sendRedirect("homeMovil.jsp");
+        response.sendRedirect("loginMovil.jsp");
         return;  // Asegúrate de terminar la ejecución del servlet después de la redirección
     }
         

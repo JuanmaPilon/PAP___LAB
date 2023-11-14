@@ -15,12 +15,15 @@
                 <div id="logo">
                     <h1>Turismo.uy - Alta de Usuario</h1>
                 </div>
+<div id="search">
                 <div id="search">
-                    <form action="buscar.jsp" method="post">
-                        <input type="text" name="query" placeholder="Buscar turistas o paquetes">
+                    <form action="SvBuscar" method="GET">
+                        <input type="text" name="consulta" placeholder="Buscar actividades o paquetes">
                         <button type="submit">Buscar</button>
                     </form>
                 </div>
+
+            </div>
                 <div id="login">
                     <a href="index.jsp" src="index.jsp">Volver al inicio</a>
                 </div>

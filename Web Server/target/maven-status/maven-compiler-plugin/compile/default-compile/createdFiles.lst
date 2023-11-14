@@ -36,6 +36,7 @@ WebServices\ImagenPorNicknameNoExite.class
 Servlets\SvProveedor.class
 WebServices\DtSalidaTuristica.class
 Servlets\SvActividad.class
+Servlets\SvBuscar.class
 Servlets\SvDeptosYCategorias.class
 WebServices\NoExisteCompra_Exception.class
 Servlets\SvModificarUsuario.class

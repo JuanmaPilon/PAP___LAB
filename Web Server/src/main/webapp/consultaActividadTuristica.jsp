@@ -23,10 +23,13 @@
                 <h1>Turismo.uy - Consulta de Actividad Turistica</h1>
             </div>
             <div id="search">
-                <form action="ss" method="post">
-                    <input type="text" name="query" placeholder="Buscar turistas o paquetes">
-                    <button type="submit">Buscar</button>
-                </form>
+                <div id="search">
+                    <form action="SvBuscar" method="GET">
+                        <input type="text" name="consulta" placeholder="Buscar actividades o paquetes">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+
             </div>
             <div id="login">
                 <a href="logedUser.jsp" src="logedUser.jsp">Volver al inicio</a>
@@ -37,8 +40,8 @@
             <h2>Mi perfil</h2>
             <ul>
                 <%
-                     if (tipoUsuario != null) {
-                    if (tipoUsuario.equals("proveedor")) {
+                    if (tipoUsuario != null) {
+                        if (tipoUsuario.equals("proveedor")) {
                 %>
                 <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
                 <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Modificar mis datos</a></li>
@@ -66,14 +69,13 @@
                     <%
                         }
                     } else {
-                        
+
                     %>
                 <li> <a href = "consultaUsuario.jsp"> Consulta de Usuario</a> </li> 
                 <li> <a href = "consultaActividadTuristica.jsp" > Consulta de Actividad Turistica</a > </li>
                 <li> <a href = "consultaSalidaTuristica.jsp" > Consulta de Salida Turistica</a > </li>
                 <li> <a href = "consultaPaqueteActividadesTuristicas.jsp" > Consulta de Paquete de Actividades Turisticas</a > </li>
-                    <%
-                        }
+                    <%                        }
                     %>
 
 

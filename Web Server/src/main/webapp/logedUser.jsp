@@ -25,10 +25,13 @@
                     <h1>Turismo.uy</h1>
                 </div>
                 <div id="search">
-                    <form action="buscar.jsp" method="get">
-                        <input type="text" name="query" placeholder="Buscar turistas o paquetes">
-                        <button type="submit">Buscar</button>
-                    </form>
+                    <div id="search">
+                        <form action="SvBuscar" method="GET">
+                            <input type="text" name="consulta" placeholder="Buscar actividades o paquetes">
+                            <button type="submit">Buscar</button>
+                        </form>
+                    </div>
+
                 </div>
                 <div id="login">
                     <%
@@ -54,37 +57,36 @@
                         if (tipoUsuario.equals("proveedor")) {
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
-                    <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Modificar mis datos</a></li>
-                    <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
+                    <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Modificar mis datos</a></li>
+                    <li><a href="altaActividadTuristica.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Alta Actividad Turistica</a></li> <!-- Proveedor -->
                     <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                     <li><a href="altaSalidaTuristica.jsp">Alta de Salida Turistica</a></li> <!-- Proveedor -->
                     <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
 
 
-                    
+
 
 
                     <% } else if (tipoUsuario.equals("turista")) {
-                         List<String> actividadesFavoritas = (List<String>) request.getSession().getAttribute("actividadesFavoritas");
+                        List<String> actividadesFavoritas = (List<String>) request.getSession().getAttribute("actividadesFavoritas");
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
-                    <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Modificar mis datos</a></li> <!-- Proveedor, Turista --> <!-- Proveedor, Turista -->
+                    <li><a href="SvModificarUsuario?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Modificar mis datos</a></li> <!-- Proveedor, Turista --> <!-- Proveedor, Turista -->
                     <li><a href="consultaActividadTuristica.jsp">Consulta de Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                     <li><a href="consultaSalidaTuristica.jsp">Consulta Salida Turistica</a></li> <!--Visitante, Proveedor, Turista -->
                     <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
-                    <li><a href="compraPaquete.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Comprar Paquete</a></li>  <!-- Turista -->
-                    <li><a href="inscripcionSalida.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario %>">Inscripcion Salida Turistica</a></li> <!-- Turista -->
+                    <li><a href="compraPaquete.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Comprar Paquete</a></li>  <!-- Turista -->
+                    <li><a href="inscripcionSalida.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Inscripcion Salida Turistica</a></li> <!-- Turista -->
                         <%
                         } else {
-                          
+
                         %>
                     <li> <a href = "consultaUsuario.jsp"> Consulta de Usuario</a> </li> 
                     <li> <a href = "consultaActividadTuristica.jsp" > Consulta de Actividad Turistica</a > </li>
                     <li> <a href = "consultaSalidaTuristica.jsp" > Consulta de Salida Turistica</a > </li>
                     <li> <a href = "consultaPaqueteActividadesTuristicas.jsp" > Consulta de Paquete de Actividades Turisticas</a > </li>
-                        <%
-                            }
+                        <%                            }
                         %>
 
 

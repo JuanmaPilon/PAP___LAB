@@ -27,10 +27,12 @@
                 <h1>Turismo.uy</h1>
             </div>
             <div id="search">
-                <form action="svlet" method="post">
-                    <input type="text" name="query" placeholder="Buscar turistas o paquetes">
-                    <button type="submit">Buscar</button>
-                </form>
+                <div id="search">
+                    <form action="SvBuscar" method="GET">
+                        <input type="text" name="consulta" placeholder="Buscar actividades o paquetes">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
             </div>
             <div id="login">
                 <a href="logedUser.jsp" src="logedUser.jsp">Volver al inicio</a>

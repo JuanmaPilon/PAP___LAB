@@ -21,10 +21,12 @@
                 <h1>Turismo.uy - Inscripcion a Salida Turistica  </h1>
             </div>
             <div id="search">
-                <form action="svlet" method="post">
-                    <input type="text" name="query" placeholder="Buscar turistas o paquetes">
-                    <button type="submit">Buscar</button>
-                </form>
+                <div id="search">
+                    <form action="SvBuscar" method="GET">
+                        <input type="text" name="consulta" placeholder="Buscar actividades o paquetes">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
             </div>
             <div id="login">
                 <a href="logedUser.jsp">Volver al inicio</a>
@@ -252,7 +254,7 @@
             function verDetallesSalida() {
                 const filtro = "FiltroSalidas";
                 var salidaSeleccionada = document.getElementById("actividadSalida").value;
-                
+
                 var url = "SvSalida?actividadSalida=" + salidaSeleccionada + "&filtro=" + filtro;
                 window.open(url, '_blank');
             }
