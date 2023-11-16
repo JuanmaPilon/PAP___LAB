@@ -41,16 +41,16 @@ public class SvConsultaActividadMovil extends HttpServlet {
             DtImagenActividad imagen = port.buscarImagenPorActividad(actividad);
             String imagenRuta = "images/sinImagen.png";
 
-            if (imagen == null) {
-                imagenRuta = "images/sinImagen.png";
-
-            } else {
-                imagenRuta = imagen.getRuta();
-            }
+//            if (imagen == null) {
+//                imagenRuta = "images/sinImagen.png";
+//
+//            } else {
+//               // imagenRuta = imagen.getRuta();
+//            }
 
             htmlResponse.append("<div class='Actividad'>");
             htmlResponse.append("<h2>Detalles de la Actividad: </h2>");
-            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
+//            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
             htmlResponse.append("<p> Nombre de la Actividad: ").append(act.getNombre()).append("</p>");
             htmlResponse.append("<p> Ciudad: ").append(act.getCiudad()).append("</p>");
             htmlResponse.append("<p> Descripcion: ").append(act.getDescripcion()).append("</p>");
@@ -62,7 +62,7 @@ public class SvConsultaActividadMovil extends HttpServlet {
             imagenRuta = "images/sinImagen.png";
             htmlResponse.append("<div class='Actividad'>");
             htmlResponse.append("<h2>Detalles de la Actividad: </h2>");
-            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
+//            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
             htmlResponse.append("<p> Nombre de la Actividad: ").append(act.getNombre()).append("</p>");
             htmlResponse.append("<p> Ciudad: ").append(act.getCiudad()).append("</p>");
             htmlResponse.append("<p> Descripcion: ").append(act.getDescripcion()).append("</p>");

@@ -4,6 +4,10 @@
  */
 package webServices;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -283,10 +287,10 @@ public class WebServices {
 
     }
 
-    @WebMethod
-    public void AltaDeImagenActividad(String imagenNombre, String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException {
-        control.AltaDeImagenActividad(imagenNombre, imagenRuta, nombreActividad, UrlVideo);
-    }
+//    @WebMethod
+//    public void AltaDeImagenActividad(String imagenNombre, String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException {
+//        control.AltaDeImagenActividad(imagenNombre, imagenRuta, nombreActividad, UrlVideo);
+//    }
 
     @WebMethod
     public ListaString listaDeptos() {
@@ -405,11 +409,37 @@ public class WebServices {
     public DTSalidaTuristica ConsultaSalidaTuristica(String nombreSalida){
     return control.ConsultaSalidaTuristica(nombreSalida);
     }
+    
     @WebMethod
-    public void AltaSalidaTuristica(String nombre, int cantMax, String fAlta, XMLGregorianCalendar fSalida, String lugar, String nombreActividad) throws PreexistingEntityException{
-    GregorianCalendar cal = fSalida.toGregorianCalendar();
-    Date fechaHoy = new Date();
-    control.AltaSalidaTuristica(nombre, cantMax, fechaHoy, cal.getTime(), lugar, nombreActividad);
+public void AltaSalidaTuristica(String nombre, int cantMax, String fAlta, String fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, ParseException {
+    System.out.println(" ****************** " + fSalida+ "*******************");
+    try {
+        // Formato de la cadena de fecha
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime fechaHoraLocal = LocalDateTime.parse(fSalida, formatter);
+        Date fechaHoraDate = java.util.Date.from(fechaHoraLocal.atZone(java.time.ZoneId.systemDefault()).toInstant());
+        
+        System.out.println(" fechaHoraDate " + fechaHoraDate+ "*******************");
+
+  
+
+       
+
+        // Obtén la fecha actual
+        Date fechaHoy = new Date();
+
+        // Llama al método con los objetos de fecha adecuados
+        control.AltaSalidaTuristica(nombre, cantMax, fechaHoy, fechaHoraDate, lugar, nombreActividad);
+    } catch (Exception e) {
+        // Manejar la excepción si la cadena de fecha no puede ser parseada
+        e.printStackTrace();
+        System.out.println(" ******************AQUI*******************");
+    }
+}
+    
+    @WebMethod
+    public void subirImagenActividad(byte[] imagen, String nombreArchivo, String actividad, String UrlVideo){
+        control.subirImagenActividad(imagen, nombreArchivo, actividad, UrlVideo);
     }
     
 }//finWS

@@ -47,14 +47,14 @@ public class SvObtenerActividades extends HttpServlet {
                 imagen = port.buscarImagenPorActividad(actividad.getNombre());
                 String imagenRuta = "images/sinImagen.png";
 
-                if (imagen == null) {
-                    imagenRuta = "images/sinImagen.png";
-
-                } else {
-                    imagenRuta = imagen.getRuta();
-                }
+//                if (imagen == null) {
+//                    imagenRuta = "images/sinImagen.png";
+//
+//                } else {
+//                    imagenRuta = imagen.getRuta();
+//                }
                 htmlResponse.append("<div class='actividad'>");
-                htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la actividad\" style=\"width: 300px; height: 300px;\">");
+//                htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la actividad\" style=\"width: 300px; height: 300px;\">");
                 htmlResponse.append("<h3>").append(actividad.getNombre()).append("</h3>");
                 htmlResponse.append("<p>").append(actividad.getDescripcion()).append("</p>");
                 htmlResponse.append("</div>");

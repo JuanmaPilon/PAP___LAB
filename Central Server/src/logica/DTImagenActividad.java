@@ -12,7 +12,6 @@ public class DTImagenActividad {
     
     private String nombre; 
     
-    private String ruta;
     
     private String nombreActividad;
     
@@ -21,9 +20,8 @@ public class DTImagenActividad {
     public DTImagenActividad() {
     }
 
-    public DTImagenActividad(String nombre, String ruta, String nombreActividad, String UrlVideo) {
+    public DTImagenActividad(String nombre, String nombreActividad, String UrlVideo) {
         this.nombre = nombre;
-        this.ruta = ruta;
         this.nombreActividad = nombreActividad;
         this.UrlVideo = UrlVideo;
     }
@@ -37,13 +35,7 @@ public class DTImagenActividad {
         this.nombre = nombre;
     }
 
-    public String getRuta() {
-        return ruta;
-    }
 
-    public void setRuta(String ruta) {
-        this.ruta = ruta;
-    }
 
     public String getNombreActividad() {
         return nombreActividad;

@@ -12,6 +12,8 @@
 
 <xs:element name="PaqueteYaComprado" type="tns:PaqueteYaComprado"></xs:element>
 
+<xs:element name="ParseException" type="tns:ParseException"></xs:element>
+
 <xs:element name="PreexistingEntityException" type="tns:PreexistingEntityException"></xs:element>
 
 <xs:element name="listaDTActividad" type="tns:listaDTActividad"></xs:element>
@@ -165,10 +167,16 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="ParseException">
+<xs:sequence>
+<xs:element name="errorOffset" type="xs:int"></xs:element>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dtImagenActividad">
 <xs:sequence>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="ruta" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nombreActividad" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="UrlVideo" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>

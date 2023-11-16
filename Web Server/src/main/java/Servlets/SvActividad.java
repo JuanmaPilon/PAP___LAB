@@ -8,10 +8,12 @@ import WebServices.PreexistingEntityException_Exception;
 import WebServices.TipoEstado;
 import WebServices.WebServices;
 import WebServices.WebServicesService;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import javax.servlet.http.Part;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -102,20 +104,20 @@ public class SvActividad extends HttpServlet {
         List<String> paquetes = port.listaPaquetesDeActividad(actividadConsultada.getNombre()).getLista();
 
         HttpSession misesion = request.getSession();
-        String imagenRuta = "images/sinImagen.png";
-        String UrlVideo = "";
+//        String imagenRuta = "images/sinImagen.png";
+//        String UrlVideo = "";
 
-        if (imagen != null) {
-            if ((imagen.getNombre() != null) && (!imagen.getUrlVideo().equals(""))) {
-                imagenRuta = imagen.getRuta();
-                UrlVideo = imagen.getUrlVideo();
-            } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo().equals(""))) {
-                imagenRuta = imagen.getRuta();
-            } else if ((imagen.getNombre() == null) && (!imagen.getUrlVideo().equals(""))) {
-                UrlVideo = imagen.getUrlVideo();
-            }
-
-        }
+//        if (imagen != null) {
+//            if ((imagen.getNombre() != null) && (!imagen.getUrlVideo().equals(""))) {
+//                imagenRuta = imagen.getRuta();
+//                UrlVideo = imagen.getUrlVideo();
+//            } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo().equals(""))) {
+//                imagenRuta = imagen.getRuta();
+//            } else if ((imagen.getNombre() == null) && (!imagen.getUrlVideo().equals(""))) {
+//                UrlVideo = imagen.getUrlVideo();
+//            }
+//
+//        }
 
         if (tipoUsuario != null) { //INSCRIPCION, NO FUNCIONA SI SE TRAE TIPO USUARIO
             misesion.setAttribute("tipoUsuario", tipoUsuario);
@@ -126,8 +128,8 @@ public class SvActividad extends HttpServlet {
         misesion.setAttribute("salidas", salidas);
         misesion.setAttribute("categorias", categorias);
         misesion.setAttribute("paquetes", paquetes);
-        misesion.setAttribute("imagen", imagenRuta);
-        misesion.setAttribute("UrlVideo", UrlVideo);
+//        misesion.setAttribute("imagen", imagenRuta);
+//        misesion.setAttribute("UrlVideo", UrlVideo);
         response.sendRedirect("perfilActividadTuristica.jsp");
 
         //  } catch (Exception ex) {
@@ -217,18 +219,17 @@ public class SvActividad extends HttpServlet {
                     nombreArchivo = archivo.getSubmittedFileName();
                     if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
                         ServletContext context = request.getServletContext();
-                        String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
-
-                        // Copiar el archivo a la ubicación relativa
-                        Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
-
-                        String rutaRelativa = "images" + File.separator + nombreArchivo;
+                  
+                        
+                        byte[] bytesImagen = getBytesDesdePart(archivo);
+                        
+                        
 
                         try {
                             if (UrlVideo == null) {
-                                port.altaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, null);
+                                port.subirImagenActividad(bytesImagen, nombreArchivo, nombre,  null);
                             } else if (UrlVideo != null) {
-                                port.altaDeImagenActividad(nombreArchivo, rutaRelativa, nombre, UrlVideo);
+                                port.subirImagenActividad(bytesImagen, nombreArchivo, nombre, UrlVideo);
                             }
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -242,9 +243,12 @@ public class SvActividad extends HttpServlet {
                 }
 
                 if ((archivo.getSize() == 0) && (!UrlVideo.equals(""))) {
-                    port.altaDeImagenActividad(null, null, nombre, UrlVideo);
-                } else if ((archivo.getSize() == 0) && (UrlVideo == null)) {
-
+                    byte[] imagenVacia = new byte[0];
+                     port.subirImagenActividad(imagenVacia, "sinImagen", nombre, UrlVideo);
+                } else if ((archivo.getSize() == 0) && (UrlVideo.equals(""))) {
+                    byte[] imagenVacia = new byte[0];
+                    //String UrlVacio = "sinVideo";
+                    port.subirImagenActividad(imagenVacia, "sinImagen", nombre, UrlVideo);
                 }
 
                 response.sendRedirect("logedUser.jsp");
@@ -258,6 +262,20 @@ public class SvActividad extends HttpServlet {
             }
         }
     }
+    
+    private byte[] getBytesDesdePart(Part part) throws IOException {
+    InputStream inputStream = part.getInputStream();
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+    byte[] buffer = new byte[4096];
+    int bytesRead;
+
+    while ((bytesRead = inputStream.read(buffer)) != -1) {
+        outputStream.write(buffer, 0, bytesRead);
+    }
+
+    return outputStream.toByteArray();
+}
 
     @Override
     public String getServletInfo() {

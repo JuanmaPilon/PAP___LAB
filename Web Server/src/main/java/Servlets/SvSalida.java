@@ -10,6 +10,7 @@ import WebServices.DtSalidaTuristica;
 import WebServices.PreexistingEntityException_Exception;
 import WebServices.WebServices;
 import WebServices.WebServicesService;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,14 +22,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -38,7 +42,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 @WebServlet(name = "SvSalida", urlPatterns = {"/SvSalida"})
 @MultipartConfig(
@@ -49,8 +55,7 @@ import javax.servlet.http.HttpSession;
 public class SvSalida extends HttpServlet {
 
     //Fabrica fabrica = Fabrica.getInstance();
-   // IControlador control = fabrica.getIControlador();
-
+    // IControlador control = fabrica.getIControlador();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -97,9 +102,9 @@ public class SvSalida extends HttpServlet {
                 //  if (imagen == null) {
                 //   return;
                 // } else {
-                String imagenRuta = imagen.getRuta();
+//                String imagenRuta = imagen.getRuta();
                 //DTSalidaTuristica salT = control.ConsultaSalidaTuristica(nombreSalida);
-                misesion.setAttribute("imagen", imagenRuta);
+//                misesion.setAttribute("imagen", imagenRuta);
                 //misesion.setAttribute("tipoUsuario", "turista");
                 response.sendRedirect("perfilSalidaTuristica.jsp");
                 return;
@@ -132,7 +137,7 @@ public class SvSalida extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                //llamado a wsdl
+        //llamado a wsdl
         WebServicesService service = new WebServicesService();
         WebServices port = service.getWebServicesPort();
         try {
@@ -162,30 +167,28 @@ public class SvSalida extends HttpServlet {
 
             //no importa la fecha actual, la carga la logica
             String fechaHoy = "11/11/1900";
+        
+
+            // Convertir Date a XMLGregorianCalendar
+          
+
             port.altaSalidaTuristica(nombreSalida, cantidadMaxTuristas, fechaHoy, fechaHoraSalida, lugarSalida, actividadTuristica);
 
             if (archivo.getSize() > 0) {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
                     ServletContext context = request.getServletContext();
-                    String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
-                    // Copiar el archivo a la ubicación relativa
-                    Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
+                    byte[] bytesImagen = getBytesDesdePart(archivo);
 
-                    String rutaRelativa = "images" + File.separator + nombreArchivo;
+                    port.subirImagenActividad(bytesImagen, nombreArchivo, nombreSalida, "");
 
-                    try {
-                        port.altaDeImagenActividad(nombreArchivo, rutaRelativa, nombreSalida, null);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        String errorMessage = "Ya existe otra salida con esta imagen, se ha dado de alta la salida sin imagen";
-                        String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'altaSalidaTuristica.jsp';</script>";
-                        response.getWriter().write(alertScript);
-
-                    }
                 }
+            } else {
+                byte[] imagenVacia = new byte[0];
+                port.subirImagenActividad(imagenVacia, "sinImagen", nombreSalida, "");
             }
+
             response.sendRedirect("logedUser.jsp");
         } catch (PreexistingEntityException_Exception ex) {
             ex.printStackTrace();
@@ -201,6 +204,27 @@ public class SvSalida extends HttpServlet {
 
         }
 
+    }
+
+    private byte[] getBytesDesdePart(Part part) throws IOException {
+        InputStream inputStream = part.getInputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        return outputStream.toByteArray();
+    }
+    
+    private static XMLGregorianCalendar dateToXMLGregorianCalendar(Date date) throws DatatypeConfigurationException {
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        gregorianCalendar.setTime(date);
+
+        return DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
     }
 
     @Override

@@ -15,7 +15,6 @@ public class imagenActividad implements Serializable {
     
     private String nombre; 
     
-    private String ruta;
     
     @Id
     private String nombreActividad;
@@ -26,9 +25,8 @@ public class imagenActividad implements Serializable {
     public imagenActividad() {
     }
     
-    public imagenActividad(String nombre, String ruta, String nombreActividad, String UrlVideo) {
+    public imagenActividad(String nombre, String nombreActividad, String UrlVideo) {
         this.nombre = nombre;
-        this.ruta = ruta;
         this.nombreActividad = nombreActividad;
         this.UrlVideo = UrlVideo;
     }
@@ -43,13 +41,6 @@ public class imagenActividad implements Serializable {
         this.nombre = nombre;
     }
     
-    public String getRuta() {
-        return ruta;
-    }
-
-    public void setRuta(String ruta) {
-        this.ruta = ruta;
-    }
     
     public String getnombreActividad() {
         return nombreActividad;

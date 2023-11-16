@@ -173,16 +173,16 @@ control.AltaDeImagenPerfil("4hs4v9c5.jpeg", "images/4hs4v9c5.jpeg", "meche");
             control.cambiarEstadoActividad("Descubre Rivera", TipoEstado.rechazada);
             
             
-control.AltaDeImagenActividad("bdehz9bb.jpg", "images/bdehz9bb.jpg", "Degusta","https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0"  );
-control.AltaDeImagenActividad("58fnr5j7.jpg", "images/58fnr5j7.jpg", "Teatro con Sabores", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0" );
-control.AltaDeImagenActividad("3rp2vvjf.jpg", "images/3rp2vvjf.jpg", "Tour por Colonia del Sacramento", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("2yeu66vb.jpg", "images/2yeu66vb.jpg", "Almuerzo en el Real de San Carlos", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("4yrs8y2c.jpg", "images/4yrs8y2c.jpg", "Almuerzo en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
-control.AltaDeImagenActividad("2vjd382t.jpg", "images/2vjd382t.jpg", "Cabalgata en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
-control.AltaDeImagenActividad("bdzyrm93.jpg", "images/bdzyrm93.jpg", "Bus turıstico Colonia", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("284kr973.jpg", "images/284kr973.jpg", "Colonia Premium Tour", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("yck2a92h.jpg", "images/yck2a92h.jpg", "Deportes nauticos sin uso de motor", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0" );
-control.AltaDeImagenActividad("y4vbc4xc.jpeg", "images/y4vbc4xc.jpeg", "Descubre Rivera", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("bdehz9bb.jpg",  "Degusta","https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0"  );
+control.AltaDeImagenActividad("58fnr5j7.jpg",  "Teatro con Sabores", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0" );
+control.AltaDeImagenActividad("3rp2vvjf.jpg",  "Tour por Colonia del Sacramento", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("2yeu66vb.jpg",  "Almuerzo en el Real de San Carlos", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("4yrs8y2c.jpg",  "Almuerzo en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("2vjd382t.jpg",  "Cabalgata en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("bdzyrm93.jpg",  "Bus turıstico Colonia", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("284kr973.jpg",  "Colonia Premium Tour", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("yck2a92h.jpg", "Deportes nauticos sin uso de motor", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0" );
+control.AltaDeImagenActividad("y4vbc4xc.jpeg", "Descubre Rivera", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
         } catch (PreexistingEntityException ex) {
             JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
@@ -211,16 +211,16 @@ control.AltaDeImagenActividad("y4vbc4xc.jpeg", "images/y4vbc4xc.jpeg", "Descubre
             control.AltaSalidaTuristica("Cabalgata Extrema", 4, fecha.parse("15/09/2022"), fechahora.parse("30/10/2022 16:00"), "Posada del Lunarejo" , "Cabalgata en Valle del Lunarejo");
             control.AltaSalidaTuristica("Almuerzo en el Real 1", 10, fecha.parse("10/10/2022"), fechahora.parse("30/10/2022 12:00"), "Restaurante de la Plaza de Toros", "Almuerzo en el Real de San Carlos");
  
-control.AltaDeImagenActividad("4jwed4jx.jpg", "images/4jwed4jx.jpg", "Degusta Agosto", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0" );
-control.AltaDeImagenActividad("2maxmx6c.jpeg", "images/2maxmx6c.jpeg", "Degusta Setiembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0" );
-control.AltaDeImagenActividad("2zturssk.jpg", "images/2zturssk.jpg", "Teatro con Sabores 1", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("5d5vm953.jpg", "images/5d5vm953.jpg", "Teatro con Sabores 2", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("5n7ud8e7.jpg", "images/5n7ud8e7.jpg", "Tour Colonia del Sacramento 11-09", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("583b3mbs.jpg", "images/583b3mbs.jpg", "Tour Colonia del Sacramento 18-09", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("mryhyr5f.jpg", "images/mryhyr5f.jpg", "Degusta Octubre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
-control.AltaDeImagenActividad("yzz6b7et.jpeg", "images/yzz6b7et.jpeg", "Degusta Noviembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
-control.AltaDeImagenActividad("mv7etjx2.jpg", "images/mv7etjx2.jpg", "Tour Colonia del Sacramento 30-10", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("3vwzthcr.jpg", "images/3vwzthcr.jpg", "Cabalgata Extrema", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0");
+control.AltaDeImagenActividad("4jwed4jx.jpg",  "Degusta Agosto", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0" );
+control.AltaDeImagenActividad("2maxmx6c.jpeg",  "Degusta Setiembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0" );
+control.AltaDeImagenActividad("2zturssk.jpg", "Teatro con Sabores 1", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("5d5vm953.jpg",  "Teatro con Sabores 2", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("5n7ud8e7.jpg",  "Tour Colonia del Sacramento 11-09", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("583b3mbs.jpg",  "Tour Colonia del Sacramento 18-09", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("mryhyr5f.jpg",  "Degusta Octubre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("yzz6b7et.jpeg",  "Degusta Noviembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+control.AltaDeImagenActividad("mv7etjx2.jpg",  "Tour Colonia del Sacramento 30-10", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+control.AltaDeImagenActividad("3vwzthcr.jpg",  "Cabalgata Extrema", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0");
             
             
             

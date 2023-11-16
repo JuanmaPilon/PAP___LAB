@@ -44,16 +44,16 @@ public class SvConsultaSalidaMovil extends HttpServlet {
             DtImagenActividad imagen = port.buscarImagenPorActividad(actividadSalidaId);
             String imagenRuta = "images/sinImagen.png";
 
-            if (imagen == null) {
-                imagenRuta = "images/sinImagen.png";
-
-            } else {
-                imagenRuta = imagen.getRuta();
-            }
+//            if (imagen == null) {
+//                imagenRuta = "images/sinImagen.png";
+//
+//            } else {
+//                imagenRuta = imagen.getRuta();
+//            }
            
             htmlResponse.append("<div class='Salida'>");
             htmlResponse.append("<h2>Detalles de la Salida Turstica:</h2>");
-            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
+//            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
             htmlResponse.append("<p>").append(salT.getNombre()).append("</p>");
             htmlResponse.append("<p>").append(salT.getFSalida()).append("</p>");
             htmlResponse.append("<p>").append(salT.getLugar()).append("</p>");
@@ -64,7 +64,7 @@ public class SvConsultaSalidaMovil extends HttpServlet {
             imagenRuta = "images/sinImagen.png";
             htmlResponse.append("<div class='Salida'>");
             htmlResponse.append("<h2>Detalles de la Salida Turstica:</h2>");
-            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
+//            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
             htmlResponse.append("<p>").append(salT.getNombre()).append("</p>");
             htmlResponse.append("<p>").append(salT.getFSalida()).append("</p>");
             htmlResponse.append("<p>").append(salT.getLugar()).append("</p>");

@@ -12,6 +12,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,7 +79,7 @@ public class Controlador implements IControlador {
     @Override
     public DTImagenActividad buscarImagenPorActividad(String nombreActividad){
         imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
-        DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad(), imagen.getUrlVideo());
+        DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getnombreActividad(), imagen.getUrlVideo());
         return dtImagen;
 
     }
@@ -109,9 +115,9 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void AltaDeImagenActividad(String imagenNombre, String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException {
+    public void AltaDeImagenActividad(String imagenNombre, String nombreActividad, String UrlVideo) throws PreexistingEntityException {
 
-        imagenActividad ImagenActividad = new imagenActividad(imagenNombre, imagenRuta, nombreActividad, UrlVideo);
+        imagenActividad ImagenActividad = new imagenActividad(imagenNombre, nombreActividad, UrlVideo);
         controlPersis.guardarImagenActividad(ImagenActividad);
 
     }
@@ -479,7 +485,7 @@ public class Controlador implements IControlador {
     public DTImagenActividad traerDTImagenActividad(String nombreActividad) {
         imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
         if (imagen != null) {
-            DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getRuta(), imagen.getnombreActividad(), imagen.getUrlVideo());
+            DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(),  imagen.getnombreActividad(), imagen.getUrlVideo());
             return dtImagen;
         } else {
             return null;
@@ -1222,6 +1228,46 @@ public class Controlador implements IControlador {
             return false;
         }
 
+    }
+    
+    public void subirImagenActividad(byte[] imagen, String nombreArchivo, String actividad, String UrlVideo){
+        try {
+        if(nombreArchivo.equals("sinImagen")){
+            nombreArchivo = "sinImagen.png";
+//            if(UrlVideo == null){
+//                imagenActividad ImagenActividad = new imagenActividad(nombreArchivo, actividad, UrlVideo);
+//                controlPersis.guardarImagenActividad(ImagenActividad);
+//            }
+             imagenActividad ImagenActividad = new imagenActividad(nombreArchivo, actividad, UrlVideo);
+             controlPersis.guardarImagenActividad(ImagenActividad);
+        } else {
+             imagenActividad ImagenActividad = new imagenActividad(nombreArchivo, actividad, UrlVideo);
+             controlPersis.guardarImagenActividad(ImagenActividad);
+        
+        
+       
+        
+        // Obtener el directorio de trabajo actual
+        String directorioTrabajo = System.getProperty("user.dir");
+
+        // Definir una carpeta para las imágenes dentro del directorio de trabajo
+        String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+
+        // Crear la ruta completa del archivo de destialtno
+        String rutaArchivoDestino = carpetaImagenes + File.separator + nombreArchivo;
+
+        
+        // Escribir los bytes en el archivo de destino
+        Files.write(FileSystems.getDefault().getPath(rutaArchivoDestino), imagen);
+        }
+        
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (Exception e){
+         e.printStackTrace();
+    }
+
+        
     }
 
 }

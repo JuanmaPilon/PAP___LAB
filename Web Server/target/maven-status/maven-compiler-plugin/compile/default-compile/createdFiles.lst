@@ -13,6 +13,7 @@ Servlets\SvValidarCorreo.class
 WebServices\ListaDTUsuario.class
 com\turismouy\pap___lab\JAXRSConfiguration.class
 WebServices\NoExisteCompra.class
+WebServices\ParseException.class
 com\turismouy\pap___lab\resources\JavaEE8Resource.class
 Servlets\SvPaquete.class
 Servlets\SvTurista.class
@@ -27,6 +28,7 @@ WebServices\DtTurista.class
 WebServices\ObjectFactory.class
 WebServices\NicknameExistenteException_Exception.class
 Servlets\SvPaquetesDeSalida.class
+WebServices\ParseException_Exception.class
 Servlets\SvConsultaSalidaMovil.class
 Servlets\SvAutenticarUsuario.class
 WebServices\DtCategoria.class

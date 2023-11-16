@@ -38,8 +38,8 @@ public class SvPerfilSalida extends HttpServlet {
         misesion.setAttribute("salida", salT);
         try {
             DtImagenActividad ImagenActividad = port.buscarImagenPorActividad(nombreSalida);
-            String imagenRuta = ImagenActividad.getRuta();
-            misesion.setAttribute("imagen", imagenRuta);
+//            String imagenRuta = ImagenActividad.getRuta();
+//            misesion.setAttribute("imagen", imagenRuta);
 
         } catch (Exception e) {
             String imagenVacia = "images/usuarioSinFoto.png";
