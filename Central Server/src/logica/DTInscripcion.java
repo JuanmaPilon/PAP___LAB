@@ -20,16 +20,26 @@ public class DTInscripcion {
     private Date fInscripcion;
     private int cantTurista;
     private float costo;
+    private TipoPago tipoPago;
 
     public DTInscripcion() {
     }
 
-    public DTInscripcion(String nicknameTurista, String nombreSalidaTuristica, Date fInscripcion, int cantTurista, float costo) {
+    public DTInscripcion(String nicknameTurista, String nombreSalidaTuristica, Date fInscripcion, int cantTurista, float costo, TipoPago tipoPago) {
         this.nicknameTurista = nicknameTurista;
         this.nombreSalidaTuristica = nombreSalidaTuristica;
         this.fInscripcion = fInscripcion;
         this.cantTurista = cantTurista;
         this.costo = costo;
+        this.tipoPago = tipoPago;
+    }
+
+    public TipoPago getTipoPago() {
+        return tipoPago;
+    }
+
+    public void setTipoPago(TipoPago tipoPago) {
+        this.tipoPago = tipoPago;
     }
 
     public Long getId() {

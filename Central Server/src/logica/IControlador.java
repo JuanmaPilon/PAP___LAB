@@ -116,4 +116,6 @@ public abstract void subirImagenPerfil(byte[] imagen, String nombreArchivo, Stri
  
  public abstract void modificarImagenPerfil(byte[] imagen, String nombreArchivo, String nickname);
  
+ public abstract ArrayList<DTInscripcion> traerDTInscSalidasDeTurista(String nickname);
+ 
 }

@@ -20,6 +20,8 @@
 
 <xs:element name="listaDTDepartamento" type="tns:listaDTDepartamento"></xs:element>
 
+<xs:element name="listaDTInscripcion" type="tns:listaDTInscripcion"></xs:element>
+
 <xs:element name="listaDTPaquete" type="tns:listaDTPaquete"></xs:element>
 
 <xs:element name="listaDTSalidaTuristica" type="tns:listaDTSalidaTuristica"></xs:element>
@@ -164,6 +166,24 @@
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="url" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDTInscripcion">
+<xs:sequence>
+<xs:element name="lista" type="tns:dtInscripcion" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtInscripcion">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="nicknameTurista" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombreSalidaTuristica" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fInscripcion" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="cantTurista" type="xs:int"></xs:element>
+<xs:element name="costo" type="xs:float"></xs:element>
+<xs:element name="tipoPago" type="tns:tipoPago" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

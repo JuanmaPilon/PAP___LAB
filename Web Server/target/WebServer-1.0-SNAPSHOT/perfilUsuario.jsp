@@ -131,7 +131,7 @@
                                 if (tipoUsuarioConsultado.equals("proveedor")) {
                             %>
                         <li><a href="#tab2">Actividades</a></li>
-                        <li><a href="#tab3">Salidas</a></li>
+                        <li><a href="#tab6">Salidas</a></li>
                             <%
                                 }
                             %>
@@ -194,10 +194,10 @@
                             <ul>
                                 <%
                                     // Obteniendo la lista de salidas turísticas desde la sesión
-                                    List<String> nombresSalidasProveedor = (List<String>) request.getSession().getAttribute("nombresSalidas");
+                                    List<String> nombresSalidasTurista = (List<String>) request.getSession().getAttribute("nombresSalidas");
 
-                                    if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
-                                        for (String nombreSalida : nombresSalidasProveedor) {
+                                    if (nombresSalidasTurista != null && !nombresSalidasTurista.isEmpty()) {
+                                        for (String nombreSalida : nombresSalidasTurista) {
                                             out.println("<li> <a href='#' onclick='mostrarSalida(\"" + nombreSalida + "\")'>" + nombreSalida + "</a></li>");
                                             out.println(" <a href='#' onclick='generarPDF(\"" + usuario + "\", \"" + nombreSalida + "\")'>" + "Generar PDF " + nombreSalida + "</a>");
                                         }
@@ -241,6 +241,23 @@
                             %>
 
 
+                        </div>
+                            
+                          <div id="tab6" class="tab">
+                            <ul>
+                                <%
+                                    // Obteniendo la lista de salidas turísticas desde la sesión
+                                    List<String> nombresSalidasProveedor = (List<String>) request.getSession().getAttribute("nombresSalidas");
+
+                                    if (nombresSalidasProveedor != null && !nombresSalidasProveedor.isEmpty()) {
+                                        for (String nombreSalida : nombresSalidasProveedor) {
+                                            out.println("<li> <a href='#' onclick='mostrarSalida(\"" + nombreSalida + "\")'>" + nombreSalida + "</a></li>");
+                                        }
+                                    } else {
+                                        out.println("<li>No hay salidas disponibles para este proveedor.</li>");
+                                    }
+                                %>
+                            </ul>
                         </div>
 
 
@@ -317,7 +334,7 @@
             var xhr = new XMLHttpRequest();
             console.log("GenerarPDF" + usuario + "   " + nombreSalida);
             //xhr.open("GET", "SvCargarActividades?departamento=" + departamento + "&startIndex1=" + startIndex1, true);
-            xhr.open("POST", "SvPerfilUsuario?usuario=" + usuario + "&nombreSalida=" + nombreSalida, true);
+            xhr.open("POST", "SvDownloadPDF?usuario=" + usuario + "&nombreSalida=" + nombreSalida, true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     alert("Se generó el PDF para la Salida Turistica correctamente.");

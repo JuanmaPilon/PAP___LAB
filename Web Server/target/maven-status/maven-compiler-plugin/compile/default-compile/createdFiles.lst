@@ -2,6 +2,7 @@ WebServices\CorreoElectronicoExistenteException_Exception.class
 WebServices\TipoEstado.class
 Servlets\exceptions\PreexistingEntityException.class
 Servlets\SvPerfilSalida.class
+WebServices\DtInscripcion.class
 Servlets\SvDepartamento.class
 WebServices\ListaDTDepartamento.class
 WebServices\NicknameExistenteException.class
@@ -26,8 +27,10 @@ WebServices\WebServicesService.class
 WebServices\DtActividad.class
 WebServices\ListaDTSalidaTuristica.class
 WebServices\PaqueteSinActividad_Exception.class
+Servlets\SvDownloadPDF.class
 WebServices\DtTurista.class
 WebServices\ObjectFactory.class
+WebServices\ListaDTInscripcion.class
 WebServices\NicknameExistenteException_Exception.class
 Servlets\SvPaquetesDeSalida.class
 WebServices\ParseException_Exception.class

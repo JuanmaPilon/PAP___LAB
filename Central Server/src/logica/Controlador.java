@@ -1143,9 +1143,17 @@ public class Controlador implements IControlador {
         Document document = new Document();
         //String outputPath = System.getProperty("catalina.base") + File.separator + "webapps" + File.separator + "TuAppName" + File.separator + "PDFs" + File.separator + nickname + ".pdf";
 
-        String outputPath = "\\PDFs\\" + nickname + ".pdf";
+        // Obtener el directorio de trabajo actual
+        String directorioTrabajo = System.getProperty("user.dir");
+
+        // Definir una carpeta para las imágenes dentro del directorio de trabajo
+        String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "PDFs";
+
+        // Crear la ruta completa del archivo de destialtno
+        String rutaArchivoDestino = carpetaImagenes + File.separator + nickname + ".pdf";
+
         try {
-            PdfWriter.getInstance(document, new FileOutputStream(outputPath));
+            PdfWriter.getInstance(document, new FileOutputStream(rutaArchivoDestino));
             document.open();
 
             ArrayList<DTSalidaTuristica> listaDTSalidaInscUsuario = traerInscSalidasDeTurista(nickname);
@@ -1397,6 +1405,22 @@ public class Controlador implements IControlador {
             e.printStackTrace();
         }
 
+    }
+    
+    
+    @Override
+    public ArrayList<DTInscripcion> traerDTInscSalidasDeTurista(String nickname) {
+        Turista t = (Turista) ConsultaDeUsuario(nickname);
+        ArrayList<DTInscripcion> listaInscSalidasDeTurista = new ArrayList();
+       //public DTInscripcion(String nicknameTurista, String nombreSalidaTuristica, Date fInscripcion, int cantTurista, float costo)
+
+        for (Inscripcion insc : t.getListaInscripcion()) {
+            DTInscripcion dtInscripcion = new DTInscripcion(insc.getTurista().getNickname(), insc.getSalida().getNombre(),
+                    insc.getfInscripcion(), insc.getCantTurista(), insc.getCosto(), insc.getTipoPago());
+
+            listaInscSalidasDeTurista.add(dtInscripcion);
+        }
+        return listaInscSalidasDeTurista;
     }
 
 }

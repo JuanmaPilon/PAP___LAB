@@ -116,7 +116,7 @@ public class SvPerfilUsuario extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String nombreSalida = request.getParameter("nombreSalida");
         
-        port.generarPDFInscripcionSalida(usuario, nombreSalida);
+        //port.generarPDFInscripcionSalida(usuario, nombreSalida);
 
     }
 
