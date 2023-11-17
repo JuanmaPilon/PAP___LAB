@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="WebServices.DtSalidaTuristica"%>
 <%@page import="java.util.List"%>
 <%@page import="WebServices.DtActividad"%>
@@ -9,6 +10,8 @@
 <html>
     <%
         DtActividad act = (DtActividad) request.getSession().getAttribute("actividad");//usuario del que se muestra la info
+        String nomActividad = act.getNombre();
+        String nomActividadCodificado = URLEncoder.encode(nomActividad, "UTF-8");//necesario para pasar el nomActividad con espacios y buscar la img
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
         String usuario = (String) request.getSession().getAttribute("usuario");
         List<String> categorias = (List<String>) request.getSession().getAttribute("categorias");
@@ -48,7 +51,7 @@
         <main>
 
             <div class="actividad">
-                <img src="<%= rutaAlaImagen%>" alt="Imagen de la actividad" style="width: 500px; height: 500px;" />
+                <img src=SvMostrarImagenActividad?nombreActividad=<%=nomActividadCodificado%> alt="Imagen de la actividad" style="width: 500px; height: 500px;" />
                 <h3><%=act.getNombre()%></h3>
                 <p>Descripcion: <%=act.getDescripcion()%></p>
                 <p>Fecha: <%=act.getFAlta()%></p>

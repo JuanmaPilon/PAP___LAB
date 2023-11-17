@@ -7,6 +7,7 @@ import WebServices.WebServices;
 import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,13 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 @WebServlet(name = "SvObtenerActividadesCategoria", urlPatterns = {"/SvObtenerActividadesCategoria"})
 public class SvObtenerActividadesCategoria extends HttpServlet {
 
     //Fabrica fabrica = Fabrica.getInstance();
     //IControlador control = fabrica.getIControlador();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
@@ -48,17 +47,13 @@ public class SvObtenerActividadesCategoria extends HttpServlet {
             DtImagenActividad imagen;
             try {
                 imagen = port.buscarImagenPorActividad(actividad.getNombre());
-                String imagenRuta = "images/sinImagen.png";
-
-//                if (imagen == null) {
-//                    imagenRuta = "images/sinImagen.png";
-//
-//                } else {
-//                    imagenRuta = imagen.getRuta();
-//                }
+                String nomActividad = imagen.getNombreActividad();
+                String nomActividadCodificado = URLEncoder.encode(nomActividad, "UTF-8");
                 htmlResponse.append("<div class='actividad'>");
-//                htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la actividad\" style=\"width: 300px; height: 300px;\">");
-               htmlResponse.append("<h3 onclick=\"mostrarActividad('" + actividad.getNombre() + "')\">").append(actividad.getNombre()).append("</h3>");
+                htmlResponse.append("<img src=SvMostrarImagenActividad?nombreActividad=")
+                        .append(nomActividadCodificado)
+                        .append(" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
+                htmlResponse.append("<h3 onclick=\"mostrarActividad('" + actividad.getNombre() + "')\">").append(actividad.getNombre()).append("</h3>");
                 htmlResponse.append("<p>").append(actividad.getDescripcion()).append("</p>");
                 htmlResponse.append("</div>");
             } catch (Exception ex) {

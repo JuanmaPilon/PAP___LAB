@@ -35,7 +35,6 @@ import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
 @WebServlet(name = "SvActividad", urlPatterns = {"/SvActividad"})
 @MultipartConfig(
         maxFileSize = 1024 * 1024, // Tamaño máximo del archivo en bytes (ejemplo: 1 MB)
@@ -44,9 +43,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 public class SvActividad extends HttpServlet {
 
-   // Fabrica fabrica = Fabrica.getInstance();
+    // Fabrica fabrica = Fabrica.getInstance();
     //IControlador control = fabrica.getIControlador();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -104,20 +102,6 @@ public class SvActividad extends HttpServlet {
         List<String> paquetes = port.listaPaquetesDeActividad(actividadConsultada.getNombre()).getLista();
 
         HttpSession misesion = request.getSession();
-//        String imagenRuta = "images/sinImagen.png";
-//        String UrlVideo = "";
-
-//        if (imagen != null) {
-//            if ((imagen.getNombre() != null) && (!imagen.getUrlVideo().equals(""))) {
-//                imagenRuta = imagen.getRuta();
-//                UrlVideo = imagen.getUrlVideo();
-//            } else if ((imagen.getNombre() != null) && (imagen.getUrlVideo().equals(""))) {
-//                imagenRuta = imagen.getRuta();
-//            } else if ((imagen.getNombre() == null) && (!imagen.getUrlVideo().equals(""))) {
-//                UrlVideo = imagen.getUrlVideo();
-//            }
-//
-//        }
 
         if (tipoUsuario != null) { //INSCRIPCION, NO FUNCIONA SI SE TRAE TIPO USUARIO
             misesion.setAttribute("tipoUsuario", tipoUsuario);
@@ -128,8 +112,7 @@ public class SvActividad extends HttpServlet {
         misesion.setAttribute("salidas", salidas);
         misesion.setAttribute("categorias", categorias);
         misesion.setAttribute("paquetes", paquetes);
-//        misesion.setAttribute("imagen", imagenRuta);
-//        misesion.setAttribute("UrlVideo", UrlVideo);
+        misesion.setAttribute("UrlVideo", imagen.getUrlVideo());
         response.sendRedirect("perfilActividadTuristica.jsp");
 
         //  } catch (Exception ex) {
@@ -219,15 +202,12 @@ public class SvActividad extends HttpServlet {
                     nombreArchivo = archivo.getSubmittedFileName();
                     if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
                         ServletContext context = request.getServletContext();
-                  
-                        
+
                         byte[] bytesImagen = getBytesDesdePart(archivo);
-                        
-                        
 
                         try {
                             if (UrlVideo == null) {
-                                port.subirImagenActividad(bytesImagen, nombreArchivo, nombre,  null);
+                                port.subirImagenActividad(bytesImagen, nombreArchivo, nombre, null);
                             } else if (UrlVideo != null) {
                                 port.subirImagenActividad(bytesImagen, nombreArchivo, nombre, UrlVideo);
                             }
@@ -244,7 +224,7 @@ public class SvActividad extends HttpServlet {
 
                 if ((archivo.getSize() == 0) && (!UrlVideo.equals(""))) {
                     byte[] imagenVacia = new byte[0];
-                     port.subirImagenActividad(imagenVacia, "sinImagen", nombre, UrlVideo);
+                    port.subirImagenActividad(imagenVacia, "sinImagen", nombre, UrlVideo);
                 } else if ((archivo.getSize() == 0) && (UrlVideo.equals(""))) {
                     byte[] imagenVacia = new byte[0];
                     //String UrlVacio = "sinVideo";
@@ -262,20 +242,20 @@ public class SvActividad extends HttpServlet {
             }
         }
     }
-    
+
     private byte[] getBytesDesdePart(Part part) throws IOException {
-    InputStream inputStream = part.getInputStream();
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        InputStream inputStream = part.getInputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-    byte[] buffer = new byte[4096];
-    int bytesRead;
+        byte[] buffer = new byte[4096];
+        int bytesRead;
 
-    while ((bytesRead = inputStream.read(buffer)) != -1) {
-        outputStream.write(buffer, 0, bytesRead);
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        return outputStream.toByteArray();
     }
-
-    return outputStream.toByteArray();
-}
 
     @Override
     public String getServletInfo() {

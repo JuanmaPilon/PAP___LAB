@@ -1,70 +1,71 @@
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTActividad.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtActividad.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtCategoria.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PreexistingEntityException_Exception.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtImagenActividad.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvModificarUsuario.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvObtenerActividadesCategoria.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvCategoria.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvActividad.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarActividades.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTDepartamento.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NoExisteCompra.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaString.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\TipoPago.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\WebServicesService.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteYaComprado_Exception.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\CorreoElectronicoExistenteException_Exception.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtSalidaTuristica.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilSalida.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTUsuario.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvObtenerActividades.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilActividad.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvValidarNickname.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvAutenticarUsuario.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtDepartamento.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquetesDeSalida.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTSalidaTuristica.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvProveedor.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvSalida.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ImagenPorNicknameNoExite_Exception.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NoExisteCompra_Exception.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\CorreoElectronicoExistenteException.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarDepartamentos.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\resources\JavaEE8Resource.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvInscripcion.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\IllegalOrphanException.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteYaComprado.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvDepartamento.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtProveedor.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvConsultaSalidaMovil.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTPaquete.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvConsultaActividadMovil.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ParseException_Exception.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilUsuario.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NicknameExistenteException_Exception.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\TipoEstado.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ObjectFactory.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvDeptosYCategorias.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtUsuario.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvValidarCorreo.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PreexistingEntityException.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\NonexistentEntityException.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtTurista.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteSinActividad_Exception.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ParseException.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\JAXRSConfiguration.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NicknameExistenteException.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\PreexistingEntityException.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvBuscar.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilPaquete.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtPaquete.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ImagenPorNicknameNoExite.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquete.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvUsuario.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtImagenPerfil.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvTurista.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\WebServices.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\package-info.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteSinActividad.java
-C:\Users\Pc\OneDrive\Documentos\Ropsitoreio de GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtCompra.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\WebServices.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtProveedor.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvValidarNickname.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvSalida.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtImagenPerfil.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTSalidaTuristica.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteSinActividad.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquete.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvProveedor.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ObjectFactory.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ImagenPorNicknameNoExite_Exception.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvModificarUsuario.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteSinActividad_Exception.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\WebServicesService.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvCategoria.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NicknameExistenteException.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ParseException.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\resources\JavaEE8Resource.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvInscripcion.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvBuscar.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtSalidaTuristica.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ParseException_Exception.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarActividades.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ImagenPorNicknameNoExite.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquetesDeSalida.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PreexistingEntityException.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\TipoEstado.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvAutenticarUsuario.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilActividad.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtTurista.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\CorreoElectronicoExistenteException.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarDepartamentos.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtImagenActividad.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvDepartamento.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvObtenerActividades.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NoExisteCompra_Exception.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\NonexistentEntityException.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilSalida.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvTurista.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtUsuario.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTActividad.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvConsultaSalidaMovil.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\IllegalOrphanException.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvConsultaActividadMovil.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtCompra.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NoExisteCompra.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvUsuario.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteYaComprado_Exception.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvDeptosYCategorias.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvObtenerActividadesCategoria.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvMostrarImagenActividad.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaString.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NicknameExistenteException_Exception.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteYaComprado.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\CorreoElectronicoExistenteException_Exception.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtPaquete.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTUsuario.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTDepartamento.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtDepartamento.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvActividad.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvValidarCorreo.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtActividad.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PreexistingEntityException_Exception.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtCategoria.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\TipoPago.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\PreexistingEntityException.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilPaquete.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilUsuario.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\package-info.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\JAXRSConfiguration.java
+C:\Users\natil\Documents\GitHub\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTPaquete.java

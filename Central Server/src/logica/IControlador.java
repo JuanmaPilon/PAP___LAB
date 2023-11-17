@@ -109,4 +109,5 @@ public abstract boolean validarNickname(String nickname); //listo
 public abstract boolean validarCorreo(String correo);//listo
 
 public abstract void subirImagenActividad(byte[] imagen, String nombreArchivo, String actividad, String UrlVideo);
+public abstract byte [] traerImagenActividad(String nombreActividad);
 }

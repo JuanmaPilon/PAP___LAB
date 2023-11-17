@@ -442,4 +442,10 @@ public void AltaSalidaTuristica(String nombre, int cantMax, String fAlta, String
         control.subirImagenActividad(imagen, nombreArchivo, actividad, UrlVideo);
     }
     
+     @WebMethod 
+    public byte [] traerImagenActividad(String nombreActividad) {
+    	return control.traerImagenActividad(nombreActividad);
+    }
+    
+    
 }//finWS

@@ -6,6 +6,7 @@ import WebServices.WebServices;
 import WebServices.WebServicesService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +37,7 @@ public class SvConsultaSalidaMovil extends HttpServlet {
         WebServicesService service = new WebServicesService();
         WebServices port = service.getWebServicesPort();
         String actividadSalidaId = request.getParameter("actividadSalidaId");
+        String nomSalidaCodificado = URLEncoder.encode(actividadSalidaId, "UTF-8");
         DtSalidaTuristica salT = port.consultaSalidaTuristica(actividadSalidaId);
         StringBuilder htmlResponse = new StringBuilder();
         //DTImagenActividad imagen = null;
@@ -43,25 +45,18 @@ public class SvConsultaSalidaMovil extends HttpServlet {
             // cambioar eso por la ruta de la imagen por que de la forma que esta revienta, tiene que estar comentado
             DtImagenActividad imagen = port.buscarImagenPorActividad(actividadSalidaId);
             String imagenRuta = "images/sinImagen.png";
-
-//            if (imagen == null) {
-//                imagenRuta = "images/sinImagen.png";
-//
-//            } else {
-//                imagenRuta = imagen.getRuta();
-//            }
            
             htmlResponse.append("<div class='Salida'>");
             htmlResponse.append("<h2>Detalles de la Salida Turstica:</h2>");
-//            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
+            htmlResponse.append("<img src=SvMostrarImagenActividad?nombreActividad=")
+            .append(nomSalidaCodificado)
+            .append( " alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");
             htmlResponse.append("<p>").append(salT.getNombre()).append("</p>");
             htmlResponse.append("<p>").append(salT.getFSalida()).append("</p>");
             htmlResponse.append("<p>").append(salT.getLugar()).append("</p>");
             htmlResponse.append("</div>");
             
         } catch (Exception ex) {
-            String imagenRuta = "images/sinImagen.png";
-            imagenRuta = "images/sinImagen.png";
             htmlResponse.append("<div class='Salida'>");
             htmlResponse.append("<h2>Detalles de la Salida Turstica:</h2>");
 //            htmlResponse.append("<img src=\"" + imagenRuta + "\" alt=\"Imagen de la salida\" style=\"width: 300px; height: 300px;\">");

@@ -11,6 +11,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -54,14 +55,14 @@ public class Controlador implements IControlador {
 
     //descomentado por una prueba:
     @Override
-    public void nuevaCantTurista(Long id, int nuevaCantTurista) throws   NoExisteCompra  {
+    public void nuevaCantTurista(Long id, int nuevaCantTurista) throws NoExisteCompra {
         Compra c = controlPersis.traerCompra(id);
         c.setCantTuristas(nuevaCantTurista);
-        
+
         try {
             controlPersis.editarCompra(c);
         } catch (Exception ex) {
-                throw new NoExisteCompra("La Compra id no existe");
+            throw new NoExisteCompra("La Compra id no existe");
         }
 
     }
@@ -70,14 +71,14 @@ public class Controlador implements IControlador {
     public DTCompra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
         Compra c = controlPersis.traerCompraDelTurista(nombreTurista, nombrePaquete);
         //(Long id, String nicknameTurista, Date fCompra, int cantTuristas, float costoTotal, Date vencimiento, String nombrePaquete)
-        DTCompra dtc = new DTCompra(c.getId(), c.getTurista().getNickname(), c.getfCompra(), c.getCantTuristas(), 
+        DTCompra dtc = new DTCompra(c.getId(), c.getTurista().getNickname(), c.getfCompra(), c.getCantTuristas(),
                 c.getCostoTotal(), c.getVencimiento(), c.getPaquete().getNombre());
-        
+
         return dtc;
     }
 
     @Override
-    public DTImagenActividad buscarImagenPorActividad(String nombreActividad){
+    public DTImagenActividad buscarImagenPorActividad(String nombreActividad) {
         imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
         DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getnombreActividad(), imagen.getUrlVideo());
         return dtImagen;
@@ -110,7 +111,7 @@ public class Controlador implements IControlador {
             controlPersis.guardarImagenPerfil(imagenPerfil);
         } catch (PreexistingEntityException e) {
             throw new PreexistingEntityException("Imagen ya en uso por otro usuario");
-        } 
+        }
 
     }
 
@@ -150,10 +151,10 @@ public class Controlador implements IControlador {
     public List<DTPaquete> traerListaDTPaquetes() {
         List<Paquete> listaPaquetes = controlPersis.consultaPaquete();
         List<DTPaquete> listaDtPaquetes = new ArrayList();
-        
-        for (Paquete p : listaPaquetes){
-             DTPaquete dtPaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
-             listaDtPaquetes.add(dtPaquete);
+
+        for (Paquete p : listaPaquetes) {
+            DTPaquete dtPaquete = new DTPaquete(p.getNombre(), p.getDescripcion(), p.getValidez(), p.getDescuento(), p.getFechaAlta());
+            listaDtPaquetes.add(dtPaquete);
         }
         return listaDtPaquetes;
     }
@@ -229,7 +230,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException{
+    public void AltaSalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, String nombreActividad) throws PreexistingEntityException {
         SalidaTuristica salidaTuristica = new SalidaTuristica();
         salidaTuristica.setNombre(nombre);
         salidaTuristica.setCantMax(cantMax);
@@ -485,7 +486,7 @@ public class Controlador implements IControlador {
     public DTImagenActividad traerDTImagenActividad(String nombreActividad) {
         imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
         if (imagen != null) {
-            DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(),  imagen.getnombreActividad(), imagen.getUrlVideo());
+            DTImagenActividad dtImagen = new DTImagenActividad(imagen.getNombre(), imagen.getnombreActividad(), imagen.getUrlVideo());
             return dtImagen;
         } else {
             return null;
@@ -741,8 +742,6 @@ public class Controlador implements IControlador {
 
         return dtactividad;
     }
-
-
 
     @Override
     public ArrayList<String> listaActividadesDelPaquete(String nombrePaquete) {
@@ -1013,7 +1012,7 @@ public class Controlador implements IControlador {
             if (actividad.getDepartamento().getNombre().equals(nombreDepartamento) && actividad.getEstado().equals(TipoEstado.confirmada)) {
                 DTActividad a = new DTActividad(actividad.getNombre(), actividad.getDescripcion(), actividad.getDuracion(),
                         actividad.getCosto(), actividad.getCiudad(), actividad.getfAlta(), actividad.getEstado(), actividad.getDepartamento().getNombre(), actividad.getProveedor().getNombre());
-               
+
                 listaActividadesTuristicas.add(a);
             }
         }
@@ -1192,13 +1191,13 @@ public class Controlador implements IControlador {
     public DTCategoria traerCategoria(String categoria) {
         Categoria c = controlPersis.traerCategoria(categoria);
         List<DTActividad> listDTAct = new ArrayList();
-        
-        for (Actividad actividad : c.getListaActividad()){
+
+        for (Actividad actividad : c.getListaActividad()) {
             DTActividad a = new DTActividad(actividad.getNombre(), actividad.getDescripcion(), actividad.getDuracion(),
-                        actividad.getCosto(), actividad.getCiudad(), actividad.getfAlta(), actividad.getEstado(), actividad.getDepartamento().getNombre(), actividad.getProveedor().getNombre());
-               
+                    actividad.getCosto(), actividad.getCiudad(), actividad.getfAlta(), actividad.getEstado(), actividad.getDepartamento().getNombre(), actividad.getProveedor().getNombre());
+
             listDTAct.add(a);
-            
+
         }
         DTCategoria dtc = new DTCategoria(c.getNombre(), listDTAct);
         return dtc;
@@ -1229,45 +1228,71 @@ public class Controlador implements IControlador {
         }
 
     }
-    
-    public void subirImagenActividad(byte[] imagen, String nombreArchivo, String actividad, String UrlVideo){
+
+    public void subirImagenActividad(byte[] imagen, String nombreArchivo, String actividad, String UrlVideo) {
         try {
-        if(nombreArchivo.equals("sinImagen")){
-            nombreArchivo = "sinImagen.png";
+            if (nombreArchivo.equals("sinImagen")) {
+                nombreArchivo = "sinImagen.png";
 //            if(UrlVideo == null){
 //                imagenActividad ImagenActividad = new imagenActividad(nombreArchivo, actividad, UrlVideo);
 //                controlPersis.guardarImagenActividad(ImagenActividad);
 //            }
-             imagenActividad ImagenActividad = new imagenActividad(nombreArchivo, actividad, UrlVideo);
-             controlPersis.guardarImagenActividad(ImagenActividad);
-        } else {
-             imagenActividad ImagenActividad = new imagenActividad(nombreArchivo, actividad, UrlVideo);
-             controlPersis.guardarImagenActividad(ImagenActividad);
-        
-        
-       
-        
-        // Obtener el directorio de trabajo actual
-        String directorioTrabajo = System.getProperty("user.dir");
+                imagenActividad ImagenActividad = new imagenActividad(nombreArchivo, actividad, UrlVideo);
+                controlPersis.guardarImagenActividad(ImagenActividad);
+            } else {
+                imagenActividad ImagenActividad = new imagenActividad(nombreArchivo, actividad, UrlVideo);
+                controlPersis.guardarImagenActividad(ImagenActividad);
 
-        // Definir una carpeta para las imágenes dentro del directorio de trabajo
-        String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+                // Obtener el directorio de trabajo actual
+                String directorioTrabajo = System.getProperty("user.dir");
 
-        // Crear la ruta completa del archivo de destialtno
-        String rutaArchivoDestino = carpetaImagenes + File.separator + nombreArchivo;
+                // Definir una carpeta para las imágenes dentro del directorio de trabajo
+                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
 
-        
-        // Escribir los bytes en el archivo de destino
-        Files.write(FileSystems.getDefault().getPath(rutaArchivoDestino), imagen);
-        }
-        
+                // Crear la ruta completa del archivo de destialtno
+                String rutaArchivoDestino = carpetaImagenes + File.separator + nombreArchivo;
+
+                // Escribir los bytes en el archivo de destino
+                Files.write(FileSystems.getDefault().getPath(rutaArchivoDestino), imagen);
+            }
+
         } catch (IOException ex) {
             ex.printStackTrace();
-        } catch (Exception e){
-         e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
-        
+    @Override
+    public byte[] traerImagenActividad(String nombreActividad) {
+        try {
+            imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
+
+            // Obtener el directorio de trabajo actual
+            String directorioTrabajo = System.getProperty("user.dir");
+
+            // Definir una carpeta para las imágenes dentro del directorio de trabajo
+            String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+
+            // Obtener la ruta completa del archivo de destino
+            String rutaArchivoImagen = carpetaImagenes + File.separator + imagen.getNombre();  // Ajusta la ruta según tu estructura
+
+            File img = new File(rutaArchivoImagen);
+
+            // Manejar el caso en que la imagen no existe
+            if (!img.exists()) {
+                return new byte[0];
+            }
+
+            Path path = Paths.get(rutaArchivoImagen);
+            return Files.readAllBytes(path);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new byte[0];
+        }
+
     }
 
 }

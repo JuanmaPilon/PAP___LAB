@@ -4,14 +4,67 @@
 <xsd:import namespace="http://webServices/" schemaLocation="http://localhost:9128/webservices?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="nuevaCantTurista">
-<part name="arg0" type="xsd:long"></part>
-<part name="arg1" type="xsd:int"></part>
+<message name="traerCategorias"></message>
+<message name="traerCategoriasResponse">
+<part name="return" type="tns:listaString"></part>
 </message>
-<message name="nuevaCantTuristaResponse"></message>
-<message name="NoExisteCompra">
-<part name="fault" element="tns:NoExisteCompra"></part>
+<message name="buscarImagenPorNickname">
+<part name="arg0" type="xsd:string"></part>
 </message>
+<message name="buscarImagenPorNicknameResponse">
+<part name="return" type="tns:dtImagenPerfil"></part>
+</message>
+<message name="ImagenPorNicknameNoExite">
+<part name="fault" element="tns:ImagenPorNicknameNoExite"></part>
+</message>
+<message name="AltaDeUsuarioProveedor">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:string"></part>
+<part name="arg5" type="xsd:anySimpleType"></part>
+<part name="arg6" type="xsd:string"></part>
+<part name="arg7" type="xsd:string"></part>
+</message>
+<message name="AltaDeUsuarioProveedorResponse"></message>
+<message name="CorreoElectronicoExistenteException">
+<part name="fault" element="tns:CorreoElectronicoExistenteException"></part>
+</message>
+<message name="NicknameExistenteException">
+<part name="fault" element="tns:NicknameExistenteException"></part>
+</message>
+<message name="PreexistingEntityException">
+<part name="fault" element="tns:PreexistingEntityException"></part>
+</message>
+<message name="buscarImagenPorActividad">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="buscarImagenPorActividadResponse">
+<part name="return" type="tns:dtImagenActividad"></part>
+</message>
+<message name="ModificarImagenPerfil">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+</message>
+<message name="ModificarImagenPerfilResponse"></message>
+<message name="AltaDeImagenPerfil">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+</message>
+<message name="AltaDeImagenPerfilResponse"></message>
+<message name="AltaDeUsuarioTurista">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:string"></part>
+<part name="arg5" type="xsd:anySimpleType"></part>
+<part name="arg6" type="xsd:string"></part>
+</message>
+<message name="AltaDeUsuarioTuristaResponse"></message>
 <message name="listaActividadesTuristicasPorCategoriaConfirmadas">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -24,6 +77,12 @@
 <message name="encontraSalidasTuristicasDeActividadResponse">
 <part name="return" type="tns:listaDTSalidaTuristica"></part>
 </message>
+<message name="listaActividadesTuristicasConfirmadas">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="listaActividadesTuristicasConfirmadasResponse">
+<part name="return" type="tns:listaString"></part>
+</message>
 <message name="turistaYaInscriptoSalidaTuristica">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
@@ -31,11 +90,11 @@
 <message name="turistaYaInscriptoSalidaTuristicaResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
-<message name="listaActividadesProveedorConfirmadas">
+<message name="traerActividadesFavoritasDelTurista">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="listaActividadesProveedorConfirmadasResponse">
-<part name="return" type="tns:listaDTActividad"></part>
+<message name="traerActividadesFavoritasDelTuristaResponse">
+<part name="return" type="tns:listaString"></part>
 </message>
 <message name="listaActividadesConfirmadasDepartamento">
 <part name="arg0" type="xsd:string"></part>
@@ -43,24 +102,14 @@
 <message name="listaActividadesConfirmadasDepartamentoResponse">
 <part name="return" type="tns:listaDTActividad"></part>
 </message>
-<message name="listaActividadesTuristicasConfirmadas">
+<message name="listaActividadesProveedorConfirmadas">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="listaActividadesTuristicasConfirmadasResponse">
-<part name="return" type="tns:listaString"></part>
+<message name="listaActividadesProveedorConfirmadasResponse">
+<part name="return" type="tns:listaDTActividad"></part>
 </message>
-<message name="traerActividadesFavoritasDelTurista">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerActividadesFavoritasDelTuristaResponse">
-<part name="return" type="tns:listaString"></part>
-</message>
-<message name="listaPaquetes"></message>
-<message name="listaPaquetesResponse">
-<part name="return" type="tns:listaString"></part>
-</message>
-<message name="listaUsuarios"></message>
-<message name="listaUsuariosResponse">
+<message name="listaDeptos"></message>
+<message name="listaDeptosResponse">
 <part name="return" type="tns:listaString"></part>
 </message>
 <message name="guardarActividad">
@@ -75,51 +124,9 @@
 <part name="arg8" type="tns:listaString"></part>
 </message>
 <message name="guardarActividadResponse"></message>
-<message name="PreexistingEntityException">
-<part name="fault" element="tns:PreexistingEntityException"></part>
-</message>
-<message name="traerCategorias"></message>
-<message name="traerCategoriasResponse">
-<part name="return" type="tns:listaString"></part>
-</message>
-<message name="traerDTPaquete">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerDTPaqueteResponse">
-<part name="return" type="tns:dtPaquete"></part>
-</message>
-<message name="traerDTActividad">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerDTActividadResponse">
-<part name="return" type="tns:dtActividad"></part>
-</message>
 <message name="traerUsuarioMod"></message>
 <message name="traerUsuarioModResponse">
 <part name="return" type="tns:listaDTUsuario"></part>
-</message>
-<message name="CompraDePaquete">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:int"></part>
-<part name="arg3" type="xsd:anySimpleType"></part>
-</message>
-<message name="CompraDePaqueteResponse"></message>
-<message name="PaqueteSinActividad">
-<part name="fault" element="tns:PaqueteSinActividad"></part>
-</message>
-<message name="PaqueteYaComprado">
-<part name="fault" element="tns:PaqueteYaComprado"></part>
-</message>
-<message name="traerCategoria">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerCategoriaResponse">
-<part name="return" type="tns:dtCategoria"></part>
-</message>
-<message name="listaDeptos"></message>
-<message name="listaDeptosResponse">
-<part name="return" type="tns:listaString"></part>
 </message>
 <message name="traerDTTurista">
 <part name="arg0" type="xsd:string"></part>
@@ -133,155 +140,13 @@
 <message name="traerDTProveedorResponse">
 <part name="return" type="tns:dtProveedor"></part>
 </message>
-<message name="ModificarDatosDeUsuarioProveedor">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-<part name="arg3" type="xsd:string"></part>
-<part name="arg4" type="xsd:anySimpleType"></part>
-<part name="arg5" type="xsd:string"></part>
-<part name="arg6" type="xsd:string"></part>
-</message>
-<message name="ModificarDatosDeUsuarioProveedorResponse"></message>
-<message name="buscarImagenPorActividad">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="buscarImagenPorActividadResponse">
-<part name="return" type="tns:dtImagenActividad"></part>
-</message>
-<message name="AltaDeImagenPerfil">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-</message>
-<message name="AltaDeImagenPerfilResponse"></message>
-<message name="buscarImagenPorNickname">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="buscarImagenPorNicknameResponse">
-<part name="return" type="tns:dtImagenPerfil"></part>
-</message>
-<message name="ImagenPorNicknameNoExite">
-<part name="fault" element="tns:ImagenPorNicknameNoExite"></part>
-</message>
-<message name="AltaDeUsuarioTurista">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-<part name="arg3" type="xsd:string"></part>
-<part name="arg4" type="xsd:string"></part>
-<part name="arg5" type="xsd:anySimpleType"></part>
-<part name="arg6" type="xsd:string"></part>
-</message>
-<message name="AltaDeUsuarioTuristaResponse"></message>
-<message name="NicknameExistenteException">
-<part name="fault" element="tns:NicknameExistenteException"></part>
-</message>
-<message name="CorreoElectronicoExistenteException">
-<part name="fault" element="tns:CorreoElectronicoExistenteException"></part>
-</message>
-<message name="AltaDeUsuarioProveedor">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-<part name="arg3" type="xsd:string"></part>
-<part name="arg4" type="xsd:string"></part>
-<part name="arg5" type="xsd:anySimpleType"></part>
-<part name="arg6" type="xsd:string"></part>
-<part name="arg7" type="xsd:string"></part>
-</message>
-<message name="AltaDeUsuarioProveedorResponse"></message>
-<message name="ModificarImagenPerfil">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-</message>
-<message name="ModificarImagenPerfilResponse"></message>
-<message name="ModificarDatosDeUsuarioTurista">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-<part name="arg3" type="xsd:string"></part>
-<part name="arg4" type="xsd:anySimpleType"></part>
-<part name="arg5" type="xsd:string"></part>
-</message>
-<message name="ModificarDatosDeUsuarioTuristaResponse"></message>
-<message name="subirImagenActividad">
-<part name="arg0" type="xsd:base64Binary"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-<part name="arg3" type="xsd:string"></part>
-</message>
-<message name="subirImagenActividadResponse"></message>
-<message name="listaDTDepartamentos"></message>
-<message name="listaDTDepartamentosResponse">
-<part name="return" type="tns:listaDTDepartamento"></part>
-</message>
-<message name="traerCompraDelTurista">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="traerCompraDelTuristaResponse">
-<part name="return" type="tns:dtCompra"></part>
-</message>
-<message name="generarPDFInscripcionSalida">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="generarPDFInscripcionSalidaResponse"></message>
-<message name="InscripcionASalidaTuristica">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:int"></part>
-<part name="arg3" type="xsd:float"></part>
-<part name="arg4" type="xsd:string"></part>
-<part name="arg5" type="tns:tipoPago"></part>
-</message>
-<message name="InscripcionASalidaTuristicaResponse"></message>
-<message name="AltaSalidaTuristica">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:int"></part>
-<part name="arg2" type="xsd:string"></part>
-<part name="arg3" type="xsd:string"></part>
-<part name="arg4" type="xsd:string"></part>
-<part name="arg5" type="xsd:string"></part>
-</message>
-<message name="AltaSalidaTuristicaResponse"></message>
-<message name="ParseException">
-<part name="fault" element="tns:ParseException"></part>
-</message>
-<message name="ConsultaSalidaTuristica">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="ConsultaSalidaTuristicaResponse">
-<part name="return" type="tns:dtSalidaTuristica"></part>
-</message>
-<message name="traerSalidasDelProveedor">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerSalidasDelProveedorResponse">
-<part name="return" type="tns:listaDTSalidaTuristica"></part>
-</message>
-<message name="cambiarEstadoActividad">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="tns:tipoEstado"></part>
-</message>
-<message name="cambiarEstadoActividadResponse"></message>
-<message name="traerInscSalidasDeTurista">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerInscSalidasDeTuristaResponse">
-<part name="return" type="tns:listaDTSalidaTuristica"></part>
-</message>
-<message name="listaPaquetesComprados">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="listaPaquetesCompradosResponse">
+<message name="listaUsuarios"></message>
+<message name="listaUsuariosResponse">
 <part name="return" type="tns:listaString"></part>
 </message>
-<message name="traerListaDTPaquetes"></message>
-<message name="traerListaDTPaquetesResponse">
-<part name="return" type="tns:listaDTPaquete"></part>
+<message name="listaPaquetes"></message>
+<message name="listaPaquetesResponse">
+<part name="return" type="tns:listaString"></part>
 </message>
 <message name="listaActividadesProveedorTodas">
 <part name="arg0" type="xsd:string"></part>
@@ -302,16 +167,11 @@
 <message name="salidaTuristicaLlenaResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
-<message name="DesMarcarActividad">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="DesMarcarActividadResponse"></message>
-<message name="listaPaquetesCompradosVigentes">
+<message name="traerInscSalidasDeTurista">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="listaPaquetesCompradosVigentesResponse">
-<part name="return" type="tns:listaDTPaquete"></part>
+<message name="traerInscSalidasDeTuristaResponse">
+<part name="return" type="tns:listaDTSalidaTuristica"></part>
 </message>
 <message name="listaActividadesDelPaquete">
 <part name="arg0" type="xsd:string"></part>
@@ -319,18 +179,22 @@
 <message name="listaActividadesDelPaqueteResponse">
 <part name="return" type="tns:listaString"></part>
 </message>
-<message name="actividadSinSalidaVigente">
+<message name="traerCompraDelTurista">
 <part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
 </message>
-<message name="actividadSinSalidaVigenteResponse">
-<part name="return" type="xsd:boolean"></part>
+<message name="traerCompraDelTuristaResponse">
+<part name="return" type="tns:dtCompra"></part>
 </message>
-<message name="listaPaquetesDeActividad">
+<message name="InscripcionASalidaTuristica">
 <part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:int"></part>
+<part name="arg3" type="xsd:float"></part>
+<part name="arg4" type="xsd:string"></part>
+<part name="arg5" type="tns:tipoPago"></part>
 </message>
-<message name="listaPaquetesDeActividadResponse">
-<part name="return" type="tns:listaString"></part>
-</message>
+<message name="InscripcionASalidaTuristicaResponse"></message>
 <message name="devolverTipoUsuario">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -341,27 +205,144 @@
 <message name="listaActividadesConfirmadasResponse">
 <part name="return" type="tns:listaDTActividad"></part>
 </message>
+<message name="actividadSinSalidaVigente">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="actividadSinSalidaVigenteResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="DesMarcarActividad">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="DesMarcarActividadResponse"></message>
+<message name="marcarUsuarioComoFavorita">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="marcarUsuarioComoFavoritaResponse"></message>
+<message name="listaDTDepartamentos"></message>
+<message name="listaDTDepartamentosResponse">
+<part name="return" type="tns:listaDTDepartamento"></part>
+</message>
 <message name="marcarActividadComoFavorita">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
 </message>
 <message name="marcarActividadComoFavoritaResponse"></message>
+<message name="traerListaDTPaquetes"></message>
+<message name="traerListaDTPaquetesResponse">
+<part name="return" type="tns:listaDTPaquete"></part>
+</message>
+<message name="listaPaquetesComprados">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="listaPaquetesCompradosResponse">
+<part name="return" type="tns:listaString"></part>
+</message>
+<message name="listaPaquetesCompradosVigentes">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="listaPaquetesCompradosVigentesResponse">
+<part name="return" type="tns:listaDTPaquete"></part>
+</message>
+<message name="subirImagenActividad">
+<part name="arg0" type="xsd:base64Binary"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+</message>
+<message name="subirImagenActividadResponse"></message>
+<message name="ModificarDatosDeUsuarioTurista">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:anySimpleType"></part>
+<part name="arg5" type="xsd:string"></part>
+</message>
+<message name="ModificarDatosDeUsuarioTuristaResponse"></message>
+<message name="cambiarEstadoActividad">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="tns:tipoEstado"></part>
+</message>
+<message name="cambiarEstadoActividadResponse"></message>
 <message name="traerCategoriasActividad">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="traerCategoriasActividadResponse">
 <part name="return" type="tns:listaString"></part>
 </message>
-<message name="marcarUsuarioComoFavorita">
+<message name="ConsultaSalidaTuristica">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="ConsultaSalidaTuristicaResponse">
+<part name="return" type="tns:dtSalidaTuristica"></part>
+</message>
+<message name="ModificarDatosDeUsuarioProveedor">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:anySimpleType"></part>
+<part name="arg5" type="xsd:string"></part>
+<part name="arg6" type="xsd:string"></part>
+</message>
+<message name="ModificarDatosDeUsuarioProveedorResponse"></message>
+<message name="AltaSalidaTuristica">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:int"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:string"></part>
+<part name="arg5" type="xsd:string"></part>
+</message>
+<message name="AltaSalidaTuristicaResponse"></message>
+<message name="ParseException">
+<part name="fault" element="tns:ParseException"></part>
+</message>
+<message name="listaPaquetesDeActividad">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="listaPaquetesDeActividadResponse">
+<part name="return" type="tns:listaString"></part>
+</message>
+<message name="traerSalidasDelProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="traerSalidasDelProveedorResponse">
+<part name="return" type="tns:listaDTSalidaTuristica"></part>
+</message>
+<message name="generarPDFInscripcionSalida">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
 </message>
-<message name="marcarUsuarioComoFavoritaResponse"></message>
-<message name="validarNickname">
+<message name="generarPDFInscripcionSalidaResponse"></message>
+<message name="traerImagenActividad">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="validarNicknameResponse">
-<part name="return" type="xsd:boolean"></part>
+<message name="traerImagenActividadResponse">
+<part name="return" type="xsd:base64Binary"></part>
+</message>
+<message name="nuevaCantTurista">
+<part name="arg0" type="xsd:long"></part>
+<part name="arg1" type="xsd:int"></part>
+</message>
+<message name="nuevaCantTuristaResponse"></message>
+<message name="NoExisteCompra">
+<part name="fault" element="tns:NoExisteCompra"></part>
+</message>
+<message name="traerDTActividad">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="traerDTActividadResponse">
+<part name="return" type="tns:dtActividad"></part>
+</message>
+<message name="traerDTPaquete">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="traerDTPaqueteResponse">
+<part name="return" type="tns:dtPaquete"></part>
 </message>
 <message name="validarCorreo">
 <part name="arg0" type="xsd:string"></part>
@@ -369,11 +350,36 @@
 <message name="validarCorreoResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
+<message name="traerCategoria">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="traerCategoriaResponse">
+<part name="return" type="tns:dtCategoria"></part>
+</message>
+<message name="CompraDePaquete">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:int"></part>
+<part name="arg3" type="xsd:anySimpleType"></part>
+</message>
+<message name="CompraDePaqueteResponse"></message>
+<message name="PaqueteSinActividad">
+<part name="fault" element="tns:PaqueteSinActividad"></part>
+</message>
+<message name="PaqueteYaComprado">
+<part name="fault" element="tns:PaqueteYaComprado"></part>
+</message>
 <message name="traerDTUsuario">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="traerDTUsuarioResponse">
 <part name="return" type="tns:dtUsuario"></part>
+</message>
+<message name="validarNickname">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="validarNicknameResponse">
+<part name="return" type="xsd:boolean"></part>
 </message>
 <message name="desMarcarUsuarioFavorito">
 <part name="arg0" type="xsd:string"></part>
@@ -381,10 +387,42 @@
 </message>
 <message name="desMarcarUsuarioFavoritoResponse"></message>
 <portType name="WebServices">
-<operation name="nuevaCantTurista" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webServices/WebServices/nuevaCantTuristaRequest" message="tns:nuevaCantTurista"></input>
-<output wsam:Action="http://webServices/WebServices/nuevaCantTuristaResponse" message="tns:nuevaCantTuristaResponse"></output>
-<fault message="tns:NoExisteCompra" name="NoExisteCompra" wsam:Action="http://webServices/WebServices/nuevaCantTurista/Fault/NoExisteCompra"></fault>
+<operation name="traerCategorias">
+<input wsam:Action="http://webServices/WebServices/traerCategoriasRequest" message="tns:traerCategorias"></input>
+<output wsam:Action="http://webServices/WebServices/traerCategoriasResponse" message="tns:traerCategoriasResponse"></output>
+</operation>
+<operation name="buscarImagenPorNickname">
+<input wsam:Action="http://webServices/WebServices/buscarImagenPorNicknameRequest" message="tns:buscarImagenPorNickname"></input>
+<output wsam:Action="http://webServices/WebServices/buscarImagenPorNicknameResponse" message="tns:buscarImagenPorNicknameResponse"></output>
+<fault message="tns:ImagenPorNicknameNoExite" name="ImagenPorNicknameNoExite" wsam:Action="http://webServices/WebServices/buscarImagenPorNickname/Fault/ImagenPorNicknameNoExite"></fault>
+</operation>
+<operation name="AltaDeUsuarioProveedor" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7">
+<input wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedorRequest" message="tns:AltaDeUsuarioProveedor"></input>
+<output wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedorResponse" message="tns:AltaDeUsuarioProveedorResponse"></output>
+<fault message="tns:CorreoElectronicoExistenteException" name="CorreoElectronicoExistenteException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedor/Fault/CorreoElectronicoExistenteException"></fault>
+<fault message="tns:NicknameExistenteException" name="NicknameExistenteException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedor/Fault/NicknameExistenteException"></fault>
+<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedor/Fault/PreexistingEntityException"></fault>
+</operation>
+<operation name="buscarImagenPorActividad">
+<input wsam:Action="http://webServices/WebServices/buscarImagenPorActividadRequest" message="tns:buscarImagenPorActividad"></input>
+<output wsam:Action="http://webServices/WebServices/buscarImagenPorActividadResponse" message="tns:buscarImagenPorActividadResponse"></output>
+</operation>
+<operation name="ModificarImagenPerfil" parameterOrder="arg0 arg1 arg2">
+<input wsam:Action="http://webServices/WebServices/ModificarImagenPerfilRequest" message="tns:ModificarImagenPerfil"></input>
+<output wsam:Action="http://webServices/WebServices/ModificarImagenPerfilResponse" message="tns:ModificarImagenPerfilResponse"></output>
+<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/ModificarImagenPerfil/Fault/PreexistingEntityException"></fault>
+</operation>
+<operation name="AltaDeImagenPerfil" parameterOrder="arg0 arg1 arg2">
+<input wsam:Action="http://webServices/WebServices/AltaDeImagenPerfilRequest" message="tns:AltaDeImagenPerfil"></input>
+<output wsam:Action="http://webServices/WebServices/AltaDeImagenPerfilResponse" message="tns:AltaDeImagenPerfilResponse"></output>
+<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/AltaDeImagenPerfil/Fault/PreexistingEntityException"></fault>
+</operation>
+<operation name="AltaDeUsuarioTurista" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6">
+<input wsam:Action="http://webServices/WebServices/AltaDeUsuarioTuristaRequest" message="tns:AltaDeUsuarioTurista"></input>
+<output wsam:Action="http://webServices/WebServices/AltaDeUsuarioTuristaResponse" message="tns:AltaDeUsuarioTuristaResponse"></output>
+<fault message="tns:NicknameExistenteException" name="NicknameExistenteException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioTurista/Fault/NicknameExistenteException"></fault>
+<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioTurista/Fault/PreexistingEntityException"></fault>
+<fault message="tns:CorreoElectronicoExistenteException" name="CorreoElectronicoExistenteException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioTurista/Fault/CorreoElectronicoExistenteException"></fault>
 </operation>
 <operation name="listaActividadesTuristicasPorCategoriaConfirmadas">
 <input wsam:Action="http://webServices/WebServices/listaActividadesTuristicasPorCategoriaConfirmadasRequest" message="tns:listaActividadesTuristicasPorCategoriaConfirmadas"></input>
@@ -394,68 +432,38 @@
 <input wsam:Action="http://webServices/WebServices/encontraSalidasTuristicasDeActividadRequest" message="tns:encontraSalidasTuristicasDeActividad"></input>
 <output wsam:Action="http://webServices/WebServices/encontraSalidasTuristicasDeActividadResponse" message="tns:encontraSalidasTuristicasDeActividadResponse"></output>
 </operation>
-<operation name="turistaYaInscriptoSalidaTuristica" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webServices/WebServices/turistaYaInscriptoSalidaTuristicaRequest" message="tns:turistaYaInscriptoSalidaTuristica"></input>
-<output wsam:Action="http://webServices/WebServices/turistaYaInscriptoSalidaTuristicaResponse" message="tns:turistaYaInscriptoSalidaTuristicaResponse"></output>
-</operation>
-<operation name="listaActividadesProveedorConfirmadas">
-<input wsam:Action="http://webServices/WebServices/listaActividadesProveedorConfirmadasRequest" message="tns:listaActividadesProveedorConfirmadas"></input>
-<output wsam:Action="http://webServices/WebServices/listaActividadesProveedorConfirmadasResponse" message="tns:listaActividadesProveedorConfirmadasResponse"></output>
-</operation>
-<operation name="listaActividadesConfirmadasDepartamento">
-<input wsam:Action="http://webServices/WebServices/listaActividadesConfirmadasDepartamentoRequest" message="tns:listaActividadesConfirmadasDepartamento"></input>
-<output wsam:Action="http://webServices/WebServices/listaActividadesConfirmadasDepartamentoResponse" message="tns:listaActividadesConfirmadasDepartamentoResponse"></output>
-</operation>
 <operation name="listaActividadesTuristicasConfirmadas">
 <input wsam:Action="http://webServices/WebServices/listaActividadesTuristicasConfirmadasRequest" message="tns:listaActividadesTuristicasConfirmadas"></input>
 <output wsam:Action="http://webServices/WebServices/listaActividadesTuristicasConfirmadasResponse" message="tns:listaActividadesTuristicasConfirmadasResponse"></output>
+</operation>
+<operation name="turistaYaInscriptoSalidaTuristica" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webServices/WebServices/turistaYaInscriptoSalidaTuristicaRequest" message="tns:turistaYaInscriptoSalidaTuristica"></input>
+<output wsam:Action="http://webServices/WebServices/turistaYaInscriptoSalidaTuristicaResponse" message="tns:turistaYaInscriptoSalidaTuristicaResponse"></output>
 </operation>
 <operation name="traerActividadesFavoritasDelTurista">
 <input wsam:Action="http://webServices/WebServices/traerActividadesFavoritasDelTuristaRequest" message="tns:traerActividadesFavoritasDelTurista"></input>
 <output wsam:Action="http://webServices/WebServices/traerActividadesFavoritasDelTuristaResponse" message="tns:traerActividadesFavoritasDelTuristaResponse"></output>
 </operation>
-<operation name="listaPaquetes">
-<input wsam:Action="http://webServices/WebServices/listaPaquetesRequest" message="tns:listaPaquetes"></input>
-<output wsam:Action="http://webServices/WebServices/listaPaquetesResponse" message="tns:listaPaquetesResponse"></output>
+<operation name="listaActividadesConfirmadasDepartamento">
+<input wsam:Action="http://webServices/WebServices/listaActividadesConfirmadasDepartamentoRequest" message="tns:listaActividadesConfirmadasDepartamento"></input>
+<output wsam:Action="http://webServices/WebServices/listaActividadesConfirmadasDepartamentoResponse" message="tns:listaActividadesConfirmadasDepartamentoResponse"></output>
 </operation>
-<operation name="listaUsuarios">
-<input wsam:Action="http://webServices/WebServices/listaUsuariosRequest" message="tns:listaUsuarios"></input>
-<output wsam:Action="http://webServices/WebServices/listaUsuariosResponse" message="tns:listaUsuariosResponse"></output>
+<operation name="listaActividadesProveedorConfirmadas">
+<input wsam:Action="http://webServices/WebServices/listaActividadesProveedorConfirmadasRequest" message="tns:listaActividadesProveedorConfirmadas"></input>
+<output wsam:Action="http://webServices/WebServices/listaActividadesProveedorConfirmadasResponse" message="tns:listaActividadesProveedorConfirmadasResponse"></output>
+</operation>
+<operation name="listaDeptos">
+<input wsam:Action="http://webServices/WebServices/listaDeptosRequest" message="tns:listaDeptos"></input>
+<output wsam:Action="http://webServices/WebServices/listaDeptosResponse" message="tns:listaDeptosResponse"></output>
 </operation>
 <operation name="guardarActividad" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8">
 <input wsam:Action="http://webServices/WebServices/guardarActividadRequest" message="tns:guardarActividad"></input>
 <output wsam:Action="http://webServices/WebServices/guardarActividadResponse" message="tns:guardarActividadResponse"></output>
 <fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/guardarActividad/Fault/PreexistingEntityException"></fault>
 </operation>
-<operation name="traerCategorias">
-<input wsam:Action="http://webServices/WebServices/traerCategoriasRequest" message="tns:traerCategorias"></input>
-<output wsam:Action="http://webServices/WebServices/traerCategoriasResponse" message="tns:traerCategoriasResponse"></output>
-</operation>
-<operation name="traerDTPaquete">
-<input wsam:Action="http://webServices/WebServices/traerDTPaqueteRequest" message="tns:traerDTPaquete"></input>
-<output wsam:Action="http://webServices/WebServices/traerDTPaqueteResponse" message="tns:traerDTPaqueteResponse"></output>
-</operation>
-<operation name="traerDTActividad">
-<input wsam:Action="http://webServices/WebServices/traerDTActividadRequest" message="tns:traerDTActividad"></input>
-<output wsam:Action="http://webServices/WebServices/traerDTActividadResponse" message="tns:traerDTActividadResponse"></output>
-</operation>
 <operation name="traerUsuarioMod">
 <input wsam:Action="http://webServices/WebServices/traerUsuarioModRequest" message="tns:traerUsuarioMod"></input>
 <output wsam:Action="http://webServices/WebServices/traerUsuarioModResponse" message="tns:traerUsuarioModResponse"></output>
-</operation>
-<operation name="CompraDePaquete" parameterOrder="arg0 arg1 arg2 arg3">
-<input wsam:Action="http://webServices/WebServices/CompraDePaqueteRequest" message="tns:CompraDePaquete"></input>
-<output wsam:Action="http://webServices/WebServices/CompraDePaqueteResponse" message="tns:CompraDePaqueteResponse"></output>
-<fault message="tns:PaqueteSinActividad" name="PaqueteSinActividad" wsam:Action="http://webServices/WebServices/CompraDePaquete/Fault/PaqueteSinActividad"></fault>
-<fault message="tns:PaqueteYaComprado" name="PaqueteYaComprado" wsam:Action="http://webServices/WebServices/CompraDePaquete/Fault/PaqueteYaComprado"></fault>
-</operation>
-<operation name="traerCategoria">
-<input wsam:Action="http://webServices/WebServices/traerCategoriaRequest" message="tns:traerCategoria"></input>
-<output wsam:Action="http://webServices/WebServices/traerCategoriaResponse" message="tns:traerCategoriaResponse"></output>
-</operation>
-<operation name="listaDeptos">
-<input wsam:Action="http://webServices/WebServices/listaDeptosRequest" message="tns:listaDeptos"></input>
-<output wsam:Action="http://webServices/WebServices/listaDeptosResponse" message="tns:listaDeptosResponse"></output>
 </operation>
 <operation name="traerDTTurista">
 <input wsam:Action="http://webServices/WebServices/traerDTTuristaRequest" message="tns:traerDTTurista"></input>
@@ -465,96 +473,13 @@
 <input wsam:Action="http://webServices/WebServices/traerDTProveedorRequest" message="tns:traerDTProveedor"></input>
 <output wsam:Action="http://webServices/WebServices/traerDTProveedorResponse" message="tns:traerDTProveedorResponse"></output>
 </operation>
-<operation name="ModificarDatosDeUsuarioProveedor" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6">
-<input wsam:Action="http://webServices/WebServices/ModificarDatosDeUsuarioProveedorRequest" message="tns:ModificarDatosDeUsuarioProveedor"></input>
-<output wsam:Action="http://webServices/WebServices/ModificarDatosDeUsuarioProveedorResponse" message="tns:ModificarDatosDeUsuarioProveedorResponse"></output>
+<operation name="listaUsuarios">
+<input wsam:Action="http://webServices/WebServices/listaUsuariosRequest" message="tns:listaUsuarios"></input>
+<output wsam:Action="http://webServices/WebServices/listaUsuariosResponse" message="tns:listaUsuariosResponse"></output>
 </operation>
-<operation name="buscarImagenPorActividad">
-<input wsam:Action="http://webServices/WebServices/buscarImagenPorActividadRequest" message="tns:buscarImagenPorActividad"></input>
-<output wsam:Action="http://webServices/WebServices/buscarImagenPorActividadResponse" message="tns:buscarImagenPorActividadResponse"></output>
-</operation>
-<operation name="AltaDeImagenPerfil" parameterOrder="arg0 arg1 arg2">
-<input wsam:Action="http://webServices/WebServices/AltaDeImagenPerfilRequest" message="tns:AltaDeImagenPerfil"></input>
-<output wsam:Action="http://webServices/WebServices/AltaDeImagenPerfilResponse" message="tns:AltaDeImagenPerfilResponse"></output>
-<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/AltaDeImagenPerfil/Fault/PreexistingEntityException"></fault>
-</operation>
-<operation name="buscarImagenPorNickname">
-<input wsam:Action="http://webServices/WebServices/buscarImagenPorNicknameRequest" message="tns:buscarImagenPorNickname"></input>
-<output wsam:Action="http://webServices/WebServices/buscarImagenPorNicknameResponse" message="tns:buscarImagenPorNicknameResponse"></output>
-<fault message="tns:ImagenPorNicknameNoExite" name="ImagenPorNicknameNoExite" wsam:Action="http://webServices/WebServices/buscarImagenPorNickname/Fault/ImagenPorNicknameNoExite"></fault>
-</operation>
-<operation name="AltaDeUsuarioTurista" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6">
-<input wsam:Action="http://webServices/WebServices/AltaDeUsuarioTuristaRequest" message="tns:AltaDeUsuarioTurista"></input>
-<output wsam:Action="http://webServices/WebServices/AltaDeUsuarioTuristaResponse" message="tns:AltaDeUsuarioTuristaResponse"></output>
-<fault message="tns:NicknameExistenteException" name="NicknameExistenteException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioTurista/Fault/NicknameExistenteException"></fault>
-<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioTurista/Fault/PreexistingEntityException"></fault>
-<fault message="tns:CorreoElectronicoExistenteException" name="CorreoElectronicoExistenteException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioTurista/Fault/CorreoElectronicoExistenteException"></fault>
-</operation>
-<operation name="AltaDeUsuarioProveedor" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7">
-<input wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedorRequest" message="tns:AltaDeUsuarioProveedor"></input>
-<output wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedorResponse" message="tns:AltaDeUsuarioProveedorResponse"></output>
-<fault message="tns:CorreoElectronicoExistenteException" name="CorreoElectronicoExistenteException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedor/Fault/CorreoElectronicoExistenteException"></fault>
-<fault message="tns:NicknameExistenteException" name="NicknameExistenteException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedor/Fault/NicknameExistenteException"></fault>
-<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/AltaDeUsuarioProveedor/Fault/PreexistingEntityException"></fault>
-</operation>
-<operation name="ModificarImagenPerfil" parameterOrder="arg0 arg1 arg2">
-<input wsam:Action="http://webServices/WebServices/ModificarImagenPerfilRequest" message="tns:ModificarImagenPerfil"></input>
-<output wsam:Action="http://webServices/WebServices/ModificarImagenPerfilResponse" message="tns:ModificarImagenPerfilResponse"></output>
-<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/ModificarImagenPerfil/Fault/PreexistingEntityException"></fault>
-</operation>
-<operation name="ModificarDatosDeUsuarioTurista" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5">
-<input wsam:Action="http://webServices/WebServices/ModificarDatosDeUsuarioTuristaRequest" message="tns:ModificarDatosDeUsuarioTurista"></input>
-<output wsam:Action="http://webServices/WebServices/ModificarDatosDeUsuarioTuristaResponse" message="tns:ModificarDatosDeUsuarioTuristaResponse"></output>
-</operation>
-<operation name="subirImagenActividad" parameterOrder="arg0 arg1 arg2 arg3">
-<input wsam:Action="http://webServices/WebServices/subirImagenActividadRequest" message="tns:subirImagenActividad"></input>
-<output wsam:Action="http://webServices/WebServices/subirImagenActividadResponse" message="tns:subirImagenActividadResponse"></output>
-</operation>
-<operation name="listaDTDepartamentos">
-<input wsam:Action="http://webServices/WebServices/listaDTDepartamentosRequest" message="tns:listaDTDepartamentos"></input>
-<output wsam:Action="http://webServices/WebServices/listaDTDepartamentosResponse" message="tns:listaDTDepartamentosResponse"></output>
-</operation>
-<operation name="traerCompraDelTurista" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webServices/WebServices/traerCompraDelTuristaRequest" message="tns:traerCompraDelTurista"></input>
-<output wsam:Action="http://webServices/WebServices/traerCompraDelTuristaResponse" message="tns:traerCompraDelTuristaResponse"></output>
-</operation>
-<operation name="generarPDFInscripcionSalida" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webServices/WebServices/generarPDFInscripcionSalidaRequest" message="tns:generarPDFInscripcionSalida"></input>
-<output wsam:Action="http://webServices/WebServices/generarPDFInscripcionSalidaResponse" message="tns:generarPDFInscripcionSalidaResponse"></output>
-</operation>
-<operation name="InscripcionASalidaTuristica" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5">
-<input wsam:Action="http://webServices/WebServices/InscripcionASalidaTuristicaRequest" message="tns:InscripcionASalidaTuristica"></input>
-<output wsam:Action="http://webServices/WebServices/InscripcionASalidaTuristicaResponse" message="tns:InscripcionASalidaTuristicaResponse"></output>
-</operation>
-<operation name="AltaSalidaTuristica" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5">
-<input wsam:Action="http://webServices/WebServices/AltaSalidaTuristicaRequest" message="tns:AltaSalidaTuristica"></input>
-<output wsam:Action="http://webServices/WebServices/AltaSalidaTuristicaResponse" message="tns:AltaSalidaTuristicaResponse"></output>
-<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/AltaSalidaTuristica/Fault/PreexistingEntityException"></fault>
-<fault message="tns:ParseException" name="ParseException" wsam:Action="http://webServices/WebServices/AltaSalidaTuristica/Fault/ParseException"></fault>
-</operation>
-<operation name="ConsultaSalidaTuristica">
-<input wsam:Action="http://webServices/WebServices/ConsultaSalidaTuristicaRequest" message="tns:ConsultaSalidaTuristica"></input>
-<output wsam:Action="http://webServices/WebServices/ConsultaSalidaTuristicaResponse" message="tns:ConsultaSalidaTuristicaResponse"></output>
-</operation>
-<operation name="traerSalidasDelProveedor">
-<input wsam:Action="http://webServices/WebServices/traerSalidasDelProveedorRequest" message="tns:traerSalidasDelProveedor"></input>
-<output wsam:Action="http://webServices/WebServices/traerSalidasDelProveedorResponse" message="tns:traerSalidasDelProveedorResponse"></output>
-</operation>
-<operation name="cambiarEstadoActividad" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webServices/WebServices/cambiarEstadoActividadRequest" message="tns:cambiarEstadoActividad"></input>
-<output wsam:Action="http://webServices/WebServices/cambiarEstadoActividadResponse" message="tns:cambiarEstadoActividadResponse"></output>
-</operation>
-<operation name="traerInscSalidasDeTurista">
-<input wsam:Action="http://webServices/WebServices/traerInscSalidasDeTuristaRequest" message="tns:traerInscSalidasDeTurista"></input>
-<output wsam:Action="http://webServices/WebServices/traerInscSalidasDeTuristaResponse" message="tns:traerInscSalidasDeTuristaResponse"></output>
-</operation>
-<operation name="listaPaquetesComprados">
-<input wsam:Action="http://webServices/WebServices/listaPaquetesCompradosRequest" message="tns:listaPaquetesComprados"></input>
-<output wsam:Action="http://webServices/WebServices/listaPaquetesCompradosResponse" message="tns:listaPaquetesCompradosResponse"></output>
-</operation>
-<operation name="traerListaDTPaquetes">
-<input wsam:Action="http://webServices/WebServices/traerListaDTPaquetesRequest" message="tns:traerListaDTPaquetes"></input>
-<output wsam:Action="http://webServices/WebServices/traerListaDTPaquetesResponse" message="tns:traerListaDTPaquetesResponse"></output>
+<operation name="listaPaquetes">
+<input wsam:Action="http://webServices/WebServices/listaPaquetesRequest" message="tns:listaPaquetes"></input>
+<output wsam:Action="http://webServices/WebServices/listaPaquetesResponse" message="tns:listaPaquetesResponse"></output>
 </operation>
 <operation name="listaActividadesProveedorTodas">
 <input wsam:Action="http://webServices/WebServices/listaActividadesProveedorTodasRequest" message="tns:listaActividadesProveedorTodas"></input>
@@ -568,25 +493,21 @@
 <input wsam:Action="http://webServices/WebServices/salidaTuristicaLlenaRequest" message="tns:salidaTuristicaLlena"></input>
 <output wsam:Action="http://webServices/WebServices/salidaTuristicaLlenaResponse" message="tns:salidaTuristicaLlenaResponse"></output>
 </operation>
-<operation name="DesMarcarActividad" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webServices/WebServices/DesMarcarActividadRequest" message="tns:DesMarcarActividad"></input>
-<output wsam:Action="http://webServices/WebServices/DesMarcarActividadResponse" message="tns:DesMarcarActividadResponse"></output>
-</operation>
-<operation name="listaPaquetesCompradosVigentes">
-<input wsam:Action="http://webServices/WebServices/listaPaquetesCompradosVigentesRequest" message="tns:listaPaquetesCompradosVigentes"></input>
-<output wsam:Action="http://webServices/WebServices/listaPaquetesCompradosVigentesResponse" message="tns:listaPaquetesCompradosVigentesResponse"></output>
+<operation name="traerInscSalidasDeTurista">
+<input wsam:Action="http://webServices/WebServices/traerInscSalidasDeTuristaRequest" message="tns:traerInscSalidasDeTurista"></input>
+<output wsam:Action="http://webServices/WebServices/traerInscSalidasDeTuristaResponse" message="tns:traerInscSalidasDeTuristaResponse"></output>
 </operation>
 <operation name="listaActividadesDelPaquete">
 <input wsam:Action="http://webServices/WebServices/listaActividadesDelPaqueteRequest" message="tns:listaActividadesDelPaquete"></input>
 <output wsam:Action="http://webServices/WebServices/listaActividadesDelPaqueteResponse" message="tns:listaActividadesDelPaqueteResponse"></output>
 </operation>
-<operation name="actividadSinSalidaVigente">
-<input wsam:Action="http://webServices/WebServices/actividadSinSalidaVigenteRequest" message="tns:actividadSinSalidaVigente"></input>
-<output wsam:Action="http://webServices/WebServices/actividadSinSalidaVigenteResponse" message="tns:actividadSinSalidaVigenteResponse"></output>
+<operation name="traerCompraDelTurista" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webServices/WebServices/traerCompraDelTuristaRequest" message="tns:traerCompraDelTurista"></input>
+<output wsam:Action="http://webServices/WebServices/traerCompraDelTuristaResponse" message="tns:traerCompraDelTuristaResponse"></output>
 </operation>
-<operation name="listaPaquetesDeActividad">
-<input wsam:Action="http://webServices/WebServices/listaPaquetesDeActividadRequest" message="tns:listaPaquetesDeActividad"></input>
-<output wsam:Action="http://webServices/WebServices/listaPaquetesDeActividadResponse" message="tns:listaPaquetesDeActividadResponse"></output>
+<operation name="InscripcionASalidaTuristica" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5">
+<input wsam:Action="http://webServices/WebServices/InscripcionASalidaTuristicaRequest" message="tns:InscripcionASalidaTuristica"></input>
+<output wsam:Action="http://webServices/WebServices/InscripcionASalidaTuristicaResponse" message="tns:InscripcionASalidaTuristicaResponse"></output>
 </operation>
 <operation name="devolverTipoUsuario">
 <input wsam:Action="http://webServices/WebServices/devolverTipoUsuarioRequest" message="tns:devolverTipoUsuario"></input>
@@ -596,29 +517,118 @@
 <input wsam:Action="http://webServices/WebServices/listaActividadesConfirmadasRequest" message="tns:listaActividadesConfirmadas"></input>
 <output wsam:Action="http://webServices/WebServices/listaActividadesConfirmadasResponse" message="tns:listaActividadesConfirmadasResponse"></output>
 </operation>
-<operation name="marcarActividadComoFavorita" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webServices/WebServices/marcarActividadComoFavoritaRequest" message="tns:marcarActividadComoFavorita"></input>
-<output wsam:Action="http://webServices/WebServices/marcarActividadComoFavoritaResponse" message="tns:marcarActividadComoFavoritaResponse"></output>
+<operation name="actividadSinSalidaVigente">
+<input wsam:Action="http://webServices/WebServices/actividadSinSalidaVigenteRequest" message="tns:actividadSinSalidaVigente"></input>
+<output wsam:Action="http://webServices/WebServices/actividadSinSalidaVigenteResponse" message="tns:actividadSinSalidaVigenteResponse"></output>
 </operation>
-<operation name="traerCategoriasActividad">
-<input wsam:Action="http://webServices/WebServices/traerCategoriasActividadRequest" message="tns:traerCategoriasActividad"></input>
-<output wsam:Action="http://webServices/WebServices/traerCategoriasActividadResponse" message="tns:traerCategoriasActividadResponse"></output>
+<operation name="DesMarcarActividad" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webServices/WebServices/DesMarcarActividadRequest" message="tns:DesMarcarActividad"></input>
+<output wsam:Action="http://webServices/WebServices/DesMarcarActividadResponse" message="tns:DesMarcarActividadResponse"></output>
 </operation>
 <operation name="marcarUsuarioComoFavorita" parameterOrder="arg0 arg1">
 <input wsam:Action="http://webServices/WebServices/marcarUsuarioComoFavoritaRequest" message="tns:marcarUsuarioComoFavorita"></input>
 <output wsam:Action="http://webServices/WebServices/marcarUsuarioComoFavoritaResponse" message="tns:marcarUsuarioComoFavoritaResponse"></output>
 </operation>
-<operation name="validarNickname">
-<input wsam:Action="http://webServices/WebServices/validarNicknameRequest" message="tns:validarNickname"></input>
-<output wsam:Action="http://webServices/WebServices/validarNicknameResponse" message="tns:validarNicknameResponse"></output>
+<operation name="listaDTDepartamentos">
+<input wsam:Action="http://webServices/WebServices/listaDTDepartamentosRequest" message="tns:listaDTDepartamentos"></input>
+<output wsam:Action="http://webServices/WebServices/listaDTDepartamentosResponse" message="tns:listaDTDepartamentosResponse"></output>
+</operation>
+<operation name="marcarActividadComoFavorita" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webServices/WebServices/marcarActividadComoFavoritaRequest" message="tns:marcarActividadComoFavorita"></input>
+<output wsam:Action="http://webServices/WebServices/marcarActividadComoFavoritaResponse" message="tns:marcarActividadComoFavoritaResponse"></output>
+</operation>
+<operation name="traerListaDTPaquetes">
+<input wsam:Action="http://webServices/WebServices/traerListaDTPaquetesRequest" message="tns:traerListaDTPaquetes"></input>
+<output wsam:Action="http://webServices/WebServices/traerListaDTPaquetesResponse" message="tns:traerListaDTPaquetesResponse"></output>
+</operation>
+<operation name="listaPaquetesComprados">
+<input wsam:Action="http://webServices/WebServices/listaPaquetesCompradosRequest" message="tns:listaPaquetesComprados"></input>
+<output wsam:Action="http://webServices/WebServices/listaPaquetesCompradosResponse" message="tns:listaPaquetesCompradosResponse"></output>
+</operation>
+<operation name="listaPaquetesCompradosVigentes">
+<input wsam:Action="http://webServices/WebServices/listaPaquetesCompradosVigentesRequest" message="tns:listaPaquetesCompradosVigentes"></input>
+<output wsam:Action="http://webServices/WebServices/listaPaquetesCompradosVigentesResponse" message="tns:listaPaquetesCompradosVigentesResponse"></output>
+</operation>
+<operation name="subirImagenActividad" parameterOrder="arg0 arg1 arg2 arg3">
+<input wsam:Action="http://webServices/WebServices/subirImagenActividadRequest" message="tns:subirImagenActividad"></input>
+<output wsam:Action="http://webServices/WebServices/subirImagenActividadResponse" message="tns:subirImagenActividadResponse"></output>
+</operation>
+<operation name="ModificarDatosDeUsuarioTurista" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5">
+<input wsam:Action="http://webServices/WebServices/ModificarDatosDeUsuarioTuristaRequest" message="tns:ModificarDatosDeUsuarioTurista"></input>
+<output wsam:Action="http://webServices/WebServices/ModificarDatosDeUsuarioTuristaResponse" message="tns:ModificarDatosDeUsuarioTuristaResponse"></output>
+</operation>
+<operation name="cambiarEstadoActividad" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webServices/WebServices/cambiarEstadoActividadRequest" message="tns:cambiarEstadoActividad"></input>
+<output wsam:Action="http://webServices/WebServices/cambiarEstadoActividadResponse" message="tns:cambiarEstadoActividadResponse"></output>
+</operation>
+<operation name="traerCategoriasActividad">
+<input wsam:Action="http://webServices/WebServices/traerCategoriasActividadRequest" message="tns:traerCategoriasActividad"></input>
+<output wsam:Action="http://webServices/WebServices/traerCategoriasActividadResponse" message="tns:traerCategoriasActividadResponse"></output>
+</operation>
+<operation name="ConsultaSalidaTuristica">
+<input wsam:Action="http://webServices/WebServices/ConsultaSalidaTuristicaRequest" message="tns:ConsultaSalidaTuristica"></input>
+<output wsam:Action="http://webServices/WebServices/ConsultaSalidaTuristicaResponse" message="tns:ConsultaSalidaTuristicaResponse"></output>
+</operation>
+<operation name="ModificarDatosDeUsuarioProveedor" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6">
+<input wsam:Action="http://webServices/WebServices/ModificarDatosDeUsuarioProveedorRequest" message="tns:ModificarDatosDeUsuarioProveedor"></input>
+<output wsam:Action="http://webServices/WebServices/ModificarDatosDeUsuarioProveedorResponse" message="tns:ModificarDatosDeUsuarioProveedorResponse"></output>
+</operation>
+<operation name="AltaSalidaTuristica" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5">
+<input wsam:Action="http://webServices/WebServices/AltaSalidaTuristicaRequest" message="tns:AltaSalidaTuristica"></input>
+<output wsam:Action="http://webServices/WebServices/AltaSalidaTuristicaResponse" message="tns:AltaSalidaTuristicaResponse"></output>
+<fault message="tns:PreexistingEntityException" name="PreexistingEntityException" wsam:Action="http://webServices/WebServices/AltaSalidaTuristica/Fault/PreexistingEntityException"></fault>
+<fault message="tns:ParseException" name="ParseException" wsam:Action="http://webServices/WebServices/AltaSalidaTuristica/Fault/ParseException"></fault>
+</operation>
+<operation name="listaPaquetesDeActividad">
+<input wsam:Action="http://webServices/WebServices/listaPaquetesDeActividadRequest" message="tns:listaPaquetesDeActividad"></input>
+<output wsam:Action="http://webServices/WebServices/listaPaquetesDeActividadResponse" message="tns:listaPaquetesDeActividadResponse"></output>
+</operation>
+<operation name="traerSalidasDelProveedor">
+<input wsam:Action="http://webServices/WebServices/traerSalidasDelProveedorRequest" message="tns:traerSalidasDelProveedor"></input>
+<output wsam:Action="http://webServices/WebServices/traerSalidasDelProveedorResponse" message="tns:traerSalidasDelProveedorResponse"></output>
+</operation>
+<operation name="generarPDFInscripcionSalida" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webServices/WebServices/generarPDFInscripcionSalidaRequest" message="tns:generarPDFInscripcionSalida"></input>
+<output wsam:Action="http://webServices/WebServices/generarPDFInscripcionSalidaResponse" message="tns:generarPDFInscripcionSalidaResponse"></output>
+</operation>
+<operation name="traerImagenActividad">
+<input wsam:Action="http://webServices/WebServices/traerImagenActividadRequest" message="tns:traerImagenActividad"></input>
+<output wsam:Action="http://webServices/WebServices/traerImagenActividadResponse" message="tns:traerImagenActividadResponse"></output>
+</operation>
+<operation name="nuevaCantTurista" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webServices/WebServices/nuevaCantTuristaRequest" message="tns:nuevaCantTurista"></input>
+<output wsam:Action="http://webServices/WebServices/nuevaCantTuristaResponse" message="tns:nuevaCantTuristaResponse"></output>
+<fault message="tns:NoExisteCompra" name="NoExisteCompra" wsam:Action="http://webServices/WebServices/nuevaCantTurista/Fault/NoExisteCompra"></fault>
+</operation>
+<operation name="traerDTActividad">
+<input wsam:Action="http://webServices/WebServices/traerDTActividadRequest" message="tns:traerDTActividad"></input>
+<output wsam:Action="http://webServices/WebServices/traerDTActividadResponse" message="tns:traerDTActividadResponse"></output>
+</operation>
+<operation name="traerDTPaquete">
+<input wsam:Action="http://webServices/WebServices/traerDTPaqueteRequest" message="tns:traerDTPaquete"></input>
+<output wsam:Action="http://webServices/WebServices/traerDTPaqueteResponse" message="tns:traerDTPaqueteResponse"></output>
 </operation>
 <operation name="validarCorreo">
 <input wsam:Action="http://webServices/WebServices/validarCorreoRequest" message="tns:validarCorreo"></input>
 <output wsam:Action="http://webServices/WebServices/validarCorreoResponse" message="tns:validarCorreoResponse"></output>
 </operation>
+<operation name="traerCategoria">
+<input wsam:Action="http://webServices/WebServices/traerCategoriaRequest" message="tns:traerCategoria"></input>
+<output wsam:Action="http://webServices/WebServices/traerCategoriaResponse" message="tns:traerCategoriaResponse"></output>
+</operation>
+<operation name="CompraDePaquete" parameterOrder="arg0 arg1 arg2 arg3">
+<input wsam:Action="http://webServices/WebServices/CompraDePaqueteRequest" message="tns:CompraDePaquete"></input>
+<output wsam:Action="http://webServices/WebServices/CompraDePaqueteResponse" message="tns:CompraDePaqueteResponse"></output>
+<fault message="tns:PaqueteSinActividad" name="PaqueteSinActividad" wsam:Action="http://webServices/WebServices/CompraDePaquete/Fault/PaqueteSinActividad"></fault>
+<fault message="tns:PaqueteYaComprado" name="PaqueteYaComprado" wsam:Action="http://webServices/WebServices/CompraDePaquete/Fault/PaqueteYaComprado"></fault>
+</operation>
 <operation name="traerDTUsuario">
 <input wsam:Action="http://webServices/WebServices/traerDTUsuarioRequest" message="tns:traerDTUsuario"></input>
 <output wsam:Action="http://webServices/WebServices/traerDTUsuarioResponse" message="tns:traerDTUsuarioResponse"></output>
+</operation>
+<operation name="validarNickname">
+<input wsam:Action="http://webServices/WebServices/validarNicknameRequest" message="tns:validarNickname"></input>
+<output wsam:Action="http://webServices/WebServices/validarNicknameResponse" message="tns:validarNicknameResponse"></output>
 </operation>
 <operation name="desMarcarUsuarioFavorito" parameterOrder="arg0 arg1">
 <input wsam:Action="http://webServices/WebServices/desMarcarUsuarioFavoritoRequest" message="tns:desMarcarUsuarioFavorito"></input>
@@ -627,111 +637,6 @@
 </portType>
 <binding name="WebServicesPortBinding" type="tns:WebServices">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="nuevaCantTurista">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-<fault name="NoExisteCompra">
-<soap:fault name="NoExisteCompra" use="literal"></soap:fault>
-</fault>
-</operation>
-<operation name="listaActividadesTuristicasPorCategoriaConfirmadas">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="encontraSalidasTuristicasDeActividad">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="turistaYaInscriptoSalidaTuristica">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="listaActividadesProveedorConfirmadas">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="listaActividadesConfirmadasDepartamento">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="listaActividadesTuristicasConfirmadas">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="traerActividadesFavoritasDelTurista">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="listaPaquetes">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="listaUsuarios">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="guardarActividad">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-<fault name="PreexistingEntityException">
-<soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
-</fault>
-</operation>
 <operation name="traerCategorias">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -740,114 +645,6 @@
 <output>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
-</operation>
-<operation name="traerDTPaquete">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="traerDTActividad">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="traerUsuarioMod">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="CompraDePaquete">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-<fault name="PaqueteSinActividad">
-<soap:fault name="PaqueteSinActividad" use="literal"></soap:fault>
-</fault>
-<fault name="PaqueteYaComprado">
-<soap:fault name="PaqueteYaComprado" use="literal"></soap:fault>
-</fault>
-</operation>
-<operation name="traerCategoria">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="listaDeptos">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="traerDTTurista">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="traerDTProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="ModificarDatosDeUsuarioProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="buscarImagenPorActividad">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="AltaDeImagenPerfil">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-<fault name="PreexistingEntityException">
-<soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
-</fault>
 </operation>
 <operation name="buscarImagenPorNickname">
 <soap:operation soapAction=""></soap:operation>
@@ -859,24 +656,6 @@
 </output>
 <fault name="ImagenPorNicknameNoExite">
 <soap:fault name="ImagenPorNicknameNoExite" use="literal"></soap:fault>
-</fault>
-</operation>
-<operation name="AltaDeUsuarioTurista">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-<fault name="NicknameExistenteException">
-<soap:fault name="NicknameExistenteException" use="literal"></soap:fault>
-</fault>
-<fault name="PreexistingEntityException">
-<soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
-</fault>
-<fault name="CorreoElectronicoExistenteException">
-<soap:fault name="CorreoElectronicoExistenteException" use="literal"></soap:fault>
 </fault>
 </operation>
 <operation name="AltaDeUsuarioProveedor">
@@ -897,6 +676,15 @@
 <soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
 </fault>
 </operation>
+<operation name="buscarImagenPorActividad">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
 <operation name="ModificarImagenPerfil">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -909,61 +697,7 @@
 <soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="ModificarDatosDeUsuarioTurista">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="subirImagenActividad">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="listaDTDepartamentos">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="traerCompraDelTurista">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="generarPDFInscripcionSalida">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="InscripcionASalidaTuristica">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="AltaSalidaTuristica">
+<operation name="AltaDeImagenPerfil">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -974,11 +708,26 @@
 <fault name="PreexistingEntityException">
 <soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
 </fault>
-<fault name="ParseException">
-<soap:fault name="ParseException" use="literal"></soap:fault>
+</operation>
+<operation name="AltaDeUsuarioTurista">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+<fault name="NicknameExistenteException">
+<soap:fault name="NicknameExistenteException" use="literal"></soap:fault>
+</fault>
+<fault name="PreexistingEntityException">
+<soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
+</fault>
+<fault name="CorreoElectronicoExistenteException">
+<soap:fault name="CorreoElectronicoExistenteException" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="ConsultaSalidaTuristica">
+<operation name="listaActividadesTuristicasPorCategoriaConfirmadas">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -987,7 +736,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="traerSalidasDelProveedor">
+<operation name="encontraSalidasTuristicasDeActividad">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -996,7 +745,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="cambiarEstadoActividad">
+<operation name="listaActividadesTuristicasConfirmadas">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1005,7 +754,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="traerInscSalidasDeTurista">
+<operation name="turistaYaInscriptoSalidaTuristica">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1014,7 +763,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="listaPaquetesComprados">
+<operation name="traerActividadesFavoritasDelTurista">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1023,7 +772,82 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="traerListaDTPaquetes">
+<operation name="listaActividadesConfirmadasDepartamento">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="listaActividadesProveedorConfirmadas">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="listaDeptos">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="guardarActividad">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+<fault name="PreexistingEntityException">
+<soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="traerUsuarioMod">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="traerDTTurista">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="traerDTProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="listaUsuarios">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="listaPaquetes">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1059,16 +883,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="DesMarcarActividad">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webServices/"></soap:body>
-</output>
-</operation>
-<operation name="listaPaquetesCompradosVigentes">
+<operation name="traerInscSalidasDeTurista">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1086,7 +901,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="actividadSinSalidaVigente">
+<operation name="traerCompraDelTurista">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1095,7 +910,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="listaPaquetesDeActividad">
+<operation name="InscripcionASalidaTuristica">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1122,7 +937,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="marcarActividadComoFavorita">
+<operation name="actividadSinSalidaVigente">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1131,7 +946,7 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="traerCategoriasActividad">
+<operation name="DesMarcarActividad">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1149,7 +964,178 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
-<operation name="validarNickname">
+<operation name="listaDTDepartamentos">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="marcarActividadComoFavorita">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="traerListaDTPaquetes">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="listaPaquetesComprados">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="listaPaquetesCompradosVigentes">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="subirImagenActividad">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="ModificarDatosDeUsuarioTurista">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="cambiarEstadoActividad">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="traerCategoriasActividad">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="ConsultaSalidaTuristica">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="ModificarDatosDeUsuarioProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="AltaSalidaTuristica">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+<fault name="PreexistingEntityException">
+<soap:fault name="PreexistingEntityException" use="literal"></soap:fault>
+</fault>
+<fault name="ParseException">
+<soap:fault name="ParseException" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="listaPaquetesDeActividad">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="traerSalidasDelProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="generarPDFInscripcionSalida">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="traerImagenActividad">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="nuevaCantTurista">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+<fault name="NoExisteCompra">
+<soap:fault name="NoExisteCompra" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="traerDTActividad">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="traerDTPaquete">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
@@ -1167,7 +1153,40 @@
 <soap:body use="literal" namespace="http://webServices/"></soap:body>
 </output>
 </operation>
+<operation name="traerCategoria">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="CompraDePaquete">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+<fault name="PaqueteSinActividad">
+<soap:fault name="PaqueteSinActividad" use="literal"></soap:fault>
+</fault>
+<fault name="PaqueteYaComprado">
+<soap:fault name="PaqueteYaComprado" use="literal"></soap:fault>
+</fault>
+</operation>
 <operation name="traerDTUsuario">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webServices/"></soap:body>
+</output>
+</operation>
+<operation name="validarNickname">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webServices/"></soap:body>

@@ -221,7 +221,17 @@ control.AltaDeImagenActividad("mryhyr5f.jpg",  "Degusta Octubre", "https://www.y
 control.AltaDeImagenActividad("yzz6b7et.jpeg",  "Degusta Noviembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
 control.AltaDeImagenActividad("mv7etjx2.jpg",  "Tour Colonia del Sacramento 30-10", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
 control.AltaDeImagenActividad("3vwzthcr.jpg",  "Cabalgata Extrema", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0");
-            
+control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo 1", "" );
+control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo 2", "" );
+control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo 3", "" );
+control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo 4", "" );
+control.AltaDeImagenActividad("sinImagen.png",  "Cabalgata 1", "" );
+control.AltaDeImagenActividad("sinImagen.png",  "Cabalgata 2", "" );
+control.AltaDeImagenActividad("sinImagen.png",  "Teatro con Sabores 3", "" );
+control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo en el Real 1", "" );
+
+
+
             
             
         } catch (PreexistingEntityException ex) {

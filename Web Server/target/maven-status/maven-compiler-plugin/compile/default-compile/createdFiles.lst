@@ -9,6 +9,7 @@ WebServices\CorreoElectronicoExistenteException.class
 WebServices\DtUsuario.class
 Servlets\exceptions\IllegalOrphanException.class
 WebServices\ImagenPorNicknameNoExite_Exception.class
+Servlets\SvMostrarImagenActividad.class
 Servlets\SvValidarCorreo.class
 WebServices\ListaDTUsuario.class
 com\turismouy\pap___lab\JAXRSConfiguration.class

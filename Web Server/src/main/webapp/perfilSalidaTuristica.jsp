@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="WebServices.DtSalidaTuristica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,9 +7,10 @@
 <html>
     <%
         DtSalidaTuristica salida = (DtSalidaTuristica) request.getSession().getAttribute("salida");//usuario del que se muestra la info
-        String rutaImagenPerfil = (String) request.getSession().getAttribute("imagen");
+        //String rutaImagenPerfil = (String) request.getSession().getAttribute("imagen");
+        String nomSalida = salida.getNombre();
+        String nomSalidaCodificado = URLEncoder.encode(nomSalida, "UTF-8");
         String usuario = (String) request.getSession().getAttribute("usuario");
-        //DTUsuario usu = (DTUsuario) request.getSession().getAttribute("usu");
         String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
 
     %>
@@ -63,7 +65,6 @@
                 <li><a href="inscripcionSalida.jsp">Inscripcion a Salida Turistica</a></li> <!-- Turista -->
                 <li><a href="consultaPaqueteActividadesTuristicas.jsp">Consulta Paquete Actividad Turistica</a></li> <!-- Visitante, Proveedor, Turista -->
                 <li><a href="compraPaquete.jsp?usuario=<%= usuario%>&tipoUsuario=<%= tipoUsuario%>">Comprar Paquete</a></li>  <!-- Turista -->
-                <li><a href="inscripcionSalida.jsp">Inscripcion Salida Turistica</a></li> <!-- Turista -->
                     <%
                     } else {
                     %>
@@ -86,7 +87,7 @@
         <main>
 
             <div class="actividad">
-                <img src="<%= rutaImagenPerfil%>" alt="alt" style="width: 100px; height: 100px;" />
+                <img src=SvMostrarImagenActividad?nombreActividad=<%=nomSalidaCodificado%> alt="alt" style="width: 100px; height: 100px;" />
                 <h3><%=salida.getNombre()%></h3>
                 <p>Cantidad máxima de turistas <%=salida.getCantMax()%></p>
                 <p>Fecha de la Salida <%=salida.getFSalida()%></p>
