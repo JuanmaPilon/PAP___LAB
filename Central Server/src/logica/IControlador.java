@@ -113,4 +113,7 @@ public abstract byte [] traerImagenActividad(String nombreActividad);
 
 public abstract void subirImagenPerfil(byte[] imagen, String nombreArchivo, String nickname);
  public abstract byte [] traerImagenPerfil(String nickname) ;
+ 
+ public abstract void modificarImagenPerfil(byte[] imagen, String nombreArchivo, String nickname);
+ 
 }

@@ -8,9 +8,9 @@
     <head>
 
         <%
-            String usuario = (String) request.getSession().getAttribute("usuario");
+            String usuario = (String) request.getSession().getAttribute("usuario");//nickname usuario logueado
             DtUsuario usuYo = (DtUsuario) request.getSession().getAttribute("usu");
-            DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usuPerfil");
+            DtUsuario usu = (DtUsuario) request.getSession().getAttribute("usuPerfil");//usuario consultado 
             String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
             String tipoUsuarioConsultado = (String) request.getSession().getAttribute("tipoUsuarioConsultado");
             List<String> usuariosFavoritos = (List<String>) request.getSession().getAttribute("usuariosFavoritos");
@@ -88,11 +88,7 @@
 
                 </ul>
             </aside>
-            <%
-                String rutaImg = (String) request.getSession().getAttribute("imagen");
 
-
-            %>
 
             <h1>Usuario: <%=usu.getNombre()%></h1>
             <%
@@ -161,7 +157,7 @@
 
                     <div class="tab-content">
                         <div id="tab1" class="tab active">
-                            <img src="<%= rutaImg%>" alt="alt" style="width: 100px; height: 100px;" />
+                            <img src="SvMostrarImagenPerfil?nickname=<%=usu.getNickname()%>" alt="alt" style="width: 100px; height: 100px;" />
                             <p><b>Nick:</b> <%=usu.getNickname()%></p>
                             <p><b>Nombre:</b> <%=usu.getNombre()%></p>
                             <p><b>Apellido:</b> <%=usu.getApellido()%></p>

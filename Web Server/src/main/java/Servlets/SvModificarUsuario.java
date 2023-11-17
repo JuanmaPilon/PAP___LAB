@@ -9,8 +9,10 @@ import WebServices.DtProveedor;
 import WebServices.DtTurista;
 import WebServices.WebServices;
 import WebServices.WebServicesService;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.nio.file.Files;
@@ -29,7 +31,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-
 @WebServlet(name = "SvModificarUsuario", urlPatterns = {"/SvModificarUsuario"})
 @MultipartConfig(
         maxFileSize = 1024 * 1024, // Tamaño máximo del archivo en bytes (ejemplo: 1 MB)
@@ -46,8 +47,7 @@ public class SvModificarUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-
+ 
             //llamado a wsdl
             WebServicesService service = new WebServicesService();
             WebServices port = service.getWebServicesPort();
@@ -69,26 +69,11 @@ public class SvModificarUsuario extends HttpServlet {
                 misesion.setAttribute("infoProveedor", infoProveedor);
             }
 
-            try {
-                DtImagenPerfil imagenPerfil = port.buscarImagenPorNickname(usuario);
-                String rutaImagen = imagenPerfil.getRuta();
+            response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
+            
+            //para ARREGLARRRRR
 
-                HttpSession misesion = request.getSession();
-                misesion.setAttribute("tipoUsuario", tipoUsuario);
-                misesion.setAttribute("rutaImagen", rutaImagen);
-                response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
-            } catch (Exception e) {
-                String rutaImagen = "";
-                HttpSession misesion = request.getSession();
-                misesion.setAttribute("tipoUsuario", tipoUsuario);
-                misesion.setAttribute("rutaImagen", rutaImagen);
-                response.sendRedirect("modificarUsuario.jsp?usuario=" + usuario + "&tipoUsuario=" + tipoUsuario);
-            }
-
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código de respuesta HTTP 500 (error interno del servidor)
-            response.getWriter().write("Se ha producido un error doGet");
-        }
+  
     }
 
     @Override
@@ -117,51 +102,38 @@ public class SvModificarUsuario extends HttpServlet {
 
             Part archivo = request.getPart("file");
             String nombreArchivo = null;
-
+            //TURISTA MOD
             if ("turista".equals(tipoUsuario)) {
 
                 String nacionalidad = request.getParameter("nacionalidad");
 
                 port.modificarDatosDeUsuarioTurista(nickname, nombre, apellido, correo, fechaNacimientoString, nacionalidad);
-                try {
-                    if (archivo.getSize() > 0) {
-                        nombreArchivo = archivo.getSubmittedFileName();
-                        ServletContext context = request.getServletContext();
-                        String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
-                        // Copiar el archivo a la ubicación relativa
-                        Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
-                        String rutaRelativa = "images" + File.separator + nombreArchivo;
-                        port.modificarImagenPerfil(nombreArchivo, rutaRelativa, nickname);
-                    }
-                } catch (Exception ex) {
-                    errorMessage = "Imagen ya en uso por otro usuario. Se modifico el resto de atributos.";
-                    request.setAttribute("errorMessage", errorMessage);
-                    request.getRequestDispatcher("modificarUsuario.jsp").forward(request, response);
-                }
+                if (archivo.getSize() > 0) {
+                    nombreArchivo = archivo.getSubmittedFileName();
+                    ServletContext context = request.getServletContext();
+
+                    byte[] bytesImagen = getBytesDesdePart(archivo);
+
+                    port.modificarImagenPerfil(bytesImagen, nombreArchivo, nickname);
+
+                } 
+            //PROVEEDOR MOD
             } else {
-
                 String descripcion = request.getParameter("descripcion");
                 String link = request.getParameter("sitioWeb");
                 port.modificarDatosDeUsuarioProveedor(nickname, nombre, apellido, correo, fechaNacimientoString, descripcion, link);
 
-                try {
-                    if (archivo.getSize() > 0) {
-                        nombreArchivo = archivo.getSubmittedFileName();
-                        ServletContext context = request.getServletContext();
-                        String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
+                if (archivo.getSize() > 0) {
+                    nombreArchivo = archivo.getSubmittedFileName();
+                    ServletContext context = request.getServletContext();
 
-                        // Copiar el archivo a la ubicación relativa
-                        Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
-                        String rutaRelativa = "images" + File.separator + nombreArchivo;
+                    byte[] bytesImagen = getBytesDesdePart(archivo);
 
-                        port.modificarImagenPerfil(nombreArchivo, rutaRelativa, nickname);
-                    }
-                } catch (Exception ex) {
-                    errorMessage = "Imagen ya en uso por otro usuario. Se modifico el resto de atributos.";
-                    request.setAttribute("errorMessage", errorMessage);
-                    request.getRequestDispatcher("modificarUsuario.jsp").forward(request, response);
+                    port.modificarImagenPerfil(bytesImagen, nombreArchivo, nickname);
+
                 }
+
             }
 
         } catch (ParseException e) {
@@ -183,4 +155,17 @@ public class SvModificarUsuario extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private byte[] getBytesDesdePart(Part part) throws IOException {
+        InputStream inputStream = part.getInputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        return outputStream.toByteArray();
+    }
 }

@@ -90,7 +90,7 @@ public class Controlador implements IControlador {
 
         try {
             ImagenPerfil imagen = controlPersis.buscarImagen(nickname);
-            DTImagenPerfil dtImagen = new DTImagenPerfil(imagen.getNombre(),  imagen.getNicknameUsuario());
+            DTImagenPerfil dtImagen = new DTImagenPerfil(imagen.getNombre(), imagen.getNicknameUsuario());
             return dtImagen;
         } catch (Exception e) {
 
@@ -99,7 +99,7 @@ public class Controlador implements IControlador {
 
     }
 
-    public void ModificarImagenPerfil(String imagenNombre,  String nicknameUsuario) throws PreexistingEntityException {
+    public void ModificarImagenPerfil(String imagenNombre, String nicknameUsuario) throws PreexistingEntityException {
         ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, nicknameUsuario);
         controlPersis.modificarImagenPerfil(imagenPerfil);
     }
@@ -1294,7 +1294,7 @@ public class Controlador implements IControlador {
         }
 
     }
-    
+
     @Override
     public void subirImagenPerfil(byte[] imagen, String nombreArchivo, String nickname) {
         try {
@@ -1327,7 +1327,7 @@ public class Controlador implements IControlador {
         }
 
     }
-    
+
     @Override
     public byte[] traerImagenPerfil(String nickname) {
         try {
@@ -1355,6 +1355,46 @@ public class Controlador implements IControlador {
         } catch (IOException e) {
             e.printStackTrace();
             return new byte[0];
+        }
+
+    }
+
+    @Override
+    public void modificarImagenPerfil(byte[] imagen, String nombreArchivo, String nickname) {
+
+        try {
+            if (nombreArchivo.equals("usuarioSinFoto")) {
+                nombreArchivo = "usuarioSinFoto.png";
+                ImagenPerfil imagenPerfilNueva = new ImagenPerfil(nombreArchivo, nickname);
+                try {
+                    controlPersis.modificarImagenPerfil(imagenPerfilNueva);
+                } catch (PreexistingEntityException ex) {
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                ImagenPerfil imagenPerfilNueva = new ImagenPerfil(nombreArchivo, nickname);
+                try {
+                    controlPersis.modificarImagenPerfil(imagenPerfilNueva);
+                } catch (PreexistingEntityException ex) {
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                // Obtener el directorio de trabajo actual
+                String directorioTrabajo = System.getProperty("user.dir");
+
+                // Definir una carpeta para las imágenes dentro del directorio de trabajo
+                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+
+                // Crear la ruta completa del archivo de destialtno
+                String rutaArchivoDestino = carpetaImagenes + File.separator + nombreArchivo;
+
+                // Escribir los bytes en el archivo de destino
+                Files.write(FileSystems.getDefault().getPath(rutaArchivoDestino), imagen);
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

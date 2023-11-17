@@ -12,6 +12,7 @@ WebServices\ImagenPorNicknameNoExite_Exception.class
 Servlets\SvMostrarImagenActividad.class
 Servlets\SvValidarCorreo.class
 WebServices\ListaDTUsuario.class
+Servlets\SvMostrarImagenPerfil.class
 com\turismouy\pap___lab\JAXRSConfiguration.class
 WebServices\NoExisteCompra.class
 WebServices\ParseException.class

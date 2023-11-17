@@ -4,8 +4,10 @@ import WebServices.CorreoElectronicoExistenteException_Exception;
 import WebServices.PreexistingEntityException_Exception;
 import WebServices.WebServices;
 import WebServices.WebServicesService;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -23,7 +25,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
 
 @WebServlet(name = "SvTurista", urlPatterns = {"/SvTurista"})
 @MultipartConfig(
@@ -71,13 +72,11 @@ public class SvTurista extends HttpServlet {
                 String fechaFormateada = formatoSalida.format(fechaNacimientoDate);
                 fNacimiento = formatoSalida.parse(fechaFormateada);
 
-                
                 cal.setTime(fNacimiento);
             }
 
             Part archivo = request.getPart("file");
             String nombreArchivo = null;
-            String rutaImagenNueva = null;
 
             port.altaDeUsuarioTurista(nickname, nombre, apellido, contrasenia, correo, fechaNacimientoString, nacionalidad);
 
@@ -85,15 +84,11 @@ public class SvTurista extends HttpServlet {
                 nombreArchivo = archivo.getSubmittedFileName();
                 if (nombreArchivo != null && !nombreArchivo.isEmpty()) {
                     ServletContext context = request.getServletContext();
-                    String rutaCompleta = context.getRealPath("/images/") + File.separator + nombreArchivo;
 
-                    // Copiar el archivo a la ubicación relativa
-                    Files.copy(archivo.getInputStream(), Paths.get(rutaCompleta), StandardCopyOption.REPLACE_EXISTING);
-
-                    String rutaRelativa = "images" + File.separator + nombreArchivo;
+                    byte[] bytesImagen = getBytesDesdePart(archivo);
 
                     try {
-                        port.altaDeImagenPerfil(nombreArchivo, rutaRelativa, nombre);
+                        port.subirImagenPerfil(bytesImagen, nombreArchivo, nickname);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         String errorMessage = "Ya existe otro usuario con esa imagen, se ha dado de alta el usuario sin imagen";
@@ -101,9 +96,20 @@ public class SvTurista extends HttpServlet {
                         response.getWriter().write(alertScript);
 
                     }
+                }
+            } else {
+                try {
+                    byte[] imagenVacia = new byte[0];
+                    port.subirImagenPerfil(imagenVacia, "usuarioSinFoto", nickname);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    String errorMessage = "Error al cargar imagen perfil sin foto";
+                    String alertScript = "<script type='text/javascript'>alert('" + errorMessage + "'); window.location.href = 'login.jsp';</script>";
+                    response.getWriter().write(alertScript);
 
                 }
-            }
+
+            }//fin if
 
             response.sendRedirect("login.jsp");
         } catch (PreexistingEntityException_Exception ex) {
@@ -133,4 +139,17 @@ public class SvTurista extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private byte[] getBytesDesdePart(Part part) throws IOException {
+        InputStream inputStream = part.getInputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        return outputStream.toByteArray();
+    }
 }

@@ -1,3 +1,4 @@
+<%@page import="WebServices.DtUsuario"%>
 <%@page import="WebServices.DtProveedor"%>
 <%@page import="WebServices.DtTurista"%>
 <%@page import="java.util.Locale"%>
@@ -11,11 +12,11 @@
 <html>
     <head>      
         <%
-            String usuario = (String) request.getSession().getAttribute("usuario");
-            //DTUsuario usi = (DTUsuario) request.getSession().getAttribute("usu");
+            String usuario = (String) request.getSession().getAttribute("usuario");//nickname de usuario logueado
+            //DtUsuario usi = (DtUsuario) request.getSession().getAttribute("usu");
             String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
             String errorMensaje = (String) request.getAttribute("errorMensaje");
-            String rutaImagenPerfil = (String) request.getSession().getAttribute("rutaImagen");
+            //String rutaImagenPerfil = (String) request.getSession().getAttribute("rutaImagen");
         %>
         <meta charset="UTF-8">
         <link href="styles.css" rel="stylesheet">
@@ -90,7 +91,7 @@
 
 
 
-                <%                    if (tipoUsuario.equals("turista")) {
+                <% if (tipoUsuario.equals("turista")) {
                         DtTurista infoTurista = (DtTurista) request.getSession().getAttribute("infoTurista");
                         Date fNacimiento = null;
                         String fechaNacimientoString = infoTurista.getFNacimiento();
@@ -101,8 +102,8 @@
                         Date fechaNacimientoDate = formatoEntrada.parse(fechaNacimientoString);
                         String fechaFormateada = formatoSalida.format(fechaNacimientoDate);
                         fNacimiento = formatoSalida.parse(fechaFormateada);
-                        System.out.print("fNcimiento: " + fNacimiento);
-                        System.out.print("fechaFormateada " + fechaFormateada);
+                        //System.out.print("fNcimiento: " + fNacimiento);
+                        //System.out.print("fechaFormateada " + fechaFormateada);
                 %>   
                 <form action="SvModificarUsuario" method="POST" enctype="multipart/form-data">
 
@@ -189,7 +190,7 @@
                     }
                 %>
 
-                <img src="<%= rutaImagenPerfil%>" alt="Imagen de perfil">
+                <img src="SvMostrarImagenPerfil?nickname=<%=usuario%>" alt="Imagen de perfil">
 
 
             </main>

@@ -173,9 +173,9 @@ public class WebServices {
     }
 
     @WebMethod
-    public void AltaDeImagenPerfil(String imagenNombre,  String nicknameUsuario) throws PreexistingEntityException {
+    public void AltaDeImagenPerfil(String imagenNombre, String nicknameUsuario) throws PreexistingEntityException {
 
-        control.AltaDeImagenPerfil(imagenNombre,  nicknameUsuario);
+        control.AltaDeImagenPerfil(imagenNombre, nicknameUsuario);
     }
 
     @WebMethod
@@ -291,7 +291,6 @@ public class WebServices {
 //    public void AltaDeImagenActividad(String imagenNombre, String imagenRuta, String nombreActividad, String UrlVideo) throws PreexistingEntityException {
 //        control.AltaDeImagenActividad(imagenNombre, imagenRuta, nombreActividad, UrlVideo);
 //    }
-
     @WebMethod
     public ListaString listaDeptos() {
         ListaString result = new ListaString();
@@ -319,8 +318,8 @@ public class WebServices {
     }
 
     @WebMethod
-    public void ModificarImagenPerfil(String imagenNombre,  String nicknameUsuario) throws PreexistingEntityException {
-        control.ModificarImagenPerfil(imagenNombre,  nicknameUsuario);
+    public void ModificarImagenPerfil(String imagenNombre, String nicknameUsuario) throws PreexistingEntityException {
+        control.ModificarImagenPerfil(imagenNombre, nicknameUsuario);
 
     }
 
@@ -405,48 +404,45 @@ public class WebServices {
     public DTCompra traerCompraDelTurista(String nombreTurista, String nombrePaquete) {
         return control.traerCompraDelTurista(nombreTurista, nombrePaquete);
     }
- @WebMethod
-    public DTSalidaTuristica ConsultaSalidaTuristica(String nombreSalida){
-    return control.ConsultaSalidaTuristica(nombreSalida);
-    }
-    
+
     @WebMethod
-public void AltaSalidaTuristica(String nombre, int cantMax, String fAlta, String fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, ParseException {
-    System.out.println(" ****************** " + fSalida+ "*******************");
-    try {
-        // Formato de la cadena de fecha
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        LocalDateTime fechaHoraLocal = LocalDateTime.parse(fSalida, formatter);
-        Date fechaHoraDate = java.util.Date.from(fechaHoraLocal.atZone(java.time.ZoneId.systemDefault()).toInstant());
-        
-        System.out.println(" fechaHoraDate " + fechaHoraDate+ "*******************");
-
-  
-
-       
-
-        // Obtén la fecha actual
-        Date fechaHoy = new Date();
-
-        // Llama al método con los objetos de fecha adecuados
-        control.AltaSalidaTuristica(nombre, cantMax, fechaHoy, fechaHoraDate, lugar, nombreActividad);
-    } catch (Exception e) {
-        // Manejar la excepción si la cadena de fecha no puede ser parseada
-        e.printStackTrace();
-        System.out.println(" ******************AQUI*******************");
+    public DTSalidaTuristica ConsultaSalidaTuristica(String nombreSalida) {
+        return control.ConsultaSalidaTuristica(nombreSalida);
     }
-}
-    
+
     @WebMethod
-    public void subirImagenActividad(byte[] imagen, String nombreArchivo, String actividad, String UrlVideo){
+    public void AltaSalidaTuristica(String nombre, int cantMax, String fAlta, String fSalida, String lugar, String nombreActividad) throws PreexistingEntityException, ParseException {
+        System.out.println(" ****************** " + fSalida + "*******************");
+        try {
+            // Formato de la cadena de fecha
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            LocalDateTime fechaHoraLocal = LocalDateTime.parse(fSalida, formatter);
+            Date fechaHoraDate = java.util.Date.from(fechaHoraLocal.atZone(java.time.ZoneId.systemDefault()).toInstant());
+
+            System.out.println(" fechaHoraDate " + fechaHoraDate + "*******************");
+
+            // Obtén la fecha actual
+            Date fechaHoy = new Date();
+
+            // Llama al método con los objetos de fecha adecuados
+            control.AltaSalidaTuristica(nombre, cantMax, fechaHoy, fechaHoraDate, lugar, nombreActividad);
+        } catch (Exception e) {
+            // Manejar la excepción si la cadena de fecha no puede ser parseada
+            e.printStackTrace();
+            System.out.println(" ******************AQUI*******************");
+        }
+    }
+
+    @WebMethod
+    public void subirImagenActividad(byte[] imagen, String nombreArchivo, String actividad, String UrlVideo) {
         control.subirImagenActividad(imagen, nombreArchivo, actividad, UrlVideo);
     }
-    
-     @WebMethod 
-    public byte [] traerImagenActividad(String nombreActividad) {
-    	return control.traerImagenActividad(nombreActividad);
+
+    @WebMethod
+    public byte[] traerImagenActividad(String nombreActividad) {
+        return control.traerImagenActividad(nombreActividad);
     }
-    
+
     @WebMethod
     public void subirImagenPerfil(byte[] imagen, String nombreArchivo, String nickname) {
         control.subirImagenPerfil(imagen, nombreArchivo, nickname);
@@ -456,6 +452,10 @@ public void AltaSalidaTuristica(String nombre, int cantMax, String fAlta, String
     public byte[] traerImagenPerfil(String nickname) {
         return control.traerImagenPerfil(nickname);
     }
-    
-    
+
+    @WebMethod
+    public void modificarImagenPerfil(byte[] imagen, String nombreArchivo, String nickname) {
+        control.modificarImagenPerfil(imagen, nombreArchivo, nickname);
+    }
+
 }//finWS

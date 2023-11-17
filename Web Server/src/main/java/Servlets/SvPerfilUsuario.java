@@ -92,16 +92,16 @@ public class SvPerfilUsuario extends HttpServlet {
             misesion.setAttribute("nombresSalidas", nombresSalidasProveedor);
         }
 
-        DtImagenPerfil imagen;
-        try {
-            imagen = port.buscarImagenPorNickname(usuarioSeleccionado);
-
-            String imagenRuta = imagen.getRuta();
-            misesion.setAttribute("imagen", imagenRuta);
-        } catch (Exception ex) {
-            String imagenVacia = "images/usuarioSinFoto.png";
-            misesion.setAttribute("imagen", imagenVacia);
-        }
+//        DtImagenPerfil imagen;
+//        try {
+//            imagen = port.buscarImagenPorNickname(usuarioSeleccionado);
+//
+//            String imagenRuta = imagen.getRuta();
+//            misesion.setAttribute("imagen", imagenRuta);
+//        } catch (Exception ex) {
+//            String imagenVacia = "images/usuarioSinFoto.png";
+//            misesion.setAttribute("imagen", imagenVacia);
+//        }
         misesion.setAttribute("tipoUsuarioConsultado", tipoUsuarioConsultado);
         response.sendRedirect("perfilUsuario.jsp");
     }
