@@ -173,9 +173,9 @@ public class WebServices {
     }
 
     @WebMethod
-    public void AltaDeImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException {
+    public void AltaDeImagenPerfil(String imagenNombre,  String nicknameUsuario) throws PreexistingEntityException {
 
-        control.AltaDeImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
+        control.AltaDeImagenPerfil(imagenNombre,  nicknameUsuario);
     }
 
     @WebMethod
@@ -319,8 +319,8 @@ public class WebServices {
     }
 
     @WebMethod
-    public void ModificarImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException {
-        control.ModificarImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
+    public void ModificarImagenPerfil(String imagenNombre,  String nicknameUsuario) throws PreexistingEntityException {
+        control.ModificarImagenPerfil(imagenNombre,  nicknameUsuario);
 
     }
 
@@ -445,6 +445,16 @@ public void AltaSalidaTuristica(String nombre, int cantMax, String fAlta, String
      @WebMethod 
     public byte [] traerImagenActividad(String nombreActividad) {
     	return control.traerImagenActividad(nombreActividad);
+    }
+    
+    @WebMethod
+    public void subirImagenPerfil(byte[] imagen, String nombreArchivo, String nickname) {
+        control.subirImagenPerfil(imagen, nombreArchivo, nickname);
+    }
+
+    @WebMethod
+    public byte[] traerImagenPerfil(String nickname) {
+        return control.traerImagenPerfil(nickname);
     }
     
     

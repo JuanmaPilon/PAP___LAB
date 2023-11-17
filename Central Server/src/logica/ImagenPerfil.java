@@ -16,12 +16,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 @PrimaryKeyJoinColumn(name = "nombre")
 public class ImagenPerfil implements Serializable {
-    
-    
-    private String nombre; // Nombre como clave primaria
-    
-    private String ruta;
-    
+
+    private String nombre; 
+
     @Id
     private String nicknameUsuario;
 
@@ -31,9 +28,8 @@ public class ImagenPerfil implements Serializable {
     public ImagenPerfil() {
     }
     
-    public ImagenPerfil(String nombre, String ruta, String nicknameUsuario) {
+    public ImagenPerfil(String nombre, String nicknameUsuario) {
         this.nombre = nombre;
-        this.ruta = ruta;
         this.nicknameUsuario = nicknameUsuario;
     }
 
@@ -47,13 +43,6 @@ public class ImagenPerfil implements Serializable {
         this.nombre = nombre;
     }
     
-    public String getRuta() {
-        return ruta;
-    }
-
-    public void setRuta(String ruta) {
-        this.ruta = ruta;
-    }
     
     public String getNicknameUsuario() {
         return nicknameUsuario;

@@ -90,7 +90,7 @@ public class Controlador implements IControlador {
 
         try {
             ImagenPerfil imagen = controlPersis.buscarImagen(nickname);
-            DTImagenPerfil dtImagen = new DTImagenPerfil(imagen.getNombre(), imagen.getRuta(), imagen.getNicknameUsuario());
+            DTImagenPerfil dtImagen = new DTImagenPerfil(imagen.getNombre(),  imagen.getNicknameUsuario());
             return dtImagen;
         } catch (Exception e) {
 
@@ -99,15 +99,15 @@ public class Controlador implements IControlador {
 
     }
 
-    public void ModificarImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException {
-        ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
+    public void ModificarImagenPerfil(String imagenNombre,  String nicknameUsuario) throws PreexistingEntityException {
+        ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, nicknameUsuario);
         controlPersis.modificarImagenPerfil(imagenPerfil);
     }
 
     @Override
-    public void AltaDeImagenPerfil(String imagenNombre, String imagenRuta, String nicknameUsuario) throws PreexistingEntityException {
+    public void AltaDeImagenPerfil(String imagenNombre, String nicknameUsuario) throws PreexistingEntityException {
         try {
-            ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, imagenRuta, nicknameUsuario);
+            ImagenPerfil imagenPerfil = new ImagenPerfil(imagenNombre, nicknameUsuario);
             controlPersis.guardarImagenPerfil(imagenPerfil);
         } catch (PreexistingEntityException e) {
             throw new PreexistingEntityException("Imagen ya en uso por otro usuario");
@@ -1268,6 +1268,70 @@ public class Controlador implements IControlador {
     public byte[] traerImagenActividad(String nombreActividad) {
         try {
             imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
+
+            // Obtener el directorio de trabajo actual
+            String directorioTrabajo = System.getProperty("user.dir");
+
+            // Definir una carpeta para las imágenes dentro del directorio de trabajo
+            String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+
+            // Obtener la ruta completa del archivo de destino
+            String rutaArchivoImagen = carpetaImagenes + File.separator + imagen.getNombre();  // Ajusta la ruta según tu estructura
+
+            File img = new File(rutaArchivoImagen);
+
+            // Manejar el caso en que la imagen no existe
+            if (!img.exists()) {
+                return new byte[0];
+            }
+
+            Path path = Paths.get(rutaArchivoImagen);
+            return Files.readAllBytes(path);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new byte[0];
+        }
+
+    }
+    
+    @Override
+    public void subirImagenPerfil(byte[] imagen, String nombreArchivo, String nickname) {
+        try {
+            if (nombreArchivo.equals("usuarioSinFoto")) {
+                nombreArchivo = "usuarioSinFoto.png";
+
+                ImagenPerfil imagenPerfil = new ImagenPerfil(nombreArchivo, nickname);
+                controlPersis.guardarImagenPerfil(imagenPerfil);
+            } else {
+                ImagenPerfil imagenPerfil = new ImagenPerfil(nombreArchivo, nickname);
+                controlPersis.guardarImagenPerfil(imagenPerfil);
+
+                // Obtener el directorio de trabajo actual
+                String directorioTrabajo = System.getProperty("user.dir");
+
+                // Definir una carpeta para las imágenes dentro del directorio de trabajo
+                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+
+                // Crear la ruta completa del archivo de destialtno
+                String rutaArchivoDestino = carpetaImagenes + File.separator + nombreArchivo;
+
+                // Escribir los bytes en el archivo de destino
+                Files.write(FileSystems.getDefault().getPath(rutaArchivoDestino), imagen);
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    @Override
+    public byte[] traerImagenPerfil(String nickname) {
+        try {
+            ImagenPerfil imagen = controlPersis.buscarImagen(nickname);
 
             // Obtener el directorio de trabajo actual
             String directorioTrabajo = System.getProperty("user.dir");

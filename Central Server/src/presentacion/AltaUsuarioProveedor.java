@@ -278,7 +278,9 @@ public class AltaUsuarioProveedor extends javax.swing.JInternalFrame {
         
         if (!(imagenNombre.equals(""))){
             String imagenRutaRelativa = "images" + File.separator + imagenNombre ;
-            control.AltaDeImagenPerfil(imagenNombre,imagenRutaRelativa, nombreUsuario);
+            control.AltaDeImagenPerfil(imagenNombre, nickname);
+        } else {
+            control.AltaDeImagenPerfil("usuarioSinFoto.png", nickname);
         }
         JOptionPane.showMessageDialog(null, "Alta realizada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }catch (ConstraseniasDistintas e) {

@@ -16,8 +16,8 @@ import persistencia.exceptions.PreexistingEntityException;
 
 public interface IControlador {
 public abstract DTImagenActividad buscarImagenPorActividad(String nombreActividad);
-public abstract void ModificarImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException;
-public abstract void AltaDeImagenPerfil(String imagenNombre,String imagenRuta, String nicknameUsuario) throws PreexistingEntityException;
+public abstract void ModificarImagenPerfil(String imagenNombre, String nicknameUsuario) throws PreexistingEntityException;
+public abstract void AltaDeImagenPerfil(String imagenNombre, String nicknameUsuario) throws PreexistingEntityException;
 public abstract DTImagenPerfil buscarImagenPorNickname(String nickname) throws ImagenPorNicknameNoExite;
 public abstract void AltaDeImagenActividad(String imagenNombre, String nombreActividad, String UrlVideo) throws PreexistingEntityException;
 public abstract void AltaDeUsuarioTurista(String nickname,  String nombre, String apellido, String contrasenia, String correo, Date fNacimiento, String nacionalidad) throws NicknameExistenteException, PreexistingEntityException, CorreoElectronicoExistenteException;
@@ -110,4 +110,7 @@ public abstract boolean validarCorreo(String correo);//listo
 
 public abstract void subirImagenActividad(byte[] imagen, String nombreArchivo, String actividad, String UrlVideo);
 public abstract byte [] traerImagenActividad(String nombreActividad);
+
+public abstract void subirImagenPerfil(byte[] imagen, String nombreArchivo, String nickname);
+ public abstract byte [] traerImagenPerfil(String nickname) ;
 }

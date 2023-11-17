@@ -26,8 +26,9 @@ import logica.ImagenPerfil;
  * @author natil
  */
 public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
-    
+
     private IControlador control;
+
     /**
      * Creates new form ConsultaUsuarioTurista2
      */
@@ -36,7 +37,7 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
         initComponents();
         cargarDatosTurista(nickname);
         cargarSalidasDeTurista(nickname);
-        cargarActividadesDelTurista( nickname);
+        cargarActividadesDelTurista(nickname);
         mostrarImagenPerfil(nickname);
     }
 
@@ -178,24 +179,24 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerSalidaActionPerformed
-         if(cmbSalidas.getSelectedIndex() != -1){
-        
-        String nombreSalida = (String) cmbSalidas.getSelectedItem();
-        
-        ConsultaDeSalidaTuristica verConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(nombreSalida, control);
-        getParent().add(verConsultaDeSalidaTuristica);        
-        verConsultaDeSalidaTuristica.show();
-         }
+        if (cmbSalidas.getSelectedIndex() != -1) {
+
+            String nombreSalida = (String) cmbSalidas.getSelectedItem();
+
+            ConsultaDeSalidaTuristica verConsultaDeSalidaTuristica = new ConsultaDeSalidaTuristica(nombreSalida, control);
+            getParent().add(verConsultaDeSalidaTuristica);
+            verConsultaDeSalidaTuristica.show();
+        }
     }//GEN-LAST:event_btnVerSalidaActionPerformed
 
     private void btnVerActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActividadActionPerformed
-         if(cmbActividades.getSelectedIndex() != -1){
-        String nombreActividad = (String) cmbActividades.getSelectedItem();
-        
-        ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad, control);
-        getParent().add(verConsultaActividadTuristica);        
-        verConsultaActividadTuristica.show();
-         }
+        if (cmbActividades.getSelectedIndex() != -1) {
+            String nombreActividad = (String) cmbActividades.getSelectedItem();
+
+            ConsultaActividadTuristica verConsultaActividadTuristica = new ConsultaActividadTuristica(nombreActividad, control);
+            getParent().add(verConsultaActividadTuristica);
+            verConsultaActividadTuristica.show();
+        }
     }//GEN-LAST:event_btnVerActividadActionPerformed
 
 
@@ -224,83 +225,89 @@ public class ConsultaUsuarioTurista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
+    private void cargarDatosTurista(String nickname) {
+        DTTurista t = control.traerDTTurista(nickname);
 
-private void cargarDatosTurista(String nickname){
-    DTTurista t = control.traerDTTurista(nickname);
-    
-    txtNickname.setText(t.getNickname());
-    txtNombre.setText(t.getNombre());
-    txtApellido.setText(t.getApellido());
-    txtNacionalidad.setText(t.getNacionalidad());
-    txtCorreo.setText(t.getCorreo());
-    
-    txtFNacimiento.setText(t.getfNacimiento());
-    
-}
+        txtNickname.setText(t.getNickname());
+        txtNombre.setText(t.getNombre());
+        txtApellido.setText(t.getApellido());
+        txtNacionalidad.setText(t.getNacionalidad());
+        txtCorreo.setText(t.getCorreo());
 
-private void cargarSalidasDeTurista(String nickname){
+        txtFNacimiento.setText(t.getfNacimiento());
 
-    ArrayList<DTSalidaTuristica> listaSalidasDeTurista = control.traerInscSalidasDeTurista(nickname);
-    
-    for (DTSalidaTuristica dt : listaSalidasDeTurista){
-        cmbSalidas.addItem(dt.getNombre());
-    }        
-}
+    }
 
-private void cargarActividadesDelTurista(String nickname){
-    
-    ArrayList<DTActividad> listaActividadesDeTurista = control.traerInscActividadesDeTurista(nickname);
-        for (DTActividad dt : listaActividadesDeTurista){
-        cmbActividades.addItem(dt.getNombre());
-    }  
-    
-}
-public void mostrarMensaje(String mensaje, String tipo, String titulo){
+    private void cargarSalidasDeTurista(String nickname) {
+
+        ArrayList<DTSalidaTuristica> listaSalidasDeTurista = control.traerInscSalidasDeTurista(nickname);
+
+        for (DTSalidaTuristica dt : listaSalidasDeTurista) {
+            cmbSalidas.addItem(dt.getNombre());
+        }
+    }
+
+    private void cargarActividadesDelTurista(String nickname) {
+
+        ArrayList<DTActividad> listaActividadesDeTurista = control.traerInscActividadesDeTurista(nickname);
+        for (DTActividad dt : listaActividadesDeTurista) {
+            cmbActividades.addItem(dt.getNombre());
+        }
+
+    }
+
+    public void mostrarMensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
-        if (tipo.equals("Info")){
+        if (tipo.equals("Info")) {
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-        }else if (tipo.equals("Error")){
+        } else if (tipo.equals("Error")) {
             optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
         }
         JDialog dialog = optionPane.createDialog(titulo);
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);
-    
+
     }
 
+    public void mostrarImagenPerfil(String nickname) {
+        try {
+            DTImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
 
-public void mostrarImagenPerfil(String nickname){
-    try {
-        DTImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
+            if (imagen != null) {
+                String directorioTrabajo = System.getProperty("user.dir");
 
-        if (imagen != null) {
-            String rutaImagen = imagen.getRuta();
-            BufferedImage imagenCargada = ImageIO.read(new File(rutaImagen));
-            
-            // Escalar la imagen al tamaño de la etiqueta (labelImagen)
-            int anchoEtiqueta = labelImagen.getWidth();
-            int altoEtiqueta = labelImagen.getHeight();
-            Image imagenEscalada = imagenCargada.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_SMOOTH);
-            
-            ImageIcon imagenPerfil = new ImageIcon(imagenEscalada);
+                // Definir una carpeta para las imágenes dentro del directorio de trabajo
+                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
 
-            // Supongamos que 'labelImagen' es el JLabel en el que quieres mostrar la imagen
-            labelImagen.setIcon(imagenPerfil);
-            labelImagen.setVisible(true);
-        } else {
-            // Manejar el caso en el que no se encuentra la imagen
-            labelImagen.setVisible(false); // Oculta el JLabel si no hay imagen
-            JOptionPane.showMessageDialog(null, "No se encontró la imagen de perfil.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                // Utilizar la carpeta para construir la ruta completa
+                String rutaCompleta = carpetaImagenes + File.separator + imagen.getNombre();
+                
+                BufferedImage imagenCargada = ImageIO.read(new File(rutaCompleta));
+
+                // Escalar la imagen al tamaño de la etiqueta (labelImagen)
+                int anchoEtiqueta = labelImagen.getWidth();
+                int altoEtiqueta = labelImagen.getHeight();
+                Image imagenEscalada = imagenCargada.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_SMOOTH);
+
+                ImageIcon imagenPerfil = new ImageIcon(imagenEscalada);
+
+                // Supongamos que 'labelImagen' es el JLabel en el que quieres mostrar la imagen
+                labelImagen.setIcon(imagenPerfil);
+                labelImagen.setVisible(true);
+            } else {
+                // Manejar el caso en el que no se encuentra la imagen
+                labelImagen.setVisible(false); // Oculta el JLabel si no hay imagen
+                JOptionPane.showMessageDialog(null, "No se encontró la imagen de perfil.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar errores al cargar la imagen desde el archivo
+            JOptionPane.showMessageDialog(null, "Error al cargar la imagen.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Manejar otras excepciones generales
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-        // Manejar errores al cargar la imagen desde el archivo
-        JOptionPane.showMessageDialog(null, "Error al cargar la imagen.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        e.printStackTrace();
-        // Manejar otras excepciones generales
-        JOptionPane.showMessageDialog(null, "Ha ocurrido un error.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
 
 }

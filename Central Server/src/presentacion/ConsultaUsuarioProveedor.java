@@ -308,37 +308,44 @@ public void mostrarMensaje(String mensaje, String tipo, String titulo){
 
 
 public void mostrarImagenPerfil(String nickname){
-    try {
-        DTImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
+     try {
+            DTImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
 
-        if (imagen != null) {
-            String rutaImagen = imagen.getRuta();
-            BufferedImage imagenCargada = ImageIO.read(new File(rutaImagen));
-            
-            // Escalar la imagen al tamaño de la etiqueta (labelImagen)
-            int anchoEtiqueta = labelImagen.getWidth();
-            int altoEtiqueta = labelImagen.getHeight();
-            Image imagenEscalada = imagenCargada.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_SMOOTH);
-            
-            ImageIcon imagenPerfil = new ImageIcon(imagenEscalada);
+            if (imagen != null) {
+                String directorioTrabajo = System.getProperty("user.dir");
 
-            // Supongamos que 'labelImagen' es el JLabel en el que quieres mostrar la imagen
-            labelImagen.setIcon(imagenPerfil);
-            labelImagen.setVisible(true);
-        } else {
-            // Manejar el caso en el que no se encuentra la imagen
-            labelImagen.setVisible(false); // Oculta el JLabel si no hay imagen
-            JOptionPane.showMessageDialog(null, "No se encontró la imagen de perfil.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                // Definir una carpeta para las imágenes dentro del directorio de trabajo
+                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+
+                // Utilizar la carpeta para construir la ruta completa
+                String rutaCompleta = carpetaImagenes + File.separator + imagen.getNombre();
+                
+                BufferedImage imagenCargada = ImageIO.read(new File(rutaCompleta));
+
+                // Escalar la imagen al tamaño de la etiqueta (labelImagen)
+                int anchoEtiqueta = labelImagen.getWidth();
+                int altoEtiqueta = labelImagen.getHeight();
+                Image imagenEscalada = imagenCargada.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_SMOOTH);
+
+                ImageIcon imagenPerfil = new ImageIcon(imagenEscalada);
+
+                // Supongamos que 'labelImagen' es el JLabel en el que quieres mostrar la imagen
+                labelImagen.setIcon(imagenPerfil);
+                labelImagen.setVisible(true);
+            } else {
+                // Manejar el caso en el que no se encuentra la imagen
+                labelImagen.setVisible(false); // Oculta el JLabel si no hay imagen
+                JOptionPane.showMessageDialog(null, "No se encontró la imagen de perfil.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar errores al cargar la imagen desde el archivo
+            JOptionPane.showMessageDialog(null, "Error al cargar la imagen.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Manejar otras excepciones generales
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-        // Manejar errores al cargar la imagen desde el archivo
-        JOptionPane.showMessageDialog(null, "Error al cargar la imagen.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        e.printStackTrace();
-        // Manejar otras excepciones generales
-        JOptionPane.showMessageDialog(null, "Ha ocurrido un error.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
 }
 
 

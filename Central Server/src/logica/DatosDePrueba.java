@@ -45,19 +45,19 @@ public DatosDePrueba(){
             control.AltaDeUsuarioProveedor("eldiez", "Pablo", "Bengoechea", "contra", "eldiez@socfomturriv.org.uy", fecha.parse("27/06/1965"), "Pablo es el presidente de la Sociedad de Fomento Turıstico de Rivera (conocida como Socfomturriv)", "http://wwww.socfomturriv.org.uy");
             control.AltaDeUsuarioProveedor("meche", "Mercedes", "Venn", "contra", "meche@colonia.gub.uy", fecha.parse("31/12/1990"), "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
             
-control.AltaDeImagenPerfil("2e3s66tw.jpeg", "images/2e3s66tw.jpeg", "lachiqui");
-control.AltaDeImagenPerfil("ycy8mbrn.png", "images/ycy8mbrn.png", "isabelita");
-control.AltaDeImagenPerfil("y2u3tybh.png", "images/y2u3tybh.png", "anibal");
-control.AltaDeImagenPerfil("2p9ed8et.jpg", "images/2p9ed8et.jpg", "waston");
-control.AltaDeImagenPerfil("mtwppxxz.jpeg", "images/mtwppxxz.jpeg", "elelvis");
-control.AltaDeImagenPerfil("3ztpasya.jpg", "images/3ztpasya.jpg", "eleven11");
-control.AltaDeImagenPerfil("43zymcch.jpg", "images/43zymcch.jpg", "bobesponja");
-control.AltaDeImagenPerfil("mr3a38w4.jpg", "images/mr3a38w4.jpg", "tony");
-control.AltaDeImagenPerfil("2b556k7t.jpg", "images/2b556k7t.jpg", "chino");
-control.AltaDeImagenPerfil("3mbeyawm.png", "images/3mbeyawm.png", "mastropiero");
-control.AltaDeImagenPerfil("3whe8372.jpg", "images/3whe8372.jpg", "washington");
-control.AltaDeImagenPerfil("mu4jeas3.jpeg", "images/mu4jeas3.jpeg", "eldiez");
-control.AltaDeImagenPerfil("4hs4v9c5.jpeg", "images/4hs4v9c5.jpeg", "meche");
+control.AltaDeImagenPerfil("2e3s66tw.jpeg",  "lachiqui");
+control.AltaDeImagenPerfil("ycy8mbrn.png",  "isabelita");
+control.AltaDeImagenPerfil("y2u3tybh.png",  "anibal");
+control.AltaDeImagenPerfil("2p9ed8et.jpg", "waston");
+control.AltaDeImagenPerfil("mtwppxxz.jpeg",  "elelvis");
+control.AltaDeImagenPerfil("3ztpasya.jpg",  "eleven11");
+control.AltaDeImagenPerfil("43zymcch.jpg",  "bobesponja");
+control.AltaDeImagenPerfil("mr3a38w4.jpg",  "tony");
+control.AltaDeImagenPerfil("2b556k7t.jpg",  "chino");
+control.AltaDeImagenPerfil("3mbeyawm.png",  "mastropiero");
+control.AltaDeImagenPerfil("3whe8372.jpg",  "washington");
+control.AltaDeImagenPerfil("mu4jeas3.jpeg",  "eldiez");
+control.AltaDeImagenPerfil("4hs4v9c5.jpeg",  "meche");
             
         } catch (ParseException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
