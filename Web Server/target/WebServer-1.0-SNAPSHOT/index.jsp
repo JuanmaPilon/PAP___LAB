@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div id="login">
-                <a href="login.jsp">Iniciar Sesión</a> | <a href="altaUsuario.jsp">Alta Usuario</a> | <a href="homeMovil.jsp">Inicio Movil</a>
+                <a href="login.jsp">Iniciar Sesión</a> | <a href="altaUsuario.jsp">Alta Usuario</a>
             </div>
 
         </header>

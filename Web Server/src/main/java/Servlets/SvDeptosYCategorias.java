@@ -68,7 +68,8 @@ public class SvDeptosYCategorias extends HttpServlet {
                 }
         }
         misesion.setAttribute("listaDepartamentos", departamentosConActividadesConfirmadas);
-       
+        String tipoUsuario = "visitante";
+        misesion.setAttribute("tipoUsuario", tipoUsuario);
      request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

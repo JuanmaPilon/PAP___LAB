@@ -69,6 +69,8 @@ public class VerTopDiez extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVisitas = new javax.swing.JTable(model);
 
+        setClosable(true);
+
         jScrollPane1.setViewportView(tablaVisitas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

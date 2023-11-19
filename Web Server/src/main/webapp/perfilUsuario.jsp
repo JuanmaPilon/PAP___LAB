@@ -47,7 +47,7 @@
                 <h2>Mi perfil</h2>
                 <ul>
                     <%
-                        if (tipoUsuario != null) {
+                        if (tipoUsuario != "visitante") {
                             if (tipoUsuario.equals("proveedor")) {
                     %>
                     <li><a href="consultaUsuario.jsp">Consulta de Usuario</a></li> <!--Visitante, Proveedor, Turista -->
@@ -92,7 +92,7 @@
 
             <h1>Usuario: <%=usu.getNombre()%></h1>
             <%
-                if (tipoUsuario != null) {
+                if (tipoUsuario != "visitante") {
                     if (!usuYo.getListaUsuariosFavoritas().isEmpty() && usuYo.getListaUsuariosFavoritas().contains(usu.getNickname())) {
 
 

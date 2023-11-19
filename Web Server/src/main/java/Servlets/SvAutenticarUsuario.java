@@ -1,6 +1,5 @@
 package Servlets;
 
-import WebServices.DtProveedor;
 import WebServices.DtUsuario;
 import WebServices.WebServices;
 import WebServices.WebServicesService;
@@ -31,7 +30,20 @@ public class SvAutenticarUsuario extends HttpServlet {
         String usuario = request.getParameter("username"); //Obtengo el nombre ingresado
         String contrasenia = request.getParameter("password"); //Obtengo la contrasenia ingresada
 
-        boolean autenticado = autenticarUsuario(usuario, contrasenia);
+        boolean autenticado = false;
+        
+        if (autenticarUsuario(usuario, contrasenia)){
+            autenticado = true;
+            request.getSession().setAttribute("usuario", usuario);  // Si el usuario es autenticado, puedes almacenar información de sesión
+
+        }
+        if (autenticarMailUsuario(usuario, contrasenia)){
+            autenticado = true;
+            usuario = obtenerNombre(usuario);
+            request.getSession().setAttribute("usuario",usuario );
+ 
+        }
+        
         String userAgent = request.getHeader("User-Agent");
 
         if (autenticado) {
@@ -47,9 +59,9 @@ public class SvAutenticarUsuario extends HttpServlet {
                 }
             }
             
-            request.getSession().setAttribute("usuario", usuario);  // Si el usuario es autenticado, puedes almacenar información de sesión
-
-            DtUsuario usu = port.traerDTUsuario(usuario);
+           
+            System.out.println(usuario);
+           DtUsuario usu = port.traerDTUsuario(usuario);
             
             //String tipoUsuario = control.devolverTipoUsuario(usu.getNickname());
             if (tipoUsuario.equals("turista")) {
@@ -85,7 +97,7 @@ public class SvAutenticarUsuario extends HttpServlet {
         //llamado a wsdl
         WebServicesService service = new WebServicesService();
         WebServices port = service.getWebServicesPort();
-        List<DtUsuario> listaUsuarios = port.traerUsuarioMod().getLista(); // Obtén la lista de usuarios con nombres de usuario y contraseñas
+        List<DtUsuario> listaUsuarios = port.traerUsuarioMod().getLista(); // Obtén la lista de usuarios 
 
         // Recorre la lista de usuarios para verificar las credenciales
         for (DtUsuario usuario : listaUsuarios) {
@@ -97,6 +109,40 @@ public class SvAutenticarUsuario extends HttpServlet {
 
         // Si llegamos aquí, las credenciales son incorrectas
         return false;
+    }
+    private boolean autenticarMailUsuario(String mail, String password) {
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
+        List<DtUsuario> listaUsuarios = port.traerUsuarioMod().getLista(); // Obtén la lista de usuarios 
+
+        // Recorre la lista de usuarios para verificar las credenciales
+        for (DtUsuario usuario : listaUsuarios) {
+            if (usuario.getCorreo().equals(mail) && usuario.getContrasenia().equals(password)) {
+                // Las credenciales son correctas               
+                return true;
+            }
+        }
+
+        // Si llegamos aquí, las credenciales son incorrectas
+        return false;
+    }
+        private String obtenerNombre (String mail) {
+        //llamado a wsdl
+        WebServicesService service = new WebServicesService();
+        WebServices port = service.getWebServicesPort();
+        List<DtUsuario> listaUsuarios = port.traerUsuarioMod().getLista(); // Obtén la lista de usuarios 
+
+        // Recorre la lista de usuarios para encontrar el nombre
+        for (DtUsuario usuario : listaUsuarios) {
+            if (usuario.getCorreo().equals(mail)) {
+                // Las credenciales son correctas               
+                return usuario.getNickname();
+            }
+        }
+
+        // Si llegamos aquí, las credenciales son incorrectas
+        return "";
     }
 
     @Override

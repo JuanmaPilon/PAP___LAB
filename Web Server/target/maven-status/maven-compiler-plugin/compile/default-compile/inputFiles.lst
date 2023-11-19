@@ -1,75 +1,75 @@
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NicknameExistenteException_Exception.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvMostrarImagenPerfil.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvValidarCorreo.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvProveedor.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\TipoEstado.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtPaquete.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvDownloadPDF.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteYaComprado.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteSinActividad_Exception.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\JAXRSConfiguration.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ImagenPorNicknameNoExite.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ImagenPorNicknameNoExite_Exception.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvDeptosYCategorias.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilSalida.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\TipoPago.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTSalidaTuristica.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtTurista.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtImagenActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTPaquete.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilPaquete.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvSalida.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteSinActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\WebServices.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarDepartamentos.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvDepartamento.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtCategoria.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NoExisteCompra_Exception.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\package-info.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvObtenerActividades.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtInscripcion.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvConsultaSalidaMovil.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\CorreoElectronicoExistenteException_Exception.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarActividades.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvMostrarImagenActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ObjectFactory.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PreexistingEntityException_Exception.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquete.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvObtenerActividadesCategoria.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtDepartamento.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTInscripcion.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvBuscar.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\CorreoElectronicoExistenteException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvConsultaActividadMovil.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvCategoria.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\NonexistentEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ParseException_Exception.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtImagenPerfil.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvModificarUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvTurista.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtCompra.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvAutenticarUsuario.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTDepartamento.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtSalidaTuristica.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\IllegalOrphanException.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PreexistingEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaString.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\resources\JavaEE8Resource.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\PreexistingEntityException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvInscripcion.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NoExisteCompra.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteYaComprado_Exception.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvValidarNickname.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtProveedor.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvActividad.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ParseException.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\WebServicesService.java
-C:\Programming\Java\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NicknameExistenteException.java
-C:\Programming\Java\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquetesDeSalida.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NicknameExistenteException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvObtenerActividadesCategoria.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvCategoria.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteSinActividad_Exception.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtTurista.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaString.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTDepartamento.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvDeptosYCategorias.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NoExisteCompra_Exception.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtInscripcion.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtCategoria.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\TipoPago.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\resources\JavaEE8Resource.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NicknameExistenteException_Exception.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvMostrarImagenPerfil.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquete.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtDepartamento.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\TipoEstado.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvConsultaActividadMovil.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\WebServicesService.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\com\turismouy\pap___lab\JAXRSConfiguration.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtImagenPerfil.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtPaquete.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvMostrarImagenActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\WebServices.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ImagenPorNicknameNoExite.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteYaComprado.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvInscripcion.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteYaComprado_Exception.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTPaquete.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvDepartamento.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvBuscar.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ParseException_Exception.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PaqueteSinActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvObtenerActividades.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtImagenActividad.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvTurista.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtSalidaTuristica.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ImagenPorNicknameNoExite_Exception.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvConsultaSalidaMovil.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\NoExisteCompra.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ObjectFactory.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvDownloadPDF.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPaquetesDeSalida.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTSalidaTuristica.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilSalida.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\package-info.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\CorreoElectronicoExistenteException_Exception.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\IllegalOrphanException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\CorreoElectronicoExistenteException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtProveedor.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarActividades.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PreexistingEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvCargarDepartamentos.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvValidarNickname.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvModificarUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvAutenticarUsuario.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvSalida.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\PreexistingEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvValidarCorreo.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\exceptions\NonexistentEntityException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ListaDTInscripcion.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilPaquete.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\PreexistingEntityException_Exception.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvProveedor.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\DtCompra.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\target\generated-sources\jaxws-wsimport\WebServices\ParseException.java
+C:\Users\carlo\OneDrive\Escritorio\Proyectos NB\PAP___LAB\Web Server\src\main\java\Servlets\SvPerfilUsuario.java
