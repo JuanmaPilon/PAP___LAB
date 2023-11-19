@@ -1,7 +1,5 @@
 package logica;
 
-
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Date;
@@ -12,11 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 @Entity
 public class SalidaTuristica implements Serializable {
+
     @Id
     private String nombre;
     private int cantMax;
+    private int visitas;
     @Temporal(TemporalType.DATE)
     private Date fAlta;
     @Temporal(TemporalType.DATE)
@@ -25,7 +26,7 @@ public class SalidaTuristica implements Serializable {
     @OneToMany(mappedBy = "salida")
     private List<Inscripcion> listaInscripciones;
     @ManyToOne
-    @JoinColumn(name="ACTIVIDAD_NOMBRE")
+    @JoinColumn(name = "ACTIVIDAD_NOMBRE")
     private Actividad actividad;
 
     public SalidaTuristica() {
@@ -34,11 +35,20 @@ public class SalidaTuristica implements Serializable {
     public SalidaTuristica(String nombre, int cantMax, Date fAlta, Date fSalida, String lugar, List<Inscripcion> listaInscripciones, Actividad actividad) {
         this.nombre = nombre;
         this.cantMax = cantMax;
+        this.visitas = 0;
         this.fAlta = fAlta;
         this.fSalida = fSalida;
         this.lugar = lugar;
         this.listaInscripciones = listaInscripciones;
         this.actividad = actividad;
+    }
+
+    public int getVisitas() {
+        return visitas;
+    }
+
+    public void setVisitas(int visitas) {
+        this.visitas = visitas;
     }
 
     public String getNombre() {
@@ -97,7 +107,4 @@ public class SalidaTuristica implements Serializable {
         this.actividad = actividad;
     }
 
-    
-
-    
 }

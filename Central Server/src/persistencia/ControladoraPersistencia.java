@@ -592,6 +592,14 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+        public void modificarSalida(SalidaTuristica s) {
+        try {
+            salidaTuristicaJpa.edit(s);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public List<Departamento> traerDepartamentos() {
         return departamentoJpa.findDepartamentoEntities();

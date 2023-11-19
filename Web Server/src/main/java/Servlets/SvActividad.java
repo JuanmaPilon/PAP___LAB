@@ -113,6 +113,7 @@ public class SvActividad extends HttpServlet {
         misesion.setAttribute("categorias", categorias);
         misesion.setAttribute("paquetes", paquetes);
         misesion.setAttribute("UrlVideo", imagen.getUrlVideo());
+        port.sumarVisitaActividad(nombreActividad);
         response.sendRedirect("perfilActividadTuristica.jsp");
 
         //  } catch (Exception ex) {

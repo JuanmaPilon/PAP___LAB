@@ -34,6 +34,7 @@ public class SvPerfilSalida extends HttpServlet {
 
         HttpSession misesion = request.getSession();
         String nombreSalida = request.getParameter("nombreSalida");
+        port.sumarVisitaSalida(nombreSalida);
         DtSalidaTuristica salT = port.consultaSalidaTuristica(nombreSalida);
         misesion.setAttribute("salida", salT);
         try {

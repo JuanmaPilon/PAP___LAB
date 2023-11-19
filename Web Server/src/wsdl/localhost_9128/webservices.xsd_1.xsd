@@ -102,6 +102,7 @@
 <xs:sequence>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="cantMax" type="xs:int"></xs:element>
+<xs:element name="visitas" type="xs:int"></xs:element>
 <xs:element name="fAlta" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="fSalida" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="lugar" type="xs:string" minOccurs="0"></xs:element>
@@ -144,6 +145,7 @@
 <xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="duracion" type="xs:int"></xs:element>
 <xs:element name="costo" type="xs:float"></xs:element>
+<xs:element name="visitas" type="xs:int"></xs:element>
 <xs:element name="ciudad" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="fAlta" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="estado" type="tns:tipoEstado" minOccurs="0"></xs:element>

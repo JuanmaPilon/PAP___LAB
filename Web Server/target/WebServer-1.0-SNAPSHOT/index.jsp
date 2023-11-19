@@ -20,7 +20,7 @@
             window.addEventListener("resize", redirigirSiEsMovil);
         </script>
     </head>
-    <body >
+    <body>
         <%
             List<String> listaCategorias = (List<String>) request.getSession().getAttribute("listaCategorias");
 

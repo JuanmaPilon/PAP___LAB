@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url(images/Thehandofpuntadeleste.jpg);
+    background-image: url(./images/Thehandofpuntadeleste.jpg);
     background-size: cover;
     background-attachment: fixed;
 }

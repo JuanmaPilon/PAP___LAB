@@ -457,12 +457,22 @@ public class WebServices {
     public void modificarImagenPerfil(byte[] imagen, String nombreArchivo, String nickname) {
         control.modificarImagenPerfil(imagen, nombreArchivo, nickname);
     }
-    
+
     @WebMethod
     public ListaDTInscripcion traerDTInscSalidasDeTurista(String nickname) {
         ListaDTInscripcion result = new ListaDTInscripcion();
         result.setLista(control.traerDTInscSalidasDeTurista(nickname));
         return result;
+    }
+
+    @WebMethod
+    public void sumarVisitaActividad(String nombreActividad) {
+        control.sumarVisitaActividad(nombreActividad);
+    }
+
+    @WebMethod
+    public void sumarVisitaSalida(String nombreSalida) {
+        control.sumarVisitaSalida(nombreSalida);
     }
 
 }//finWS

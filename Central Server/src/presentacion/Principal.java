@@ -69,6 +69,7 @@ public class Principal extends javax.swing.JFrame {
         consActividadTuristica = new javax.swing.JMenuItem();
         consSalidaTuristica = new javax.swing.JMenuItem();
         consPaquete = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         menuModificar = new javax.swing.JMenu();
         modUsuario = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -185,6 +186,11 @@ public class Principal extends javax.swing.JFrame {
         barraMenuPrincipal.add(menuAltas);
 
         menuConsultas.setText("Consultas");
+        menuConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuConsultasActionPerformed(evt);
+            }
+        });
 
         consUsuario.setText("Usuario");
         consUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -217,6 +223,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         menuConsultas.add(consPaquete);
+
+        jMenuItem2.setText("Ver Top 10 Actividades y Salidas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(jMenuItem2);
 
         barraMenuPrincipal.add(menuConsultas);
 
@@ -374,6 +388,16 @@ public class Principal extends javax.swing.JFrame {
         verAceptarRechazarActividadTuristica.show();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void menuConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuConsultasActionPerformed
+        
+    }//GEN-LAST:event_menuConsultasActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        VerTopDiez verTopDiez = new VerTopDiez(control);
+        contenedorPrincipal.add(verTopDiez);
+        verTopDiez.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
        public JDesktopPane obtenerJDesktopPane() {
       //  System.out.print("funcion obtener");
     return contenedorPrincipal;
@@ -403,6 +427,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane contenedorPrincipal;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu menuAltas;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenu menuModificar;

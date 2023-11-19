@@ -15,6 +15,7 @@ public class DTActividad {
     private String descripcion;
     private int duracion;
     private float costo;
+    private int visitas;
     private String ciudad;
     private Date fAlta;
     private TipoEstado estado;
@@ -36,7 +37,28 @@ public class DTActividad {
         this.nombreProveedor = nombreProveedor;
     }
      
-  
+      public DTActividad(String nombre, String descripcion, int duracion, float costo, int visitas, String ciudad, Date fAlta,TipoEstado estado, String nombreDepartamento, String nombreProveedor) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.visitas = visitas;
+        this.ciudad = ciudad;
+        this.fAlta = fAlta;
+        this.estado = estado;
+        this.nombreDepartamento = nombreDepartamento;
+        this.nombreProveedor = nombreProveedor;
+    }
+
+    public int getVisitas() {
+        return visitas;
+    }
+
+    public void setVisitas(int visitas) {
+        this.visitas = visitas;
+    }
+     
+      
 
     public DTActividad() {
         

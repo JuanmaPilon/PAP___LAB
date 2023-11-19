@@ -19,6 +19,7 @@ public class Actividad implements Serializable {
     private String nombre;
     private String descripcion;
     private int duracion;
+    private int visitas;
     private float costo;
     private String ciudad;
     private TipoEstado estado;
@@ -44,6 +45,7 @@ public class Actividad implements Serializable {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
+        this.visitas = 0;
         this.costo = costo;
         this.ciudad = ciudad;
         this.fAlta = fAlta;
@@ -57,6 +59,7 @@ public class Actividad implements Serializable {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
+        this.visitas = 0;
         this.costo = costo;
         this.ciudad = ciudad;
         this.estado = estado;
@@ -67,6 +70,16 @@ public class Actividad implements Serializable {
         this.proveedor = proveedor;
         this.listaCategoria = listaCategoria;
     }
+
+    public int getVisitas() {
+        return visitas;
+    }
+
+    public void setVisitas(int visitas) {
+        this.visitas = visitas;
+    }
+    
+    
 
     public TipoEstado getEstado() {
         return estado;

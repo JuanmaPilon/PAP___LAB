@@ -14,13 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 @WebServlet(urlPatterns = {"/SvPerfilActividad"})
 public class SvPerfilActividad extends HttpServlet {
 
     //Fabrica fabrica = Fabrica.getInstance();
     //IControlador control = fabrica.getIControlador();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -29,23 +27,22 @@ public class SvPerfilActividad extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                //llamado a wsdl
+        //llamado a wsdl
         WebServicesService service = new WebServicesService();
         WebServices port = service.getWebServicesPort();
         HttpSession misesion = request.getSession();
         String nombreActividad = request.getParameter("nombreActividad");
-       // System.out.println("Nombre de la actividad: " + nombreActividad);
+        // System.out.println("Nombre de la actividad: " + nombreActividad);
+        port.sumarVisitaActividad(nombreActividad);
         DtActividad act = port.traerDTActividad(nombreActividad);
         List<String> listaCategoria = port.traerCategoriasActividad(act.getNombre()).getLista(); // categorias de la actividad
-        
-        
+
         List<DtSalidaTuristica> listaDtSalidas = port.encontraSalidasTuristicasDeActividad(act.getNombre()).getLista();
 
-                
         misesion.setAttribute("nombresSalidasActividad", listaDtSalidas);
         misesion.setAttribute("actividad", act);//datos de la actividad
         misesion.setAttribute("categorias", listaCategoria);//categorias de la actividad (lista de string)
-        
+
     }
 
     @Override

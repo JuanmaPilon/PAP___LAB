@@ -1,34 +1,26 @@
 package logica;
 
 import logica.exceptions.ImagenPorNicknameNoExite;
-import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.draw.LineSeparator;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import static logica.TipoEstado.agregada;
 import logica.exceptions.ConstraseniasDistintas;
 import logica.exceptions.NoExisteCompra;
 import logica.exceptions.PaqueteSinActividad;
@@ -1406,13 +1398,12 @@ public class Controlador implements IControlador {
         }
 
     }
-    
-    
+
     @Override
     public ArrayList<DTInscripcion> traerDTInscSalidasDeTurista(String nickname) {
         Turista t = (Turista) ConsultaDeUsuario(nickname);
         ArrayList<DTInscripcion> listaInscSalidasDeTurista = new ArrayList();
-       //public DTInscripcion(String nicknameTurista, String nombreSalidaTuristica, Date fInscripcion, int cantTurista, float costo)
+        //public DTInscripcion(String nicknameTurista, String nombreSalidaTuristica, Date fInscripcion, int cantTurista, float costo)
 
         for (Inscripcion insc : t.getListaInscripcion()) {
             DTInscripcion dtInscripcion = new DTInscripcion(insc.getTurista().getNickname(), insc.getSalida().getNombre(),
@@ -1423,4 +1414,73 @@ public class Controlador implements IControlador {
         return listaInscSalidasDeTurista;
     }
 
+    @Override
+    public void sumarVisitaActividad(String nombreActividad) {
+        Actividad act = controlPersis.consultaActividad(nombreActividad);
+        int visitas = act.getVisitas();
+        act.setVisitas(visitas + 1);
+        controlPersis.modificarActividad(act);
+    }
+
+    @Override
+    public void sumarVisitaSalida(String nombreSalida) {
+        SalidaTuristica salt = controlPersis.consultaSalida(nombreSalida);
+        int visitas = salt.getVisitas();
+        salt.setVisitas(visitas + 1);
+        controlPersis.modificarSalida(salt);
+    }
+
+    @Override
+    public ArrayList<DTActividad> listaActividadesConVisitas() {
+
+        ArrayList<DTActividad> listaActividadesConVisitas = new ArrayList();
+        List<Actividad> listaActividades = controlPersis.traerActividades();
+        for (Actividad a : listaActividades) {
+            DTActividad dta = new DTActividad(a.getNombre(), a.getDescripcion(), a.getDuracion(), a.getCosto(), a.getVisitas(), a.getCiudad(), a.getfAlta(),
+                    a.getEstado(), a.getDepartamento().getNombre(), a.getProveedor().getNickname());
+            listaActividadesConVisitas.add(dta);
+        }
+        return listaActividadesConVisitas;
+    }
+
+    @Override
+    public ArrayList<DTSalidaTuristica> listaSalidasConVisitas() {
+
+        ArrayList<DTSalidaTuristica> listaSalidasConVisitas = new ArrayList();
+        List<SalidaTuristica> listaSalidas = controlPersis.traerSalidasTuristicas();
+        for (SalidaTuristica s : listaSalidas) {
+            DTSalidaTuristica dts = new DTSalidaTuristica(s.getNombre(), s.getCantMax(), s.getVisitas(), s.getfAlta(), s.getfSalida(), s.getLugar(), s.getActividad().getNombre());
+            listaSalidasConVisitas.add(dts);
+        }
+
+        return listaSalidasConVisitas;
+    }
+
+    @Override
+    public List<Object> obtenerTopNMasVisitadas(ArrayList<DTSalidaTuristica> salidas, ArrayList<DTActividad> actividades) {
+        List<Object> combinedList = new ArrayList<>();
+        combinedList.addAll(salidas);
+        combinedList.addAll(actividades);
+        Collections.sort(combinedList, new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                int visitas1 = obtenerVisitas(o1);
+                int visitas2 = obtenerVisitas(o2);
+                return Integer.compare(visitas2, visitas1);
+            }
+
+            private int obtenerVisitas(Object obj) {
+                // Implementar la lógica para obtener el atributo "visitas" según el tipo de objeto
+                if (obj instanceof DTSalidaTuristica) {
+                    return ((DTSalidaTuristica) obj).getVisitas();
+                } else if (obj instanceof DTActividad) {
+                    return ((DTActividad) obj).getVisitas();
+                }
+                return 0;
+            }
+        });
+
+        // Obtener las primeras N entradas
+        return combinedList.subList(0, Math.min(combinedList.size(), 10));
+    }
 }

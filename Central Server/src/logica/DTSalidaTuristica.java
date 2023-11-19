@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logica;
 
 import java.util.List;
@@ -9,15 +5,11 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-/**
- *
- * @author natil
- */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DTSalidaTuristica {
     private String nombre;
     private int cantMax;
+    private int visitas;
     private Date fAlta;
     private Date fSalida;
     private String lugar;
@@ -35,6 +27,26 @@ public class DTSalidaTuristica {
         this.lugar = lugar;
         this.nombreActividad = nombreActividad;
     }
+    
+    public DTSalidaTuristica(String nombre, int cantMax, int visitas, Date fAlta, Date fSalida, String lugar, String nombreActividad) {
+        this.nombre = nombre;
+        this.cantMax = cantMax;
+        this.visitas = visitas;
+        this.fAlta = fAlta;
+        this.fSalida = fSalida;
+        this.lugar = lugar;
+        this.nombreActividad = nombreActividad;
+    }
+
+    public int getVisitas() {
+        return visitas;
+    }
+
+    public void setVisitas(int visitas) {
+        this.visitas = visitas;
+    }
+    
+    
 
     public String getNombre() {
         return nombre;

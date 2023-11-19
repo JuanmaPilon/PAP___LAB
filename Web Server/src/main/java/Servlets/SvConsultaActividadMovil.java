@@ -37,6 +37,7 @@ public class SvConsultaActividadMovil extends HttpServlet {
         String nomActividadCodificado = URLEncoder.encode(actividad, "UTF-8");
         DtActividad act = port.traerDTActividad(actividad);
         StringBuilder htmlResponse = new StringBuilder();
+        port.sumarVisitaActividad(actividad);
         //DTImagenActividad imagen = null;
         try {
             // cambioar eso por la ruta de la imagen por que de la forma que esta revienta, tiene que estar comentado
