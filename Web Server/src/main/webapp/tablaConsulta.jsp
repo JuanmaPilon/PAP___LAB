@@ -1,4 +1,3 @@
-
 <%@page import="java.net.URLEncoder"%>
 <%@page import="WebServices.DtImagenActividad"%>
 <%@page import="WebServices.DtPaquete"%>
@@ -9,14 +8,18 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link href="styles.css" src="styles.css"">
-        <title>Turismo.uy - Consultas</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <title>Turismo.uy - Consultas</title>
         <style>
-
-
-
         </style>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+        <script>
+            $(function () {
+                $('#mi-tabla').tablesorter();
+                $('#mi-tabla2').tablesorter();
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -24,104 +27,85 @@
                 <h1>Turismo.uy</h1>
             </div>
             <div id="login">
-                <a href="index.jsp" src="index.jsp">Volver al inicio</a>
+                <a href="index.jsp">Volver al inicio</a>
             </div>
+
+            <%
+                List<DtActividad> actividadesFiltradas = (List<DtActividad>) request.getSession().getAttribute("actividadesFiltradas");
+                List<DtPaquete> paquetesFiltrados = (List<DtPaquete>) request.getSession().getAttribute("paquetesFiltrados");
+                List<DtImagenActividad> imagenesActividades = (List<DtImagenActividad>) request.getSession().getAttribute("imagenesActividades");
+                String nomActividadCodificado = null;
+            %>
         </header>
 
-        <%
-            List<DtActividad> actividadesFiltradas = (List<DtActividad>) request.getSession().getAttribute("actividadesFiltradas");
-            List<DtPaquete> paquetesFiltrados = (List<DtPaquete>) request.getSession().getAttribute("paquetesFiltrados");
-            List<DtImagenActividad> imagenesActividades = (List<DtImagenActividad>) request.getSession().getAttribute("imagenesActividades");
-            String nomActividadCodificado = null;
-        %>
-
-
-
         <main>
-            <label for="ordenar">Ordenar por:</label>
-            <select id="ordenar" onchange="ordenarTabla()">
-                <option value="nombre">A-Z Nombre</option>
-                <option value="ano">Año</option>
-                <option value="departamento">Departamento</option>
-            </select>
-            
             <h1> Actividades </h1>
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Duración</th>
-                    <th>Costo</th>
-                    <th>Ciudad</th>
-                    <th>Fecha Alta</th>
-                    <th>Departamento</th>
-                    <th>Proveedor</th>
-                    <th>Imagen</th>
-                </tr>
-                <% for (DtActividad actividad : actividadesFiltradas) {%>
-                <tr>
-                    <td><%= actividad.getNombre()%></td>
-                    <%= nomActividadCodificado = URLEncoder.encode(actividad.getNombre(), "UTF-8")%>
-                    <td><%= actividad.getDescripcion()%></td>
-                    <td><%= actividad.getDuracion()%></td>
-                    <td><%= actividad.getCosto()%></td>
-                    <td><%= actividad.getCiudad()%></td>
-                    <td><%= actividad.getFAlta()%></td>
-                    <td><%= actividad.getNombreDepartamento()%></td>
-                    <td><%= actividad.getNombreProveedor()%></td>
-                    <td>
-                        <% for (DtImagenActividad imagenActividad : imagenesActividades) { %>
-                        <% if (imagenActividad.getNombreActividad().equals(actividad.getNombre()) && imagenActividad.getNombre() != null) {%>
-                        <img src="SvMostrarImagenPerfil?nickname=<%=nomActividadCodificado%>" alt="alt" />
+            <div>
+                <table cellspacing="0" cellpadding="0" id="mi-tabla" class="tabla">
+                    <thead>
+                        <tr>
+                            <th><span>Nombre</span></th>
+                            <th><span>Descripción</span></th>
+                            <th><span>Duración</span></th>
+                            <th><span>Costo</span></th>
+                            <th><span>Ciudad</span></th>
+                            <th><span>Fecha Alta</span></th>
+                            <th><span>Departamento</span></th>
+                            <th><span>Proveedor</span></th>
+                            <th><span>Imagen</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (DtActividad actividad : actividadesFiltradas) {%>
+                        <tr>
+                            <td class="align-left"><%= actividad.getNombre()%></td>
+                            <% nomActividadCodificado = URLEncoder.encode(actividad.getNombre(), "UTF-8");%>
+                            <td><%= actividad.getDescripcion()%></td>
+                            <td><%= actividad.getDuracion()%></td>
+                            <td><%= actividad.getCosto()%></td>
+                            <td><%= actividad.getCiudad()%></td>
+                            <td><%= actividad.getFAlta()%></td>
+                            <td><%= actividad.getNombreDepartamento()%></td>
+                            <td><%= actividad.getNombreProveedor()%></td>
+                            <td>                                
+                                <img src="SvMostrarImagenActividad?nombreActividad=<%=nomActividadCodificado%>" alt="alt" style="width: 250px; height: 250px;"/>
+                            </td>
+                        </tr>
                         <% } %>
-                        <% } %>
-                    </td>
-                </tr>
-                <% }%>
-            </table>
+                    </tbody>
+                </table>
 
-             <h1> Paquetes </h1>
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Validez</th>
-                    <th>Descuento</th>
-                    <th>Fecha Alta</th>
-                </tr>
-                <% for (DtPaquete paquete : paquetesFiltrados) {%>
-                <tr>
-                    <td><%= paquete.getNombre()%></td>
-                    <td><%= paquete.getDescripcion()%></td>
-                    <td><%= paquete.getValidez()%></td>
-                    <td><%= paquete.getDescuento()%></td>
-                    <td><%= paquete.getFechaAlta()%></td>
-                </tr>
-                <% }%>
-            </table>
 
+
+                <h1> Paquetes </h1>
+                <table cellspacing="0" cellpadding="0" id="mi-tabla2" class="tabla">
+                    <thead>
+                        <tr>
+                            <th><span>Nombre</span></th>
+                            <th><span>Descripción</span></th>
+                            <th><span>Validez</span></th>
+                            <th><span>Descuento</span></th>
+                            <th><span>Fecha Alta</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (DtPaquete paquete : paquetesFiltrados) {%>
+                        <tr>
+                            <td class="align-left"><%= paquete.getNombre()%></td>
+                            <td><%= paquete.getDescripcion()%></td>
+                            <td><%= paquete.getValidez()%></td>
+                            <td><%= paquete.getDescuento()%></td>
+                            <td><%= paquete.getFechaAlta()%></td>
+                        </tr>
+                        <% }%>
+                    </tbody>
+                </table>
+            </div>
         </main>
 
-        <script>
-            function ordenarTabla() {
-                //var select = document.getElementById("ordenar");
-                //var selectedValue = select.options[select.selectedIndex].value;
-                // var url = "SvBuscar?filtro=" + selectedValue;
-                //window.location.href = url;
-
-
-
-            }
-        </script>
-
-
-
-
-</html> 
-<footer>
-    <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
-    <p>&copy; 2023 Turismo.uy</p>
-</footer>
-</body>
+        <footer>
+            <p>Creado por Juan Martin Pilon - Carlos Santana - Natalia Lopez - Santiago Badiola</p>
+            <p>&copy; 2023 Turismo.uy</p>
+        </footer>
+    </body>
 </html>
-

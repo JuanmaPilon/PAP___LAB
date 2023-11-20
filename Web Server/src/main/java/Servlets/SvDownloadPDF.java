@@ -53,7 +53,7 @@ public class SvDownloadPDF extends HttpServlet {
         //String outputPath = System.getProperty("catalina.base") + File.separator + "webapps" + File.separator + "TuAppName" + File.separator + "PDFs" + File.separator + nickname + ".pdf";
 
         // Obtener el directorio de descargas del usuario
-        String carpetaDescargas = System.getProperty("user.home") + File.separator + "Downloads";
+        String carpetaDescargas = System.getProperty("user.home") + File.separator + "Descargas";
 
 // Crear la ruta completa del archivo de destino en la carpeta de descargas
         String rutaArchivoDestino = carpetaDescargas + File.separator + nickname + ".pdf";

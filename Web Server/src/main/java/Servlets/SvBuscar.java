@@ -44,7 +44,7 @@ public class SvBuscar extends HttpServlet {
         WebServicesService service = new WebServicesService();
         WebServices port = service.getWebServicesPort();
         try {
-            //String filtro = request.getParameter("filtro");
+            String filtro = request.getParameter("filtro");
 
             String consulta = request.getParameter("consulta");
 
