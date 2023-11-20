@@ -1,4 +1,3 @@
-
 package logica;
 
 import java.text.ParseException;
@@ -19,15 +18,18 @@ import persistencia.exceptions.PreexistingEntityException;
  * @author natil
  */
 public class DatosDePrueba {
+
     private IControlador control;
 
-public DatosDePrueba(){
-};    
+    public DatosDePrueba() {
+    }
+
+    ;    
 
     public void cargarDatosDePrueba() {
         //Usuarios y Proveedores:
-            Fabrica fabrica = Fabrica.getInstance();
-            IControlador control = fabrica.getIControlador();
+        Fabrica fabrica = Fabrica.getInstance();
+        IControlador control = fabrica.getIControlador();
         SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
@@ -44,21 +46,66 @@ public DatosDePrueba(){
             control.AltaDeUsuarioProveedor("washington", "Washington", "Rocha", "contra", "washington@turismorocha.gub.uy", fecha.parse("14/09/1970"), "Hola! me llamo Washington y soy el encargado del portal de turismo del departamento de Rocha - Uruguay", "http://turismorocha.gub.uy/");
             control.AltaDeUsuarioProveedor("eldiez", "Pablo", "Bengoechea", "contra", "eldiez@socfomturriv.org.uy", fecha.parse("27/06/1965"), "Pablo es el presidente de la Sociedad de Fomento Turıstico de Rivera (conocida como Socfomturriv)", "http://wwww.socfomturriv.org.uy");
             control.AltaDeUsuarioProveedor("meche", "Mercedes", "Venn", "contra", "meche@colonia.gub.uy", fecha.parse("31/12/1990"), "Departamento de Turismo del Departamento de Colonia", "https://colonia.gub.uy/turismo/");
-            
-control.AltaDeImagenPerfil("2e3s66tw.jpeg",  "lachiqui");
-control.AltaDeImagenPerfil("ycy8mbrn.png",  "isabelita");
-control.AltaDeImagenPerfil("y2u3tybh.png",  "anibal");
-control.AltaDeImagenPerfil("2p9ed8et.jpg", "waston");
-control.AltaDeImagenPerfil("mtwppxxz.jpeg",  "elelvis");
-control.AltaDeImagenPerfil("3ztpasya.jpg",  "eleven11");
-control.AltaDeImagenPerfil("43zymcch.jpg",  "bobesponja");
-control.AltaDeImagenPerfil("mr3a38w4.jpg",  "tony");
-control.AltaDeImagenPerfil("2b556k7t.jpg",  "chino");
-control.AltaDeImagenPerfil("3mbeyawm.png",  "mastropiero");
-control.AltaDeImagenPerfil("3whe8372.jpg",  "washington");
-control.AltaDeImagenPerfil("mu4jeas3.jpeg",  "eldiez");
-control.AltaDeImagenPerfil("4hs4v9c5.jpeg",  "meche");
-            
+
+            control.marcarUsuarioComoFavorita("lachiqui", "isabelita");
+            control.marcarUsuarioComoFavorita("lachiqui", "mastropiero");
+            control.marcarUsuarioComoFavorita("lachiqui", "washington");
+            control.marcarUsuarioComoFavorita("lachiqui", "eldiez");
+            control.marcarUsuarioComoFavorita("lachiqui", "meche");
+
+            control.marcarUsuarioComoFavorita("isabelita", "lachiqui");
+
+            control.marcarUsuarioComoFavorita("anibal", "waston");
+            control.marcarUsuarioComoFavorita("anibal", "eleven11");
+            control.marcarUsuarioComoFavorita("anibal", "bobesponja");
+            control.marcarUsuarioComoFavorita("anibal", "meche");
+
+            control.marcarUsuarioComoFavorita("waston", "isabelita");
+            control.marcarUsuarioComoFavorita("waston", "washington");
+
+            control.marcarUsuarioComoFavorita("elelvis", "bobesponja");
+            control.marcarUsuarioComoFavorita("elelvis", "tony");
+            control.marcarUsuarioComoFavorita("elelvis", "washington");
+
+            control.marcarUsuarioComoFavorita("eleven11", "lachiqui");
+            control.marcarUsuarioComoFavorita("eleven11", "waston");
+            control.marcarUsuarioComoFavorita("eleven11", "mastropiero");
+
+            control.marcarUsuarioComoFavorita("bobesponja", "anibal");
+            control.marcarUsuarioComoFavorita("bobesponja", "eleven11");
+
+            control.marcarUsuarioComoFavorita("chino", "elelvis");
+            control.marcarUsuarioComoFavorita("chino", "mastropiero");
+            control.marcarUsuarioComoFavorita("chino", "washington");
+            control.marcarUsuarioComoFavorita("chino", "meche");
+
+            control.marcarUsuarioComoFavorita("tony", "chino");
+            control.marcarUsuarioComoFavorita("tony", "eldiez");
+
+            control.marcarUsuarioComoFavorita("washington", "waston");
+            control.marcarUsuarioComoFavorita("washington", "mastropiero");
+
+            control.marcarUsuarioComoFavorita("eldiez", "tony");
+
+            control.marcarUsuarioComoFavorita("meche", "waston");
+            control.marcarUsuarioComoFavorita("meche", "lachiqui");
+            control.marcarUsuarioComoFavorita("meche", "isabelita");
+            control.marcarUsuarioComoFavorita("meche", "eleven11");
+
+            control.AltaDeImagenPerfil("2e3s66tw.jpeg", "lachiqui");
+            control.AltaDeImagenPerfil("ycy8mbrn.png", "isabelita");
+            control.AltaDeImagenPerfil("y2u3tybh.png", "anibal");
+            control.AltaDeImagenPerfil("2p9ed8et.jpg", "waston");
+            control.AltaDeImagenPerfil("mtwppxxz.jpeg", "elelvis");
+            control.AltaDeImagenPerfil("3ztpasya.jpg", "eleven11");
+            control.AltaDeImagenPerfil("43zymcch.jpg", "bobesponja");
+            control.AltaDeImagenPerfil("mr3a38w4.jpg", "tony");
+            control.AltaDeImagenPerfil("2b556k7t.jpg", "chino");
+            control.AltaDeImagenPerfil("3mbeyawm.png", "mastropiero");
+            control.AltaDeImagenPerfil("3whe8372.jpg", "washington");
+            control.AltaDeImagenPerfil("mu4jeas3.jpeg", "eldiez");
+            control.AltaDeImagenPerfil("4hs4v9c5.jpeg", "meche");
+
         } catch (ParseException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (CorreoElectronicoExistenteException ex) {
@@ -171,18 +218,38 @@ control.AltaDeImagenPerfil("4hs4v9c5.jpeg",  "meche");
 
             control.guardarActividad("Descubre Rivera", "Rivera es un departamento de extraordinaria riqueza natural patrimonial y cultural con una ubicacion geografica privilegiada", 2, 650, "Rivera", fecha.parse("16/9/2022"), "eldiez", "Rivera", lcat10);
             control.cambiarEstadoActividad("Descubre Rivera", TipoEstado.rechazada);
+       
+            control.marcarActividadComoFavorita("lachiqui", "Degusta");
+            control.marcarActividadComoFavorita("lachiqui", "Tour por Colonia del Sacramento");
+            control.marcarActividadComoFavorita("isabelita", "Tour por Colonia del Sacramento");
+            control.marcarActividadComoFavorita("isabelita", "Almuerzo en el Real de San Carlos");
+            control.marcarActividadComoFavorita("anibal", "Almuerzo en el Real de San Carlos");
+            control.marcarActividadComoFavorita("anibal", "Almuerzo en Valle del Lunarejo");
+            control.marcarActividadComoFavorita("anibal", "Cabalgata en Valle del Lunarejo");
+            control.marcarActividadComoFavorita("waston", "Degusta");
+            control.marcarActividadComoFavorita("waston", "Teatro con Sabores");
+            control.marcarActividadComoFavorita("waston", "Tour por Colonia del Sacramento");
+            control.marcarActividadComoFavorita("waston", "Almuerzo en el Real de San Carlos");
+            control.marcarActividadComoFavorita("elelvis", "Cabalgata en Valle del Lunarejo");
+            control.marcarActividadComoFavorita("eleven11", "Degusta");
+            control.marcarActividadComoFavorita("eleven11", "Teatro con Sabores");
+            control.marcarActividadComoFavorita("bobesponja", "Tour por Colonia del Sacramento");
+            control.marcarActividadComoFavorita("bobesponja", "Almuerzo en el Real de San Carlos");
+            control.marcarActividadComoFavorita("tony", "Teatro con Sabores");
             
             
-control.AltaDeImagenActividad("bdehz9bb.jpg",  "Degusta","https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0"  );
-control.AltaDeImagenActividad("58fnr5j7.jpg",  "Teatro con Sabores", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0" );
-control.AltaDeImagenActividad("3rp2vvjf.jpg",  "Tour por Colonia del Sacramento", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("2yeu66vb.jpg",  "Almuerzo en el Real de San Carlos", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("4yrs8y2c.jpg",  "Almuerzo en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
-control.AltaDeImagenActividad("2vjd382t.jpg",  "Cabalgata en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
-control.AltaDeImagenActividad("bdzyrm93.jpg",  "Bus turıstico Colonia", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("284kr973.jpg",  "Colonia Premium Tour", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("yck2a92h.jpg", "Deportes nauticos sin uso de motor", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0" );
-control.AltaDeImagenActividad("y4vbc4xc.jpeg", "Descubre Rivera", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+            
+            
+            control.AltaDeImagenActividad("bdehz9bb.jpg", "Degusta", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0");
+            control.AltaDeImagenActividad("58fnr5j7.jpg", "Teatro con Sabores", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0");
+            control.AltaDeImagenActividad("3rp2vvjf.jpg", "Tour por Colonia del Sacramento", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+            control.AltaDeImagenActividad("2yeu66vb.jpg", "Almuerzo en el Real de San Carlos", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+            control.AltaDeImagenActividad("4yrs8y2c.jpg", "Almuerzo en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+            control.AltaDeImagenActividad("2vjd382t.jpg", "Cabalgata en Valle del Lunarejo", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
+            control.AltaDeImagenActividad("bdzyrm93.jpg", "Bus turıstico Colonia", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+            control.AltaDeImagenActividad("284kr973.jpg", "Colonia Premium Tour", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
+            control.AltaDeImagenActividad("yck2a92h.jpg", "Deportes nauticos sin uso de motor", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0");
+            control.AltaDeImagenActividad("y4vbc4xc.jpeg", "Descubre Rivera", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
         } catch (PreexistingEntityException ex) {
             JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra actividad", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
@@ -206,34 +273,37 @@ control.AltaDeImagenActividad("y4vbc4xc.jpeg", "Descubre Rivera", "https://www.y
             control.AltaSalidaTuristica("Cabalgata 2", 4, fecha.parse("15/08/2022"), fechahora.parse("11/09/2022 16:00"), "Posada del Lunarejo", "Cabalgata en Valle del Lunarejo");
             control.AltaSalidaTuristica("Degusta Octubre", 20, fecha.parse("22/09/2022"), fechahora.parse("30/10/2022 17:00"), "Sociedad Agropecuaria de Rocha", "Degusta");
             control.AltaSalidaTuristica("Degusta Noviembre", 20, fecha.parse("02/10/2022"), fechahora.parse("05/11/2022 17:00"), "Sociedad Agropecuaria de Rocha", "Degusta");
-	    control.AltaSalidaTuristica("Teatro con Sabores 3", 30, fecha.parse("25/08/2022"), fechahora.parse("11/11/2022 18:00"), "Club Deportivo Union", "Teatro con Sabores");
+            control.AltaSalidaTuristica("Teatro con Sabores 3", 30, fecha.parse("25/08/2022"), fechahora.parse("11/11/2022 18:00"), "Club Deportivo Union", "Teatro con Sabores");
             control.AltaSalidaTuristica("Tour Colonia del Sacramento 30-10", 10, fecha.parse("07/09/2022"), fechahora.parse("30/10/2022 10:00"), "Encuentro en la base del Faro", "Tour por Colonia del Sacramento");
-            control.AltaSalidaTuristica("Cabalgata Extrema", 4, fecha.parse("15/09/2022"), fechahora.parse("30/10/2022 16:00"), "Posada del Lunarejo" , "Cabalgata en Valle del Lunarejo");
+            control.AltaSalidaTuristica("Cabalgata Extrema", 4, fecha.parse("15/09/2022"), fechahora.parse("30/10/2022 16:00"), "Posada del Lunarejo", "Cabalgata en Valle del Lunarejo");
             control.AltaSalidaTuristica("Almuerzo en el Real 1", 10, fecha.parse("10/10/2022"), fechahora.parse("30/10/2022 12:00"), "Restaurante de la Plaza de Toros", "Almuerzo en el Real de San Carlos");
- 
-control.AltaDeImagenActividad("4jwed4jx.jpg",  "Degusta Agosto", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0" );
-control.AltaDeImagenActividad("2maxmx6c.jpeg",  "Degusta Setiembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0" );
-control.AltaDeImagenActividad("2zturssk.jpg", "Teatro con Sabores 1", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("5d5vm953.jpg",  "Teatro con Sabores 2", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("5n7ud8e7.jpg",  "Tour Colonia del Sacramento 11-09", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("583b3mbs.jpg",  "Tour Colonia del Sacramento 18-09", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("mryhyr5f.jpg",  "Degusta Octubre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
-control.AltaDeImagenActividad("yzz6b7et.jpeg",  "Degusta Noviembre", "https://www.youtube.com/embed/dlUb22YfXDg?si=Zc0ZeCds1EZenY_0&amp;controls=0");
-control.AltaDeImagenActividad("mv7etjx2.jpg",  "Tour Colonia del Sacramento 30-10", "https://www.youtube.com/embed/JmMf48DWO4w?si=8qiwAkOrHOV8zEEC&amp;controls=0");
-control.AltaDeImagenActividad("3vwzthcr.jpg",  "Cabalgata Extrema", "https://www.youtube.com/embed/dV3nhvjDSaw?si=IYxfsSVtShOBdrpD&amp;controls=0");
-control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo 1", "" );
-control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo 2", "" );
-control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo 3", "" );
-control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo 4", "" );
-control.AltaDeImagenActividad("sinImagen.png",  "Cabalgata 1", "" );
-control.AltaDeImagenActividad("sinImagen.png",  "Cabalgata 2", "" );
-control.AltaDeImagenActividad("sinImagen.png",  "Teatro con Sabores 3", "" );
-control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo en el Real 1", "" );
-
-
-
+            
+            control.AltaSalidaTuristica("Degusta Diciembre", 20, fecha.parse("07/11/2022"), fechahora.parse("02/12/2022 17:00"), "Sociedad Agropecuaria de Rocha", "Degusta");
+            control.AltaSalidaTuristica("Teatro con Sabores 4", 30, fecha.parse("07/11/2022"), fechahora.parse("03/12/2022 18:30"), "Club Deportivo Union", "Teatro con Sabores");
             
             
+            control.AltaDeImagenActividad("4jwed4jx.jpg", "Degusta Agosto", "");
+            control.AltaDeImagenActividad("2maxmx6c.jpeg", "Degusta Setiembre", "");
+            control.AltaDeImagenActividad("2zturssk.jpg", "Teatro con Sabores 1", "");
+            control.AltaDeImagenActividad("5d5vm953.jpg", "Teatro con Sabores 2", "");
+            control.AltaDeImagenActividad("5n7ud8e7.jpg", "Tour Colonia del Sacramento 11-09", "");
+            control.AltaDeImagenActividad("583b3mbs.jpg", "Tour Colonia del Sacramento 18-09", "");
+            control.AltaDeImagenActividad("mryhyr5f.jpg", "Degusta Octubre", "");
+            control.AltaDeImagenActividad("yzz6b7et.jpeg", "Degusta Noviembre", "");
+            control.AltaDeImagenActividad("mv7etjx2.jpg", "Tour Colonia del Sacramento 30-10", "");
+            control.AltaDeImagenActividad("3vwzthcr.jpg", "Cabalgata Extrema", "");
+            control.AltaDeImagenActividad("sinImagen.png", "Almuerzo 1", "");
+            control.AltaDeImagenActividad("sinImagen.png", "Almuerzo 2", "");
+            control.AltaDeImagenActividad("sinImagen.png", "Almuerzo 3", "");
+            control.AltaDeImagenActividad("sinImagen.png", "Almuerzo 4", "");
+            control.AltaDeImagenActividad("2p9he77w.jpg", "Cabalgata 1", "");
+            control.AltaDeImagenActividad("sinImagen.png", "Cabalgata 2", "");
+            control.AltaDeImagenActividad("sinImagen.png", "Teatro con Sabores 3", "");
+            control.AltaDeImagenActividad("sinImagen.png", "Almuerzo en el Real 1", "");
+            
+            control.AltaDeImagenActividad("sinImagen.png", "Degusta Diciembre", "");
+            control.AltaDeImagenActividad("yzz6b7et.jpeg", "Teatro con Sabores 4", "");
+
         } catch (PreexistingEntityException ex) {
             JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otra salida", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
@@ -245,6 +315,9 @@ control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo en el Real 1", "" );
             control.crearPaqueteActividadTuristica("Disfrutar Rocha", "Actividades para hacer en familia y disfrutar arte y gastronomıa", 60, fecha.parse("10/08/2022"), 20);
             control.crearPaqueteActividadTuristica("Un dıa en Colonia", "Paseos por el casco historico y se puede terminar con Almuerzo en la Plaza de Toros", 45, fecha.parse("01/08/2022"), 15);
             control.crearPaqueteActividadTuristica("Valle Del Lunarejo", "Visite un area protegida con un paisaje natural hermoso", 60, fecha.parse("15/09/2022"), 15);
+            control.crearPaqueteActividadTuristica("Rocha de Fiesta", "Para cerrar el anio a lo grande en nuestro departamento mas oceanico", 45, fecha.parse("7/11/2022"), 30);
+        
+        
         } catch (PreexistingEntityException ex) {
             JOptionPane.showMessageDialog(null, "El nombre ya está en uso por otro paquete", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
@@ -259,6 +332,8 @@ control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo en el Real 1", "" );
             control.asignarActividadPaquete("Un dıa en Colonia", "Almuerzo en el Real de San Carlos");
             control.asignarActividadPaquete("Valle Del Lunarejo", "Almuerzo en Valle del Lunarejo");
             control.asignarActividadPaquete("Valle Del Lunarejo", "Cabalgata en Valle del Lunarejo");
+            control.asignarActividadPaquete("Rocha de Fiesta", "Degusta");
+            
         } catch (NonexistentEntityException ex) {
             JOptionPane.showMessageDialog(null, "El paquete con ese nombre no existe", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
@@ -279,22 +354,39 @@ control.AltaDeImagenActividad("sinImagen.png",  "Almuerzo en el Real 1", "" );
         }
 
         //inscripcion
-        
         try {
 
             control.InscripcionASalidaTuristica("Degusta Agosto", "lachiqui", 3, 2400, fecha.parse("15/8/2022"), TipoPago.general);
             control.InscripcionASalidaTuristica("Degusta Agosto", "elelvis", 5, 4000, fecha.parse("16/8/2022"), TipoPago.general);
-            control.InscripcionASalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui", 3, 1200, fecha.parse("18/8/2022"),TipoPago.general);
+            control.InscripcionASalidaTuristica("Tour Colonia del Sacramento 18-09", "lachiqui", 3, 1200, fecha.parse("18/8/2022"), TipoPago.general);
             control.InscripcionASalidaTuristica("Tour Colonia del Sacramento 18-09", "isabelita", 1, 400, fecha.parse("19/8/2022"), TipoPago.general);
             control.InscripcionASalidaTuristica("Almuerzo 2", "mastropiero", 2, 1600, fecha.parse("19/8/2022"), TipoPago.general);
             control.InscripcionASalidaTuristica("Teatro con Sabores 1", "chino", 1, 500, fecha.parse("19/8/2022"), TipoPago.general);
             control.InscripcionASalidaTuristica("Teatro con Sabores 2", "chino", 10, 5000, fecha.parse("20/8/2022"), TipoPago.general);
             control.InscripcionASalidaTuristica("Teatro con Sabores 2", "bobesponja", 2, 1000, fecha.parse("20/8/2022"), TipoPago.general);
             control.InscripcionASalidaTuristica("Teatro con Sabores 2", "anibal", 1, 500, fecha.parse("21/8/2022"), TipoPago.general);
-            control.InscripcionASalidaTuristica("Degusta Setiembre", "tony", 11, 8800, fecha.parse("21/8/2022"),TipoPago.general);
-        
+            control.InscripcionASalidaTuristica("Degusta Setiembre", "tony", 11, 8800, fecha.parse("21/8/2022"), TipoPago.general);
             
+            control.InscripcionASalidaTuristica("Degusta Noviembre", "lachiqui", 2, 1280, fecha.parse("03/10/2022"), TipoPago.paquete);
+            control.InscripcionASalidaTuristica("Teatro con Sabores 3", "lachiqui", 2, 800, fecha.parse("03/10/2022"), TipoPago.paquete);
+            control.InscripcionASalidaTuristica("Teatro con Sabores 3", "lachiqui", 2, 800, fecha.parse("03/10/2022"), TipoPago.paquete);
+            control.InscripcionASalidaTuristica("Degusta Setiembre", "elelvis", 5, 3200, fecha.parse("02/09/2022"), TipoPago.paquete);
+            control.InscripcionASalidaTuristica("Teatro con Sabores 1", "elelvis", 5, 2000, fecha.parse("02/09/2022"), TipoPago.paquete);
+            control.InscripcionASalidaTuristica("Tour Colonia del Sacramento 11-09", "lachiqui", 5, 1700, fecha.parse("03/09/2022"), TipoPago.paquete);
+            control.InscripcionASalidaTuristica("Almuerzo 1", "lachiqui", 5, 4000, fecha.parse("03/09/2022"), TipoPago.general);
+            
+            control.InscripcionASalidaTuristica("Tour Colonia del Sacramento 18-09", "waston", 1, 340, fecha.parse("05/09/2022"), TipoPago.paquete);
+            
+            control.InscripcionASalidaTuristica("Almuerzo 2", "waston", 1, 800, fecha.parse("05/09/2022"), TipoPago.general);
+            
+            control.InscripcionASalidaTuristica("Tour Colonia del Sacramento 30-10", "elelvis", 2, 680, fecha.parse("02/10/2022"), TipoPago.paquete);
+            
+            control.InscripcionASalidaTuristica("Almuerzo en el Real 1", "elelvis", 2, 1600, fecha.parse("11/10/2022"), TipoPago.general);
         
+            control.InscripcionASalidaTuristica("Tour Colonia del Sacramento 30-10", "mastropiero", 4, 1360, fecha.parse("12/10/2022"), TipoPago.paquete);
+        
+            control.InscripcionASalidaTuristica("Almuerzo en el Real 1", "mastropiero", 4, 3200, fecha.parse("12/10/2022"), TipoPago.general);
+            
         } catch (ParseException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
