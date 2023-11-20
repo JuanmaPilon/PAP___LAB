@@ -82,7 +82,6 @@ public class SvAutenticarUsuario extends HttpServlet {
             }
         } else {
 
-            request.getSession().setAttribute("errorMensaje", "Usuario y/o contrasenia incorrectas"); // Almacena un mensaje de error en la sesión
             if (userAgent != null && (userAgent.contains("Android") || userAgent.contains("iPhone") || userAgent.contains("Mobile"))) {
                 // Redirigir a la versión móvil
                 response.sendRedirect("loginMovil.jsp");

@@ -312,10 +312,11 @@ public void mostrarImagenPerfil(String nickname){
             DTImagenPerfil imagen = control.buscarImagenPorNickname(nickname);
 
             if (imagen != null) {
-                String directorioTrabajo = System.getProperty("user.dir");
+                // Obtener el directorio de trabajo actual
+                String directorioTrabajo = System.getProperty("user.home");
 
                 // Definir una carpeta para las imágenes dentro del directorio de trabajo
-                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+                String carpetaImagenes = directorioTrabajo + File.separator + "images";
 
                 // Utilizar la carpeta para construir la ruta completa
                 String rutaCompleta = carpetaImagenes + File.separator + imagen.getNombre();

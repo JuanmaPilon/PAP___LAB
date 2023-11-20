@@ -32,7 +32,7 @@
         <h2>Iniciar Sesión</h2>
         <form action="SvAutenticarUsuario" method="GET" onsubmit="return validarFormulario()">
             <div class="form-group">
-                <label for="username">Nombre de Usuario:</label>
+                <label for="username">Nickname o Correo Usuario:</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
@@ -44,11 +44,6 @@
         </form>
         
         <div class="error-message">
-            <%-- Muestra el mensaje de error si está presente en la sesión --%>
-            <% String errorMensaje = (String) session.getAttribute("errorMensaje"); %>
-            <% if (errorMensaje != null) { %>
-                <p><%= errorMensaje %></p>
-            <% } %>
         </div>
     </section>
 </main>

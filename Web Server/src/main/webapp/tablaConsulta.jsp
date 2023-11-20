@@ -1,5 +1,5 @@
 
-
+<%@page import="java.net.URLEncoder"%>
 <%@page import="WebServices.DtImagenActividad"%>
 <%@page import="WebServices.DtPaquete"%>
 <%@page import="WebServices.DtActividad"%>
@@ -32,6 +32,7 @@
             List<DtActividad> actividadesFiltradas = (List<DtActividad>) request.getSession().getAttribute("actividadesFiltradas");
             List<DtPaquete> paquetesFiltrados = (List<DtPaquete>) request.getSession().getAttribute("paquetesFiltrados");
             List<DtImagenActividad> imagenesActividades = (List<DtImagenActividad>) request.getSession().getAttribute("imagenesActividades");
+            String nomActividadCodificado = null;
         %>
 
 
@@ -60,6 +61,7 @@
                 <% for (DtActividad actividad : actividadesFiltradas) {%>
                 <tr>
                     <td><%= actividad.getNombre()%></td>
+                    <%= nomActividadCodificado = URLEncoder.encode(actividad.getNombre(), "UTF-8")%>
                     <td><%= actividad.getDescripcion()%></td>
                     <td><%= actividad.getDuracion()%></td>
                     <td><%= actividad.getCosto()%></td>
@@ -70,7 +72,7 @@
                     <td>
                         <% for (DtImagenActividad imagenActividad : imagenesActividades) { %>
                         <% if (imagenActividad.getNombreActividad().equals(actividad.getNombre()) && imagenActividad.getNombre() != null) {%>
-                        <img src="<%= imagenActividad.getRuta()%>" alt="Imagen de actividad">
+                        <img src="SvMostrarImagenPerfil?nickname=<%=nomActividadCodificado%>" alt="alt" />
                         <% } %>
                         <% } %>
                     </td>

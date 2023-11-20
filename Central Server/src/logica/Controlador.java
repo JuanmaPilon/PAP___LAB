@@ -413,11 +413,11 @@ public class Controlador implements IControlador {
 
         if (usuario instanceof Turista) {
             DTTurista dtTurista = traerDTTurista(nickname);
-            dtTurista.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
+            //dtTurista.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
             return dtTurista;
         } else {
             DTProveedor dtProveedor = traerDTProveedor(nickname);
-            dtProveedor.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
+            //dtProveedor.setListaUsuariosFavoritas(usuario.getListaUsuariosFavoritas());
             return dtProveedor;
         }
 
@@ -447,9 +447,10 @@ public class Controlador implements IControlador {
         //conversion date a String
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fnac = sdf.format(t.getfNacimiento());
-
-        return new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
+        DTTurista dtTurista = new DTTurista(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
                 fnac, t.getNacionalidad(), t.getContrasenia());
+         dtTurista.setListaUsuariosFavoritas(t.getListaUsuariosFavoritas());
+        return dtTurista;
     }
     //Devuelve DTProveedor del Proveedor a partir del nickname
 
@@ -459,9 +460,12 @@ public class Controlador implements IControlador {
         //conversion date a String
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fnac = sdf.format(t.getfNacimiento());
-
-        return new DTProveedor(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
+        DTProveedor dtProveedor = new DTProveedor(t.getNickname(), t.getNombre(), t.getApellido(), t.getCorreo(),
                 fnac, t.getContrasenia(), t.getDescripcion(), t.getLink());
+        dtProveedor.setListaUsuariosFavoritas(t.getListaUsuariosFavoritas());
+        return dtProveedor;
+        
+       
     }
 
     //Devuelve el DTSalidaTuristica a partir del nombre de la Salida Turistica
@@ -1244,10 +1248,10 @@ public class Controlador implements IControlador {
                 controlPersis.guardarImagenActividad(ImagenActividad);
 
                 // Obtener el directorio de trabajo actual
-                String directorioTrabajo = System.getProperty("user.dir");
+                String directorioTrabajo = System.getProperty("user.home");
 
                 // Definir una carpeta para las imágenes dentro del directorio de trabajo
-                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+                String carpetaImagenes = directorioTrabajo + File.separator + "images";
 
                 // Crear la ruta completa del archivo de destialtno
                 String rutaArchivoDestino = carpetaImagenes + File.separator + nombreArchivo;
@@ -1270,10 +1274,10 @@ public class Controlador implements IControlador {
             imagenActividad imagen = controlPersis.buscarImagenActividad(nombreActividad);
 
             // Obtener el directorio de trabajo actual
-            String directorioTrabajo = System.getProperty("user.dir");
+                String directorioTrabajo = System.getProperty("user.home");
 
-            // Definir una carpeta para las imágenes dentro del directorio de trabajo
-            String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+                // Definir una carpeta para las imágenes dentro del directorio de trabajo
+                String carpetaImagenes = directorioTrabajo + File.separator + "images";
 
             // Obtener la ruta completa del archivo de destino
             String rutaArchivoImagen = carpetaImagenes + File.separator + imagen.getNombre();  // Ajusta la ruta según tu estructura
@@ -1307,12 +1311,12 @@ public class Controlador implements IControlador {
                 ImagenPerfil imagenPerfil = new ImagenPerfil(nombreArchivo, nickname);
                 controlPersis.guardarImagenPerfil(imagenPerfil);
 
-                // Obtener el directorio de trabajo actual
-                String directorioTrabajo = System.getProperty("user.dir");
+             // Obtener el directorio de trabajo actual
+                String directorioTrabajo = System.getProperty("user.home");
 
                 // Definir una carpeta para las imágenes dentro del directorio de trabajo
-                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
-
+                String carpetaImagenes = directorioTrabajo + File.separator + "images";
+                
                 // Crear la ruta completa del archivo de destialtno
                 String rutaArchivoDestino = carpetaImagenes + File.separator + nombreArchivo;
 
@@ -1333,11 +1337,11 @@ public class Controlador implements IControlador {
         try {
             ImagenPerfil imagen = controlPersis.buscarImagen(nickname);
 
-            // Obtener el directorio de trabajo actual
-            String directorioTrabajo = System.getProperty("user.dir");
+           // Obtener el directorio de trabajo actual
+                String directorioTrabajo = System.getProperty("user.home");
 
-            // Definir una carpeta para las imágenes dentro del directorio de trabajo
-            String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+                // Definir una carpeta para las imágenes dentro del directorio de trabajo
+                String carpetaImagenes = directorioTrabajo + File.separator + "images";
 
             // Obtener la ruta completa del archivo de destino
             String rutaArchivoImagen = carpetaImagenes + File.separator + imagen.getNombre();  // Ajusta la ruta según tu estructura
@@ -1379,10 +1383,10 @@ public class Controlador implements IControlador {
                     Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 // Obtener el directorio de trabajo actual
-                String directorioTrabajo = System.getProperty("user.dir");
+                String directorioTrabajo = System.getProperty("user.home");
 
                 // Definir una carpeta para las imágenes dentro del directorio de trabajo
-                String carpetaImagenes = directorioTrabajo + File.separator + "src" + File.separator + "images";
+                String carpetaImagenes = directorioTrabajo + File.separator + "images";
 
                 // Crear la ruta completa del archivo de destialtno
                 String rutaArchivoDestino = carpetaImagenes + File.separator + nombreArchivo;
