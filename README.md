@@ -21,8 +21,13 @@
 - Boostrap
 - Javascript
 - JSP
+- WSDL
+- REST / SOAP
 
 ### Fechas limites:
 
 - Primera entrega **17 de Setiembre a las 23:59hs**
 - Segunda entrega **22 de Octubre a las 23:59hs**
+- Tercera entrega **12 de Noviembre a las 23:59hs**
+
+**APROBADO**
